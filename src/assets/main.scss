@@ -1,4 +1,13 @@
 // Lato Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 
-@import './components/base-components.scss'
+@import "./components/base-components.scss";
+// Main styles goes here
+.home-circle {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(black, 0.7);
+  color: #fff;
+  border-radius: 50%;
+  @apply flex justify-center items-center;
+}
