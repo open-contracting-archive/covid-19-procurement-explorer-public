@@ -1,0 +1,26 @@
+table {
+	width: 100%;
+	max-width: 100%;
+	background: transparent;
+
+	thead {
+		th {
+			text-align: left;
+			font-weight: normal;
+			text-transform: uppercase;
+			font-size: 12px;
+			padding: 0 8px;
+			vertical-align: bottom;
+			border-bottom: 1px solid #333;
+		}
+	}
+
+	tbody {
+		td {
+			vertical-align: top;
+			padding: 8px;
+			border-bottom: 1px solid #ececec;
+			font-size: 14px;
+		}
+	}
+}
