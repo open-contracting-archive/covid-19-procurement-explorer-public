@@ -9,7 +9,10 @@ import {
 
 import "react-accessible-accordion/dist/fancy-example.css";
 
-const CountryProfile = () => {
+const CountryProfile = ({ profileData }) => {
+  const equityData = profileData.equity_level;
+  const procurement = profileData.procurement;
+
   return (
     <Accordion allowMultipleExpanded allowZeroExpanded>
       <AccordionItem>
@@ -20,21 +23,29 @@ const CountryProfile = () => {
           <div className="[ flex flex-wrap ] px-4">
             <div className="mr-4 md:mr-12 mb-6">
               <h4>Unemployment rate</h4>
-              <p className="text-3xl font-extrabold text-gray-900">3.4%</p>
+              <p className="text-3xl font-extrabold text-gray-900">
+                {equityData.unemployment_rate}%
+              </p>
             </div>
             <div className="mr-4 md:mr-12 mb-6">
               <h4>Average income</h4>
-              <p className="text-3xl font-extrabold text-gray-900">$834</p>
+              <p className="text-3xl font-extrabold text-gray-900">
+                ${equityData.average_income}
+              </p>
             </div>
             <div className="mr-4 md:mr-12 mb-6">
               <h4>Gender distribution</h4>
               <div className="flex">
                 <div className="mr-8 mb-4 md:mb-0">
-                  <p className="text-3xl font-extrabold text-gray-900">48.1%</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.gender_distribution.male}%
+                  </p>
                   <p className="uppercase text-sm">male</p>
                 </div>
                 <div className="mr-8 mb-4 md:mb-0">
-                  <p className="text-3xl font-extrabold text-gray-900">51.9%</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.gender_distribution.female}%
+                  </p>
                   <p className="uppercase text-sm">female</p>
                 </div>
               </div>
@@ -43,24 +54,44 @@ const CountryProfile = () => {
               <h4>Age distribution</h4>
               <div className="flex flex-wrap">
                 <div className="mr-8 mb-4 md:mb-0">
-                  <p className="text-3xl font-extrabold text-gray-900">26.61%</p>
-                  <p className="uppercase text-sm">0-14 yrs</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.age_distribution.level_1.value}%
+                  </p>
+                  <p className="uppercase text-sm">
+                    {equityData.age_distribution.level_1.range} yrs
+                  </p>
                 </div>
                 <div className="mr-8 mb-4 md:mb-0">
-                  <p className="text-3xl font-extrabold text-gray-900">17.9%</p>
-                  <p className="uppercase text-sm">15-24 yrs</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.age_distribution.level_2.value}%
+                  </p>
+                  <p className="uppercase text-sm">
+                    {equityData.age_distribution.level_2.range} yrs
+                  </p>
                 </div>
                 <div className="mr-8 mb-4 md:mb-0">
-                  <p className="text-3xl font-extrabold text-gray-900">40.19%</p>
-                  <p className="uppercase text-sm">25-54 yrs</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.age_distribution.level_3.value}%
+                  </p>
+                  <p className="uppercase text-sm">
+                    {equityData.age_distribution.level_3.range} yrs
+                  </p>
                 </div>
                 <div className="mr-8 mb-4 md:mb-0">
-                  <p className="text-3xl font-extrabold text-gray-900">7.82%</p>
-                  <p className="uppercase text-sm">55-64 yrs</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.age_distribution.level_4.value}%
+                  </p>
+                  <p className="uppercase text-sm">
+                    {equityData.age_distribution.level_4.range} yrs
+                  </p>
                 </div>
                 <div>
-                  <p className="text-3xl font-extrabold text-gray-900">5.31%</p>
-                  <p className="uppercase text-sm">65 & above</p>
+                  <p className="text-3xl font-extrabold text-gray-900">
+                    {equityData.age_distribution.level_5.value}%
+                  </p>
+                  <p className="uppercase text-sm">
+                    {equityData.age_distribution.level_5.range}
+                  </p>
                 </div>
               </div>
             </div>
@@ -75,19 +106,27 @@ const CountryProfile = () => {
           <div className="[ flex flex-wrap px-4 ] ">
             <div className="mr-4 md:mr-12 mb-6">
               <h4>Annual public procurement spending</h4>
-              <p className="text-3xl font-extrabold text-gray-900">$111.5B</p>
+              <p className="text-3xl font-extrabold text-gray-900">
+                ${procurement.annual_spending}
+              </p>
             </div>
             <div className="mr-4 md:mr-12 mb-6">
               <h4>% of Procurement to GDP</h4>
-              <p className="text-3xl font-extrabold text-gray-900">8%</p>
+              <p className="text-3xl font-extrabold text-gray-900">
+                {procurement.gdp_percentage}%
+              </p>
             </div>
             <div className="mr-4 md:mr-12 mb-6">
               <h4>COVID-19 spending</h4>
-              <p className="text-3xl font-extrabold text-gray-900">$12B</p>
+              <p className="text-3xl font-extrabold text-gray-900">
+                ${procurement.covid_spending}
+              </p>
             </div>
             <div className="mr-4 md:mr-12 mb-6">
               <h4>% from total procurement market</h4>
-              <p className="text-3xl font-extrabold text-gray-900">13%</p>
+              <p className="text-3xl font-extrabold text-gray-900">
+                {procurement.total_procurement_market}%
+              </p>
             </div>
           </div>
           <div className="px-4">
