@@ -2,8 +2,10 @@ import React from "react";
 
 function About() {
 	return (
-		<section>
-			<div>This is about page</div>
+		<section class="px-4">
+			<div className="container mx-auto">
+				<div className="mt-4 bg-gray-100 p-4 shadow rounded">This is about page</div>
+			</div>
 		</section>
 	);
 }
