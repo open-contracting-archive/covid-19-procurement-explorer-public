@@ -22,7 +22,7 @@ export default {
 		"Realice un seguimiento del estado de adquisición de Covid-19 de su país",
 	Population: "Población",
 	GDP: "PIB",
-	"Healthcare budget": "Presupuesto sanitario",
+	"Healthcare_budget": "Presupuesto sanitario",
 	"per capita": "per cápita",
 	"% of GDP to healthcare": "% del PIB a la salud",
 	"Total Covid-19 cases": "Total de casos de Covid-19",
