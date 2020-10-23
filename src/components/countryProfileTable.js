@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
-const CountryProfileTable = ({ tenderData }) => {
-  console.log(tenderData);
+const CountryProfileTable = () => {
+  // console.log(tenderData);
+  const [tenderData, setTenderData] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        "https://covid19admin.py.staging.yipl.com.np/api/v1/tender/?country=1"
+      )
+      .then((res) => {
+        // console.log(res.data);
+        setTenderData(res.data);
+      });
+  }, []);
   return (
     <div>
       <table>
@@ -22,9 +35,9 @@ const CountryProfileTable = ({ tenderData }) => {
                 <tr key={index}>
                   <td>{tender.project_title}</td>
                   <td>{tender.procurement_method}</td>
-                  <td className="uppercase">{tender.supplier}</td>
+                  <td className="uppercase">{tender.supplier_name}</td>
                   <td>{tender.status}</td>
-                  <td>{tender.value.toLocaleString("en")}</td>
+                  <td>{tender.value_usd.toLocaleString("en")}</td>
                   <td>
                     {tender.red_flag && (
                       <span className="bg-gray-300 inline-block px-4 rounded-full text-orange-500 text-xs">
