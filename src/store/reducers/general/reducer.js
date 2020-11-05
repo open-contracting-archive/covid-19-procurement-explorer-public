@@ -3,7 +3,7 @@ import * as types from "./type";
 const initialState = {
 	currentCountry: null,
 	currentLocale: "en",
-	translations: { en: {}, sp: {} },
+	translations: { en: {}, es: {} },
 };
 
 const GeneralReducer = (state = initialState, { type, payload }) => {

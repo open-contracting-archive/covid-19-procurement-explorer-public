@@ -1,11 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentLocale } from "../store/reducers/general/action";
+import {
+	setCurrentLocale,
+	setTranslations,
+} from "../store/reducers/general/action";
 import useTrans from "../hooks/useTrans";
+import CountryProfileServices from "../services/countryProfileServices";
 
 const languages = [
 	{ code: "en", name: "English" },
-	{ code: "sp", name: "Spanish" },
+	{ code: "es", name: "Spanish" },
 ];
 
 const LanguageSwitcherSelector = () => {
@@ -15,13 +19,16 @@ const LanguageSwitcherSelector = () => {
 
 	const onChange = (e) => {
 		dispatch(setCurrentLocale(e.target.value));
+		CountryProfileServices.getTranslations(e.target.value).then((response) => {
+			dispatch(setTranslations(response));
+		});
 	};
 
 	const { trans } = useTrans();
 
 	return (
 		<div className="lang">
-			<span className="text-sm mr-3">{trans("general.Choose Language")}:</span>
+			<span className="text-sm mr-3">{trans("Choose Language")}:</span>
 			<select
 				className="cursor-pointer outline-none appearance-none bg-transparent border px-2 rounded text-xs"
 				onChange={onChange}
