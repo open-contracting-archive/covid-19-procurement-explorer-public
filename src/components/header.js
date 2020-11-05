@@ -16,17 +16,22 @@ const Header = () => {
 					<ul className="flex">
 						<li className="mr-8">
 							<NavLink exact activeClassName="active" to="/">
-								{trans("general.Home")}
+								{trans("Home")}
 							</NavLink>
 						</li>
 						<li className="mr-8">
 							<NavLink activeClassName="active" to="/about">
-								{trans("general.About")}
+								{trans("About")}
 							</NavLink>
 						</li>
 						<li className="mr-8">
-							<NavLink activeClassName="active" to="/country/mexico">
-								{trans("general.Country")}
+							<NavLink activeClassName="active" to="/country/1">
+								{trans("Mexico")}
+							</NavLink>
+						</li>
+						<li className="mr-8">
+							<NavLink activeClassName="active" to="/country/2">
+								{trans("Kenya")}
 							</NavLink>
 						</li>
 					</ul>

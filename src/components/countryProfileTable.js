@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
+import CountryProfileServices from "../services/countryProfileServices";
+import { useParams } from "react-router-dom";
 
 const CountryProfileTable = () => {
-  // console.log(tenderData);
   const [tenderData, setTenderData] = useState([]);
+  const [loading, setLoading] = useState([]);
+
+  let { id } = useParams();
+
   useEffect(() => {
-    axios
-      .get(
-        "https://covid19admin.py.staging.yipl.com.np/api/v1/tender/?country=1"
-      )
-      .then((res) => {
-        // console.log(res.data);
-        setTenderData(res.data);
-      });
-  }, []);
+		CountryProfileServices.CountryProfileTenderData(id).then((response) => {
+			if (response) {
+				setTenderData(response);
+			}
+			setLoading(false);
+		});
+	}, [id]);
+  
   return (
     <div>
       <table>
