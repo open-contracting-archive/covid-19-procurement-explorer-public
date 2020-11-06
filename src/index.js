@@ -1,8 +1,8 @@
 import React from "react";
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
-import "./assets/tailwind.scss";
-import "./assets/main.scss";
+import "./assets/scss/tailwind.scss";
+import "./assets/scss/main.scss";
 import store from "./store";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";

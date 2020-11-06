@@ -1,0 +1,28 @@
+.react-tabs {
+    margin-top: 24px;
+
+    &__tab-list {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 24px;
+    }
+
+    .react-tabs__tab {
+        color: #828282;
+        border-bottom: 3px solid transparent;
+        margin-right: 24px;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:hover {
+            color: #333333;
+        }
+
+        &--selected {
+            color: #333333;
+            border-color: #333333;
+        }
+    }
+}

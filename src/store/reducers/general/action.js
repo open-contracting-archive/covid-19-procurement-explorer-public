@@ -1,16 +1,15 @@
-import { createAction } from "redux-actions";
-import * as types from "./type";
+import { createAction } from 'redux-actions'
+import * as types from './type'
 
-export const setCurrentCountry = createAction(types.SET_CURRENT_COUNTRY);
+export const setCurrentCountry = createAction(types.SET_CURRENT_COUNTRY)
 
 export const setCurrentLocale = (locale) => {
+    window.localStorage.setItem('locale', locale)
 
-	window.localStorage.setItem('locale', locale);
+    return {
+        type: types.SET_CURRENT_LOCALE,
+        payload: locale
+    }
+}
 
-	return {
-		type: types.SET_CURRENT_LOCALE,
-		payload: locale,
-	};
-};
-
-export const setTranslations = createAction(types.SET_TRANSLATIONS);
+export const setTranslations = createAction(types.SET_TRANSLATIONS)

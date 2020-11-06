@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+.react-tabs {
+  margin-top: 24px;
+}
+
+.react-tabs__tab-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.react-tabs .react-tabs__tab {
+  color: #828282;
+  border-bottom: 3px solid transparent;
+  margin-right: 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.react-tabs .react-tabs__tab:hover {
+  color: #333333;
+}
+
+.react-tabs .react-tabs__tab--selected {
+  color: #333333;
+  border-color: #333333;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+}
+
+table thead th {
+  text-align: left;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 0 8px;
+  vertical-align: bottom;
+  border-bottom: 1px solid #333;
+}
+
+table tbody td {
+  vertical-align: top;
+  padding: 8px;
+  border-bottom: 1px solid #ececec;
+  font-size: 14px;
+}
+
+.home-circle {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-radius: 50%;
+  @apply flex justify-center items-center;
+}
+/*# sourceMappingURL=main.css.map */

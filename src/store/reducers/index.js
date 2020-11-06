@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import { GeneralReducer } from "./general";
+import { combineReducers } from 'redux'
+import { GeneralReducer } from './general'
 
 const appReducers = combineReducers({
-	general: GeneralReducer,
-});
+    general: GeneralReducer
+})
 
-export default appReducers;
+export default appReducers
