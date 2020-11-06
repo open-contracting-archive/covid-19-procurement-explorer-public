@@ -8,12 +8,7 @@ class CountryProfileServices {
 
 	static async CountryProfileData(id) {
 		const { data } = await axios.get(
-			"https://covid19admin.py.staging.yipl.com.np/api/v1/country/" + id,
-			{
-				headers: {
-					"Access-Control-Allow-Origin": "*",
-				},
-			}
+			"https://covid19admin.py.staging.yipl.com.np/api/v1/country/" + id
 		);
 		return data;
 	}
@@ -21,12 +16,7 @@ class CountryProfileServices {
 	static async CountryProfileTenderData(id) {
 		const { data } = await axios.get(
 			"https://covid19admin.py.staging.yipl.com.np/api/v1/tender/?country=" +
-				id,
-			{
-				headers: {
-					"Access-Control-Allow-Origin": "*",
-				},
-			}
+				id
 		);
 		return data;
 	}
