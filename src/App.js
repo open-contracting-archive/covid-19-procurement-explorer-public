@@ -5,6 +5,7 @@ import About from './layouts/About'
 import Country from './layouts/Country'
 import Header from './components/header/header'
 import Home from './layouts/Home'
+import Footer from './components/footer/footer'
 import Map from './components/charts/map'
 import CountryProfileServices from './services/countryProfileServices'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/country/:id" component={Country} />
                 <Route component={Notfound} />
             </Switch>
+            <Footer/>
         </BrowserRouter>
     )
 }
