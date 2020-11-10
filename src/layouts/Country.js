@@ -49,7 +49,7 @@ function CountryDetail() {
             {loading ? (
                 <div className="container mx-auto">
                     <h2 className="font-bold mb-5 text-3xl text-gray-900">
-                        {data.name}
+                        {trans(data.name)}
                     </h2>
                     <div className="flex flex-wrap -mx-4 -mb-4">
                         <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">

@@ -1,0 +1,9 @@
+body {
+    @apply antialiased leading-snug;
+}
+
+header {
+    &.header-home {
+        @apply bg-black-3d3 relative;
+    }
+}
