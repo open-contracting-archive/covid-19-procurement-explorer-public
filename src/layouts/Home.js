@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { ReactComponent as HeroIcon } from '../assets/img/icons/covid.svg'
 import { ReactComponent as MouseScroll } from '../assets/img/icons/mouse-scroll.svg'
 import { ReactComponent as CircleIcon } from '../assets/img/icons/circle-ring.svg'
+import { ReactComponent as BottomCurve} from "../assets/img/icons/circle_bottom.svg"
 import useTrans from '../hooks/useTrans'
 import Library from './home/library'
 
@@ -9,7 +10,7 @@ const Home = () => {
     const { trans } = useTrans()
     return (
         <Fragment>
-            <main className="hero-section [ mx-auto px-4 ] [ flex flex-col justify-center ]">
+            <main className="hero-section relative [ mx-auto px-4 ] [ flex flex-col justify-center ]">
                 <div
                     // style={{
                     //     height: '667px',
@@ -76,6 +77,8 @@ const Home = () => {
                     <MouseScroll className="m-auto" />
                     <p className="text-sm mt-3">Scroll down for more</p>
                 </div>
+
+                <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
             </main>
             <Library />
         </Fragment>
