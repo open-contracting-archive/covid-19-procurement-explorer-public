@@ -248,6 +248,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        "GTEestiPro",
         "Lato",
         "system-ui",
         "-apple-system",

@@ -4,7 +4,7 @@ import {
     setCurrentLocale,
     setTranslations
 } from '../../store/reducers/general/action'
-import useTrans from '../../hooks/useTrans'
+// import useTrans from '../../hooks/useTrans'
 import CountryProfileServices from '../../services/countryProfileServices'
 
 const languages = [
@@ -26,20 +26,22 @@ const LanguageSwitcherSelector = () => {
         )
     }
 
-    const { trans } = useTrans()
+    // const { trans } = useTrans()
 
     return (
-        <div className="lang">
-            <span className="text-sm mr-3">{trans('Choose Language')}:</span>
+        <div className="lang relative">
+            {/* <span className="text-sm mr-3">{trans('Choose Language')}:</span> */}
+
             <select
-                className="cursor-pointer outline-none appearance-none bg-transparent border px-2 rounded text-xs"
+                style={{backgroundColor: "rgba(255,255,255,0.2)", padding: "5px 20px 5px 10px"}}
+                className="cursor-pointer outline-none appearance-none bg-transparent py-2 px-3 rounded-3xl uppercase text-xs"
                 onChange={onChange}>
                 {languages.map((language, index) => (
                     <option
                         key={index}
                         value={language.code}
                         selected={currentLocale === language.code}>
-                        {language.name}
+                        {language.code}
                     </option>
                 ))}
             </select>
