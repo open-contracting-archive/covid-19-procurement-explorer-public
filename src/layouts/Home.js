@@ -2,27 +2,22 @@ import React, { Fragment } from 'react'
 import { ReactComponent as HeroIcon } from '../assets/img/icons/covid.svg'
 import { ReactComponent as MouseScroll } from '../assets/img/icons/mouse-scroll.svg'
 import { ReactComponent as CircleIcon } from '../assets/img/icons/circle-ring.svg'
-import { ReactComponent as BottomCurve} from "../assets/img/icons/circle_bottom.svg"
+import { ReactComponent as BottomCurve } from '../assets/img/icons/circle_bottom.svg'
 import useTrans from '../hooks/useTrans'
 import Library from './home/library'
+import geo_data from '../data/GeoChart.world.geo.json'
+import GeoChart from '../components/charts/GeoChart'
 
 const Home = () => {
     const { trans } = useTrans()
     return (
         <Fragment>
-            <main className="hero-section relative [ mx-auto px-4 ] [ flex flex-col justify-center ]">
-                <div
-                    // style={{
-                    //     height: '667px',
-                    //     width: '667px'
-                    // }}
-                    className="outer-circle mt-40 mx-auto relative [ flex justify-center items-center ]">
+            <section className="hero-section relative [ mx-auto px-4 ] [ flex flex-col justify-center ]">
+                <div className="outer-circle mt-40 mx-auto relative [ flex justify-center items-center ]">
                     <CircleIcon className="circle-ring absolute h-full w-full" />
                     <HeroIcon className="covid-icon" />
                     <div
                         style={{
-                            // height: '633px',
-                            // width: '633px',
                             backgroundColor: '#C8D419'
                         }}
                         className="inner-circle rounded-full bg-orange-200 overflow-hidden [ flex flex-col justify-center items-center ]">
@@ -79,7 +74,10 @@ const Home = () => {
                 </div>
 
                 <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
-            </main>
+            </section>
+            <section>
+                <GeoChart data={geo_data} />
+            </section>
             <Library />
         </Fragment>
     )

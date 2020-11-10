@@ -2,15 +2,19 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
 import LanguageSwitcherSelector from '../language-switcher/languageSwitcherSelector'
-const Header = () => {
+const Header = ({ style }) => {
     const { trans } = useTrans()
     return (
-        <div className="py-4 px-4 absolute top-0 w-full z-10">
+        <header className={'py-4 px-4 absolute top-0 w-full z-10 ' + style}>
             <div className="container text-white [ mx-auto ] [ flex justify-between items-center ]">
                 <div className="w-24 leading-none">
                     <NavLink to="/" className="leading-snug font-bold">
-                        <span className="block" style={{color: "#C8D419"}}>Covid-19</span>
-                        <span className="block" style={{color: "#1FBBEC"}}>Procurement</span>
+                        <span className="block" style={{ color: '#C8D419' }}>
+                            Covid-19
+                        </span>
+                        <span className="block" style={{ color: '#1FBBEC' }}>
+                            Procurement
+                        </span>
                         Explorer
                     </NavLink>
                 </div>
@@ -35,7 +39,7 @@ const Header = () => {
                     <LanguageSwitcherSelector />
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
 
