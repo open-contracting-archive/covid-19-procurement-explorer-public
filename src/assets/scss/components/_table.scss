@@ -8,19 +8,88 @@ table {
             text-align: left;
             font-weight: normal;
             text-transform: uppercase;
-            font-size: 12px;
-            padding: 0 8px;
+            font-size: 14px;
+            padding: 0 8px 8px;
             vertical-align: bottom;
-            border-bottom: 1px solid #333;
         }
     }
 
     tbody {
         td {
             vertical-align: top;
-            padding: 8px;
-            border-bottom: 1px solid #ececec;
+            padding: 18px 8px 12px;
+            border-bottom: 1px solid #f1f1f1;
             font-size: 14px;
+            background-color: #fff;
         }
     }
+}
+
+.table {
+    tbody {
+        tr {
+            &:first-child {
+                td {
+                    &:first-child {
+                        border-top-left-radius: 6px;
+                    }
+                    &:last-child {
+                        border-top-right-radius: 6px;
+                    }
+                }
+            }
+            &:last-child {
+                td {
+                    &:first-child {
+                        border-bottom-left-radius: 6px;
+                    }
+                    &:last-child {
+                        border-bottom-right-radius: 6px;
+                    }
+                }
+            }
+
+            td {
+                &:first-child {
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
+
+    thead {
+        th {
+            &:first-child {
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    min-height: 10px;
+    min-width: 10px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: inline-block;
+    margin-right: 4px;
+
+    &.active {
+        background-color: #b174fe;
+    }
+    &.completed {
+        background-color: #43ce94;
+    }
+    &.canceled {
+        background-color: #c3bdcc;
+    }
+}
+
+.sort{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }

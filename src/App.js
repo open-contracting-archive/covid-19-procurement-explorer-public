@@ -18,16 +18,6 @@ function App() {
     const dispatch = useDispatch()
     const currentLocale = useSelector((state) => state.general.currentLocale)
 
-    // const usePathname = () => {
-    //     const location = useLocation()
-    //     return location.pathname
-    // }
-
-    let HeaderHome = ''
-    if (location.pathname !== '/') {
-        HeaderHome = 'header-home'
-    }
-
     useEffect(() => {
         dispatch(
             setCurrentLocale(window.localStorage.getItem('locale') || 'es')
@@ -42,7 +32,7 @@ function App() {
     return (
         <BrowserRouter>
             <Fragment>
-                <Header style={HeaderHome} />
+                <Header />
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
