@@ -21,6 +21,13 @@ class CountryProfileServices {
         return data
     }
 
+    static async CountryProfileTenderDetailData(countryId, tenderId) {
+        const { data } = await axios.get(
+            `https://covid19admin.py.staging.yipl.com.np/api/v1/tender/${tenderId}/?country=${countryId}`
+        )
+        return data
+    }
+
     static async getTranslations(currentLocale) {
         const { data: translationData } = await axios.get(
             `https://covid19admin.py.staging.yipl.com.np/static/translations/${currentLocale}/words.json`
