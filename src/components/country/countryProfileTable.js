@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import CountryProfileServices from '../../services/countryProfileServices'
 import { useParams } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
+import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
 
 const CountryProfileTable = () => {
@@ -159,7 +160,13 @@ const CountryProfileTable = () => {
                             {tenderData &&
                                 tenderData.map((tender, index) => {
                                     return (
-                                        <tr key={index}>
+                                        <tr
+                                            key={index}
+                                            className={`${
+                                                tender.red_flag
+                                                    ? 'has-red-flag'
+                                                    : ''
+                                            }`}>
                                             <td className="uppercase">
                                                 {tender.project_title}
                                             </td>
@@ -179,8 +186,8 @@ const CountryProfileTable = () => {
                                             </td>
                                             <td>
                                                 {tender.red_flag && (
-                                                    <span className="bg-gray-300 inline-block px-4 rounded-full text-orange-500 text-xs">
-                                                        {tender.red_flag}
+                                                    <span className="mr-4">
+                                                        <FlagIcon />
                                                     </span>
                                                 )}
                                             </td>

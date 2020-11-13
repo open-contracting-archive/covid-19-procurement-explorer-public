@@ -14,6 +14,7 @@ function CountryDetail() {
     const [countryData, setCountryData] = useState([])
 
     let { id } = useParams()
+    console.log(countryData)
 
     const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
 
@@ -75,7 +76,12 @@ function CountryDetail() {
                                             <li key={index} className="ml-6">
                                                 <Link
                                                     style={{ color: '#293E45' }}
-                                                    className="opacity-50"
+                                                    className={`opacity-50 hover:opacity-100 ${
+                                                        countryData[country]
+                                                            .id == id
+                                                            ? 'opacity-100 font-bold'
+                                                            : ''
+                                                    }`}
                                                     to={`/country/${countryData[country].id}`}>
                                                     {countryData[country].name}
                                                 </Link>
@@ -106,11 +112,11 @@ function CountryDetail() {
                                 <div className="flex flex-col text-gray-800 font-extrabold">
                                     <div
                                         style={{ backgroundColor: '#C8D419' }}
-                                        className="p-8 py-4 ">
+                                        className="p-8 py-6 ">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
-                                                    <span className="text-lg inline-block">
+                                                    <span className="font-normal inline-block">
                                                         {trans('Population')}{' '}
                                                     </span>
                                                     <h2 className="text-3xl">
@@ -122,7 +128,7 @@ function CountryDetail() {
                                             </div>
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
-                                                    <span className="text-lg inline-block">
+                                                    <span className="font-normal inline-block">
                                                         {trans('GDP')}
                                                     </span>
                                                     <h2 className="text-3xl">
@@ -135,7 +141,7 @@ function CountryDetail() {
                                             </div>
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
-                                                    <span className="text-lg font-extrabold  inline-block">
+                                                    <span className="font-normal inline-block">
                                                         {trans(
                                                             'Healthcare budget'
                                                         )}
@@ -147,14 +153,14 @@ function CountryDetail() {
                                                             {data.currency}
                                                         </span>
                                                     </h2>
-                                                    <span className="block text-lg font-extrabold">
+                                                    <span className="block font-normal">
                                                         {trans('per capita')}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
-                                                    <span className="text-lg font-extrabold  inline-block">
+                                                    <span className="font-normal inline-block">
                                                         {trans(
                                                             '% of GDP to healthcare'
                                                         )}
@@ -186,11 +192,11 @@ function CountryDetail() {
                                     </div>
                                     <div
                                         style={{ backgroundColor: '#293E45' }}
-                                        className="p-8 py-4 text-white">
+                                        className="p-8 text-white">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
-                                                    <span className="text-lg inline-block">
+                                                    <span className="font-normal inline-block">
                                                         {trans(
                                                             'Total Covid-19 cases'
                                                         )}
@@ -205,7 +211,7 @@ function CountryDetail() {
                                             </div>
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
-                                                    <span className="text-lg inline-block">
+                                                    <span className="font-normal inline-block">
                                                         {trans(
                                                             'Total deaths by Covid-19'
                                                         )}
