@@ -32,10 +32,12 @@ const LanguageSwitcherSelector = () => {
                     padding: '5px 20px 5px 10px'
                 }}
                 className="cursor-pointer outline-none appearance-none bg-transparent py-2 px-3 rounded-3xl uppercase text-xs"
-                onChange={onChange}
-                defaultValue={currentLocale}>
+                onChange={onChange}>
                 {languages.map((language, index) => (
-                    <option key={index} value={language.code}>
+                    <option
+                        key={index}
+                        value={language.code}
+                        selected={currentLocale === language.code}>
                         {language.code}
                     </option>
                 ))}

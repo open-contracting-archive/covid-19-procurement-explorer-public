@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useEffect } from 'react'
 import CountryProfileServices from '../../services/countryProfileServices'
 import { Link, useParams } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
+import Loader from '../../components/loader/Loader'
 
 const CountryProfileTable = () => {
     const [tenderData, setTenderData] = useState([])
@@ -38,7 +39,7 @@ const CountryProfileTable = () => {
     return (
         <div style={{ color: '#293E45' }}>
             {loading ? (
-                <>
+                <Fragment>
                     <div
                         style={{ color: '#293E45' }}
                         className="mb-12 flex gap-8 justify-between">
@@ -198,9 +199,9 @@ const CountryProfileTable = () => {
                                 })}
                         </tbody>
                     </table>
-                </>
+                </Fragment>
             ) : (
-                ''
+                <Loader />
             )}
         </div>
     )
