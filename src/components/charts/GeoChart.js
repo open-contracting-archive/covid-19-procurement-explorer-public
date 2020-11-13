@@ -95,7 +95,7 @@ function GeoChart({ data }) {
             })
     }, [data, dimensions, countryData])
 
-    console.log(countryData)
+    // console.log(countryData)
 
     return (
         <div className="px-4 mb-16 map-wrapper pt-20">

@@ -2,8 +2,30 @@ body {
     @apply antialiased leading-snug;
 }
 
+.header-inner-container{
+    height: 125px;
+}
+
 header {
-    &.header-home {
-        @apply bg-black-3d3 relative;
+    &.header-inner {
+        @apply relative;
+        background-color: #293e45;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: auto;
+            height: 35px;
+            width: 110%;
+            background: #293e45;
+            border-radius: 0 0 50% 50%/0 0 100% 100%;
+        }
+
+        .lang select{
+            background-color: #447483 !important;
+        }
     }
 }
