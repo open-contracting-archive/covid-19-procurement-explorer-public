@@ -6,7 +6,8 @@ import { ReactComponent as BottomCurve } from '../assets/img/icons/circle_bottom
 import useTrans from '../hooks/useTrans'
 import Library from './home/library'
 import geo_data from '../data/GeoChart.world.geo.json'
-import GeoChart from '../components/charts/GeoChart'
+import GeoChart from '../components/charts/GeoChart/GeoChart'
+import Map from '../components/charts/Map/Map'
 
 const Home = () => {
     const { trans } = useTrans()
@@ -76,7 +77,8 @@ const Home = () => {
                 <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
             </section>
             <section>
-                <GeoChart data={geo_data} />
+                <Map />
+                {/* <GeoChart data={geo_data} /> */}
             </section>
             <Library />
         </Fragment>

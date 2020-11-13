@@ -6,7 +6,7 @@ import Country from './layouts/Country'
 import Header from './components/header/header'
 import Home from './layouts/Home'
 import Footer from './components/footer/footer'
-import GeoChart from './components/charts/GeoChart'
+import GeoChart from './components/charts/GeoChart/GeoChart'
 import CountryProfileServices from './services/countryProfileServices'
 import { useDispatch, useSelector } from 'react-redux'
 import {

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import Iframe from 'react-iframe'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import CountryProfileTable from '../components/country/countryProfileTable'
+import CountryDataCharts from '../components/country/CountryDataChart'
 import CountryProfile from '../components/country/countryProfile'
 import CountryProfileServices from '../services/countryProfileServices'
 import useTrans from '../hooks/useTrans'
@@ -92,7 +93,7 @@ function CountryDetail() {
                             </ul>
                         </div>
                         <h2 className="font-bold mb-5 text-3xl text-gray-900">
-                            {trans(data.name)}
+                            {data.name}
                         </h2>
                         <div className="flex flex-wrap -mx-4 -mb-4">
                             <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">
@@ -248,6 +249,7 @@ function CountryDetail() {
                     <Tabs>
                         <div className="container mx-auto px-4 ">
                             <TabList>
+                                <Tab>{trans('Data')}</Tab>
                                 <Tab>{trans('Tenders')}</Tab>
                                 <Tab>{trans('Profile')}</Tab>
                             </TabList>
@@ -257,8 +259,11 @@ function CountryDetail() {
                                 backgroundColor: '#E5E5E5',
                                 borderTop: '5px solid #1fbbec'
                             }}
-                            className="py-20">
+                            className="py-16">
                             <div className="container mx-auto px-4 ">
+                                <TabPanel>
+                                    <CountryDataCharts />
+                                </TabPanel>
                                 <TabPanel>
                                     <CountryProfileTable />
                                 </TabPanel>

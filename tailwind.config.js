@@ -33,6 +33,7 @@ module.exports = {
             black: '#000',
             'black-50': 'rgba(0,0,0,0.5)',
             white: '#fff',
+            'blue-50': '#293E45',
             gray: {
                 100: '#f7fafc',
                 200: '#edf2f7',
