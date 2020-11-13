@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Iframe from 'react-iframe'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import CountryProfileTable from '../components/country/countryProfileTable'
 import CountryDataCharts from '../components/country/CountryDataChart'
 import CountryProfile from '../components/country/countryProfile'
+import Loader from '../components/loader/Loader'
 import CountryProfileServices from '../services/countryProfileServices'
 import useTrans from '../hooks/useTrans'
 import CountryServices from '../services/countryServices'
@@ -61,19 +62,14 @@ function CountryDetail() {
     return (
         <section className="pt-8">
             {loading ? (
-                <>
+                <Fragment>
                     <div className="container mx-auto px-4 ">
                         <div className="mb-6">
                             <ul className="flex text-sm">
-                                <li
-                                    style={{ color: '#293E45' }}
-                                    className="opacity-50">
-                                    All
-                                </li>
                                 {Object.keys(countryData).map(
                                     (country, index) => {
                                         return (
-                                            <li key={index} className="ml-6">
+                                            <li key={index} className="mr-6">
                                                 <Link
                                                     style={{ color: '#293E45' }}
                                                     className={`opacity-50 hover:opacity-100 ${
@@ -272,9 +268,9 @@ function CountryDetail() {
                             </div>
                         </div>
                     </Tabs>
-                </>
+                </Fragment>
             ) : (
-                ''
+                <Loader />
             )}
         </section>
     )

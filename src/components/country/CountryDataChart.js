@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import BarChart from '../../components/charts/BarChart/BarChart'
 import PieChart from '../../components/charts/PieChart/PieChart'
 import AreaChart from '../../components/charts/AreaChart/AreaChart'
 import CombinedChart from '../../components/charts/CombinedChart/CombinedChart'
+import Loader from '../../components/loader/Loader'
 
 // Add Bar Chart data
 const bar_chart_data = [
@@ -194,104 +195,116 @@ const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
 function CountryDataCharts() {
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setLoading(true)
+    }, [])
+
     return (
         <section style={{ background: '#E5E5E5' }}>
             <div className="container mx-auto">
-                <div className="flex flex-wrap -mx-3 -mb-6">
-                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                        <div className="bg-white rounded p-4">
-                            <h3 className="uppercase font-bold text-blue-50 mb-6">
-                                Total Spending
-                            </h3>
-                            <div className="flex items-end">
-                                <div className="text-blue-50 pb-10">
-                                    <span>
-                                        <strong className="text-4xl inline-block mr-3">
-                                            87M
-                                        </strong>
-                                        USD
-                                    </span>
+                {loading ? (
+                    <div className="flex flex-wrap -mx-3 -mb-6">
+                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                    Total Spending
+                                </h3>
+                                <div className="flex items-end">
+                                    <div className="text-blue-50 pb-10">
+                                        <span>
+                                            <strong className="text-4xl inline-block mr-3">
+                                                87M
+                                            </strong>
+                                            USD
+                                        </span>
+                                    </div>
+                                    <div className="flex-1">
+                                        <BarChart
+                                            data={bar_chart_data}
+                                            barColorValue={barColorValue}
+                                            axisRotation={axisRotation}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex-1">
-                                    <BarChart
-                                        data={bar_chart_data}
-                                        barColorValue={barColorValue}
-                                        axisRotation={axisRotation}
-                                    />
+                            </div>
+                        </div>
+                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                    Total contracts
+                                </h3>
+                                <div className="flex items-end">
+                                    <div className="text-blue-50 pb-10">
+                                        <span>
+                                            <strong className="text-4xl inline-block mr-3">
+                                                218
+                                            </strong>
+                                        </span>
+                                    </div>
+                                    <div className="flex-1">
+                                        <BarChart
+                                            data={bar_chart_data}
+                                            barColorValue={barColorValue}
+                                            axisRotation={axisRotation}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                    Cancelled awards
+                                </h3>
+                                <div className="flex items-end">
+                                    <div className="text-blue-50 pb-10">
+                                        <span>
+                                            <strong className="text-4xl inline-block mr-3">
+                                                51
+                                            </strong>
+                                        </span>
+                                    </div>
+                                    <div className="flex-1">
+                                        <PieChart
+                                            data={pie_chart_data}
+                                            colors={colors}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                    Procurement trend
+                                </h3>
+                                <div className="flex">
+                                    <div className="flex-1">
+                                        <AreaChart data={area_chart_data} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                    Combined Chart with multiple value axes
+                                </h3>
+                                <div className="flex">
+                                    <div className="flex-1">
+                                        <CombinedChart
+                                            data={combined_chart_data}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                        <div className="bg-white rounded p-4">
-                            <h3 className="uppercase font-bold text-blue-50 mb-6">
-                                Total contracts
-                            </h3>
-                            <div className="flex items-end">
-                                <div className="text-blue-50 pb-10">
-                                    <span>
-                                        <strong className="text-4xl inline-block mr-3">
-                                            218
-                                        </strong>
-                                    </span>
-                                </div>
-                                <div className="flex-1">
-                                    <BarChart
-                                        data={bar_chart_data}
-                                        barColorValue={barColorValue}
-                                        axisRotation={axisRotation}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                        <div className="bg-white rounded p-4">
-                            <h3 className="uppercase font-bold text-blue-50 mb-6">
-                                Cancelled awards
-                            </h3>
-                            <div className="flex items-end">
-                                <div className="text-blue-50 pb-10">
-                                    <span>
-                                        <strong className="text-4xl inline-block mr-3">
-                                            51
-                                        </strong>
-                                    </span>
-                                </div>
-                                <div className="flex-1">
-                                    <PieChart
-                                        data={pie_chart_data}
-                                        colors={colors}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full px-2 mb-6">
-                        <div className="bg-white rounded p-4">
-                            <h3 className="uppercase font-bold text-blue-50 mb-6">
-                                Procurement trend
-                            </h3>
-                            <div className="flex">
-                                <div className="flex-1">
-                                    <AreaChart data={area_chart_data} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full px-2 mb-6">
-                        <div className="bg-white rounded p-4">
-                            <h3 className="uppercase font-bold text-blue-50 mb-6">
-                                Combined Chart with multiple value axes
-                            </h3>
-                            <div className="flex">
-                                <div className="flex-1">
-                                    <CombinedChart data={combined_chart_data} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                ) : (
+                    <Loader />
+                )}
             </div>
         </section>
     )

@@ -11,6 +11,7 @@ const TenderDetail = () => {
     let history = useHistory()
     const { trans } = useTrans()
     let { id: countryId, tenderId } = useParams()
+    window.scrollTo(0, 0)
 
     const previousPage = () => {
         history.goBack()
