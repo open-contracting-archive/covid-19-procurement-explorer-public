@@ -1,8 +1,9 @@
 body {
     @apply antialiased leading-snug;
+    color: #293e45;
 }
 
-.header-inner-container{
+.header-inner-container {
     height: 125px;
 }
 
@@ -24,7 +25,7 @@ header {
             border-radius: 0 0 50% 50%/0 0 100% 100%;
         }
 
-        .lang select{
+        .lang select {
             background-color: #447483 !important;
         }
     }

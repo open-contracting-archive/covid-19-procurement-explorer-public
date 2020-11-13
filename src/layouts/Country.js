@@ -15,7 +15,6 @@ function CountryDetail() {
     const [countryData, setCountryData] = useState([])
 
     let { id } = useParams()
-    console.log(countryData)
 
     const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
 

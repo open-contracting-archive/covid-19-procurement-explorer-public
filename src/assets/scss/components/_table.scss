@@ -27,7 +27,8 @@ table {
 
 .table {
     tbody {
-        tr {
+        tr,
+        > a {
             &:first-child {
                 td {
                     &:first-child {
@@ -55,9 +56,9 @@ table {
                 }
             }
 
-            &.has-red-flag{
-                td{
-                    background-color: #FAE9E9;
+            &.has-red-flag {
+                td {
+                    background-color: #fae9e9;
                 }
             }
         }
@@ -93,9 +94,8 @@ table {
     }
 }
 
-.sort{
+.sort {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
 }

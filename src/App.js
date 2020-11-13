@@ -13,6 +13,7 @@ import {
     setCurrentLocale,
     setTranslations
 } from './store/reducers/general/action'
+import TenderDetail from './layouts/TenderDetail'
 
 function App() {
     const dispatch = useDispatch()
@@ -37,7 +38,11 @@ function App() {
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
                     <Route path="/geo-chart" component={GeoChart} />
-                    <Route path="/country/:id" component={Country} />
+                    <Route exact path="/country/:id" component={Country} />
+                    <Route
+                        path="/country/:id/tender/:tenderId"
+                        component={TenderDetail}
+                    />
                     <Route component={Notfound} />
                 </Switch>
             </Fragment>
