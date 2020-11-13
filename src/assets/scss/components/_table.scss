@@ -54,6 +54,12 @@ table {
                     padding-left: 20px;
                 }
             }
+
+            &.has-red-flag{
+                td{
+                    background-color: #FAE9E9;
+                }
+            }
         }
     }
 
