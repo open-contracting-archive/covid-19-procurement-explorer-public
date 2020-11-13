@@ -8,6 +8,11 @@
         font-size: 24px;
         padding-bottom: 0;
 
+        &:hover,
+        &:focus {
+            color: #1fbbec;
+        }
+
         &::before,
         &::after {
             content: '';
