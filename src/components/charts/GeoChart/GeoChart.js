@@ -3,32 +3,13 @@ import { select, geoPath, geoMercator } from 'd3'
 import { Link } from 'react-router-dom'
 import useResizeObserver from '../../../hooks/useResizeObserver'
 import CountryServices from '../../../services/countryServices'
+import formatNumber from '../../formatNumber/FormatNumber'
 
 function GeoChart({ data }) {
     const svgRef = useRef()
     const wrapperRef = useRef()
     const dimensions = useResizeObserver(wrapperRef)
     const [countryData, setCountryData] = useState([])
-
-    const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
-
-    const formatNumber = (number) => {
-        // what tier? (determines SI symbol)
-        var tier = (Math.log10(number) / 3) | 0
-
-        // if zero, we don't need a suffix
-        if (tier === 0) return number
-
-        // get suffix and determine scale
-        var suffix = SI_SYMBOL[tier]
-        var scale = Math.pow(10, tier * 3)
-
-        // scale the number
-        var scaled = number / scale
-
-        // format number and add suffix
-        return scaled.toFixed(1) + suffix
-    }
 
     useEffect(() => {
         CountryServices.CountryData().then((response) => {

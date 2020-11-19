@@ -9,28 +9,10 @@ import {
 
 import 'react-accessible-accordion/dist/fancy-example.css'
 import useTrans from '../../hooks/useTrans'
+import formatNumber from '../../components/formatNumber/FormatNumber'
 
 const CountryProfile = ({ profileData }) => {
     const { trans } = useTrans()
-
-    const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
-    const formatNumber = (number) => {
-        // what tier? (determines SI symbol)
-        var tier = (Math.log10(number) / 3) | 0
-
-        // if zero, we don't need a suffix
-        if (tier === 0) return number
-
-        // get suffix and determine scale
-        var suffix = SI_SYMBOL[tier]
-        var scale = Math.pow(10, tier * 3)
-
-        // scale the number
-        var scaled = number / scale
-
-        // format number and add suffix
-        return scaled.toFixed(1) + suffix
-    }
 
     return (
         <Accordion allowMultipleExpanded allowZeroExpanded>
