@@ -9,6 +9,7 @@ import Loader from '../components/loader/Loader'
 import CountryProfileServices from '../services/countryProfileServices'
 import useTrans from '../hooks/useTrans'
 import CountryServices from '../services/countryServices'
+import formatNumber from '../components/formatNumber/FormatNumber'
 
 function CountryDetail() {
     const [data, setData] = useState({})
@@ -16,26 +17,6 @@ function CountryDetail() {
     const [countryData, setCountryData] = useState([])
 
     let { id } = useParams()
-
-    const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
-
-    const formatNumber = (number) => {
-        // what tier? (determines SI symbol)
-        var tier = (Math.log10(number) / 3) | 0
-
-        // if zero, we don't need a suffix
-        if (tier === 0) return number
-
-        // get suffix and determine scale
-        var suffix = SI_SYMBOL[tier]
-        var scale = Math.pow(10, tier * 3)
-
-        // scale the number
-        var scaled = number / scale
-
-        // format number and add suffix
-        return scaled.toFixed(1) + suffix
-    }
 
     useEffect(() => {
         CountryServices.CountryData().then((response) => {
@@ -144,7 +125,9 @@ function CountryDetail() {
                                                     </span>
                                                     <h2 className="text-3xl">
                                                         $
-                                                        {data.healthcare_budget}
+                                                        {formatNumber(
+                                                            data.healthcare_budget
+                                                        )}
                                                         <span className="inline-block uppercase text-sm tracking-tight">
                                                             {data.currency}
                                                         </span>

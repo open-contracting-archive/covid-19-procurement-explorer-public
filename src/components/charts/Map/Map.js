@@ -6,30 +6,11 @@ import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { Link } from 'react-router-dom'
 import CountryServices from '../../../services/countryServices'
+import formatNumber from '../../formatNumber/FormatNumber'
 
 const Map = ({ data, barColorValue, axisRotation }) => {
     const mapchartDiv = useRef(null)
     const [countryData, setCountryData] = useState([])
-
-    const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
-
-    const formatNumber = (number) => {
-        // what tier? (determines SI symbol)
-        var tier = (Math.log10(number) / 3) | 0
-
-        // if zero, we don't need a suffix
-        if (tier === 0) return number
-
-        // get suffix and determine scale
-        var suffix = SI_SYMBOL[tier]
-        var scale = Math.pow(10, tier * 3)
-
-        // scale the number
-        var scaled = number / scale
-
-        // format number and add suffix
-        return scaled.toFixed(1) + suffix
-    }
 
     useEffect(() => {
         CountryServices.CountryData().then((response) => {

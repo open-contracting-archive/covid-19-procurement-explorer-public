@@ -2,9 +2,12 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { ReactComponent as FlagIcon } from '../assets/img/icons/ic_flag.svg'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { ReactComponent as RedIcon } from '../assets/img/icons/ic_flag.svg'
+import CountryFlag from '../components/CountryFlagIcon'
 import useTrans from '../hooks/useTrans'
 import CountryProfileServices from '../services/countryProfileServices'
+import AwardedItems from '../components/country/AwardedItems'
 
 const TenderDetail = () => {
     const [tenderInfo, setTenderInfo] = useState()
@@ -48,13 +51,13 @@ const TenderDetail = () => {
                     className="flex flex-wrap mb-5">
                     <div
                         style={{ backgroundColor: '#F1F1F1' }}
-                        className="flex items-center py-2 px-3 mr-2 mb-2 rounded-full">
-                        <FlagIcon />
+                        className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full">
+                        <RedIcon />
                         <p className="mx-2 text-sm">3 Red flags identified</p>
                     </div>
                     <div
                         style={{ backgroundColor: '#F1F1F1' }}
-                        className="flex items-center py-2 px-3 mr-2 mb-2 rounded-full">
+                        className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full">
                         <span
                             className={`status-indicator ${
                                 tenderInfo && tenderInfo.status
@@ -65,8 +68,8 @@ const TenderDetail = () => {
                     </div>
                     <div
                         style={{ backgroundColor: '#F1F1F1' }}
-                        className="flex items-center py-2 px-3 mr-2 mb-2 rounded-full">
-                        <span className="status-indicator completed"></span>
+                        className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full">
+                        <CountryFlag className="rounded-sm mr-2" code="mx" />
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.country_name}
                         </p>
@@ -181,14 +184,25 @@ const TenderDetail = () => {
                 </div>
             </div>
             <div className="container mx-auto px-4 "></div>
-            <div
-                style={{
-                    backgroundColor: '#E5E5E5',
-                    borderTop: '5px solid #1fbbec'
-                }}
-                className="py-20">
-                <div className="container mx-auto px-4 "></div>
-            </div>
+            <Tabs>
+                <div className="container mx-auto px-4 ">
+                    <TabList>
+                        <Tab>{trans('Awarded items')}</Tab>
+                    </TabList>
+                </div>
+                <div
+                    style={{
+                        backgroundColor: '#E5E5E5',
+                        borderTop: '5px solid #1fbbec'
+                    }}
+                    className="pt-16 pb-24">
+                    <div className="container mx-auto px-4 ">
+                        <TabPanel>
+                            <AwardedItems />
+                        </TabPanel>
+                    </div>
+                </div>
+            </Tabs>
         </section>
     )
 }

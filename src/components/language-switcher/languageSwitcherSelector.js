@@ -37,7 +37,7 @@ const LanguageSwitcherSelector = () => {
                     <option
                         key={index}
                         value={language.code}
-                        selected={currentLocale === language.code}>
+                        defaultValue={currentLocale === language.code}>
                         {language.code}
                     </option>
                 ))}
