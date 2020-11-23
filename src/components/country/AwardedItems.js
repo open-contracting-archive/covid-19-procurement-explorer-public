@@ -5,7 +5,7 @@ import useTrans from '../../hooks/useTrans'
 const AwardedItems = () => {
     const { trans } = useTrans()
     return (
-        <div style={{ color: '#293E45' }}>
+        <div className="text-primary-dark">
             <Fragment>
                 <table className="table">
                     <thead>

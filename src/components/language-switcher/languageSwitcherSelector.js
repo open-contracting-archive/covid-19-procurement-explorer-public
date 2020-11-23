@@ -28,10 +28,9 @@ const LanguageSwitcherSelector = () => {
         <div className="lang relative">
             <select
                 style={{
-                    backgroundColor: 'rgba(255,255,255,0.2)',
                     padding: '5px 20px 5px 10px'
                 }}
-                className="cursor-pointer outline-none appearance-none bg-transparent py-2 px-3 rounded-3xl uppercase text-xs"
+                className="cursor-pointer outline-none appearance-none bg-black bg-opacity-25 py-2 px-3 rounded-3xl uppercase text-xs"
                 onChange={onChange}>
                 {languages.map((language, index) => (
                     <option

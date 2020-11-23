@@ -81,13 +81,13 @@ function GeoChart({ data }) {
             <div className="container mx-auto mb-16">
                 <div className="flex flex-wrap items-center -mx-2">
                     <div className="w-3/12 leading-snug px-2">
-                        <h2 className="text-4xl uppercase leading-snug m-0 text-black-3d3">
+                        <h2 className="text-4xl uppercase leading-snug m-0 text-yellow-50">
                             Explore Countries
                         </h2>
                     </div>
                     <div className="flex-1 px-2">
                         <div>
-                            <span className="text-xl inline-block mb-6 text-black-3d3-50">
+                            <span className="text-xl inline-block mb-6 text-yellow-50 opacity-50">
                                 Track your country’s Covid-19 Procurement status
                             </span>
                             <ul className="flex items-center space-x-16">
@@ -102,7 +102,7 @@ function GeoChart({ data }) {
                                                 {countryData[country].name}
                                             </Link>
                                         </span>
-                                        <span className="text-sm text-black-50 block">
+                                        <span className="text-sm text-black text-opacity-50 block">
                                             {formatNumber(
                                                 countryData[country].gdp
                                             )}
