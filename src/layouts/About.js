@@ -4,7 +4,7 @@ function About() {
     return (
         <section className="px-4">
             <div className="container mx-auto">
-                <div className="mt-4 bg-gray-100 p-4 shadow rounded">
+                <div className="mt-4 bg-primary-gray p-4 shadow rounded">
                     This is about page
                 </div>
             </div>

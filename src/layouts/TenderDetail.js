@@ -40,7 +40,7 @@ const TenderDetail = () => {
                     </span>{' '}
                     /
                 </div>
-                <h2 className="md:w-3/4 text-2xl md:text-double leading-tight mb-8 uppercase text-primary-dark">
+                <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">
                     {tenderInfo && tenderInfo.project_title}
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">
@@ -83,13 +83,13 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Number of bidders')}
                         </p>
-                        <p className="font-bold text-double">7</p>
+                        <p className="font-bold text-xl">7</p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
                             {trans('Tender value')}
                         </p>
-                        <p className="font-bold text-double">
+                        <p className="font-bold text-xl">
                             60K{' '}
                             <span className="font-normal text-base uppercase">
                                 USD
@@ -100,7 +100,7 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Award value')}
                         </p>
-                        <p className="font-bold text-double">
+                        <p className="font-bold text-xl">
                             59K{' '}
                             <span className="font-normal text-base uppercase">
                                 USD
@@ -111,7 +111,7 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Contract value')}
                         </p>
-                        <p className="font-bold text-double">
+                        <p className="font-bold text-xl">
                             62K{' '}
                             <span className="font-normal text-base uppercase">
                                 USD

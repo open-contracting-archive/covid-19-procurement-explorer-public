@@ -27,15 +27,11 @@ const Header = () => {
                 } `}>
                 <div className="container text-white [ mx-auto ] [ flex justify-between items-center ]">
                     <div className="w-24 leading-none">
-                        <NavLink to="/" className="leading-snug font-bold">
-                            <span
-                                className="block text-yellow-20">
+                        <NavLink to="/" className="leading-tight font-bold">
+                            <span className="block text-yellow-20">
                                 Covid-19
                             </span>
-                            <span
-                                className="block text-blue-20">
-                                Procurement
-                            </span>
+                            <span className="block text-blue-20">Contract</span>
                             Explorer
                         </NavLink>
                     </div>

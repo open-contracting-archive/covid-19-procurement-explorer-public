@@ -67,7 +67,7 @@ function CountryDetail() {
                                 )}
                             </ul>
                         </div>
-                        <h2 className="font-bold mb-5 text-3xl  text-primary-dark">
+                        <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
                             {data.name}
                         </h2>
                         <div className="flex flex-wrap -mx-4 -mb-4">
@@ -85,7 +85,7 @@ function CountryDetail() {
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
-                                <div className="flex flex-col  text-primary-dark font-extrabold">
+                                <div className="flex flex-col  text-primary-dark font-bold">
                                     <div
                                         className="p-8 py-6 bg-yellow-20 ">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
@@ -94,7 +94,7 @@ function CountryDetail() {
                                                     <span className="font-normal inline-block">
                                                         {trans('Population')}{' '}
                                                     </span>
-                                                    <h2 className="text-3xl">
+                                                    <h2 className="text-xl">
                                                         {formatNumber(
                                                             data.population
                                                         )}
@@ -106,7 +106,7 @@ function CountryDetail() {
                                                     <span className="font-normal inline-block">
                                                         {trans('GDP')}
                                                     </span>
-                                                    <h2 className="text-3xl">
+                                                    <h2 className="text-xl">
                                                         {formatNumber(data.gdp)}
                                                         <span className="inline-block uppercase text-xl tracking-tight">
                                                             {data.currency}
@@ -121,7 +121,7 @@ function CountryDetail() {
                                                             'Healthcare budget'
                                                         )}
                                                     </span>
-                                                    <h2 className="text-3xl">
+                                                    <h2 className="text-xl">
                                                         $
                                                         {formatNumber(
                                                             data.healthcare_budget
@@ -142,7 +142,7 @@ function CountryDetail() {
                                                             '% of GDP to healthcare'
                                                         )}
                                                     </span>
-                                                    <h2 className="text-3xl">
+                                                    <h2 className="text-xl">
                                                         {data.healthcare_gdp_pc}
                                                         <span className="inline-block uppercase text-sm tracking-tight">
                                                             %
@@ -177,7 +177,7 @@ function CountryDetail() {
                                                             'Total Covid-19 cases'
                                                         )}
                                                     </span>
-                                                    <h2 className="text-3xl">
+                                                    <h2 className="text-xl">
                                                         {data.covid_cases_total &&
                                                             data.covid_cases_total.toLocaleString(
                                                                 'en'
@@ -192,7 +192,7 @@ function CountryDetail() {
                                                             'Total deaths by Covid-19'
                                                         )}
                                                     </span>
-                                                    <h2 className="text-3xl">
+                                                    <h2 className="text-xl">
                                                         {data.covid_deaths_total &&
                                                             data.covid_deaths_total.toLocaleString(
                                                                 'en'

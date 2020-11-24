@@ -1,13 +1,14 @@
 import React from 'react'
-
+import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
+import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 const Footer = () => {
     return (
-        <footer className="py-16 px-4 text-white text-sm bg-yellow-50">
-            <div className="container mx-auto">
+        <footer className="relative pt-16 pb-40  px-4 text-white text-sm bg-yellow-50">
+            <div className="container mx-auto relative z-10">
                 <div className="grid-cols-12 grid gap-4">
                     <div className="col-span-12 md:col-span-4">
-                        <p>
-                            Covid-19 <br /> procurement <br /> explorer
+                        <p className="font-bold leading-tight">
+                            Covid-19 <br /> Contract <br /> Explorer
                         </p>
                     </div>
                     <div className="col-span-6 md:col-span-2">
@@ -34,14 +35,21 @@ const Footer = () => {
                                 <input
                                     type="text"
                                     placeholder="Type your email address"
-                                    className="px-3 py-5 w-full rounded-sm  text-primary-dark"
+                                    className="px-3 py-4 w-full rounded-sm  text-primary-dark"
                                 />
-                                <button className="absolute right-0 bg-blue-600 h-full p-5">Subscribe</button>
+                                <button className="absolute right-0 bg-blue-20 h-full p-5">
+                                    Subscribe
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
+                <FooterIcon
+                    className="absolute"
+                    style={{ bottom: '-130px', right: '-30px' }}
+                />
             </div>
+            <FooterBlob className="absolute bottom-0 left-0" />
         </footer>
     )
 }
