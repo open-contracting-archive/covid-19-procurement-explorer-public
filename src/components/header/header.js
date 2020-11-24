@@ -29,13 +29,11 @@ const Header = () => {
                     <div className="w-24 leading-none">
                         <NavLink to="/" className="leading-snug font-bold">
                             <span
-                                className="block"
-                                style={{ color: '#C8D419' }}>
+                                className="block text-yellow-20">
                                 Covid-19
                             </span>
                             <span
-                                className="block"
-                                style={{ color: '#1FBBEC' }}>
+                                className="block text-blue-20">
                                 Procurement
                             </span>
                             Explorer

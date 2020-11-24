@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import BarChart from '../../components/charts/BarChart/BarChart'
 import PieChart from '../../components/charts/PieChart/PieChart'
 import AreaChart from '../../components/charts/AreaChart/AreaChart'
@@ -202,17 +202,17 @@ function CountryDataCharts() {
     }, [])
 
     return (
-        <section style={{ background: '#E5E5E5' }}>
+        <section className="bg-primary-gray">
             <div className="container mx-auto">
                 {loading ? (
                     <div className="flex flex-wrap -mx-3 -mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Total Spending
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className="text-blue-50 pb-10">
+                                    <div className=" text-primary-dark pb-10">
                                         <span>
                                             <strong className="text-4xl inline-block mr-3">
                                                 87M
@@ -232,11 +232,11 @@ function CountryDataCharts() {
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Total contracts
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className="text-blue-50 pb-10">
+                                    <div className=" text-primary-dark pb-10">
                                         <span>
                                             <strong className="text-4xl inline-block mr-3">
                                                 218
@@ -255,11 +255,11 @@ function CountryDataCharts() {
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Cancelled awards
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className="text-blue-50 pb-10">
+                                    <div className=" text-primary-dark pb-10">
                                         <span>
                                             <strong className="text-4xl inline-block mr-3">
                                                 51
@@ -277,7 +277,7 @@ function CountryDataCharts() {
                         </div>
                         <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Procurement trend
                                 </h3>
                                 <div className="flex">
@@ -289,7 +289,7 @@ function CountryDataCharts() {
                         </div>
                         <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold text-blue-50 mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Combined Chart with multiple value axes
                                 </h3>
                                 <div className="flex">

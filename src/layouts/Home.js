@@ -18,12 +18,8 @@ const Home = () => {
                     <CircleIcon className="circle-ring absolute h-full w-full" />
                     <HeroIcon className="covid-icon" />
                     <div
-                        style={{
-                            backgroundColor: '#C8D419'
-                        }}
-                        className="inner-circle rounded-full bg-orange-200 overflow-hidden [ flex flex-col justify-center items-center ]">
+                        className="inner-circle rounded-full bg-yellow-20 overflow-hidden [ flex flex-col justify-center items-center ]">
                         <div
-                            style={{ color: '#293E45' }}
                             className="[ flex-1 flex flex-col justify-end items-center ] pb-8">
                             <h1 className="[ text-3xl md:text-6xl font-bold uppercase leading-none ] text-center">
                                 {trans('EMERGENCY PROCUREMENT')}
@@ -37,16 +33,14 @@ const Home = () => {
                         <div
                             style={{
                                 height: '200px',
-                                backgroundColor: '#293E45'
                             }}
-                            className="[ flex flex-wrap md:flex-no-wrap justify-center ] pt-12 w-full text-white">
+                            className="[ flex flex-wrap md:flex-no-wrap justify-center ] pt-12 w-full text-white bg-primary-dark">
                             <a
                                 href=""
                                 className="flex [ mr-12 mb-10 ] text-center">
                                 <div>
                                     <p
-                                        style={{ borderColor: '#1FBBEC' }}
-                                        className="[ text-lg font-bold uppercase ] border-b-4">
+                                        className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
                                         {trans('Explore data')}
                                     </p>
                                     <p className="text-sm opacity-50">
@@ -57,8 +51,7 @@ const Home = () => {
                             <a href="" className="flex text-center">
                                 <div>
                                     <p
-                                        style={{ borderColor: '#1FBBEC' }}
-                                        className="[ text-lg font-bold uppercase ] border-b-4">
+                                        className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
                                         {trans('Explore library')}
                                     </p>
                                     <p className="text-sm opacity-50">

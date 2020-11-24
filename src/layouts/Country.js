@@ -52,7 +52,6 @@ function CountryDetail() {
                                         return (
                                             <li key={index} className="mr-6">
                                                 <Link
-                                                    style={{ color: '#293E45' }}
                                                     className={`opacity-50 hover:opacity-100 ${
                                                         countryData[country]
                                                             .id == id
@@ -68,7 +67,7 @@ function CountryDetail() {
                                 )}
                             </ul>
                         </div>
-                        <h2 className="font-bold mb-5 text-3xl text-gray-900">
+                        <h2 className="font-bold mb-5 text-3xl  text-primary-dark">
                             {data.name}
                         </h2>
                         <div className="flex flex-wrap -mx-4 -mb-4">
@@ -86,10 +85,9 @@ function CountryDetail() {
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
-                                <div className="flex flex-col text-gray-800 font-extrabold">
+                                <div className="flex flex-col  text-primary-dark font-extrabold">
                                     <div
-                                        style={{ backgroundColor: '#C8D419' }}
-                                        className="p-8 py-6 ">
+                                        className="p-8 py-6 bg-yellow-20 ">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
@@ -170,8 +168,7 @@ function CountryDetail() {
                                         </div>
                                     </div>
                                     <div
-                                        style={{ backgroundColor: '#293E45' }}
-                                        className="p-8 text-white">
+                                        className="p-8 text-white bg-primary-dark">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
@@ -234,10 +231,9 @@ function CountryDetail() {
                         </div>
                         <div
                             style={{
-                                backgroundColor: '#E5E5E5',
                                 borderTop: '5px solid #1fbbec'
                             }}
-                            className="py-16">
+                            className="py-16 bg-primary-gray">
                             <div className="container mx-auto px-4 ">
                                 <TabPanel>
                                     <CountryDataCharts />

@@ -1,4 +1,4 @@
-@mixin equalDimension($dimension){
+@mixin equalDimension($dimension) {
     width: $dimension;
     height: $dimension;
 }
@@ -23,7 +23,7 @@
         z-index: -1;
     }
 
-    .outer-circle{
+    .outer-circle {
         @include equalDimension(667px);
 
         @media (max-width: 767px) {
@@ -34,7 +34,7 @@
         // }
     }
 
-    .inner-circle{
+    .inner-circle {
         @include equalDimension(633px);
 
         @media (max-width: 767px) {
@@ -62,5 +62,19 @@
         right: 7px;
         top: 12px;
         pointer-events: none;
+    }
+}
+
+.library {
+    &__tag {
+        @apply p-2 rounded-md bg-blue-20 text-center text-white text-xs inline-block mb-2 font-bold;
+    }
+
+    &__heading {
+        @apply text-xl leading-tight mb-2 font-normal;
+    }
+
+    &__date {
+        @apply text-sm text-primary-dark text-opacity-75;
     }
 }

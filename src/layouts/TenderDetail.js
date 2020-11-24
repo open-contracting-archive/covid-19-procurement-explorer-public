@@ -32,32 +32,23 @@ const TenderDetail = () => {
     return (
         <section className="pt-8">
             <div className="container mx-auto px-4 ">
-                <div style={{ color: '#ABBABF' }} className="text-sm mb-4">
+                <div className="text-sm mb-4 text-blue-5">
                     <span
-                        style={{ color: '#1FBBEC' }}
-                        className="cursor-pointer"
+                        className="cursor-pointer text-primary-blue"
                         onClick={previousPage}>
                         {trans('Tender')}{' '}
                     </span>{' '}
                     /
                 </div>
-                <h2
-                    style={{ color: '#293E45' }}
-                    className="md:w-3/4 text-2xl md:text-double leading-tight mb-8 uppercase">
+                <h2 className="md:w-3/4 text-2xl md:text-double leading-tight mb-8 uppercase text-primary-dark">
                     {tenderInfo && tenderInfo.project_title}
                 </h2>
-                <div
-                    style={{ color: '#293E45' }}
-                    className="flex flex-wrap mb-5">
-                    <div
-                        style={{ backgroundColor: '#F1F1F1' }}
-                        className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full">
+                <div className="flex flex-wrap mb-5 text-primary-dark">
+                    <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <RedIcon />
                         <p className="mx-2 text-sm">3 Red flags identified</p>
                     </div>
-                    <div
-                        style={{ backgroundColor: '#F1F1F1' }}
-                        className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full">
+                    <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <span
                             className={`status-indicator ${
                                 tenderInfo && tenderInfo.status
@@ -66,18 +57,14 @@ const TenderDetail = () => {
                             {tenderInfo && tenderInfo.status}
                         </p>
                     </div>
-                    <div
-                        style={{ backgroundColor: '#F1F1F1' }}
-                        className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full">
+                    <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag className="rounded-sm mr-2" code="mx" />
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.country_name}
                         </p>
                     </div>
                 </div>
-                <div
-                    style={{ backgroundColor: '#F1F1F1', color: '#293E45' }}
-                    className="p-8 rounded-md grid grid-cols-12 gap-y-6 md:gap-y-10 mb-8">
+                <div className="p-8 rounded-md grid grid-cols-12 gap-y-6 md:gap-y-10 mb-8 bg-primary-gray">
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
                             {trans('Contract signed')}
@@ -192,10 +179,9 @@ const TenderDetail = () => {
                 </div>
                 <div
                     style={{
-                        backgroundColor: '#E5E5E5',
                         borderTop: '5px solid #1fbbec'
                     }}
-                    className="pt-16 pb-24">
+                    className="pt-16 pb-24 bg-primary-gray">
                     <div className="container mx-auto px-4 ">
                         <TabPanel>
                             <AwardedItems />

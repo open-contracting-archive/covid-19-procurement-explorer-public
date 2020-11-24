@@ -37,11 +37,10 @@ const CountryProfileTable = () => {
     }, [id])
 
     return (
-        <div style={{ color: '#293E45' }}>
+        <div>
             {loading ? (
                 <Fragment>
                     <div
-                        style={{ color: '#293E45' }}
                         className="mb-12 flex gap-8 justify-between">
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">

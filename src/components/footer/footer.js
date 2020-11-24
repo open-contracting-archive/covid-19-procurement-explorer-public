@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer style={{backgroundColor: "#3D393D"}} className="py-16 px-4 text-white text-sm">
+        <footer className="py-16 px-4 text-white text-sm bg-yellow-50">
             <div className="container mx-auto">
                 <div className="grid-cols-12 grid gap-4">
                     <div className="col-span-12 md:col-span-4">
@@ -34,7 +34,7 @@ const Footer = () => {
                                 <input
                                     type="text"
                                     placeholder="Type your email address"
-                                    className="px-3 py-5 w-full rounded-sm text-gray-900"
+                                    className="px-3 py-5 w-full rounded-sm  text-primary-dark"
                                 />
                                 <button className="absolute right-0 bg-blue-600 h-full p-5">Subscribe</button>
                             </div>
