@@ -5,7 +5,7 @@
         position: relative;
         display: flex;
         align-items: center;
-        font-size: 24px;
+        font-size: 22px;
         padding-bottom: 0;
 
         &:hover,
@@ -26,7 +26,7 @@
         line-height: 1.1;
 
         &--selected {
-            color: #293e45;
+            color: #fff;
             background-color: #1fbbec;
             border-top-left-radius: 6px;
             border-top-right-radius: 6px;

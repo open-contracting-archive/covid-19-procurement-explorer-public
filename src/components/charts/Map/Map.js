@@ -151,13 +151,13 @@ const Map = ({ data, barColorValue, axisRotation }) => {
             <div className="container mx-auto mb-16">
                 <div className="flex flex-wrap items-center -mx-2">
                     <div className="w-3/12 leading-snug px-2">
-                        <h2 className="text-4xl uppercase leading-snug m-0 text-yellow-50">
+                        <h2 className="text-xl uppercase leading-snug m-0 text-yellow-50">
                             Explore Countries
                         </h2>
                     </div>
                     <div className="flex-1 px-2">
                         <div>
-                            <span className="text-xl inline-block mb-6 text-yellow-50 text-opacity-50">
+                            <span className="text-lg inline-block mb-6 text-yellow-50 text-opacity-50">
                                 Track your country’s Covid-19 Procurement status
                             </span>
                             <ul className="flex items-center space-x-16">

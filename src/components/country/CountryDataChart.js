@@ -214,7 +214,7 @@ function CountryDataCharts() {
                                 <div className="flex items-end">
                                     <div className=" text-primary-dark pb-10">
                                         <span>
-                                            <strong className="text-4xl inline-block mr-3">
+                                            <strong className="text-xl inline-block mr-3">
                                                 87M
                                             </strong>
                                             USD
@@ -238,7 +238,7 @@ function CountryDataCharts() {
                                 <div className="flex items-end">
                                     <div className=" text-primary-dark pb-10">
                                         <span>
-                                            <strong className="text-4xl inline-block mr-3">
+                                            <strong className="text-xl inline-block mr-3">
                                                 218
                                             </strong>
                                         </span>
@@ -261,7 +261,7 @@ function CountryDataCharts() {
                                 <div className="flex items-end">
                                     <div className=" text-primary-dark pb-10">
                                         <span>
-                                            <strong className="text-4xl inline-block mr-3">
+                                            <strong className="text-xl inline-block mr-3">
                                                 51
                                             </strong>
                                         </span>

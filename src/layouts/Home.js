@@ -15,16 +15,16 @@ const Home = () => {
         <Fragment>
             <section className="hero-section relative [ mx-auto px-4 ] [ flex flex-col justify-center ]">
                 <div className="outer-circle mt-40 mx-auto relative [ flex justify-center items-center ]">
-                    <CircleIcon className="circle-ring absolute h-full w-full" />
+                    <CircleIcon className="circle-ring absolute h-full w-full z-negative" />
                     <HeroIcon className="covid-icon" />
                     <div
                         className="inner-circle rounded-full bg-yellow-20 overflow-hidden [ flex flex-col justify-center items-center ]">
                         <div
                             className="[ flex-1 flex flex-col justify-end items-center ] pb-8">
-                            <h1 className="[ text-3xl md:text-6xl font-bold uppercase leading-none ] text-center">
+                            <h1 className="[ text-3xl md:text-4xl font-bold uppercase leading-none ] text-center">
                                 {trans('EMERGENCY PROCUREMENT')}
                             </h1>
-                            <p className="[ text-lg uppercase ] mt-8">
+                            <p className="uppercase mt-6">
                                 {trans(
                                     'DATA, BEST PRACTICES AND RECOMMENDATIONS'
                                 )}
@@ -43,7 +43,7 @@ const Home = () => {
                                         className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
                                         {trans('Explore data')}
                                     </p>
-                                    <p className="text-sm opacity-50">
+                                    <p className="text-sm opacity-50 mt-1">
                                         {trans('Stats from countries')}
                                     </p>
                                 </div>
@@ -54,7 +54,7 @@ const Home = () => {
                                         className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
                                         {trans('Explore library')}
                                     </p>
-                                    <p className="text-sm opacity-50">
+                                    <p className="text-sm opacity-50 mt-1">
                                         {trans('Best practices and resources')}
                                     </p>
                                 </div>
