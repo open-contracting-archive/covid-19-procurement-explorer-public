@@ -3,7 +3,7 @@ import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 const Footer = () => {
     return (
-        <footer className="relative pt-16 pb-40  px-4 text-white text-sm bg-yellow-50">
+        <footer className="relative pt-16 pb-40  px-4 text-white text-sm bg-yellow-50 overflow-hidden">
             <div className="container mx-auto relative z-10">
                 <div className="grid-cols-12 grid gap-4">
                     <div className="col-span-12 md:col-span-4">
@@ -45,7 +45,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <FooterIcon
-                    className="absolute"
+                    className="absolute z-negative"
                     style={{ bottom: '-130px', right: '-30px' }}
                 />
             </div>
