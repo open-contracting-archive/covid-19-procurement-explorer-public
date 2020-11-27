@@ -15,6 +15,8 @@ import {
     setTranslations
 } from './store/reducers/general/action'
 import TenderDetail from './layouts/TenderDetail'
+import News from './layouts/News'
+import NewsDetail from './layouts/NewsDetail'
 
 function App() {
     const dispatch = useDispatch()
@@ -45,6 +47,8 @@ function App() {
                         path="/country/:id/tender/:tenderId"
                         component={TenderDetail}
                     />
+                    <Route exact path="/news" component={News} />
+                    <Route path="/news-detail" component={NewsDetail} />
                     <Route component={Notfound} />
                 </Switch>
             </Fragment>
