@@ -40,7 +40,7 @@ function App() {
                     <Route path="/about" component={About} />
                     <Route path="/geo-chart" component={GeoChart} />
                     <Route exact path="/country/:id" component={Country} />
-                    <Route exact path="/data-visualization" component={Data} />
+                    <Route exact path="/data" component={Data} />
                     <Route
                         path="/country/:id/tender/:tenderId"
                         component={TenderDetail}

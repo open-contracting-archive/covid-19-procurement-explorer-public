@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import CountryServices from '../../../services/countryServices'
 import formatNumber from '../../formatNumber/FormatNumber'
 
-const Map = ({ data, barColorValue, axisRotation }) => {
+const Map = ({ data }) => {
     const mapchartDiv = useRef(null)
     const [countryData, setCountryData] = useState([])
 
@@ -93,41 +93,41 @@ const Map = ({ data, barColorValue, axisRotation }) => {
         let colorSet = new am4core.ColorSet()
 
         imageSeries.data = [
-            {
-                title: 'Kenya',
-                latitude: 1,
-                longitude: 38,
-                url: '/country/2',
-                color: colorSet.next()
-            },
-            {
-                title: 'Kyrgyzstan',
-                latitude: 41,
-                longitude: 75,
-                url: '/country/9',
-                color: colorSet.next()
-            },
-            {
-                title: 'Moldova',
-                latitude: 47,
-                longitude: 29,
-                url: '/country/8',
-                color: colorSet.next()
-            },
-            {
-                title: 'United Kingdom',
-                latitude: 54,
-                longitude: -2,
-                url: '/country/7',
-                color: colorSet.next()
-            },
-            {
-                title: 'Ukraine',
-                latitude: 49,
-                longitude: 32,
-                url: '/country/6',
-                color: colorSet.next()
-            },
+            // {
+            //     title: 'Kenya',
+            //     latitude: 1,
+            //     longitude: 38,
+            //     url: '/country/2',
+            //     color: colorSet.next()
+            // },
+            // {
+            //     title: 'Kyrgyzstan',
+            //     latitude: 41,
+            //     longitude: 75,
+            //     url: '/country/9',
+            //     color: colorSet.next()
+            // },
+            // {
+            //     title: 'Moldova',
+            //     latitude: 47,
+            //     longitude: 29,
+            //     url: '/country/8',
+            //     color: colorSet.next()
+            // },
+            // {
+            //     title: 'United Kingdom',
+            //     latitude: 54,
+            //     longitude: -2,
+            //     url: '/country/7',
+            //     color: colorSet.next()
+            // },
+            // {
+            //     title: 'Ukraine',
+            //     latitude: 49,
+            //     longitude: 32,
+            //     url: '/country/6',
+            //     color: colorSet.next()
+            // },
             {
                 title: 'Mexico',
                 latitude: 23,

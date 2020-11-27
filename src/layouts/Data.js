@@ -7,6 +7,10 @@ import CombinedChart from '../components/charts/CombinedChart/CombinedChart'
 import SankeyChart from '../components/charts/SankeyChart/SankeyChart'
 import CompareChart from '../components/charts/CompareChart/CompareChart'
 import RaceBarChart from '../components/charts/RaceBarChart/RaceBarChart'
+import PartitionedChart from '../components/charts/PartitionedChart/PartitionedChart'
+import StackedChart from '../components/charts/StackedChart/StackedChart'
+import DrillDownMap from '../components/charts/DrillDownMap/DrillDownMap'
+import HorizontalBarChart from '../components/charts/HorizontalBarChart/HorizontalBarChart'
 import Loader from '../components/loader/Loader'
 
 // Bar Chart data
@@ -1799,6 +1803,338 @@ const race_bar_chart_data = {
     ]
 }
 
+// Partitioned Chart Data
+const partitioned_chart_data = [
+    {
+        region: 'Central',
+        state: 'North Dakota',
+        sales: 920
+    },
+    {
+        region: 'Central',
+        state: 'South Dakota',
+        sales: 1317
+    },
+    {
+        region: 'Central',
+        state: 'Kansas',
+        sales: 2916
+    },
+    {
+        region: 'Central',
+        state: 'Iowa',
+        sales: 4577
+    },
+    {
+        region: 'Central',
+        state: 'Nebraska',
+        sales: 7464
+    },
+    {
+        region: 'Central',
+        state: 'Oklahoma',
+        sales: 19686
+    },
+    {
+        region: 'Central',
+        state: 'Missouri',
+        sales: 22207
+    },
+    {
+        region: 'Central',
+        state: 'Minnesota',
+        sales: 29865
+    },
+    {
+        region: 'Central',
+        state: 'Wisconsin',
+        sales: 32125
+    },
+    {
+        region: 'Central',
+        state: 'Indiana',
+        sales: 53549
+    },
+    {
+        region: 'Central',
+        state: 'Michigan',
+        sales: 76281
+    },
+    {
+        region: 'Central',
+        state: 'Illinois',
+        sales: 80162
+    },
+    {
+        region: 'Central',
+        state: 'Texas',
+        sales: 170187
+    },
+    {
+        region: 'East',
+        state: 'West Virginia',
+        sales: 1209
+    },
+    {
+        region: 'East',
+        state: 'Maine',
+        sales: 1270
+    },
+    {
+        region: 'East',
+        state: 'District of Columbia',
+        sales: 2866
+    },
+    {
+        region: 'East',
+        state: 'New Hampshire',
+        sales: 7294
+    },
+    {
+        region: 'East',
+        state: 'Vermont',
+        sales: 8929
+    },
+    {
+        region: 'East',
+        state: 'Connecticut',
+        sales: 13386
+    },
+    {
+        region: 'East',
+        state: 'Rhode Island',
+        sales: 22629
+    },
+    {
+        region: 'East',
+        state: 'Maryland',
+        sales: 23707
+    },
+    {
+        region: 'East',
+        state: 'Delaware',
+        sales: 27453
+    },
+    {
+        region: 'East',
+        state: 'Massachusetts',
+        sales: 28639
+    },
+    {
+        region: 'East',
+        state: 'New Jersey',
+        sales: 35763
+    },
+    {
+        region: 'East',
+        state: 'Ohio',
+        sales: 78253
+    },
+    {
+        region: 'East',
+        state: 'Pennsylvania',
+        sales: 116522
+    },
+    {
+        region: 'East',
+        state: 'New York',
+        sales: 310914
+    },
+    {
+        region: 'South',
+        state: 'South Carolina',
+        sales: 8483
+    },
+    {
+        region: 'South',
+        state: 'Louisiana',
+        sales: 9219
+    },
+    {
+        region: 'South',
+        state: 'Mississippi',
+        sales: 10772
+    },
+    {
+        region: 'South',
+        state: 'Arkansas',
+        sales: 11678
+    },
+    {
+        region: 'South',
+        state: 'Alabama',
+        sales: 19511
+    },
+    {
+        region: 'South',
+        state: 'Tennessee',
+        sales: 30662
+    },
+    {
+        region: 'South',
+        state: 'Kentucky',
+        sales: 36598
+    },
+    {
+        region: 'South',
+        state: 'Georgia',
+        sales: 49103
+    },
+    {
+        region: 'South',
+        state: 'North Carolina',
+        sales: 55604
+    },
+    {
+        region: 'South',
+        state: 'Virginia',
+        sales: 70641
+    },
+    {
+        region: 'South',
+        state: 'Florida',
+        sales: 89479
+    },
+    {
+        region: 'West',
+        state: 'Wyoming',
+        sales: 1603
+    },
+    {
+        region: 'West',
+        state: 'Idaho',
+        sales: 4380
+    },
+    {
+        region: 'West',
+        state: 'New Mexico',
+        sales: 4779
+    },
+    {
+        region: 'West',
+        state: 'Montana',
+        sales: 5589
+    },
+    {
+        region: 'West',
+        state: 'Utah',
+        sales: 11223
+    },
+    {
+        region: 'West',
+        state: 'Nevada',
+        sales: 16729
+    },
+    {
+        region: 'West',
+        state: 'Oregon',
+        sales: 17431
+    },
+    {
+        region: 'West',
+        state: 'Colorado',
+        sales: 32110
+    },
+    {
+        region: 'West',
+        state: 'Arizona',
+        sales: 35283
+    },
+    {
+        region: 'West',
+        state: 'Washington',
+        sales: 138656
+    },
+    {
+        region: 'West',
+        state: 'California',
+        sales: 457731
+    }
+]
+
+// Stacked Chart Data
+const stacked_chart_data = [
+    {
+        year: '2016',
+        europe: 2.5,
+        namerica: 2.5,
+        asia: 2.1,
+        lamerica: 0.3,
+        meast: 0.2,
+        africa: 0.1
+    },
+    {
+        year: '2017',
+        europe: 2.6,
+        namerica: 2.7,
+        asia: 2.2,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1
+    },
+    {
+        year: '2018',
+        europe: 2.8,
+        namerica: 2.9,
+        asia: 2.4,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1
+    }
+]
+
+// Horizontal Bar Chart
+const horizontal_bar_chart_data = [
+    {
+        network: 'Facebook',
+        MAU: 2255250000
+    },
+    {
+        network: 'Google+',
+        MAU: 430000000
+    },
+    {
+        network: 'Instagram',
+        MAU: 1000000000
+    },
+    {
+        network: 'Pinterest',
+        MAU: 246500000
+    },
+    {
+        network: 'Reddit',
+        MAU: 355000000
+    },
+    {
+        network: 'TikTok',
+        MAU: 500000000
+    },
+    {
+        network: 'Tumblr',
+        MAU: 624000000
+    },
+    {
+        network: 'Twitter',
+        MAU: 329500000
+    },
+    {
+        network: 'WeChat',
+        MAU: 1000000000
+    },
+    {
+        network: 'Weibo',
+        MAU: 431000000
+    },
+    {
+        network: 'Whatsapp',
+        MAU: 1433333333
+    },
+    {
+        network: 'YouTube',
+        MAU: 1900000000
+    }
+]
+
 const axisRotation = 60
 const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
@@ -1825,6 +2161,13 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Simple Bar Chart
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/simple-column-chart/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex items-end">
                                         <div className="flex-1">
@@ -1841,6 +2184,13 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Pie Chart
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/pie-chart-with-legend/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex items-end">
                                         <div className="flex-1">
@@ -1855,7 +2205,35 @@ function Data() {
                             <div className="w-full px-2 mb-6">
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                        Horizontal Bar Chart
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/sorted-bar-chart/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
+                                    </h3>
+                                    <div className="flex">
+                                        <div className="flex-1">
+                                            <HorizontalBarChart
+                                                data={horizontal_bar_chart_data}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full px-2 mb-6">
+                                <div className="bg-white rounded p-4">
+                                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Procurement trend
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/line-with-changing-color/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex">
                                         <div className="flex-1">
@@ -1868,6 +2246,13 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Combined Chart with multiple value axes
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/combined-bullet-column-line-chart/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex">
                                         <div className="flex-1">
@@ -1882,6 +2267,13 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Tree Map Chart Visualization
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/multilevel-tree-map/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex">
                                         <div className="flex-1">
@@ -1896,6 +2288,13 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Sankey Diagram
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/sankey-diagram/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex">
                                         <div className="flex-1">
@@ -1910,6 +2309,13 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Compare Chart Visualization
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/stock-chart-comparing-prices/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex">
                                         <div className="flex-1">
@@ -1922,12 +2328,80 @@ function Data() {
                                 <div className="bg-white rounded p-4">
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                         Race Bar Chart Visualization
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/bar-chart-race/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
                                     </h3>
                                     <div className="flex">
                                         <div className="flex-1">
                                             <RaceBarChart
                                                 data={race_bar_chart_data}
                                             />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full px-2 mb-6">
+                                <div className="bg-white rounded p-4">
+                                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                        Partitioned Chart Visualization
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/partitioned-bar-chart/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
+                                    </h3>
+                                    <div className="flex">
+                                        <div className="flex-1">
+                                            <PartitionedChart
+                                                data={partitioned_chart_data}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full px-2 mb-6">
+                                <div className="bg-white rounded p-4">
+                                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                        Stacked Chart Visualization
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/stacked-column-chart/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
+                                    </h3>
+                                    <div className="flex">
+                                        <div className="flex-1">
+                                            <StackedChart
+                                                data={stacked_chart_data}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full px-2 mb-6">
+                                <div className="bg-white rounded p-4">
+                                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                        Drill Down Map Visualization
+                                        <a
+                                            className="text-blue-30 underline capitalize inline-block ml-4 text-sm font-normal"
+                                            href="https://www.amcharts.com/demos/drill-down-map/"
+                                            target="_blank"
+                                            rel="noreferrer">
+                                            Data link
+                                        </a>
+                                    </h3>
+                                    <div className="flex">
+                                        <div className="flex-1">
+                                            <DrillDownMap />
                                         </div>
                                     </div>
                                 </div>

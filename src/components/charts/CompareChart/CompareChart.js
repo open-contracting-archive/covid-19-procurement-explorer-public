@@ -91,6 +91,7 @@ const CompareChart = () => {
         valueAxis.tooltip.disabled = true
         valueAxis.zIndex = 1
         valueAxis.renderer.baseGrid.disabled = true
+
         // height of axis
         valueAxis.height = am4core.percent(65)
 
@@ -197,7 +198,8 @@ const CompareChart = () => {
         <div>
             <div
                 ref={compareChart}
-                style={{ width: '100%', height: '400px' }} />
+                style={{ width: '100%', height: '400px' }}
+            />
         </div>
     )
 }

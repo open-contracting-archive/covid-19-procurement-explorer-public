@@ -43,7 +43,7 @@ const Header = () => {
                                 </NavLink>
                             </li>
                             <li className="mr-8">
-                                <NavLink activeClassName="active" to="/">
+                                <NavLink activeClassName="active" to="/data">
                                     {trans('Data')}
                                 </NavLink>
                             </li>
