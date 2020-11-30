@@ -1,3 +1,11 @@
 import React from 'react'
-const Notfound = () => <h2>Not found</h2>
-export default Notfound
+
+function NotFound() {
+    return (
+        <div className="py-56 container mx-auto">
+            <h2 className="text-2xl font-bold">Page is under Contruction !!</h2>
+        </div>
+    )
+}
+
+export default NotFound

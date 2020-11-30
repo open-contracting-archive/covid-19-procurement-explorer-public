@@ -31,6 +31,10 @@ header {
             background-color: #447483 !important;
         }
     }
+
+    a.active {
+        color: #1fbbec;
+    }
 }
 
 #controls {
@@ -85,5 +89,99 @@ header {
 .social-icon {
     &:not(:last-child) {
         margin-right: 20px;
+    }
+}
+
+.simple-tab {
+    .react-tabs {
+        margin-top: 0;
+
+        .react-tabs__tab {
+            background: transparent;
+            color: #293e45;
+            font-size: 16px;
+            padding: 0 0 4px;
+            border-bottom: 4px solid transparent;
+            margin-right: 10px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        .react-tabs__tab--selected {
+            border-bottom-color: #1fbbec;
+        }
+    }
+}
+
+.arrow-nav {
+    li.active {
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 12px;
+            width: 0;
+            height: 0;
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-left: 7px solid #1fbbec;
+        }
+    }
+}
+
+.contract-line {
+    width: 18px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+
+    .line {
+        height: 2px;
+        display: inline-block;
+        width: 100%;
+
+        &.red {
+            background: #f97878;
+        }
+
+        &.purple {
+            background: #b174fe;
+        }
+
+        &.mint {
+            background: #43ce94;
+        }
+
+        &.green {
+            background: #b4bc3e;
+        }
+
+        &.blue {
+            background: #419ab7;
+        }
+    }
+}
+
+.contract-text {
+    width: calc(100% - 18px);
+}
+
+.global-profile {
+    > section {
+        padding-bottom: 90px;
+    }
+
+    .react-tabs {
+        margin-top: -40px;
+    }
+
+    .simple-tab {
+        .react-tabs {
+            margin-top: 0;
+        }
     }
 }

@@ -66,7 +66,18 @@ const Home = () => {
 
                 <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
             </section>
-            <section>
+            <section className="pt-16">
+                <div className="text-center mb-10">
+                    <h3 className="uppercase text-3xl font-bold leading-none">
+                        <span className="block text-base font-bold">
+                            Explore
+                        </span>
+                        Countries
+                    </h3>
+                    <p className="text-base text-opacity-50  text-primary-dark">
+                        Government spendings to fight COVID-19
+                    </p>
+                </div>
                 <Map />
                 {/* <GeoChart data={geo_data} /> */}
             </section>
