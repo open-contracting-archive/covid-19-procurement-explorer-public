@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+
 
 function ChartShare() {
+    const handle = useFullScreenHandle()
     return (
         <div className="">
             <div
@@ -21,8 +24,12 @@ function ChartShare() {
                 </div>
                 <div>
                     <span className="flex items-center">
-                        <span className="cursor-pointer">View full screen</span>
-                        <FullViewIcon className="ml-2 inline-block" />
+                        <button onClick={handle.enter}>
+                            <span className="cursor-pointer">
+                                View full screen
+                            </span>
+                            <FullViewIcon className="ml-2 inline-block" />
+                        </button>
                     </span>
                 </div>
             </div>

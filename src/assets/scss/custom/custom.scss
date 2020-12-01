@@ -33,19 +33,16 @@ header {
     }
 
     a.active {
-        color: #1fbbec;
+        @apply text-primary-blue font-bold;
     }
 }
 
 #controls {
-    overflow: hidden;
-    padding-bottom: 3px;
+    @apply overflow-hidden pb-1;
 }
 
 .img-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    @apply w-full h-full overflow-hidden;
 }
 
 .img-gradient {
@@ -94,7 +91,7 @@ header {
 
 .simple-tab {
     .react-tabs {
-        margin-top: 0;
+        @apply mt-0;
 
         .react-tabs__tab {
             background: transparent;
@@ -105,19 +102,19 @@ header {
             margin-right: 10px;
 
             &:last-child {
-                margin-right: 0;
+                @apply mr-0;
             }
         }
 
         .react-tabs__tab--selected {
-            border-bottom-color: #1fbbec;
+            @apply border-primary-blue;
         }
     }
 }
 
 .arrow-nav {
     li.active {
-        position: relative;
+        @apply relative
 
         &:before {
             content: '';
@@ -177,6 +174,7 @@ header {
 
     .react-tabs {
         margin-top: -40px;
+        flex: 1;
     }
 
     .simple-tab {
@@ -184,4 +182,70 @@ header {
             margin-top: 0;
         }
     }
+}
+
+.custom-horizontal-bar {
+    ul {
+        li {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f1f1;
+            margin-bottom: 15px;
+
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+        }
+    }
+    .custom-horizontal-bar-text {
+        width: 180px;
+
+        h3 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
+    }
+
+    .custom-horizontal-bar-progress {
+        margin-left: 17px;
+        height: 14px;
+        width: calc(100% - 180px);
+        background: #dceaee;
+        position: relative;
+
+        span {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-color: #abbabf;
+            bottom: 0;
+            z-index: 1;
+            transition: all 0.23s ease-in-out;
+        }
+    }
+}
+
+.custom-scrollbar {
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px #dceaee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #1fbbec;
+        outline: 1px solid #1fbbec;
+    }
+}
+
+.fullscreen-enabled {
+    background: #fff;
+    padding: 50px;
 }

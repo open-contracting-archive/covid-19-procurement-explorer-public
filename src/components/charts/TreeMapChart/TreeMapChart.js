@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { Fragment, useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -54,7 +54,7 @@ const TreeMapChart = ({ data }) => {
         chart.dataFields.value = 'count'
         chart.dataFields.name = 'name'
         chart.dataFields.children = 'children'
-        chart.homeText = 'US Car Sales 2017'
+        // chart.homeText = 'US Car Sales 2017'
 
         // enable navigation
         chart.navigationBar = new am4charts.NavigationBar()

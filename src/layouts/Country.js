@@ -86,8 +86,7 @@ function CountryDetail() {
                             </div>
                             <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
                                 <div className="flex flex-col  text-primary-dark font-bold">
-                                    <div
-                                        className="p-8 py-6 bg-yellow-20 ">
+                                    <div className="p-8 py-6 bg-yellow-20 ">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>
@@ -167,8 +166,7 @@ function CountryDetail() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        className="p-8 text-white bg-primary-dark">
+                                    <div className="p-8 text-white bg-primary-dark">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
                                             <div className="w-full xs:w-1/2 px-4 mb-4">
                                                 <div>

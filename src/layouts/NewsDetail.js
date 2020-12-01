@@ -6,6 +6,7 @@ import socialIcons from '../assets/img/icons/social'
 
 const NewsDetail = () => {
     let history = useHistory()
+    window.scrollTo(0, 0)
 
     const previousPage = () => {
         history.goBack()
