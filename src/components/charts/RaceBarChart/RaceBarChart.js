@@ -147,8 +147,6 @@ const RaceBarChart = ({ data }) => {
             }, 2000)
         })
 
-        // chart.data = data
-
         return () => {
             chart.dispose()
 
@@ -156,7 +154,7 @@ const RaceBarChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={raceBarchart} style={{ width: '100%', height: '400px' }} />
+    return <div ref={raceBarchart} style={{ width: '100%', height: '600px' }} />
 }
 
 export default RaceBarChart

@@ -31,6 +31,7 @@ const Map = ({ data }) => {
 
         // Create chart instance
         let chart = am4core.create(mapchartDiv.current, am4maps.MapChart)
+        chart.chartContainer.wheelable = false
         chart.exporting.menu = new am4core.ExportMenu()
 
         // Set map definition
@@ -45,98 +46,84 @@ const Map = ({ data }) => {
         // Exclude Antartica
         polygonSeries.exclude = ['AQ']
 
+        //Set min/max fill color for each area
+        polygonSeries.heatRules.push({
+            property: 'fill',
+            target: polygonSeries.mapPolygons.template,
+            min: chart.colors.getIndex(1).brighten(1),
+            max: chart.colors.getIndex(1).brighten(-0.3)
+        })
+
         // Make map load polygon (like country names) data from GeoJSON
         polygonSeries.useGeodata = true
 
-        // Configure series
-        let polygonTemplate = polygonSeries.mapPolygons.template
-        polygonTemplate.tooltipText = '{name}'
-        polygonTemplate.polygon.fillOpacity = 0.6
-
-        // Create hover state and set alternative fill color
-        let hs = polygonTemplate.states.create('hover')
-        hs.properties.fill = chart.colors.getIndex(0)
-
-        // Add image series
-        let imageSeries = chart.series.push(new am4maps.MapImageSeries())
-        imageSeries.mapImages.template.propertyFields.longitude = 'longitude'
-        imageSeries.mapImages.template.propertyFields.latitude = 'latitude'
-        imageSeries.mapImages.template.tooltipText = '{title}'
-        imageSeries.mapImages.template.propertyFields.url = 'url'
-
-        let circle = imageSeries.mapImages.template.createChild(am4core.Circle)
-        circle.radius = 3
-        circle.propertyFields.fill = 'color'
-
-        let circle2 = imageSeries.mapImages.template.createChild(am4core.Circle)
-        circle2.radius = 3
-        circle2.propertyFields.fill = 'color'
-
-        circle2.events.on('inited', function (event) {
-            animateBullet(event.target)
-        })
-
-        function animateBullet(circle) {
-            let animation = circle.animate(
-                [
-                    { property: 'scale', from: 1, to: 5 },
-                    { property: 'opacity', from: 1, to: 0 }
-                ],
-                1000,
-                am4core.ease.circleOut
-            )
-            animation.events.on('animationended', function (event) {
-                animateBullet(event.target.object)
-            })
-        }
-
-        let colorSet = new am4core.ColorSet()
-
-        imageSeries.data = [
-            // {
-            //     title: 'Kenya',
-            //     latitude: 1,
-            //     longitude: 38,
-            //     url: '/country/2',
-            //     color: colorSet.next()
-            // },
-            // {
-            //     title: 'Kyrgyzstan',
-            //     latitude: 41,
-            //     longitude: 75,
-            //     url: '/country/9',
-            //     color: colorSet.next()
-            // },
-            // {
-            //     title: 'Moldova',
-            //     latitude: 47,
-            //     longitude: 29,
-            //     url: '/country/8',
-            //     color: colorSet.next()
-            // },
-            // {
-            //     title: 'United Kingdom',
-            //     latitude: 54,
-            //     longitude: -2,
-            //     url: '/country/7',
-            //     color: colorSet.next()
-            // },
-            // {
-            //     title: 'Ukraine',
-            //     latitude: 49,
-            //     longitude: 32,
-            //     url: '/country/6',
-            //     color: colorSet.next()
-            // },
+        // Set heatmap values for each state
+        polygonSeries.data = [
             {
-                title: 'Mexico',
-                latitude: 23,
-                longitude: -102,
-                url: '/country/1',
-                color: colorSet.next()
+                id: 'UA',
+                value: 8447100
+            },
+            {
+                id: 'US',
+                value: 4447100
+            },
+            {
+                id: 'UK',
+                value: 626932
+            },
+            {
+                id: 'KE',
+                value: 5130632
+            },
+            {
+                id: 'MD',
+                value: 2673400
+            },
+            {
+                id: 'KG',
+                value: 33871648
+            },
+            {
+                id: 'MX',
+                value: 50871648
             }
         ]
 
+        // Set up heat legend
+        let heatLegend = chart.createChild(am4maps.HeatLegend)
+        heatLegend.series = polygonSeries
+        heatLegend.align = 'right'
+        heatLegend.valign = 'bottom'
+        heatLegend.width = am4core.percent(20)
+        heatLegend.marginRight = am4core.percent(4)
+        heatLegend.minValue = 0
+        heatLegend.maxValue = 40000000
+
+        // Set up custom heat map legend labels using axis ranges
+        let minRange = heatLegend.valueAxis.axisRanges.create()
+        minRange.value = heatLegend.minValue
+        minRange.label.text = 'Little'
+        let maxRange = heatLegend.valueAxis.axisRanges.create()
+        maxRange.value = heatLegend.maxValue
+        maxRange.label.text = 'A lot!'
+
+        // Blank out internal heat legend value axis labels
+        heatLegend.valueAxis.renderer.labels.template.adapter.add(
+            'text',
+            function (labelText) {
+                return ''
+            }
+        )
+
+        // Configure series tooltip
+        let polygonTemplate = polygonSeries.mapPolygons.template
+        polygonTemplate.tooltipText = '{name}: {value}'
+        polygonTemplate.nonScalingStroke = true
+        polygonTemplate.strokeWidth = 0.5
+
+        // Create hover state and set alternative fill color
+        let hs = polygonTemplate.states.create('hover')
+        hs.properties.fill = am4core.color('#3c5bdc')
         chart.data = data
 
         return () => {
@@ -148,7 +135,7 @@ const Map = ({ data }) => {
 
     return (
         <div className="px-4 mb-16 map-wrapper pt-20">
-            <div className="container mx-auto mb-16">
+            {/* <div className="container mx-auto mb-16">
                 <div className="flex flex-wrap items-center -mx-2">
                     <div className="w-3/12 leading-snug px-2">
                         <h2 className="text-xl uppercase leading-snug m-0 text-yellow-50">
@@ -186,7 +173,7 @@ const Map = ({ data }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div ref={mapchartDiv} style={{ width: '100%', height: '500px' }} />
         </div>
     )

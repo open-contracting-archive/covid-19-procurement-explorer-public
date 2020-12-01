@@ -36,17 +36,17 @@ const PartitionedChart = ({ data }) => {
             if (target.dataItem) {
                 switch (target.dataItem.dataContext.region) {
                     case 'Central':
-                        return chart.colors.getIndex(0)
-                        
+                        chart.colors.getIndex(0)
+                        break
                     case 'East':
-                        return chart.colors.getIndex(1)
-                        
+                        chart.colors.getIndex(1)
+                        break
                     case 'South':
-                        return chart.colors.getIndex(2)
-                        
+                        chart.colors.getIndex(2)
+                        break
                     case 'West':
-                        return chart.colors.getIndex(3)
-                        
+                        chart.colors.getIndex(3)
+                        break
                 }
             }
             return fill
