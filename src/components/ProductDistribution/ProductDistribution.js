@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import ChartShare from '../ChartShare/ChartShare'
 import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
 import useTrans from '../../hooks/useTrans'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 // Add Treemap Chart data
 const treemap_chart_data = {
@@ -343,43 +346,57 @@ const treemap_chart_data = {
 
 function ProductDistribution() {
     const { trans } = useTrans()
+    const handle = useFullScreenHandle()
 
     return (
         <div className="bg-white rounded p-6">
-            <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                Global Suppliers
-            </h3>
-
-            <div className="flex">
-                <div className="flex-1">
-                    <div className="flex">
-                        <div className="flex-1 simple-tab -mt-10">
-                            <Tabs>
-                                <div className="flex justify-end">
-                                    <TabList>
-                                        <Tab>{trans('By contract value')}</Tab>
-                                        <Tab>
-                                            {trans('By number of contracts')}
-                                        </Tab>
-                                    </TabList>
-                                </div>
-
-                                <div className="mt-10">
-                                    <TabPanel>
-                                        <TreeMapChart
-                                            data={treemap_chart_data}
-                                        />
-                                    </TabPanel>
-                                    <TabPanel>
-                                        <TreeMapChart
-                                            data={treemap_chart_data}
-                                        />
-                                    </TabPanel>
-                                </div>
-                            </Tabs>
+            <FullScreen handle={handle}>
+                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                    Product Distribution
+                </h3>
+                <div className="flex simple-tab">
+                    <Tabs>
+                        <div className="flex">
+                            <TabList>
+                                <Tab>{trans('By contract value')}</Tab>
+                                <Tab>{trans('By number of contracts')}</Tab>
+                            </TabList>
                         </div>
-                    </div>
-                    <ChartShare />
+
+                        <div className="mt-5">
+                            <TabPanel>
+                                <TreeMapChart data={treemap_chart_data} />
+                            </TabPanel>
+                            <TabPanel>
+                                <TreeMapChart data={treemap_chart_data} />
+                            </TabPanel>
+                        </div>
+                    </Tabs>
+                </div>
+            </FullScreen>
+
+            <div
+                className="flex items-center justify-between pt-4 border-t mt-10 border-blue-0 text-sm
+                                             text-primary-blue -mx-6 px-6">
+                <div className="flex">
+                    <span className="flex items-center">
+                        <DownloadIcon className="mr-2 inline-block" />{' '}
+                        <span className="cursor-pointer">Download</span>
+                    </span>
+                    <span className="ml-8 flex items-center">
+                        <ShareIcon className="mr-2 inline-block" />{' '}
+                        <span className="cursor-pointer">Share</span>
+                    </span>
+                </div>
+                <div>
+                    <span className="flex items-center">
+                        <button onClick={handle.enter}>
+                            <span className="cursor-pointer">
+                                View full screen
+                            </span>
+                            <FullViewIcon className="ml-2 inline-block" />
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>

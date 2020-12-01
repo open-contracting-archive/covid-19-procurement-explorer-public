@@ -1,0 +1,2 @@
+(this["webpackJsonpcovid19-procurement"]=this["webpackJsonpcovid19-procurement"]||[]).push([[2],{424:function(n,c){},514:function(n,c){},515:function(n,c){}}]);
+//# sourceMappingURL=xlsx.ddba3e6f.chunk.js.map

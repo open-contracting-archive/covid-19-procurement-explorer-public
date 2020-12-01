@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
-import NotFound from './components/NotFound/NotFound'
 import About from './layouts/About'
 import Country from './layouts/Country'
 import Data from './layouts/Data'
@@ -11,6 +10,8 @@ import GeoChart from './components/charts/GeoChart/GeoChart'
 import GlobalProfile from './layouts/GlobalProfile'
 import CountryProfileServices from './services/countryProfileServices'
 import { useDispatch, useSelector } from 'react-redux'
+import NotFound from './components/NotFound/NotFound'
+
 import {
     setCurrentLocale,
     setTranslations

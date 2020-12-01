@@ -4,7 +4,6 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
-import { DateAxis } from '@amcharts/amcharts4/charts'
 
 const GlobalMap = ({ data }) => {
     const globalMapchartDiv = useRef(null)
@@ -120,11 +119,13 @@ const GlobalMap = ({ data }) => {
     }, [data])
 
     return (
-        <div className="px-4 mb-16 map-wrapper pt-20">
-            <div
-                ref={globalMapchartDiv}
-                style={{ width: '100%', height: '500px' }}
-            />
+        <div>
+            <div className="map-wrapper bg-white">
+                <div
+                    ref={globalMapchartDiv}
+                    style={{ width: '100%', height: '500px' }}
+                />
+            </div>
         </div>
     )
 }

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import CombinedChart from '../charts/CombinedChart/CombinedChart'
-import ChartShare from '../ChartShare/ChartShare'
 import useTrans from '../../hooks/useTrans'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 // Add Combined Chart data
 const combined_chart_data = [
@@ -115,48 +118,47 @@ const combined_chart_data = [
 
 function QuantityCorrelation() {
     const { trans } = useTrans()
+    const handle = useFullScreenHandle()
+
     return (
         <div className="bg-white rounded p-6">
-            <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                Covid/contracts quantity correlation
-            </h3>
-            <div className="flex">
-                <div className="flex-1">
-                    <div className="flex">
-                        <div>
-                            <ul className="arrow-nav w-80">
-                                <li className="active py-2 border-b border-blue-0 text-blue-50">
-                                    Ukraine
-                                </li>
-                                <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
-                                    Kenya
-                                </li>
-                                <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
-                                    Kyrgyzstan
-                                </li>
-                                <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
-                                    Moldova
-                                </li>
-                                <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
-                                    United Kingdom
-                                </li>
-                                <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
-                                    Mexico
-                                </li>
-                            </ul>
+            <FullScreen handle={handle}>
+                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                    Covid/contracts quantity correlation
+                </h3>
+                <div className="flex simple-tab">
+                    <Tabs>
+                        <div className="flex">
+                            <TabList>
+                                <Tab>{trans('By contract value')}</Tab>
+                                <Tab>{trans('By number of contracts')}</Tab>
+                            </TabList>
                         </div>
-                        <div className="flex-1 simple-tab">
-                            <Tabs>
-                                <div className="flex justify-end">
-                                    <TabList>
-                                        <Tab>{trans('By contract value')}</Tab>
-                                        <Tab>
-                                            {trans('By number of contracts')}
-                                        </Tab>
-                                    </TabList>
-                                </div>
-
-                                <div className="mt-10">
+                        <div className="flex mt-5">
+                            <div>
+                                <ul className="arrow-nav w-80">
+                                    <li className="active py-2 border-b border-blue-0 text-blue-50">
+                                        Ukraine
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
+                                        Kenya
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
+                                        Kyrgyzstan
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
+                                        Moldova
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
+                                        United Kingdom
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50">
+                                        Mexico
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="flex-1">
+                                <div className="">
                                     <TabPanel>
                                         <CombinedChart
                                             data={combined_chart_data}
@@ -168,10 +170,33 @@ function QuantityCorrelation() {
                                         />
                                     </TabPanel>
                                 </div>
-                            </Tabs>
+                            </div>
                         </div>
-                    </div>
-                    <ChartShare />
+                    </Tabs>
+                </div>
+            </FullScreen>
+            <div
+                className="flex items-center justify-between pt-4 border-t mt-10 border-blue-0 text-sm
+                                             text-primary-blue -mx-6 px-6">
+                <div className="flex">
+                    <span className="flex items-center">
+                        <DownloadIcon className="mr-2 inline-block" />{' '}
+                        <span className="cursor-pointer">Download</span>
+                    </span>
+                    <span className="ml-8 flex items-center">
+                        <ShareIcon className="mr-2 inline-block" />{' '}
+                        <span className="cursor-pointer">Share</span>
+                    </span>
+                </div>
+                <div>
+                    <span className="flex items-center">
+                        <button onClick={handle.enter}>
+                            <span className="cursor-pointer">
+                                View full screen
+                            </span>
+                            <FullViewIcon className="ml-2 inline-block" />
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>
