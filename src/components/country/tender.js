@@ -5,10 +5,12 @@ import { Link, useParams } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
-import Loader from '../../components/loader/Loader'
+import Loader from '../loader/Loader'
 
-const CountryProfileTable = () => {
-    const [tenderData, setTenderData] = useState([])
+const Tender = () => {
+    // const [tenderData, setTenderData] = useState({})
+    const [tenderList, setTenderList] = useState([])
+    const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(false)
 
     const options = [
@@ -30,18 +32,31 @@ const CountryProfileTable = () => {
     useEffect(() => {
         CountryProfileServices.CountryProfileTenderData(id).then((response) => {
             if (response) {
-                setTenderData(response)
+                // setTenderData(response)
+                setTenderList(response.results)
+                setPagination(response.next)
             }
             setLoading(true)
         })
     }, [id])
 
+    const LoadMoreTenderData = () => {
+        CountryProfileServices.LoadMoreTenderData(pagination).then(
+            (response) => {
+                if (response) {
+                    // setTenderData(tenderData, ...response)
+                    setTenderList([...tenderList, ...response.results])
+                    setPagination(response.next)
+                }
+            }
+        )
+    }
+
     return (
         <div>
             {loading ? (
                 <Fragment>
-                    <div
-                        className="mb-12 flex gap-8 justify-between">
+                    <div className="mb-12 flex gap-8 justify-between">
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
                                 Project title
@@ -129,7 +144,7 @@ const CountryProfileTable = () => {
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
                                 </th>
-                                <th>
+                                <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Procurement Method{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
@@ -141,13 +156,13 @@ const CountryProfileTable = () => {
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
                                 </th>
-                                <th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Status{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
                                 </th>
-                                <th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Value (USD){' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
@@ -157,24 +172,25 @@ const CountryProfileTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {tenderData &&
-                                tenderData.map((tender, index) => {
+                            {tenderList &&
+                                tenderList.map((tender, index) => {
                                     return (
                                         <Link
-                                            style={{ display: 'table-row' }}
                                             key={index}
                                             to={`/country/${id}/tender/${tender.id}`}
-                                            className={`${
+                                            className={`table-row ${
                                                 tender.red_flag
                                                     ? 'has-red-flag'
                                                     : ''
                                             }`}>
                                             <td className="uppercase">
-                                                {tender.project_title}
+                                                {tender.contract_title}
                                             </td>
-                                            <td>{tender.procurement_method}</td>
+                                            <td>
+                                                {tender.procurement_procedure}
+                                            </td>
                                             <td className="uppercase">
-                                                {tender.supplier_name}
+                                                {tender.supplier.supplier_name}
                                             </td>
                                             <td className="capitalize">
                                                 <span
@@ -182,7 +198,7 @@ const CountryProfileTable = () => {
                                                 {tender.status}
                                             </td>
                                             <td>
-                                                {tender.value_usd.toLocaleString(
+                                                {tender.contract_value_usd.toLocaleString(
                                                     'en'
                                                 )}
                                             </td>
@@ -198,6 +214,13 @@ const CountryProfileTable = () => {
                                 })}
                         </tbody>
                     </table>
+                    <div className="text-center mt-8">
+                        <button
+                            className="text-primary-blue"
+                            onClick={LoadMoreTenderData}>
+                            Load more
+                        </button>
+                    </div>
                 </Fragment>
             ) : (
                 <Loader />
@@ -206,4 +229,4 @@ const CountryProfileTable = () => {
     )
 }
 
-export default CountryProfileTable
+export default Tender

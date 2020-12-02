@@ -1893,7 +1893,7 @@ function CountryDataCharts() {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full px-2 mb-6">
+                        {/* <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Combined Chart with multiple value axes
@@ -1906,8 +1906,8 @@ function CountryDataCharts() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="w-full px-2 mb-6">
+                        </div> */}
+                        {/* <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Tree Map Chart Visualization
@@ -1920,8 +1920,8 @@ function CountryDataCharts() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="w-full px-2 mb-6">
+                        </div> */}
+                        {/* <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Sankey Diagram
@@ -1932,8 +1932,8 @@ function CountryDataCharts() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="w-full px-2 mb-6">
+                        </div> */}
+                        {/* <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Race Bar Chart Visualization
@@ -1946,7 +1946,7 @@ function CountryDataCharts() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 ) : (
                     <Loader />

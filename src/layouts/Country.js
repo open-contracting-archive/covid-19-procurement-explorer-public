@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Iframe from 'react-iframe'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import CountryProfileTable from '../components/country/countryProfileTable'
+import Tender from '../components/country/tender'
 import CountryDataCharts from '../components/country/CountryDataChart'
 import CountryProfile from '../components/country/countryProfile'
 import Loader from '../components/loader/Loader'
@@ -237,7 +237,7 @@ function CountryDetail() {
                                     <CountryDataCharts />
                                 </TabPanel>
                                 <TabPanel>
-                                    <CountryProfileTable />
+                                    <Tender />
                                 </TabPanel>
                                 <TabPanel>
                                     <CountryProfile profileData={data} />
