@@ -7,14 +7,14 @@ class CountryProfileServices {
         return countryProfiledata[country] || null
     }
 
-    static async CountryProfileData(id) {
-        const { data } = await axios.get(`${API_URL}api/v1/country/${id}`)
+    static async CountryProfileData(slug) {
+        const { data } = await axios.get(`${API_URL}api/v1/country/${slug}`)
         return data
     }
 
-    static async CountryProfileTenderData(id) {
+    static async CountryProfileTenderData(slug) {
         const { data } = await axios.get(
-            `${API_URL}api/v1/tender/?country=${id}`
+            `${API_URL}api/v1/tender/?country_name=${slug}`
         )
         return data
     }

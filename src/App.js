@@ -43,7 +43,7 @@ function App() {
                     <Route exact path="/" component={Home} />
                     <Route path="/about" component={About} />
                     <Route path="/geo-chart" component={GeoChart} />
-                    <Route exact path="/country/:id" component={Country} />
+                    <Route exact path="/country/:slug" component={Country} />
                     <Route exact path="/data" component={GlobalProfile} />
                     <Route exact path="/global-data" component={Data} />
                     <Route
@@ -51,7 +51,7 @@ function App() {
                         component={TenderDetail}
                     />
                     <Route exact path="/news" component={News} />
-                    <Route path="/news-detail" component={NewsDetail} />
+                    <Route path="/news-detail/:id" component={NewsDetail} />
                     <Route component={NotFound} />
                 </Switch>
             </Fragment>
