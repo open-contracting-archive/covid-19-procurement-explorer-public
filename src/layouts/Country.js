@@ -16,7 +16,7 @@ function CountryDetail() {
     const [loading, setLoading] = useState(false)
     const [countryData, setCountryData] = useState([])
 
-    let { id } = useParams()
+    let { slug } = useParams()
 
     useEffect(() => {
         CountryServices.CountryData().then((response) => {
@@ -30,13 +30,13 @@ function CountryDetail() {
     }, [])
 
     useEffect(() => {
-        CountryProfileServices.CountryProfileData(id).then((response) => {
+        CountryProfileServices.CountryProfileData(slug).then((response) => {
             if (response) {
                 setData(response)
             }
             setLoading(true)
         })
-    }, [id])
+    }, [slug])
 
     const { trans } = useTrans()
 
@@ -54,7 +54,7 @@ function CountryDetail() {
                                                 <Link
                                                     className={`opacity-50 hover:opacity-100 ${
                                                         countryData[country]
-                                                            .id == id
+                                                            .slug == slug
                                                             ? 'opacity-100 font-bold'
                                                             : ''
                                                     }`}

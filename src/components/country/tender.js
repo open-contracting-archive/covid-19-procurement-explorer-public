@@ -27,10 +27,10 @@ const Tender = () => {
     //         borderRadius: 0
     //     })
     // }
-    let { id } = useParams()
+    let { slug } = useParams()
 
     useEffect(() => {
-        CountryProfileServices.CountryProfileTenderData(id).then((response) => {
+        CountryProfileServices.CountryProfileTenderData(slug).then((response) => {
             if (response) {
                 // setTenderData(response)
                 setTenderList(response.results)
@@ -38,7 +38,7 @@ const Tender = () => {
             }
             setLoading(true)
         })
-    }, [id])
+    }, [slug])
 
     const LoadMoreTenderData = () => {
         CountryProfileServices.LoadMoreTenderData(pagination).then(
@@ -177,7 +177,7 @@ const Tender = () => {
                                     return (
                                         <Link
                                             key={index}
-                                            to={`/country/${id}/tender/${tender.id}`}
+                                            to={`/country/${slug}/tender/${tender.id}`}
                                             className={`table-row ${
                                                 tender.red_flag
                                                     ? 'has-red-flag'
