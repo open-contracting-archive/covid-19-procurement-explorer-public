@@ -74,15 +74,6 @@ function CountryDetail() {
                         <div className="flex flex-wrap -mx-4 -mb-4">
                             <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">
                                 <div className="h-full">
-                                    {/* <Iframe
-                                        url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15010268.98948006!2d-111.65143694146222!3d23.293382281181213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x84043a3b88685353%3A0xed64b4be6b099811!2sMexico!5e0!3m2!1sen!2snp!4v1602666699465!5m2!1sen!2snp"
-                                        width="100%"
-                                        height="450px"
-                                        id=""
-                                        className="h-full"
-                                        display="initial"
-                                        position="relative"
-                                    /> */}
                                     <GlobalMap innerMap />
                                 </div>
                             </div>

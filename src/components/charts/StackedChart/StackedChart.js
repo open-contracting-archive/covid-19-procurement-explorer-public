@@ -16,9 +16,21 @@ const StackedChart = ({ data }) => {
         // Create chart instance
         let chart = am4core.create(stackedChart.current, am4charts.XYChart)
 
+        chart.colors.list = [
+            am4core.color('#BEBADA'),
+            am4core.color('#FCCDE5'),
+            am4core.color('#B3DE69'),
+            am4core.color('#BC80BD'),
+            am4core.color('#FB8072'),
+            am4core.color('#8DD3C7'),
+            am4core.color('#D9D9D9'),
+            am4core.color('#FDB462'),
+            am4core.color('#FFED6F')
+        ]
+
         // Create axes
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-        categoryAxis.dataFields.category = 'year'
+        categoryAxis.dataFields.category = 'month'
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.grid.template.disabled = true
         categoryAxis.renderer.labels.template.fontSize = 12
@@ -35,7 +47,7 @@ const StackedChart = ({ data }) => {
             let series = chart.series.push(new am4charts.ColumnSeries())
             series.name = name
             series.dataFields.valueY = field
-            series.dataFields.categoryX = 'year'
+            series.dataFields.categoryX = 'month'
             series.sequencedInterpolation = true
 
             // Make it stacked
@@ -55,12 +67,15 @@ const StackedChart = ({ data }) => {
             return series
         }
 
-        createSeries('europe', 'Europe')
-        createSeries('namerica', 'North America')
-        createSeries('asia', 'Asia-Pacific')
-        createSeries('lamerica', 'Latin America')
-        createSeries('meast', 'Middle-East')
-        createSeries('africa', 'Africa')
+        createSeries('ppe', 'PPE')
+        createSeries('ventilator', 'Ventilator')
+        createSeries('covid_tests', 'Covid Tests')
+        createSeries('vaccine', 'Vaccine')
+        createSeries('construction_works_and_materials', 'Construction works & materials')
+        createSeries('medicines', 'Medicines')
+        createSeries('sanitizing_supplies', 'Sanitizing supplies')
+        createSeries('medical_consumables', 'Medical consumables')
+        createSeries('other', 'Other')
 
         // Legend
         chart.legend = new am4charts.Legend()
@@ -71,18 +86,6 @@ const StackedChart = ({ data }) => {
         let markerTemplate = chart.legend.markers.template
         markerTemplate.width = 10
         markerTemplate.height = 10
-
-        chart.colors.list = [
-            am4core.color('#BEBADA'),
-            am4core.color('#FCCDE5'),
-            am4core.color('#8DD3C7'),
-            am4core.color('#FB8072'),
-            am4core.color('#BC80BD'),
-            am4core.color('#D9D9D9'),
-            am4core.color('#FDB462'),
-            am4core.color('#FFED6F'),
-            am4core.color('#B3DE69')
-        ]
 
         chart.data = data
 

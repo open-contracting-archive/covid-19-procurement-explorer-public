@@ -34,3 +34,66 @@
         }
     }
 }
+
+.simple-tab .react-tabs {
+    .worldmap-tab {
+        .react-tabs__tab-list {
+            flex-direction: column;
+            width: 67px;
+            background: rgba(41, 62, 69, 0.1);
+            border-radius: 4px;
+            padding: 18px 14px;
+            margin-right: 24px;
+            margin-bottom: 24px;
+        }
+
+        .react-tabs__tab {
+            border: none;
+            margin: 0;
+            text-align: center;
+            margin-bottom: 15px;
+            opacity: 0.5;
+
+            &:hover, &:focus {
+                opacity: 1;
+                > * {
+                    color: #1fbbec;
+                    fill: #1fbbec;
+                }
+            }
+
+            &.react-tabs__tab--selected {
+                opacity: 1;
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 76px;
+                    left: -14px;
+                    top: -10px;
+                    right: 0px;
+                    bottom: 0;
+                    background: #1fbbec;
+                    border-radius: 0 4px 4px 0;
+                }
+
+                > * {
+                    position: relative;
+                    color: #fff;
+                    fill: #fff;
+                }
+            }
+        }
+    }
+}
+
+.contract-switch {
+    li {
+        border-bottom: 4px solid transparent;
+
+        &.active {
+            border-bottom-color: #1fbbec;
+        }
+    }
+}

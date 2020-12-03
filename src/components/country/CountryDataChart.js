@@ -1969,7 +1969,7 @@ function CountryDataCharts() {
                 {loading ? (
                     <div className="flex flex-wrap -mx-3 -mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <div className="bg-white rounded p-4">
+                            <div className="bg-white rounded p-4 h-full">
                                 <h3 className="uppercase font-bold  text-primary-dark">
                                     Total Spending
                                 </h3>
@@ -1997,7 +1997,7 @@ function CountryDataCharts() {
                             </div>
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <div className="bg-white rounded p-4">
+                            <div className="bg-white rounded p-4 h-full">
                                 <h3 className="uppercase font-bold  text-primary-dark">
                                     Total contracts
                                 </h3>
@@ -2024,7 +2024,7 @@ function CountryDataCharts() {
                             </div>
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <div className="bg-white rounded p-4">
+                            <div className="bg-white rounded p-4 h-full">
                                 <h3 className="uppercase font-bold  text-primary-dark">
                                     Average bids per contract
                                 </h3>

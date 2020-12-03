@@ -43,7 +43,7 @@ const contract_red_flag_data = [
 
 function ContractRedFlag() {
     return (
-        <div className="bg-white rounded p-6">
+        <div className="bg-white rounded p-6 h-full">
             <h3 className="uppercase font-bold flex items-center text-primary-dark mb-6">
                 Contracts with red flags
                 <FlagIcon className="ml-2 inline-block" />
