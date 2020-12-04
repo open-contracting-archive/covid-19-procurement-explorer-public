@@ -1897,58 +1897,100 @@ const race_bar_chart_data = {
 // Stacked Chart Data
 const stacked_chart_data = [
     {
-        year: '2016',
-        europe: 2.5,
-        namerica: 2.5,
-        asia: 2.1,
-        lamerica: 0.3,
-        meast: 0.2,
-        africa: 0.1
+        month: 'Apr',
+        ppe: 2.5,
+        ventilator: 2.5,
+        covid_tests: 2.1,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.2,
+        medicines: 0.1,
+        sanitizing_supplies: 0.4,
+        medical_consumables: 1.5,
+        other: 2
     },
     {
-        year: '2017',
-        europe: 2.6,
-        namerica: 2.7,
-        asia: 2.2,
-        lamerica: 0.3,
-        meast: 0.3,
-        africa: 0.1
+        month: 'May',
+        ppe: 2.6,
+        ventilator: 2.7,
+        covid_tests: 2.2,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.3,
+        medicines: 0.1,
+        sanitizing_supplies: 0.9,
+        medical_consumables: 1.5,
+        other: 2
     },
     {
-        year: '2018',
-        europe: 2.8,
-        namerica: 2.9,
-        asia: 2.4,
-        lamerica: 0.3,
-        meast: 0.3,
-        africa: 0.1
+        month: 'Jun',
+        ppe: 2.8,
+        ventilator: 2.9,
+        covid_tests: 2.4,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.3,
+        medicines: 0.1,
+        sanitizing_supplies: 0.7,
+        medical_consumables: 1.5,
+        other: 2
     },
     {
-        year: '2019',
-        europe: 2.5,
-        namerica: 2.5,
-        asia: 2.1,
-        lamerica: 0.3,
-        meast: 0.2,
-        africa: 0.1
+        month: 'Jul',
+        ppe: 2.5,
+        ventilator: 2.5,
+        covid_tests: 2.1,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.2,
+        medicines: 0.1,
+        sanitizing_supplies: 0.2,
+        medical_consumables: 1.5,
+        other: 2
     },
     {
-        year: '2020',
-        europe: 2.6,
-        namerica: 2.7,
-        asia: 2.2,
-        lamerica: 0.3,
-        meast: 0.3,
-        africa: 0.1
+        month: 'Aug',
+        ppe: 2.6,
+        ventilator: 2.7,
+        covid_tests: 2.2,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.3,
+        medicines: 0.1,
+        sanitizing_supplies: 0.7,
+        medical_consumables: 1.5,
+        other: 2
     },
     {
-        year: '2021',
-        europe: 2.8,
-        namerica: 2.9,
-        asia: 2.4,
-        lamerica: 0.3,
-        meast: 0.3,
-        africa: 0.1
+        month: 'Sep',
+        ppe: 2.8,
+        ventilator: 2.9,
+        covid_tests: 2.4,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.3,
+        medicines: 0.1,
+        sanitizing_supplies: 0.1,
+        medical_consumables: 1.5,
+        other: 2
+    },
+    {
+        month: 'Oct',
+        ppe: 2.8,
+        ventilator: 2.9,
+        covid_tests: 2.4,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.3,
+        medicines: 0.1,
+        sanitizing_supplies: 0.7,
+        medical_consumables: 1.5,
+        other: 2
+    },
+    {
+        month: 'Nov',
+        ppe: 2.8,
+        ventilator: 2.9,
+        covid_tests: 2.4,
+        vaccine: 0.3,
+        construction_works_and_materials: 0.3,
+        medicines: 0.1,
+        sanitizing_supplies: 1,
+        medical_consumables: 1.5,
+        other: 2
     }
 ]
 
@@ -2075,7 +2117,7 @@ function CountryDataCharts() {
                             <div className="flex flex-col">
                                 <div className="bg-white rounded p-4 py-2 mb-3">
                                     <h3 className="uppercase font-bold  text-primary-dark">
-                                        Cancelled awards
+                                        Equity indicators
                                     </h3>
                                     <div className="flex items-end">
                                         <div className=" text-primary-dark">

@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import Iframe from 'react-iframe'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import Tender from '../components/country/tender'
+import Insights from '../components/country/insights'
 import CountryDataCharts from '../components/country/CountryDataChart'
 import CountryProfile from '../components/country/countryProfile'
 import Loader from '../components/loader/Loader'
@@ -11,6 +12,7 @@ import useTrans from '../hooks/useTrans'
 import CountryServices from '../services/countryServices'
 import formatNumber from '../components/formatNumber/FormatNumber'
 import GlobalMap from '../components/GlobalMap/GlobalMap'
+import Buyers from '../components/country/buyers'
 
 function CountryDetail() {
     const [data, setData] = useState({})
@@ -216,8 +218,10 @@ function CountryDetail() {
                         <div className="container mx-auto px-4 ">
                             <TabList>
                                 <Tab>{trans('Data')}</Tab>
-                                <Tab>{trans('Tenders')}</Tab>
-                                <Tab>{trans('Profile')}</Tab>
+                                <Tab>{trans('Insights')}</Tab>
+                                <Tab>{trans('Contracts')}</Tab>
+                                <Tab>{trans('Equity')}</Tab>
+                                <Tab>{trans('Buyers')}</Tab>
                             </TabList>
                         </div>
                         <div
@@ -230,10 +234,16 @@ function CountryDetail() {
                                     <CountryDataCharts />
                                 </TabPanel>
                                 <TabPanel>
+                                    <Insights />
+                                </TabPanel>
+                                <TabPanel>
                                     <Tender />
                                 </TabPanel>
                                 <TabPanel>
                                     <CountryProfile profileData={data} />
+                                </TabPanel>
+                                <TabPanel>
+                                    <Buyers />
                                 </TabPanel>
                             </div>
                         </div>

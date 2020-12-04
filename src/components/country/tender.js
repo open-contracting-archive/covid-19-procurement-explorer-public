@@ -6,6 +6,7 @@ import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
 import Loader from '../loader/Loader'
+import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 
 const Tender = () => {
     // const [tenderData, setTenderData] = useState({})
@@ -30,14 +31,16 @@ const Tender = () => {
     let { slug } = useParams()
 
     useEffect(() => {
-        CountryProfileServices.CountryProfileTenderData(slug).then((response) => {
-            if (response) {
-                // setTenderData(response)
-                setTenderList(response.results)
-                setPagination(response.next)
+        CountryProfileServices.CountryProfileTenderData(slug).then(
+            (response) => {
+                if (response) {
+                    // setTenderData(response)
+                    setTenderList(response.results)
+                    setPagination(response.next)
+                }
+                setLoading(true)
             }
-            setLoading(true)
-        })
+        )
     }, [slug])
 
     const LoadMoreTenderData = () => {
@@ -56,6 +59,9 @@ const Tender = () => {
         <div>
             {loading ? (
                 <Fragment>
+                    <div className="w-full px-2 mb-16 global-profile">
+                        <ContractsIndicator />
+                    </div>
                     <div className="mb-12 flex gap-8 justify-between">
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
