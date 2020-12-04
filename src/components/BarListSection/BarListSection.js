@@ -6,7 +6,7 @@ import useTrans from '../../hooks/useTrans'
 function BarListSection({ bar_data, label }) {
     const { trans } = useTrans()
     return (
-        <div className="bg-white rounded p-6">
+        <div className="bg-white rounded p-6 h-full">
             <h3 className="uppercase font-bold  text-primary-dark mb-6">
                 {label}
             </h3>

@@ -1,0 +1,159 @@
+{
+    "2020-01": {
+        "UA": {
+            "value": 121314,
+            "number": 521314
+        },
+        "MX": {
+            "value": 342344,
+            "number": 134245,
+            "url": "/country/mexico"
+        },
+        "GB": {
+            "value": 1231231,
+            "number": 4564546
+        },
+        "KE": {
+            "value": 3123199,
+            "number": 8934546
+        },
+        "KG": {
+            "value": 5618202,
+            "number": 930485
+        },
+        "MD": {
+            "value": 356778,
+            "number": 456799
+        }
+    },
+    "2020-02": {
+        "UA": {
+            "value": 1313890,
+            "number": 6313890
+        },
+        "MX": {
+            "value": 314890,
+            "number": 63138
+        },
+        "GB": {
+            "value": 341231,
+            "number": 64546
+        },
+        "KE": {
+            "value": 1235789,
+            "number": 5647393
+        },
+        "KG": {
+            "value": 4628291,
+            "number": 982742
+        },
+        "MD": {
+            "value": 875422,
+            "number": 1123456
+        }
+    },
+    "2020-03": {
+        "UA": {
+            "value": 113890,
+            "number": 613890
+        },
+        "MX": {
+            "value": 7583625,
+            "number": 4372822
+        },
+        "GB": {
+            "value": 8673092,
+            "number": 532728
+        },
+        "KE": {
+            "value": 4678932,
+            "number": 4519292
+        },
+        "KG": {
+            "value": 762521,
+            "number": 204955
+        },
+        "MD": {
+            "value": 346778,
+            "number": 9886553
+        }
+    },
+    "2020-04": {
+        "UA": {
+            "value": 0,
+            "number": 0
+        },
+        "MX": {
+            "value": 0,
+            "number": 0
+        },
+        "GB": {
+            "value": 0,
+            "number": 0
+        },
+        "KE": {
+            "value": 0,
+            "number": 0
+        },
+        "KG": {
+            "value": 0,
+            "number": 0
+        },
+        "MD": {
+            "value": 0,
+            "number": 0
+        }
+    },
+    "2020-05": {
+        "UA": {
+            "value": 0,
+            "number": 0
+        },
+        "MX": {
+            "value": 0,
+            "number": 0
+        },
+        "GB": {
+            "value": 0,
+            "number": 0
+        },
+        "KE": {
+            "value": 0,
+            "number": 0
+        },
+        "KG": {
+            "value": 0,
+            "number": 0
+        },
+        "MD": {
+            "value": 0,
+            "number": 0
+        }
+    },
+    "2020-06": {
+        "UA": {
+            "value": 324566,
+            "number": 126899
+        },
+        "MX": {
+            "value": 7829274,
+            "number": 567322
+        },
+        "GB": {
+            "value": 122849,
+            "number": 987633
+        },
+        "KE": {
+            "value": 567832,
+            "number": 229028
+        },
+        "KG": {
+            "value": 4527292,
+            "number": 859433
+        },
+        "MD": {
+            "value": 3456777,
+            "number": 1214455
+        }
+    }
+}

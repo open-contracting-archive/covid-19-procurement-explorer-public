@@ -15,6 +15,7 @@ const AreaChart = ({ data }) => {
 
         // Create chart instance
         let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
+        chart.logo.height = -15
         // chart.exporting.menu = new am4core.ExportMenu()
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
@@ -77,7 +78,7 @@ const AreaChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={areachartDiv} style={{ width: '100%', height: '80px' }} />
+    return <div ref={areachartDiv} className="overflow-hidden" style={{ width: '100%', height: '90px' }} />
 }
 
 export default AreaChart

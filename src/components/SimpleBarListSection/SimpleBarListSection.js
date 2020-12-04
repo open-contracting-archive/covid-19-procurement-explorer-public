@@ -6,33 +6,29 @@ import useTrans from '../../hooks/useTrans'
 function SimpleBarListSection({ bar_data, label }) {
     const { trans } = useTrans()
     return (
-        <div className="bg-white rounded p-6">
-            <h3 className="uppercase font-bold  text-primary-dark mb-4">
-                {label}
-            </h3>
-            <div className="flex">
-                <div className="flex-1">
-                    <div className="flex-1 simple-tab -mt-10">
-                        <Tabs>
-                            <div className="flex justify-end">
-                                <TabList>
-                                    <Tab>{trans('By value')}</Tab>
-                                    <Tab>{trans('By number')}</Tab>
-                                </TabList>
-                            </div>
+        <div className="bg-white rounded p-6 h-full simple-tab">
+            <Tabs>
+                <div className="flex justify-between items-center">
+                    <h3 className="uppercase font-bold  text-primary-dark">
+                        {label}
+                    </h3>
 
-                            <div className="mt-6">
-                                <TabPanel>
-                                    <SimpleBarListChart data={bar_data} />
-                                </TabPanel>
-                                <TabPanel>
-                                    <SimpleBarListChart data={bar_data} />
-                                </TabPanel>
-                            </div>
-                        </Tabs>
+                    <div className="flex">
+                        <TabList>
+                            <Tab>{trans('By value')}</Tab>
+                            <Tab>{trans('By number')}</Tab>
+                        </TabList>
                     </div>
                 </div>
-            </div>
+                <div className="mt-6">
+                    <TabPanel>
+                        <SimpleBarListChart data={bar_data} />
+                    </TabPanel>
+                    <TabPanel>
+                        <SimpleBarListChart data={bar_data} />
+                    </TabPanel>
+                </div>
+            </Tabs>
         </div>
     )
 }

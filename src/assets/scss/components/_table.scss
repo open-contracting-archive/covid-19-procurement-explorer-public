@@ -17,7 +17,7 @@ table {
     tbody {
         td {
             vertical-align: top;
-            padding: 18px 18px 12px;
+            padding: 18px 8px 12px;
             border-bottom: 1px solid #f1f1f1;
             font-size: 14px;
             background-color: #fff;
@@ -26,6 +26,15 @@ table {
 }
 
 .table {
+    thead {
+        th:first-child {
+            td {
+                &:first-child {
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
     tbody {
         tr,
         > a {
