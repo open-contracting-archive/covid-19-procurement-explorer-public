@@ -10,6 +10,7 @@ import CountryProfileServices from '../services/countryProfileServices'
 import useTrans from '../hooks/useTrans'
 import CountryServices from '../services/countryServices'
 import formatNumber from '../components/formatNumber/FormatNumber'
+import GlobalMap from '../components/GlobalMap/GlobalMap'
 
 function CountryDetail() {
     const [data, setData] = useState({})
@@ -41,11 +42,11 @@ function CountryDetail() {
     const { trans } = useTrans()
 
     return (
-        <section className="pt-8">
+        <section className="pt-20 -mt-8 bg-blue-0">
             {loading ? (
                 <Fragment>
                     <div className="container mx-auto px-4 ">
-                        <div className="mb-6">
+                        {/* <div className="mb-6">
                             <ul className="flex text-sm">
                                 {Object.keys(countryData).map(
                                     (country, index) => {
@@ -66,14 +67,14 @@ function CountryDetail() {
                                     }
                                 )}
                             </ul>
-                        </div>
+                        </div> */}
                         <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
                             {data.name}
                         </h2>
                         <div className="flex flex-wrap -mx-4 -mb-4">
                             <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">
                                 <div className="h-full">
-                                    <Iframe
+                                    {/* <Iframe
                                         url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15010268.98948006!2d-111.65143694146222!3d23.293382281181213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x84043a3b88685353%3A0xed64b4be6b099811!2sMexico!5e0!3m2!1sen!2snp!4v1602666699465!5m2!1sen!2snp"
                                         width="100%"
                                         height="450px"
@@ -81,14 +82,15 @@ function CountryDetail() {
                                         className="h-full"
                                         display="initial"
                                         position="relative"
-                                    />
+                                    /> */}
+                                    <GlobalMap innerMap />
                                 </div>
                             </div>
                             <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
                                 <div className="flex flex-col  text-primary-dark font-bold">
-                                    <div className="p-8 py-6 bg-yellow-20 ">
+                                    <div className="p-8 py-6 bg-yellow-20 rounded-t-md ">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
-                                            <div className="w-full xs:w-1/2 px-4 mb-4">
+                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
                                                 <div>
                                                     <span className="font-normal inline-block">
                                                         {trans('Population')}{' '}
@@ -100,7 +102,7 @@ function CountryDetail() {
                                                     </h2>
                                                 </div>
                                             </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4">
+                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
                                                 <div>
                                                     <span className="font-normal inline-block">
                                                         {trans('GDP')}
@@ -113,7 +115,7 @@ function CountryDetail() {
                                                     </h2>
                                                 </div>
                                             </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4">
+                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
                                                 <div>
                                                     <span className="font-normal inline-block">
                                                         {trans(
@@ -134,7 +136,7 @@ function CountryDetail() {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4">
+                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
                                                 <div>
                                                     <span className="font-normal inline-block">
                                                         {trans(
@@ -166,13 +168,13 @@ function CountryDetail() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="p-8 text-white bg-primary-dark">
+                                    <div className="px-8 py-16 text-white bg-primary-dark rounded-b-md">
                                         <div className="flex flex-wrap -mx-4 -mb-4">
-                                            <div className="w-full xs:w-1/2 px-4 mb-4">
+                                            <div className="w-full xs:w-1/2 px-4 mb-12">
                                                 <div>
-                                                    <span className="font-normal inline-block">
+                                                    <span className="font-normal inline-block mb-4">
                                                         {trans(
-                                                            'Total Covid-19 cases'
+                                                            'Covid-19 cases'
                                                         )}
                                                     </span>
                                                     <h2 className="text-xl">
@@ -183,11 +185,11 @@ function CountryDetail() {
                                                     </h2>
                                                 </div>
                                             </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4">
+                                            <div className="w-full xs:w-1/2 px-4 mb-12">
                                                 <div>
-                                                    <span className="font-normal inline-block">
+                                                    <span className="font-normal inline-block mb-4">
                                                         {trans(
-                                                            'Total deaths by Covid-19'
+                                                            'Deaths by Covid-19'
                                                         )}
                                                     </span>
                                                     <h2 className="text-xl">

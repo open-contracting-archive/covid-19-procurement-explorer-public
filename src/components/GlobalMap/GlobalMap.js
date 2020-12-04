@@ -5,7 +5,7 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const GlobalMap = ({ data }) => {
+const GlobalMap = ({ data, innerMap }) => {
     const globalMapchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -17,7 +17,7 @@ const GlobalMap = ({ data }) => {
         // Create chart instance
         let chart = am4core.create(globalMapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
-        chart.exporting.menu = new am4core.ExportMenu()
+        // chart.exporting.menu = new am4core.ExportMenu()
 
         // Set map definition
         chart.geodata = am4geodata_worldLow
@@ -119,13 +119,15 @@ const GlobalMap = ({ data }) => {
     }, [data])
 
     return (
-        <div>
-            <div className="map-wrapper bg-white">
-                <div
-                    ref={globalMapchartDiv}
-                    style={{ width: '100%', height: '500px' }}
-                />
-            </div>
+        <div className="map-wrapper bg-white rounded-md h-full">
+            <div
+                ref={globalMapchartDiv}
+                style={
+                    innerMap
+                        ? { width: '100%', height: '100%', minHeight: '400px' }
+                        : { width: '100%', height: '500px' }
+                }
+            />
         </div>
     )
 }

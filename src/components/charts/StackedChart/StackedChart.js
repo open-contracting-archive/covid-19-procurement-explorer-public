@@ -20,10 +20,13 @@ const StackedChart = ({ data }) => {
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.dataFields.category = 'year'
         categoryAxis.renderer.grid.template.location = 0
+        categoryAxis.renderer.grid.template.disabled = true
+        categoryAxis.renderer.labels.template.fontSize = 12
 
         let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
         valueAxis.renderer.inside = true
         valueAxis.renderer.labels.template.disabled = true
+        valueAxis.renderer.grid.template.disabled = true
         valueAxis.min = 0
 
         // Create series
@@ -44,10 +47,10 @@ const StackedChart = ({ data }) => {
                 '[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}'
 
             // Add label
-            let labelBullet = series.bullets.push(new am4charts.LabelBullet())
-            labelBullet.label.text = '{valueY}'
-            labelBullet.locationY = 0.5
-            labelBullet.label.hideOversized = true
+            // let labelBullet = series.bullets.push(new am4charts.LabelBullet())
+            // labelBullet.label.text = '{valueY}'
+            // labelBullet.locationY = 0.5
+            // labelBullet.label.hideOversized = true
 
             return series
         }
@@ -61,6 +64,25 @@ const StackedChart = ({ data }) => {
 
         // Legend
         chart.legend = new am4charts.Legend()
+        chart.legend.useDefaultMarker = true
+        let marker = chart.legend.markers.template.children.getIndex(0)
+        marker.cornerRadius(0, 0, 0, 0)
+        chart.legend.labels.template.fontSize = 12
+        let markerTemplate = chart.legend.markers.template
+        markerTemplate.width = 10
+        markerTemplate.height = 10
+
+        chart.colors.list = [
+            am4core.color('#BEBADA'),
+            am4core.color('#FCCDE5'),
+            am4core.color('#8DD3C7'),
+            am4core.color('#FB8072'),
+            am4core.color('#BC80BD'),
+            am4core.color('#D9D9D9'),
+            am4core.color('#FDB462'),
+            am4core.color('#FFED6F'),
+            am4core.color('#B3DE69')
+        ]
 
         chart.data = data
 
@@ -71,7 +93,7 @@ const StackedChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={stackedChart} style={{ width: '100%', height: '400px' }} />
+    return <div ref={stackedChart} style={{ width: '100%', height: '345px' }} />
 }
 
 export default StackedChart

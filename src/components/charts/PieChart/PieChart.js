@@ -15,7 +15,7 @@ const PieChart = ({ data, colors }) => {
 
         // Create chart instance
         let chart = am4core.create(piechartDiv.current, am4charts.PieChart)
-        chart.exporting.menu = new am4core.ExportMenu()
+        // chart.exporting.menu = new am4core.ExportMenu()
 
         // Add and configure Series
         let pieSeries = chart.series.push(new am4charts.PieSeries())
@@ -23,7 +23,7 @@ const PieChart = ({ data, colors }) => {
         pieSeries.dataFields.category = 'value'
 
         // Let's cut a hole in our Pie chart the size of 30% the radius
-        chart.innerRadius = am4core.percent(30)
+        chart.innerRadius = am4core.percent(45)
 
         // Put a thick white border around each Slice
         pieSeries.slices.template.stroke = am4core.color('#fff')
@@ -41,6 +41,7 @@ const PieChart = ({ data, colors }) => {
         pieSeries.labels.template.bent = true
         pieSeries.labels.template.radius = 3
         pieSeries.labels.template.padding(0, 0, 0, 0)
+        pieSeries.labels.template.disabled = true
 
         pieSeries.ticks.template.disabled = true
 
@@ -61,9 +62,9 @@ const PieChart = ({ data, colors }) => {
         hoverShadow.blur = 5
 
         // Add a legend
-        chart.legend = new am4charts.Legend()
-        chart.legend.position = 'top'
-        
+        // chart.legend = new am4charts.Legend()
+        // chart.legend.position = 'top'
+
         pieSeries.colors.list = colors.map((color) => {
             return am4core.color(color)
         })
@@ -77,7 +78,7 @@ const PieChart = ({ data, colors }) => {
         }
     }, [data])
 
-    return <div ref={piechartDiv} style={{ width: '100%', height: '250px' }} />
+    return <div ref={piechartDiv} style={{ width: '50px', height: '50px' }} />
 }
 
 export default PieChart

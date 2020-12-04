@@ -228,6 +228,25 @@ header {
             transition: all 0.23s ease-in-out;
         }
     }
+
+    &.simple-bar {
+        ul {
+            li {
+                border: none;
+                margin-bottom: 0;
+
+                &:last-child {
+                    padding-bottom: 0;
+                }
+            }
+        }
+        .custom-horizontal-bar-text {
+            width: 100px;
+        }
+        .custom-horizontal-bar-progress {
+            width: calc(100% - 80px);
+        }
+    }
 }
 
 .custom-scrollbar {

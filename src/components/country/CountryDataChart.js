@@ -1,13 +1,111 @@
 import React, { useEffect, useState } from 'react'
-import BarChart from '../../components/charts/BarChart/BarChart'
-import PieChart from '../../components/charts/PieChart/PieChart'
-import AreaChart from '../../components/charts/AreaChart/AreaChart'
-import TreeMapChart from '../../components/charts/TreeMapChart/TreeMapChart'
-import CombinedChart from '../../components/charts/CombinedChart/CombinedChart'
-import SankeyChart from '../../components/charts/SankeyChart/SankeyChart'
-import CompareChart from '../../components/charts/CompareChart/CompareChart'
-import RaceBarChart from '../../components/charts/RaceBarChart/RaceBarChart'
-import Loader from '../../components/loader/Loader'
+import BarChart from '../charts/BarChart/BarChart'
+import PieChart from '../charts/PieChart/PieChart'
+import AreaChart from '../charts/AreaChart/AreaChart'
+import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
+import CombinedChart from '../charts/CombinedChart/CombinedChart'
+import SankeyChart from '../charts/SankeyChart/SankeyChart'
+import CompareChart from '../charts/CompareChart/CompareChart'
+import RaceBarChart from '../charts/RaceBarChart/RaceBarChart'
+import Loader from '../loader/Loader'
+import SimpleBarChart from '../charts/SimpleBarChart/SimpleBarChart'
+import BarListSection from '../BarListSection/BarListSection'
+import SimpleBarListSection from '../SimpleBarListSection/SimpleBarListSection'
+import ContractRedFlag from '../ContractRedFlag/ContractRedFlag'
+import StackedChart from '../charts/StackedChart/StackedChart'
+
+const top_supply_bar_data = [
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'TECNOLOGIA Y CALIFORNIA',
+        value: '45%'
+    },
+    {
+        name: 'REACTIVOS EXPERIMENT',
+        value: '12%'
+    },
+    {
+        name: 'Kit de detección single',
+        value: '5%'
+    },
+    {
+        name: 'TaqPath 1-Step RT-qPC',
+        value: '68%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    }
+]
+
+const contract_status_data = [
+    {
+        name: 'Active',
+        value: '85%'
+    },
+    {
+        name: 'Completed',
+        value: '45%'
+    },
+    {
+        name: 'Cancelled',
+        value: '12%'
+    }
+]
+
+const top_buyer_bar_data = [
+    {
+        name: 'Kit de detección single',
+        value: '5%'
+    },
+    {
+        name: 'TaqPath 1-Step RT-qPC',
+        value: '68%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'TECNOLOGIA Y CALIFORNIA',
+        value: '45%'
+    },
+    {
+        name: 'REACTIVOS EXPERIMENT',
+        value: '12%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    },
+    {
+        name: 'LABORATORIO MEDICO',
+        value: '85%'
+    }
+]
 
 // Add Bar Chart data
 const bar_chart_data = [
@@ -531,17 +629,17 @@ const treemap_chart_data = {
 }
 
 const sankey_chart_data = [
-    { from: 'A', to: 'D', value: 10 },
-    { from: 'B', to: 'D', value: 8 },
-    { from: 'B', to: 'E', value: 4 },
-    { from: 'C', to: 'E', value: 3 },
-    { from: 'D', to: 'G', value: 5 },
-    { from: 'D', to: 'I', value: 2 },
-    { from: 'D', to: 'H', value: 3 },
-    { from: 'E', to: 'H', value: 6 },
-    { from: 'G', to: 'J', value: 5 },
-    { from: 'I', to: 'J', value: 1 },
-    { from: 'H', to: 'J', value: 9 }
+    { from: 'Supplier A', to: 'Product D', value: 10 },
+    { from: 'Supplier B', to: 'Product D', value: 8 },
+    { from: 'Supplier B', to: 'Product E', value: 4 },
+    { from: 'Supplier C', to: 'Product E', value: 3 },
+    { from: 'Product D', to: 'Product G', value: 5 },
+    { from: 'Product D', to: 'Product I', value: 2 },
+    { from: 'Product D', to: 'Product H', value: 3 },
+    { from: 'Product E', to: 'Product H', value: 6 },
+    { from: 'Product G', to: 'Product J', value: 5 },
+    { from: 'Product I', to: 'Product J', value: 1 },
+    { from: 'Product H', to: 'Product J', value: 9 }
 ]
 
 const race_bar_chart_data = {
@@ -1796,6 +1894,64 @@ const race_bar_chart_data = {
     ]
 }
 
+// Stacked Chart Data
+const stacked_chart_data = [
+    {
+        year: '2016',
+        europe: 2.5,
+        namerica: 2.5,
+        asia: 2.1,
+        lamerica: 0.3,
+        meast: 0.2,
+        africa: 0.1
+    },
+    {
+        year: '2017',
+        europe: 2.6,
+        namerica: 2.7,
+        asia: 2.2,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1
+    },
+    {
+        year: '2018',
+        europe: 2.8,
+        namerica: 2.9,
+        asia: 2.4,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1
+    },
+    {
+        year: '2019',
+        europe: 2.5,
+        namerica: 2.5,
+        asia: 2.1,
+        lamerica: 0.3,
+        meast: 0.2,
+        africa: 0.1
+    },
+    {
+        year: '2020',
+        europe: 2.6,
+        namerica: 2.7,
+        asia: 2.2,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1
+    },
+    {
+        year: '2021',
+        europe: 2.8,
+        namerica: 2.9,
+        asia: 2.4,
+        lamerica: 0.3,
+        meast: 0.3,
+        africa: 0.1
+    }
+]
+
 const axisRotation = 60
 const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
@@ -1814,20 +1970,24 @@ function CountryDataCharts() {
                     <div className="flex flex-wrap -mx-3 -mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark">
                                     Total Spending
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark pb-10">
-                                        <span>
+                                    <div className=" text-primary-dark pb-4 w-2/5">
+                                        <AreaChart data={area_chart_data} />
+                                        <p>
                                             <strong className="text-xl inline-block mr-3">
                                                 87M
                                             </strong>
                                             USD
-                                        </span>
+                                        </p>
+                                        <p className="text-sm text-green-30 font-bold">
+                                            +8%
+                                        </p>
                                     </div>
                                     <div className="flex-1">
-                                        <BarChart
+                                        <SimpleBarChart
                                             data={bar_chart_data}
                                             barColorValue={barColorValue}
                                             axisRotation={axisRotation}
@@ -1838,19 +1998,23 @@ function CountryDataCharts() {
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                <h3 className="uppercase font-bold  text-primary-dark">
                                     Total contracts
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark pb-10">
-                                        <span>
+                                    <div className=" text-primary-dark pb-4 w-2/5">
+                                        <AreaChart data={area_chart_data} />
+                                        <p>
                                             <strong className="text-xl inline-block mr-3">
                                                 218
                                             </strong>
-                                        </span>
+                                        </p>
+                                        <p className="text-sm text-red-30 font-bold">
+                                            -8%
+                                        </p>
                                     </div>
                                     <div className="flex-1">
-                                        <BarChart
+                                        <SimpleBarChart
                                             data={bar_chart_data}
                                             barColorValue={barColorValue}
                                             axisRotation={axisRotation}
@@ -1861,52 +2025,133 @@ function CountryDataCharts() {
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                    Cancelled awards
+                                <h3 className="uppercase font-bold  text-primary-dark">
+                                    Average bids per contract
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark pb-10">
-                                        <span>
-                                            <strong className="text-xl inline-block mr-3">
-                                                51
-                                            </strong>
-                                        </span>
-                                    </div>
-                                    <div className="flex-1">
-                                        <PieChart
-                                            data={pie_chart_data}
-                                            colors={colors}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-full px-2 mb-6">
-                            <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                    Procurement trend
-                                </h3>
-                                <div className="flex">
-                                    <div className="flex-1">
+                                    <div className=" text-primary-dark w-2/5">
                                         <AreaChart data={area_chart_data} />
+                                        <p>
+                                            <strong className="text-xl inline-block mr-3">
+                                                218
+                                            </strong>
+                                        </p>
+                                        <p className="text-sm text-red-30 font-bold">
+                                            -11%
+                                        </p>
+                                    </div>
+                                    <div className="flex-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold  text-primary-dark">
+                                    Monopolization
+                                </h3>
+                                <div className="flex items-end">
+                                    <div className=" text-primary-dark w-2/5">
+                                        <AreaChart data={area_chart_data} />
+                                        <p>
+                                            <strong className="text-xl inline-block mr-3">
+                                                67
+                                            </strong>
+                                        </p>
+                                        <p className="text-sm text-green-30 font-bold">
+                                            +18%
+                                        </p>
+                                    </div>
+                                    <div className="flex-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                            <SimpleBarListSection
+                                label="Contract status"
+                                bar_data={contract_status_data}
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                            <div className="flex flex-col">
+                                <div className="bg-white rounded p-4 py-2 mb-3">
+                                    <h3 className="uppercase font-bold  text-primary-dark">
+                                        Cancelled awards
+                                    </h3>
+                                    <div className="flex items-end">
+                                        <div className=" text-primary-dark">
+                                            <span>
+                                                <strong className="text-xl inline-block mr-3">
+                                                    51
+                                                </strong>
+                                            </span>
+                                        </div>
+                                        <div className="flex-1">
+                                            <PieChart
+                                                data={pie_chart_data}
+                                                colors={colors}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white rounded p-4 py-2">
+                                    <h3 className="uppercase font-bold  text-primary-dark">
+                                        Direct/open
+                                    </h3>
+                                    <div className="flex items-end">
+                                        <div className=" text-primary-dark">
+                                            <span>
+                                                <strong className="text-xl inline-block mr-3">
+                                                    51
+                                                </strong>
+                                            </span>
+                                        </div>
+                                        <div className="flex-1">
+                                            <PieChart
+                                                data={pie_chart_data}
+                                                colors={colors}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="w-full px-2 mb-6">
+
+                        <div className="w-full lg:w-1/2 px-2 mb-6">
                             <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                    Combined Chart with multiple value axes
+                                <h3 className="uppercase font-bold  text-primary-dark">
+                                    Products timeline
                                 </h3>
                                 <div className="flex">
                                     <div className="flex-1">
-                                        <CombinedChart
-                                            data={combined_chart_data}
+                                        <StackedChart
+                                            data={stacked_chart_data}
                                         />
                                     </div>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
+
+                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                            <BarListSection
+                                label="Concentration"
+                                bar_data={top_supply_bar_data}
+                            />
+                        </div>
+
+                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                            <BarListSection
+                                label="Top Suppliers"
+                                bar_data={top_supply_bar_data}
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                            <BarListSection
+                                label="Top Buyers"
+                                bar_data={top_buyer_bar_data}
+                            />
+                        </div>
+
                         {/* <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
@@ -1921,7 +2166,7 @@ function CountryDataCharts() {
                                 </div>
                             </div>
                         </div> */}
-                        {/* <div className="w-full px-2 mb-6">
+                        <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                                     Sankey Diagram
@@ -1932,7 +2177,32 @@ function CountryDataCharts() {
                                     </div>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
+
+                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                            <BarListSection
+                                label="Product distribution"
+                                bar_data={top_supply_bar_data}
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                            <ContractRedFlag />
+                        </div>
+
+                        <div className="w-full px-2 mb-6">
+                            <div className="bg-white rounded p-4">
+                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                    Combined Chart with multiple value axes
+                                </h3>
+                                <div className="flex">
+                                    <div className="flex-1">
+                                        <CombinedChart
+                                            data={combined_chart_data}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {/* <div className="w-full px-2 mb-6">
                             <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark mb-6">

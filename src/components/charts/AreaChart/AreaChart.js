@@ -15,13 +15,14 @@ const AreaChart = ({ data }) => {
 
         // Create chart instance
         let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
-        chart.exporting.menu = new am4core.ExportMenu()
+        // chart.exporting.menu = new am4core.ExportMenu()
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.ticks.template.disabled = true
         categoryAxis.renderer.line.opacity = 0
         categoryAxis.renderer.grid.template.disabled = true
+        categoryAxis.renderer.labels.template.disabled = true
         categoryAxis.renderer.minGridDistance = 40
         categoryAxis.dataFields.category = 'month'
         categoryAxis.startLocation = 0.4
@@ -31,6 +32,9 @@ const AreaChart = ({ data }) => {
         valueAxis.tooltip.disabled = true
         valueAxis.renderer.line.opacity = 0
         valueAxis.renderer.ticks.template.disabled = true
+        valueAxis.renderer.grid.template.disabled = true
+        valueAxis.renderer.labels.template.disabled = true
+
         valueAxis.min = 0
 
         let lineSeries = chart.series.push(new am4charts.LineSeries())
@@ -51,18 +55,18 @@ const AreaChart = ({ data }) => {
         fillModifier.gradient.rotation = 90
         lineSeries.segments.template.fillModifier = fillModifier
 
-        let bullet = lineSeries.bullets.push(new am4charts.CircleBullet())
-        bullet.circle.radius = 6
-        bullet.circle.fill = am4core.color('#fff')
-        bullet.circle.strokeWidth = 3
+        // let bullet = lineSeries.bullets.push(new am4charts.CircleBullet())
+        // bullet.circle.radius = 6
+        // bullet.circle.fill = am4core.color('#fff')
+        // bullet.circle.strokeWidth = 3
 
         chart.cursor = new am4charts.XYCursor()
         chart.cursor.behavior = 'panX'
         chart.cursor.lineX.opacity = 0
         chart.cursor.lineY.opacity = 0
 
-        chart.scrollbarX = new am4core.Scrollbar()
-        chart.scrollbarX.parent = chart.bottomAxesContainer
+        // chart.scrollbarX = new am4core.Scrollbar()
+        // chart.scrollbarX.parent = chart.bottomAxesContainer
 
         chart.data = data
 
@@ -73,7 +77,7 @@ const AreaChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={areachartDiv} style={{ width: '100%', height: '400px' }} />
+    return <div ref={areachartDiv} style={{ width: '100%', height: '80px' }} />
 }
 
 export default AreaChart
