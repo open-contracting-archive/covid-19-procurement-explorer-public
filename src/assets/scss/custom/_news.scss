@@ -87,19 +87,23 @@
 
             .main-news__caption {
                 order: 2;
+                z-index: 10;
+                color: #fff;
+                bottom: 20px;
+                left: 20px;
             }
 
             .img-wrapper {
                 max-width: unset;
-                max-height: 360px;
-                @apply ml-0 mb-6;
+                max-height: 100%;
+                @apply m-0;
             }
         }
 
         .img-wrapper {
             max-height: 120px;
             max-width: 135px;
-            @apply ml-10;
+            @apply mr-6;
 
             img {
                 object-fit: cover;
