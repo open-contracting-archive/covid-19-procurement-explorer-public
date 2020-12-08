@@ -15,13 +15,14 @@ import GlobalMap from '../components/GlobalMap/GlobalMap'
 import Buyers from '../components/country/buyers'
 
 function CountryDetail() {
-    const [data, setData] = useState({})
+    const [data, setData] = useState({}) // Country specific data
     const [loading, setLoading] = useState(false)
-    const [countryData, setCountryData] = useState([])
+    const [countryData, setCountryData] = useState([]) // List of all countries
 
     let { slug } = useParams()
 
     useEffect(() => {
+        // Fetch list of all countries
         CountryServices.CountryData().then((response) => {
             if (response) {
                 const countries = response.reduce((acc, current) => {
@@ -33,6 +34,7 @@ function CountryDetail() {
     }, [])
 
     useEffect(() => {
+        // Fetch country specific data
         CountryProfileServices.CountryProfileData(slug).then((response) => {
             if (response) {
                 setData(response)
@@ -40,6 +42,9 @@ function CountryDetail() {
             setLoading(true)
         })
     }, [slug])
+
+    // console.log(data)
+    // console.log(countryData)
 
     const { trans } = useTrans()
 
@@ -231,7 +236,9 @@ function CountryDetail() {
                             className="py-16 bg-primary-gray">
                             <div className="container mx-auto px-4 ">
                                 <TabPanel>
-                                    <CountryDataCharts />
+                                    <CountryDataCharts
+                                        countryName={data.name}
+                                    />
                                 </TabPanel>
                                 <TabPanel>
                                     <Insights />

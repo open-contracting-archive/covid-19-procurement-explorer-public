@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const AreaChart = ({ data }) => {
+const AreaChart = ({ data, apiData }) => {
     const areachartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -15,7 +15,7 @@ const AreaChart = ({ data }) => {
 
         // Create chart instance
         let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
-        chart.logo.height = -15
+        chart.logo.height = 15
         // chart.exporting.menu = new am4core.ExportMenu()
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
@@ -25,7 +25,7 @@ const AreaChart = ({ data }) => {
         categoryAxis.renderer.grid.template.disabled = true
         categoryAxis.renderer.labels.template.disabled = true
         categoryAxis.renderer.minGridDistance = 40
-        categoryAxis.dataFields.category = 'month'
+        categoryAxis.dataFields.category = apiData ? 'date' : 'month'
         categoryAxis.startLocation = 0.4
         categoryAxis.endLocation = 0.6
 
@@ -39,7 +39,7 @@ const AreaChart = ({ data }) => {
         valueAxis.min = 0
 
         let lineSeries = chart.series.push(new am4charts.LineSeries())
-        lineSeries.dataFields.categoryX = 'month'
+        lineSeries.dataFields.categoryX = apiData ? 'date' : 'month'
         lineSeries.dataFields.valueY = 'value'
         lineSeries.tooltipText = 'value: {valueY.value}'
         lineSeries.fillOpacity = 1
@@ -78,7 +78,13 @@ const AreaChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={areachartDiv} className="overflow-hidden" style={{ width: '100%', height: '90px' }} />
+    return (
+        <div
+            ref={areachartDiv}
+            className="relative z-10"
+            style={{ width: '100%', height: '90px' }}
+        />
+    )
 }
 
 export default AreaChart

@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import * as dayjs from 'dayjs'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { get } from 'lodash'
 import ProcurementTimeline from '../ProcurementTimeline/ProcurementTimeline'
 import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 import GlobalSupplier from '../GlobalSupplier/GlobalSupplier'
 import ProductDistribution from '../ProductDistribution/ProductDistribution'
 import QuantityCorrelation from '../QuantityCorrelation/QuantityCorrelation'
 import BarChart from '../charts/BarChart/BarChart'
-import PieChart from '../charts/PieChart/PieChart'
-import AreaChart from '../charts/AreaChart/AreaChart'
-import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
-import CombinedChart from '../charts/CombinedChart/CombinedChart'
-import SankeyChart from '../charts/SankeyChart/SankeyChart'
 import CompareChart from '../charts/CompareChart/CompareChart'
 import RaceBarChart from '../charts/RaceBarChart/RaceBarChart'
+import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
+import PieChart from '../charts/PieChart/PieChart'
+import AreaChart from '../charts/AreaChart/AreaChart'
+import CombinedChart from '../charts/CombinedChart/CombinedChart'
+import SankeyChart from '../charts/SankeyChart/SankeyChart'
 import Loader from '../loader/Loader'
 import SimpleBarChart from '../charts/SimpleBarChart/SimpleBarChart'
 import BarListSection from '../BarListSection/BarListSection'
 import SimpleBarListSection from '../SimpleBarListSection/SimpleBarListSection'
 import ContractRedFlag from '../ContractRedFlag/ContractRedFlag'
 import StackedChart from '../charts/StackedChart/StackedChart'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import useTrans from '../../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import VisualizationServices from '../../services/visualizationServices'
+import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
 
 const top_supply_bar_data = [
     {
@@ -154,43 +159,43 @@ const pie_chart_data = [
 const area_chart_data = [
     {
         month: 'FEB',
-        value: 22324,
-        expenses: 21.1
+        value: 22324
+        // expenses: 21.1
     },
     {
         month: 'MAR',
-        value: 45990,
-        expenses: 30.5
+        value: 45990
+        // expenses: 30.5
     },
     {
         month: 'APR',
-        value: 10003,
-        expenses: 34.9
+        value: 10003
+        // expenses: 34.9
     },
     {
         month: 'MAY',
-        value: 77070,
-        expenses: 23.1
+        value: 77070
+        // expenses: 23.1
     },
     {
         month: 'JUN',
-        value: 23489,
-        expenses: 28.2
+        value: 23489
+        // expenses: 28.2
     },
     {
         month: 'JUL',
-        value: 58902,
-        expenses: 31.9
+        value: 58902
+        // expenses: 31.9
     },
     {
         month: 'AUG',
-        value: 29190,
-        expenses: 31.9
+        value: 29190
+        // expenses: 31.9
     },
     {
         month: 'SEP',
-        value: 45908,
-        expenses: 31.9
+        value: 45908
+        // expenses: 31.9
     }
 ]
 
@@ -2008,12 +2013,67 @@ const colors = ['#ABBABF', '#DCEAEE']
 
 function GlobalDataChart() {
     const [loading, setLoading] = useState(false)
+    const [totalSpending, setTotalSpending] = useState()
+    const [totalContracts, setTotalContracts] = useState()
+    const [averageBids, setAverageBids] = useState()
+
+    const currency = useSelector((state) => state.general.currency)
+
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     useEffect(() => {
         setLoading(true)
     }, [])
+
+    useEffect(() => {
+        VisualizationServices.TotalSpending().then((response) => {
+            setTotalSpending(response)
+        })
+        VisualizationServices.TotalContracts().then((response) => {
+            setTotalContracts(response)
+        })
+        VisualizationServices.AverageBids().then((response) => {
+            setAverageBids(response)
+        })
+    }, [])
+
+    // const totalSpendingLineChartData = get(totalSpending, 'usd.line_chart')
+    const lineChartData = (chartData) => {
+        return (
+            chartData &&
+            chartData.map((data) => {
+                return {
+                    date: dayjs(data.date).format('MMMM'),
+                    value: data.value
+                }
+            })
+        )
+    }
+
+    // Total spending data
+    const totalSpendingLineChartData =
+        totalSpending &&
+        lineChartData(get(totalSpending[currency], 'line_chart'))
+    const totalSpendingAmount =
+        totalSpending && get(totalSpending[currency], 'total')
+    const totalSpendingPercentage =
+        totalSpending && get(totalSpending[currency], 'increment')
+    const totalSpendingBarChartData =
+        totalSpending && get(totalSpending[currency], 'bar_chart')
+
+    // Total contracts data
+    const totalContractLineChartData =
+        totalContracts && lineChartData(totalContracts.line_chart)
+    const totalContractAmount = totalContracts && totalContracts.total
+    const totalContractPercentage = totalContracts && totalContracts.difference
+    const totalContractBarChartData = totalContracts && totalContracts.bar_chart
+
+    // Average bids
+    const averageBidsLineChartData =
+        averageBids && lineChartData(averageBids.line_chart)
+    const averageBidsAmount = averageBids && averageBids.average
+    const averageBidsPercentage = averageBids && averageBids.difference
 
     return (
         <section className="bg-primary-gray">
@@ -2026,23 +2086,17 @@ function GlobalDataChart() {
                                     Total Spending
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark pb-4 w-2/5">
-                                        <AreaChart data={area_chart_data} />
-                                        <p>
-                                            <strong className="text-xl inline-block mr-3">
-                                                87M
-                                            </strong>
-                                            USD
-                                        </p>
-                                        <p className="text-sm text-green-30 font-bold">
-                                            +8%
-                                        </p>
-                                    </div>
+                                    {/* Line area chart */}
+                                    <AreaChartBlock
+                                        chartData={totalSpendingLineChartData}
+                                        totalAmount={totalSpendingAmount}
+                                        percentage={totalSpendingPercentage}
+                                        currency={currency}
+                                    />
                                     <div className="flex-1">
                                         <SimpleBarChart
-                                            data={bar_chart_data}
+                                            data={totalSpendingBarChartData}
                                             barColorValue={barColorValue}
-                                            axisRotation={axisRotation}
                                         />
                                     </div>
                                 </div>
@@ -2054,22 +2108,16 @@ function GlobalDataChart() {
                                     Total contracts
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark pb-4 w-2/5">
-                                        <AreaChart data={area_chart_data} />
-                                        <p>
-                                            <strong className="text-xl inline-block mr-3">
-                                                218
-                                            </strong>
-                                        </p>
-                                        <p className="text-sm text-red-30 font-bold">
-                                            -8%
-                                        </p>
-                                    </div>
+                                    {/* Line are chart */}
+                                    <AreaChartBlock
+                                        chartData={totalContractLineChartData}
+                                        totalAmount={totalContractAmount}
+                                        percentage={totalContractPercentage}
+                                    />
                                     <div className="flex-1">
                                         <SimpleBarChart
-                                            data={bar_chart_data}
+                                            data={totalContractBarChartData}
                                             barColorValue={barColorValue}
-                                            axisRotation={axisRotation}
                                         />
                                     </div>
                                 </div>
@@ -2081,17 +2129,12 @@ function GlobalDataChart() {
                                     Average bids per contract
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark w-2/5">
-                                        <AreaChart data={area_chart_data} />
-                                        <p>
-                                            <strong className="text-xl inline-block mr-3">
-                                                218
-                                            </strong>
-                                        </p>
-                                        <p className="text-sm text-red-30 font-bold">
-                                            -11%
-                                        </p>
-                                    </div>
+                                    {/* Line area chart */}
+                                    <AreaChartBlock
+                                        chartData={averageBidsLineChartData}
+                                        totalAmount={averageBidsAmount}
+                                        percentage={averageBidsPercentage}
+                                    />
                                     <div className="flex-1"></div>
                                 </div>
                             </div>
@@ -2143,7 +2186,26 @@ function GlobalDataChart() {
                                             </div>
                                         </div>
 
-                                        <div className="mt-6">
+                                        <div className="mt-2">
+                                            <TabPanel>
+                                                <div className="flex items-end">
+                                                    <div className=" text-primary-dark">
+                                                        <span>
+                                                            <strong className="text-xl inline-block mr-3">
+                                                                51
+                                                            </strong>
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <PieChart
+                                                            data={
+                                                                pie_chart_data
+                                                            }
+                                                            colors={colors}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </TabPanel>
                                             <TabPanel>
                                                 <div className="flex items-end">
                                                     <div className=" text-primary-dark">
@@ -2184,7 +2246,7 @@ function GlobalDataChart() {
                                             </div>
                                         </div>
 
-                                        <div className="mt-6">
+                                        <div className="mt-2">
                                             <TabPanel>
                                                 <div className="flex items-end">
                                                     <div className=" text-primary-dark">
