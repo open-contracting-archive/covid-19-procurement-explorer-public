@@ -3,7 +3,7 @@ import React from 'react'
 function NotFound() {
     return (
         <div className="py-56 container mx-auto">
-            <h2 className="text-2xl font-bold">Page is under Contruction !!</h2>
+            <h2 className="text-2xl font-bold">Page is under Construction !!</h2>
         </div>
     )
 }

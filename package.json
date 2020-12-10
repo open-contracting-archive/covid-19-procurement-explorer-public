@@ -11,6 +11,7 @@
     "axios": "^0.20.0",
     "css-loader": "^5.0.0",
     "d3": "^6.2.0",
+    "dayjs": "^1.9.7",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-accessible-accordion": "^3.3.3",

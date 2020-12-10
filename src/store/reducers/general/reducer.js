@@ -3,7 +3,8 @@ import * as types from './type'
 const initialState = {
     currentCountry: null,
     currentLocale: 'en',
-    translations: { en: {}, es: {} }
+    translations: { en: {}, es: {} },
+    currency: 'usd'
 }
 
 const GeneralReducer = (state = initialState, { type, payload }) => {
@@ -16,6 +17,9 @@ const GeneralReducer = (state = initialState, { type, payload }) => {
 
         case types.SET_TRANSLATIONS:
             return { ...state, translations: payload }
+
+        case types.SET_CURRENCY:
+            return { ...state, currency: payload }
 
         default:
             return state

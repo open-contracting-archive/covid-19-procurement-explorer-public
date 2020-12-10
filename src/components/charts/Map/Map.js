@@ -148,7 +148,7 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
                 let index = Math.round((sliderData.length - 1) * slider.start)
                 const updatedData = extractData(sliderData[index])
 
-                console.log(sliderData[index], 'Slider Data')
+                // console.log(sliderData[index], 'Slider Data')
 
                 for (var i = 0; i < updatedData.length; i++) {
                     let di = updatedData[i]
