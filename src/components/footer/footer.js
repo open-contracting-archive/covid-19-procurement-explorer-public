@@ -1,6 +1,7 @@
 import React from 'react'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
+import FooterImage from '../../assets/img/icons/cc-img.png'
 const Footer = () => {
     return (
         <footer className="relative pt-16 pb-40  px-4 text-white text-sm bg-yellow-50 overflow-hidden">
@@ -10,6 +11,10 @@ const Footer = () => {
                         <p className="font-bold leading-tight">
                             Covid-19 <br /> Contract <br /> Explorer
                         </p>
+                        <div className="mt-12">
+                            <img src={FooterImage} alt="" /> 
+                            <p className="mt-4 opacity-50">Creative Commons</p>
+                        </div>
                     </div>
                     <div className="col-span-6 md:col-span-2">
                         <h4 className="mb-1">Explore</h4>

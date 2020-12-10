@@ -1,6 +1,11 @@
 import React, { Fragment, useEffect } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import About from './layouts/About'
+import Library from './layouts/Library'
+import Resources from './layouts/Resources'
+import Tags from './layouts/Tags'
+import Blogs from './layouts/Blogs'
+import Events from './layouts/Events'
 import Country from './layouts/Country'
 import Data from './layouts/Data'
 import Header from './components/header/header'
@@ -19,6 +24,8 @@ import {
 import TenderDetail from './layouts/TenderDetail'
 import News from './layouts/News'
 import NewsDetail from './layouts/NewsDetail'
+import EventsDetail from './layouts/EventsDetail'
+import BlogsDetail from './layouts/BlogsDetail'
 
 function App() {
     const dispatch = useDispatch()
@@ -52,6 +59,13 @@ function App() {
                     />
                     <Route exact path="/news" component={News} />
                     <Route path="/news-detail/:id" component={NewsDetail} />
+                    <Route path="/blogs-detail/:id" component={BlogsDetail} />
+                    <Route path="/events-detail/:id" component={EventsDetail} />
+                    <Route path="/library" component={Library} />
+                    <Route path="/blogs" component={Blogs} />
+                    <Route path="/events" component={Events} />
+                    <Route path="/resources" component={Resources} />
+                    <Route path="/Tags" component={Tags} />
                     <Route component={NotFound} />
                 </Switch>
             </Fragment>
