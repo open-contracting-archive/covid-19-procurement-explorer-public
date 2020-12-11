@@ -2559,7 +2559,7 @@ function GlobalDataChart() {
                             <div className="bg-white rounded p-4 simple-tab">
                                 <FullScreen handle={handle}>
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                        Sankey Diagram
+                                        Global suppliers
                                     </h3>
 
                                     <Tabs>

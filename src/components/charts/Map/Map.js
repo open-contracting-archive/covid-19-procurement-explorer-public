@@ -8,22 +8,27 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
     const mapchartDiv = useRef(null)
     const [data, setData] = useState({})
-    const [yearMonthMapData, setYearMonthMapData] = useState(yearMonth)
+    // const [yearMonthMapData, setYearMonthMapData] = useState(yearMonth)
+    let yearMonthMapData = yearMonth
 
     const extractData = (selectedKey) => {
         const currentData = contractData[selectedKey] || {}
         return Object.entries(currentData).map(([countryCode, valObject]) => {
             return {
                 id: countryCode,
-                value: valObject[contractType] || 0
+                value: valObject[contractType] || 0,
+                url: valObject.url || '/country/united-kingdom'
             }
         })
     }
 
     useEffect(() => {
-        if (contractData) {
-            setData(extractData(yearMonthMapData))
-        }
+        let mapData = extractData(yearMonthMapData)
+        setData(mapData)
+        // if (contractData) {
+        //     // console.log(yearMonthMapData)
+        //     setData(extractData(yearMonthMapData))
+        // }
     }, [yearMonthMapData, contractData, contractType])
 
     useLayoutEffect(() => {
@@ -61,6 +66,7 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
 
         // Set heatmap values for each state
         polygonSeries.data = data
+        // console.log(polygonSeries.data)
 
         // Set up heat legend
         let heatLegend = chart.createChild(am4maps.HeatLegend)
@@ -105,7 +111,8 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
         polygonTemplate.tooltipText = '{name}: {value}'
         polygonTemplate.nonScalingStroke = true
         polygonTemplate.strokeWidth = 0.5
-        polygonTemplate.url = '/country/mexico'
+        // polygonTemplate.url = '/country/mexico'
+        polygonTemplate.url = '{url}'
 
         // polygonSeries.mapPolygons.template.propertyFields.url = 'url'
 
