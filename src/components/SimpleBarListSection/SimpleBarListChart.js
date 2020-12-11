@@ -1,9 +1,10 @@
 import React from 'react'
+import formatNumber from '../formatNumber/FormatNumber'
 
-function SimpleBarListChart({ data }) {
+function SimpleBarListChart({ data, byValue }) {
     return (
         <div className="custom-horizontal-bar simple-bar">
-            <ul className="custom-scrollbar pr-4">
+            <ul className="custom-scrollbar">
                 {data.map((bar_value, index) => {
                     return (
                         <li key={index}>
@@ -14,11 +15,14 @@ function SimpleBarListChart({ data }) {
                                 <div className="custom-horizontal-bar-progress">
                                     <span
                                         style={{
-                                            width: `${bar_value.value}`
+                                            width: `${bar_value.value}%`
                                         }}></span>
                                 </div>
-                                <div className="ml-2">
-                                    <p>$14K</p>
+                                <div className="ml-2 custom-horizontal-bar-amount">
+                                    <p>
+                                        {byValue ? '$' : ''}
+                                        {formatNumber(bar_value.amount)}
+                                    </p>
                                 </div>
                             </div>
                         </li>

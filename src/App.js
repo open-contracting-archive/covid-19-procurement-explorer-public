@@ -10,7 +10,7 @@ import GeoChart from './components/charts/GeoChart/GeoChart'
 import GlobalProfile from './layouts/GlobalProfile'
 import CountryProfileServices from './services/countryProfileServices'
 import { useDispatch, useSelector } from 'react-redux'
-import NotFound from './components/NotFound/NotFound'
+import NotFound from './components/NotFound/notfound'
 
 import {
     setCurrentLocale,

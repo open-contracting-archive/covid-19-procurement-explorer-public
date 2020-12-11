@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import BarListChart from '../BarListSection/BarListChart'
 import useTrans from '../../hooks/useTrans'
 
-function BarListSection({ bar_data, label }) {
+function BarListSection({ bar_data, label, byValue, byNumber }) {
     const { trans } = useTrans()
     return (
         <div className="bg-white rounded p-6 h-full">
@@ -23,10 +23,13 @@ function BarListSection({ bar_data, label }) {
 
                             <div className="mt-10">
                                 <TabPanel>
-                                    <BarListChart data={bar_data} />
+                                    <BarListChart
+                                        data={byValue || bar_data}
+                                        byValue
+                                    />
                                 </TabPanel>
                                 <TabPanel>
-                                    <BarListChart data={bar_data} />
+                                    <BarListChart data={byNumber || bar_data} />
                                 </TabPanel>
                             </div>
                         </Tabs>
