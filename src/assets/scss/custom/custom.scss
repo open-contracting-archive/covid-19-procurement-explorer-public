@@ -199,6 +199,7 @@ header {
     }
     .custom-horizontal-bar-text {
         width: 180px;
+        flex-shrink: 0;
 
         h3 {
             overflow: hidden;
@@ -206,6 +207,10 @@ header {
             white-space: nowrap;
             width: 100%;
         }
+    }
+    .custom-horizontal-bar-amount {
+        width: 60px;
+        flex-shrink: 0;
     }
 
     .custom-horizontal-bar-progress {

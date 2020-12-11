@@ -2016,6 +2016,10 @@ function GlobalDataChart() {
     const [totalSpending, setTotalSpending] = useState()
     const [totalContracts, setTotalContracts] = useState()
     const [averageBids, setAverageBids] = useState()
+    const [directOpen, setDirectOpen] = useState()
+    const [topSuppliers, setTopSuppliers] = useState()
+    const [topBuyers, setTopBuyers] = useState()
+    const [contractStatus, setContractStatus] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
@@ -2035,6 +2039,18 @@ function GlobalDataChart() {
         })
         VisualizationServices.AverageBids().then((response) => {
             setAverageBids(response)
+        })
+        VisualizationServices.DirectOpen().then((response) => {
+            setDirectOpen(response)
+        })
+        VisualizationServices.TopSuppliers().then((response) => {
+            setTopSuppliers(response)
+        })
+        VisualizationServices.TopBuyers().then((response) => {
+            setTopBuyers(response)
+        })
+        VisualizationServices.ContractStatus().then((response) => {
+            setContractStatus(response)
         })
     }, [])
 
@@ -2074,6 +2090,138 @@ function GlobalDataChart() {
         averageBids && lineChartData(averageBids.line_chart)
     const averageBidsAmount = averageBids && averageBids.average
     const averageBidsPercentage = averageBids && averageBids.difference
+
+    // Direct open chart
+    const directOpenByValue =
+        directOpen &&
+        directOpen.map((data) => {
+            return {
+                value: data.procedure,
+                number: currency == 'usd' ? data.amount_usd : data.amount_local
+            }
+        })
+    const directOpenByNumber =
+        directOpen &&
+        directOpen.map((data) => {
+            return { value: data.procedure, number: data.tender_count }
+        })
+
+    // Top suppliers
+    const calculateBarChartPercentage = (data, type) => {
+        if (type == 'by_value') {
+            let total = data.by_number.reduce((acc, current) => {
+                return acc + current.amount_local
+            }, 0)
+
+            let topSuppliersChartData = data.by_number.map((data) => {
+                return {
+                    name: data.supplier_name,
+                    value: Math.ceil((data.amount_local / total) * 100),
+                    amount: data.amount_local
+                }
+            })
+            return topSuppliersChartData
+        }
+        if (type == 'by_number') {
+            let total = data.by_number.reduce((acc, current) => {
+                return acc + current.tender_count
+            }, 0)
+
+            let topSuppliersChartData = data.by_number.map((data) => {
+                return {
+                    name: data.supplier_name,
+                    value: Math.ceil((data.tender_count / total) * 100),
+                    amount: data.tender_count
+                }
+            })
+            return topSuppliersChartData
+        }
+    }
+
+    const topSuppliersDataByNumber =
+        topSuppliers && calculateBarChartPercentage(topSuppliers, 'by_number')
+    const topSuppliersDataByValue =
+        topSuppliers && calculateBarChartPercentage(topSuppliers, 'by_value')
+    // console.log(topSuppliersDataByValue)
+
+    // Top buyers
+    const calculateBuyersChartPercentage = (data, type) => {
+        if (type == 'by_value') {
+            let total = data.by_number.reduce((acc, current) => {
+                return acc + current.amount_local
+            }, 0)
+
+            let topSuppliersChartData = data.by_number.map((data) => {
+                return {
+                    name: data.buyer_name,
+                    value: Math.ceil((data.amount_local / total) * 100),
+                    amount: data.amount_local
+                }
+            })
+            return topSuppliersChartData
+        }
+        if (type == 'by_number') {
+            let total = data.by_number.reduce((acc, current) => {
+                return acc + current.tender_count
+            }, 0)
+
+            let topSuppliersChartData = data.by_number.map((data) => {
+                return {
+                    name: data.buyer_name,
+                    value: Math.ceil((data.tender_count / total) * 100),
+                    amount: data.tender_count
+                }
+            })
+            return topSuppliersChartData
+        }
+    }
+
+    const topBuyersDataByNumber =
+        topBuyers && calculateBuyersChartPercentage(topBuyers, 'by_number')
+    const topBuyersDataByValue =
+        topBuyers && calculateBuyersChartPercentage(topBuyers, 'by_value')
+    // console.log(topSuppliersDataByValue)
+
+    // Contract status
+    const calculateContractStatusChartPercentage = (data, type) => {
+        if (type == 'by_value') {
+            let total = data.reduce((acc, current) => {
+                return acc + current.amount_local
+            }, 0)
+
+            let dataByValue = data.map((data) => {
+                return {
+                    name: data.status,
+                    value: Math.ceil((data.amount_local / total) * 100),
+                    amount: data.amount_local
+                }
+            })
+            return dataByValue
+        }
+        if (type == 'by_number') {
+            let total = data.reduce((acc, current) => {
+                return acc + current.tender_count
+            }, 0)
+
+            let dataByNumber = data.map((data) => {
+                return {
+                    name: data.status,
+                    value: Math.ceil((data.tender_count / total) * 100),
+                    amount: data.tender_count
+                }
+            })
+            return dataByNumber
+        }
+    }
+
+    const contractStatusDataByNumber =
+        contractStatus &&
+        calculateContractStatusChartPercentage(contractStatus, 'by_number')
+    const contractStatusDataByValue =
+        contractStatus &&
+        calculateContractStatusChartPercentage(contractStatus, 'by_value')
+    // console.log(contractStatusDataByNumber)
+    // console.log(contractStatusDataByValue)
 
     return (
         <section className="bg-primary-gray">
@@ -2164,6 +2312,14 @@ function GlobalDataChart() {
                             <SimpleBarListSection
                                 label="Contract status"
                                 bar_data={contract_status_data}
+                                byNumber={
+                                    contractStatusDataByNumber &&
+                                    contractStatusDataByNumber
+                                }
+                                byValue={
+                                    contractStatusDataByValue &&
+                                    contractStatusDataByValue
+                                }
                             />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-4">
@@ -2172,7 +2328,7 @@ function GlobalDataChart() {
                                     <Tabs>
                                         <div className="flex items-center justify-between">
                                             <h3 className="uppercase font-bold  text-primary-dark">
-                                                Cancelled awards
+                                                Equity indicators
                                             </h3>
                                             <div className="flex">
                                                 <TabList>
@@ -2259,7 +2415,26 @@ function GlobalDataChart() {
                                                     <div className="flex-1">
                                                         <PieChart
                                                             data={
-                                                                pie_chart_data
+                                                                directOpenByValue
+                                                            }
+                                                            colors={colors}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="flex items-end">
+                                                    <div className=" text-primary-dark">
+                                                        <span>
+                                                            <strong className="text-xl inline-block mr-3">
+                                                                51
+                                                            </strong>
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex-1">
+                                                        <PieChart
+                                                            data={
+                                                                directOpenByNumber
                                                             }
                                                             colors={colors}
                                                         />
@@ -2341,13 +2516,27 @@ function GlobalDataChart() {
                         <div className="w-full lg:w-1/2 px-2 mb-4">
                             <BarListSection
                                 label="Top Suppliers"
-                                bar_data={top_supply_bar_data}
+                                byNumber={
+                                    topSuppliersDataByNumber &&
+                                    topSuppliersDataByNumber
+                                }
+                                byValue={
+                                    topSuppliersDataByValue &&
+                                    topSuppliersDataByValue
+                                }
                             />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4">
                             <BarListSection
                                 label="Top Buyers"
                                 bar_data={top_buyer_bar_data}
+                                byNumber={
+                                    topBuyersDataByNumber &&
+                                    topBuyersDataByNumber
+                                }
+                                byValue={
+                                    topBuyersDataByValue && topBuyersDataByValue
+                                }
                             />
                         </div>
 

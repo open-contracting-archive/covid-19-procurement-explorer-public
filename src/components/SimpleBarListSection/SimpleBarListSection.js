@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import SimpleBarListChart from './SimpleBarListChart'
 import useTrans from '../../hooks/useTrans'
 
-function SimpleBarListSection({ bar_data, label }) {
+function SimpleBarListSection({ bar_data, label, byValue, byNumber }) {
     const { trans } = useTrans()
     return (
         <div className="bg-white rounded p-6 h-full simple-tab">
@@ -22,10 +22,13 @@ function SimpleBarListSection({ bar_data, label }) {
                 </div>
                 <div className="mt-6">
                     <TabPanel>
-                        <SimpleBarListChart data={bar_data} />
+                        <SimpleBarListChart
+                            data={byValue || bar_data}
+                            byValue
+                        />
                     </TabPanel>
                     <TabPanel>
-                        <SimpleBarListChart data={bar_data} />
+                        <SimpleBarListChart data={byNumber || bar_data} />
                     </TabPanel>
                 </div>
             </Tabs>

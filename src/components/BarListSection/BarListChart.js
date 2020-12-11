@@ -1,26 +1,34 @@
 import React from 'react'
+import formatNumber from '../formatNumber/FormatNumber'
 
-function BarListChart({ data }) {
+function BarListChart({ data, byValue }) {
     return (
         <div className="custom-horizontal-bar">
             <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
-                {data.map((bar_value, index) => {
-                    return (
-                        <li key={index}>
-                            <div className="flex items-center">
-                                <div className="custom-horizontal-bar-text">
-                                    <h3>{bar_value.name}</h3>
+                {data &&
+                    data.map((bar_value, index) => {
+                        return (
+                            <li key={index}>
+                                <div className="flex items-center">
+                                    <div className="custom-horizontal-bar-text">
+                                        <h3>{bar_value.name}</h3>
+                                    </div>
+                                    <div className="custom-horizontal-bar-progress">
+                                        <span
+                                            style={{
+                                                width: `${bar_value.value}%`
+                                            }}></span>
+                                    </div>
+                                    <div className="ml-2 custom-horizontal-bar-amount">
+                                        <p>
+                                            {byValue ? '$' : ''}
+                                            {formatNumber(bar_value.amount)}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="custom-horizontal-bar-progress">
-                                    <span
-                                        style={{
-                                            width: `${bar_value.value}`
-                                        }}></span>
-                                </div>
-                            </div>
-                        </li>
-                    )
-                })}
+                            </li>
+                        )
+                    })}
             </ul>
         </div>
     )
