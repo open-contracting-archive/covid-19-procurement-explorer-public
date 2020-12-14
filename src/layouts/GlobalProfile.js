@@ -1,5 +1,6 @@
 import React, { useCallback, Fragment, useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import * as dayjs from 'dayjs'
 import GlobalDataCharts from '../components/globalProfile/GlobalDataCharts'
 import Map from '../components/charts/Map/Map'
 import Loader from '../components/loader/Loader'
@@ -11,12 +12,15 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import CountryContractMapServices from '../services/countryContractMapServices'
 import Select from 'react-select'
 
-function GlobalProfile() {
+const GlobalProfile = () => {
     const [data, setData] = useState({})
-    const [contractData, setContractData] = useState(null)
+    // const [contractData, setContractData] = useState(null)
     const [contractType, setContractType] = useState('value')
     const [sliderData, setSliderData] = useState([])
-    const [yearMonth, setYearMonth] = useState('2020-01')
+    const [yearMonth, setYearMonth] = useState('')
+
+    const [dataFromApi, setDataFromApi] = useState()
+    const [contractDataApi, setContractDataApi] = useState({})
 
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
@@ -27,17 +31,56 @@ function GlobalProfile() {
         { value: 'europe', label: 'Europe' }
     ]
 
+    // useEffect(() => {
+    //     CountryContractMapServices.getContractData().then((response) => {
+    //         setContractData(response)
+
+    //         const keys = Object.entries(response).map(([key]) => key)
+    //     })
+    // }, [])
+
     useEffect(() => {
-        CountryContractMapServices.getContractData().then((response) => {
-            setContractData(response)
-
-            const keys = Object.entries(response).map(([key]) => key)
-
-            setSliderData(keys)
+        CountryContractMapServices.GetGlobalMapData().then((response) => {
+            setDataFromApi(response)
         })
     }, [])
 
-    if (!contractData) {
+    useEffect(() => {
+        let dateObject = {}
+        dataFromApi &&
+            dataFromApi.result.map((data) => {
+                let countryObject = {}
+                data.details.map((detail) => {
+                    if (detail.country_code != 'ALL') {
+                        countryObject = {
+                            ...countryObject,
+                            [detail.aplha2_code]: {
+                                value: detail.amount_usd,
+                                number: detail.tender_count,
+                                url: `/country/${detail.country
+                                    .toLowerCase()
+                                    .replace(' ', '-')}`
+                            }
+                        }
+                    }
+                })
+                dateObject = {
+                    ...dateObject,
+                    [data.month]: countryObject
+                }
+            })
+        setContractDataApi(dateObject)
+        setYearMonth(dataFromApi && dataFromApi.result[0].month)
+
+        const keys =
+            dataFromApi &&
+            dataFromApi.result.map((data) => {
+                return data.month
+            })
+        setSliderData(keys)
+    }, [dataFromApi])
+
+    if (!contractDataApi) {
         return ''
     }
 
@@ -102,7 +145,9 @@ function GlobalProfile() {
 
                                             <div>
                                                 <Map
-                                                    contractData={contractData}
+                                                    contractData={
+                                                        contractDataApi
+                                                    }
                                                     contractType={contractType}
                                                     yearMonth={yearMonth}
                                                     sliderData={sliderData}
