@@ -11,7 +11,9 @@ function BarListChart({ data, byValue }) {
                             <li key={index}>
                                 <div className="flex items-center">
                                     <div className="custom-horizontal-bar-text">
-                                        <h3>{bar_value.name}</h3>
+                                        <h3 title={bar_value.name}>
+                                            {bar_value.name}
+                                        </h3>
                                     </div>
                                     <div className="custom-horizontal-bar-progress">
                                         <span

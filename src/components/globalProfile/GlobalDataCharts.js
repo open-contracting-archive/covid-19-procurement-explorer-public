@@ -2109,11 +2109,11 @@ function GlobalDataChart() {
     // Top suppliers
     const calculateBarChartPercentage = (data, type) => {
         if (type == 'by_value') {
-            let total = data.by_number.reduce((acc, current) => {
+            let total = data.by_value.reduce((acc, current) => {
                 return acc + current.amount_local
             }, 0)
 
-            let topSuppliersChartData = data.by_number.map((data) => {
+            let topSuppliersChartData = data.by_value.map((data) => {
                 return {
                     name: data.supplier_name,
                     value: Math.ceil((data.amount_local / total) * 100),
@@ -2147,11 +2147,11 @@ function GlobalDataChart() {
     // Top buyers
     const calculateBuyersChartPercentage = (data, type) => {
         if (type == 'by_value') {
-            let total = data.by_number.reduce((acc, current) => {
+            let total = data.by_value.reduce((acc, current) => {
                 return acc + current.amount_local
             }, 0)
 
-            let topSuppliersChartData = data.by_number.map((data) => {
+            let topSuppliersChartData = data.by_value.map((data) => {
                 return {
                     name: data.buyer_name,
                     value: Math.ceil((data.amount_local / total) * 100),
