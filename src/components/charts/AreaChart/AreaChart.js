@@ -70,6 +70,7 @@ const AreaChart = ({ data, apiData }) => {
         // chart.scrollbarX.parent = chart.bottomAxesContainer
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

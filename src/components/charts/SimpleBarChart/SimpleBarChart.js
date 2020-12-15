@@ -50,6 +50,7 @@ const SimpleBarChart = ({ data, barColorValue, axisRotation }) => {
         columnTemplate.stroke = '#ABBABF'
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

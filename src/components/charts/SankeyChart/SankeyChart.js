@@ -70,6 +70,7 @@ const SankeyChart = ({ data }) => {
         nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()
