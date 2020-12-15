@@ -201,6 +201,27 @@ const area_chart_data = [
 
 // Add Combined Chart data
 const combined_chart_data = [
+    // {
+    //     date: '2009-01-16',
+    //     market1: 71,
+    //     market2: 75,
+    //     sales1: 5,
+    //     sales2: 8
+    // },
+    // {
+    //     date: '2010-01-16',
+    //     market1: 71,
+    //     market2: 75,
+    //     sales1: 5,
+    //     sales2: 8
+    // },
+    // {
+    //     date: '2011-01-16',
+    //     market1: 71,
+    //     market2: 75,
+    //     sales1: 5,
+    //     sales2: 8
+    // },
     {
         date: '2013-01-16',
         market1: 71,
@@ -209,103 +230,103 @@ const combined_chart_data = [
         sales2: 8
     },
     {
-        date: '2013-01-17',
-        market1: 74,
-        market2: 78,
-        sales1: 4,
-        sales2: 6
-    },
-    {
-        date: '2013-01-18',
+        date: '2013-02-16',
         market1: 78,
         market2: 88,
         sales1: 5,
         sales2: 2
     },
     {
-        date: '2013-01-19',
+        date: '2013-03-16',
+        market1: 74,
+        market2: 78,
+        sales1: 4,
+        sales2: 6
+    },
+    {
+        date: '2013-04-16',
         market1: 85,
         market2: 89,
         sales1: 8,
         sales2: 9
     },
     {
-        date: '2013-01-20',
-        market1: 82,
-        market2: 89,
-        sales1: 9,
-        sales2: 6
-    },
-    {
-        date: '2013-01-21',
-        market1: 83,
-        market2: 85,
-        sales1: 3,
-        sales2: 5
-    },
-    {
-        date: '2013-01-22',
+        date: '2013-05-16',
         market1: 88,
         market2: 92,
         sales1: 5,
         sales2: 7
     },
     {
-        date: '2013-01-23',
-        market1: 85,
-        market2: 90,
-        sales1: 7,
-        sales2: 6
-    },
-    {
-        date: '2013-01-24',
-        market1: 85,
-        market2: 91,
-        sales1: 9,
-        sales2: 5
-    },
-    {
-        date: '2013-01-25',
-        market1: 80,
-        market2: 84,
-        sales1: 5,
-        sales2: 8
-    },
-    {
-        date: '2013-01-26',
-        market1: 87,
-        market2: 92,
-        sales1: 4,
-        sales2: 8
-    },
-    {
-        date: '2013-01-27',
-        market1: 84,
-        market2: 87,
-        sales1: 3,
-        sales2: 4
-    },
-    {
-        date: '2013-01-28',
+        date: '2013-05-16',
         market1: 83,
-        market2: 88,
-        sales1: 5,
-        sales2: 7
-    },
-    {
-        date: '2013-01-29',
-        market1: 84,
-        market2: 87,
-        sales1: 5,
-        sales2: 8
-    },
-    {
-        date: '2013-01-30',
-        market1: 81,
         market2: 85,
-        sales1: 4,
-        sales2: 7
+        sales1: 3,
+        sales2: 5
     }
+    // {
+    //     date: '2013-01-23',
+    //     market1: 85,
+    //     market2: 90,
+    //     sales1: 7,
+    //     sales2: 6
+    // },
+    // {
+    //     date: '2013-01-24',
+    //     market1: 85,
+    //     market2: 91,
+    //     sales1: 9,
+    //     sales2: 5
+    // },
+    // {
+    //     date: '2013-01-20',
+    //     market1: 82,
+    //     market2: 89,
+    //     sales1: 9,
+    //     sales2: 6
+    // },
+    // {
+    //     date: '2013-01-25',
+    //     market1: 80,
+    //     market2: 84,
+    //     sales1: 5,
+    //     sales2: 8
+    // },
+    // {
+    //     date: '2013-01-26',
+    //     market1: 87,
+    //     market2: 92,
+    //     sales1: 4,
+    //     sales2: 8
+    // },
+    // {
+    //     date: '2013-01-27',
+    //     market1: 84,
+    //     market2: 87,
+    //     sales1: 3,
+    //     sales2: 4
+    // },
+    // {
+    //     date: '2013-01-28',
+    //     market1: 83,
+    //     market2: 88,
+    //     sales1: 5,
+    //     sales2: 7
+    // },
+    // {
+    //     date: '2013-01-29',
+    //     market1: 84,
+    //     market2: 87,
+    //     sales1: 5,
+    //     sales2: 8
+    // },
+    // {
+    //     date: '2013-01-30',
+    //     market1: 81,
+    //     market2: 85,
+    //     sales1: 4,
+    //     sales2: 7
+    // }
 ]
 
 const treemap_chart_data = {
@@ -2020,6 +2041,7 @@ function GlobalDataChart() {
     const [topSuppliers, setTopSuppliers] = useState()
     const [topBuyers, setTopBuyers] = useState()
     const [contractStatus, setContractStatus] = useState()
+    const [quantityCorrelation, setQuantityCorrelation] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
@@ -2051,6 +2073,9 @@ function GlobalDataChart() {
         })
         VisualizationServices.ContractStatus().then((response) => {
             setContractStatus(response)
+        })
+        VisualizationServices.QuantityCorrelation().then((response) => {
+            setQuantityCorrelation(response)
         })
     }, [])
 
@@ -2222,6 +2247,38 @@ function GlobalDataChart() {
         calculateContractStatusChartPercentage(contractStatus, 'by_value')
     // console.log(contractStatusDataByNumber)
     // console.log(contractStatusDataByValue)
+
+    // Quantity correlation
+    const quantityCorrelationDataByValueRaw =
+        quantityCorrelation &&
+        quantityCorrelation.map((data) => {
+            return {
+                date: data.month,
+                activeCase: data.active_cases,
+                value: data.amount_usd || 0
+            }
+        })
+    const quantityCorrelationDataByValue =
+        quantityCorrelationDataByValueRaw &&
+        quantityCorrelationDataByValueRaw.sort((date1, date2) => {
+            return dayjs(date1.date).diff(dayjs(date2.date))
+        })
+    // console.log(quantityCorrelationDataByValue)
+    const quantityCorrelationDataByNumberRaw =
+        quantityCorrelation &&
+        quantityCorrelation.map((data) => {
+            return {
+                date: data.month,
+                activeCase: data.active_cases,
+                value: data.tender_count
+            }
+        })
+    const quantityCorrelationDataByNumber =
+        quantityCorrelationDataByNumberRaw &&
+        quantityCorrelationDataByNumberRaw.sort((date1, date2) => {
+            return dayjs(date1.date).diff(dayjs(date2.date))
+        })
+    // console.log(quantityCorrelationDataByValue)
 
     return (
         <section className="bg-primary-gray">
@@ -2645,7 +2702,7 @@ function GlobalDataChart() {
                             <div className="bg-white rounded p-4 simple-tab">
                                 <FullScreen handle={handle}>
                                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                        Combined Chart with multiple value axes
+                                        covid/contracts quantity correlation
                                     </h3>
 
                                     <Tabs>
@@ -2665,14 +2722,17 @@ function GlobalDataChart() {
                                                 <TabPanel>
                                                     <CombinedChart
                                                         data={
-                                                            combined_chart_data
+                                                            quantityCorrelationDataByValue &&
+                                                            quantityCorrelationDataByValue
                                                         }
+                                                        type="by-value"
                                                     />
                                                 </TabPanel>
                                                 <TabPanel>
                                                     <CombinedChart
                                                         data={
-                                                            combined_chart_data
+                                                            quantityCorrelationDataByNumber &&
+                                                            quantityCorrelationDataByNumber
                                                         }
                                                     />
                                                 </TabPanel>

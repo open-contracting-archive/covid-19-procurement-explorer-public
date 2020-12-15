@@ -52,8 +52,9 @@ function CountryDetail() {
         <section className="pt-20 -mt-8 bg-blue-0">
             {loading ? (
                 <Fragment>
-                    <div className="container mx-auto px-4 ">
-                        {/* <div className="mb-6">
+                    <section className="px-4">
+                        <div className="container mx-auto">
+                            {/* <div className="mb-6">
                             <ul className="flex text-sm">
                                 {Object.keys(countryData).map(
                                     (country, index) => {
@@ -75,142 +76,155 @@ function CountryDetail() {
                                 )}
                             </ul>
                         </div> */}
-                        <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
-                            {data.name}
-                        </h2>
-                        <div className="flex flex-wrap -mx-4 -mb-4">
-                            <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">
-                                <div className="h-full">
-                                    <GlobalMap innerMap />
+                            <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
+                                {data.name}
+                            </h2>
+                            <div className="flex flex-wrap -mx-4 -mb-4">
+                                <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">
+                                    <div className="h-full">
+                                        <GlobalMap innerMap />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
-                                <div className="flex flex-col  text-primary-dark font-bold">
-                                    <div className="p-8 py-6 bg-yellow-20 rounded-t-md ">
-                                        <div className="flex flex-wrap -mx-4 -mb-4">
-                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
-                                                <div>
-                                                    <span className="font-normal inline-block">
-                                                        {trans('Population')}{' '}
-                                                    </span>
-                                                    <h2 className="text-xl">
-                                                        {formatNumber(
-                                                            data.population
-                                                        )}
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
-                                                <div>
-                                                    <span className="font-normal inline-block">
-                                                        {trans('GDP')}
-                                                    </span>
-                                                    <h2 className="text-xl">
-                                                        {formatNumber(data.gdp)}
-                                                        <span className="inline-block uppercase text-xl tracking-tight">
-                                                            {data.currency}
-                                                        </span>
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
-                                                <div>
-                                                    <span className="font-normal inline-block">
-                                                        {trans(
-                                                            'Healthcare budget'
-                                                        )}
-                                                    </span>
-                                                    <h2 className="text-xl">
-                                                        $
-                                                        {formatNumber(
-                                                            data.healthcare_budget
-                                                        )}
-                                                        <span className="inline-block uppercase text-sm tracking-tight">
-                                                            {data.currency}
-                                                        </span>
-                                                    </h2>
-                                                    <span className="block font-normal">
-                                                        {trans('per capita')}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
-                                                <div>
-                                                    <span className="font-normal inline-block">
-                                                        {trans(
-                                                            '% of GDP to healthcare'
-                                                        )}
-                                                    </span>
-                                                    <h2 className="text-xl">
-                                                        {data.healthcare_gdp_pc}
-                                                        <span className="inline-block uppercase text-sm tracking-tight">
-                                                            %
-                                                        </span>
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div className="w-full px-4 mb-4">
-                                                <div>
-                                                    <p className="text-sm font-normal">
-                                                        {trans('Source')}:
-                                                        <a
-                                                            href={data.source}
-                                                            className="ml-1 underline font-bold"
-                                                            title="John Hopkins University">
+                                <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
+                                    <div className="flex flex-col  text-primary-dark font-bold">
+                                        <div className="p-8 py-6 bg-yellow-20 rounded-t-md ">
+                                            <div className="flex flex-wrap -mx-4 -mb-4">
+                                                <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                                                    <div>
+                                                        <span className="font-normal inline-block">
                                                             {trans(
-                                                                'John Hopkins University'
+                                                                'Population'
+                                                            )}{' '}
+                                                        </span>
+                                                        <h2 className="text-xl">
+                                                            {formatNumber(
+                                                                data.population
                                                             )}
-                                                        </a>
-                                                    </p>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                                                    <div>
+                                                        <span className="font-normal inline-block">
+                                                            {trans('GDP')}
+                                                        </span>
+                                                        <h2 className="text-xl">
+                                                            {formatNumber(
+                                                                data.gdp
+                                                            )}
+                                                            <span className="inline-block uppercase text-xl tracking-tight">
+                                                                {data.currency}
+                                                            </span>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                                                    <div>
+                                                        <span className="font-normal inline-block">
+                                                            {trans(
+                                                                'Healthcare budget'
+                                                            )}
+                                                        </span>
+                                                        <h2 className="text-xl">
+                                                            $
+                                                            {formatNumber(
+                                                                data.healthcare_budget
+                                                            )}
+                                                            <span className="inline-block uppercase text-sm tracking-tight">
+                                                                {data.currency}
+                                                            </span>
+                                                        </h2>
+                                                        <span className="block font-normal">
+                                                            {trans(
+                                                                'per capita'
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                                                    <div>
+                                                        <span className="font-normal inline-block">
+                                                            {trans(
+                                                                '% of GDP to healthcare'
+                                                            )}
+                                                        </span>
+                                                        <h2 className="text-xl">
+                                                            {
+                                                                data.healthcare_gdp_pc
+                                                            }
+                                                            <span className="inline-block uppercase text-sm tracking-tight">
+                                                                %
+                                                            </span>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <div className="w-full px-4 mb-4">
+                                                    <div>
+                                                        <p className="text-sm font-normal">
+                                                            {trans('Source')}:
+                                                            <a
+                                                                href={
+                                                                    data.source
+                                                                }
+                                                                className="ml-1 underline font-bold"
+                                                                title="John Hopkins University">
+                                                                {trans(
+                                                                    'John Hopkins University'
+                                                                )}
+                                                            </a>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="px-8 py-16 text-white bg-primary-dark rounded-b-md">
-                                        <div className="flex flex-wrap -mx-4 -mb-4">
-                                            <div className="w-full xs:w-1/2 px-4 mb-12">
-                                                <div>
-                                                    <span className="font-normal inline-block mb-4">
-                                                        {trans(
-                                                            'Covid-19 cases'
-                                                        )}
-                                                    </span>
-                                                    <h2 className="text-xl">
-                                                        {data.covid_cases_total &&
-                                                            data.covid_cases_total.toLocaleString(
-                                                                'en'
-                                                            )}
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div className="w-full xs:w-1/2 px-4 mb-12">
-                                                <div>
-                                                    <span className="font-normal inline-block mb-4">
-                                                        {trans(
-                                                            'Deaths by Covid-19'
-                                                        )}
-                                                    </span>
-                                                    <h2 className="text-xl">
-                                                        {data.covid_deaths_total &&
-                                                            data.covid_deaths_total.toLocaleString(
-                                                                'en'
-                                                            )}
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div className="w-full px-4 mb-4">
-                                                <div>
-                                                    <p className="text-sm font-normal">
-                                                        {trans('Source')}:
-                                                        <a
-                                                            href={data.source}
-                                                            className="ml-1 text-white underline font-bold"
-                                                            title="John Hopkins University">
+                                        <div className="px-8 py-16 text-white bg-primary-dark rounded-b-md">
+                                            <div className="flex flex-wrap -mx-4 -mb-4">
+                                                <div className="w-full xs:w-1/2 px-4 mb-12">
+                                                    <div>
+                                                        <span className="font-normal inline-block mb-4">
                                                             {trans(
-                                                                'John Hopkins University'
+                                                                'Covid-19 cases'
                                                             )}
-                                                        </a>
-                                                    </p>
+                                                        </span>
+                                                        <h2 className="text-xl">
+                                                            {data.covid_cases_total &&
+                                                                data.covid_cases_total.toLocaleString(
+                                                                    'en'
+                                                                )}
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <div className="w-full xs:w-1/2 px-4 mb-12">
+                                                    <div>
+                                                        <span className="font-normal inline-block mb-4">
+                                                            {trans(
+                                                                'Deaths by Covid-19'
+                                                            )}
+                                                        </span>
+                                                        <h2 className="text-xl">
+                                                            {data.covid_deaths_total &&
+                                                                data.covid_deaths_total.toLocaleString(
+                                                                    'en'
+                                                                )}
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                                <div className="w-full px-4 mb-4">
+                                                    <div>
+                                                        <p className="text-sm font-normal">
+                                                            {trans('Source')}:
+                                                            <a
+                                                                href={
+                                                                    data.source
+                                                                }
+                                                                className="ml-1 text-white underline font-bold"
+                                                                title="John Hopkins University">
+                                                                {trans(
+                                                                    'John Hopkins University'
+                                                                )}
+                                                            </a>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,9 +232,9 @@ function CountryDetail() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <Tabs>
-                        <div className="container mx-auto px-4 ">
+                        <div className="container mx-auto">
                             <TabList>
                                 <Tab>{trans('Data')}</Tab>
                                 <Tab>{trans('Insights')}</Tab>
@@ -233,11 +247,11 @@ function CountryDetail() {
                             style={{
                                 borderTop: '5px solid #1fbbec'
                             }}
-                            className="py-16 bg-primary-gray">
-                            <div className="container mx-auto px-4 ">
+                            className="py-16 bg-primary-gray px-4">
+                            <div className="container mx-auto">
                                 <TabPanel>
                                     <CountryDataCharts
-                                        countryName={data.name}
+                                        countryCode={data.country_code_alpha_2}
                                     />
                                 </TabPanel>
                                 <TabPanel>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import * as dayjs from 'dayjs'
 import { get } from 'lodash'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 // import BarChart from '../charts/BarChart/BarChart'
 import PieChart from '../charts/PieChart/PieChart'
 import AreaChart from '../charts/AreaChart/AreaChart'
@@ -193,109 +193,74 @@ const area_chart_data = [
 // Add Combined Chart data
 const combined_chart_data = [
     {
-        date: '2013-01-16',
-        market1: 71,
-        market2: 75,
-        sales1: 5,
-        sales2: 8
-    },
-    {
-        date: '2013-01-17',
-        market1: 74,
-        market2: 78,
-        sales1: 4,
-        sales2: 6
-    },
-    {
-        date: '2013-01-18',
-        market1: 78,
-        market2: 88,
-        sales1: 5,
-        sales2: 2
-    },
-    {
-        date: '2013-01-19',
-        market1: 85,
-        market2: 89,
-        sales1: 8,
-        sales2: 9
-    },
-    {
-        date: '2013-01-20',
-        market1: 82,
-        market2: 89,
-        sales1: 9,
-        sales2: 6
-    },
-    {
-        date: '2013-01-21',
-        market1: 83,
-        market2: 85,
-        sales1: 3,
-        sales2: 5
-    },
-    {
-        date: '2013-01-22',
-        market1: 88,
-        market2: 92,
-        sales1: 5,
-        sales2: 7
-    },
-    {
-        date: '2013-01-23',
-        market1: 85,
-        market2: 90,
-        sales1: 7,
-        sales2: 6
-    },
-    {
-        date: '2013-01-24',
-        market1: 85,
-        market2: 91,
-        sales1: 9,
-        sales2: 5
-    },
-    {
-        date: '2013-01-25',
+        date: '2020-10-16',
         market1: 80,
         market2: 84,
         sales1: 5,
         sales2: 8
     },
     {
-        date: '2013-01-26',
-        market1: 87,
+        date: '2020-09-16',
+        market1: 85,
+        market2: 91,
+        sales1: 9,
+        sales2: 5
+    },
+    {
+        date: '2020-08-16',
+        market1: 85,
+        market2: 90,
+        sales1: 7,
+        sales2: 6
+    },
+    {
+        date: '2020-07-16',
+        market1: 88,
         market2: 92,
-        sales1: 4,
-        sales2: 8
+        sales1: 5,
+        sales2: 7
     },
     {
-        date: '2013-01-27',
-        market1: 84,
-        market2: 87,
-        sales1: 3,
-        sales2: 4
-    },
-    {
-        date: '2013-01-28',
+        date: '2020-06-16',
         market1: 83,
+        market2: 85,
+        sales1: 3,
+        sales2: 5
+    },
+    {
+        date: '2020-05-16',
+        market1: 82,
+        market2: 89,
+        sales1: 9,
+        sales2: 6
+    },
+    {
+        date: '2020-04-16',
+        market1: 85,
+        market2: 89,
+        sales1: 8,
+        sales2: 9
+    },
+    {
+        date: '2020-03-16',
+        market1: 78,
         market2: 88,
         sales1: 5,
-        sales2: 7
+        sales2: 2
     },
     {
-        date: '2013-01-29',
-        market1: 84,
-        market2: 87,
+        date: '2020-02-16',
+        market1: 74,
+        market2: 78,
+        sales1: 4,
+        sales2: 6
+    },
+    {
+        date: '2020-01-16',
+        market1: 71,
+        market2: 75,
         sales1: 5,
         sales2: 8
-    },
-    {
-        date: '2013-01-30',
-        market1: 81,
-        market2: 85,
-        sales1: 4,
-        sales2: 7
     }
 ]
 
@@ -2005,7 +1970,7 @@ const axisRotation = 60
 const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
-function CountryDataCharts({ countryName }) {
+function CountryDataCharts({ countryCode }) {
     const [loading, setLoading] = useState(false)
     const [totalSpending, setTotalSpending] = useState({})
     const [totalContracts, setTotalContracts] = useState({})
@@ -2014,47 +1979,54 @@ function CountryDataCharts({ countryName }) {
     const [topSuppliers, setTopSuppliers] = useState()
     const [topBuyers, setTopBuyers] = useState()
     const [contractStatus, setContractStatus] = useState()
+    const [quantityCorrelation, setQuantityCorrelation] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
     const { trans } = useTrans()
+    const handle = useFullScreenHandle()
 
     useEffect(() => {
         setLoading(true)
     }, [])
 
     useEffect(() => {
-        VisualizationServices.TotalSpendingCountry(countryName).then(
+        VisualizationServices.TotalSpendingCountry(countryCode).then(
             (response) => {
                 setTotalSpending(response)
             }
         )
-        VisualizationServices.TotalContractsCountry(countryName).then(
+        VisualizationServices.TotalContractsCountry(countryCode).then(
             (response) => {
                 setTotalContracts(response)
             }
         )
-        VisualizationServices.AverageBidsCountry(countryName).then(
+        VisualizationServices.AverageBidsCountry(countryCode).then(
             (response) => {
                 setAverageBids(response)
             }
         )
-        VisualizationServices.DirectOpenCountry(countryName).then(
+        VisualizationServices.DirectOpenCountry(countryCode).then(
             (response) => {
                 setDirectOpen(response)
             }
         )
-        VisualizationServices.TopSuppliersCountry(countryName).then(
+        VisualizationServices.TopSuppliersCountry(countryCode).then(
             (response) => {
                 setTopSuppliers(response)
             }
         )
-        VisualizationServices.TopBuyersCountry(countryName).then((response) => {
+        VisualizationServices.TopBuyersCountry(countryCode).then((response) => {
             setTopBuyers(response)
         })
-        VisualizationServices.ContractStatusCountry(countryName).then(
+        VisualizationServices.ContractStatusCountry(countryCode).then(
             (response) => {
                 setContractStatus(response)
+            }
+        )
+        VisualizationServices.QuantityCorrelationCountry(countryCode).then(
+            (response) => {
+                setQuantityCorrelation(response)
             }
         )
     }, [])
@@ -2224,6 +2196,38 @@ function CountryDataCharts({ countryName }) {
         calculateContractStatusChartPercentage(contractStatus, 'by_value')
     // console.log(contractStatusDataByNumber)
     // console.log(contractStatusDataByValue)
+
+    // Quantity correlation
+    const quantityCorrelationDataByValueRaw =
+        quantityCorrelation &&
+        quantityCorrelation.map((data) => {
+            return {
+                date: data.month,
+                activeCase: data.active_cases,
+                value: data.amount_usd || 0
+            }
+        })
+    const quantityCorrelationDataByValue =
+        quantityCorrelationDataByValueRaw &&
+        quantityCorrelationDataByValueRaw.sort((date1, date2) => {
+            return dayjs(date1.date).diff(dayjs(date2.date))
+        })
+    // console.log(quantityCorrelationDataByValue)
+    const quantityCorrelationDataByNumberRaw =
+        quantityCorrelation &&
+        quantityCorrelation.map((data) => {
+            return {
+                date: data.month,
+                activeCase: data.active_cases,
+                value: data.tender_count
+            }
+        })
+    const quantityCorrelationDataByNumber =
+        quantityCorrelationDataByNumberRaw &&
+        quantityCorrelationDataByNumberRaw.sort((date1, date2) => {
+            return dayjs(date1.date).diff(dayjs(date2.date))
+        })
+    // console.log(quantityCorrelationDataByValue)
 
     return (
         <section className="bg-primary-gray">
@@ -2571,17 +2575,50 @@ function CountryDataCharts({ countryName }) {
                         </div>
 
                         <div className="w-full px-2 mb-6">
-                            <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                    Combined Chart with multiple value axes
-                                </h3>
-                                <div className="flex">
-                                    <div className="flex-1">
-                                        <CombinedChart
-                                            data={combined_chart_data}
-                                        />
-                                    </div>
-                                </div>
+                            <div className="bg-white rounded p-4 simple-tab">
+                                <FullScreen handle={handle}>
+                                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                        covid/contracts quantity correlation
+                                    </h3>
+
+                                    <Tabs>
+                                        <TabList>
+                                            <Tab>
+                                                {trans('By contract value')}
+                                            </Tab>
+                                            <Tab>
+                                                {trans(
+                                                    'By number of contracts'
+                                                )}
+                                            </Tab>
+                                        </TabList>
+
+                                        <div className="flex mt-6">
+                                            <div className="flex-1">
+                                                <TabPanel>
+                                                    <CombinedChart
+                                                        data={
+                                                            quantityCorrelationDataByValue &&
+                                                            quantityCorrelationDataByValue
+                                                        }
+                                                        type="by-value"
+                                                    />
+                                                </TabPanel>
+                                                <TabPanel>
+                                                    <CombinedChart
+                                                        // data={
+                                                        //     combined_chart_data
+                                                        // }
+                                                        data={
+                                                            quantityCorrelationDataByNumber &&
+                                                            quantityCorrelationDataByNumber
+                                                        }
+                                                    />
+                                                </TabPanel>
+                                            </div>
+                                        </div>
+                                    </Tabs>
+                                </FullScreen>
                             </div>
                         </div>
                         {/* <div className="w-full px-2 mb-6">

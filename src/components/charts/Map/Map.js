@@ -219,6 +219,7 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
         }
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

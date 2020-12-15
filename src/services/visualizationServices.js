@@ -5,7 +5,7 @@ class VisualizationServices {
     static async TotalSpending() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total_spending/`
+                await `${API_URL}api/v1/vizualization/total-spending/`
             )
             return res.body
         } catch (error) {
@@ -15,7 +15,7 @@ class VisualizationServices {
     static async TotalSpendingCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total_spending/?country=${country}`
+                await `${API_URL}api/v1/vizualization/total-spending/?country=${country}`
             )
             return res.body
         } catch (error) {
@@ -25,7 +25,7 @@ class VisualizationServices {
     static async TotalContracts() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total_contracts/`
+                await `${API_URL}api/v1/vizualization/total-contracts/`
             )
             return res.body
         } catch (error) {
@@ -35,7 +35,7 @@ class VisualizationServices {
     static async TotalContractsCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total_contracts/?country=${country}`
+                await `${API_URL}api/v1/vizualization/total-contracts/?country=${country}`
             )
             return res.body
         } catch (error) {
@@ -45,7 +45,7 @@ class VisualizationServices {
     static async AverageBids() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/average_bids/`
+                await `${API_URL}api/v1/vizualization/average-bids/`
             )
             return res.body
         } catch (error) {
@@ -55,7 +55,7 @@ class VisualizationServices {
     static async AverageBidsCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/average_bids/?country=${country}`
+                await `${API_URL}api/v1/vizualization/average-bids/?country=${country}`
             )
             return res.body
         } catch (error) {
@@ -65,7 +65,7 @@ class VisualizationServices {
     static async DirectOpen() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/direct_open/`
+                await `${API_URL}api/v1/vizualization/direct-open/`
             )
             return res.body
         } catch (error) {
@@ -75,7 +75,7 @@ class VisualizationServices {
     static async DirectOpenCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/direct_open/?country=${country}`
+                await `${API_URL}api/v1/vizualization/direct-open/?country=${country}`
             )
             return res.body
         } catch (error) {
@@ -85,7 +85,7 @@ class VisualizationServices {
     static async TopSuppliers() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top_suppliers/`
+                await `${API_URL}api/v1/vizualization/top-suppliers/`
             )
             return res.body
         } catch (error) {
@@ -95,7 +95,7 @@ class VisualizationServices {
     static async TopSuppliersCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top_suppliers/?country=${country}`
+                await `${API_URL}api/v1/vizualization/top-suppliers/?country=${country}`
             )
             return res.body
         } catch (error) {
@@ -105,7 +105,7 @@ class VisualizationServices {
     static async TopBuyers() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top_buyers/`
+                await `${API_URL}api/v1/vizualization/top-buyers/`
             )
             return res.body
         } catch (error) {
@@ -115,7 +115,7 @@ class VisualizationServices {
     static async TopBuyersCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top_buyers/?country=${country}`
+                await `${API_URL}api/v1/vizualization/top-buyers/?country=${country}`
             )
             return res.body
         } catch (error) {
@@ -125,7 +125,7 @@ class VisualizationServices {
     static async ContractStatus() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/contract_status/`
+                await `${API_URL}api/v1/vizualization/contract-status/`
             )
             return res.body
         } catch (error) {
@@ -135,7 +135,27 @@ class VisualizationServices {
     static async ContractStatusCountry(country) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/contract_status/?country=${country}`
+                await `${API_URL}api/v1/vizualization/contract-status/?country=${country}`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async QuantityCorrelation() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/quantity-correlation/`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async QuantityCorrelationCountry(country) {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/quantity-correlation/?country=${country}`
             )
             return res.body
         } catch (error) {
