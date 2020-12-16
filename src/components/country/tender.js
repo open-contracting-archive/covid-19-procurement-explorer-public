@@ -1,14 +1,15 @@
 import React, { Fragment, useState } from 'react'
 import { useEffect } from 'react'
-import CountryProfileServices from '../../services/countryProfileServices'
+import { get } from 'lodash'
 import { Link, useParams } from 'react-router-dom'
+import Select from 'react-select'
+import CountryProfileServices from '../../services/countryProfileServices'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
-import Select from 'react-select'
 import Loader from '../loader/Loader'
 import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 
-const Tender = () => {
+const Tender = ({ selectedCountry }) => {
     // const [tenderData, setTenderData] = useState({})
     const [tenderList, setTenderList] = useState([])
     const [pagination, setPagination] = useState('')
@@ -28,10 +29,9 @@ const Tender = () => {
     //         borderRadius: 0
     //     })
     // }
-    let { slug } = useParams()
 
     useEffect(() => {
-        CountryProfileServices.CountryProfileTenderData(slug).then(
+        CountryProfileServices.CountryProfileTenderData(selectedCountry).then(
             (response) => {
                 if (response) {
                     // setTenderData(response)
@@ -41,7 +41,7 @@ const Tender = () => {
                 setLoading(true)
             }
         )
-    }, [slug])
+    }, [])
 
     const LoadMoreTenderData = () => {
         CountryProfileServices.LoadMoreTenderData(pagination).then(
@@ -54,6 +54,8 @@ const Tender = () => {
             }
         )
     }
+
+    // console.log(tenderList)
 
     return (
         <div>
@@ -183,7 +185,7 @@ const Tender = () => {
                                     return (
                                         <Link
                                             key={index}
-                                            to={`/country/${slug}/tender/${tender.id}`}
+                                            to={`/tender/${tender.id}`}
                                             className={`table-row ${
                                                 tender.red_flag
                                                     ? 'has-red-flag'
@@ -196,7 +198,13 @@ const Tender = () => {
                                                 {tender.procurement_procedure}
                                             </td>
                                             <td className="uppercase">
-                                                {tender.supplier.supplier_name}
+                                                {get(
+                                                    tender,
+                                                    'supplier.supplier_name'
+                                                )}
+                                                {/* {tender.supplier &&
+                                                    tender.supplier
+                                                        .supplier_name} */}
                                             </td>
                                             <td className="capitalize">
                                                 <span
@@ -204,9 +212,10 @@ const Tender = () => {
                                                 {tender.status}
                                             </td>
                                             <td>
-                                                {tender.contract_value_usd.toLocaleString(
-                                                    'en'
-                                                )}
+                                                {tender.contract_value_usd &&
+                                                    tender.contract_value_usd.toLocaleString(
+                                                        'en'
+                                                    )}
                                             </td>
                                             <td>
                                                 {tender.red_flag && (

@@ -27,7 +27,7 @@ function BarListChart({ data, byValue }) {
                                                 ? '$'
                                                 : ''}
                                             {formatNumber(bar_value.amount) ||
-                                                'N/A'}
+                                                '-'}
                                         </p>
                                     </div>
                                 </div>

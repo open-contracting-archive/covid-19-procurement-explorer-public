@@ -1,7 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Iframe from 'react-iframe'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import * as dayjs from 'dayjs'
+import Select from 'react-select'
 import Tender from '../components/country/tender'
 import Insights from '../components/country/insights'
 import CountryDataCharts from '../components/country/CountryDataChart'
@@ -20,6 +21,11 @@ function CountryDetail() {
     const [countryData, setCountryData] = useState([]) // List of all countries
 
     let { slug } = useParams()
+
+    const country = [
+        { label: 'Mexico', value: 'mexico' },
+        { label: 'United Kingdom', value: 'united-kingdom' }
+    ]
 
     useEffect(() => {
         // Fetch list of all countries
@@ -45,6 +51,15 @@ function CountryDetail() {
 
     // console.log(data)
     // console.log(countryData)
+    let selectedCountry = ''
+
+    countryData &&
+        Object.keys(countryData).map((country) => {
+            if (countryData[country].slug == slug) {
+                selectedCountry = countryData[country].name
+            }
+        })
+    // console.log(selectedCountry)
 
     const { trans } = useTrans()
 
@@ -54,38 +69,43 @@ function CountryDetail() {
                 <Fragment>
                     <section className="px-4">
                         <div className="container mx-auto">
-                            {/* <div className="mb-6">
-                            <ul className="flex text-sm">
-                                {Object.keys(countryData).map(
-                                    (country, index) => {
-                                        return (
-                                            <li key={index} className="mr-6">
-                                                <Link
-                                                    className={`opacity-50 hover:opacity-100 ${
-                                                        countryData[country]
-                                                            .slug == slug
-                                                            ? 'opacity-100 font-bold'
-                                                            : ''
-                                                    }`}
-                                                    to={`/country/${countryData[country].id}`}>
-                                                    {countryData[country].name}
-                                                </Link>
-                                            </li>
-                                        )
-                                    }
-                                )}
-                            </ul>
-                        </div> */}
-                            <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
+                            <div className="mb-6">
+                                <ul className="flex text-sm">
+                                    {Object.keys(countryData).map(
+                                        (country, index) => {
+                                            return (
+                                                <li
+                                                    key={index}
+                                                    className="mr-6">
+                                                    <Link
+                                                        className={`opacity-50 hover:opacity-100 ${
+                                                            countryData[country]
+                                                                .slug == slug
+                                                                ? 'opacity-100 font-bold'
+                                                                : ''
+                                                        }`}
+                                                        to={`/country/${countryData[country].slug}`}>
+                                                        {
+                                                            countryData[country]
+                                                                .name
+                                                        }
+                                                    </Link>
+                                                </li>
+                                            )
+                                        }
+                                    )}
+                                </ul>
+                            </div>
+                            {/* <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
                                 {data.name}
-                            </h2>
+                            </h2> */}
                             <div className="flex flex-wrap -mx-4 -mb-4">
-                                <div className="w-full md:w-1/2 lg:w-7/12 px-4 mb-4">
+                                <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4">
                                     <div className="h-full">
                                         <GlobalMap innerMap />
                                     </div>
                                 </div>
-                                <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-4">
+                                <div className="w-full md:w-1/2 lg:w-38 px-4 pl-2 mb-4 relative">
                                     <div className="flex flex-col  text-primary-dark font-bold">
                                         <div className="p-8 py-6 bg-yellow-20 rounded-t-md ">
                                             <div className="flex flex-wrap -mx-4 -mb-4">
@@ -109,12 +129,13 @@ function CountryDetail() {
                                                             {trans('GDP')}
                                                         </span>
                                                         <h2 className="text-xl">
+                                                            $
                                                             {formatNumber(
                                                                 data.gdp
                                                             )}
-                                                            <span className="inline-block uppercase text-xl tracking-tight">
+                                                            {/* <span className="inline-block uppercase text-xl tracking-tight">
                                                                 {data.currency}
-                                                            </span>
+                                                            </span> */}
                                                         </h2>
                                                     </div>
                                                 </div>
@@ -130,9 +151,9 @@ function CountryDetail() {
                                                             {formatNumber(
                                                                 data.healthcare_budget
                                                             )}
-                                                            <span className="inline-block uppercase text-sm tracking-tight">
+                                                            {/* <span className="inline-block uppercase text-sm tracking-tight">
                                                                 {data.currency}
-                                                            </span>
+                                                            </span> */}
                                                         </h2>
                                                         <span className="block font-normal">
                                                             {trans(
@@ -229,6 +250,20 @@ function CountryDetail() {
                                             </div>
                                         </div>
                                     </div>
+                                    <div
+                                        className="absolute"
+                                        style={{ top: '-30px', right: '25px' }}>
+                                        <p className="text-blue-40">
+                                            <span className="opacity-75">
+                                                Last updated on{' '}
+                                            </span>
+                                            <span>
+                                                {dayjs(
+                                                    data.covid_data_last_updated
+                                                ).format('h:mm a MMM D, YYYY')}
+                                            </span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -258,7 +293,11 @@ function CountryDetail() {
                                     <Insights />
                                 </TabPanel>
                                 <TabPanel>
-                                    <Tender />
+                                    <Tender
+                                        selectedCountry={
+                                            selectedCountry && selectedCountry
+                                        }
+                                    />
                                 </TabPanel>
                                 <TabPanel>
                                     <CountryProfile profileData={data} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BASE_URL } from '../../helpers'
+import { API_URL } from '../../helpers'
 import newsImage from '../../assets/img/news.jpg'
 import InsightServices from '../../services/insightServices'
 import Loader from '../../components/loader/Loader'
@@ -54,7 +54,7 @@ const NewsSection = () => {
                                                 className="news-link">
                                                 <div className="img-wrapper img-gradient">
                                                     <img
-                                                        src={`${BASE_URL}${news.content_image.meta.download_url}`}
+                                                        src={`${API_URL}${news.content_image.meta.download_url}`}
                                                         className="news-img"
                                                         alt={
                                                             news.content_image

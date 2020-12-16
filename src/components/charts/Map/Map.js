@@ -17,7 +17,7 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
             return {
                 id: countryCode,
                 value: valObject[contractType] || 0,
-                url: valObject.url || '/country/united-kingdom'
+                url: valObject.url
             }
         })
     }

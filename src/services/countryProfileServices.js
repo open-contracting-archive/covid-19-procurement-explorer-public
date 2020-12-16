@@ -14,7 +14,7 @@ class CountryProfileServices {
 
     static async CountryProfileTenderData(slug) {
         const { data } = await axios.get(
-            `${API_URL}api/v1/tender/?country_name=${slug}`
+            `${API_URL}api/v1/tender/?country__name=${slug}`
         )
         return data
     }
@@ -24,10 +24,8 @@ class CountryProfileServices {
         return data
     }
 
-    static async CountryProfileTenderDetailData(countryId, tenderId) {
-        const { data } = await axios.get(
-            `${API_URL}api/v1/tender/${tenderId}/?country=${countryId}`
-        )
+    static async CountryProfileTenderDetailData(tenderId) {
+        const { data } = await axios.get(`${API_URL}api/v1/tender/${tenderId}`)
         return data
     }
 

@@ -17,6 +17,12 @@ module.exports = {
     important: false,
     separator: ':',
     theme: {
+        extend: {
+            width: {
+                38: '38%',
+                62: '62%'
+            }
+        },
         screens: {
             xs: '500px',
             sm: '640px',

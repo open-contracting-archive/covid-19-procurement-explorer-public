@@ -4,7 +4,7 @@ import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-viru
 import FooterImage from '../../assets/img/icons/cc-img.png'
 const Footer = () => {
     return (
-        <footer className="relative pt-16 pb-40  px-4 text-white text-sm bg-yellow-50 overflow-hidden">
+        <footer className="relative pt-16 pb-20  px-4 text-white text-sm bg-yellow-50 overflow-hidden">
             <div className="container mx-auto relative z-10">
                 <div className="grid-cols-12 grid gap-4">
                     <div className="col-span-12 md:col-span-4">
@@ -12,7 +12,7 @@ const Footer = () => {
                             Covid-19 <br /> Contract <br /> Explorer
                         </p>
                         <div className="mt-12">
-                            <img src={FooterImage} alt="" /> 
+                            <img src={FooterImage} alt="" />
                             <p className="mt-4 opacity-50">Creative Commons</p>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ const Footer = () => {
                 </div>
                 <FooterIcon
                     className="absolute z-negative"
-                    style={{ bottom: '-130px', right: '-30px' }}
+                    style={{ bottom: '-70px', right: '-30px' }}
                 />
             </div>
             <FooterBlob className="absolute bottom-0 left-0" />
