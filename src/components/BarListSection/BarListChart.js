@@ -23,8 +23,11 @@ function BarListChart({ data, byValue }) {
                                     </div>
                                     <div className="ml-2 custom-horizontal-bar-amount">
                                         <p>
-                                            {byValue ? '$' : ''}
-                                            {formatNumber(bar_value.amount)}
+                                            {byValue && bar_value.amount
+                                                ? '$'
+                                                : ''}
+                                            {formatNumber(bar_value.amount) ||
+                                                'N/A'}
                                         </p>
                                     </div>
                                 </div>

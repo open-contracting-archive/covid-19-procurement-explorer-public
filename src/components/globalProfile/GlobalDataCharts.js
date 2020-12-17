@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux'
 import * as dayjs from 'dayjs'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { get } from 'lodash'
-import ProcurementTimeline from '../ProcurementTimeline/ProcurementTimeline'
-import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
-import GlobalSupplier from '../GlobalSupplier/GlobalSupplier'
-import ProductDistribution from '../ProductDistribution/ProductDistribution'
-import QuantityCorrelation from '../QuantityCorrelation/QuantityCorrelation'
-import BarChart from '../charts/BarChart/BarChart'
-import CompareChart from '../charts/CompareChart/CompareChart'
-import RaceBarChart from '../charts/RaceBarChart/RaceBarChart'
-import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
+// import ProcurementTimeline from '../ProcurementTimeline/ProcurementTimeline'
+// import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
+// import GlobalSupplier from '../GlobalSupplier/GlobalSupplier'
+// import ProductDistribution from '../ProductDistribution/ProductDistribution'
+// import QuantityCorrelation from '../QuantityCorrelation/QuantityCorrelation'
+// import BarChart from '../charts/BarChart/BarChart'
+// import CompareChart from '../charts/CompareChart/CompareChart'
+// import RaceBarChart from '../charts/RaceBarChart/RaceBarChart'
+// import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
 import PieChart from '../charts/PieChart/PieChart'
 import AreaChart from '../charts/AreaChart/AreaChart'
 import CombinedChart from '../charts/CombinedChart/CombinedChart'
@@ -2042,6 +2042,7 @@ function GlobalDataChart() {
     const [topBuyers, setTopBuyers] = useState()
     const [contractStatus, setContractStatus] = useState()
     const [quantityCorrelation, setQuantityCorrelation] = useState()
+    const [monopolization, setMonopolization] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
@@ -2077,25 +2078,38 @@ function GlobalDataChart() {
         VisualizationServices.QuantityCorrelation().then((response) => {
             setQuantityCorrelation(response)
         })
+        VisualizationServices.monopolization().then((response) => {
+            setMonopolization(response)
+        })
     }, [])
 
     // const totalSpendingLineChartData = get(totalSpending, 'usd.line_chart')
+    // Function to manage data for line chart
     const lineChartData = (chartData) => {
         return (
             chartData &&
             chartData.map((data) => {
                 return {
-                    date: dayjs(data.date).format('MMMM'),
+                    date: dayjs(data.date).format('MMMM YYYY'),
                     value: data.value
                 }
             })
         )
     }
 
+    // Function to sort by date
+    const sortDate = (data) => {
+        return data.sort((date1, date2) => {
+            return dayjs(date1.date).diff(dayjs(date2.date))
+        })
+    }
+
     // Total spending data
-    const totalSpendingLineChartData =
+    const totalSpendingLineChartDataRaw =
         totalSpending &&
         lineChartData(get(totalSpending[currency], 'line_chart'))
+    const totalSpendingLineChartData =
+        totalSpendingLineChartDataRaw && sortDate(totalSpendingLineChartDataRaw)
     const totalSpendingAmount =
         totalSpending && get(totalSpending[currency], 'total')
     const totalSpendingPercentage =
@@ -2104,17 +2118,31 @@ function GlobalDataChart() {
         totalSpending && get(totalSpending[currency], 'bar_chart')
 
     // Total contracts data
-    const totalContractLineChartData =
+    const totalContractLineChartDataRaw =
         totalContracts && lineChartData(totalContracts.line_chart)
+    const totalContractLineChartData =
+        totalContractLineChartDataRaw && sortDate(totalContractLineChartDataRaw)
     const totalContractAmount = totalContracts && totalContracts.total
     const totalContractPercentage = totalContracts && totalContracts.difference
     const totalContractBarChartData = totalContracts && totalContracts.bar_chart
 
     // Average bids
-    const averageBidsLineChartData =
+    const averageBidsLineChartDataRaw =
         averageBids && lineChartData(averageBids.line_chart)
+    const averageBidsLineChartData =
+        averageBidsLineChartDataRaw && sortDate(averageBidsLineChartDataRaw)
     const averageBidsAmount = averageBids && averageBids.average
     const averageBidsPercentage = averageBids && averageBids.difference
+
+    // Monopolization
+    const monopolizationLineChartDataRaw =
+        monopolization && lineChartData(monopolization.line_chart)
+
+    const monopolizationLineChartData =
+        monopolizationLineChartDataRaw &&
+        sortDate(monopolizationLineChartDataRaw)
+    const monopolizationAmount = monopolization && monopolization.average
+    const monopolizationPercentage = monopolization && monopolization.difference
 
     // Direct open chart
     const directOpenByValue =
@@ -2260,9 +2288,7 @@ function GlobalDataChart() {
         })
     const quantityCorrelationDataByValue =
         quantityCorrelationDataByValueRaw &&
-        quantityCorrelationDataByValueRaw.sort((date1, date2) => {
-            return dayjs(date1.date).diff(dayjs(date2.date))
-        })
+        sortDate(quantityCorrelationDataByValueRaw)
     // console.log(quantityCorrelationDataByValue)
     const quantityCorrelationDataByNumberRaw =
         quantityCorrelation &&
@@ -2275,9 +2301,7 @@ function GlobalDataChart() {
         })
     const quantityCorrelationDataByNumber =
         quantityCorrelationDataByNumberRaw &&
-        quantityCorrelationDataByNumberRaw.sort((date1, date2) => {
-            return dayjs(date1.date).diff(dayjs(date2.date))
-        })
+        sortDate(quantityCorrelationDataByNumberRaw)
     // console.log(quantityCorrelationDataByValue)
 
     return (
@@ -2350,17 +2374,11 @@ function GlobalDataChart() {
                                     Monopolization
                                 </h3>
                                 <div className="flex items-end">
-                                    <div className=" text-primary-dark w-2/5">
-                                        <AreaChart data={area_chart_data} />
-                                        <p>
-                                            <strong className="text-xl inline-block mr-3">
-                                                67
-                                            </strong>
-                                        </p>
-                                        <p className="text-sm text-green-30 font-bold">
-                                            +18%
-                                        </p>
-                                    </div>
+                                    <AreaChartBlock
+                                        chartData={monopolizationLineChartData}
+                                        totalAmount={monopolizationAmount}
+                                        percentage={monopolizationPercentage}
+                                    />
                                     <div className="flex-1"></div>
                                 </div>
                             </div>

@@ -162,6 +162,26 @@ class VisualizationServices {
             console.log(error)
         }
     }
+    static async monopolization() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/monopolization/`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async monopolizationCountry(country) {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/monopolization/?country=${country}`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationServices
