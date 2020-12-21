@@ -14,6 +14,7 @@ import Select from 'react-select'
 
 const GlobalProfile = () => {
     const [data, setData] = useState({})
+    const [loading, setLoading] = useState(true)
     // const [contractData, setContractData] = useState(null)
     const [contractType, setContractType] = useState('value')
     const [sliderData, setSliderData] = useState([])
@@ -42,6 +43,7 @@ const GlobalProfile = () => {
     useEffect(() => {
         CountryContractMapServices.GetGlobalMapData().then((response) => {
             setDataFromApi(response)
+            setLoading(false)
         })
     }, [])
 
@@ -87,125 +89,142 @@ const GlobalProfile = () => {
     return (
         <Fragment>
             <section className="global-profile -mt-8">
-                <section className="bg-blue-0 pt-20 px-4">
-                    <div className="container mx-auto">
-                        <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
-                            Global Overview
-                        </h2>
-                        <div className="flex flex-wrap -mx-4 -mb-4">
-                            <div className="w-full px-4 mb-4">
-                                <div className="bg-white rounded p-6">
-                                    <FullScreen handle={handle}>
-                                        <div className="relative">
-                                            <div className="flex">
-                                                <ul className="contract-switch flex">
-                                                    <li
-                                                        className={`mr-4 cursor-pointer ${
-                                                            contractType ===
-                                                            'value'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            setContractType(
-                                                                'value'
-                                                            )
-                                                        }>
-                                                        {trans(
-                                                            'By contract value'
-                                                        )}
-                                                    </li>
-                                                    <li
-                                                        className={`cursor-pointer ${
-                                                            contractType ===
-                                                            'number'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            setContractType(
-                                                                'number'
-                                                            )
-                                                        }>
-                                                        {trans(
-                                                            'By number of contracts'
-                                                        )}
-                                                    </li>
-                                                </ul>
-                                            </div>
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <section className="bg-blue-0 pt-20 px-4">
+                            <div className="container mx-auto">
+                                <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
+                                    Global Overview
+                                </h2>
+                                <div className="flex flex-wrap -mx-4 -mb-4">
+                                    <div className="w-full px-4 mb-4">
+                                        <div className="bg-white rounded p-6">
+                                            <FullScreen handle={handle}>
+                                                <div className="relative">
+                                                    <div className="flex">
+                                                        <ul className="contract-switch flex">
+                                                            <li
+                                                                className={`mr-4 cursor-pointer ${
+                                                                    contractType ===
+                                                                    'value'
+                                                                        ? 'active'
+                                                                        : ''
+                                                                }`}
+                                                                onClick={() =>
+                                                                    setContractType(
+                                                                        'value'
+                                                                    )
+                                                                }>
+                                                                {trans(
+                                                                    'By contract value'
+                                                                )}
+                                                            </li>
+                                                            <li
+                                                                className={`cursor-pointer ${
+                                                                    contractType ===
+                                                                    'number'
+                                                                        ? 'active'
+                                                                        : ''
+                                                                }`}
+                                                                onClick={() =>
+                                                                    setContractType(
+                                                                        'number'
+                                                                    )
+                                                                }>
+                                                                {trans(
+                                                                    'By number of contracts'
+                                                                )}
+                                                            </li>
+                                                        </ul>
+                                                    </div>
 
-                                            <div className="w-1/5 absolute top-0 right-0 z-10 -mt-3">
-                                                <Select
-                                                    className="select-filter text-sm"
-                                                    classNamePrefix="select-filter"
-                                                    options={options}
-                                                    defaultValue={options[0]}
-                                                />
-                                            </div>
+                                                    <div className="w-1/5 absolute top-0 right-0 z-10 -mt-3">
+                                                        <Select
+                                                            className="select-filter text-sm"
+                                                            classNamePrefix="select-filter"
+                                                            options={options}
+                                                            defaultValue={
+                                                                options[0]
+                                                            }
+                                                        />
+                                                    </div>
 
-                                            <div>
-                                                <Map
-                                                    contractData={
-                                                        contractDataApi
-                                                    }
-                                                    contractType={contractType}
-                                                    yearMonth={yearMonth}
-                                                    sliderData={sliderData}
-                                                />
-                                            </div>
-                                        </div>
-                                    </FullScreen>
-                                    <div
-                                        className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
+                                                    <div>
+                                                        <Map
+                                                            contractData={
+                                                                contractDataApi
+                                                            }
+                                                            contractType={
+                                                                contractType
+                                                            }
+                                                            yearMonth={
+                                                                yearMonth
+                                                            }
+                                                            sliderData={
+                                                                sliderData
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </FullScreen>
+                                            <div
+                                                className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-6 px-6">
-                                        <div className="flex">
-                                            <span className="flex items-center">
-                                                <DownloadIcon className="mr-2 inline-block" />{' '}
-                                                <span className="cursor-pointer">
-                                                    Download
-                                                </span>
-                                            </span>
-                                            <span className="ml-8 flex items-center">
-                                                <ShareIcon className="mr-2 inline-block" />{' '}
-                                                <span className="cursor-pointer">
-                                                    Share
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span className="flex items-center">
-                                                <button onClick={handle.enter}>
-                                                    <span className="cursor-pointer">
-                                                        View full screen
+                                                <div className="flex">
+                                                    <span className="flex items-center">
+                                                        <DownloadIcon className="mr-2 inline-block" />{' '}
+                                                        <span className="cursor-pointer">
+                                                            Download
+                                                        </span>
                                                     </span>
-                                                    <FullViewIcon className="ml-2 inline-block" />
-                                                </button>
-                                            </span>
+                                                    <span className="ml-8 flex items-center">
+                                                        <ShareIcon className="mr-2 inline-block" />{' '}
+                                                        <span className="cursor-pointer">
+                                                            Share
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span className="flex items-center">
+                                                        <button
+                                                            onClick={
+                                                                handle.enter
+                                                            }>
+                                                            <span className="cursor-pointer">
+                                                                View full screen
+                                                            </span>
+                                                            <FullViewIcon className="ml-2 inline-block" />
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <Tabs>
-                    <div className="container mx-auto">
-                        <TabList>
-                            <Tab>{trans('Data')}</Tab>
-                        </TabList>
-                    </div>
-                    <div
-                        style={{
-                            borderTop: '5px solid #1fbbec'
-                        }}
-                        className="py-16 bg-primary-gray px-4">
-                        <div className="container mx-auto">
-                            <TabPanel>
-                                <GlobalDataCharts />
-                            </TabPanel>
-                        </div>
-                    </div>
-                </Tabs>
+                        </section>
+                        <Tabs>
+                            <div className="container mx-auto">
+                                <TabList>
+                                    <Tab>{trans('Data')}</Tab>
+                                </TabList>
+                            </div>
+                            <div
+                                style={{
+                                    borderTop: '5px solid #1fbbec'
+                                }}
+                                className="py-16 bg-primary-gray px-4">
+                                <div className="container mx-auto">
+                                    <TabPanel>
+                                        <GlobalDataCharts />
+                                    </TabPanel>
+                                </div>
+                            </div>
+                        </Tabs>
+                    </>
+                )}
             </section>
         </Fragment>
     )

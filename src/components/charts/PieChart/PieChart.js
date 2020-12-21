@@ -70,6 +70,7 @@ const PieChart = ({ data, colors }) => {
         })
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

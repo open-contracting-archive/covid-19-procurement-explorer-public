@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../assets/img/icons/ic_flag.svg'
 import CountryFlag from '../components/CountryFlagIcon'
 import useTrans from '../hooks/useTrans'
@@ -22,13 +23,14 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryProfileServices.CountryProfileTenderDetailData(
-            countryId,
-            tenderId
-        ).then((response) => {
-            setTenderInfo(response)
-        })
+        CountryProfileServices.CountryProfileTenderDetailData(tenderId).then(
+            (response) => {
+                setTenderInfo(response)
+            }
+        )
     }, [])
+
+    // console.log(tenderInfo)
 
     return (
         <section className="pt-8">
@@ -59,7 +61,16 @@ const TenderDetail = () => {
                         </p>
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
-                        <CountryFlag className="rounded-sm mr-2" code="mx" />
+                        <CountryFlag
+                            className="rounded-sm mr-2"
+                            code={`${
+                                tenderInfo &&
+                                get(
+                                    tenderInfo,
+                                    'country_alpha_code'
+                                ).toLowerCase()
+                            }`}
+                        />
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.country_name}
                         </p>
@@ -93,8 +104,7 @@ const TenderDetail = () => {
                             {trans('Tender value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {tenderInfo &&
-                                FormatNumber(tenderInfo.contract_value_usd)}
+                            62K{' '}
                             <span className="font-normal text-base uppercase">
                                 USD
                             </span>
@@ -116,7 +126,8 @@ const TenderDetail = () => {
                             {trans('Contract value')}
                         </p>
                         <p className="font-bold text-xl">
-                            62K{' '}
+                            {tenderInfo &&
+                                FormatNumber(tenderInfo.contract_value_usd)}
                             <span className="font-normal text-base uppercase">
                                 USD
                             </span>
@@ -150,7 +161,9 @@ const TenderDetail = () => {
                             {trans('Supplier')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {tenderInfo && tenderInfo.supplier.supplier_name}
+                            {get(tenderInfo, 'supplier.supplier_name')}
+                            {/* {tenderInfo.supplier &&
+                                tenderInfo.supplier.supplier_name} */}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-10 md:row-start-2">
@@ -158,8 +171,8 @@ const TenderDetail = () => {
                             {trans('Supplier address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            CIAD-Centro de Investigación en Alimentación y
-                            Desarrollo, A.C. #0389ZY998
+                            {get(tenderInfo, 'supplier.supplier_address')}
+                            {/* {tenderInfo && tenderInfo.supplier.supplier_address} */}
                         </p>
                     </div>
                 </div>

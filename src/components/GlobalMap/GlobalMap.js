@@ -110,6 +110,7 @@ const GlobalMap = ({ data, innerMap }) => {
         let hs = polygonTemplate.states.create('hover')
         hs.properties.fill = am4core.color('#3c5bdc')
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

@@ -21,8 +21,7 @@ function SimpleBarListChart({ data, byValue }) {
                                 <div className="ml-2 custom-horizontal-bar-amount">
                                     <p>
                                         {byValue && bar_value.amount ? '$' : ''}
-                                        {formatNumber(bar_value.amount) ||
-                                            'N/A'}
+                                        {formatNumber(bar_value.amount) || '-'}
                                     </p>
                                 </div>
                             </div>

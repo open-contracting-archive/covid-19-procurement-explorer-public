@@ -53,10 +53,7 @@ function App() {
                     <Route exact path="/country/:slug" component={Country} />
                     <Route exact path="/data" component={GlobalProfile} />
                     <Route exact path="/global-data" component={Data} />
-                    <Route
-                        path="/country/:id/tender/:tenderId"
-                        component={TenderDetail}
-                    />
+                    <Route path="/tender/:tenderId" component={TenderDetail} />
                     <Route exact path="/news" component={News} />
                     <Route path="/news-detail/:id" component={NewsDetail} />
                     <Route path="/blogs-detail/:id" component={BlogsDetail} />
