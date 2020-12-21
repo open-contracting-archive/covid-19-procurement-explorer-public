@@ -16,8 +16,21 @@ class InsightServices {
             return error
         }
     }
-
     static async NewsDetailData(id) {
+        const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
+        return res.body
+    }
+    static async BlogsData() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v2/pages/?type=content.InsightsPage&&fields=*&&country=1&&contents_type=Blog`
+            )
+            return res.body
+        } catch (error) {
+            return error
+        }
+    }
+    static async BlogsDetailData(id) {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
     }

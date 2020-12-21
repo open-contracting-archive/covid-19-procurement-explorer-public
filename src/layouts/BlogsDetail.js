@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import { BASE_URL } from '../helpers'
+import * as dayjs from 'dayjs'
+
+import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/loader/Loader'
 
 const BlogsDetail = () => {
-    const [newsDetail, setNewsDetail] = useState({})
-    const [newsData, setNewsData] = useState([])
+    const [blogsDetail, setBlogsDetail] = useState({})
+    const [blogsData, setBlogsData] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
-    let { id: newsId } = useParams()
+    let { id: blogsId } = useParams()
     window.scrollTo(0, 0)
 
     const previousPage = () => {
@@ -19,15 +21,15 @@ const BlogsDetail = () => {
     }
 
     useEffect(() => {
-        InsightServices.NewsDetailData(newsId).then((response) => {
+        InsightServices.BlogsDetailData(blogsId).then((response) => {
             // console.log(response)
-            setNewsDetail(response)
+            setBlogsDetail(response)
             setLoading(false)
         })
-        InsightServices.NewsData().then((response) => {
-            setNewsData(response.items)
+        InsightServices.BlogsData().then((response) => {
+            setBlogsData(response.items)
         })
-    }, [newsId])
+    }, [blogsId])
 
     return (
         <>
@@ -40,20 +42,20 @@ const BlogsDetail = () => {
                             <span
                                 className="cursor-pointer text-primary-blue"
                                 onClick={previousPage}>
-                                News
+                                Blogs
                             </span>{' '}
                             /
                         </div>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
-                            {newsDetail.title}
+                            {blogsDetail.title}
                         </h2>
                         <div className="img-wrapper mb-6 md:mb-10">
                             <img
-                                src={`${BASE_URL}${get(
-                                    newsDetail,
+                                src={`${API_URL}${get(
+                                    blogsDetail,
                                     'content_image.meta.download_url'
                                 )}`}
-                                alt={get(newsDetail, 'content_image.title')}
+                                alt={get(blogsDetail, 'content_image.title')}
                             />
                         </div>
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
@@ -62,7 +64,9 @@ const BlogsDetail = () => {
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {newsDetail.published_date}
+                                    {dayjs(blogsDetail.published_date).format(
+                                        'MMMM DD, YYYY'
+                                    )}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -91,7 +95,7 @@ const BlogsDetail = () => {
                                 <div
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
-                                        __html: newsDetail.body
+                                        __html: blogsDetail.body
                                     }}>
                                     {/* {newsDetail.body} */}
                                 </div>
@@ -162,23 +166,23 @@ const BlogsDetail = () => {
 
                         <hr className="mb-10 text-primary-gray" />
                         <div className="mb-20">
-                            <h2 className="text-xl mb-6">Other News</h2>
+                            <h2 className="text-xl mb-6">Related Blogs</h2>
                             <div className="grid grid-cols-12 gap-10 mb-10">
-                                {newsData &&
-                                    newsData
-                                        .filter((news) => news.id != newsId)
+                                {blogsData &&
+                                    blogsData
+                                        .filter((blogs) => blogs.id != blogsId)
                                         .slice(0, 3)
-                                        .map((news) => {
+                                        .map((blogs) => {
                                             return (
                                                 <>
                                                     <Link
-                                                        className="news-thumbnail"
-                                                        to={`/news-detail/${news.id}`}
-                                                        key={news.id}>
+                                                        className="blogs-thumbnail"
+                                                        to={`/blogs-detail/${news.id}`}
+                                                        key={blogs.id}>
                                                         <div className="img-wrapper">
                                                             <img
-                                                                src={`${BASE_URL}${get(
-                                                                    news,
+                                                                src={`${API_URL}${get(
+                                                                    blogs,
                                                                     'content_image.meta.download_url'
                                                                 )}`}
                                                                 alt=""
@@ -186,12 +190,14 @@ const BlogsDetail = () => {
                                                         </div>
                                                         <div>
                                                             <h3 className="news-caption__title">
-                                                                {news.title}
+                                                                {blogs.title}
                                                             </h3>
                                                             <p className="news-caption__date">
-                                                                {
-                                                                    news.published_date
-                                                                }
+                                                                {dayjs(
+                                                                    blogs.published_date.format(
+                                                                        'MMM DD, YYY'
+                                                                    )
+                                                                )}
                                                             </p>
                                                         </div>
                                                     </Link>
@@ -200,8 +206,8 @@ const BlogsDetail = () => {
                                         })}
                             </div>
                             <div className="flex justify-center mt-12">
-                                <Link to="/news" className="text-blue-20">
-                                    View all news --&gt;{' '}
+                                <Link to="/blogs" className="text-blue-20">
+                                    View all blogs --&gt;{' '}
                                 </Link>
                             </div>
                         </div>

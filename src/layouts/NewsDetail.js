@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import { BASE_URL } from '../helpers'
+import * as dayjs from 'dayjs'
+import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/loader/Loader'
@@ -49,7 +50,7 @@ const NewsDetail = () => {
                         </h2>
                         <div className="img-wrapper mb-6 md:mb-10">
                             <img
-                                src={`${BASE_URL}${get(
+                                src={`${API_URL}${get(
                                     newsDetail,
                                     'content_image.meta.download_url'
                                 )}`}
@@ -62,7 +63,9 @@ const NewsDetail = () => {
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {newsDetail.published_date}
+                                    {dayjs(newsDetail.published_date).format(
+                                        'MMMM DD, YYYY'
+                                    )}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -170,32 +173,32 @@ const NewsDetail = () => {
                                         .slice(0, 3)
                                         .map((news) => {
                                             return (
-                                                <>
-                                                    <Link
-                                                        className="news-thumbnail"
-                                                        to={`/news-detail/${news.id}`}
-                                                        key={news.id}>
-                                                        <div className="img-wrapper">
-                                                            <img
-                                                                src={`${BASE_URL}${get(
-                                                                    news,
-                                                                    'content_image.meta.download_url'
-                                                                )}`}
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <h3 className="news-caption__title">
-                                                                {news.title}
-                                                            </h3>
-                                                            <p className="news-caption__date">
-                                                                {
-                                                                    news.published_date
-                                                                }
-                                                            </p>
-                                                        </div>
-                                                    </Link>
-                                                </>
+                                                <Link
+                                                    className="news-thumbnail"
+                                                    to={`/news-detail/${news.id}`}
+                                                    key={news.id}>
+                                                    <div className="img-wrapper">
+                                                        <img
+                                                            src={`${API_URL}${get(
+                                                                news,
+                                                                'content_image.meta.download_url'
+                                                            )}`}
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="news-caption__title">
+                                                            {news.title}
+                                                        </h3>
+                                                        <p className="news-caption__date">
+                                                            {dayjs(
+                                                                news.published_date
+                                                            ).format(
+                                                                'MMM DD, YYYY'
+                                                            )}
+                                                        </p>
+                                                    </div>
+                                                </Link>
                                             )
                                         })}
                             </div>
