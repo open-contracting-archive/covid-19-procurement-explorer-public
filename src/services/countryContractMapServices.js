@@ -10,7 +10,7 @@ class CountryContractMapServices {
     static async GetGlobalMapData() {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/global-overview/`
+                await `${API_URL}api/v1/vizualization/world-map-race/`
             )
             return res.body
         } catch (error) {

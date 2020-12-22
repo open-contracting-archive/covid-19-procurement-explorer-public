@@ -5,7 +5,8 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const GlobalMap = ({ data, innerMap }) => {
+const GlobalMap = ({ data, innerMap, coordinates }) => {
+    console.log(data)
     const globalMapchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -54,15 +55,18 @@ const GlobalMap = ({ data, innerMap }) => {
             },
             {
                 id: 'UK',
-                value: 626932
+                value: 626932,
+                url: '/country/united-kingdom'
             },
             {
                 id: 'KE',
-                value: 5130632
+                value: 5130632,
+                url: '/country/kenya'
             },
             {
                 id: 'MD',
-                value: 2673400
+                value: 2673400,
+                url: '/country/moldova'
             },
             {
                 id: 'KG',
@@ -70,7 +74,8 @@ const GlobalMap = ({ data, innerMap }) => {
             },
             {
                 id: 'MX',
-                value: 50871648
+                value: 50871648,
+                url: '/country/mexico'
             }
         ]
 
@@ -105,6 +110,21 @@ const GlobalMap = ({ data, innerMap }) => {
         polygonTemplate.tooltipText = '{name}: {value}'
         polygonTemplate.nonScalingStroke = true
         polygonTemplate.strokeWidth = 0.5
+        // polygonTemplate.url = '{ url }'
+        polygonTemplate.url = '/country/mexico'
+
+        // Zoom control
+        chart.zoomControl = new am4maps.ZoomControl()
+        chart.zoomControl.valign = 'top'
+
+        // Setting map's initial zoom
+        chart.homeZoomLevel = (coordinates && coordinates.zoomLevel) || 1
+        chart.homeGeoPoint = {
+            latitude: (coordinates && coordinates.lat) || 0,
+            longitude: (coordinates && coordinates.long) || 0
+            // latitude: 55.85406929584602,
+            // longitude: 28.24904034876191
+        }
 
         // Create hover state and set alternative fill color
         let hs = polygonTemplate.states.create('hover')
@@ -117,7 +137,7 @@ const GlobalMap = ({ data, innerMap }) => {
 
             chart = null
         }
-    }, [data])
+    }, [data, coordinates])
 
     return (
         <div className="map-wrapper bg-white rounded-md h-full">
@@ -125,7 +145,7 @@ const GlobalMap = ({ data, innerMap }) => {
                 ref={globalMapchartDiv}
                 style={
                     innerMap
-                        ? { width: '100%', height: '100%', minHeight: '400px' }
+                        ? { width: '100%', height: '430px', minHeight: '400px' }
                         : { width: '100%', height: '500px' }
                 }
             />

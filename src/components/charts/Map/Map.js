@@ -5,7 +5,13 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
+const Map = ({
+    sliderData,
+    contractType,
+    contractData,
+    yearMonth,
+    coordinates
+}) => {
     const mapchartDiv = useRef(null)
     const [data, setData] = useState({})
     // const [yearMonthMapData, setYearMonthMapData] = useState(yearMonth)
@@ -105,6 +111,15 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
 
         chart.zoomControl = new am4maps.ZoomControl()
         chart.zoomControl.valign = 'top'
+
+        // Setting map's initial zoom
+        chart.homeZoomLevel = (coordinates && coordinates.zoomLevel) || 1
+        chart.homeGeoPoint = {
+            latitude: (coordinates && coordinates.lat) || 0,
+            longitude: (coordinates && coordinates.long) || 0
+            // latitude: 55.85406929584602,
+            // longitude: 28.24904034876191
+        }
 
         // Configure series tooltip
         let polygonTemplate = polygonSeries.mapPolygons.template
@@ -226,7 +241,7 @@ const Map = ({ sliderData, contractType, contractData, yearMonth }) => {
 
             chart = null
         }
-    }, [data])
+    }, [data, coordinates])
 
     return (
         <div className="map-wrapper pb-6">

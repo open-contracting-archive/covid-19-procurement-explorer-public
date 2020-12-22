@@ -1,13 +1,18 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import Select from 'react-select'
+
 import { ReactComponent as HeroIcon } from '../assets/img/icons/covid.svg'
 import { ReactComponent as MouseScroll } from '../assets/img/icons/mouse-scroll.svg'
 import { ReactComponent as CircleIcon } from '../assets/img/icons/circle-ring.svg'
 import { ReactComponent as BottomCurve } from '../assets/img/icons/circle_bottom.svg'
 import useTrans from '../hooks/useTrans'
 import Library from './home/library'
-import geo_data from '../data/GeoChart.world.geo.json'
-import GeoChart from '../components/charts/GeoChart/GeoChart'
+// import geo_data from '../data/GeoChart.world.geo.json'
+// import GeoChart from '../components/charts/GeoChart/GeoChart'
 import Map from '../components/charts/Map/Map'
+import RaceMap from '../components/charts/RaceMap/RaceMap'
 import NewsSection from './home/newsSection'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
@@ -16,11 +21,8 @@ import { ReactComponent as ChartsIcon } from '../assets/img/icons/ic_charts.svg'
 import { ReactComponent as MapIcon } from '../assets/img/icons/ic_map.svg'
 import { ReactComponent as TableIcon } from '../assets/img/icons/ic_table.svg'
 import { ReactComponent as SourcesIcon } from '../assets/img/icons/ic_sources.svg'
-import { ReactComponent as SortIcon } from '../assets/img/icons/ic_sort.svg'
-import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+// import { ReactComponent as SortIcon } from '../assets/img/icons/ic_sort.svg'
 import CountryContractMapServices from '../services/countryContractMapServices'
-import Select from 'react-select'
 
 const Home = () => {
     const [data, setData] = useState({})
@@ -31,27 +33,129 @@ const Home = () => {
     const [loading, setLoading] = useState(true)
 
     const [yearMonth, setYearMonth] = useState('2020-01')
+    const [dataFromApi, setDataFromApi] = useState()
+    const [contractDataApi, setContractDataApi] = useState({})
+    const [selectedContinent, setSelectedContinent] = useState({
+        value: 'all',
+        label: 'All Continent'
+    })
 
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     const options = [
-        { value: 'all_continent', label: 'All Continent' },
+        { value: 'all', label: 'All Continent' },
         { value: 'asia', label: 'Asia' },
-        { value: 'europe', label: 'Europe' }
+        { value: 'europe', label: 'Europe' },
+        { value: 'africa', label: 'Africa' },
+        { value: 'oceania', label: 'Oceania' },
+        { value: 'south_america', label: 'South America' },
+        { value: 'north_america', label: 'North America' },
+        { value: 'middle_east', label: 'Middle East' }
     ]
 
+    // useEffect(() => {
+    //     CountryContractMapServices.getContractData().then((response) => {
+    //         setContractData(response)
+
+    //         const keys = Object.entries(response).map(([key]) => key)
+
+    //         setSliderData(keys)
+    //     })
+    // }, [])
+
     useEffect(() => {
-        CountryContractMapServices.getContractData().then((response) => {
-            setContractData(response)
-
-            const keys = Object.entries(response).map(([key]) => key)
-
-            setSliderData(keys)
+        CountryContractMapServices.GetGlobalMapData().then((response) => {
+            setDataFromApi(response)
+            setLoading(false)
         })
-    }, []) 
+    }, [])
 
-    if (!contractData) {
+    useEffect(() => {
+        let dateObject = {}
+        dataFromApi &&
+            dataFromApi.result.map((data) => {
+                let countryObject = {}
+                data.details.map((detail) => {
+                    if (detail.country_code != 'ALL') {
+                        countryObject = {
+                            ...countryObject,
+                            [detail.country_code]: {
+                                value: detail.amount_usd,
+                                number: detail.tender_count,
+                                url: `/country/${detail.country
+                                    .toLowerCase()
+                                    .replace(' ', '-')}`
+                            }
+                        }
+                    }
+                })
+                dateObject = {
+                    ...dateObject,
+                    [data.month]: countryObject
+                }
+            })
+        setContractDataApi(dateObject)
+        setYearMonth(dataFromApi && dataFromApi.result[0].month)
+
+        const keys =
+            dataFromApi &&
+            dataFromApi.result.map((data) => {
+                return data.month
+            })
+        setSliderData(keys)
+    }, [dataFromApi])
+
+    const handleContinentChange = (selectedOption) => {
+        setSelectedContinent(selectedOption)
+    }
+
+    const continent = {
+        all: {
+            lat: 0,
+            long: 0,
+            zoomLevel: 1
+        },
+        asia: {
+            lat: 44.94789322476297,
+            long: 95.75037267845751,
+            zoomLevel: 1.8
+        },
+        europe: {
+            lat: 55.85406929584602,
+            long: 28.24904034876191,
+            zoomLevel: 1.8
+        },
+        africa: {
+            lat: 6.426117205286786,
+            long: 18.276615276175992,
+            zoomLevel: 1.6
+        },
+        oceania: {
+            lat: -31.065922730080157,
+            long: 152.78101519406331,
+            zoomLevel: 1.6
+        },
+        south_america: {
+            lat: -15.173251268423256,
+            long: -60.792112817153885,
+            zoomLevel: 1.6
+        },
+        north_america: {
+            lat: 56.51520886670177,
+            long: -92.32043635079269,
+            zoomLevel: 1.6
+        },
+        middle_east: {
+            lat: 27.0,
+            long: 38.25,
+            zoomLevel: 1.6
+        }
+    }
+
+    // console.log(continent[selectedContinent])
+
+    if (!contractDataApi) {
         return ''
     }
 
@@ -198,16 +302,36 @@ const Home = () => {
                                                         className="select-filter text-sm"
                                                         classNamePrefix="select-filter"
                                                         options={options}
+                                                        value={
+                                                            selectedContinent
+                                                        }
                                                         defaultValue={
                                                             options[0]
                                                         }
+                                                        onChange={(
+                                                            selectedOption
+                                                        ) =>
+                                                            handleContinentChange(
+                                                                selectedOption
+                                                            )
+                                                        }
                                                     />
                                                 </div>
-                                                <Map
-                                                    contractData={contractData}
+                                                <RaceMap
+                                                    contractData={
+                                                        contractDataApi
+                                                    }
                                                     contractType={contractType}
                                                     yearMonth={yearMonth}
-                                                    sliderData={sliderData}
+                                                    sliderData={
+                                                        sliderData || []
+                                                    }
+                                                    coordinates={
+                                                        continent[
+                                                            selectedContinent
+                                                                .value
+                                                        ]
+                                                    }
                                                 />
                                             </TabPanel>
                                             <TabPanel>
