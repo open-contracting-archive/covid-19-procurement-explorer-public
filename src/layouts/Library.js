@@ -12,10 +12,12 @@ function Library() {
     const [newsData, setNewsData] = useState([])
     const [BlogsDetail, setBlogsDetail] = useState({})
     const [blogsData, setBlogsData] = useState([])
+    const [eventsData, setEventsData] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
     let { id: newsId } = useParams()
     let { id: blogsId } = useParams()
+    let { id: eventsId } = useParams()
     window.scrollTo(0, 0)
 
     const previousPage = () => {
@@ -41,9 +43,13 @@ function Library() {
             InsightServices.BlogsData().then((response) => {
                 setBlogsData(response.items)
             })
+            InsightServices.EventsData().then((response) => {
+                setEventsData(response.items)
+            })
         },
         [newsId],
-        [blogsId]
+        [blogsId],
+        [eventsId]
     )
 
     return (
@@ -196,63 +202,50 @@ function Library() {
                                 </p>
                             </div>
                             <div className="grid grid-cols-3 grid-rows-1 gap-x-4 gap-y-4 card">
-                                <div className="card__item px-8 py-8">
-                                    <div className="card__day text-4xl">13</div>
-                                    <div className="card__month text-base uppercase">
-                                        Dec
-                                    </div>
-                                    <div className="card__caption">
-                                        <h3 className="card__title mt-8 mb-4 text-lg">
-                                            A Procurement Path to Equity:
-                                            Virtual Report Launch
-                                        </h3>
-                                        <p className="card__time opacity-50 text-base mb-4">
-                                            8A.M - 5P.M
-                                        </p>
-                                        <p className="card__venue text-base">
-                                            Aspen Institute Center for Urban
-                                            Innovation.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="card__item px-8 py-8">
-                                    <div className="card__day text-4xl">13</div>
-                                    <div className="card__month text-base uppercase">
-                                        Dec
-                                    </div>
-                                    <div className="card__caption">
-                                        <h3 className="card__title mt-8 mb-4 text-lg">
-                                            A Procurement Path to Equity:
-                                            Virtual Report Launch
-                                        </h3>
-                                        <p className="card__time opacity-50 text-base mb-4">
-                                            8A.M - 5P.M
-                                        </p>
-                                        <p className="card__venue text-base">
-                                            Aspen Institute Center for Urban
-                                            Innovation.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="card__item px-8 py-8">
-                                    <div className="card__day text-4xl">13</div>
-                                    <div className="card__month text-base uppercase">
-                                        Dec
-                                    </div>
-                                    <div className="card__caption">
-                                        <h3 className="card__title mt-8 mb-4 text-lg">
-                                            A Procurement Path to Equity:
-                                            Virtual Report Launch
-                                        </h3>
-                                        <p className="card__time opacity-50 text-base mb-4">
-                                            8A.M - 5P.M
-                                        </p>
-                                        <p className="card__venue text-base">
-                                            Aspen Institute Center for Urban
-                                            Innovation.
-                                        </p>
-                                    </div>
-                                </div>
+                                {eventsData &&
+                                    eventsData.slice(0, 3).map((events) => {
+                                        return (
+                                            <Link
+                                                className="events-thumbnail"
+                                                to={`/events-detail/${events.id}`}
+                                                key={events.id}>
+                                                <div className="card__item px-8 py-8">
+                                                    <div className="card__day text-4xl leading-none">
+                                                        {dayjs(
+                                                            eventsData[0]
+                                                                .event_date
+                                                        ).format('DD')}
+                                                    </div>
+                                                    <div className="card__month text-base uppercase">
+                                                        {dayjs(
+                                                            eventsData[0]
+                                                                .event_date
+                                                        ).format('MMMM')}
+                                                    </div>
+                                                    <div className="card__caption">
+                                                        <h3 className="card__title mt-8 mb-4 text-lg">
+                                                            {events.title}
+                                                        </h3>
+                                                        <div className="card__time opacity-50 text-base mb-4 uppercase flex">
+                                                            <p className="from mr-1">
+                                                                {
+                                                                    events.time_from
+                                                                }
+                                                            </p>
+                                                            -
+                                                            <p className="to ml-1">
+                                                                {events.time_to}
+                                                            </p>
+                                                        </div>
+
+                                                        <p className="card__venue text-base">
+                                                            {events.location}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        )
+                                    })}
                             </div>
                             <div className="flex justify-center pt-10">
                                 <Link to="/events" className="text-blue-20">

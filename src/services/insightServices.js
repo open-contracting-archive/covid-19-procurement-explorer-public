@@ -34,6 +34,20 @@ class InsightServices {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
     }
+    static async EventsData() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}/api/v2/pages/?type=content.EventsPage&&fields=*`
+            )
+            return res.body
+        } catch (error) {
+            return error
+        }
+    }
+    static async EventsDetailData(id) {
+        const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
+        return res.body
+    }
 }
 
 export default InsightServices
