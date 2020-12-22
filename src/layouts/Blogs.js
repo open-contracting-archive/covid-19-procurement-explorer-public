@@ -19,10 +19,6 @@ const Blogs = () => {
     }
 
     useEffect(() => {
-        // InsightServices.BlogsDetailData(blogsId).then((response) => {
-        //     // console.log(response)
-        //     // setBlogsDetail(response)
-        // })
         InsightServices.BlogsData().then((response) => {
             setBlogsData(response.items)
             setLoading(false)
@@ -39,6 +35,7 @@ const Blogs = () => {
                         <p className="text-2xl mb-10">Blogs</p>
                         {blogsData &&
                             blogsData.map((blogs) => {
+                                let data = blogs.body.slice(0,200).replace('<p>','');
                                 return (
                                     <Link
                                         className="blogs-thumbnail grid grid-cols-2 gap-x-10 mb-16"
@@ -70,7 +67,15 @@ const Blogs = () => {
                                                     ).format('MMM DD, YYYY')}
                                                 </p>
                                             </div>
-                                            <p className="blog-caption__details mt-4"></p>
+                                            {/* <p className="blog-caption__details mt-4"> </p> */}
+                                            <div
+                                                className="blog-caption__details mt-4"
+                                                // dangerouslySetInnerHTML={{
+                                                //     __html: blogs.body
+                                                // }}
+                                                >
+                                                {data}
+                                            </div>
                                         </div>
                                     </Link>
                                 )

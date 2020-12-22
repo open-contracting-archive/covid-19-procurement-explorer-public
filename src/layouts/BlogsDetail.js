@@ -93,12 +93,10 @@ const BlogsDetail = () => {
                             </div>
                             <div>
                                 <div
-                                    className="mb-10 news-detail__content"
+                                    className="mb-10 blogs-detail__content"
                                     dangerouslySetInnerHTML={{
                                         __html: blogsDetail.body
-                                    }}>
-                                    {/* {newsDetail.body} */}
-                                </div>
+                                    }}></div>
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
                                     <div className="block lg:hidden mb-6 md:mb-0">
                                         <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -189,10 +187,10 @@ const BlogsDetail = () => {
                                                             />
                                                         </div>
                                                         <div>
-                                                            <h3 className="news-caption__title">
+                                                            <h3 className="blogs-caption__title">
                                                                 {blogs.title}
                                                             </h3>
-                                                            <p className="news-caption__date">
+                                                            <p className="blogs-caption__date">
                                                                 {dayjs(
                                                                     blogs.published_date.format(
                                                                         'MMM DD, YYY'

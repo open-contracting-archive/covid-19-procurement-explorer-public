@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import { BASE_URL } from '../helpers'
+import * as dayjs from 'dayjs'
+import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/loader/Loader'
 
 const EventsDetail = () => {
-    const [newsDetail, setNewsDetail] = useState({})
-    const [newsData, setNewsData] = useState([])
+    const [eventsDetail, setEventsDetail] = useState({})
+    const [eventsData, setEventsData] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
-    let { id: newsId } = useParams()
+    let { id: eventsId } = useParams()
     window.scrollTo(0, 0)
 
     const previousPage = () => {
@@ -19,15 +20,15 @@ const EventsDetail = () => {
     }
 
     useEffect(() => {
-        InsightServices.NewsDetailData(newsId).then((response) => {
+        InsightServices.EventsDetailData(eventsId).then((response) => {
             // console.log(response)
-            setNewsDetail(response)
+            setEventsDetail(response)
             setLoading(false)
         })
-        InsightServices.NewsData().then((response) => {
-            setNewsData(response.items)
+        InsightServices.EventsData().then((response) => {
+            setEventsData(response.items)
         })
-    }, [newsId])
+    }, [eventsId])
 
     return (
         <>
@@ -40,29 +41,31 @@ const EventsDetail = () => {
                             <span
                                 className="cursor-pointer text-primary-blue"
                                 onClick={previousPage}>
-                                News
+                                Events
                             </span>{' '}
                             /
                         </div>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
-                            {newsDetail.title}
+                            {eventsDetail.title}
                         </h2>
                         <div className="img-wrapper mb-6 md:mb-10">
                             <img
-                                src={`${BASE_URL}${get(
-                                    newsDetail,
-                                    'content_image.meta.download_url'
+                                src={`${API_URL}${get(
+                                    eventsDetail,
+                                    'event_image.meta.download_url'
                                 )}`}
-                                alt={get(newsDetail, 'content_image.title')}
+                                alt={get(eventsDetail, 'event_image.title')}
                             />
                         </div>
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
-                            <div className="mb-4 news-detail__metadata">
+                            <div className="mb-4 events-detail__metadata">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {newsDetail.published_date}
+                                    {dayjs(
+                                        eventsDetail.meta.first_published_at
+                                    ).format('MMMM DD, YYYY')}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -91,9 +94,9 @@ const EventsDetail = () => {
                                 <div
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
-                                        __html: newsDetail.body
+                                        __html: eventsDetail.description
                                     }}>
-                                    {/* {newsDetail.body} */}
+                                    {/* {eventsDetail.body} */}
                                 </div>
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
                                     <div className="block lg:hidden mb-6 md:mb-0">
@@ -162,35 +165,37 @@ const EventsDetail = () => {
 
                         <hr className="mb-10 text-primary-gray" />
                         <div className="mb-20">
-                            <h2 className="text-xl mb-6">Other News</h2>
+                            <h2 className="text-xl mb-6">Other Events</h2>
                             <div className="grid grid-cols-12 gap-10 mb-10">
-                                {newsData &&
-                                    newsData
-                                        .filter((news) => news.id != newsId)
+                                {eventsData &&
+                                    eventsData
+                                        .filter(
+                                            (events) => events.id != eventsId
+                                        )
                                         .slice(0, 3)
                                         .map((news) => {
                                             return (
                                                 <>
                                                     <Link
-                                                        className="news-thumbnail"
-                                                        to={`/news-detail/${news.id}`}
+                                                        className="events-thumbnail"
+                                                        to={`/events-detail/${news.id}`}
                                                         key={news.id}>
                                                         <div className="img-wrapper">
                                                             <img
-                                                                src={`${BASE_URL}${get(
-                                                                    news,
+                                                                src={`${API_URL}${get(
+                                                                    events,
                                                                     'content_image.meta.download_url'
                                                                 )}`}
                                                                 alt=""
                                                             />
                                                         </div>
                                                         <div>
-                                                            <h3 className="news-caption__title">
-                                                                {news.title}
+                                                            <h3 className="events-caption__title">
+                                                                {events.title}
                                                             </h3>
-                                                            <p className="news-caption__date">
+                                                            <p className="events-caption__date">
                                                                 {
-                                                                    news.published_date
+                                                                    events.published_date
                                                                 }
                                                             </p>
                                                         </div>
