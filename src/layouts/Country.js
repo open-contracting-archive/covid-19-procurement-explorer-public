@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import * as dayjs from 'dayjs'
 import Select from 'react-select'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Tender from '../components/country/tender'
 import Insights from '../components/country/insights'
 import CountryDataCharts from '../components/country/CountryDataChart'
@@ -14,11 +15,15 @@ import CountryServices from '../services/countryServices'
 import formatNumber from '../components/formatNumber/FormatNumber'
 import GlobalMap from '../components/GlobalMap/GlobalMap'
 import Buyers from '../components/country/buyers'
+import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
 
 function CountryDetail() {
     const [data, setData] = useState({}) // Country specific data
     const [loading, setLoading] = useState(false)
     const [countryData, setCountryData] = useState([]) // List of all countries
+    const [contractType, setContractType] = useState('value')
 
     let { slug } = useParams()
 
@@ -26,6 +31,8 @@ function CountryDetail() {
         { label: 'Mexico', value: 'mexico' },
         { label: 'United Kingdom', value: 'united-kingdom' }
     ]
+
+    const handle = useFullScreenHandle()
 
     useEffect(() => {
         // Fetch list of all countries
@@ -69,7 +76,7 @@ function CountryDetail() {
                 <Fragment>
                     <section className="px-4">
                         <div className="container mx-auto">
-                            <div className="mb-6">
+                            {/* <div className="mb-6">
                                 <ul className="flex text-sm">
                                     {Object.keys(countryData).map(
                                         (country, index) => {
@@ -95,15 +102,182 @@ function CountryDetail() {
                                         }
                                     )}
                                 </ul>
-                            </div>
-                            {/* <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
+                            </div> */}
+                            <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
                                 {data.name}
-                            </h2> */}
+                            </h2>
                             <div className="flex flex-wrap -mx-4 -mb-4">
-                                <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4">
-                                    <div className="h-full">
-                                        <GlobalMap innerMap />
+                                <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4 bg-white rounded p-6">
+                                    {/* <div className="bg-white rounded p-6">
+                                        <FullScreen handle={handle}>
+                                            <div className="relative">
+                                                <div className="flex">
+                                                    <ul className="contract-switch flex">
+                                                        <li
+                                                            className={`mr-4 cursor-pointer ${
+                                                                contractType ===
+                                                                'value'
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setContractType(
+                                                                    'value'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By contract value'
+                                                            )}
+                                                        </li>
+                                                        <li
+                                                            className={`cursor-pointer ${
+                                                                contractType ===
+                                                                'number'
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setContractType(
+                                                                    'number'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By number of contracts'
+                                                            )}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                {/* <div className="w-1/5 absolute top-0 right-0 z-10 -mt-3">
+                                                    <Select
+                                                        className="select-filter text-sm"
+                                                        classNamePrefix="select-filter"
+                                                        options={options}
+                                                        value={
+                                                            selectedContinent
+                                                        }
+                                                        defaultValue={
+                                                            options[0]
+                                                        }
+                                                        onChange={(
+                                                            selectedOption
+                                                        ) =>
+                                                            handleContinentChange(
+                                                                selectedOption
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="h-full">
+                                                    <GlobalMap innerMap />
+                                                </div>
+                                            </div>
+                                        </FullScreen>
+                                        <div
+                                            className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
+                                             text-primary-blue -mx-6 px-6">
+                                            <div className="flex">
+                                                <span className="flex items-center">
+                                                    <DownloadIcon className="mr-2 inline-block" />{' '}
+                                                    <span className="cursor-pointer">
+                                                        Download
+                                                    </span>
+                                                </span>
+                                                <span className="ml-8 flex items-center">
+                                                    <ShareIcon className="mr-2 inline-block" />{' '}
+                                                    <span className="cursor-pointer">
+                                                        Share
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span className="flex items-center">
+                                                    <button
+                                                        onClick={handle.enter}>
+                                                        <span className="cursor-pointer">
+                                                            View full screen
+                                                        </span>
+                                                        <FullViewIcon className="ml-2 inline-block" />
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div> */}
+
+                                    {/* <div className="bg-white rounded p-6"> */}
+                                    <FullScreen handle={handle}>
+                                        <div className="relative">
+                                            <div className="flex justify-end">
+                                                <ul className="contract-switch flex">
+                                                    <li
+                                                        className={`mr-4 cursor-pointer ${
+                                                            contractType ===
+                                                            'value'
+                                                                ? 'active'
+                                                                : ''
+                                                        }`}
+                                                        onClick={() =>
+                                                            setContractType(
+                                                                'value'
+                                                            )
+                                                        }>
+                                                        {trans(
+                                                            'By contract value'
+                                                        )}
+                                                    </li>
+                                                    <li
+                                                        className={`cursor-pointer ${
+                                                            contractType ===
+                                                            'number'
+                                                                ? 'active'
+                                                                : ''
+                                                        }`}
+                                                        onClick={() =>
+                                                            setContractType(
+                                                                'number'
+                                                            )
+                                                        }>
+                                                        {trans(
+                                                            'By number of contracts'
+                                                        )}
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div className="h-full">
+                                                <GlobalMap innerMap />
+                                            </div>
+                                        </div>
+                                    </FullScreen>
+                                    <div
+                                        className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
+                                             text-primary-blue -mx-6 px-6">
+                                        <div className="flex">
+                                            <span className="flex items-center">
+                                                <DownloadIcon className="mr-2 inline-block" />{' '}
+                                                <span className="cursor-pointer">
+                                                    Download
+                                                </span>
+                                            </span>
+                                            <span className="ml-8 flex items-center">
+                                                <ShareIcon className="mr-2 inline-block" />{' '}
+                                                <span className="cursor-pointer">
+                                                    Share
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="flex items-center">
+                                                <button onClick={handle.enter}>
+                                                    <span className="cursor-pointer">
+                                                        View full screen
+                                                    </span>
+                                                    <FullViewIcon className="ml-2 inline-block" />
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
+                                    {/* </div> */}
                                 </div>
                                 <div className="w-full md:w-1/2 lg:w-38 px-4 pl-2 mb-4 relative">
                                     <div className="flex flex-col  text-primary-dark font-bold">
