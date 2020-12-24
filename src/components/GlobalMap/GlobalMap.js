@@ -6,7 +6,6 @@ import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const GlobalMap = ({ data, innerMap, coordinates }) => {
-    console.log(data)
     const globalMapchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -44,74 +43,87 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         polygonSeries.useGeodata = true
 
         // Set heatmap values for each state
-        polygonSeries.data = [
-            {
-                id: 'UA',
-                value: 8447100
-            },
-            {
-                id: 'US',
-                value: 4447100
-            },
-            {
-                id: 'UK',
-                value: 626932,
-                url: '/country/united-kingdom'
-            },
-            {
-                id: 'KE',
-                value: 5130632,
-                url: '/country/kenya'
-            },
-            {
-                id: 'MD',
-                value: 2673400,
-                url: '/country/moldova'
-            },
-            {
-                id: 'KG',
-                value: 33871648
-            },
-            {
-                id: 'MX',
-                value: 50871648,
-                url: '/country/mexico'
-            }
-        ]
+        if (data) {
+            polygonSeries.data = data
+        } else {
+            polygonSeries.data = [
+                {
+                    id: 'UA',
+                    value: 8447100
+                },
+                {
+                    id: 'US',
+                    value: 4447100
+                },
+                {
+                    id: 'UK',
+                    value: 626932,
+                    url: '/country/united-kingdom'
+                },
+                {
+                    id: 'KE',
+                    value: 5130632,
+                    url: '/country/kenya'
+                },
+                {
+                    id: 'MD',
+                    value: 2673400,
+                    url: '/country/moldova'
+                },
+                {
+                    id: 'KG',
+                    value: 33871648
+                },
+                {
+                    id: 'MX',
+                    value: 50871648,
+                    url: '/country/mexico'
+                }
+            ]
+        }
 
         // Set up heat legend
         let heatLegend = chart.createChild(am4maps.HeatLegend)
         heatLegend.series = polygonSeries
-        heatLegend.align = 'right'
+        heatLegend.align = 'center'
         heatLegend.valign = 'bottom'
-        heatLegend.width = am4core.percent(20)
+        heatLegend.width = am4core.percent(40)
         heatLegend.marginRight = am4core.percent(4)
-        heatLegend.minValue = 0
-        heatLegend.maxValue = 40000000
+        // heatLegend.minValue = 0
+        // heatLegend.maxValue = 40000000
+        heatLegend.orientation = 'horizontal'
+        heatLegend.padding(20, 20, 20, 20)
+        heatLegend.valueAxis.renderer.labels.template.fontSize = 10
+        heatLegend.valueAxis.renderer.minGridDistance = 40
 
-        // Set up custom heat map legend labels using axis ranges
-        let minRange = heatLegend.valueAxis.axisRanges.create()
-        minRange.value = heatLegend.minValue
-        minRange.label.text = '0'
-        let maxRange = heatLegend.valueAxis.axisRanges.create()
-        maxRange.value = heatLegend.maxValue
-        maxRange.label.text = '100M'
+        polygonSeries.mapPolygons.template.events.on('over', (event) => {
+            handleHover(event.target)
+        })
 
-        // Blank out internal heat legend value axis labels
-        heatLegend.valueAxis.renderer.labels.template.adapter.add(
-            'text',
-            function (labelText) {
-                return ''
+        polygonSeries.mapPolygons.template.events.on('hit', (event) => {
+            handleHover(event.target)
+        })
+
+        function handleHover(mapPolygon) {
+            if (!isNaN(mapPolygon.dataItem.value)) {
+                heatLegend.valueAxis.showTooltipAt(mapPolygon.dataItem.value)
+            } else {
+                heatLegend.valueAxis.hideTooltip()
             }
-        )
+        }
+
+        polygonSeries.mapPolygons.template.strokeOpacity = 0.4
+        polygonSeries.mapPolygons.template.events.on('out', (event) => {
+            heatLegend.valueAxis.hideTooltip()
+        })
 
         // Configure series tooltip
         let polygonTemplate = polygonSeries.mapPolygons.template
         polygonTemplate.tooltipText = '{name}: {value}'
         polygonTemplate.nonScalingStroke = true
         polygonTemplate.strokeWidth = 0.5
-        // polygonTemplate.url = '{ url }'
-        polygonTemplate.url = '/country/mexico'
+        polygonTemplate.url = '{url}'
+        // polygonTemplate.url = '/country/mexico'
 
         // Zoom control
         chart.zoomControl = new am4maps.ZoomControl()
