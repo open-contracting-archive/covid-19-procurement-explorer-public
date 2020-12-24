@@ -2,6 +2,26 @@ import Api from './api'
 import { API_URL } from '../helpers'
 
 class VisualizationServices {
+    static async GlobalMap() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/world-map/`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async CountryMap(countryCode) {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/country-map/?country=${countryCode}`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
     static async TotalSpending() {
         try {
             const res = await Api.get(

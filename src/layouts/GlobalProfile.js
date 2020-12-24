@@ -11,27 +11,27 @@ import useTrans from '../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
-import CountryContractMapServices from '../services/countryContractMapServices'
+import VisualizationServices from '../services/visualizationServices'
 import GlobalMap from '../components/GlobalMap/GlobalMap'
+import { CONTINENTS } from '../helpers'
 
 const GlobalProfile = () => {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(true)
-    // const [contractData, setContractData] = useState(null)
     const [contractType, setContractType] = useState('value')
-    const [sliderData, setSliderData] = useState([])
-    const [yearMonth, setYearMonth] = useState('')
-
-    const [dataFromApi, setDataFromApi] = useState()
-    const [contractDataApi, setContractDataApi] = useState({})
+    const [mapData, setMapData] = useState()
+    // const [contractData, setContractData] = useState(null)
+    // const [dataFromApi, setDataFromApi] = useState()
+    // const [contractDataApi, setContractDataApi] = useState({})
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
         label: 'All Continent'
     })
-
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
-
     const options = [
         { value: 'all', label: 'All Continent' },
         { value: 'asia', label: 'Asia' },
@@ -43,107 +43,49 @@ const GlobalProfile = () => {
         { value: 'middle_east', label: 'Middle East' }
     ]
 
-    // useEffect(() => {
-    //     CountryContractMapServices.getContractData().then((response) => {
-    //         setContractData(response)
-
-    //         const keys = Object.entries(response).map(([key]) => key)
-    //     })
-    // }, [])
-
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
     useEffect(() => {
-        CountryContractMapServices.GetGlobalMapData().then((response) => {
-            setDataFromApi(response)
+        VisualizationServices.GlobalMap().then((response) => {
+            setData(response)
             setLoading(false)
         })
     }, [])
 
+    useEffect(() => {
+        let mapData = {}
+        const parsedMapData =
+            data.result &&
+            data.result.map((data) => {
+                return (mapData = {
+                    ...mapData,
+                    id: data.country_code,
+                    value:
+                        contractType == 'value'
+                            ? data.amount_usd
+                            : data.tender_count,
+                    url: `/country/${data.country
+                        .toLowerCase()
+                        .replace(' ', '-')}`
+                })
+            })
+        setMapData(parsedMapData)
+    }, [data, contractType])
+
+    // ===========================================================================
+    // Handler and functions
+    // ===========================================================================
     const handleContinentChange = (selectedOption, value) => {
         setSelectedContinent(selectedOption)
     }
 
-    const continent = {
-        all: {
-            lat: 0,
-            long: 0,
-            zoomLevel: 1
-        },
-        asia: {
-            lat: 44.94789322476297,
-            long: 95.75037267845751,
-            zoomLevel: 1.8
-        },
-        europe: {
-            lat: 55.85406929584602,
-            long: 28.24904034876191,
-            zoomLevel: 1.8
-        },
-        africa: {
-            lat: 6.426117205286786,
-            long: 18.276615276175992,
-            zoomLevel: 1.6
-        },
-        oceania: {
-            lat: -31.065922730080157,
-            long: 152.78101519406331,
-            zoomLevel: 1.6
-        },
-        south_america: {
-            lat: -15.173251268423256,
-            long: -60.792112817153885,
-            zoomLevel: 1.6
-        },
-        north_america: {
-            lat: 56.51520886670177,
-            long: -92.32043635079269,
-            zoomLevel: 1.6
-        },
-        middle_east: {
-            lat: 27.0,
-            long: 38.25,
-            zoomLevel: 1.6
-        }
-    }
-
-    useEffect(() => {
-        let dateObject = {}
-        dataFromApi &&
-            dataFromApi.result.map((data) => {
-                let countryObject = {}
-                data.details.map((detail) => {
-                    if (detail.country_code != 'ALL') {
-                        countryObject = {
-                            ...countryObject,
-                            [detail.aplha2_code]: {
-                                value: detail.amount_usd,
-                                number: detail.tender_count,
-                                url: `/country/${detail.country
-                                    .toLowerCase()
-                                    .replace(' ', '-')}`
-                            }
-                        }
-                    }
-                })
-                dateObject = {
-                    ...dateObject,
-                    [data.month]: countryObject
-                }
-            })
-        setContractDataApi(dateObject)
-        setYearMonth(dataFromApi && dataFromApi.result[0].month)
-
-        const keys =
-            dataFromApi &&
-            dataFromApi.result.map((data) => {
-                return data.month
-            })
-        setSliderData(keys)
-    }, [dataFromApi])
-
-    if (!contractDataApi) {
-        return ''
-    }
-
+    // ===========================================================================
+    // Others
+    // ===========================================================================
+    // if (!contractDataApi) {
+    //     return ''
+    // }
     return (
         <Fragment>
             <section className="global-profile -mt-8">
@@ -235,8 +177,12 @@ const GlobalProfile = () => {
                                                             }
                                                         /> */}
                                                         <GlobalMap
+                                                            data={mapData}
+                                                            contractType={
+                                                                contractType
+                                                            }
                                                             coordinates={
-                                                                continent[
+                                                                CONTINENTS[
                                                                     selectedContinent
                                                                         .value
                                                                 ]
