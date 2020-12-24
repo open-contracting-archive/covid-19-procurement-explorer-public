@@ -61,7 +61,7 @@ function Library() {
                     <section className="news px-4 py-24 bg-primary-gray -mt-8">
                         <div className="container mx-auto">
                             <p className="text-2xl mb-10">Library</p>
-                            <div className="grid grid-cols-2 gap-x-20">
+                            <div className="grid md:grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-10">
                                 <div className="display__item flex flex-col">
                                     <p className="text-xl mb-6 ">News</p>
 
@@ -152,7 +152,7 @@ function Library() {
                             <div className="text-center">
                                 <p className="text-xl blue-50 pb-10">Blogs</p>
                             </div>
-                            <div className="grid grid-cols-12 gap-10 mb-10 ">
+                            <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10 ">
                                 {blogsData &&
                                     blogsData.slice(0, 6).map((blogs) => {
                                         return (
@@ -201,9 +201,9 @@ function Library() {
                                     Upcoming Events
                                 </p>
                             </div>
-                            <div className="grid grid-cols-3 grid-rows-1 gap-x-4 gap-y-4 card">
+                            <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4  card">
                                 {eventsData &&
-                                    eventsData.slice(0, 3).map((events) => {
+                                    eventsData.slice(0, 2).map((events) => {
                                         return (
                                             <Link
                                                 className="events-thumbnail"

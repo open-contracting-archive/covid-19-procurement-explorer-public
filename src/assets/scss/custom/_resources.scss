@@ -1,0 +1,12 @@
+.resources__cards{
+    .list__item{
+        .img-wrapper{
+            @apply w-1/3;
+            flex-shrink: 0;
+        }
+    }
+}
+// blogs listing styles
+.blogs-list .img-wrapper{
+    @apply h-full;
+}

@@ -36,7 +36,7 @@ function Events() {
                                 Upcoming Events
                             </p>
                         </div>
-                        <div className="grid grid-cols-3 grid-rows-1 gap-x-4 gap-y-4 card">
+                        <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
                         {eventsData &&
                             eventsData.slice(0, 3).map((events) => {
                                 return (
@@ -94,7 +94,7 @@ function Events() {
                                 Past Events
                             </p>
                         </div>
-                        <div className="grid grid-cols-3 grid-rows-1 gap-x-4 gap-y-4 card">
+                        <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
                             {eventsData &&
                             eventsData.slice(3, 9).map((events) => {
                                 return (

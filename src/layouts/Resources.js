@@ -1,21 +1,3 @@
-// import React from 'react'
-// import newsImage from '../assets/img/news.jpg'
-// import { Link } from 'react-router-dom'
-// import Insights from '../components/country/insights'
-
-// function Resources() {
-//     return (
-//         <div className="resources px-4 pb-16 pt-24 bg-primary-gray -mt-8">
-//             <div className="container mx-auto">
-//                 <Insights/>
-//             </div> 
-//         </div>
-        
-//     )
-// }
-
-// export default Resources
-
 import React, { Fragment, useState } from 'react'
 import CountryProfileServices from '../services/countryProfileServices'
 import { Link } from 'react-router-dom'
@@ -53,12 +35,9 @@ const Resources = () => {
                     </h2>
                     <div className="grid grid-cols-2 gap-x-20">
                         <div className="display__item">
-                            <p className="text-xl mb-6 ">
-                                News
-                            </p>
-                            <div className="news__item">
-                                <div className="img-wrapper relative">
-                                    <img src={newsImage} alt="" />
+                            <div className="news__item h-full">
+                                <div className="img-wrapper relative h-full">
+                                    <img className="h-full object-cover"src={newsImage} alt="" />
                                     <div className="news__caption px-6 py-6 text-white">
                                         <h3 className="news-caption__title">
                                             How COVID-19 has advanced the case for
@@ -73,7 +52,7 @@ const Resources = () => {
                         <p className="text-lg mb-6 mt-4 uppercase">
                             Recent Posts
                         </p>
-                            <div className="news__item flex">
+                            <div className="news__item flex mb-8">
                                 <div className="img-wrapper h-auto">
                                     <img src={newsImage} alt="" />
                                 </div>
@@ -85,7 +64,7 @@ const Resources = () => {
                                     <p className="news-caption__date mt-2">Nov 19, 2020</p>
                                 </div>
                             </div>
-                            <div className="news__item flex">
+                            <div className="news__item flex mb-8">
                                 <div className="img-wrapper h-auto">
                                     <img src={newsImage} alt="" />
                                 </div>
