@@ -39,8 +39,8 @@ const News = () => {
                         <div className="container mx-auto">
                             <p className="text-2xl mb-10">News</p>
                             <p className="text-xl mb-6 ">Featured News</p>
-                            <div className="grid grid-cols-12 gap-x-10">
-                                <div className="display__item col-span-8">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 ">
+                                <div className="display__item md:col-span-8">
                                     {newsData && (
                                         <Link
                                             className="news-thumbnail"
@@ -69,7 +69,7 @@ const News = () => {
                                         </Link>
                                     )}
                                 </div>
-                                <div className="list__item col-span-4">
+                                <div className="list__item md:col-span-4">
                                     {newsData &&
                                         newsData.slice(1, 3).map((news) => {
                                             return (
@@ -126,7 +126,7 @@ const News = () => {
                                     Other News
                                 </p>
                             </div>
-                            <div className="grid grid-cols-12 gap-10 mb-10 ">
+                            <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10 ">
                                 {newsData &&
                                     newsData.slice(3).map((news) => {
                                         return (
@@ -136,7 +136,7 @@ const News = () => {
                                                 key={news.id}>
                                                 <div className="img-wrapper">
                                                     <img
-                                                        className="h-full object-cover"
+                                                        className="h-full w-full object-cover"
                                                         src={`${API_URL}${get(
                                                             news,
                                                             'content_image.meta.download_url'

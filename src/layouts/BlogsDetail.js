@@ -165,7 +165,7 @@ const BlogsDetail = () => {
                         <hr className="mb-10 text-primary-gray" />
                         <div className="mb-20">
                             <h2 className="text-xl mb-6">Related Blogs</h2>
-                            <div className="grid grid-cols-12 gap-10 mb-10">
+                            <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                 {blogsData &&
                                     blogsData
                                         .filter((blogs) => blogs.id != blogsId)
@@ -203,10 +203,12 @@ const BlogsDetail = () => {
                                             )
                                         })}
                             </div>
-                            <div className="flex justify-center mt-12">
-                                <Link to="/blogs" className="text-blue-20">
+                            <div className="flex justify-center items-center mt-12">
+                                <hr className="text-primary-gray flex-1"/>
+                                <Link to="/blogs" className="text-blue-20 px-4">
                                     View all blogs --&gt;{' '}
                                 </Link>
+                                <hr className="text-primary-gray flex-1"/>
                             </div>
                         </div>
                     </div>

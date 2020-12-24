@@ -38,11 +38,11 @@ const Blogs = () => {
                                 let data = blogs.body.slice(0,200).replace('<p>','');
                                 return (
                                     <Link
-                                        className="blogs-thumbnail grid grid-cols-2 gap-x-10 mb-16"
+                                        className="blogs-thumbnail grid md:grid-cols-2 grid-cols-1  gap-x-10 gap-y-6 mb-16"
                                         to={`/blogs-detail/${blogs.id}`}
                                         key={blogs.id}>
                                         <div className="img-wrapper">
-                                            <img
+                                            <img className="h-full w-full object-cover"
                                                 src={`${API_URL}${get(
                                                     blogs,
                                                     'content_image.meta.download_url'

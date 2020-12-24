@@ -166,7 +166,7 @@ const EventsDetail = () => {
                         <hr className="mb-10 text-primary-gray" />
                         <div className="mb-20">
                             <h2 className="text-xl mb-6">Other Events</h2>
-                            <div className="grid grid-cols-12 gap-10 mb-10">
+                            <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
                                 {eventsData &&
                                     eventsData
                                         .filter(
@@ -204,10 +204,12 @@ const EventsDetail = () => {
                                             )
                                         })}
                             </div>
-                            <div className="flex justify-center mt-12">
-                                <Link to="/news" className="text-blue-20">
-                                    View all news --&gt;{' '}
+                            <div className="flex justify-center items-center mt-12">
+                                <hr className="text-primary-gray flex-1"/>
+                                <Link to="/events" className="text-blue-20 px-4">
+                                    View all events --&gt;{' '}
                                 </Link>
+                                <hr className="text-primary-gray flex-1"/>
                             </div>
                         </div>
                     </div>
