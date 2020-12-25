@@ -58,7 +58,7 @@ function Library() {
                 <Loader />
             ) : (
                 <div className="library">
-                    <section className="news px-4 py-24 bg-primary-gray -mt-8">
+                    <section className="news px-4 py-24 bg-blue-0 -mt-8">
                         <div className="container mx-auto">
                             <p className="text-2xl mb-10">Library</p>
                             <div className="grid md:grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-10">
@@ -72,11 +72,13 @@ function Library() {
                                                     className="news-thumbnail"
                                                     to={`/news-detail/${newsData[0].id}`}>
                                                     <div className="img-wrapper relative">
-                                                        <img
-                                                            className="w-full h-full object-cover"
-                                                            src={`${API_URL}${newsData[0].content_image.meta.download_url}`}
-                                                            alt=""
-                                                        />
+                                                        {newsData[0].content_image.meta.download_url  && 
+                                                            <img
+                                                                className="w-full h-full object-cover"
+                                                                src={`${API_URL}${newsData[0].content_image.meta.download_url}`}
+                                                                alt=""
+                                                            />
+                                                        }
                                                         <div className="news__caption px-6 py-6 text-white">
                                                             <h3 className="news-caption__title">
                                                                 {
@@ -111,16 +113,21 @@ function Library() {
                                                     to={`/news-detail/${news.id}`}
                                                     key={news.id}>
                                                     <div className="news__item flex">
-                                                        <div className="img-wrapper">
-                                                            <img
-                                                                className="w-full h-full object-cover"
-                                                                src={`${API_URL}${get(
-                                                                    news,
-                                                                    'content_image.meta.download_url'
-                                                                )}`}
-                                                                alt=""
-                                                            />
-                                                        </div>
+                                                    {get(
+                                                            news,
+                                                            'content_image.meta.download_url'
+                                                        ) && 
+                                                            <div className="img-wrapper">
+                                                                <img
+                                                                    className="w-full h-full object-cover"
+                                                                    src={`${API_URL}${get(
+                                                                        news,
+                                                                        'content_image.meta.download_url'
+                                                                    )}`}
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        }
                                                         <div className="news__caption pl-6">
                                                             <h3 className="news-caption__title">
                                                                 {news.title}
@@ -139,11 +146,14 @@ function Library() {
                                         })}
                                 </div>
                             </div>
-                            <div className="flex justify-end pt-10">
-                                <Link to="/news" className="text-blue-20">
-                                    View all news --&gt;{' '}
-                                </Link>
-                            </div>
+                            {newsData.length !== 0 ?
+                                <div className="flex justify-end pt-10">
+                                    <Link to="/news" className="text-blue-20">
+                                        View all news --&gt;{' '}
+                                    </Link>
+                                </div>
+                                : <p> There are no News Records</p>
+                            }
                         </div>
                     </section>
 
@@ -160,16 +170,21 @@ function Library() {
                                                 className="blogs-thumbnail"
                                                 to={`/blogs-detail/${blogs.id}`}
                                                 key={blogs.id}>
-                                                <div className="img-wrapper">
-                                                    <img
-                                                        className="h-full object-cover"
-                                                        src={`${API_URL}${get(
-                                                            blogs,
-                                                            'content_image.meta.download_url'
-                                                        )}`}
-                                                        alt=""
-                                                    />
-                                                </div>
+                                                {get(
+                                                    blogs,
+                                                    'content_image.meta.download_url'
+                                                ) && 
+                                                    <div className="img-wrapper">
+                                                        <img
+                                                            className="h-full object-cover"
+                                                            src={`${API_URL}${get(
+                                                                blogs,
+                                                                'content_image.meta.download_url'
+                                                            )}`}
+                                                            alt=""
+                                                        />
+                                                    </div>
+                                                }
                                                 <div>
                                                     <h3 className="blogs-caption__title">
                                                         {blogs.title}
@@ -186,12 +201,14 @@ function Library() {
                                         )
                                     })}
                             </div>
-
-                            <div className="flex justify-center pt-10">
-                                <Link to="/blogs" className="text-blue-20">
-                                    View all blogs --&gt;{' '}
-                                </Link>
-                            </div>
+                            {blogsData.length !== 0 ? 
+                                <div className="flex justify-center pt-10">
+                                    <Link to="/blogs" className="text-blue-20">
+                                        View all blogs --&gt;{' '}
+                                    </Link>
+                                </div>
+                                : <p> There are no Blogs Records</p>
+                            }
                         </div>
                     </section>
                     <section className="px-4 events bg-primary-gray py-24">
@@ -232,10 +249,14 @@ function Library() {
                                                                     events.time_from
                                                                 }
                                                             </p>
-                                                            -
-                                                            <p className="to ml-1">
-                                                                {events.time_to}
-                                                            </p>
+                                                            {events.time_to &&
+                                                                <>
+                                                                    -
+                                                                    <p className="to ml-1">
+                                                                        {events.time_to}
+                                                                    </p>
+                                                                </>
+                                                            }
                                                         </div>
 
                                                         <p className="card__venue text-base">
@@ -247,11 +268,14 @@ function Library() {
                                         )
                                     })}
                             </div>
-                            <div className="flex justify-center pt-10">
-                                <Link to="/events" className="text-blue-20">
-                                    View all Events --&gt;{' '}
-                                </Link>
-                            </div>
+                            {eventsData.length !== 0 ? 
+                                <div className="flex justify-center pt-10">
+                                    <Link to="/events" className="text-blue-20">
+                                        View all events --&gt;{' '}
+                                    </Link>
+                                </div>
+                                :<p> There are no Events Records</p>
+                            }
                         </div>
                     </section>
                     <section className="px-4 resources py-24">
@@ -488,8 +512,8 @@ function Library() {
                                 </div>
                             </div>
                             <div className="flex justify-center pt-10">
-                                <Link to="#" className="text-blue-20">
-                                    View all Resources --&gt;{' '}
+                                <Link to="/resources" className="text-blue-20">
+                                    View all resources --&gt;{' '}
                                 </Link>
                             </div>
                         </div>

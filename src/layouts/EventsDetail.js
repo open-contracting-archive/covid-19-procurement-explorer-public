@@ -38,25 +38,34 @@ const EventsDetail = () => {
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
                         <div className="text-sm mb-4 text-blue-5">
-                            <span
+                            <Link to="/library"
+                                className="cursor-pointer text-primary-blue">
+                                Library
+                            </Link>{' '}
+                            /
+                            <Link to="/events"
                                 className="cursor-pointer text-primary-blue"
                                 onClick={previousPage}>
                                 Events
-                            </span>{' '}
-                            /
+                            </Link>{' '}
                         </div>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
                             {eventsDetail.title}
                         </h2>
-                        <div className="img-wrapper mb-6 md:mb-10">
-                            <img
-                                src={`${API_URL}${get(
-                                    eventsDetail,
-                                    'event_image.meta.download_url'
-                                )}`}
-                                alt={get(eventsDetail, 'event_image.title')}
-                            />
-                        </div>
+                        {get(
+                            eventsDetail,
+                            'event_image.meta.download_url'
+                        ) &&
+                            <div className="img-wrapper mb-6 md:mb-10">
+                                <img
+                                    src={`${API_URL}${get(
+                                        eventsDetail,
+                                        'event_image.meta.download_url'
+                                    )}`}
+                                    alt={get(eventsDetail, 'event_image.title')}
+                                />
+                            </div>
+                        }
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 events-detail__metadata">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -162,56 +171,82 @@ const EventsDetail = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <hr className="mb-10 text-primary-gray" />
-                        <div className="mb-20">
-                            <h2 className="text-xl mb-6">Other Events</h2>
-                            <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
-                                {eventsData &&
-                                    eventsData
-                                        .filter(
-                                            (events) => events.id != eventsId
-                                        )
-                                        .slice(0, 3)
-                                        .map((news) => {
-                                            return (
-                                                <>
-                                                    <Link
-                                                        className="events-thumbnail"
-                                                        to={`/events-detail/${news.id}`}
-                                                        key={news.id}>
-                                                        <div className="img-wrapper">
-                                                            <img
-                                                                src={`${API_URL}${get(
-                                                                    events,
-                                                                    'content_image.meta.download_url'
-                                                                )}`}
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <h3 className="events-caption__title">
-                                                                {events.title}
-                                                            </h3>
-                                                            <p className="events-caption__date">
-                                                                {
-                                                                    events.published_date
-                                                                }
-                                                            </p>
-                                                        </div>
-                                                    </Link>
-                                                </>
+                        {eventsData.length !== 0 ?
+                        <>
+                            <hr className="mb-10 text-primary-gray" />
+                            <div className="mb-20">
+                                <h2 className="text-xl mb-6">Other Events</h2>
+                                <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
+                                    {eventsData &&
+                                        eventsData
+                                            .filter(
+                                                (events) => events.id != eventsId
                                             )
-                                        })}
+                                            .slice(0, 3)
+                                            .map((events) => {
+                                                return (
+                                                    <>
+                                                        <Link
+                                                            className="events-thumbnail"
+                                                            to={`/events-detail/${events.id}`}
+                                                            key={events.id}>
+                                                                    <div className="card__item bg-blue-0 px-8 py-8">
+                                                                            <div className="card__day text-4xl leading-none">
+                                                                                {dayjs(
+                                                                                    eventsData[0]
+                                                                                        .event_date
+                                                                                ).format(
+                                                                                    'DD'
+                                                                                )}
+                                                                            </div>
+                                                                            <div className="card__month text-base uppercase">
+                                                                                {dayjs(
+                                                                                    eventsData[0]
+                                                                                        .event_date
+                                                                                ).format(
+                                                                                    'MMMM'
+                                                                                )}
+                                                                            </div>
+                                                                            <div className="card__caption">
+                                                                                <h3 className="card__title mt-8 mb-4 text-lg">
+                                                                                    {events.title}
+                                                                                </h3>
+                                                                                <div className="card__time opacity-50 text-base mb-4 uppercase flex">
+                                                                                    <p className="from mr-1">
+                                                                                        {events.time_from}
+                                                                                    </p> 
+                                                                                    
+                                                                                    {events.time_to &&
+                                                                                        <>
+                                                                                            -
+                                                                                            <p className="to ml-1">
+                                                                                                {events.time_to}
+                                                                                            </p>
+                                                                                        </>
+                                                                                    }
+                                                                                </div>
+
+                                                                                <p className="card__venue text-base">
+                                                                                    {events.location}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                </Link>
+                                                    </>
+                                                )
+                                            })}
+                                </div>
+                                <div className="flex justify-center items-center mt-12">
+                                    <hr className="text-primary-gray flex-1"/>
+                                    <Link to="/events" className="text-blue-20 px-4">
+                                        View all events --&gt;{' '}
+                                    </Link>
+                                    <hr className="text-primary-gray flex-1"/>
+                                </div>
                             </div>
-                            <div className="flex justify-center items-center mt-12">
-                                <hr className="text-primary-gray flex-1"/>
-                                <Link to="/events" className="text-blue-20 px-4">
-                                    View all events --&gt;{' '}
-                                </Link>
-                                <hr className="text-primary-gray flex-1"/>
-                            </div>
-                        </div>
+                        </>: ""
+                        }
+                        
                     </div>
                 </section>
             )}

@@ -21,13 +21,26 @@ function Events() {
     useEffect(() => {
         InsightServices.EventsData().then((response) => {
             setEventsData(response.items)
+            setLoading(false)
         })
     }, [])
     return (
+        <>
+            {loading ? (
+                <Loader />
+            ) : (
         
             <div className="">
                 <section className="px-4 events events__upcoming pt-24 pb-16 -mt-8">
                     <div className="container mx-auto">
+                        <div className="text-sm mb-4 text-blue-5">
+                            <span
+                                className="cursor-pointer text-primary-blue"
+                                onClick={previousPage}>
+                                Library
+                            </span>{' '}
+                            /
+                        </div>
                         <h2 className="text-2xl mb-10">
                             Events
                         </h2>
@@ -69,10 +82,15 @@ function Events() {
                                                                 <p className="from mr-1">
                                                                     {events.time_from}
                                                                 </p> 
-                                                                -
-                                                                <p className="to ml-1">
-                                                                    {events.time_to}
-                                                                </p>
+                                                                
+                                                                {events.time_to &&
+                                                                    <>
+                                                                        -
+                                                                        <p className="to ml-1">
+                                                                            {events.time_to}
+                                                                        </p>
+                                                                    </>
+                                                                }
                                                             </div>
 
                                                             <p className="card__venue text-base">
@@ -134,6 +152,7 @@ function Events() {
                                                                 </p> 
                                                                 -
                                                                 <p className="to ml-1">
+                                                                    
                                                                     {dayjs(
                                                                         eventsData[0]
                                                                             .time_to
@@ -152,14 +171,20 @@ function Events() {
                                             )
                                         })}
                         </div>
-                        <div className="flex justify-center pt-10">
-                            <Link to="/events" className="text-white bg-primary-blue px-32 py-4 rounded">
-                                Load More
-                            </Link>
-                        </div>
+                        {eventsData.length !== 0 ? 
+                            <div className="flex justify-center pt-10">
+                                <Link to="/events" className="text-white bg-primary-blue px-32 py-4 rounded">
+                                    Load more
+                                </Link>
+                            </div>
+                        :<p> There are no Past Events Records</p>
+                        }
+                        
                     </div>
                 </section>
             </div>
+            )}
+        </>
     )
 }
 export default Events

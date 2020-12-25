@@ -32,8 +32,17 @@ const Blogs = () => {
             ) : (
                 <section className="py-24 px-4 blogs-list -mt-8">
                     <div className="container mx-auto">
+                        <div className="text-sm mb-4 text-blue-5">
+                            <span
+                                className="cursor-pointer text-primary-blue"
+                                onClick={previousPage}>
+                                News
+                            </span>{' '}
+                            /
+                        </div>
                         <p className="text-2xl mb-10">Blogs</p>
-                        {blogsData &&
+                        {/* {blogsData.length !== 0}  */}
+                        {blogsData && blogsData.length !== 0 &&
                             blogsData.map((blogs) => {
                                 let data = blogs.body.slice(0,200).replace('<p>','');
                                 return (
@@ -41,15 +50,21 @@ const Blogs = () => {
                                         className="blogs-thumbnail grid md:grid-cols-2 grid-cols-1  gap-x-10 gap-y-6 mb-16"
                                         to={`/blogs-detail/${blogs.id}`}
                                         key={blogs.id}>
-                                        <div className="img-wrapper">
-                                            <img className="h-full w-full object-cover"
-                                                src={`${API_URL}${get(
-                                                    blogs,
-                                                    'content_image.meta.download_url'
-                                                )}`}
-                                                alt=""
-                                            />
-                                        </div>
+                                        {get(
+                                            blogs,
+                                            'content_image.meta.download_url'
+                                        ) && 
+                                            <div className="img-wrapper">
+                                                <img className="h-full w-full object-cover"
+                                                    src={`${API_URL}${get(
+                                                        blogs,
+                                                        'content_image.meta.download_url'
+                                                    )}`}
+                                                    alt=""
+                                                />
+                                            </div>
+                                        }
+                                        
                                         <div className="blog__caption">
                                             <h3 className="blog-caption__title text-xl">
                                                 {blogs.title}
@@ -80,13 +95,15 @@ const Blogs = () => {
                                     </Link>
                                 )
                             })}
-                        <div className="flex justify-center">
+                        {blogsData.length !== 0 ? <div className="flex justify-center">
                             <Link
                                 to="/blogs"
                                 className="text-white bg-primary-blue px-32 py-4 rounded">
-                                Load More
+                                Load more
                             </Link>
                         </div>
+                        : <p> There are no Blogs Records</p> 
+                        }
                     </div>
                 </section>
             )}
