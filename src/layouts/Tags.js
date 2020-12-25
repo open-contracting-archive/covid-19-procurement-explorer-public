@@ -1,13 +1,16 @@
-import React from 'react'
 import newsImage from '../assets/img/news.jpg'
-import { Link } from 'react-router-dom'
-
+import React, { useEffect, useState } from 'react'
+import { useHistory, Link, useParams } from 'react-router-dom'
+import { get } from 'lodash'
+import * as dayjs from 'dayjs'
+import { API_URL } from '../helpers'
 
 function Tags() {
     return (
         <div className="">
             <section className="px-4 py-24 tags -mt-8">
                 <div className="container mx-auto">
+                    
                    <p className="text-2xl mb-10">
                         Tags
                     </p>

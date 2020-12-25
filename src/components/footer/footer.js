@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import FooterImage from '../../assets/img/icons/cc-img.png'
@@ -19,16 +20,28 @@ const Footer = () => {
                     <div className="col-span-6 md:col-span-2">
                         <h4 className="mb-1">Explore</h4>
                         <ul>
-                            <li className="opacity-50">Data</li>
+                            <li className="opacity-50">
+                                <Link to="/data">
+                                    Data
+                                </Link>
+                            </li>
                             <li className="opacity-50">Countries</li>
                             <li className="opacity-50">Tenders</li>
                             <li className="opacity-50">Suppliers</li>
-                            <li className="opacity-50">Resources</li>
+                            <li className="opacity-50">
+                                <Link to="/resources">
+                                    Resources
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="col-span-6 md:col-span-2">
                         <ul className="mt-5">
-                            <li className="opacity-50">About</li>
+                            <li className="opacity-50">
+                                <Link to="/about">
+                                    About
+                                </Link>
+                            </li>
                             <li className="opacity-50">Terms of use</li>
                             <li className="opacity-50">Privacy policy</li>
                         </ul>
@@ -36,13 +49,13 @@ const Footer = () => {
                     <div className="col-span-12 md:col-span-4">
                         <p className="mb-3">Subscribe and get weekly updates</p>
                         <form>
-                            <div className="relative">
+                            <div className="relative flex items-center">
                                 <input
                                     type="text"
                                     placeholder="Type your email address"
                                     className="px-3 py-4 w-full rounded-sm  text-primary-dark"
                                 />
-                                <button className="absolute right-0 bg-blue-20 h-full p-5">
+                                <button className=" subscribe absolute right-0 bg-blue-20 h-full p-4">
                                     Subscribe
                                 </button>
                             </div>

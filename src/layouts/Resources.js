@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import CountryProfileServices from '../services/countryProfileServices'
-import { Link } from 'react-router-dom'
+import { useHistory, Link, useParams } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
@@ -25,11 +25,22 @@ const Resources = () => {
             </tr>
         )
     })
+    const previousPage = () => {
+        history.goBack()
+    }
 
     return (
         <div className=" resources">
             <section className="px-4 resources__cards pt-24 pb-12 -mt-8">
                 <div className="container mx-auto">
+                    <div className="text-sm mb-4 text-blue-5">
+                            <span
+                                className="cursor-pointer text-primary-blue"
+                                onClick={previousPage}>
+                                Library
+                            </span>{' '}
+                            /
+                        </div>
                     <h2 className="text-2xl mb-10">
                         Resources
                     </h2>
@@ -49,7 +60,7 @@ const Resources = () => {
                             </div>
                         </div>
                         <div className="list__item">
-                        <p className="text-lg mb-6 mt-4 uppercase">
+                        <p className="text-lg mb-6 uppercase">
                             Recent Posts
                         </p>
                             <div className="news__item flex mb-8">
