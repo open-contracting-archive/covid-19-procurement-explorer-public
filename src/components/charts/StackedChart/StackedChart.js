@@ -71,7 +71,10 @@ const StackedChart = ({ data }) => {
         createSeries('ventilator', 'Ventilator')
         createSeries('covid_tests', 'Covid Tests')
         createSeries('vaccine', 'Vaccine')
-        createSeries('construction_works_and_materials', 'Construction works & materials')
+        createSeries(
+            'construction_works_and_materials',
+            'Construction works & materials'
+        )
         createSeries('medicines', 'Medicines')
         createSeries('sanitizing_supplies', 'Sanitizing supplies')
         createSeries('medical_consumables', 'Medical consumables')
@@ -88,6 +91,7 @@ const StackedChart = ({ data }) => {
         markerTemplate.height = 10
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

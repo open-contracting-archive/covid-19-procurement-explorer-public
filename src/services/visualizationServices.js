@@ -142,6 +142,26 @@ class VisualizationServices {
             console.log(error)
         }
     }
+    static async ProductDistribution() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/product-distribution/`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async ProductDistributionCountry(country) {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/product-distribution/?country=${country}`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
     static async ContractStatus() {
         try {
             const res = await Api.get(
@@ -196,6 +216,46 @@ class VisualizationServices {
         try {
             const res = await Api.get(
                 await `${API_URL}api/v1/vizualization/monopolization/?country=${country}`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async GlobalSuppliers() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/global-suppliers/`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async CountrySuppliers(country) {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/country-suppliers/?country=${country}`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async Equity() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/equity-indicators/`
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async EquityCountry(country) {
+        try {
+            const res = await Api.get(
+                await `${API_URL}api/v1/vizualization/equity-indicators/?country=${country}`
             )
             return res.body
         } catch (error) {
