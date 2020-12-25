@@ -182,7 +182,7 @@ const Home = () => {
                             }}
                             className="[ flex flex-wrap md:flex-no-wrap justify-center ] pt-12 w-full text-white bg-primary-dark">
                             <a
-                                href=""
+                                href="/data"
                                 className="flex [ mr-12 mb-10 ] text-center">
                                 <div>
                                     <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
@@ -193,7 +193,7 @@ const Home = () => {
                                     </p>
                                 </div>
                             </a>
-                            <a href="" className="flex text-center">
+                            <a href="/library" className="flex text-center">
                                 <div>
                                     <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
                                         {trans('Explore library')}
