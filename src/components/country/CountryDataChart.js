@@ -1971,6 +1971,9 @@ const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
 function CountryDataCharts({ countryCode }) {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
     const [loading, setLoading] = useState(false)
     const [totalSpending, setTotalSpending] = useState({})
     const [totalContracts, setTotalContracts] = useState({})
@@ -1978,15 +1981,20 @@ function CountryDataCharts({ countryCode }) {
     const [directOpen, setDirectOpen] = useState()
     const [topSuppliers, setTopSuppliers] = useState()
     const [topBuyers, setTopBuyers] = useState()
+    const [productDistribution, setProductDistribution] = useState()
     const [contractStatus, setContractStatus] = useState()
     const [quantityCorrelation, setQuantityCorrelation] = useState()
     const [monopolization, setMonopolization] = useState()
+    const [countrySuppliers, setCountrySuppliers] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
     useEffect(() => {
         setLoading(true)
     }, [])
@@ -2020,6 +2028,11 @@ function CountryDataCharts({ countryCode }) {
         VisualizationServices.TopBuyersCountry(countryCode).then((response) => {
             setTopBuyers(response)
         })
+        VisualizationServices.ProductDistributionCountry(countryCode).then(
+            (response) => {
+                setProductDistribution(response)
+            }
+        )
         VisualizationServices.ContractStatusCountry(countryCode).then(
             (response) => {
                 setContractStatus(response)
@@ -2035,8 +2048,14 @@ function CountryDataCharts({ countryCode }) {
                 setMonopolization(response)
             }
         )
+        VisualizationServices.CountrySuppliers(countryCode).then((response) => {
+            setCountrySuppliers(response)
+        })
     }, [])
 
+    // ===========================================================================
+    // Handlers and functions
+    // ===========================================================================
     // const totalSpendingLineChartData = get(totalSpending, 'usd.line_chart')
     // Function to manage data for line chart
     const lineChartData = (chartData) => {
@@ -2186,6 +2205,48 @@ function CountryDataCharts({ countryCode }) {
         topBuyers && calculateBuyersChartPercentage(topBuyers, 'by_value')
     // console.log(topSuppliersDataByValue)
 
+    // Product distribution
+    const calculateProductChartPercentage = (data, type) => {
+        if (type == 'by_value') {
+            let total = data.reduce((acc, current) => {
+                return acc + current.amount_local
+            }, 0)
+
+            let productDistributionChartData = data.map((data) => {
+                return {
+                    name: data.product_name,
+                    value: Math.ceil((data.amount_local / total) * 100),
+                    amount: data.amount_local
+                }
+            })
+            return productDistributionChartData
+        }
+        if (type == 'by_number') {
+            let total = data.reduce((acc, current) => {
+                return acc + current.tender_count
+            }, 0)
+
+            let productDistributionChartData = data.map((data) => {
+                return {
+                    name: data.product_name,
+                    value: Math.ceil((data.tender_count / total) * 100),
+                    amount: data.tender_count
+                }
+            })
+            return productDistributionChartData
+        }
+    }
+
+    const productDistributionDataByNumber =
+        productDistribution &&
+        calculateProductChartPercentage(productDistribution, 'by_number')
+    const productDistributionDataByValue =
+        productDistribution &&
+        calculateProductChartPercentage(productDistribution, 'by_value')
+    // console.log(productDistribution)
+    // console.log(productDistributionDataByValue)
+    // console.log(productDistributionDataByNumber)
+
     // Contract status
     const calculateContractStatusChartPercentage = (data, type) => {
         if (type == 'by_value') {
@@ -2254,6 +2315,43 @@ function CountryDataCharts({ countryCode }) {
         quantityCorrelationDataByNumberRaw &&
         sortDate(quantityCorrelationDataByNumberRaw)
     // console.log(quantityCorrelationDataByValue)
+
+    // Country Suppliers Visualization
+    const getSuppliersData = (data, type) => {
+        let suppliersData = {}
+        let set1 =
+            data &&
+            data.product_buyer.map((item) => {
+                return {
+                    ...suppliersData,
+                    from: item.product_name,
+                    to: item.buyer_name,
+                    value:
+                        type == 'by_value' ? item.amount_usd : item.tender_count
+                }
+            })
+        let set2 =
+            data &&
+            data.supplier_product.map((item) => {
+                return {
+                    ...suppliersData,
+                    from: item.supplier_name,
+                    to: item.product_name,
+                    value:
+                        type == 'by_value' ? item.amount_usd : item.tender_count
+                }
+            })
+        // console.log(set1)
+        // console.log(set2)
+        const combinedData = [...set2, ...set1]
+        // console.log(combinedData)
+        return combinedData
+    }
+    const countrySuppliersDataByNumber =
+        countrySuppliers && getSuppliersData(countrySuppliers, 'by_number')
+    const countrySuppliersDataByValue =
+        countrySuppliers && getSuppliersData(countrySuppliers, 'by_value')
+    console.log(countrySuppliersDataByNumber)
 
     return (
         <section className="bg-primary-gray">
@@ -2532,7 +2630,6 @@ function CountryDataCharts({ countryCode }) {
                         <div className="w-full lg:w-1/2 px-2 mb-6">
                             <BarListSection
                                 label="Top Suppliers"
-                                bar_data={top_supply_bar_data}
                                 byNumber={
                                     topSuppliersDataByNumber &&
                                     topSuppliersDataByNumber
@@ -2572,22 +2669,63 @@ function CountryDataCharts({ countryCode }) {
                             </div>
                         </div> */}
                         <div className="w-full px-2 mb-6">
-                            <div className="bg-white rounded p-4">
-                                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                    Global suppliers
-                                </h3>
-                                <div className="flex">
+                            <div className="bg-white rounded p-4 simple-tab">
+                                <FullScreen handle={handle}>
+                                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                                        Global suppliers
+                                    </h3>
+                                    <Tabs>
+                                        <TabList>
+                                            <Tab>
+                                                {trans('By contract value')}
+                                            </Tab>
+                                            <Tab>
+                                                {trans(
+                                                    'By number of contracts'
+                                                )}
+                                            </Tab>
+                                        </TabList>
+
+                                        <div className="flex">
+                                            <div className="flex-1">
+                                                <TabPanel>
+                                                    <SankeyChart
+                                                        data={
+                                                            countrySuppliersDataByValue
+                                                        }
+                                                    />
+                                                </TabPanel>
+                                                <TabPanel>
+                                                    <SankeyChart
+                                                        data={
+                                                            countrySuppliersDataByNumber
+                                                        }
+                                                    />
+                                                </TabPanel>
+                                            </div>
+                                        </div>
+                                    </Tabs>
+                                    {/* <div className="flex">
                                     <div className="flex-1">
                                         <SankeyChart data={sankey_chart_data} />
                                     </div>
-                                </div>
+                                </div> */}
+                                </FullScreen>
                             </div>
                         </div>
 
                         <div className="w-full lg:w-1/2 px-2 mb-6">
                             <BarListSection
                                 label="Product distribution"
-                                bar_data={top_supply_bar_data}
+                                // bar_data={top_supply_bar_data}
+                                byNumber={
+                                    productDistributionDataByNumber &&
+                                    productDistributionDataByNumber
+                                }
+                                byValue={
+                                    productDistributionDataByValue &&
+                                    productDistributionDataByValue
+                                }
                             />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">

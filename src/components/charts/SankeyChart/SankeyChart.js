@@ -45,7 +45,7 @@ const SankeyChart = ({ data }) => {
         let chart = am4core.create(sankeyChart.current, am4charts.SankeyDiagram)
         chart.hiddenState.properties.opacity = 0
 
-        chart.exporting.menu = new am4core.ExportMenu()
+        // chart.exporting.menu = new am4core.ExportMenu()
 
         let hoverState = chart.links.template.states.create('hover')
         hoverState.properties.fillOpacity = 0.6
@@ -68,6 +68,9 @@ const SankeyChart = ({ data }) => {
         nodeTemplate.readerTitle = 'Click to show/hide or drag to rearrange'
         nodeTemplate.showSystemTooltip = true
         nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
+
+        nodeTemplate.nameLabel.height = undefined
+        nodeTemplate.nameLabel.label.hideOversized = true
 
         chart.data = data
         chart.logo.disabled = true

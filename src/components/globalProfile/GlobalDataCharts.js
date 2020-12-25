@@ -13,7 +13,7 @@ import { get } from 'lodash'
 // import RaceBarChart from '../charts/RaceBarChart/RaceBarChart'
 // import TreeMapChart from '../charts/TreeMapChart/TreeMapChart'
 import PieChart from '../charts/PieChart/PieChart'
-import AreaChart from '../charts/AreaChart/AreaChart'
+// import AreaChart from '../charts/AreaChart/AreaChart'
 import CombinedChart from '../charts/CombinedChart/CombinedChart'
 import SankeyChart from '../charts/SankeyChart/SankeyChart'
 import Loader from '../loader/Loader'
@@ -2033,6 +2033,9 @@ const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
 function GlobalDataChart() {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
     const [loading, setLoading] = useState(false)
     const [totalSpending, setTotalSpending] = useState()
     const [totalContracts, setTotalContracts] = useState()
@@ -2040,15 +2043,21 @@ function GlobalDataChart() {
     const [directOpen, setDirectOpen] = useState()
     const [topSuppliers, setTopSuppliers] = useState()
     const [topBuyers, setTopBuyers] = useState()
+    const [productDistribution, setProductDistribution] = useState()
     const [contractStatus, setContractStatus] = useState()
     const [quantityCorrelation, setQuantityCorrelation] = useState()
     const [monopolization, setMonopolization] = useState()
+    const [globalSuppliers, setGlobalSuppliers] = useState()
+    const [equity, setEquity] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
     useEffect(() => {
         setLoading(true)
     }, [])
@@ -2072,6 +2081,9 @@ function GlobalDataChart() {
         VisualizationServices.TopBuyers().then((response) => {
             setTopBuyers(response)
         })
+        VisualizationServices.ProductDistribution().then((response) => {
+            setProductDistribution(response)
+        })
         VisualizationServices.ContractStatus().then((response) => {
             setContractStatus(response)
         })
@@ -2081,8 +2093,17 @@ function GlobalDataChart() {
         VisualizationServices.monopolization().then((response) => {
             setMonopolization(response)
         })
+        VisualizationServices.GlobalSuppliers().then((response) => {
+            setGlobalSuppliers(response)
+        })
+        VisualizationServices.Equity().then((response) => {
+            setEquity(response)
+        })
     }, [])
 
+    // ===========================================================================
+    // Handlers and functions
+    // ===========================================================================
     // const totalSpendingLineChartData = get(totalSpending, 'usd.line_chart')
     // Function to manage data for line chart
     const lineChartData = (chartData) => {
@@ -2235,6 +2256,48 @@ function GlobalDataChart() {
         topBuyers && calculateBuyersChartPercentage(topBuyers, 'by_value')
     // console.log(topSuppliersDataByValue)
 
+    // Product distribution
+    const calculateProductChartPercentage = (data, type) => {
+        if (type == 'by_value') {
+            let total = data.reduce((acc, current) => {
+                return acc + current.amount_usd
+            }, 0)
+
+            let productDistributionChartData = data.map((data) => {
+                return {
+                    name: data.product_name,
+                    value: Math.ceil((data.amount_usd / total) * 100),
+                    amount: data.amount_usd
+                }
+            })
+            return productDistributionChartData
+        }
+        if (type == 'by_number') {
+            let total = data.reduce((acc, current) => {
+                return acc + current.tender_count
+            }, 0)
+
+            let productDistributionChartData = data.map((data) => {
+                return {
+                    name: data.product_name,
+                    value: Math.ceil((data.tender_count / total) * 100),
+                    amount: data.tender_count
+                }
+            })
+            return productDistributionChartData
+        }
+    }
+
+    const productDistributionDataByNumber =
+        productDistribution &&
+        calculateProductChartPercentage(productDistribution, 'by_number')
+    const productDistributionDataByValue =
+        productDistribution &&
+        calculateProductChartPercentage(productDistribution, 'by_value')
+    // console.log(productDistribution)
+    // console.log(productDistributionDataByValue)
+    // console.log(productDistributionDataByNumber)
+
     // Contract status
     const calculateContractStatusChartPercentage = (data, type) => {
         if (type == 'by_value') {
@@ -2303,6 +2366,59 @@ function GlobalDataChart() {
         quantityCorrelationDataByNumberRaw &&
         sortDate(quantityCorrelationDataByNumberRaw)
     // console.log(quantityCorrelationDataByValue)
+
+    // Global Suppliers Visualization
+    const getSuppliersData = (data, type) => {
+        let suppliersData = {}
+        let set1 =
+            data &&
+            data[type].product_country.map((item) => {
+                return {
+                    ...suppliersData,
+                    from: item.product_name,
+                    to: item.country_name,
+                    value:
+                        type == 'by_value' ? item.amount_usd : item.tender_count
+                }
+            })
+        let set2 =
+            data &&
+            data[type].supplier_product.map((item) => {
+                return {
+                    ...suppliersData,
+                    from: item.supplier_name,
+                    to: item.product_name,
+                    value:
+                        type == 'by_value' ? item.amount_usd : item.tender_count
+                }
+            })
+        // console.log(set1)
+        // console.log(set2)
+        const combinedData = [...set2, ...set1]
+        // console.log(combinedData)
+        return combinedData
+    }
+    const globalSuppliersDataByNumber =
+        globalSuppliers && getSuppliersData(globalSuppliers, 'by_number')
+    const globalSuppliersDataByValue =
+        globalSuppliers && getSuppliersData(globalSuppliers, 'by_value')
+    // console.log(globalSuppliersDataByNumber)
+
+    // Equity chart
+    // const equityByValue =
+    // equity &&
+    // equity.map((data) => {
+    //     return {
+    //         value: "assigned",
+    //         number: data.by_value.assigned
+    //     }
+    // })
+    // const equityByNumber =
+    // equity &&
+    // equity.map((data) => {
+    //     return { value: data.procedure, number: data.tender_count }
+    // })
+
 
     return (
         <section className="bg-primary-gray">
@@ -2662,12 +2778,16 @@ function GlobalDataChart() {
                                             <div className="flex-1">
                                                 <TabPanel>
                                                     <SankeyChart
-                                                        data={sankey_chart_data}
+                                                        data={
+                                                            globalSuppliersDataByValue
+                                                        }
                                                     />
                                                 </TabPanel>
                                                 <TabPanel>
                                                     <SankeyChart
-                                                        data={sankey_chart_data}
+                                                        data={
+                                                            globalSuppliersDataByNumber
+                                                        }
                                                     />
                                                 </TabPanel>
                                             </div>
@@ -2709,7 +2829,15 @@ function GlobalDataChart() {
                         <div className="w-full lg:w-1/2 px-2 mb-4">
                             <BarListSection
                                 label="Product distribution"
-                                bar_data={top_supply_bar_data}
+                                // bar_data={top_supply_bar_data}
+                                byNumber={
+                                    productDistributionDataByNumber &&
+                                    productDistributionDataByNumber
+                                }
+                                byValue={
+                                    productDistributionDataByValue &&
+                                    productDistributionDataByValue
+                                }
                             />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4">
