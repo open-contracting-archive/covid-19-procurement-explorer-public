@@ -26,6 +26,7 @@ import News from './layouts/News'
 import NewsDetail from './layouts/NewsDetail'
 import EventsDetail from './layouts/EventsDetail'
 import BlogsDetail from './layouts/BlogsDetail'
+import Insights from './components/country/insights'
 
 function App() {
     const dispatch = useDispatch()
@@ -63,6 +64,7 @@ function App() {
                     <Route path="/events" component={Events} />
                     <Route path="/resources" component={Resources} />
                     <Route path="/Tags" component={Tags} />
+                    <Route path="/insights/:id" component={Insights} />
                     <Route component={NotFound} />
                 </Switch>
             </Fragment>

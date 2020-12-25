@@ -48,6 +48,20 @@ class InsightServices {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
     }
+    static async InsightsData() {
+        try {
+            const res = await Api.get(
+                await `${API_URL}/api/v2/pages/?type=content.InsightsPage&fields=*`
+            )
+            return res.body
+        } catch (error) {
+            return error
+        }
+    }
+    static async InsightsDetailData(id) {
+        const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
+        return res.body
+    }
 }
 
 export default InsightServices

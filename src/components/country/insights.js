@@ -1,12 +1,31 @@
-import React, { Fragment, useState } from 'react'
+import React, { useEffect, Fragment, useState } from 'react'
 import CountryProfileServices from '../../services/countryProfileServices'
-import { Link } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
 import newsImage from '../../assets/img/news.jpg'
+import { useHistory, Link, useParams } from 'react-router-dom'
+import { get } from 'lodash'
+import * as dayjs from 'dayjs'
+import { API_URL } from '../../helpers'
+import InsightServices from '../../services/insightServices'
+import Loader from '../../components/loader/Loader'
 
 const Insights = () => {
+
+    const [insightsDetail, setInsightsDetail] = useState({})
+    const [insightsData, setInsightsData] = useState([])
+    const [loading, setLoading] = useState(true)
+    let history = useHistory()
+    let { id: insightsId } = useParams()
+    window.scrollTo(0, 0)
+
+    useEffect(() => {
+        InsightServices.InsightsData().then((response) => {
+            setInsightsData(response.items)
+            setLoading(false)
+        })
+    }, [])
     const options = [
         { value: 'option-1', label: 'Option 1' },
         { value: 'option-2', label: 'Option 2' },
@@ -30,54 +49,35 @@ const Insights = () => {
         <div>
             <h2 className="font-normal text-lg mb-6">Library</h2>
             <div className="grid grid-cols-12 grid-rows-3 gap-x-16 gap-y-10 main-news mb-12">
-                <div className="main-news__item relative">
-                    <div className="main-news__caption absolute">
-                        <h3 className="news-caption__title">
-                            How COVID-19 has advanced the case for procurement
-                            reform
-                        </h3>
-                        <p className="news-caption__date">Nov 19, 2020</p>
-                    </div>
-                    <div className="img-wrapper img-gradient">
-                        <img src={newsImage} alt="" />
-                    </div>
-                </div>
-                <div className="main-news__item">
-                    <div className="img-wrapper">
-                        <img src={newsImage} alt="" />
-                    </div>
-                    <div className="main-news__caption">
-                        <h3 className="news-caption__title">
-                            How COVID-19 has advanced the case for procurement
-                            reform
-                        </h3>
-                        <p className="news-caption__date">Nov 19, 2020</p>
-                    </div>
-                </div>
-                <div className="main-news__item">
-                    <div className="img-wrapper">
-                        <img src={newsImage} alt="" />
-                    </div>
-                    <div className="main-news__caption">
-                        <h3 className="news-caption__title">
-                            How COVID-19 has advanced the case for procurement
-                            reform
-                        </h3>
-                        <p className="news-caption__date">Nov 19, 2020</p>
-                    </div>
-                </div>
-                <div className="main-news__item">
-                    <div className="img-wrapper">
-                        <img src={newsImage} alt="" />
-                    </div>
-                    <div className="main-news__caption">
-                        <h3 className="news-caption__title">
-                            How COVID-19 has advanced the case for procurement
-                            reform
-                        </h3>
-                        <p className="news-caption__date">Nov 19, 2020</p>
-                    </div>
-                </div>
+            {insightsData &&
+                insightsData.slice(0, 4).map((insights) => {
+                    return (
+                        <Link className="main-news__item relative"
+                            to={`/insights-detail/${insights.id}`}
+                            key={insights.id}>
+                            {/* <div className="main-news__item relative"> */}
+                                {get(
+                                    insights,
+                                    'content_image.meta.download_url'
+                                    ) && 
+                                <div className="img-wrapper img-gradient">
+                                    <img src={`${API_URL}${get(
+                                        insights,
+                                        'content_image.meta.download_url'
+                                    )}`} alt="" />
+                                </div>
+                                }
+                                <div className="main-news__caption">
+                                    <h3 className="news-caption__title">
+                                        {insights.title}
+                                    </h3>
+                                    <p className="news-caption__date">{insights.published_date}</p>
+                                </div>
+                                
+                            {/* </div> */}
+                        </Link>
+                    )
+                })}
             </div>
             <h2 className="font-normal text-lg mb-6">
                 Best practices and solutions from our database
