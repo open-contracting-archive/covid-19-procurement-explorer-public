@@ -303,3 +303,5 @@ $RECYCLE.BIN/
 
 .idea/
 .vscode/
+
+config/deploy/parameters/*
