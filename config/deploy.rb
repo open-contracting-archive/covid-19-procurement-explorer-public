@@ -21,7 +21,7 @@ set :default_stage,       "staging"
 
 # Other Options #
 #####################################################################################
-set :ssh_options,         { verify_host_key: :always, :forward_agent => true }
+set :ssh_options,         { :forward_agent => true }
 set :default_run_options, { :pty => true }
 
 # Permissions #
@@ -35,7 +35,7 @@ set :keep_releases,       1
 
 # Slack Integration #
 #####################################################################################
-set :slack_webhook_url,     "https://hooks.slack.com/services/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"
+set :slack_webhook_url,     "https://hooks.slack.com/services/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"
 
 # Rollbar Integration #
 #####################################################################################
