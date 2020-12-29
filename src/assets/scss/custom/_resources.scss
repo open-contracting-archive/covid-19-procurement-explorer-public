@@ -10,3 +10,49 @@
 .blogs-list .img-wrapper{
     @apply h-full;
 }
+.related-section{
+    max-width: 246px;
+    .related__list {
+        border-bottom: 1px solid #eeeeee;
+        img{
+            height:90px;
+        }
+        &:last-child{
+            @apply mb-0 pb-0;
+        }
+    }
+}
+.detail__metadata{
+    max-width: 170px;
+
+}
+
+.details{
+    ul{
+        padding:0;
+        margin:0;
+        li{
+            &:before{
+                content:"";
+                position: absolute;
+                height: 6px;
+                width: 6px;
+                left: 0;
+                position: block;
+                background: #1FBBEC;
+                border-radius: 50%;
+            }
+        }
+    }
+    table{
+        border: 1px solid #eee;
+        tr:not(:last-child){
+            border: 1px solid #eee;
+
+        }
+        th{
+            width: 180px;
+            border-right: 1px solid #eee;
+        }
+    }
+}

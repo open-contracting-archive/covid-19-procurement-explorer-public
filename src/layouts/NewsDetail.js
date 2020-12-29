@@ -87,7 +87,7 @@ const NewsDetail = () => {
                                     </p>
                                     <div className="tags flex flex-wrap">
                                         {newsDetail.tags && newsDetail.tags.map(news => (
-                                            <Link className="tag" key={news} onClick={handleClick}>{news}</Link>
+                                            <a href="#" className="tag" key={news} onClick={handleClick}>{news}</a>
                                         ))}
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@ const NewsDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        {newsData.length !== 0 ?
+                        {newsData.length !== 1 ?
                             <>
                             <hr className="mb-10 text-primary-gray" />
                             <div className="mb-20">

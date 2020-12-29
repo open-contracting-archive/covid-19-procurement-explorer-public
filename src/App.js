@@ -26,6 +26,7 @@ import News from './layouts/News'
 import NewsDetail from './layouts/NewsDetail'
 import EventsDetail from './layouts/EventsDetail'
 import BlogsDetail from './layouts/BlogsDetail'
+import ResourcesDetail from './layouts/ResourcesDetail'
 import Insights from './components/country/insights'
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
                     <Route path="/news-detail/:id" component={NewsDetail} />
                     <Route path="/blogs-detail/:id" component={BlogsDetail} />
                     <Route path="/events-detail/:id" component={EventsDetail} />
+                    <Route path="/resources-detail" component={ResourcesDetail} />
                     <Route path="/library" component={Library} />
                     <Route path="/blogs" component={Blogs} />
                     <Route path="/events" component={Events} />

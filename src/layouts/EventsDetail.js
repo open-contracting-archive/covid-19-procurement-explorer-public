@@ -19,6 +19,10 @@ const EventsDetail = () => {
         history.goBack()
     }
 
+    const handleClick = () => {
+        history.push("/tags");
+    }
+
     useEffect(() => {
         InsightServices.EventsDetailData(eventsId).then((response) => {
             // console.log(response)
@@ -81,21 +85,9 @@ const EventsDetail = () => {
                                         Tags
                                     </p>
                                     <div className="tags flex flex-wrap">
-                                        <div className="tag">
-                                            <p>Covid-19</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>Corona</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>Virus</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>News</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>Article</p>
-                                        </div>
+                                        {eventsDetail.tags && eventsDetail.tags.map(events => (
+                                            <a  href="#" className="tag" key={events} onClick={handleClick}>{events}</a>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +163,7 @@ const EventsDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        {eventsData.length !== 0 ?
+                        {eventsData.length !== 1 ?
                         <>
                             <hr className="mb-10 text-primary-gray" />
                             <div className="mb-20">
@@ -187,10 +179,10 @@ const EventsDetail = () => {
                                                 return (
                                                     <>
                                                         <Link
-                                                            className="events-thumbnail"
+                                                            className="events-thumbnail bg-blue-0 "
                                                             to={`/events-detail/${events.id}`}
                                                             key={events.id}>
-                                                                    <div className="card__item bg-blue-0 px-8 py-8">
+                                                                    <div className="card__item h-full px-8 py-8">
                                                                             <div className="card__day text-4xl leading-none">
                                                                                 {dayjs(
                                                                                     eventsData[0]

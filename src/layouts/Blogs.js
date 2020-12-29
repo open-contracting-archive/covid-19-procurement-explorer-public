@@ -36,7 +36,7 @@ const Blogs = () => {
                             <span
                                 className="cursor-pointer text-primary-blue"
                                 onClick={previousPage}>
-                                News
+                                Library
                             </span>{' '}
                             /
                         </div>
@@ -44,7 +44,7 @@ const Blogs = () => {
                         {/* {blogsData.length !== 0}  */}
                         {blogsData && blogsData.length !== 0 &&
                             blogsData.map((blogs) => {
-                                let data = blogs.body.slice(0,200).replace('<p>','');
+                                let data = blogs.body.slice(0,150).replace('<p>','');
                                 return (
                                     <Link
                                         className="blogs-thumbnail grid md:grid-cols-2 grid-cols-1  gap-x-10 gap-y-6 mb-16"
