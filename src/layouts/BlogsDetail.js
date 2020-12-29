@@ -20,6 +20,10 @@ const BlogsDetail = () => {
         history.goBack()
     }
 
+    const handleClick = () => {
+        history.push("/tags");
+    }
+
     useEffect(() => {
         InsightServices.BlogsDetailData(blogsId).then((response) => {
             // console.log(response)
@@ -30,7 +34,7 @@ const BlogsDetail = () => {
             setBlogsData(response.items)
         })
     }, [blogsId])
-
+    
     return (
         <>
             {loading ? (
@@ -43,18 +47,18 @@ const BlogsDetail = () => {
                                 className="cursor-pointer text-primary-blue">
                                 Library
                             </Link>{' '}
+                            /
                             <Link to="/blogs"
                                 className="cursor-pointer text-primary-blue"
-                            >
+                                >
                                 Blogs
                             </Link>{' '}
-                            /
                         </div>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
                             {blogsDetail.title}
                         </h2>
                         {get(
-                            blogs,
+                            blogsDetail,
                             'content_image.meta.download_url'
                         ) &&
                             <div className="img-wrapper mb-6 md:mb-10">
@@ -82,21 +86,9 @@ const BlogsDetail = () => {
                                         Tags
                                     </p>
                                     <div className="tags flex flex-wrap">
-                                        <div className="tag">
-                                            <p>Covid-19</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>Corona</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>Virus</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>News</p>
-                                        </div>
-                                        <div className="tag">
-                                            <p>Article</p>
-                                        </div>
+                                        {blogsDetail.tags && blogsDetail.tags.map(blogs => (
+                                            <a href="#" className="tag" key={blogs} onClick={handleClick}>{blogs}</a>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -170,8 +162,9 @@ const BlogsDetail = () => {
                                 </div>
                             </div>
                         </div>
-                        {blogsData.length !== 0 ?
+                        {blogsData.length !== 1 ?
                         <>
+                        
                             <hr className="mb-10 text-primary-gray" />
                             <div className="mb-20">
                                 <h2 className="text-xl mb-6">Related Blogs</h2>

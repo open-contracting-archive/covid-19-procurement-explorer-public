@@ -63,19 +63,17 @@
    }
 }
 .events{
-    .card{
-        &__item{
-            @apply bg-blue-0;
-            transition: all .4s ease;
-            &:hover{
-                @apply bg-blue-20;
-                @apply text-white;
-            }
+    .events-thumbnail{
+        @apply bg-blue-0;
+        transition: all .4s ease;
+        &:hover{
+            @apply bg-blue-20;
+            @apply text-white;
         }
 
     }
     &__past{
-        .card__item{
+        .events-thumbnail{
             @apply bg-primary-gray;
         }
     }

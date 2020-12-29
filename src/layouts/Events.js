@@ -57,7 +57,7 @@ function Events() {
                                         className="events-thumbnail"
                                         to={`/events-detail/${events.id}`}
                                         key={events.id}>
-                                                <div className="card__item px-8 py-8">
+                                                <div className="card__item h-full px-8 py-8">
                                                         <div className="card__day text-4xl leading-none">
                                                             {dayjs(
                                                                 eventsData[0]
@@ -120,7 +120,7 @@ function Events() {
                                         className="events-thumbnail"
                                         to={`/events-detail/${events.id}`}
                                         key={events.id}>
-                                                <div className="card__item px-8 py-8">
+                                                <div className="card__item h-full px-8 py-8">
                                                         <div className="card__day text-4xl">
                                                             {dayjs(
                                                                 eventsData[0]

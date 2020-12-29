@@ -240,7 +240,7 @@ const GlobalProfile = () => {
                                 className="py-16 bg-primary-gray px-4">
                                 <div className="container mx-auto">
                                     <TabPanel>
-                                        <GlobalDataCharts />
+                                        <GlobalDataCharts />     
                                     </TabPanel>
                                 </div>
                             </div>
