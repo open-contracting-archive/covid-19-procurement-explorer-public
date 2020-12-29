@@ -1,4 +1,3 @@
-import newsImage from '../assets/img/news.jpg'
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
@@ -72,13 +71,15 @@ function Library() {
                                                     className="news-thumbnail"
                                                     to={`/news-detail/${newsData[0].id}`}>
                                                     <div className="img-wrapper relative">
-                                                        {newsData[0].content_image.meta.download_url  && 
+                                                        {newsData[0]
+                                                            .content_image.meta
+                                                            .download_url && (
                                                             <img
                                                                 className="w-full h-full object-cover"
                                                                 src={`${API_URL}${newsData[0].content_image.meta.download_url}`}
                                                                 alt=""
                                                             />
-                                                        }
+                                                        )}
                                                         <div className="news__caption px-6 py-6 text-white">
                                                             <h3 className="news-caption__title">
                                                                 {
@@ -113,10 +114,10 @@ function Library() {
                                                     to={`/news-detail/${news.id}`}
                                                     key={news.id}>
                                                     <div className="news__item flex">
-                                                    {get(
+                                                        {get(
                                                             news,
                                                             'content_image.meta.download_url'
-                                                        ) && 
+                                                        ) && (
                                                             <div className="img-wrapper">
                                                                 <img
                                                                     className="w-full h-full object-cover"
@@ -127,7 +128,7 @@ function Library() {
                                                                     alt=""
                                                                 />
                                                             </div>
-                                                        }
+                                                        )}
                                                         <div className="news__caption pl-6">
                                                             <h3 className="news-caption__title">
                                                                 {news.title}
@@ -146,14 +147,15 @@ function Library() {
                                         })}
                                 </div>
                             </div>
-                            {newsData.length !== 0 ?
+                            {newsData.length !== 0 ? (
                                 <div className="flex justify-end pt-10">
                                     <Link to="/news" className="text-blue-20">
                                         View all news --&gt;{' '}
                                     </Link>
                                 </div>
-                                : <p> There are no News Records</p>
-                            }
+                            ) : (
+                                <p> There are no News Records</p>
+                            )}
                         </div>
                     </section>
 
@@ -173,7 +175,7 @@ function Library() {
                                                 {get(
                                                     blogs,
                                                     'content_image.meta.download_url'
-                                                ) && 
+                                                ) && (
                                                     <div className="img-wrapper">
                                                         <img
                                                             className="h-full object-cover"
@@ -184,7 +186,7 @@ function Library() {
                                                             alt=""
                                                         />
                                                     </div>
-                                                }
+                                                )}
                                                 <div>
                                                     <h3 className="blogs-caption__title">
                                                         {blogs.title}
@@ -201,14 +203,15 @@ function Library() {
                                         )
                                     })}
                             </div>
-                            {blogsData.length !== 0 ? 
+                            {blogsData.length !== 0 ? (
                                 <div className="flex justify-center pt-10">
                                     <Link to="/blogs" className="text-blue-20">
                                         View all blogs --&gt;{' '}
                                     </Link>
                                 </div>
-                                : <p> There are no Blogs Records</p>
-                            }
+                            ) : (
+                                <p> There are no Blogs Records</p>
+                            )}
                         </div>
                     </section>
                     <section className="px-4 events bg-primary-gray py-24">
@@ -249,14 +252,16 @@ function Library() {
                                                                     events.time_from
                                                                 }
                                                             </p>
-                                                            {events.time_to &&
+                                                            {events.time_to && (
                                                                 <>
                                                                     -
                                                                     <p className="to ml-1">
-                                                                        {events.time_to}
+                                                                        {
+                                                                            events.time_to
+                                                                        }
                                                                     </p>
                                                                 </>
-                                                            }
+                                                            )}
                                                         </div>
 
                                                         <p className="card__venue text-base">
@@ -268,14 +273,15 @@ function Library() {
                                         )
                                     })}
                             </div>
-                            {eventsData.length !== 0 ? 
+                            {eventsData.length !== 0 ? (
                                 <div className="flex justify-center pt-10">
                                     <Link to="/events" className="text-blue-20">
                                         View all events --&gt;{' '}
                                     </Link>
                                 </div>
-                                :<p> There are no Events Records</p>
-                            }
+                            ) : (
+                                <p> There are no Events Records</p>
+                            )}
                         </div>
                     </section>
                     <section className="px-4 resources py-24">
@@ -524,4 +530,3 @@ function Library() {
     )
 }
 export default Library
-    

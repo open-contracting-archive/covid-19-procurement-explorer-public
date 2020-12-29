@@ -1,5 +1,10 @@
 import React, { Fragment, useEffect } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    setCurrentLocale,
+    setTranslations
+} from './store/reducers/general/action'
 import About from './layouts/About'
 import Library from './layouts/Library'
 import Resources from './layouts/Resources'
@@ -7,20 +12,13 @@ import Tags from './layouts/Tags'
 import Blogs from './layouts/Blogs'
 import Events from './layouts/Events'
 import Country from './layouts/Country'
-import Data from './layouts/Data'
 import Header from './components/header/header'
-import Home from './layouts/Home'
+import Home from './layouts/pages/Homepage'
 import Footer from './components/footer/footer'
-import GeoChart from './components/charts/GeoChart/GeoChart'
 import GlobalProfile from './layouts/GlobalProfile'
+import GlobalOverview from './layouts/pages/GlobalOverview'
 import CountryProfileServices from './services/countryProfileServices'
-import { useDispatch, useSelector } from 'react-redux'
 import NotFound from './components/NotFound/NotFound'
-
-import {
-    setCurrentLocale,
-    setTranslations
-} from './store/reducers/general/action'
 import TenderDetail from './layouts/TenderDetail'
 import News from './layouts/News'
 import NewsDetail from './layouts/NewsDetail'
@@ -52,13 +50,16 @@ function App() {
                 <Header />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/about" component={About} />
-                    <Route path="/geo-chart" component={GeoChart} />
                     <Route exact path="/country/:slug" component={Country} />
+                    <Route path="/about" component={About} />
                     <Route exact path="/data" component={GlobalProfile} />
-                    <Route exact path="/global-data" component={Data} />
+                    <Route
+                        exact
+                        path="/global-overview"
+                        component={GlobalOverview}
+                    />
                     <Route path="/tender/:tenderId" component={TenderDetail} />
-                    <Route exact path="/news" component={News} />
+                    <Route path="/news" component={News} />
                     <Route path="/news-detail/:id" component={NewsDetail} />
                     <Route path="/blogs-detail/:id" component={BlogsDetail} />
                     <Route path="/events-detail/:id" component={EventsDetail} />
@@ -67,7 +68,7 @@ function App() {
                     <Route path="/blogs" component={Blogs} />
                     <Route path="/events" component={Events} />
                     <Route path="/resources" component={Resources} />
-                    <Route path="/Tags" component={Tags} />
+                    <Route path="/tags" component={Tags} />
                     <Route path="/insights/:id" component={Insights} />
                     <Route path="/buyer-profile" component={BuyerProfile} />
                     <Route

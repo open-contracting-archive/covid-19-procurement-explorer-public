@@ -1,8 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import * as dayjs from 'dayjs'
-import Select from 'react-select'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Tender from '../components/country/tender'
 import Insights from '../components/country/insights'
@@ -38,7 +37,6 @@ function CountryDetail() {
     // ===========================================================================
     // Hooks
     // ===========================================================================
-
     useEffect(() => {
         // Fetch list of all countries
         CountryServices.CountryData().then((response) => {

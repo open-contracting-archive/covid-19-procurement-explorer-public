@@ -17,6 +17,7 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         // Create chart instance
         let chart = am4core.create(globalMapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
+        am4core.options.queue = true
         // chart.exporting.menu = new am4core.ExportMenu()
 
         // Set map definition
@@ -152,7 +153,7 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
     }, [data, coordinates])
 
     return (
-        <div className="map-wrapper bg-white rounded-md h-full">
+        <div className="map-wrapper bg-white rounded-md h-full mt-5">
             <div
                 ref={globalMapchartDiv}
                 style={

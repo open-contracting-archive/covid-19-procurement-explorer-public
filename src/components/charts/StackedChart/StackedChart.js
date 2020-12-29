@@ -12,6 +12,7 @@ const StackedChart = ({ data }) => {
         // Themes begin
         am4core.useTheme(am4themes_animated)
         // Themes end
+        am4core.options.queue = true
 
         // Create chart instance
         let chart = am4core.create(stackedChart.current, am4charts.XYChart)

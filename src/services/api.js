@@ -1,8 +1,5 @@
 import Http from 'axios'
 import querystring from 'querystring'
-
-// var cache = []
-
 class Api {
     constructor() {
         Http.defaults.timeout = 300000
