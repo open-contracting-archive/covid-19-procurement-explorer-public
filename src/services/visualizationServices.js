@@ -33,230 +33,121 @@ class VisualizationServices {
             console.log(error)
         }
     }
-    static async TotalSpendingCountry(country) {
+    static async TotalContracts(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total-spending/?country=${country}`
+                getApi('visualization.total-contracts'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async TotalContracts() {
+    static async AverageBids(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total-contracts/`
+                getApi('visualization.average-bids'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async TotalContractsCountry(country) {
+    static async DirectOpen(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total-contracts/?country=${country}`
+                getApi('visualization.direct-open'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async AverageBids() {
+    static async TopSuppliers(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/average-bids/`
+                getApi('visualization.top-suppliers'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async AverageBidsCountry(country) {
+    static async TopBuyers(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/average-bids/?country=${country}`
+                getApi('visualization.top-buyers'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async DirectOpen() {
+    static async ProductDistribution(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/direct-open/`
+                getApi('visualization.product-distribution'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async DirectOpenCountry(country) {
+    static async ContractStatus(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/direct-open/?country=${country}`
+                getApi('visualization.contract-status'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async TopSuppliers() {
+    static async QuantityCorrelation(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top-suppliers/`
+                getApi('visualization.quantity-correlation'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async TopSuppliersCountry(country) {
+    static async monopolization(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top-suppliers/?country=${country}`
+                getApi('visualization.monopolization'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async TopBuyers() {
+    static async GlobalSuppliers(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top-buyers/`
+                getApi('visualization.global-suppliers'),
+                params
             )
             return res.body
         } catch (error) {
             console.log(error)
         }
     }
-    static async TopBuyersCountry(country) {
+    static async Equity(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/top-buyers/?country=${country}`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async ProductDistribution() {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/product-distribution/`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async ProductDistributionCountry(country) {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/product-distribution/?country=${country}`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async ContractStatus() {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/contract-status/`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async ContractStatusCountry(country) {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/contract-status/?country=${country}`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async QuantityCorrelation() {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/quantity-correlation/`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async QuantityCorrelationCountry(country) {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/quantity-correlation/?country=${country}`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async monopolization() {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/monopolization/`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async monopolizationCountry(country) {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/monopolization/?country=${country}`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async GlobalSuppliers() {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/global-suppliers/`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async CountrySuppliers(country) {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/country-suppliers/?country=${country}`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async Equity() {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/equity-indicators/`
-            )
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    static async EquityCountry(country) {
-        try {
-            const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/equity-indicators/?country=${country}`
+                getApi('visualization.equity-indicators'),
+                params
             )
             return res.body
         } catch (error) {

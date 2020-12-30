@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import VisualizationServices from '../../services/visualizationServices'
@@ -63,11 +62,11 @@ function TotalSpending({ label, params }) {
     }
 
     // Total spending data
-    const totalSpendingLineChartDataRaw =
+    const totalSpendingAreaChartDataRaw =
         totalSpending &&
         lineChartData(get(totalSpending[currency], 'line_chart'))
-    const totalSpendingLineChartData =
-        totalSpendingLineChartDataRaw && sortDate(totalSpendingLineChartDataRaw)
+    const totalSpendingAreaChartData =
+        totalSpendingAreaChartDataRaw && sortDate(totalSpendingAreaChartDataRaw)
     const totalSpendingAmount =
         totalSpending && get(totalSpending[currency], 'total')
     const totalSpendingPercentage =
@@ -101,7 +100,7 @@ function TotalSpending({ label, params }) {
                 <div className="flex items-end">
                     {/* Line area chart */}
                     <AreaChartBlock
-                        chartData={totalSpendingLineChartData}
+                        chartData={totalSpendingAreaChartData}
                         totalAmount={totalSpendingAmount}
                         percentage={totalSpendingPercentage}
                         currency={currency}

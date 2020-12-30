@@ -5,8 +5,8 @@ import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort
 import { ReactComponent as FlagIcon } from '../../../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
 import newsImage from '../../../../assets/img/news.jpg'
-import AreaChart from '../../../../components/charts/AreaChart/AreaChart'
-import SimpleBarChart from '../../../../components/charts/SimpleBarChart/SimpleBarChart'
+import AreaChart from '../../../../components/Charts/AreaChart/AreaChart'
+import SimpleBarChart from '../../../../components/Charts/SimpleBarChart/SimpleBarChart'
 
 const barColorValue = '#ABBABF'
 
@@ -84,17 +84,15 @@ const GlobalBuyers = () => {
     let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const tempTableData = tempArray.map((index) => {
         return (
-                <tr key={index}>
-                    <td className="uppercase">
-                        SERVICIOS DE LABORATORIO CLÍNICO
-                    </td>
-                    <td>Mexico</td>
-                    <td>21</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>2,352,045</td>
-                    <td className="uppercase">1.2</td>
-                </tr>
+            <tr key={index}>
+                <td className="uppercase">SERVICIOS DE LABORATORIO CLÍNICO</td>
+                <td>Mexico</td>
+                <td>21</td>
+                <td>3</td>
+                <td>5</td>
+                <td>2,352,045</td>
+                <td className="uppercase">1.2</td>
+            </tr>
         )
     })
 

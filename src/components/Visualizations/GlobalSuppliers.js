@@ -9,7 +9,7 @@ import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullsc
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../services/visualizationServices'
 
-function GlobalSuppliers() {
+function GlobalSuppliers(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -22,7 +22,7 @@ function GlobalSuppliers() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.GlobalSuppliers().then((response) => {
+        VisualizationServices.GlobalSuppliers(params).then((response) => {
             setGlobalSuppliers(response)
             setLoading(false)
         })

@@ -1,29 +1,29 @@
-import React, {useEffect, useState} from 'react'
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
-import {FullScreen, useFullScreenHandle} from 'react-full-screen'
+import React, { useEffect, useState } from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../services/visualizationServices'
 import CombinedChart from '../Charts/CombinedChart/CombinedChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
-import {ReactComponent as DownloadIcon} from '../../assets/img/icons/ic_download.svg'
-import {ReactComponent as ShareIcon} from '../../assets/img/icons/ic_share.svg'
-import {ReactComponent as FullViewIcon} from '../../assets/img/icons/ic_fullscreen.svg'
-import {dateDiff} from "../../helpers/date";
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import { dateDiff } from '../../helpers/date'
 
-function ContractsCorrelation() {
+function ContractsCorrelation(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [quantityCorrelation, setQuantityCorrelation] = useState()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.QuantityCorrelation().then((response) => {
+        VisualizationServices.QuantityCorrelation(params).then((response) => {
             setQuantityCorrelation(response)
             setLoading(false)
         })
@@ -78,7 +78,7 @@ function ContractsCorrelation() {
                         <Tab>{trans('By number of contracts')}</Tab>
                     </TabList>
                     {loading ? (
-                        <Loader/>
+                        <Loader />
                     ) : (
                         <div className="flex mt-6">
                             <div className="flex-1">
@@ -110,11 +110,11 @@ function ContractsCorrelation() {
                                 text-primary-blue -mx-6 px-6">
                 <div className="flex">
                     <span className="flex items-center">
-                        <DownloadIcon className="mr-2 inline-block"/>{' '}
+                        <DownloadIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Download</span>
                     </span>
                     <span className="ml-8 flex items-center">
-                        <ShareIcon className="mr-2 inline-block"/>{' '}
+                        <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>
                 </div>
@@ -124,7 +124,7 @@ function ContractsCorrelation() {
                             <span className="cursor-pointer">
                                 View full screen
                             </span>
-                            <FullViewIcon className="ml-2 inline-block"/>
+                            <FullViewIcon className="ml-2 inline-block" />
                         </button>
                     </span>
                 </div>

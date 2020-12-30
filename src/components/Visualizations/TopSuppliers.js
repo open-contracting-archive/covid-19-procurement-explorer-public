@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react'
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
+import React, { useEffect, useState } from 'react'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
-import BarListChart from "../BarListSection/BarListChart";
+import BarListChart from '../BarListSection/BarListChart'
 
-function TopSuppliers() {
+function TopSuppliers(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [topSuppliers, setTopSuppliers] = useState()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TopSuppliers().then((response) => {
+        VisualizationServices.TopSuppliers(params).then((response) => {
             setTopSuppliers(response)
             setLoading(false)
         })
@@ -74,18 +74,24 @@ function TopSuppliers() {
                                 <div className="flex justify-end">
                                     <TabList>
                                         <Tab>{trans('By contract value')}</Tab>
-                                        <Tab>{trans('By number of contracts')}</Tab>
+                                        <Tab>
+                                            {trans('By number of contracts')}
+                                        </Tab>
                                     </TabList>
                                 </div>
                                 {loading ? (
-                                    <Loader/>
+                                    <Loader />
                                 ) : (
                                     <div className="mt-10">
                                         <TabPanel>
-                                            <BarListChart data={topSuppliersDataByValue}/>
+                                            <BarListChart
+                                                data={topSuppliersDataByValue}
+                                            />
                                         </TabPanel>
                                         <TabPanel>
-                                            <BarListChart data={topSuppliersDataByNumber}/>
+                                            <BarListChart
+                                                data={topSuppliersDataByNumber}
+                                            />
                                         </TabPanel>
                                     </div>
                                 )}

@@ -47,7 +47,17 @@ export const CONTINENTS = {
 
 const apiRoutes = {
     'visualization.total-spending': 'api/v1/vizualization/total-spending/',
-    'visualization.total-contracts': 'api/v1/vizualization/total-contracts/'
+    'visualization.total-contracts': 'api/v1/vizualization/total-contracts/',
+    'visualization.average-bids': 'api/v1/vizualization/average-bids/',
+    'visualization.direct-open': 'api/v1/vizualization/direct-open/',
+    'visualization.top-suppliers': 'api/v1/vizualization/top-suppliers/',
+    'visualization.top-buyers': 'api/v1/vizualization/top-buyers/',
+    'visualization.product-distribution': 'api/v1/vizualization/product-distribution/',
+    'visualization.contract-status': 'api/v1/vizualization/contract-status/',
+    'visualization.quantity-correlation': 'api/v1/vizualization/quantity-correlation/',
+    'visualization.monopolization': 'api/v1/vizualization/monopolization/',
+    'visualization.global-suppliers': 'api/v1/vizualization/global-suppliers/',
+    'visualization.equity-indicators': 'api/v1/vizualization/equity-indicators/',
 }
 
 export const getApi = (routeName) => {
