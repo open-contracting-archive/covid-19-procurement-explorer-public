@@ -2,10 +2,10 @@ import newsImage from '../assets/img/news.jpg'
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/Loader/Loader'
+import {formatDate} from "../helpers/date";
 
 function Events() {
     const [eventsData, setEventsData] = useState([])
@@ -59,20 +59,10 @@ function Events() {
                                         key={events.id}>
                                                 <div className="card__item h-full px-8 py-8">
                                                         <div className="card__day text-4xl leading-none">
-                                                            {dayjs(
-                                                                eventsData[0]
-                                                                    .event_date
-                                                            ).format(
-                                                                'DD'
-                                                            )}
+                                                            {formatDate(events.event_date, 'DD')}
                                                         </div>
                                                         <div className="card__month text-base uppercase">
-                                                            {dayjs(
-                                                                eventsData[0]
-                                                                    .event_date
-                                                            ).format(
-                                                                'MMMM'
-                                                            )}
+                                                            {formatDate(events.event_date, 'MMMM')}
                                                         </div>
                                                         <div className="card__caption">
                                                             <h3 className="card__title mt-8 mb-4 text-lg">
@@ -122,20 +112,10 @@ function Events() {
                                         key={events.id}>
                                                 <div className="card__item h-full px-8 py-8">
                                                         <div className="card__day text-4xl">
-                                                            {dayjs(
-                                                                eventsData[0]
-                                                                    .event_date
-                                                            ).format(
-                                                                'DD'
-                                                            )}
+                                                            {formatDate(events.event_date, 'DD')}
                                                         </div>
                                                         <div className="card__month text-base uppercase">
-                                                            {dayjs(
-                                                                eventsData[0]
-                                                                    .event_date
-                                                            ).format(
-                                                                'MMMM'
-                                                            )}
+                                                            {formatDate(events.event_date, 'MMMM')}
                                                         </div>
                                                         <div className="card__caption">
                                                             <h3 className="card__title mt-8 mb-4 text-lg">
@@ -143,22 +123,11 @@ function Events() {
                                                             </h3>
                                                             <div className="card__time opacity-50 text-base mb-4 uppercase flex">
                                                                 <p className="from mr-1">
-                                                                    {dayjs(
-                                                                    eventsData[0]
-                                                                        .time_from
-                                                                    ).format(
-                                                                        'hh a'
-                                                                    )}
+                                                                    {events.time_from}
                                                                 </p>
                                                                 -
                                                                 <p className="to ml-1">
-
-                                                                    {dayjs(
-                                                                        eventsData[0]
-                                                                            .time_to
-                                                                    ).format(
-                                                                        'hh a'
-                                                                    )}
+                                                                    {events.time_to}
                                                                 </p>
                                                             </div>
 

@@ -41,10 +41,10 @@ const Resources = () => {
                             </span>{' '}
                             /
                         </div>
-                    <h2 className="text-2xl mb-10">
+                    <h2 className="text-2xl">
                         Resources
                     </h2>
-                    <div className="grid grid-cols-2 gap-x-20">
+                    {/* <div className="grid grid-cols-2 gap-x-20 mt-10">
                         <div className="display__item">
                             <div className="news__item h-full">
                                 <div className="img-wrapper relative h-full">
@@ -100,9 +100,7 @@ const Resources = () => {
                                 </div>
                             </div>
                         </div>
-                            
-                       
-                    </div>
+                    </div> */}
                 </div>
             </section>
             <section className="resources__table py-12 bg-primary-gray">

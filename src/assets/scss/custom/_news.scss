@@ -188,7 +188,7 @@
     .blogs-caption__title,
     .news-caption__title {
         @apply mb-1;
-        height:54px;
+        max-height:54px;
         overflow: hidden;
     }
 }
@@ -204,7 +204,7 @@
 }
 .blogs-list .blogs-thumbnail{
     .blogs-caption__title {
-        height: 90px;
+        max-height: 90px;
         overflow: hidden;
     }
 }

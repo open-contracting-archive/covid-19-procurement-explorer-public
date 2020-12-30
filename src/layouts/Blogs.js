@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/Loader/Loader'
+import {formatDate} from "../helpers/date";
 
 const Blogs = () => {
     const [BlogsDetail, setBlogsDetail] = useState({})
@@ -44,31 +44,38 @@ const Blogs = () => {
                         {/* {blogsData.length !== 0}  */}
                         {blogsData && blogsData.length !== 0 &&
                             blogsData.map((blogs) => {
-                                let data = blogs.body.slice(0,150).replace('<p>','');
+                                // let data = blogs.body.split('\n')[0].replace('<p>','');
+                                // let data = blogs.body.slice(0,150).replace('<p>','');
+                                
+                                let data = blogs.body && blogs.body.split('\n')[0].replace('<p>','');
+                                
+                               
                                 return (
-                                    <Link
-                                        className="blogs-thumbnail grid md:grid-cols-2 grid-cols-1  gap-x-10 gap-y-6 mb-16"
-                                        to={`/blogs-detail/${blogs.id}`}
-                                        key={blogs.id}>
-                                        {get(
-                                            blogs,
-                                            'content_image.meta.download_url'
-                                        ) &&
-                                            <div className="img-wrapper">
-                                                <img className="h-full w-full object-cover"
-                                                    src={`${API_URL}${get(
-                                                        blogs,
-                                                        'content_image.meta.download_url'
-                                                    )}`}
-                                                    alt=""
-                                                />
-                                            </div>
-                                        }
-
+                                    <div className="blogs-thumbnail grid md:grid-cols-2 grid-cols-1  gap-x-10 gap-y-6 mb-16" key={blogs.id}>
+                                        <Link to={`/blogs-detail/${blogs.id}`}
+                                            key={blogs.id}>
+                                            {get(
+                                                blogs,
+                                                'content_image.meta.download_url'
+                                            ) &&
+                                                <div className="img-wrapper">
+                                                    <img className="h-full w-full object-cover"
+                                                        src={`${API_URL}${get(
+                                                            blogs,
+                                                            'content_image.meta.download_url'
+                                                        )}`}
+                                                        alt=""
+                                                    />
+                                                </div>
+                                            }
+                                        </Link>
                                         <div className="blog__caption">
-                                            <h3 className="blog-caption__title text-xl">
-                                                {blogs.title}
-                                            </h3>
+                                            <Link to={`/blogs-detail/${blogs.id}`}
+                                            key={blogs.id}>
+                                                <h3 className="blog-caption__title text-xl">
+                                                    {blogs.title}
+                                                </h3>
+                                            </Link>
                                             <div className="blog-caption__date mt-2 text-sm opacity-50 flex">
                                                 <p className="mr-4">
                                                     By{' '}
@@ -77,22 +84,22 @@ const Blogs = () => {
                                                     </span>
                                                 </p>
                                                 <p>
-                                                    {dayjs(
-                                                        blogs.published_date
-                                                    ).format('MMM DD, YYYY')}
+                                                    {formatDate(blogs.published_date, 'MMMM DD, YYYY')}
                                                 </p>
                                             </div>
                                             {/* <p className="blog-caption__details mt-4"> </p> */}
-                                            <div
-                                                className="blog-caption__details mt-4"
-                                                // dangerouslySetInnerHTML={{
-                                                //     __html: blogs.body
-                                                // }}
-                                                >
-                                                {data}
-                                            </div>
+                                             { blogs.body &&
+                                                <div
+                                                    className="blog-caption__details mt-4"
+                                                    // dangerouslySetInnerHTML={{
+                                                    //     __html: blogs.body
+                                                    // }}
+                                                    >
+                                                    {data || ''}
+                                                </div>
+                                            }
                                         </div>
-                                    </Link>
+                                    </div>
                                 )
                             })}
                         {blogsData.length !== 0 ? <div className="flex justify-center">
