@@ -1986,6 +1986,7 @@ function CountryDataCharts({ countryCode }) {
     const [quantityCorrelation, setQuantityCorrelation] = useState()
     const [monopolization, setMonopolization] = useState()
     const [countrySuppliers, setCountrySuppliers] = useState()
+    const [equity, setEquity] = useState()
 
     const currency = useSelector((state) => state.general.currency)
 
@@ -2050,6 +2051,9 @@ function CountryDataCharts({ countryCode }) {
         )
         VisualizationServices.CountrySuppliers(countryCode).then((response) => {
             setCountrySuppliers(response)
+        })
+        VisualizationServices.EquityCountry(countryCode).then((response) => {
+            setEquity(response)
         })
     }, [])
 
@@ -2353,6 +2357,21 @@ function CountryDataCharts({ countryCode }) {
         countrySuppliers && getSuppliersData(countrySuppliers, 'by_value')
     console.log(countrySuppliersDataByNumber)
 
+    // Equity chart
+    const equityByValue =
+        equity &&
+        equity.map((data) => {
+            return {
+                value: data.type,
+                number: currency == 'usd' ? data.amount_usd : data.amount_local
+            }
+        })
+    const equityByNumber =
+        equity &&
+        equity.map((data) => {
+            return { value: data.type, number: data.tender_count }
+        })
+
     return (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
@@ -2364,19 +2383,6 @@ function CountryDataCharts({ countryCode }) {
                                     Total Spending
                                 </h3>
                                 <div className="flex items-end">
-                                    {/* <div className=" text-primary-dark pb-4 w-2/5">
-                                        <AreaChart data={area_chart_data} />
-                                        <p>
-                                            <strong className="text-xl inline-block mr-3">
-                                                87M
-                                            </strong>
-                                            USD
-                                        </p>
-                                        <p className="text-sm text-green-30 font-bold">
-                                            +8%
-                                        </p>
-                                    </div> */}
-                                    {/* Line area chart */}
                                     <AreaChartBlock
                                         chartData={totalSpendingLineChartData}
                                         totalAmount={totalSpendingAmount}

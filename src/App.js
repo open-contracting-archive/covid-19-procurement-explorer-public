@@ -28,6 +28,8 @@ import EventsDetail from './layouts/EventsDetail'
 import BlogsDetail from './layouts/BlogsDetail'
 import ResourcesDetail from './layouts/ResourcesDetail'
 import Insights from './components/country/insights'
+import BuyerProfile from './layouts/BuyerProfile'
+import SupplierProfile from './layouts/SupplierProfile'
 
 function App() {
     const dispatch = useDispatch()
@@ -67,6 +69,11 @@ function App() {
                     <Route path="/resources" component={Resources} />
                     <Route path="/Tags" component={Tags} />
                     <Route path="/insights/:id" component={Insights} />
+                    <Route path="/buyer-profile" component={BuyerProfile} />
+                    <Route
+                        path="/supplier-profile"
+                        component={SupplierProfile}
+                    />
                     <Route component={NotFound} />
                 </Switch>
             </Fragment>

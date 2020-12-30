@@ -84,15 +84,19 @@ const Buyers = () => {
     let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const tempTableData = tempArray.map((index) => {
         return (
-            <tr className="table-row" key={index}>
-                <td className="uppercase">SERVICIOS DE LABORATORIO CLÍNICO</td>
-                <td>Mexico</td>
-                <td>21</td>
-                <td>3</td>
-                <td>5</td>
-                <td>2,352,045</td>
-                <td className="uppercase">1.2</td>
-            </tr>
+            <Link className="table-row" key={index} to="/buyer-profile">
+                <tr>
+                    <td className="uppercase">
+                        SERVICIOS DE LABORATORIO CLÍNICO
+                    </td>
+                    <td>Mexico</td>
+                    <td>21</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>2,352,045</td>
+                    <td className="uppercase">1.2</td>
+                </tr>
+            </Link>
         )
     })
 
