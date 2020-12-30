@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import Loader from '../Loader/Loader'
-import SimpleBarChart from '../charts/SimpleBarChart/SimpleBarChart'
+import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
-import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
+import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import {dateDiff, formatDate} from "../../helpers/date";
 
 function TotalContracts() {
@@ -64,7 +64,7 @@ function TotalContracts() {
                 {trans('Total contracts')}
             </h3>
             {loading ? (
-                <Loader sm/>
+                <Loader sm />
             ) : (
                 <div className="flex items-end">
                     {/* Line are chart */}

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import CombinedChart from '../charts/CombinedChart/CombinedChart'
+import CombinedChart from '../Charts/CombinedChart/CombinedChart'
 import useTrans from '../../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'

@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react'
-import {FullScreen, useFullScreenHandle} from 'react-full-screen'
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
+import React, { useState, useEffect } from 'react'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import Select from 'react-select'
 import useTrans from '../../../../hooks/useTrans'
-import Map from '../../../../components/charts/Map/Map'
-import RaceMap from '../../../../components/charts/RaceMap/RaceMap'
-import RaceBarChart from '../../../../components/charts/RaceBarChart/RaceBarChart'
-import {ReactComponent as DownloadIcon} from '../../../../assets/img/icons/ic_download.svg'
-import {ReactComponent as ShareIcon} from '../../../../assets/img/icons/ic_share.svg'
-import {ReactComponent as FullViewIcon} from '../../../../assets/img/icons/ic_fullscreen.svg'
-import {ReactComponent as ChartsIcon} from '../../../../assets/img/icons/ic_charts.svg'
-import {ReactComponent as MapIcon} from '../../../../assets/img/icons/ic_map.svg'
-import {ReactComponent as TableIcon} from '../../../../assets/img/icons/ic_table.svg'
-import {ReactComponent as SourcesIcon} from '../../../../assets/img/icons/ic_sources.svg'
+import Map from '../../../../components/Charts/Map/Map'
+import RaceMap from '../../../../components/Charts/RaceMap/RaceMap'
+import RaceBarChart from '../../../../components/Charts/RaceBarChart/RaceBarChart'
+import { ReactComponent as DownloadIcon } from '../../../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../../../assets/img/icons/ic_fullscreen.svg'
+import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
+import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
+import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
+import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import CountryContractMapServices from '../../../../services/countryContractMapServices'
 
 // Race Chart data
@@ -106,57 +106,55 @@ const WorldMapRace = () => {
     const [yearMonth, setYearMonth] = useState('2020-01')
     const [dataFromApi, setDataFromApi] = useState()
     const [contractDataApi, setContractDataApi] = useState({})
-    const [raceChartDataApi, setRaceChartDataApi] = useState({})
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
         label: 'All Continent'
     })
 
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     const options = [
-        {value: 'all', label: 'All Continent'},
-        {value: 'asia', label: 'Asia'},
-        {value: 'europe', label: 'Europe'},
-        {value: 'africa', label: 'Africa'},
-        {value: 'oceania', label: 'Oceania'},
-        {value: 'south_america', label: 'South America'},
-        {value: 'north_america', label: 'North America'},
-        {value: 'middle_east', label: 'Middle East'}
+        { value: 'all', label: 'All Continent' },
+        { value: 'asia', label: 'Asia' },
+        { value: 'europe', label: 'Europe' },
+        { value: 'africa', label: 'Africa' },
+        { value: 'oceania', label: 'Oceania' },
+        { value: 'south_america', label: 'South America' },
+        { value: 'north_america', label: 'North America' },
+        { value: 'middle_east', label: 'Middle East' }
     ]
 
     useEffect(() => {
-        CountryContractMapServices.GetGlobalMapData()
-            .then((response) => {
-                setDataFromApi(response)
-            })
+        CountryContractMapServices.GetGlobalMapData().then((response) => {
+            setDataFromApi(response)
+        })
     }, [])
 
     useEffect(() => {
         let dateObject = {}
         dataFromApi &&
-        dataFromApi.result.map((data) => {
-            let countryObject = {}
-            data.details.map((detail) => {
-                if (detail.country_code !== 'ALL') {
-                    countryObject = {
-                        ...countryObject,
-                        [detail.country_code]: {
-                            value: detail.amount_usd,
-                            number: detail.tender_count,
-                            url: `/country/${detail.country
-                                .toLowerCase()
-                                .replace(' ', '-')}`
+            dataFromApi.result.map((data) => {
+                let countryObject = {}
+                data.details.map((detail) => {
+                    if (detail.country_code !== 'ALL') {
+                        countryObject = {
+                            ...countryObject,
+                            [detail.country_code]: {
+                                value: detail.amount_usd,
+                                number: detail.tender_count,
+                                url: `/country/${detail.country
+                                    .toLowerCase()
+                                    .replace(' ', '-')}`
+                            }
                         }
                     }
+                })
+                dateObject = {
+                    ...dateObject,
+                    [data.month]: countryObject
                 }
             })
-            dateObject = {
-                ...dateObject,
-                [data.month]: countryObject
-            }
-        })
         setContractDataApi(dateObject)
         setYearMonth(dataFromApi && dataFromApi.result[0].month)
 
@@ -166,33 +164,6 @@ const WorldMapRace = () => {
                 return data.month
             })
         setSliderData(keys)
-    }, [dataFromApi])
-
-    useEffect(() => {
-        let raceDateObject = {}
-
-        dataFromApi &&
-        dataFromApi.result.map((data) => {
-            let countryObject = {}
-            data.details.map((detail) => {
-                if (detail.country_code !== 'ALL') {
-                    countryObject = {
-                        ...countryObject,
-                        [detail.country_code]: {
-                            value: detail.amount_usd,
-                            number: detail.tender_count,
-                            url: `/country/${detail.country
-                                .toLowerCase()
-                                .replace(' ', '-')}`
-                        }
-                    }
-                }
-            })
-            raceDateObject = {
-                ...raceDateObject,
-                [data.month]: countryObject
-            }
-        })
     }, [dataFromApi])
 
     const handleContinentChange = (selectedOption) => {
@@ -246,17 +217,13 @@ const WorldMapRace = () => {
         return ''
     }
 
-    if (!raceChartDataApi) {
-        return ''
-    }
+    console.log(contractDataApi)
 
     return (
         <section className="pt-16 bg-primary-gray pb-24">
             <div className="text-center mb-10">
                 <h3 className="uppercase text-3xl font-bold leading-none">
-                        <span className="block text-base font-bold">
-                            Explore
-                        </span>
+                    <span className="block text-base font-bold">Explore</span>
                     Countries
                 </h3>
                 <p className="text-base text-opacity-50  text-primary-dark">
@@ -272,28 +239,28 @@ const WorldMapRace = () => {
                                     <div className="worldmap-tab">
                                         <TabList>
                                             <Tab>
-                                                <MapIcon className="inline-block"/>
+                                                <MapIcon className="inline-block" />
                                                 <span className="text-sm mt-1 inline-block">
-                                                        {trans('Map')}
-                                                    </span>
+                                                    {trans('Map')}
+                                                </span>
                                             </Tab>
                                             <Tab>
-                                                <ChartsIcon className="inline-block"/>
+                                                <ChartsIcon className="inline-block" />
                                                 <span className="text-sm mt-1 inline-block">
-                                                        {trans('Charts')}
-                                                    </span>
+                                                    {trans('Charts')}
+                                                </span>
                                             </Tab>
                                             <Tab>
-                                                <TableIcon className="inline-block"/>
+                                                <TableIcon className="inline-block" />
                                                 <span className="text-sm mt-1 inline-block">
-                                                        {trans('Table')}
-                                                    </span>
+                                                    {trans('Table')}
+                                                </span>
                                             </Tab>
                                             <Tab>
-                                                <SourcesIcon className="inline-block"/>
+                                                <SourcesIcon className="inline-block" />
                                                 <span className="text-sm mt-1 inline-block">
-                                                        {trans('Sources')}
-                                                    </span>
+                                                    {trans('Sources')}
+                                                </span>
                                             </Tab>
                                         </TabList>
                                     </div>
@@ -340,12 +307,8 @@ const WorldMapRace = () => {
                                                     className="select-filter text-sm"
                                                     classNamePrefix="select-filter"
                                                     options={options}
-                                                    value={
-                                                        selectedContinent
-                                                    }
-                                                    defaultValue={
-                                                        options[0]
-                                                    }
+                                                    value={selectedContinent}
+                                                    defaultValue={options[0]}
                                                     onChange={(
                                                         selectedOption
                                                     ) =>
@@ -356,19 +319,14 @@ const WorldMapRace = () => {
                                                 />
                                             </div>
                                             <RaceMap
-                                                contractData={
-                                                    contractDataApi
-                                                }
+                                                contractData={contractDataApi}
                                                 contractType={contractType}
                                                 yearMonth={yearMonth}
-                                                sliderData={
-                                                    sliderData || []
-                                                }
+                                                sliderData={sliderData || []}
                                                 coordinates={
                                                     continent[
-                                                        selectedContinent
-                                                            .value
-                                                        ]
+                                                        selectedContinent.value
+                                                    ]
                                                 }
                                             />
                                         </TabPanel>
@@ -414,12 +372,8 @@ const WorldMapRace = () => {
                                                     className="select-filter text-sm"
                                                     classNamePrefix="select-filter"
                                                     options={options}
-                                                    value={
-                                                        selectedContinent
-                                                    }
-                                                    defaultValue={
-                                                        options[0]
-                                                    }
+                                                    value={selectedContinent}
+                                                    defaultValue={options[0]}
                                                     onChange={(
                                                         selectedOption
                                                     ) =>
@@ -434,12 +388,10 @@ const WorldMapRace = () => {
                                             />
                                         </TabPanel>
                                         <TabPanel>
-                                            Table Section under construction
-                                            !!
+                                            Table Section coming soon !!
                                         </TabPanel>
                                         <TabPanel>
-                                            Sources section under
-                                            construction !!
+                                            Sources section coming soon !!
                                         </TabPanel>
                                     </div>
                                 </div>
@@ -450,18 +402,14 @@ const WorldMapRace = () => {
                         className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-6 px-6">
                         <div className="flex">
-                                <span className="flex items-center">
-                                    <DownloadIcon className="mr-2 inline-block"/>{' '}
-                                    <span className="cursor-pointer">
-                                        Download
-                                    </span>
-                                </span>
+                            <span className="flex items-center">
+                                <DownloadIcon className="mr-2 inline-block" />{' '}
+                                <span className="cursor-pointer">Download</span>
+                            </span>
                             <span className="ml-8 flex items-center">
-                                    <ShareIcon className="mr-2 inline-block"/>{' '}
-                                <span className="cursor-pointer">
-                                        Share
-                                    </span>
-                                </span>
+                                <ShareIcon className="mr-2 inline-block" />{' '}
+                                <span className="cursor-pointer">Share</span>
+                            </span>
                         </div>
                         <div>
                             <span className="flex items-center">
@@ -469,7 +417,7 @@ const WorldMapRace = () => {
                                     <span className="cursor-pointer">
                                         View full screen
                                     </span>
-                                    <FullViewIcon className="ml-2 inline-block"/>
+                                    <FullViewIcon className="ml-2 inline-block" />
                                 </button>
                             </span>
                         </div>

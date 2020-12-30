@@ -5,8 +5,8 @@ import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
 import newsImage from '../../assets/img/news.jpg'
-import AreaChart from '../charts/AreaChart/AreaChart'
-import SimpleBarChart from '../charts/SimpleBarChart/SimpleBarChart'
+import AreaChart from '../Charts/AreaChart/AreaChart'
+import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 
 const barColorValue = '#ABBABF'
 
