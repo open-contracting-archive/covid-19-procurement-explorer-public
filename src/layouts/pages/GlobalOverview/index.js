@@ -3,6 +3,11 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
 import useTrans from '../../../hooks/useTrans'
 import WorldMap from '../../../components/Visualizations/WorldMap'
 import GlobalDataTab from './tabs/GlobalDataTab'
+import GlobalInsights from './tabs/GlobalInsightTab'
+import GlobalContracts from './tabs/GlobalContracts'
+import GlobalEquity from './tabs/GlobalEquity'
+import GlobalBuyers from './tabs/GlobalBuyers'
+import GlobalSuppliers from './tabs/GlobalSuppliers'
 
 const GlobalOverview = () => {
     // ===========================================================================
@@ -25,6 +30,11 @@ const GlobalOverview = () => {
                     <div className="container mx-auto">
                         <TabList>
                             <Tab>{trans('Data')}</Tab>
+                            <Tab>{trans('Insights')}</Tab>
+                            <Tab>{trans('Contracts')}</Tab>
+                            <Tab>{trans('Equity')}</Tab>
+                            <Tab>{trans('Buyers')}</Tab>
+                            <Tab>{trans('Suppliers')}</Tab>
                         </TabList>
                     </div>
                     <div
@@ -36,6 +46,22 @@ const GlobalOverview = () => {
                             <TabPanel>
                                 <GlobalDataTab/>
                             </TabPanel>
+                            <TabPanel>
+                                <GlobalInsights/>
+                            </TabPanel>
+                            <TabPanel>
+                                <GlobalContracts/>
+                            </TabPanel>
+                            <TabPanel>
+                                <GlobalEquity/>
+                            </TabPanel>
+                            <TabPanel>
+                                <GlobalBuyers/>
+                            </TabPanel>   
+                            <TabPanel>
+                                <GlobalSuppliers/>
+                            </TabPanel>      
+
                         </div>
                     </div>
                 </Tabs>

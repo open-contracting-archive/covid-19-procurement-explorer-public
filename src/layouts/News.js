@@ -5,7 +5,7 @@ import { get } from 'lodash'
 import { API_URL } from '../helpers'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/Loader/Loader'
-import * as dayjs from 'dayjs'
+import {formatDate} from "../helpers/date";
 
 const News = () => {
     const [newsDetail, setNewsDetail] = useState({})
@@ -83,13 +83,7 @@ const News = () => {
                                                             {newsData[0].title}
                                                         </h3>
                                                         <p className="news-caption__date mt-2">
-                                                            {/* {
-                                                                newsData[0]
-                                                                    .published_date
-                                                            } */}
-                                                            {dayjs(
-                                                                newsData[0].published_date
-                                                            ).format('MMMM DD, YYYY')}
+                                                            {formatDate(newsData[0].published_date, 'MMMM DD, YYYY')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -126,9 +120,7 @@ const News = () => {
                                                                 {news.title}
                                                             </h3>
                                                             <p className="news-caption__date mt-2">
-                                                                {dayjs(
-                                                                    news.published_date
-                                                                ).format('MMMM DD, YYYY')}
+                                                                {formatDate(news.published_date, 'MMMM DD, YYYY')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -194,9 +186,7 @@ const News = () => {
                                                         {news.title}
                                                     </h3>
                                                     <p className="news-caption__date">
-                                                    {dayjs(
-                                                        news.published_date
-                                                    ).format('MMMM DD, YYYY')}
+                                                        {formatDate(news.published_date, 'MMMM DD, YYYY')}
                                                     </p>
                                                 </div>
                                             </Link>

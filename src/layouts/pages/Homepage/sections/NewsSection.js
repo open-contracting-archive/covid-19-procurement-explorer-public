@@ -4,6 +4,7 @@ import {get} from 'lodash'
 import {API_URL} from '../../../../helpers'
 import InsightServices from '../../../../services/insightServices'
 import Loader from '../../../../components/Loader/Loader'
+import {formatDate} from "../../../../helpers/date";
 
 const NewsSection = () => {
     const [newsData, setNewsData] = useState([])
@@ -53,18 +54,25 @@ const NewsSection = () => {
                                             to={`/news-detail/${news.id}`}
                                             className="news-link">
                                             <div className="img-wrapper img-gradient">
-                                                <img
-                                                    src={`${API_URL}${get(
-                                                        news,
-                                                        'content_image.meta.download_url'
-                                                    )}`}
-                                                    className="news-img"
-                                                    alt={get(
-                                                        news,
-                                                        'content_image.title'
-                                                    )}
-                                                />
+                                                {get(
+                                                    news,
+                                                    'content_image.meta.download_url'
+                                                ) && 
+                                                
+                                                    <img
+                                                        src={`${API_URL}${get(
+                                                             news,
+                                                            'content_image.meta.download_url'
+                                                        )}`}
+                                                        className="news-img"
+                                                        alt={get(
+                                                            news,
+                                                            'content_image.title'
+                                                        )}
+                                                    />
+                                                }
                                             </div>
+                                            
                                             <div
                                                 className={`news-caption ${
                                                     index === 0
@@ -75,7 +83,8 @@ const NewsSection = () => {
                                                     {news.title}
                                                 </h3>
                                                 <p className="news-caption__date">
-                                                    {news.published_date}
+                                                    {formatDate(news.published_date, 'MMM DD, YYYY')}
+                                                    
                                                 </p>
                                             </div>
                                         </Link>

@@ -6,6 +6,7 @@ import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/Loader/Loader'
+import {formatDate} from "../helpers/date";
 
 const EventsDetail = () => {
     const [eventsDetail, setEventsDetail] = useState({})
@@ -76,9 +77,7 @@ const EventsDetail = () => {
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {dayjs(
-                                        eventsDetail.meta.first_published_at
-                                    ).format('MMMM DD, YYYY')}
+                                    {formatDate(eventsDetail.meta.first_published_at, 'MMMM DD, YYYY')}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -184,20 +183,10 @@ const EventsDetail = () => {
                                                             key={events.id}>
                                                                     <div className="card__item h-full px-8 py-8">
                                                                             <div className="card__day text-4xl leading-none">
-                                                                                {dayjs(
-                                                                                    eventsData[0]
-                                                                                        .event_date
-                                                                                ).format(
-                                                                                    'DD'
-                                                                                )}
+                                                                                {formatDate(events.event_date, 'DD')}
                                                                             </div>
                                                                             <div className="card__month text-base uppercase">
-                                                                                {dayjs(
-                                                                                    eventsData[0]
-                                                                                        .event_date
-                                                                                ).format(
-                                                                                    'MMMM'
-                                                                                )}
+                                                                                {formatDate(events.event_date, 'MMMM')}
                                                                             </div>
                                                                             <div className="card__caption">
                                                                                 <h3 className="card__title mt-8 mb-4 text-lg">

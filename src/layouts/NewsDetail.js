@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/Loader/Loader'
+import {formatDate} from "../helpers/date";
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
@@ -77,9 +77,7 @@ const NewsDetail = () => {
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {dayjs(newsDetail.published_date).format(
-                                        'MMMM DD, YYYY'
-                                    )}
+                                    {formatDate(newsDetail.published_date, 'MMMM DD, YYYY')}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -199,11 +197,7 @@ const NewsDetail = () => {
                                                                 {news.title}
                                                             </h3>
                                                             <p className="news-caption__date">
-                                                                {dayjs(
-                                                                    news.published_date
-                                                                ).format(
-                                                                    'MMM DD, YYYY'
-                                                                )}
+                                                                {formatDate(news.published_date, 'MMMM DD, YYYY')}
                                                             </p>
                                                         </div>
                                                     </Link>

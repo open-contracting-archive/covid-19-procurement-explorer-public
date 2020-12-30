@@ -190,7 +190,7 @@ const BlogsDetail = () => {
                                                                     {blogs.title}
                                                                 </h3>
                                                                 <p className="blogs-caption__date">
-                                                                    {formatDate(blogs.published_date, 'MMM DD, YYY')}
+                                                                    {formatDate(blogs.published_date, 'MMMM DD, YYYY')}
                                                                 </p>
                                                             </div>
                                                         </Link>

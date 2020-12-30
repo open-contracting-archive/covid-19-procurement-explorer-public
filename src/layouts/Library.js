@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/Loader/Loader'
+import {formatDate} from "../helpers/date";
 
 function Library() {
     const [newsDetail, setNewsDetail] = useState({})
@@ -88,12 +88,7 @@ function Library() {
                                                                 }
                                                             </h3>
                                                             <p className="news-caption__date mt-2">
-                                                                {dayjs(
-                                                                    newsData[0]
-                                                                        .published_date
-                                                                ).format(
-                                                                    'MMM DD, YYYY'
-                                                                )}
+                                                                {formatDate(newsData[0].published_date, 'MMM DD, YYYY')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -134,11 +129,7 @@ function Library() {
                                                                 {news.title}
                                                             </h3>
                                                             <p className="news-caption__date mt-2">
-                                                                {dayjs(
-                                                                    news.published_date
-                                                                ).format(
-                                                                    'MMM DD, YYYY'
-                                                                )}
+                                                                {formatDate(news.published_date, 'MMM DD, YYYY')}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -192,11 +183,7 @@ function Library() {
                                                         {blogs.title}
                                                     </h3>
                                                     <p className="blogs-caption__date">
-                                                        {dayjs(
-                                                            blogs.published_date
-                                                        ).format(
-                                                            'MMM DD, YYYY'
-                                                        )}
+                                                        {formatDate(blogs.published_date, 'MMM DD, YYYY')}
                                                     </p>
                                                 </div>
                                             </Link>
@@ -231,16 +218,10 @@ function Library() {
                                                 key={events.id}>
                                                 <div className="card__item h-full px-8 py-8">
                                                     <div className="card__day text-4xl leading-none">
-                                                        {dayjs(
-                                                            eventsData[0]
-                                                                .event_date
-                                                        ).format('DD')}
+                                                        {formatDate(events.event_date, 'DD')}
                                                     </div>
                                                     <div className="card__month text-base uppercase">
-                                                        {dayjs(
-                                                            eventsData[0]
-                                                                .event_date
-                                                        ).format('MMMM')}
+                                                        {formatDate(events.event_date, 'MMMM')}
                                                     </div>
                                                     <div className="card__caption">
                                                         <h3 className="card__title mt-8 mb-4 text-lg">

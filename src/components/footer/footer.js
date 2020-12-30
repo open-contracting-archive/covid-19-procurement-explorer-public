@@ -22,25 +22,25 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col-span-6 md:col-span-2">
-                        <h4 className="mb-1">Explore</h4>
+                        <h4 className="mb-2">Explore</h4>
                         <ul>
-                            <li className="opacity-50">
+                            <li className="opacity-50 mb-1">
                                 <Link to="/global-overview">Data</Link>
                             </li>
-                            <li className="opacity-50">Countries</li>
-                            <li className="opacity-50">Tenders</li>
-                            <li className="opacity-50">Suppliers</li>
-                            <li className="opacity-50">
+                            <li className="opacity-50 mb-1">Countries</li>
+                            <li className="opacity-50 mb-1">Tenders</li>
+                            <li className="opacity-50 mb-1">Suppliers</li>
+                            <li className="opacity-50 ">
                                 <Link to="/resources">Resources</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="col-span-6 md:col-span-2">
                         <ul className="mt-5">
-                            <li className="opacity-50">
+                            <li className="opacity-50 mb-1">
                                 <Link to="/about">About</Link>
                             </li>
-                            <li className="opacity-50">Terms of use</li>
+                            <li className="opacity-50 mb-1">Terms of use</li>
                             <li className="opacity-50">Privacy policy</li>
                         </ul>
                     </div>
