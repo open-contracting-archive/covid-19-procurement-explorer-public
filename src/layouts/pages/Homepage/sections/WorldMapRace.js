@@ -14,88 +14,7 @@ import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.s
 import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import CountryContractMapServices from '../../../../services/countryContractMapServices'
-
-// Race Chart data
-const race_bar_chart_data = {
-    2018: [
-        {
-            network: 'Ukraine',
-            MAU: 500000
-        },
-        {
-            network: 'Kenya',
-            MAU: 400000000
-        },
-        {
-            network: 'Kyrgyzstan',
-            MAU: 123312133
-        },
-        {
-            network: 'Moldova',
-            MAU: 345623445
-        },
-        {
-            network: 'United Kingdom',
-            MAU: 4478003466
-        },
-        {
-            network: 'Mexico',
-            MAU: 21000021345
-        }
-    ],
-    2019: [
-        {
-            network: 'Ukraine',
-            MAU: 3550003455
-        },
-        {
-            network: 'Kenya',
-            MAU: 402345661
-        },
-        {
-            network: 'Kyrgyzstan',
-            MAU: 100643245
-        },
-        {
-            network: 'Moldova',
-            MAU: 2033218664
-        },
-        {
-            network: 'United Kingdom',
-            MAU: 480349020
-        },
-        {
-            network: 'Mexico',
-            MAU: 1321116677
-        }
-    ],
-    2020: [
-        {
-            network: 'Ukraine',
-            MAU: 19833257
-        },
-        {
-            network: 'Kenya',
-            MAU: 675421434
-        },
-        {
-            network: 'Kyrgyzstan',
-            MAU: 3598546111
-        },
-        {
-            network: 'Moldova',
-            MAU: 1111245667
-        },
-        {
-            network: 'United Kingdom',
-            MAU: 123444700
-        },
-        {
-            network: 'Mexico',
-            MAU: 200567782
-        }
-    ]
-}
+import Loader from '../../../../components/Loader/Loader'
 
 const WorldMapRace = () => {
     // ===========================================================================
@@ -106,6 +25,7 @@ const WorldMapRace = () => {
     const [yearMonth, setYearMonth] = useState('2020-01')
     const [dataFromApi, setDataFromApi] = useState()
     const [contractDataApi, setContractDataApi] = useState({})
+    const [raceBarDataApi, setRaceBarDataApi] = useState(null)
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
         label: 'All Continent'
@@ -166,6 +86,29 @@ const WorldMapRace = () => {
         setSliderData(keys)
     }, [dataFromApi])
 
+    // console.log(contractDataApi, 'Map Data')
+
+    useEffect(() => {
+        let raceBarDateObject = {}
+        dataFromApi &&
+            dataFromApi.result.map((data) => {
+                let raceBarCountryObject = data.details.map((detail) => {
+                    return {
+                        country: detail.country,
+                        value: detail.amount_usd
+                    }
+                })
+                raceBarDateObject = {
+                    ...raceBarDateObject,
+                    [data.month]: raceBarCountryObject
+                }
+            })
+
+        setRaceBarDataApi(raceBarDateObject)
+    }, [dataFromApi])
+
+    console.log(raceBarDataApi)
+
     const handleContinentChange = (selectedOption) => {
         setSelectedContinent(selectedOption)
     }
@@ -214,20 +157,24 @@ const WorldMapRace = () => {
     }
 
     if (!contractDataApi) {
-        return ''
+        return <Loader />
     }
 
-    console.log(contractDataApi)
+    if (!raceBarDataApi) {
+        return <Loader />
+    }
 
     return (
         <section className="pt-16 bg-primary-gray pb-24">
             <div className="text-center mb-10">
                 <h3 className="uppercase text-3xl font-bold leading-none">
-                    <span className="block text-base font-bold">Explore</span>
-                    Countries
+                    <span className="block text-base font-bold">
+                        {trans('Explore')}
+                    </span>
+                    {trans('Countries')}
                 </h3>
                 <p className="text-base text-opacity-50  text-primary-dark">
-                    Government spendings to fight COVID-19
+                    {trans('Government spendings to fight COVID-19')}
                 </p>
             </div>
             <div className="container mx-auto">
@@ -384,7 +331,7 @@ const WorldMapRace = () => {
                                                 />
                                             </div>
                                             <RaceBarChart
-                                                data={race_bar_chart_data}
+                                                data={raceBarDataApi}
                                             />
                                         </TabPanel>
                                         <TabPanel>
