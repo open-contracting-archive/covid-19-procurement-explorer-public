@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as dayjs from 'dayjs'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
-import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
+import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 
 function Monopolization() {
@@ -59,13 +59,13 @@ function Monopolization() {
 
     return (
         <div className="bg-white rounded p-4 h-full">
-            {loading ? (
-                <Loader sm/>
-            ) : (
-                <div>
-                    <h3 className="uppercase font-bold  text-primary-dark">
-                        {trans('Monopolization')}
-                    </h3>
+            <div>
+                <h3 className="uppercase font-bold  text-primary-dark">
+                    {trans('Monopolization')}
+                </h3>
+                {loading ? (
+                    <Loader sm />
+                ) : (
                     <div className="flex items-end">
                         <AreaChartBlock
                             chartData={monopolizationLineChartData}
@@ -74,8 +74,8 @@ function Monopolization() {
                         />
                         <div className="flex-1"></div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     )
 }

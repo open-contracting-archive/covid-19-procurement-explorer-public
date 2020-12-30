@@ -22,7 +22,7 @@ const GlobalDataTab = () => {
             <div className="container mx-auto">
                 <div className="flex flex-wrap -mx-3 -mb-4">
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <TotalSpending />
+                        <TotalSpending label="Total Spending" />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <TotalContracts />

@@ -62,7 +62,8 @@ const CompareChart = () => {
         let chart = am4core.create(compareChart.current, am4charts.XYChart)
         chart.padding(0, 15, 0, 15)
         chart.colors.step = 3
-        chart.exporting.menu = new am4core.ExportMenu()
+        am4core.options.queue = true
+
         // the following line makes value axes to be arranged vertically.
         chart.leftAxesContainer.layout = 'vertical'
 
@@ -186,6 +187,7 @@ const CompareChart = () => {
         chart.scrollbarX = scrollbarX
 
         chart.data = data
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

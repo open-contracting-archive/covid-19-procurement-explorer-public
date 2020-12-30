@@ -5,7 +5,11 @@ import formatNumber from '../../formatNumber/FormatNumber'
 const AreaChartBlock = ({ totalAmount, chartData, percentage, currency }) => {
     return (
         <div className=" text-primary-dark pb-4 w-2/5">
-            <AreaChart data={chartData} apiData />
+            <AreaChart
+                data={chartData}
+                apiData
+                colorValue={percentage < 100 ? '#FE5151' : '#3EEDA4'}
+            />
             <p className="mt-2">
                 <strong className="text-xl inline-block mr-3">
                     {formatNumber(totalAmount)}

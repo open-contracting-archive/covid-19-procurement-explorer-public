@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import Checkbox from '../Checkbox/Checkbox'
-import CompareChart from '../charts/CompareChart/CompareChart'
+import CompareChart from '../Charts/CompareChart/CompareChart'
 import useTrans from '../../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'

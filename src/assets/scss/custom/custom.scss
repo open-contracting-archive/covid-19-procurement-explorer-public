@@ -281,14 +281,15 @@ header {
     align-items: center;
     justify-content: center;
     background-color: rgba(41, 62, 69, 0.9) !important;
+    padding: 0 16px;
 }
 
 .ReactModal__Content {
     position: relative !important;
     inset: 0 !important;
     top: 0;
-    max-width: 768px;
-    flex-basis: 768px;
+    max-width: 900px;
+    flex-basis: 900px;
     height: calc(100vh - 50px);
     border: none !important;
     left: 0;
@@ -296,4 +297,15 @@ header {
     margin: 0 auto !important;
     bottom: 0;
     transform: none !important;
+}
+
+.rsm-fixed {
+    background-color: rgba(41, 62, 69, 0.9) !important;
+    margin: 0 !important;
+    padding: 16px;
+}
+
+.rsm-bg-white {
+    max-width: 900px !important;
+    width: 100% !important;
 }

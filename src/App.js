@@ -12,9 +12,9 @@ import Tags from './layouts/Tags'
 import Blogs from './layouts/Blogs'
 import Events from './layouts/Events'
 import Country from './layouts/Country'
-import Header from './components/header/header'
+import Header from './components/Header/header'
 import Home from './layouts/pages/Homepage'
-import Footer from './components/footer/footer'
+import Footer from './components/Footer/footer'
 import GlobalOverview from './layouts/pages/GlobalOverview'
 import CountryProfileServices from './services/countryProfileServices'
 import NotFound from './components/NotFound/NotFound'
@@ -61,7 +61,10 @@ function App() {
                     <Route path="/news-detail/:id" component={NewsDetail} />
                     <Route path="/blogs-detail/:id" component={BlogsDetail} />
                     <Route path="/events-detail/:id" component={EventsDetail} />
-                    <Route path="/resources-detail" component={ResourcesDetail} />
+                    <Route
+                        path="/resources-detail"
+                        component={ResourcesDetail}
+                    />
                     <Route path="/library" component={Library} />
                     <Route path="/blogs" component={Blogs} />
                     <Route path="/events" component={Events} />

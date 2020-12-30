@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const AreaChart = ({ data, apiData }) => {
+const AreaChart = ({ data, apiData, colorValue }) => {
     const areachartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -15,7 +15,6 @@ const AreaChart = ({ data, apiData }) => {
 
         // Create chart instance
         let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
-        chart.logo.height = 15
         am4core.options.queue = true
         // chart.exporting.menu = new am4core.ExportMenu()
 
@@ -43,9 +42,9 @@ const AreaChart = ({ data, apiData }) => {
         lineSeries.dataFields.valueY = 'value'
         lineSeries.tooltipText = 'value: {valueY.value}'
         lineSeries.fillOpacity = 1
-        lineSeries.strokeWidth = 2
-        lineSeries.stroke = '#1fbbec'
-        lineSeries.fill = '#1fbbec'
+        lineSeries.strokeWidth = 1
+        lineSeries.stroke = colorValue
+        lineSeries.fill = colorValue
 
         var gradient = new am4core.LinearGradient()
         gradient.addColor(am4core.color(''))
@@ -56,18 +55,10 @@ const AreaChart = ({ data, apiData }) => {
         fillModifier.gradient.rotation = 90
         lineSeries.segments.template.fillModifier = fillModifier
 
-        // let bullet = lineSeries.bullets.push(new am4charts.CircleBullet())
-        // bullet.circle.radius = 6
-        // bullet.circle.fill = am4core.color('#fff')
-        // bullet.circle.strokeWidth = 3
-
         chart.cursor = new am4charts.XYCursor()
         chart.cursor.behavior = 'panX'
         chart.cursor.lineX.opacity = 0
         chart.cursor.lineY.opacity = 0
-
-        // chart.scrollbarX = new am4core.Scrollbar()
-        // chart.scrollbarX.parent = chart.bottomAxesContainer
 
         chart.data = data
         chart.logo.disabled = true

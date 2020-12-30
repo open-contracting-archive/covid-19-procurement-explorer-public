@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
-import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
-import {dateDiff, formatDate} from "../../helpers/date";
+import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
+import { dateDiff, formatDate } from '../../helpers/date'
 
 function AverageBidsPerContract() {
     // ===========================================================================
@@ -11,7 +11,7 @@ function AverageBidsPerContract() {
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [averageBids, setAverageBids] = useState()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -60,7 +60,7 @@ function AverageBidsPerContract() {
                 {trans('Average bids per contract')}
             </h3>
             {loading ? (
-                <Loader sm/>
+                <Loader sm />
             ) : (
                 <div className="flex items-end">
                     <AreaChartBlock
@@ -68,7 +68,7 @@ function AverageBidsPerContract() {
                         totalAmount={averageBidsAmount}
                         percentage={averageBidsPercentage}
                     />
-                    <div className="flex-1"/>
+                    <div className="flex-1" />
                 </div>
             )}
         </div>
