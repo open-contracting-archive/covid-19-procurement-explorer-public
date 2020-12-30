@@ -4,7 +4,7 @@ import {get} from 'lodash'
 import VisualizationServices from '../../services/visualizationServices'
 import SimpleBarChart from '../charts/SimpleBarChart/SimpleBarChart'
 import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import {dateDiff, formatDate} from "../../helpers/date";
 
 function TotalSpending(params) {

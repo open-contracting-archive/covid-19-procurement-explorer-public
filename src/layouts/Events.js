@@ -5,7 +5,7 @@ import { get } from 'lodash'
 import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import InsightServices from '../services/insightServices'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 
 function Events() {
     const [eventsData, setEventsData] = useState([])
@@ -29,7 +29,7 @@ function Events() {
             {loading ? (
                 <Loader />
             ) : (
-        
+
             <div className="">
                 <section className="px-4 events events__upcoming pt-24 pb-16 -mt-8">
                     <div className="container mx-auto">
@@ -81,8 +81,8 @@ function Events() {
                                                             <div className="card__time opacity-50 text-base mb-4 uppercase flex">
                                                                 <p className="from mr-1">
                                                                     {events.time_from}
-                                                                </p> 
-                                                                
+                                                                </p>
+
                                                                 {events.time_to &&
                                                                     <>
                                                                         -
@@ -149,10 +149,10 @@ function Events() {
                                                                     ).format(
                                                                         'hh a'
                                                                     )}
-                                                                </p> 
+                                                                </p>
                                                                 -
                                                                 <p className="to ml-1">
-                                                                    
+
                                                                     {dayjs(
                                                                         eventsData[0]
                                                                             .time_to
@@ -171,7 +171,7 @@ function Events() {
                                             )
                                         })}
                         </div>
-                        {eventsData.length !== 0 ? 
+                        {eventsData.length !== 0 ?
                             <div className="flex justify-center pt-10">
                                 <Link to="/events" className="text-white bg-primary-blue px-32 py-4 rounded">
                                     Load more
@@ -179,7 +179,7 @@ function Events() {
                             </div>
                         :<p> There are no Past Events Records</p>
                         }
-                        
+
                     </div>
                 </section>
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import SankeyChart from '../charts/SankeyChart/SankeyChart'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'

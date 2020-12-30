@@ -3,7 +3,7 @@ import * as dayjs from 'dayjs'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 
 function Monopolization() {
     // ===========================================================================

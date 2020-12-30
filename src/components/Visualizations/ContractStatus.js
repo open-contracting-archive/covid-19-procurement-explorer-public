@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import SimpleBarListSection from '../SimpleBarListSection/SimpleBarListSection'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 
 // Contract Status Data
 const contract_status_data = [

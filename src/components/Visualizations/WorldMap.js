@@ -8,7 +8,7 @@ import {ReactComponent as DownloadIcon} from '../../assets/img/icons/ic_download
 import {ReactComponent as ShareIcon} from '../../assets/img/icons/ic_share.svg'
 import {ReactComponent as FullViewIcon} from '../../assets/img/icons/ic_fullscreen.svg'
 import {CONTINENTS} from '../../helpers'
-import Loader from '../../components/loader/Loader'
+import Loader from '../../components/Loader/Loader'
 
 const WorldMap = () => {
     // ===========================================================================

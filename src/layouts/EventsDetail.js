@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 
 const EventsDetail = () => {
     const [eventsDetail, setEventsDetail] = useState({})
@@ -206,8 +206,8 @@ const EventsDetail = () => {
                                                                                 <div className="card__time opacity-50 text-base mb-4 uppercase flex">
                                                                                     <p className="from mr-1">
                                                                                         {events.time_from}
-                                                                                    </p> 
-                                                                                    
+                                                                                    </p>
+
                                                                                     {events.time_to &&
                                                                                         <>
                                                                                             -
@@ -238,7 +238,7 @@ const EventsDetail = () => {
                             </div>
                         </>: ""
                         }
-                        
+
                     </div>
                 </section>
             )}

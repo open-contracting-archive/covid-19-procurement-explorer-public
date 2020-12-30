@@ -4,7 +4,7 @@ import {get} from 'lodash'
 import {API_URL} from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 import {formatDate} from "../helpers/date";
 
 const BlogsDetail = () => {

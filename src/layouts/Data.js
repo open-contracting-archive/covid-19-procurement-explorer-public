@@ -11,7 +11,7 @@ import PartitionedChart from '../components/charts/PartitionedChart/PartitionedC
 import StackedChart from '../components/charts/StackedChart/StackedChart'
 import DrillDownMap from '../components/charts/DrillDownMap/DrillDownMap'
 import HorizontalBarChart from '../components/charts/HorizontalBarChart/HorizontalBarChart'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 
 // Bar Chart data
 const bar_chart_data = [

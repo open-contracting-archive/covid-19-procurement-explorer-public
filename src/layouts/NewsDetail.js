@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
@@ -60,7 +60,7 @@ const NewsDetail = () => {
                         {get(
                             newsDetail,
                              'content_image.meta.download_url'
-                            ) && 
+                            ) &&
                             <div className="img-wrapper mb-6 md:mb-10">
                                 <img
                                     src={`${API_URL}${get(
@@ -183,7 +183,7 @@ const NewsDetail = () => {
                                                         {get(
                                                         news,
                                                         'content_image.meta.download_url'
-                                                        ) && 
+                                                        ) &&
                                                             <div className="img-wrapper">
                                                                 <img
                                                                     src={`${API_URL}${get(

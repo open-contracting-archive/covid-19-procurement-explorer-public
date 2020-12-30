@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 
 const contracts_red_flag_data = [

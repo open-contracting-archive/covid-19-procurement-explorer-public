@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs'
 import Select from 'react-select'
 import GlobalDataCharts from '../components/globalProfile/GlobalDataCharts'
 import Map from '../components/charts/Map/Map'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 import useTrans from '../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
@@ -225,7 +225,7 @@ const GlobalProfile = () => {
                                 className="py-16 bg-primary-gray px-4">
                                 <div className="container mx-auto">
                                     <TabPanel>
-                                        <GlobalDataCharts />     
+                                        <GlobalDataCharts />
                                     </TabPanel>
                                 </div>
                             </div>

@@ -4,7 +4,7 @@ import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../helpers'
 import InsightServices from '../services/insightServices'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 import * as dayjs from 'dayjs'
 
 const News = () => {
@@ -30,7 +30,7 @@ const News = () => {
 	// 	);
     //     setNewsData(post);
 	// };
-    
+
 
     useEffect(() => {
         // InsightServices.NewsDetailData(newsId).then((response) => {
@@ -71,7 +71,7 @@ const News = () => {
                                             <div className="news__item h-full">
                                                 <div className="img-wrapper h-full relative">
                                                     {newsData[0].content_image.meta.download_url
-                                                    && 
+                                                    &&
                                                     <img
                                                         className="w-full h-full object-cover"
                                                         src={`${API_URL}${newsData[0].content_image.meta.download_url}`}
@@ -109,7 +109,7 @@ const News = () => {
                                                     {get(
                                                     news,
                                                     'content_image.meta.download_url'
-                                                    ) && 
+                                                    ) &&
                                                             <div className="img-wrapper w-full h-auto">
                                                                 <img
                                                                     className="w-full"
@@ -166,7 +166,7 @@ const News = () => {
                                 </form>
                             </div>
                             <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10 ">
-                                {newsData && 
+                                {newsData &&
                                     newsData.slice(3).map((news) => {
                                         return (
                                             <Link
@@ -176,7 +176,7 @@ const News = () => {
                                                 {get(
                                                     news,
                                                     'content_image.meta.download_url'
-                                                ) && 
+                                                ) &&
                                                     <div className="img-wrapper">
                                                         <img
                                                             className="h-full w-full object-cover"
@@ -186,9 +186,9 @@ const News = () => {
                                                             )}`}
                                                             alt=""
                                                         />
-                                                    </div> 
+                                                    </div>
                                                 }
-                                                
+
                                                 <div>
                                                     <h3 className="news-caption__title">
                                                         {news.title}
@@ -203,7 +203,7 @@ const News = () => {
                                         )
                                     })}
                             </div>
-                            {newsData.length !== 0 ? 
+                            {newsData.length !== 0 ?
                                 <div className="flex justify-center pt-10">
                                     <Link
                                         to="/news"
@@ -214,7 +214,7 @@ const News = () => {
                                 : <p> There are no News Records</p>
                             }
 
-                            
+
                         </div>
                     </section>
                 </div>

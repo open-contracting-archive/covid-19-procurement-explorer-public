@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useHistory, Link, useParams} from 'react-router-dom'
 import InsightServices from '../../../../services/insightServices'
 import {formatDate} from "../../../../helpers/date";
-import Loader from "../../../../components/loader/Loader";
+import Loader from "../../../../components/Loader/Loader";
 
 const LibrarySection = () => {
     const [newsData, setNewsData] = useState([])

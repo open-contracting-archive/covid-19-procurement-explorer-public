@@ -25,7 +25,7 @@ const Footer = () => {
                         <h4 className="mb-1">Explore</h4>
                         <ul>
                             <li className="opacity-50">
-                                <Link to="/data">Data</Link>
+                                <Link to="/global-overview">Data</Link>
                             </li>
                             <li className="opacity-50">Countries</li>
                             <li className="opacity-50">Tenders</li>

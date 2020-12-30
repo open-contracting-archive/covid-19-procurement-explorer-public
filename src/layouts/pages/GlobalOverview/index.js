@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
 import useTrans from '../../../hooks/useTrans'
-import WorldMap from '../../../components/visualizations/WorldMap'
+import WorldMap from '../../../components/Visualizations/WorldMap'
 import GlobalDataTab from './tabs/GlobalDataTab'
 
 const GlobalOverview = () => {

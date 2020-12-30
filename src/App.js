@@ -15,7 +15,6 @@ import Country from './layouts/Country'
 import Header from './components/header/header'
 import Home from './layouts/pages/Homepage'
 import Footer from './components/footer/footer'
-import GlobalProfile from './layouts/GlobalProfile'
 import GlobalOverview from './layouts/pages/GlobalOverview'
 import CountryProfileServices from './services/countryProfileServices'
 import NotFound from './components/NotFound/NotFound'
@@ -52,7 +51,6 @@ function App() {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/country/:slug" component={Country} />
                     <Route path="/about" component={About} />
-                    <Route exact path="/data" component={GlobalProfile} />
                     <Route
                         exact
                         path="/global-overview"

@@ -14,7 +14,7 @@ import {
     ProductDistribution,
     ContractsRedFlags,
     ContractsCorrelation
-} from '../../../../components/visualizations'
+} from '../../../../components/Visualizations'
 
 const GlobalDataTab = () => {
     return (

@@ -34,7 +34,7 @@ const Home = () => {
                             }}
                             className="[ flex flex-wrap md:flex-no-wrap justify-center ] pt-12 w-full text-white bg-primary-dark">
                             <a
-                                href="/data"
+                                href="/global-overview"
                                 className="flex [ mr-12 mb-10 ] text-center">
                                 <div>
                                     <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">

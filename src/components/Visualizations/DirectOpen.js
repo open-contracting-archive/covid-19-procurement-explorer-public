@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import PieChart from '../charts/PieChart/PieChart'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 

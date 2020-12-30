@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {get} from 'lodash'
 import {API_URL} from '../../../../helpers'
 import InsightServices from '../../../../services/insightServices'
-import Loader from '../../../../components/loader/Loader'
+import Loader from '../../../../components/Loader/Loader'
 
 const NewsSection = () => {
     const [newsData, setNewsData] = useState([])

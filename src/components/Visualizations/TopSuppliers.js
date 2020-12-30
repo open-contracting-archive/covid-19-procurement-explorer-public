@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
 import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import BarListChart from "../BarListSection/BarListChart";
 
 function TopSuppliers() {

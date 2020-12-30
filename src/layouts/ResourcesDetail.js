@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs'
 import { API_URL } from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
-import Loader from '../components/loader/Loader'
+import Loader from '../components/Loader/Loader'
 import newsImage from '../assets/img/news.jpg'
 
 const ResourcesDetail = () => {
@@ -55,7 +55,7 @@ const ResourcesDetail = () => {
                                 Resources
                             </Link>{' '}
                         </div>
-                        
+
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 detail__metadata text-center">
                                 <img src={newsImage} alt="" className="mb-6"/>
@@ -79,7 +79,7 @@ const ResourcesDetail = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div className="details md:mx-10 mx-0 b-24"> 
+                            <div className="details md:mx-10 mx-0 b-24">
                                 <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-10 md:mb-10 uppercase text-primary-dark">
                                     Health sector emergency response plan
                                 </h2>

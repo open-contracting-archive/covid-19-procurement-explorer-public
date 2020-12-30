@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
 import VisualizationServices from '../../services/visualizationServices'
 

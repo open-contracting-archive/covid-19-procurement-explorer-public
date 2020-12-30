@@ -1,24 +1,27 @@
 import React, {useEffect, useState} from 'react'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
+import SimpleBarChart from '../charts/SimpleBarChart/SimpleBarChart'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../charts/AreaChart/AreaChartBlock'
 import {dateDiff, formatDate} from "../../helpers/date";
 
-function AverageBidsPerContract() {
+function TotalContracts() {
+    const barColorValue = '#ABBABF'
+
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
-    const [averageBids, setAverageBids] = useState()
+    const [totalContracts, setTotalContracts] = useState()
     const {trans} = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.AverageBids().then((response) => {
-            setAverageBids(response)
+        VisualizationServices.TotalContracts().then((response) => {
+            setTotalContracts(response)
             setLoading(false)
         })
     }, [])
@@ -46,33 +49,40 @@ function AverageBidsPerContract() {
         })
     }
 
-    // Average bids
-    const averageBidsLineChartDataRaw =
-        averageBids && lineChartData(averageBids.line_chart)
-    const averageBidsLineChartData =
-        averageBidsLineChartDataRaw && sortDate(averageBidsLineChartDataRaw)
-    const averageBidsAmount = averageBids && averageBids.average
-    const averageBidsPercentage = averageBids && averageBids.difference
+    // Total contracts data
+    const totalContractLineChartDataRaw =
+        totalContracts && lineChartData(totalContracts.line_chart)
+    const totalContractLineChartData =
+        totalContractLineChartDataRaw && sortDate(totalContractLineChartDataRaw)
+    const totalContractAmount = totalContracts && totalContracts.total
+    const totalContractPercentage = totalContracts && totalContracts.difference
+    const totalContractBarChartData = totalContracts && totalContracts.bar_chart
 
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {trans('Average bids per contract')}
+                {trans('Total contracts')}
             </h3>
             {loading ? (
                 <Loader sm/>
             ) : (
                 <div className="flex items-end">
+                    {/* Line are chart */}
                     <AreaChartBlock
-                        chartData={averageBidsLineChartData}
-                        totalAmount={averageBidsAmount}
-                        percentage={averageBidsPercentage}
+                        chartData={totalContractLineChartData}
+                        totalAmount={totalContractAmount}
+                        percentage={Math.round(totalContractPercentage, 2)}
                     />
-                    <div className="flex-1"/>
+                    <div className="flex-1">
+                        <SimpleBarChart
+                            data={totalContractBarChartData}
+                            barColorValue={barColorValue}
+                        />
+                    </div>
                 </div>
             )}
         </div>
     )
 }
 
-export default AverageBidsPerContract
+export default TotalContracts

@@ -6,7 +6,7 @@ import Select from 'react-select'
 import CountryProfileServices from '../../services/countryProfileServices'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
-import Loader from '../loader/Loader'
+import Loader from '../Loader/Loader'
 import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 
 const Tender = ({ selectedCountry }) => {
