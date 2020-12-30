@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const PieChart = ({ data, colors }) => {
+const PieChart = ({ data, colors, large }) => {
     const piechartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -79,7 +79,16 @@ const PieChart = ({ data, colors }) => {
         }
     }, [data])
 
-    return <div ref={piechartDiv} style={{ width: '50px', height: '50px' }} />
+    return (
+        <div
+            ref={piechartDiv}
+            style={
+                large
+                    ? { width: '100px', height: '100px', margin: '0 auto' }
+                    : { width: '50px', height: '50px' }
+            }
+        />
+    )
 }
 
 export default PieChart

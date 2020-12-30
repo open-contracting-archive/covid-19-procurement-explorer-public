@@ -2405,20 +2405,19 @@ function GlobalDataChart() {
     // console.log(globalSuppliersDataByNumber)
 
     // Equity chart
-    // const equityByValue =
-    // equity &&
-    // equity.map((data) => {
-    //     return {
-    //         value: "assigned",
-    //         number: data.by_value.assigned
-    //     }
-    // })
-    // const equityByNumber =
-    // equity &&
-    // equity.map((data) => {
-    //     return { value: data.procedure, number: data.tender_count }
-    // })
-
+    const equityByValue =
+        equity &&
+        equity.map((data) => {
+            return {
+                value: data.type,
+                number: currency == 'usd' ? data.amount_usd : data.amount_local
+            }
+        })
+    const equityByNumber =
+        equity &&
+        equity.map((data) => {
+            return { value: data.type, number: data.tender_count }
+        })
 
     return (
         <section className="bg-primary-gray">
@@ -2545,9 +2544,7 @@ function GlobalDataChart() {
                                                     </div>
                                                     <div className="flex-1">
                                                         <PieChart
-                                                            data={
-                                                                pie_chart_data
-                                                            }
+                                                            data={equityByValue}
                                                             colors={colors}
                                                         />
                                                     </div>
@@ -2565,7 +2562,7 @@ function GlobalDataChart() {
                                                     <div className="flex-1">
                                                         <PieChart
                                                             data={
-                                                                pie_chart_data
+                                                                equityByNumber
                                                             }
                                                             colors={colors}
                                                         />

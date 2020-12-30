@@ -19,6 +19,7 @@ import Buyers from '../components/country/buyers'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
+import Suppliers from '../components/country/suppliers'
 
 function CountryDetail() {
     // ===========================================================================
@@ -33,7 +34,6 @@ function CountryDetail() {
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
     let { slug } = useParams()
-
 
     // ===========================================================================
     // Hooks
@@ -370,6 +370,7 @@ function CountryDetail() {
                                 <Tab>{trans('Contracts')}</Tab>
                                 <Tab>{trans('Equity')}</Tab>
                                 <Tab>{trans('Buyers')}</Tab>
+                                <Tab>{trans('Suppliers')}</Tab>
                             </TabList>
                         </div>
                         <div
@@ -396,6 +397,9 @@ function CountryDetail() {
                                 </TabPanel>
                                 <TabPanel>
                                     <Buyers />
+                                </TabPanel>
+                                <TabPanel>
+                                    <Suppliers />
                                 </TabPanel>
                             </div>
                         </div>
