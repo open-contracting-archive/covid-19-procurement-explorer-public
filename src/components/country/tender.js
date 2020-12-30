@@ -10,7 +10,6 @@ import Loader from '../Loader/Loader'
 import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 
 const Tender = ({ selectedCountry }) => {
-    // const [tenderData, setTenderData] = useState({})
     const [tenderList, setTenderList] = useState([])
     const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(false)
@@ -20,15 +19,6 @@ const Tender = ({ selectedCountry }) => {
         { value: 'option-2', label: 'Option 2' },
         { value: 'option-3', label: 'Option 3' }
     ]
-
-    // const filterStyle = {
-    //     control: () => ({
-    //         backgroundColor: 'none',
-    //         border: 'none',
-    //         borderBottom: '2px solid #1fbbec',
-    //         borderRadius: 0
-    //     })
-    // }
 
     useEffect(() => {
         CountryProfileServices.CountryProfileTenderData(selectedCountry).then(

@@ -154,6 +154,15 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
+    static async TenderList(params) {
+        try {
+            const res = await Api.get(getApi('tenders'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationServices

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
-import LanguageSwitcherSelector from '../language-switcher/languageSwitcherSelector'
+import LanguageSwitcherSelector from '../../components/language-switcher/languageSwitcherSelector'
 
 const Header = () => {
     const [isHome, setIsHome] = useState(true)
