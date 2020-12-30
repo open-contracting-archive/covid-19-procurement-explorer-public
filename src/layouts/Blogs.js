@@ -53,7 +53,7 @@ const Blogs = () => {
                                         {get(
                                             blogs,
                                             'content_image.meta.download_url'
-                                        ) && 
+                                        ) &&
                                             <div className="img-wrapper">
                                                 <img className="h-full w-full object-cover"
                                                     src={`${API_URL}${get(
@@ -64,7 +64,7 @@ const Blogs = () => {
                                                 />
                                             </div>
                                         }
-                                        
+
                                         <div className="blog__caption">
                                             <h3 className="blog-caption__title text-xl">
                                                 {blogs.title}
@@ -102,7 +102,7 @@ const Blogs = () => {
                                 Load more
                             </Link>
                         </div>
-                        : <p> There are no Blogs Records</p> 
+                        : <p> There are no Blogs Records</p>
                         }
                     </div>
                 </section>

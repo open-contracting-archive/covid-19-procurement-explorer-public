@@ -5,8 +5,9 @@ import useTrans from '../../hooks/useTrans'
 
 function SimpleBarListSection({ bar_data, label, byValue, byNumber }) {
     const { trans } = useTrans()
+
     return (
-        <div className="bg-white rounded p-6 h-full simple-tab">
+        <div className="simple-tab">
             <Tabs>
                 <div className="flex justify-between items-center">
                     <h3 className="uppercase font-bold  text-primary-dark">

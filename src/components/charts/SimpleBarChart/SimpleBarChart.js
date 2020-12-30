@@ -15,6 +15,7 @@ const SimpleBarChart = ({ data, barColorValue, axisRotation }) => {
 
         // Create chart instance
         let chart = am4core.create(barchartDiv.current, am4charts.XYChart)
+        am4core.options.queue = true
 
         // Add chart download option
         // chart.exporting.menu = new am4core.ExportMenu()
@@ -24,10 +25,7 @@ const SimpleBarChart = ({ data, barColorValue, axisRotation }) => {
         categoryAxis.dataFields.category = 'method'
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.minGridDistance = 30
-        categoryAxis.renderer.grid.template.location = 0
-        categoryAxis.renderer.minGridDistance = 30
         categoryAxis.renderer.labels.template.verticalCenter = 'middle'
-        // categoryAxis.renderer.labels.template.rotation = axisRotation
         categoryAxis.renderer.labels.template.fontSize = 12
         categoryAxis.renderer.grid.template.disabled = true
 

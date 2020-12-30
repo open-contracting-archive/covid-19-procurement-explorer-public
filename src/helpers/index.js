@@ -1,5 +1,6 @@
+import { get } from 'lodash'
+
 export const API_URL = process.env.REACT_APP_API_URL
-export const BASE_URL = process.env.REACT_APP_BASE_URL
 
 export const CONTINENTS = {
     all: {
@@ -42,4 +43,13 @@ export const CONTINENTS = {
         long: 38.25,
         zoomLevel: 1.6
     }
+}
+
+const apiRoutes = {
+    'visualization.total-spending': 'api/v1/vizualization/total-spending/',
+    'visualization.total-contracts': 'api/v1/vizualization/total-contracts/'
+}
+
+export const getApi = (routeName) => {
+    return API_URL + get(apiRoutes, routeName)
 }

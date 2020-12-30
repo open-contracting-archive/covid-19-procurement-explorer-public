@@ -8,12 +8,11 @@ import { ReactComponent as MouseScroll } from '../assets/img/icons/mouse-scroll.
 import { ReactComponent as CircleIcon } from '../assets/img/icons/circle-ring.svg'
 import { ReactComponent as BottomCurve } from '../assets/img/icons/circle_bottom.svg'
 import useTrans from '../hooks/useTrans'
-import Library from './home/library'
-// import geo_data from '../data/GeoChart.world.geo.json'
-// import GeoChart from '../components/charts/GeoChart/GeoChart'
+import LibrarySection from './pages/Homepage/sections/library'
 import Map from '../components/charts/Map/Map'
 import RaceMap from '../components/charts/RaceMap/RaceMap'
-import NewsSection from './home/newsSection'
+import RaceBarChart from '../components/charts/RaceBarChart/RaceBarChart'
+import NewsSection from './pages/Homepage/sections/newsSection'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
@@ -24,17 +23,101 @@ import { ReactComponent as SourcesIcon } from '../assets/img/icons/ic_sources.sv
 // import { ReactComponent as SortIcon } from '../assets/img/icons/ic_sort.svg'
 import CountryContractMapServices from '../services/countryContractMapServices'
 
+// Race Chart data
+const race_bar_chart_data = {
+    2018: [
+        {
+            network: 'Ukraine',
+            MAU: 500000
+        },
+        {
+            network: 'Kenya',
+            MAU: 400000000
+        },
+        {
+            network: 'Kyrgyzstan',
+            MAU: 123312133
+        },
+        {
+            network: 'Moldova',
+            MAU: 345623445
+        },
+        {
+            network: 'United Kingdom',
+            MAU: 4478003466
+        },
+        {
+            network: 'Mexico',
+            MAU: 21000021345
+        }
+    ],
+    2019: [
+        {
+            network: 'Ukraine',
+            MAU: 3550003455
+        },
+        {
+            network: 'Kenya',
+            MAU: 402345661
+        },
+        {
+            network: 'Kyrgyzstan',
+            MAU: 100643245
+        },
+        {
+            network: 'Moldova',
+            MAU: 2033218664
+        },
+        {
+            network: 'United Kingdom',
+            MAU: 480349020
+        },
+        {
+            network: 'Mexico',
+            MAU: 1321116677
+        }
+    ],
+    2020: [
+        {
+            network: 'Ukraine',
+            MAU: 19833257
+        },
+        {
+            network: 'Kenya',
+            MAU: 675421434
+        },
+        {
+            network: 'Kyrgyzstan',
+            MAU: 3598546111
+        },
+        {
+            network: 'Moldova',
+            MAU: 1111245667
+        },
+        {
+            network: 'United Kingdom',
+            MAU: 123444700
+        },
+        {
+            network: 'Mexico',
+            MAU: 200567782
+        }
+    ]
+}
+
 const Home = () => {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
     const [data, setData] = useState({})
     const [contractData, setContractData] = useState(null)
     const [contractType, setContractType] = useState('value')
     const [sliderData, setSliderData] = useState([])
-
-    const [loading, setLoading] = useState(true)
-
     const [yearMonth, setYearMonth] = useState('2020-01')
+    const [raceChartYear, setRaceChartYear] = useState('2020')
     const [dataFromApi, setDataFromApi] = useState()
     const [contractDataApi, setContractDataApi] = useState({})
+    const [raceChartDataApi, setRaceChartDataApi] = useState({})
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
         label: 'All Continent'
@@ -54,20 +137,9 @@ const Home = () => {
         { value: 'middle_east', label: 'Middle East' }
     ]
 
-    // useEffect(() => {
-    //     CountryContractMapServices.getContractData().then((response) => {
-    //         setContractData(response)
-
-    //         const keys = Object.entries(response).map(([key]) => key)
-
-    //         setSliderData(keys)
-    //     })
-    // }, [])
-
     useEffect(() => {
         CountryContractMapServices.GetGlobalMapData().then((response) => {
             setDataFromApi(response)
-            setLoading(false)
         })
     }, [])
 
@@ -104,6 +176,33 @@ const Home = () => {
                 return data.month
             })
         setSliderData(keys)
+    }, [dataFromApi])
+
+    useEffect(() => {
+        let raceDateObject = {}
+
+        dataFromApi &&
+            dataFromApi.result.map((data) => {
+                let countryObject = {}
+                data.details.map((detail) => {
+                    if (detail.country_code != 'ALL') {
+                        countryObject = {
+                            ...countryObject,
+                            [detail.country_code]: {
+                                value: detail.amount_usd,
+                                number: detail.tender_count,
+                                url: `/country/${detail.country
+                                    .toLowerCase()
+                                    .replace(' ', '-')}`
+                            }
+                        }
+                    }
+                })
+                raceDateObject = {
+                    ...raceDateObject,
+                    [data.month]: countryObject
+                }
+            })
     }, [dataFromApi])
 
     const handleContinentChange = (selectedOption) => {
@@ -153,9 +252,11 @@ const Home = () => {
         }
     }
 
-    // console.log(continent[selectedContinent])
-
     if (!contractDataApi) {
+        return ''
+    }
+
+    if (!raceChartDataApi) {
         return ''
     }
 
@@ -335,8 +436,65 @@ const Home = () => {
                                                 />
                                             </TabPanel>
                                             <TabPanel>
-                                                Chart section under construction
-                                                !!
+                                                <div className="flex justify-end">
+                                                    <ul className="contract-switch flex">
+                                                        <li
+                                                            className={`mr-4 cursor-pointer ${
+                                                                contractType ===
+                                                                'value'
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setContractType(
+                                                                    'value'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By contract value'
+                                                            )}
+                                                        </li>
+                                                        <li
+                                                            className={`cursor-pointer ${
+                                                                contractType ===
+                                                                'number'
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setContractType(
+                                                                    'number'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By number of contracts'
+                                                            )}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
+                                                    <Select
+                                                        className="select-filter text-sm"
+                                                        classNamePrefix="select-filter"
+                                                        options={options}
+                                                        value={
+                                                            selectedContinent
+                                                        }
+                                                        defaultValue={
+                                                            options[0]
+                                                        }
+                                                        onChange={(
+                                                            selectedOption
+                                                        ) =>
+                                                            handleContinentChange(
+                                                                selectedOption
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <RaceBarChart
+                                                    data={race_bar_chart_data}
+                                                />
                                             </TabPanel>
                                             <TabPanel>
                                                 Table Section under construction
@@ -390,7 +548,7 @@ const Home = () => {
                 {/* <GeoChart data={geo_data} /> */}
             </section>
             <NewsSection />
-            <Library />
+            <LibrarySection />
         </Fragment>
     )
 }

@@ -16,6 +16,7 @@ const AreaChart = ({ data, apiData }) => {
         // Create chart instance
         let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
         chart.logo.height = 15
+        am4core.options.queue = true
         // chart.exporting.menu = new am4core.ExportMenu()
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
@@ -35,7 +36,6 @@ const AreaChart = ({ data, apiData }) => {
         valueAxis.renderer.ticks.template.disabled = true
         valueAxis.renderer.grid.template.disabled = true
         valueAxis.renderer.labels.template.disabled = true
-
         valueAxis.min = 0
 
         let lineSeries = chart.series.push(new am4charts.LineSeries())

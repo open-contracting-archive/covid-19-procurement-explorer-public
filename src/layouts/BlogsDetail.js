@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory, Link, useParams } from 'react-router-dom'
-import { get } from 'lodash'
-import * as dayjs from 'dayjs'
-
-import { API_URL } from '../helpers'
+import React, {useEffect, useState} from 'react'
+import {useHistory, Link, useParams} from 'react-router-dom'
+import {get} from 'lodash'
+import {API_URL} from '../helpers'
 import socialIcons from '../assets/img/icons/social'
 import InsightServices from '../services/insightServices'
 import Loader from '../components/loader/Loader'
+import {formatDate} from "../helpers/date";
 
 const BlogsDetail = () => {
     const [blogsDetail, setBlogsDetail] = useState({})
     const [blogsData, setBlogsData] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
-    let { id: blogsId } = useParams()
-    window.scrollTo(0, 0)
+    let {id: blogsId} = useParams()
 
     const previousPage = () => {
         history.goBack()
@@ -34,23 +32,23 @@ const BlogsDetail = () => {
             setBlogsData(response.items)
         })
     }, [blogsId])
-    
+
     return (
         <>
             {loading ? (
-                <Loader />
+                <Loader/>
             ) : (
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
                         <div className="text-sm mb-4 text-blue-5">
                             <Link to="/library"
-                                className="cursor-pointer text-primary-blue">
+                                  className="cursor-pointer text-primary-blue">
                                 Library
                             </Link>{' '}
                             /
                             <Link to="/blogs"
-                                className="cursor-pointer text-primary-blue"
-                                >
+                                  className="cursor-pointer text-primary-blue"
+                            >
                                 Blogs
                             </Link>{' '}
                         </div>
@@ -61,25 +59,23 @@ const BlogsDetail = () => {
                             blogsDetail,
                             'content_image.meta.download_url'
                         ) &&
-                            <div className="img-wrapper mb-6 md:mb-10">
-                                <img
-                                    src={`${API_URL}${get(
-                                        blogsDetail,
-                                        'content_image.meta.download_url'
-                                    )}`}
-                                    alt={get(blogsDetail, 'content_image.title')}
-                                />
-                            </div>
-                        }   
+                        <div className="img-wrapper mb-6 md:mb-10">
+                            <img
+                                src={`${API_URL}${get(
+                                    blogsDetail,
+                                    'content_image.meta.download_url'
+                                )}`}
+                                alt={get(blogsDetail, 'content_image.title')}
+                            />
+                        </div>
+                        }
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 news-detail__metadata">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {dayjs(blogsDetail.published_date).format(
-                                        'MMMM DD, YYYY'
-                                    )}
+                                    {formatDate(blogsDetail.published_date, 'MMMM DD, YYYY')}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <p className="inline-block lg:block font-bold opacity-40 mb-2">
@@ -127,16 +123,16 @@ const BlogsDetail = () => {
                                         </p>
                                         <div className="flex">
                                             <a href="" className="social-icon">
-                                                <socialIcons.fbIcon />
+                                                <socialIcons.fbIcon/>
                                             </a>
                                             <a href="" className="social-icon">
-                                                <socialIcons.twitterIcon />
+                                                <socialIcons.twitterIcon/>
                                             </a>
                                             <a href="" className="social-icon">
-                                                <socialIcons.linkedIcon />
+                                                <socialIcons.linkedIcon/>
                                             </a>
                                             <a href="" className="social-icon">
-                                                <socialIcons.mailIcon />
+                                                <socialIcons.mailIcon/>
                                             </a>
                                         </div>
                                     </div>
@@ -148,28 +144,28 @@ const BlogsDetail = () => {
                                 </p>
                                 <div className="flex">
                                     <a href="" className="social-icon">
-                                        <socialIcons.fbIcon />
+                                        <socialIcons.fbIcon/>
                                     </a>
                                     <a href="" className="social-icon">
-                                        <socialIcons.twitterIcon />
+                                        <socialIcons.twitterIcon/>
                                     </a>
                                     <a href="" className="social-icon">
-                                        <socialIcons.linkedIcon />
+                                        <socialIcons.linkedIcon/>
                                     </a>
                                     <a href="" className="social-icon">
-                                        <socialIcons.mailIcon />
+                                        <socialIcons.mailIcon/>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         {blogsData.length !== 1 ?
-                        <>
-                        
-                            <hr className="mb-10 text-primary-gray" />
-                            <div className="mb-20">
-                                <h2 className="text-xl mb-6">Related Blogs</h2>
-                                <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
-                                    {blogsData &&
+                            <>
+
+                                <hr className="mb-10 text-primary-gray"/>
+                                <div className="mb-20">
+                                    <h2 className="text-xl mb-6">Related Blogs</h2>
+                                    <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
+                                        {blogsData &&
                                         blogsData
                                             .filter((blogs) => blogs.id != blogsId)
                                             .slice(0, 3)
@@ -194,28 +190,24 @@ const BlogsDetail = () => {
                                                                     {blogs.title}
                                                                 </h3>
                                                                 <p className="blogs-caption__date">
-                                                                    {dayjs(
-                                                                        blogs.published_date.format(
-                                                                            'MMM DD, YYY'
-                                                                        )
-                                                                    )}
+                                                                    {formatDate(blogs.published_date, 'MMM DD, YYY')}
                                                                 </p>
                                                             </div>
                                                         </Link>
                                                     </>
                                                 )
                                             })}
+                                    </div>
+                                    <div className="flex justify-center items-center mt-12">
+                                        <hr className="text-primary-gray flex-1"/>
+                                        <Link to="/blogs" className="text-blue-20 px-4">
+                                            View all blogs --&gt;{' '}
+                                        </Link>
+                                        <hr className="text-primary-gray flex-1"/>
+                                    </div>
                                 </div>
-                                <div className="flex justify-center items-center mt-12">
-                                    <hr className="text-primary-gray flex-1"/>
-                                    <Link to="/blogs" className="text-blue-20 px-4">
-                                        View all blogs --&gt;{' '}
-                                    </Link>
-                                    <hr className="text-primary-gray flex-1"/>
-                                </div>
-                            </div>
-                        </>
-                        : ""}
+                            </>
+                            : ""}
                     </div>
                 </section>
             )}

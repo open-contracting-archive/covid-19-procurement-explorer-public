@@ -3,7 +3,6 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import * as dayjs from 'dayjs'
 import Select from 'react-select'
-
 import GlobalDataCharts from '../components/globalProfile/GlobalDataCharts'
 import Map from '../components/charts/Map/Map'
 import Loader from '../components/loader/Loader'
@@ -162,20 +161,6 @@ const GlobalProfile = () => {
                                                     </div>
 
                                                     <div>
-                                                        {/* <Map
-                                                            contractData={
-                                                                contractDataApi
-                                                            }
-                                                            contractType={
-                                                                contractType
-                                                            }
-                                                            yearMonth={
-                                                                yearMonth
-                                                            }
-                                                            sliderData={
-                                                                sliderData
-                                                            }
-                                                        /> */}
                                                         <GlobalMap
                                                             data={mapData}
                                                             contractType={

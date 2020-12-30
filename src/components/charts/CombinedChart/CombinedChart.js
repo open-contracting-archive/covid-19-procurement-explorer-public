@@ -35,9 +35,6 @@ const CombinedChart = ({ data, type }) => {
 
         // Create series
         let series1 = chart.series.push(new am4charts.ColumnSeries())
-        // for dummy data
-        // series1.dataFields.valueY = 'sales1'
-        // series1.dataFields.dateX = 'date'
         series1.dataFields.valueY = 'activeCase'
         series1.dataFields.dateX = 'date'
         series1.yAxis = valueAxis1

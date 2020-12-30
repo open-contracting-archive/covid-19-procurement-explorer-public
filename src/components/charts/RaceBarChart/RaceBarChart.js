@@ -23,8 +23,6 @@ const RaceBarChart = ({ data }) => {
             { number: 1e9, suffix: 'B' }
         ]
 
-        chart.exporting.menu = new am4core.ExportMenu()
-
         let label = chart.plotContainer.createChild(am4core.Label)
         label.x = am4core.percent(97)
         label.y = am4core.percent(95)
@@ -46,7 +44,7 @@ const RaceBarChart = ({ data }) => {
             }
         })
 
-        let stepDuration = 4000
+        let stepDuration = 8000
 
         let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
         categoryAxis.renderer.grid.template.location = 0
@@ -85,7 +83,7 @@ const RaceBarChart = ({ data }) => {
             return chart.colors.getIndex(target.dataItem.index)
         })
 
-        let year = 2003
+        let year = 2018
         label.text = year.toString()
 
         let interval
@@ -106,8 +104,8 @@ const RaceBarChart = ({ data }) => {
         function nextYear() {
             year++
 
-            if (year > 2018) {
-                year = 2003
+            if (year > 2020) {
+                year = 2018
             }
 
             let newData = data[year]
@@ -119,7 +117,7 @@ const RaceBarChart = ({ data }) => {
                 }
             }
 
-            if (year == 2003) {
+            if (year == 2018) {
                 series.interpolationDuration = stepDuration / 4
                 valueAxis.rangeChangeDuration = stepDuration / 4
             } else {
@@ -139,6 +137,7 @@ const RaceBarChart = ({ data }) => {
         categoryAxis.sortBySeries = series
 
         chart.data = JSON.parse(JSON.stringify(data[year]))
+        chart.logo.disabled = true
         categoryAxis.zoom({ start: 0, end: 1 / chart.data.length })
 
         series.events.on('inited', function () {

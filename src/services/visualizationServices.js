@@ -1,5 +1,5 @@
 import Api from './api'
-import { API_URL } from '../helpers'
+import { API_URL, getApi } from '../helpers'
 
 class VisualizationServices {
     static async GlobalMap() {
@@ -22,10 +22,11 @@ class VisualizationServices {
             console.log(error)
         }
     }
-    static async TotalSpending() {
+    static async TotalSpending(params) {
         try {
             const res = await Api.get(
-                await `${API_URL}api/v1/vizualization/total-spending/`
+                getApi('visualization.total-spending'),
+                params
             )
             return res.body
         } catch (error) {

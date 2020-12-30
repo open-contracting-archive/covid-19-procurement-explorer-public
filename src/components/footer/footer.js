@@ -13,34 +13,32 @@ const Footer = () => {
                             Covid-19 <br /> Contract <br /> Explorer
                         </p>
                         <div className="mt-12">
-                            <img src={FooterImage} alt="" />
-                            <p className="mt-4 opacity-50">Creative Commons</p>
+                            <a href="https://creativecommons.org/">
+                                <img src={FooterImage} alt="" />
+                                <p className="mt-4 opacity-50">
+                                    Creative Commons
+                                </p>
+                            </a>
                         </div>
                     </div>
                     <div className="col-span-6 md:col-span-2">
                         <h4 className="mb-1">Explore</h4>
                         <ul>
                             <li className="opacity-50">
-                                <Link to="/data">
-                                    Data
-                                </Link>
+                                <Link to="/data">Data</Link>
                             </li>
                             <li className="opacity-50">Countries</li>
                             <li className="opacity-50">Tenders</li>
                             <li className="opacity-50">Suppliers</li>
                             <li className="opacity-50">
-                                <Link to="/resources">
-                                    Resources
-                                </Link>
+                                <Link to="/resources">Resources</Link>
                             </li>
                         </ul>
                     </div>
                     <div className="col-span-6 md:col-span-2">
                         <ul className="mt-5">
                             <li className="opacity-50">
-                                <Link to="/about">
-                                    About
-                                </Link>
+                                <Link to="/about">About</Link>
                             </li>
                             <li className="opacity-50">Terms of use</li>
                             <li className="opacity-50">Privacy policy</li>
