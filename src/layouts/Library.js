@@ -159,7 +159,7 @@ function Library() {
                                 {blogsData &&
                                     blogsData.slice(0, 6).map((blogs) => {
                                         return (
-                                            <Link
+                                            <div
                                                 className="blogs-thumbnail"
                                                 to={`/blogs-detail/${blogs.id}`}
                                                 key={blogs.id}>
@@ -167,7 +167,8 @@ function Library() {
                                                     blogs,
                                                     'content_image.meta.download_url'
                                                 ) && (
-                                                    <div className="img-wrapper">
+                                                    <Link to={`/blogs-detail/${blogs.id}`}>
+                                                        <div className="img-wrapper">
                                                         <img
                                                             className="h-full object-cover"
                                                             src={`${API_URL}${get(
@@ -176,17 +177,20 @@ function Library() {
                                                             )}`}
                                                             alt=""
                                                         />
-                                                    </div>
+                                                        </div>
+                                                    </Link>
                                                 )}
                                                 <div>
-                                                    <h3 className="blogs-caption__title">
-                                                        {blogs.title}
-                                                    </h3>
+                                                    <Link to={`/blogs-detail/${blogs.id}`}>
+                                                        <h3 className="blogs-caption__title">
+                                                            {blogs.title}
+                                                        </h3>
+                                                    </Link>
                                                     <p className="blogs-caption__date">
                                                         {formatDate(blogs.published_date, 'MMM DD, YYYY')}
                                                     </p>
                                                 </div>
-                                            </Link>
+                                            </div>
                                         )
                                     })}
                             </div>

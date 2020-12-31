@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from 'react'
-import CountryProfileServices from '../../services/countryProfileServices'
 import { Link } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
-import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Select from 'react-select'
-import newsImage from '../../assets/img/news.jpg'
 import AreaChart from '../Charts/AreaChart/AreaChart'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 

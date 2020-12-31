@@ -15,7 +15,7 @@ import Events from './layouts/Events'
 import Header from './layouts/Main/header'
 import CountryProfile from './layouts/pages/CountryProfile'
 import Home from './layouts/pages/Homepage'
-import Footer from "./layouts/Main/footer";
+import Footer from "./layouts/Main/footer"
 import GlobalOverview from './layouts/pages/GlobalOverview'
 import NotFound from './components/NotFound/NotFound'
 import TenderDetail from './layouts/TenderDetail'

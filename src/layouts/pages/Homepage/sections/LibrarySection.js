@@ -56,7 +56,7 @@ const LibrarySection = () => {
                                         <div className="library__tag">
                                             <p className="uppercase">{eachdata.contents_type}</p>
                                         </div>
-                                        <h4 className="library__heading">
+                                        <h4 className="library__heading ">
                                             {eachdata.title}
                                         </h4>
                                         <p className="library__date">

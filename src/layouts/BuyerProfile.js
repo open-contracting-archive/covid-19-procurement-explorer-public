@@ -172,50 +172,50 @@ const BuyerProfile = () => {
                     </div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th style={{ width: '20%' }}>
+                        <tr>
+                            <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Buyer{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of suppliers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                            </tr>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

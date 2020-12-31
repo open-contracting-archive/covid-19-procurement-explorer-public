@@ -65,7 +65,7 @@ const Home = () => {
                 <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
             </section>
 
-            {/* <WorldMapRace/> */}
+             <WorldMapRace/>
 
             <NewsSection />
 

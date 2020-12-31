@@ -99,7 +99,6 @@ function CountryDataCharts({ countryCode }) {
                     <div className="w-full lg:w-1/2 px-2 mb-6">
                         <ContractsRedFlags />
                     </div>
-
                     <div className="w-full px-2 mb-6">
                         <ContractsCorrelation
                             label="Covid/Contracts Quantity Correlation"

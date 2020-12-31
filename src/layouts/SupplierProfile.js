@@ -5,17 +5,8 @@ import { useHistory } from 'react-router-dom'
 import { Tabs, Tab, TabPanel, TabList } from 'react-tabs'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import PieChart from '../components/Charts/PieChart/PieChart'
-import SimpleBarChart from '../components/Charts/SimpleBarChart/SimpleBarChart'
-import StackedChart from '../components/Charts/StackedChart/StackedChart'
-import BarListSection from '../components/BarListSection/BarListSection'
-import ContractRedFlag from '../components/ContractRedFlag/ContractRedFlag'
-import SankeyChart from '../components/Charts/SankeyChart/SankeyChart'
 import CountryFlag from '../components/CountryFlagIcon'
 import useTrans from '../hooks/useTrans'
-import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
-import AreaChart from '../components/Charts/AreaChart/AreaChart'
 import {
     ContractsRedFlags,
     GlobalSuppliers,
@@ -25,124 +16,6 @@ import {
     TotalContracts,
     TotalSpending
 } from '../components/Visualizations'
-
-const top_supply_bar_data = [
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'TECNOLOGIA Y CALIFORNIA',
-        value: '45%'
-    },
-    {
-        name: 'REACTIVOS EXPERIMENT',
-        value: '12%'
-    },
-    {
-        name: 'Kit de detección single',
-        value: '5%'
-    },
-    {
-        name: 'TaqPath 1-Step RT-qPC',
-        value: '68%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    }
-]
-
-// Add Bar Chart data
-const bar_chart_data = [
-    {
-        method: 'Open',
-        value: 2025
-    },
-    {
-        method: 'Limited',
-        value: 1882
-    },
-    {
-        method: 'Selective',
-        value: 1809
-    },
-    {
-        method: 'Direct',
-        value: 1322
-    }
-]
-
-const contract_status_data = [
-    {
-        name: 'Active',
-        value: '85%'
-    },
-    {
-        name: 'Completed',
-        value: '45%'
-    },
-    {
-        name: 'Cancelled',
-        value: '12%'
-    }
-]
-
-// Add Area Chart data
-const area_chart_data = [
-    {
-        month: 'FEB',
-        value: 22324,
-        expenses: 21.1
-    },
-    {
-        month: 'MAR',
-        value: 45990,
-        expenses: 30.5
-    },
-    {
-        month: 'APR',
-        value: 10003,
-        expenses: 34.9
-    },
-    {
-        month: 'MAY',
-        value: 77070,
-        expenses: 23.1
-    },
-    {
-        month: 'JUN',
-        value: 23489,
-        expenses: 28.2
-    },
-    {
-        month: 'JUL',
-        value: 58902,
-        expenses: 31.9
-    },
-    {
-        month: 'AUG',
-        value: 29190,
-        expenses: 31.9
-    },
-    {
-        month: 'SEP',
-        value: 45908,
-        expenses: 31.9
-    }
-]
 
 // Add Pie Chart data
 const pie_chart_data = [
@@ -156,122 +29,6 @@ const pie_chart_data = [
     }
 ]
 
-// Stacked Chart Data
-const stacked_chart_data = [
-    {
-        month: 'Apr',
-        ppe: 2.5,
-        ventilator: 2.5,
-        covid_tests: 2.1,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.2,
-        medicines: 0.1,
-        sanitizing_supplies: 0.4,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'May',
-        ppe: 2.6,
-        ventilator: 2.7,
-        covid_tests: 2.2,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.9,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Jun',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.7,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Jul',
-        ppe: 2.5,
-        ventilator: 2.5,
-        covid_tests: 2.1,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.2,
-        medicines: 0.1,
-        sanitizing_supplies: 0.2,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Aug',
-        ppe: 2.6,
-        ventilator: 2.7,
-        covid_tests: 2.2,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.7,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Sep',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.1,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Oct',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.7,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Nov',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 1,
-        medical_consumables: 1.5,
-        other: 2
-    }
-]
-
-// Sankey Chart data
-const sankey_chart_data = [
-    { from: 'A', to: 'D', value: 10 },
-    { from: 'B', to: 'D', value: 8 },
-    { from: 'B', to: 'E', value: 4 },
-    { from: 'C', to: 'E', value: 3 },
-    { from: 'D', to: 'G', value: 5 },
-    { from: 'D', to: 'I', value: 2 },
-    { from: 'D', to: 'H', value: 3 },
-    { from: 'E', to: 'H', value: 6 },
-    { from: 'G', to: 'J', value: 5 },
-    { from: 'I', to: 'J', value: 1 },
-    { from: 'H', to: 'J', value: 9 }
-]
-
-const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
 const SupplierProfile = () => {
@@ -544,50 +301,50 @@ const SupplierProfile = () => {
                     </div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th style={{ width: '20%' }}>
+                        <tr>
+                            <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Buyer{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of suppliers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                            </tr>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

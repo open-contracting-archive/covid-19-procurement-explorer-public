@@ -100,21 +100,9 @@ const BlogsDetail = () => {
                                             Tags
                                         </p>
                                         <div className="tags flex flex-wrap">
-                                            <div className="tag">
-                                                <p>Covid-19</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Corona</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Virus</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>News</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Article</p>
-                                            </div>
+                                            {blogsDetail.tags && blogsDetail.tags.map(blogs => (
+                                                <a href="#" className="tag" key={blogs} onClick={handleClick}>{blogs}</a>
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="flex">
@@ -172,28 +160,33 @@ const BlogsDetail = () => {
                                             .map((blogs) => {
                                                 return (
                                                     <>
-                                                        <Link
+                                                        <div
                                                             className="blogs-thumbnail"
-                                                            to={`/blogs-detail/${news.id}`}
                                                             key={blogs.id}>
-                                                            <div className="img-wrapper">
-                                                                <img
-                                                                    src={`${API_URL}${get(
-                                                                        blogs,
-                                                                        'content_image.meta.download_url'
-                                                                    )}`}
-                                                                    alt=""
-                                                                />
-                                                            </div>
+                                                            <Link 
+                                                                to={`/blogs-detail/${news.id}`}>
+                                                                <div className="img-wrapper">
+                                                                    <img
+                                                                        src={`${API_URL}${get(
+                                                                            blogs,
+                                                                            'content_image.meta.download_url'
+                                                                        )}`}
+                                                                        alt=""
+                                                                    />
+                                                                </div>
+                                                            </Link>
                                                             <div>
-                                                                <h3 className="blogs-caption__title">
-                                                                    {blogs.title}
-                                                                </h3>
+                                                                <Link 
+                                                                    to={`/blogs-detail/${news.id}`}>
+                                                                    <h3 className="blogs-caption__title">
+                                                                        {blogs.title}
+                                                                    </h3>
+                                                                </Link>
                                                                 <p className="blogs-caption__date">
                                                                     {formatDate(blogs.published_date, 'MMMM DD, YYYY')}
                                                                 </p>
                                                             </div>
-                                                        </Link>
+                                                        </div>
                                                     </>
                                                 )
                                             })}

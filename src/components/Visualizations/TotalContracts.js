@@ -6,7 +6,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function TotalContracts({label, params}) {
+function TotalContracts({ label, params }) {
     const barColorValue = '#ABBABF'
 
     // ===========================================================================
