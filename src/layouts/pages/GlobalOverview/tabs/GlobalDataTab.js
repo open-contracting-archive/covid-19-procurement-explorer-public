@@ -25,34 +25,34 @@ const GlobalDataTab = () => {
                         <TotalSpending label="Total Spending" />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <TotalContracts />
+                        <TotalContracts label="Total Contracts" />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <AverageBidsPerContract />
+                        <AverageBidsPerContract label="Average bids per contract" />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <Monopolization />
+                        <Monopolization label="Monopolization" />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <ContractStatus />
+                        <ContractStatus label="Contract status" />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <div className="flex flex-col justify-between h-full">
-                            <EquityIndicators />
-                            <DirectOpen />
+                            <EquityIndicators label="Equity indicators" />
+                            <DirectOpen label="Direct/Open" />
                         </div>
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <ProductsTimeline />
+                        <ProductsTimeline label="Products timeline" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <TopSuppliers />
+                        <TopSuppliers label="Top Suppliers" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <TopBuyers />
+                        <TopBuyers label="Top Buyers" />
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <GlobalSuppliers />
+                        <GlobalSuppliers label="Global suppliers" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <ProductDistribution />

@@ -3,22 +3,24 @@ import { useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import * as dayjs from 'dayjs'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import Tender from '../components/country/tender'
-import Insights from '../components/country/insights'
-import CountryDataCharts from '../components/country/CountryDataChart'
-// import CountryProfile from '../components/country/countryProfile'
-import Loader from '../components/Loader/Loader'
-import CountryProfileServices from '../services/countryProfileServices'
-import useTrans from '../hooks/useTrans'
-import CountryServices from '../services/countryServices'
-import VisualizationServices from '../services/visualizationServices'
-import formatNumber from '../components/formatNumber/FormatNumber'
-import CountryMap from '../components/charts/CountryMap/CountryMap'
-import Buyers from '../components/country/buyers'
-import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
-import Suppliers from '../components/country/suppliers'
+import Tender from '../../../components/country/tender'
+import Insights from '../../../components/country/insights'
+import CountryDataCharts from '../../../components/country/CountryDataChart'
+import CountryDetailProfile from '../../../components/country/countryDetailProfile'
+import Loader from '../../../components/Loader/Loader'
+import CountryProfileServices from '../../../services/countryProfileServices'
+import useTrans from '../../../hooks/useTrans'
+import CountryServices from '../../../services/countryServices'
+import VisualizationServices from '../../../services/visualizationServices'
+import formatNumber from '../../../components/formatNumber/FormatNumber'
+import CountryMap from '../../../components/Charts/CountryMap/CountryMap'
+import Buyers from '../../../components/country/buyers'
+import { ReactComponent as DownloadIcon } from '../../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../../assets/img/icons/ic_fullscreen.svg'
+import Suppliers from '../../../components/country/suppliers'
+import CountryProductTab from './tabs/CountryProductTab'
+import CountryDataTab from './tabs/CountryDataTab'
 
 function CountryProfile() {
     // ===========================================================================
@@ -116,7 +118,7 @@ function CountryProfile() {
                             <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
                                 {data.name}
                             </h2>
-                            <div className="flex flex-wrap -mx-4 -mb-4">
+                            <div className="flex flex-wrap -mb-4">
                                 <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4 bg-white rounded p-6">
                                     <FullScreen handle={handle}>
                                         <div className="relative">
@@ -369,6 +371,7 @@ function CountryProfile() {
                                 <Tab>{trans('Equity')}</Tab>
                                 <Tab>{trans('Buyers')}</Tab>
                                 <Tab>{trans('Suppliers')}</Tab>
+                                <Tab>{trans('Products')}</Tab>
                             </TabList>
                         </div>
                         <div
@@ -378,7 +381,7 @@ function CountryProfile() {
                             className="py-16 bg-primary-gray px-4">
                             <div className="container mx-auto">
                                 <TabPanel>
-                                    <CountryDataCharts
+                                    <CountryDataTab
                                         countryCode={data.country_code_alpha_2}
                                     />
                                 </TabPanel>
@@ -391,13 +394,16 @@ function CountryProfile() {
                                     />
                                 </TabPanel>
                                 <TabPanel>
-                                    {/* <CountryProfile profileData={data} /> */}
+                                    <CountryDetailProfile profileData={data} />
                                 </TabPanel>
                                 <TabPanel>
                                     <Buyers />
                                 </TabPanel>
                                 <TabPanel>
                                     <Suppliers />
+                                </TabPanel>
+                                <TabPanel>
+                                    <CountryProductTab />
                                 </TabPanel>
                             </div>
                         </div>

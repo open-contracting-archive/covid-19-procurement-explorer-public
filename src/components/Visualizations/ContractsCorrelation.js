@@ -10,7 +10,7 @@ import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { dateDiff } from '../../helpers/date'
 
-function ContractsCorrelation(params) {
+function ContractsCorrelation({label, params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -70,7 +70,7 @@ function ContractsCorrelation(params) {
         <div className="bg-white rounded p-4 simple-tab">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {trans('Covid/Contracts Quantity Correlation')}
+                    {label}
                 </h3>
                 <Tabs>
                     <TabList>

@@ -8,7 +8,7 @@ import VisualizationServices from '../../services/visualizationServices'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function DirectOpen(params) {
+function DirectOpen({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -56,7 +56,7 @@ function DirectOpen(params) {
                 <Tabs>
                     <div className="flex items-center justify-between">
                         <h3 className="uppercase font-bold  text-primary-dark">
-                            {trans('Direct/Open')}
+                            {label}
                         </h3>
                         <div className="flex">
                             <TabList>

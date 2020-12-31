@@ -12,8 +12,8 @@ import Resources from './layouts/Resources'
 import Tags from './layouts/Tags'
 import Blogs from './layouts/Blogs'
 import Events from './layouts/Events'
-import Country from './layouts/Country'
 import Header from './layouts/Main/header'
+import CountryProfile from './layouts/pages/CountryProfile'
 import Home from './layouts/pages/Homepage'
 import Footer from "./layouts/Main/footer";
 import GlobalOverview from './layouts/pages/GlobalOverview'
@@ -49,7 +49,11 @@ function App() {
                 <Header />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/country/:slug" component={Country} />
+                    <Route
+                        exact
+                        path="/country/:slug"
+                        component={CountryProfile}
+                    />
                     <Route path="/about" component={About} />
                     <Route exact path="/global-overview" component={GlobalOverview} />
                     <Route path="/tender/:tenderId" component={TenderDetail} />

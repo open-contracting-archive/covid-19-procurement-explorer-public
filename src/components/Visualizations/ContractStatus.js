@@ -20,7 +20,7 @@ const contract_status_data = [
     }
 ]
 
-function ContractStatus(params) {
+function ContractStatus({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -86,7 +86,7 @@ function ContractStatus(params) {
                     <Loader sm />
                 ) : (
                     <SimpleBarListSection
-                        label="Contract status"
+                        label={label}
                         bar_data={contract_status_data}
                         byNumber={
                             contractStatusDataByNumber &&

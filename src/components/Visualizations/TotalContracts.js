@@ -6,7 +6,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function TotalContracts(params) {
+function TotalContracts({label, params}) {
     const barColorValue = '#ABBABF'
 
     // ===========================================================================
@@ -61,7 +61,7 @@ function TotalContracts(params) {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {trans('Total contracts')}
+                {label}
             </h3>
             {loading ? (
                 <Loader sm />

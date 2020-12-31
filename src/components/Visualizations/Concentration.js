@@ -3,7 +3,7 @@ import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
 import VisualizationServices from '../../services/visualizationServices'
 
-function Concentration(params) {
+function Concentration({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -67,7 +67,7 @@ function Concentration(params) {
                 <Loader />
             ) : (
                 <BarListSection
-                    label="Concentration"
+                    label={label}
                     byNumber={
                         productDistributionDataByNumber &&
                         productDistributionDataByNumber
