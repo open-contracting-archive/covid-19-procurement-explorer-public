@@ -12,3 +12,4 @@ export { default as GlobalSuppliers } from '../../components/Visualizations/Glob
 export { default as ProductDistribution } from '../../components/Visualizations/ProductDistribution'
 export { default as ContractsRedFlags } from '../../components/Visualizations/ContractsRedFlags'
 export { default as ContractsCorrelation } from '../../components/Visualizations/ContractsCorrelation'
+export { default as Concentration } from './Concentration'

@@ -8,7 +8,7 @@ import VisualizationServices from '../../services/visualizationServices'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function DirectOpen() {
+function DirectOpen(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -22,7 +22,7 @@ function DirectOpen() {
     // ===========================================================================
 
     useEffect(() => {
-        VisualizationServices.DirectOpen().then((response) => {
+        VisualizationServices.DirectOpen(params).then((response) => {
             setDirectOpen(response)
             setLoading(false)
         })

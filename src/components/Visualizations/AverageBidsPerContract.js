@@ -5,7 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function AverageBidsPerContract() {
+function AverageBidsPerContract(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -17,7 +17,7 @@ function AverageBidsPerContract() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.AverageBids().then((response) => {
+        VisualizationServices.AverageBids(params).then((response) => {
             setAverageBids(response)
             setLoading(false)
         })

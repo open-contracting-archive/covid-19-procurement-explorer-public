@@ -4,6 +4,7 @@ import PieChart from '../Charts/PieChart/PieChart'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
 import VisualizationServices from '../../services/visualizationServices'
+import { useSelector } from 'react-redux'
 
 // Add Pie Chart data
 const pie_chart_data = [
@@ -19,7 +20,7 @@ const pie_chart_data = [
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function EquityIndicators() {
+function EquityIndicators(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -31,11 +32,31 @@ function EquityIndicators() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.Equity().then((response) => {
+        VisualizationServices.Equity(params).then((response) => {
             setEquity(response)
             setLoading(false)
         })
     }, [])
+
+    const currency = useSelector((state) => state.general.currency)
+
+    // ===========================================================================
+    // Handlers and functions
+    // ===========================================================================
+    // Equity chart
+    const equityByValue =
+        equity &&
+        equity.map((data) => {
+            return {
+                value: data.type,
+                number: currency == 'usd' ? data.amount_usd : data.amount_local
+            }
+        })
+    const equityByNumber =
+        equity &&
+        equity.map((data) => {
+            return { value: data.type, number: data.tender_count }
+        })
     return (
         <div className="bg-white rounded p-4 mb-2 simple-tab">
             {loading ? (
@@ -66,7 +87,7 @@ function EquityIndicators() {
                                 </div>
                                 <div className="flex-1">
                                     <PieChart
-                                        data={pie_chart_data}
+                                        data={equityByValue}
                                         colors={colors}
                                     />
                                 </div>
@@ -83,7 +104,7 @@ function EquityIndicators() {
                                 </div>
                                 <div className="flex-1">
                                     <PieChart
-                                        data={pie_chart_data}
+                                        data={equityByNumber}
                                         colors={colors}
                                     />
                                 </div>

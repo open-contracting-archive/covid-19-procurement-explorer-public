@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import {dateDiff, formatDate} from "../../helpers/date";
+import { dateDiff, formatDate } from '../../helpers/date'
 
-function TotalContracts() {
+function TotalContracts(params) {
     const barColorValue = '#ABBABF'
 
     // ===========================================================================
@@ -14,13 +14,13 @@ function TotalContracts() {
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [totalContracts, setTotalContracts] = useState()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalContracts().then((response) => {
+        VisualizationServices.TotalContracts(params).then((response) => {
             setTotalContracts(response)
             setLoading(false)
         })

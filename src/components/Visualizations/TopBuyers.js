@@ -42,7 +42,7 @@ const top_buyer_bar_data = [
     }
 ]
 
-function TopBuyers() {
+function TopBuyers(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -53,7 +53,7 @@ function TopBuyers() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TopBuyers().then((response) => {
+        VisualizationServices.TopBuyers(params).then((response) => {
             setTopBuyers(response)
             setLoading(false)
         })

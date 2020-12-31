@@ -3,7 +3,7 @@ import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
 import VisualizationServices from '../../services/visualizationServices'
 
-function ProductDistribution() {
+function ProductDistribution(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -14,7 +14,7 @@ function ProductDistribution() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductDistribution().then((response) => {
+        VisualizationServices.ProductDistribution(params).then((response) => {
             setProductDistribution(response)
             setLoading(false)
         })

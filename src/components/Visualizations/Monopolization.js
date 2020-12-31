@@ -5,7 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 
-function Monopolization() {
+function Monopolization(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -17,7 +17,7 @@ function Monopolization() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.monopolization().then((response) => {
+        VisualizationServices.monopolization(params).then((response) => {
             setMonopolization(response)
             setLoading(false)
         })

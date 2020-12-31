@@ -20,7 +20,7 @@ const contract_status_data = [
     }
 ]
 
-function ContractStatus() {
+function ContractStatus(params) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -32,7 +32,7 @@ function ContractStatus() {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ContractStatus().then((response) => {
+        VisualizationServices.ContractStatus(params).then((response) => {
             setContractStatus(response)
             setLoading(false)
         })
