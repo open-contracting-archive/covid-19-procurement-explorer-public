@@ -5,11 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-<<<<<<< HEAD
-function AverageBidsPerContract({label,params}) {
-=======
 function AverageBidsPerContract({ label, params }) {
->>>>>>> -[x] Buyers and suppliers profile visualization
     // ===========================================================================
     // State and variables
     // ===========================================================================
