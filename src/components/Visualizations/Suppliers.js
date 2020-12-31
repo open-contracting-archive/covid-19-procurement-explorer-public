@@ -1,5 +1,6 @@
-import React from "react"
-import AreaChart from "../Charts/AreaChart/AreaChart";
+import React from 'react'
+import AreaChart from '../Charts/AreaChart/AreaChart'
+import useTrans from '../../hooks/useTrans'
 
 // Add Area Chart data
 const area_chart_data = [
@@ -46,6 +47,8 @@ const area_chart_data = [
 ]
 
 function Suppliers() {
+    const { trans } = useTrans()
+
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
@@ -53,15 +56,13 @@ function Suppliers() {
             </h3>
             <div className="flex items-end">
                 <div className=" text-primary-dark w-2/5">
-                    <AreaChart data={area_chart_data} />
+                    <AreaChart data={area_chart_data} colorValue="#FE5151" />
                     <p>
                         <strong className="text-xl inline-block mr-3">
                             21,800
                         </strong>
                     </p>
-                    <p className="text-sm text-red-30 font-bold">
-                        -11%
-                    </p>
+                    <p className="text-sm text-red-30 font-bold">-11%</p>
                 </div>
                 <div className="flex-1"></div>
             </div>

@@ -7,13 +7,13 @@ const GlobalSuppliers = () => {
         <div>
             <div className="flex flex-wrap -mx-3 mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <Suppliers />
+                    <Suppliers label="Suppliers"/>
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalContracts />
+                    <TotalContracts label="Total Contracts"/>
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalSpending />
+                    <TotalSpending label="Total Spending"/>
                 </div>
             </div>
             <SupplierTable />

@@ -275,30 +275,6 @@ header {
     padding: 50px;
 }
 
-.ReactModal__Overlay {
-    z-index: 111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(41, 62, 69, 0.9) !important;
-    padding: 0 16px;
-}
-
-.ReactModal__Content {
-    position: relative !important;
-    inset: 0 !important;
-    top: 0;
-    max-width: 900px;
-    flex-basis: 900px;
-    height: calc(100vh - 50px);
-    border: none !important;
-    left: 0;
-    right: 0;
-    margin: 0 auto !important;
-    bottom: 0;
-    transform: none !important;
-}
-
 .rsm-fixed {
     background-color: rgba(41, 62, 69, 0.9) !important;
     margin: 0 !important;
@@ -308,4 +284,38 @@ header {
 .rsm-bg-white {
     max-width: 900px !important;
     width: 100% !important;
+}
+
+.secondary-nav {
+    ul {
+        position: relative;
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        padding-bottom: 0;
+
+        li {
+            margin-right: 16px;
+            &:last-child {
+                margin-right: 0;
+            }
+            a {
+                color: #293e45;
+                padding: 8px;
+                cursor: pointer;
+                line-height: 1.1;
+                display: inline-block;
+
+                &:hover,
+                &:focus,
+                &.active {
+                    color: #fff;
+                    background-color: #1fbbec;
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
+                    padding: 8px;
+                }
+            }
+        }
+    }
 }

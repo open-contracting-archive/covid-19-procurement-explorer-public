@@ -88,12 +88,21 @@ function TopSuppliers({ label, params }) {
                                             <BarListChart
                                                 data={topSuppliersDataByValue}
                                             />
-                                            <Link to="">View All</Link>
+                                            <Link
+                                                to=""
+                                                className="text-primary-blue pt-3 inline-block">
+                                                View All
+                                            </Link>
                                         </TabPanel>
                                         <TabPanel>
                                             <BarListChart
                                                 data={topSuppliersDataByNumber}
                                             />
+                                            <Link
+                                                to=""
+                                                className="text-primary-blue pt-3 inline-block">
+                                                View All
+                                            </Link>
                                         </TabPanel>
                                     </div>
                                 )}

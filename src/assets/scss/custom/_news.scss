@@ -13,6 +13,10 @@
 
     &__title {
         @apply text-lg leading-tight;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 
     &__date {
@@ -145,7 +149,7 @@
         p {
             @apply mb-8;
         }
-        ol{
+        ol {
             list-style: decimal;
         }
         ul {
@@ -188,11 +192,11 @@
     .blogs-caption__title,
     .news-caption__title {
         @apply mb-1;
-        max-height:54px;
+        max-height: 54px;
         overflow: hidden;
     }
 }
-.blogs-thumbnail{
+.blogs-thumbnail {
     .blogs-caption__title {
         font-size: 1.375rem;
         line-height: 1.25;
@@ -202,12 +206,12 @@
         opacity: 0.5;
     }
 }
-.blogs-list .blogs-thumbnail{
+.blogs-list .blogs-thumbnail {
     .blogs-caption__title {
         max-height: 90px;
         overflow: hidden;
     }
 }
-.form-search{
+.form-search {
     width: 348px;
 }

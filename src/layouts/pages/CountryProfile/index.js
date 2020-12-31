@@ -19,7 +19,8 @@ import { ReactComponent as DownloadIcon } from '../../../assets/img/icons/ic_dow
 import { ReactComponent as ShareIcon } from '../../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../../assets/img/icons/ic_fullscreen.svg'
 import Suppliers from '../../../components/country/suppliers'
-import CountryProductTab from '../../pages/CountryProfile/tabs/CountryProductTab'
+import CountryProductTab from './tabs/CountryProductTab'
+import CountryDataTab from './tabs/CountryDataTab'
 
 function CountryProfile() {
     // ===========================================================================
@@ -117,7 +118,7 @@ function CountryProfile() {
                             <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
                                 {data.name}
                             </h2>
-                            <div className="flex flex-wrap -mx-4 -mb-4">
+                            <div className="flex flex-wrap -mb-4">
                                 <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4 bg-white rounded p-6">
                                     <FullScreen handle={handle}>
                                         <div className="relative">
@@ -380,7 +381,7 @@ function CountryProfile() {
                             className="py-16 bg-primary-gray px-4">
                             <div className="container mx-auto">
                                 <TabPanel>
-                                    <CountryDataCharts
+                                    <CountryDataTab
                                         countryCode={data.country_code_alpha_2}
                                     />
                                 </TabPanel>

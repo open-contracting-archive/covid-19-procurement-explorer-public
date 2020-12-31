@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
 import VisualizationServices from '../../services/visualizationServices'
+import { Link } from 'react-router-dom'
 
 const top_buyer_bar_data = [
     {
@@ -42,7 +43,7 @@ const top_buyer_bar_data = [
     }
 ]
 
-function TopBuyers({label,params}) {
+function TopBuyers({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -110,6 +111,9 @@ function TopBuyers({label,params}) {
                     byValue={topBuyersDataByValue && topBuyersDataByValue}
                 />
             )}
+            <Link to="" className="text-primary-blue pt-3 pl-6 inline-block">
+                View All
+            </Link>
         </div>
     )
 }
