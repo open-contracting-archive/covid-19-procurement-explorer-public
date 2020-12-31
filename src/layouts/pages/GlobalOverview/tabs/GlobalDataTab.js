@@ -15,6 +15,8 @@ import {
     ContractsRedFlags,
     ContractsCorrelation
 } from '../../../../components/Visualizations'
+import Slider from '../../../../components/Slider/DataSlider'
+import {Link} from 'react-router-dom'
 
 const GlobalDataTab = () => {
     return (
@@ -62,6 +64,9 @@ const GlobalDataTab = () => {
                     </div>
                     <div className="w-full px-2 mb-4">
                         {/* <ContractsCorrelation /> */}
+                    </div>
+                    <div className="w-full px-2 mb-6">
+                        <Slider/>
                     </div>
                 </div>
             </div>

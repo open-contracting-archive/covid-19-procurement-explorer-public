@@ -103,22 +103,10 @@ const NewsDetail = () => {
                                         <p className="inline-block lg:block font-bold opacity-40 mb-2">
                                             Tags
                                         </p>
-                                        <div className="tags flex flex-wrap">
-                                            <div className="tag">
-                                                <p>Covid-19</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Corona</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Virus</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>News</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Article</p>
-                                            </div>
+                                         <div className="tags flex flex-wrap">
+                                            {newsDetail.tags && newsDetail.tags.map(news => (
+                                                <a href="#" className="tag" key={news} onClick={handleClick}>{news}</a>
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="flex">

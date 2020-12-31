@@ -7,7 +7,6 @@ import CountryProfileServices from '../../services/countryProfileServices'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Loader from '../Loader/Loader'
-import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 
 const Tender = ({ selectedCountry }) => {
     const [tenderList, setTenderList] = useState([])
@@ -45,15 +44,10 @@ const Tender = ({ selectedCountry }) => {
         )
     }
 
-    // console.log(tenderList)
-
     return (
         <div>
             {loading ? (
                 <Fragment>
-                    <div className="w-full px-2 mb-16 global-profile">
-                        <ContractsIndicator />
-                    </div>
                     <div className="mb-12 flex gap-8 justify-between">
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
@@ -135,88 +129,88 @@ const Tender = ({ selectedCountry }) => {
                     </div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th style={{ width: '35%' }}>
+                        <tr>
+                            <th style={{ width: '35%' }}>
                                     <span className="flex items-center">
                                         Project Title{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '20%' }}>
+                            </th>
+                            <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Procurement Method{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th>
+                            </th>
+                            <th>
                                     <span className="flex items-center">
                                         Supplier{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Status{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Value (USD){' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th></th>
-                            </tr>
+                            </th>
+                            <th></th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {tenderList &&
-                                tenderList.map((tender, index) => {
-                                    return (
-                                        <Link
-                                            key={index}
-                                            to={`/tender/${tender.id}`}
-                                            className={`table-row ${
-                                                tender.red_flag
-                                                    ? 'has-red-flag'
-                                                    : ''
-                                            }`}>
-                                            <td className="uppercase">
-                                                {tender.contract_title}
-                                            </td>
-                                            <td>
-                                                {tender.procurement_procedure}
-                                            </td>
-                                            <td className="uppercase">
-                                                {get(
-                                                    tender,
-                                                    'supplier.supplier_name'
-                                                )}
-                                                {/* {tender.supplier &&
+                        {tenderList &&
+                        tenderList.map((tender, index) => {
+                            return (
+                                <Link
+                                    key={index}
+                                    to={`/tender/${tender.id}`}
+                                    className={`table-row ${
+                                        tender.red_flag
+                                            ? 'has-red-flag'
+                                            : ''
+                                    }`}>
+                                    <td className="uppercase">
+                                        {tender.contract_title}
+                                    </td>
+                                    <td>
+                                        {tender.procurement_procedure}
+                                    </td>
+                                    <td className="uppercase">
+                                        {get(
+                                            tender,
+                                            'supplier.supplier_name'
+                                        )}
+                                        {/* {tender.supplier &&
                                                     tender.supplier
                                                         .supplier_name} */}
-                                            </td>
-                                            <td className="capitalize">
+                                    </td>
+                                    <td className="capitalize">
                                                 <span
                                                     className={`status-indicator ${tender.status}`}></span>
-                                                {tender.status}
-                                            </td>
-                                            <td>
-                                                {tender.contract_value_usd &&
-                                                    tender.contract_value_usd.toLocaleString(
-                                                        'en'
-                                                    )}
-                                            </td>
-                                            <td>
-                                                {tender.red_flag && (
-                                                    <span className="mr-4">
+                                        {tender.status}
+                                    </td>
+                                    <td>
+                                        {tender.contract_value_usd &&
+                                        tender.contract_value_usd.toLocaleString(
+                                            'en'
+                                        )}
+                                    </td>
+                                    <td>
+                                        {tender.red_flag && (
+                                            <span className="mr-4">
                                                         <FlagIcon />
                                                     </span>
-                                                )}
-                                            </td>
-                                        </Link>
-                                    )
-                                })}
+                                        )}
+                                    </td>
+                                </Link>
+                            )
+                        })}
                         </tbody>
                     </table>
                     <div className="text-center mt-8">

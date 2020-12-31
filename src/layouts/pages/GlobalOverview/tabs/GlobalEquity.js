@@ -4,9 +4,18 @@ import 'react-accessible-accordion/dist/fancy-example.css'
 import useTrans from '../../../../hooks/useTrans'
 import formatNumber from '../../../../components/formatNumber/FormatNumber'
 import ContractsIndicator from '../../../../components/ContractsIndicator/ContractsIndicator'
+import Select from 'react-select'
+import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort.svg'
+import { ReactComponent as FlagIcon } from '../../../../assets/img/icons/ic_flag.svg'
 
 const GlobalEquity = () => {
     const { trans } = useTrans()
+
+    const options = [
+        { value: 'option-1', label: 'Option 1' },
+        { value: 'option-2', label: 'Option 2' },
+        { value: 'option-3', label: 'Option 3' }
+    ]
 
     return (
         <div>
@@ -14,7 +23,7 @@ const GlobalEquity = () => {
                 <ContractsIndicator />
             </div>
 
-            <div className="w-full px-2 mb-12">
+            {/* <div className="w-full px-2 mb-12">
                 <h2 className="font-normal text-lg mb-6">Equity Overview</h2>
                 <div className="[ grid grid-cols-1 md:grid-cols-12 gap-6 ]">
                     <div className="rounded-md p-4 col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 bg-white">
@@ -154,7 +163,153 @@ const GlobalEquity = () => {
                 <a href="" className="text-blue-20 mt-6 block">
                     {trans("See Mexico's procurement portal ")} --&gt;
                 </a>
-            </div>
+            </div> */}
+            {/* adding table to the equity section */}
+            <div className="mb-12 flex gap-8 justify-between">
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Project title
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}   
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Products
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Supplier
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Method
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Data range
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Value range
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Status
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                    </div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th style={{ width: '35%' }}>
+                                    <span className="flex items-center">
+                                        Project Title{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '20%' }}>
+                                    <span className="flex items-center">
+                                        Procurement Method{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th>
+                                    <span className="flex items-center">
+                                        Supplier{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '10%' }}>
+                                    <span className="flex items-center">
+                                        Status{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '10%' }}>
+                                    <span className="flex items-center">
+                                        Value (USD){' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="uppercase">
+                                    Global Contracts
+                                </td>
+                                <td>
+                                    Covid-19
+                                </td>
+                                <td className="uppercase">
+                                    YIPL
+                                </td>
+                                <td className="capitalize">
+                                    N/A
+                                </td>
+                                <td>
+                                   100
+                                </td>
+                                <td>
+                                    N/A
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div className="text-center mt-8">
+                        <button
+                            className="text-primary-blue">
+                            Load more
+                        </button>
+                    </div>
+
         </div>
     )
 }

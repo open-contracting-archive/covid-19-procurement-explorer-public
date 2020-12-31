@@ -57,7 +57,7 @@ const EventsDetail = () => {
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
                             {eventsDetail.title}
                         </h2>
-                        {get(
+                        {/* {get(
                             eventsDetail,
                             'event_image.meta.download_url'
                         ) &&
@@ -70,27 +70,46 @@ const EventsDetail = () => {
                                     alt={get(eventsDetail, 'event_image.title')}
                                 />
                             </div>
-                        }
+                        } */}
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 events-detail__metadata">
-                                <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                    Published on
-                                </p>
-                                <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {formatDate(eventsDetail.meta.first_published_at, 'MMMM DD, YYYY')}
-                                </p>
-                                <div className="mt-8 hidden lg:block">
-                                    <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                        Tags
-                                    </p>
-                                    <div className="tags flex flex-wrap">
-                                        {eventsDetail.tags && eventsDetail.tags.map(events => (
-                                            <a  href="#" className="tag" key={events} onClick={handleClick}>{events}</a>
-                                        ))}
+                                <div className="time mb-8">
+                                    <div className="card__day text-4xl mb-2 leading-normal">
+                                        {formatDate(eventsDetail.event_date, 'DD')}
                                     </div>
+                                    <div className="card__month text-base uppercase">
+                                        {formatDate(eventsDetail.event_date, 'MMMM')}
+                                    </div>
+                                    <p className="from mr-1 inline-block">
+                                        {eventsDetail.time_from}
+                                    </p>
+                                    {eventsDetail.time_to &&
+                                        <>
+                                            /
+                                            <p className="to ml-1 inline-block">
+                                                {eventsDetail.time_to}
+                                            </p>
+                                        </>
+                                    }
+                                </div>
+                                <div className="organization mb-8">
+                                    <p className="block font-bold opacity-40 mb-2">
+                                        Organization
+                                    </p>
+                                    <p className="block ml-3 lg:ml-0">
+                                        {eventsDetail.organization}
+                                    </p>
+                                </div>
+                                <div className="location mb-8">
+                                    <p className="block font-bold opacity-40 mb-2">
+                                        Location
+                                    </p>
+                                    <p className="block ml-3 lg:ml-0">
+                                        {eventsDetail.location}
+                                    </p>
                                 </div>
                             </div>
-                            <div>
+                        <div>
                                 <div
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
@@ -99,28 +118,6 @@ const EventsDetail = () => {
                                     {/* {eventsDetail.body} */}
                                 </div>
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
-                                    <div className="block lg:hidden mb-6 md:mb-0">
-                                        <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                            Tags
-                                        </p>
-                                        <div className="tags flex flex-wrap">
-                                            <div className="tag">
-                                                <p>Covid-19</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Corona</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Virus</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>News</p>
-                                            </div>
-                                            <div className="tag">
-                                                <p>Article</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div className="flex">
                                         <p className="font-bold opacity-40 mr-4">
                                             Share on

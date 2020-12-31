@@ -391,7 +391,7 @@ function CountryDetail() {
                                     />
                                 </TabPanel>
                                 <TabPanel>
-                                    <CountryProfile profileData={data} />
+                                    <CountryProfile/>
                                 </TabPanel>
                                 <TabPanel>
                                     <Buyers />
