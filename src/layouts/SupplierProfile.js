@@ -1,14 +1,11 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import { ReactComponent as SortIcon } from '../assets/img/icons/ic_sort.svg'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { Tabs, Tab, TabPanel, TabList } from 'react-tabs'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import PieChart from '../components/Charts/PieChart/PieChart'
-import AreaChart from '../components/Charts/AreaChart/AreaChart'
-import AreaChartBlock from '../components/Charts/AreaChart/AreaChartBlock'
 import SimpleBarChart from '../components/Charts/SimpleBarChart/SimpleBarChart'
-import SimpleBarListSection from '../components/SimpleBarListSection/SimpleBarListSection'
 import StackedChart from '../components/Charts/StackedChart/StackedChart'
 import BarListSection from '../components/BarListSection/BarListSection'
 import ContractRedFlag from '../components/ContractRedFlag/ContractRedFlag'
@@ -18,6 +15,7 @@ import useTrans from '../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
+import AreaChart from "../components/Charts/AreaChart/AreaChart";
 
 const top_supply_bar_data = [
     {
@@ -251,24 +249,24 @@ const stacked_chart_data = [
 
 // Sankey Chart data
 const sankey_chart_data = [
-    { from: 'A', to: 'D', value: 10 },
-    { from: 'B', to: 'D', value: 8 },
-    { from: 'B', to: 'E', value: 4 },
-    { from: 'C', to: 'E', value: 3 },
-    { from: 'D', to: 'G', value: 5 },
-    { from: 'D', to: 'I', value: 2 },
-    { from: 'D', to: 'H', value: 3 },
-    { from: 'E', to: 'H', value: 6 },
-    { from: 'G', to: 'J', value: 5 },
-    { from: 'I', to: 'J', value: 1 },
-    { from: 'H', to: 'J', value: 9 }
+    {from: 'A', to: 'D', value: 10},
+    {from: 'B', to: 'D', value: 8},
+    {from: 'B', to: 'E', value: 4},
+    {from: 'C', to: 'E', value: 3},
+    {from: 'D', to: 'G', value: 5},
+    {from: 'D', to: 'I', value: 2},
+    {from: 'D', to: 'H', value: 3},
+    {from: 'E', to: 'H', value: 6},
+    {from: 'G', to: 'J', value: 5},
+    {from: 'I', to: 'J', value: 1},
+    {from: 'H', to: 'J', value: 9}
 ]
 
 const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
 const SupplierProfile = () => {
-    const { trans } = useTrans()
+    const {trans} = useTrans()
     let history = useHistory()
     const handle = useFullScreenHandle()
 
@@ -277,9 +275,9 @@ const SupplierProfile = () => {
     }
 
     const options = [
-        { value: 'option-1', label: 'Option 1' },
-        { value: 'option-2', label: 'Option 2' },
-        { value: 'option-3', label: 'Option 3' }
+        {value: 'option-1', label: 'Option 1'},
+        {value: 'option-2', label: 'Option 2'},
+        {value: 'option-3', label: 'Option 3'}
     ]
 
     let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -588,50 +586,50 @@ const SupplierProfile = () => {
                     </div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th style={{ width: '20%' }}>
+                        <tr>
+                            <th style={{width: '20%'}}>
                                     <span className="flex items-center">
                                         Buyer{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{width: '10%'}}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{width: '10%'}}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{width: '10%'}}>
                                     <span className="flex items-center">
                                         # of suppliers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{width: '10%'}}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{width: '10%'}}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{width: '10%'}}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                            </tr>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

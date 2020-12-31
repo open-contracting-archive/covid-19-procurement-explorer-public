@@ -58,6 +58,7 @@ const apiRoutes = {
     'visualization.monopolization': 'api/v1/vizualization/monopolization/',
     'visualization.global-suppliers': 'api/v1/vizualization/global-suppliers/',
     'visualization.equity-indicators': 'api/v1/vizualization/equity-indicators/',
+    'tenders': 'api/v1/tender'
 }
 
 export const getApi = (routeName) => {

@@ -5,6 +5,7 @@ import {
     setCurrentLocale,
     setTranslations
 } from './store/reducers/general/action'
+import CountryProfileServices from './services/countryProfileServices'
 import About from './layouts/About'
 import Library from './layouts/Library'
 import Resources from './layouts/Resources'
@@ -12,11 +13,10 @@ import Tags from './layouts/Tags'
 import Blogs from './layouts/Blogs'
 import Events from './layouts/Events'
 import Country from './layouts/Country'
-import Header from './components/Header/header'
+import Header from './layouts/Main/header'
 import Home from './layouts/pages/Homepage'
-import Footer from './components/Footer/footer'
+import Footer from "./layouts/Main/footer";
 import GlobalOverview from './layouts/pages/GlobalOverview'
-import CountryProfileServices from './services/countryProfileServices'
 import NotFound from './components/NotFound/NotFound'
 import TenderDetail from './layouts/TenderDetail'
 import News from './layouts/News'
@@ -51,11 +51,7 @@ function App() {
                     <Route exact path="/" component={Home} />
                     <Route exact path="/country/:slug" component={Country} />
                     <Route path="/about" component={About} />
-                    <Route
-                        exact
-                        path="/global-overview"
-                        component={GlobalOverview}
-                    />
+                    <Route exact path="/global-overview" component={GlobalOverview} />
                     <Route path="/tender/:tenderId" component={TenderDetail} />
                     <Route path="/news" component={News} />
                     <Route path="/news-detail/:id" component={NewsDetail} />

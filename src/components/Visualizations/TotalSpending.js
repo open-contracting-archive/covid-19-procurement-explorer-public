@@ -16,20 +16,19 @@ import useTrans from '../../hooks/useTrans'
 import 'react-simple-hook-modal/dist/styles.css'
 
 import {
-    ModalProvider,
     Modal,
     useModal,
     ModalTransition
 } from 'react-simple-hook-modal'
 
-function TotalSpending({ label, params }) {
+function TotalSpending({label, params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [totalSpending, setTotalSpending] = useState()
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
-    const { isModalOpen, openModal, closeModal } = useModal()
+    const {isModalOpen, openModal, closeModal} = useModal()
 
     useEffect(() => {
         VisualizationServices.TotalSpending(params).then((response) => {
@@ -86,14 +85,16 @@ function TotalSpending({ label, params }) {
     }
 
     const barColorValue = '#ABBABF'
-    const { trans } = useTrans()
+    const {trans} = useTrans()
     const handle = useFullScreenHandle()
 
     return (
         <div
             onClick={openModal}
             className="bg-white rounded p-4 h-full cursor-pointer">
-            <h3 className="uppercase font-bold text-primary-dark">{label}</h3>
+            <h3 className="uppercase font-bold text-primary-dark">
+                {trans(label ? label : "Total Spending")}
+            </h3>
             {loading ? (
                 <Loader sm />
             ) : (
@@ -124,7 +125,7 @@ function TotalSpending({ label, params }) {
                 </button>
                 <div>
                     <h3 className="uppercase font-bold text-primary-dark">
-                        {label}
+                        {trans(label ? label : "Total Spending")}
                     </h3>
 
                     <div className="bg-white rounded mt-4">
