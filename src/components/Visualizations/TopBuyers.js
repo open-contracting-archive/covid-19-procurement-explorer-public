@@ -42,7 +42,7 @@ const top_buyer_bar_data = [
     }
 ]
 
-function TopBuyers(params) {
+function TopBuyers({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -104,7 +104,7 @@ function TopBuyers(params) {
                 <Loader />
             ) : (
                 <BarListSection
-                    label="Top Buyers"
+                    label={label}
                     bar_data={top_buyer_bar_data}
                     byNumber={topBuyersDataByNumber && topBuyersDataByNumber}
                     byValue={topBuyersDataByValue && topBuyersDataByValue}

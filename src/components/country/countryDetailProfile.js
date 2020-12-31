@@ -1,11 +1,10 @@
 import React from 'react'
-
 import 'react-accessible-accordion/dist/fancy-example.css'
 import useTrans from '../../hooks/useTrans'
-import formatNumber from '../../components/formatNumber/FormatNumber'
+import formatNumber from '../formatNumber/FormatNumber'
 import ContractsIndicator from '../ContractsIndicator/ContractsIndicator'
 
-const CountryProfile = ({ profileData }) => {
+const CountryDetailProfile = ({ profileData }) => {
     const { trans } = useTrans()
 
     return (
@@ -163,4 +162,4 @@ const CountryProfile = ({ profileData }) => {
     )
 }
 
-export default CountryProfile
+export default CountryDetailProfile

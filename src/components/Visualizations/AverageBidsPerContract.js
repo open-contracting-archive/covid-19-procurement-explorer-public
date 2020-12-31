@@ -5,7 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function AverageBidsPerContract(params) {
+function AverageBidsPerContract({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -57,7 +57,7 @@ function AverageBidsPerContract(params) {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {trans('Average bids per contract')}
+                {label}
             </h3>
             {loading ? (
                 <Loader sm />

@@ -5,7 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 
-function Monopolization(params) {
+function Monopolization({label, params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -61,7 +61,7 @@ function Monopolization(params) {
         <div className="bg-white rounded p-4 h-full">
             <div>
                 <h3 className="uppercase font-bold  text-primary-dark">
-                    {trans('Monopolization')}
+                    {label}
                 </h3>
                 {loading ? (
                     <Loader sm />

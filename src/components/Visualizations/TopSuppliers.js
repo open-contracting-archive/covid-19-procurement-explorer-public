@@ -4,8 +4,9 @@ import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
 import BarListChart from '../BarListSection/BarListChart'
+import { Link } from 'react-router-dom'
 
-function TopSuppliers(params) {
+function TopSuppliers({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -65,7 +66,7 @@ function TopSuppliers(params) {
         <div className="bg-white rounded h-full">
             <div className="bg-white rounded p-6 h-full">
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {trans('Top Suppliers')}
+                    {label}
                 </h3>
                 <div className="flex">
                     <div className="flex-1">
@@ -87,6 +88,7 @@ function TopSuppliers(params) {
                                             <BarListChart
                                                 data={topSuppliersDataByValue}
                                             />
+                                            <Link to="">View All</Link>
                                         </TabPanel>
                                         <TabPanel>
                                             <BarListChart

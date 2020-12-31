@@ -9,7 +9,7 @@ import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullsc
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../services/visualizationServices'
 
-function GlobalSuppliers(params) {
+function GlobalSuppliers({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -68,7 +68,7 @@ function GlobalSuppliers(params) {
         <div className="bg-white rounded p-4 simple-tab">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {trans('Global suppliers')}
+                    {label}
                 </h3>
 
                 <Tabs>

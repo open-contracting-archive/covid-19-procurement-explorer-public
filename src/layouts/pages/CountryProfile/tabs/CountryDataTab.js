@@ -15,9 +15,9 @@ import {
     ContractsCorrelation,
     ContractsRedFlags,
     Concentration
-} from '../Visualizations'
+} from '../../../../components/Visualizations'
 
-function CountryDataCharts({ countryCode }) {
+function CountryDataTab({ countryCode }) {
     return (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
@@ -112,4 +112,4 @@ function CountryDataCharts({ countryCode }) {
     )
 }
 
-export default CountryDataCharts
+export default CountryDataTab

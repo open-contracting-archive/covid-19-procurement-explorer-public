@@ -46,8 +46,6 @@ const TreeMapChart = ({ data }) => {
         chart.padding(0, 0, 0, 0)
         chart.hiddenState.properties.opacity = 0
 
-        chart.exporting.menu = new am4core.ExportMenu()
-
         // only one level visible initially
         chart.maxLevels = 2
         // define data fields
@@ -95,6 +93,7 @@ const TreeMapChart = ({ data }) => {
         bullet1.label.fillOpacity = 0.7
 
         chart.data = processData(data)
+        chart.logo.disabled = true
 
         return () => {
             chart.dispose()

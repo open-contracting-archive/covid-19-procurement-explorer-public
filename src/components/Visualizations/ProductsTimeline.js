@@ -108,7 +108,7 @@ const stacked_chart_data = [
     }
 ]
 
-function ProductsTimeline() {
+function ProductsTimeline({label, params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -137,7 +137,7 @@ function ProductsTimeline() {
                     <FullScreen handle={handle}>
                         <div className="flex items-center justify-between">
                             <h3 className="uppercase font-bold  text-primary-dark">
-                                Products timeline
+                                {label}
                             </h3>
                             <div className="flex">
                                 <TabList>

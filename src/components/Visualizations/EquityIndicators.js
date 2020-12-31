@@ -20,7 +20,7 @@ const pie_chart_data = [
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function EquityIndicators(params) {
+function EquityIndicators({label,params}) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -65,7 +65,7 @@ function EquityIndicators(params) {
                 <Tabs>
                     <div className="flex items-center justify-between">
                         <h3 className="uppercase font-bold  text-primary-dark">
-                            {trans('Equity indicators')}
+                            {label}
                         </h3>
                         <div className="flex">
                             <TabList>
