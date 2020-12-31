@@ -71,11 +71,8 @@ function App() {
                     <Route path="/resources" component={Resources} />
                     <Route path="/tags" component={Tags} />
                     <Route path="/insights/:id" component={Insights} />
-                    <Route path="/buyer-profile" component={BuyerProfile} />
-                    <Route
-                        path="/supplier-profile"
-                        component={SupplierProfile}
-                    />
+                    <Route path="/buyer/:id" component={BuyerProfile} />
+                    <Route path="/supplier/:id" component={SupplierProfile} />
                     <Route component={NotFound} />
                 </Switch>
             </Fragment>

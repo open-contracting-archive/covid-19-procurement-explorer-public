@@ -58,7 +58,7 @@ function EquityIndicators({label,params}) {
             return { value: data.type, number: data.tender_count }
         })
     return (
-        <div className="bg-white rounded p-4 mb-2 simple-tab">
+        <div className="bg-white rounded p-4 mb-2 simple-tab relative z-10">
             {loading ? (
                 <Loader sm />
             ) : (

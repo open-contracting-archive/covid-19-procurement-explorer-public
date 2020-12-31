@@ -8,7 +8,7 @@ const AreaChartBlock = ({ totalAmount, chartData, percentage, currency }) => {
             <AreaChart
                 data={chartData}
                 apiData
-                colorValue={percentage < 100 ? '#FE5151' : '#3EEDA4'}
+                colorValue={percentage < 0 ? '#FE5151' : '#3EEDA4'}
             />
             <p className="mt-2">
                 <strong className="text-xl inline-block mr-3">
@@ -18,7 +18,7 @@ const AreaChartBlock = ({ totalAmount, chartData, percentage, currency }) => {
             </p>
             <p
                 className={`text-sm  font-bold ${
-                    percentage < 100 ? 'text-red-30' : 'text-green-30'
+                    percentage < 0 ? 'text-red-30' : 'text-green-30'
                 }`}>
                 {percentage}%
             </p>

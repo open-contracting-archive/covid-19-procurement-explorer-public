@@ -5,7 +5,11 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
+<<<<<<< HEAD
 function AverageBidsPerContract({label,params}) {
+=======
+function AverageBidsPerContract({ label, params }) {
+>>>>>>> -[x] Buyers and suppliers profile visualization
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -57,7 +61,7 @@ function AverageBidsPerContract({label,params}) {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {label}
+                {label || trans('Average bids per contract')}
             </h3>
             {loading ? (
                 <Loader sm />
