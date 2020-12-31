@@ -16,17 +16,20 @@ function ContractsCorrelation({label, params}) {
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [quantityCorrelation, setQuantityCorrelation] = useState()
-    const { trans } = useTrans()
+    const {trans} = useTrans()
     const handle = useFullScreenHandle()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.QuantityCorrelation(params).then((response) => {
-            setQuantityCorrelation(response)
-            setLoading(false)
-        })
+        VisualizationServices.QuantityCorrelation(params)
+            .then((response) => {
+                if (response) {
+                    setQuantityCorrelation(response)
+                }
+                setLoading(false)
+            })
     }, [])
 
     // ===========================================================================

@@ -20,7 +20,7 @@ const contract_status_data = [
     }
 ]
 
-function ContractStatus({label,params}) {
+function ContractStatus({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -32,10 +32,11 @@ function ContractStatus({label,params}) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ContractStatus(params).then((response) => {
-            setContractStatus(response)
-            setLoading(false)
-        })
+        VisualizationServices.ContractStatus(params)
+            .then((response) => {
+                setContractStatus(response)
+                setLoading(false)
+            })
     }, [])
 
     // ===========================================================================
@@ -43,33 +44,32 @@ function ContractStatus({label,params}) {
     // ===========================================================================
     // Contract status
     const calculateContractStatusChartPercentage = (data, type) => {
-        if (type == 'by_value') {
+        if (type === 'by_value') {
             let total = data.reduce((acc, current) => {
                 return acc + current.amount_local
             }, 0)
 
-            let dataByValue = data.map((data) => {
+            return data.map((data) => {
                 return {
                     name: data.status,
                     value: Math.ceil((data.amount_local / total) * 100),
                     amount: data.amount_local
                 }
             })
-            return dataByValue
         }
-        if (type == 'by_number') {
+
+        if (type === 'by_number') {
             let total = data.reduce((acc, current) => {
                 return acc + current.tender_count
             }, 0)
 
-            let dataByNumber = data.map((data) => {
+            return data.map((data) => {
                 return {
                     name: data.status,
                     value: Math.ceil((data.tender_count / total) * 100),
                     amount: data.tender_count
                 }
             })
-            return dataByNumber
         }
     }
     const contractStatusDataByNumber =

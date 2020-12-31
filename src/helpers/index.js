@@ -58,9 +58,13 @@ const apiRoutes = {
     'visualization.monopolization': 'api/v1/vizualization/monopolization/',
     'visualization.global-suppliers': 'api/v1/vizualization/global-suppliers/',
     'visualization.equity-indicators': 'api/v1/vizualization/equity-indicators/',
-    'tenders': 'api/v1/tender'
+    'tenders': 'api/v1/tender/',
+    'pages': 'api/v2/pages/',
+    'countries': 'api/v1/country/',
+    'visualization.world-map': 'api/v1/vizualization/world-map/',
+    'visualization.country-map': 'api/v1/vizualization/country-map/',
 }
 
-export const getApi = (routeName) => {
+export const getURI = (routeName) => {
     return API_URL + get(apiRoutes, routeName)
 }

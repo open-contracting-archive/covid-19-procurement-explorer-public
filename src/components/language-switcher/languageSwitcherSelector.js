@@ -4,7 +4,7 @@ import {
     setCurrentLocale,
     setTranslations
 } from '../../store/reducers/general/action'
-import CountryProfileServices from '../../services/countryProfileServices'
+import CountryServices from '../../services/CountryServices'
 
 const languages = [
     { code: 'en', name: 'English' },
@@ -18,7 +18,7 @@ const LanguageSwitcherSelector = () => {
 
     const onChange = (e) => {
         dispatch(setCurrentLocale(e.target.value))
-        CountryProfileServices.getTranslations(e.target.value).then(
+        CountryServices.getTranslations(e.target.value).then(
             (response) => {
                 dispatch(setTranslations(response))
             }

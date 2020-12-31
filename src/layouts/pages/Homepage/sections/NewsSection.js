@@ -51,14 +51,14 @@ const NewsSection = () => {
                                         className="news-item"
                                         key={news.id}>
                                         <Link
-                                            to={`/news-detail/${news.id}`}
+                                            to={`/news/${news.id}`}
                                             className="news-link">
                                             <div className="img-wrapper img-gradient">
                                                 {get(
                                                     news,
                                                     'content_image.meta.download_url'
-                                                ) && 
-                                                
+                                                ) &&
+
                                                     <img
                                                         src={`${API_URL}${get(
                                                              news,
@@ -72,7 +72,7 @@ const NewsSection = () => {
                                                     />
                                                 }
                                             </div>
-                                            
+
                                             <div
                                                 className={`news-caption ${
                                                     index === 0
@@ -84,7 +84,7 @@ const NewsSection = () => {
                                                 </h3>
                                                 <p className="news-caption__date">
                                                     {formatDate(news.published_date, 'MMM DD, YYYY')}
-                                                    
+
                                                 </p>
                                             </div>
                                         </Link>

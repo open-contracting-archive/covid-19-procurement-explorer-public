@@ -107,7 +107,7 @@ const WorldMapRace = () => {
         setRaceBarDataApi(raceBarDateObject)
     }, [dataFromApi])
 
-    console.log(raceBarDataApi)
+    // console.log(raceBarDataApi)
 
     const handleContinentChange = (selectedOption) => {
         setSelectedContinent(selectedOption)

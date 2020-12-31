@@ -1,5 +1,5 @@
 import Api from './api'
-import { API_URL } from '../helpers'
+import { API_URL, getURI } from '../helpers'
 
 class InsightServices {
     static async NewsData() {
@@ -16,10 +16,12 @@ class InsightServices {
             return error
         }
     }
+
     static async NewsDetailData(id) {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
     }
+
     static async BlogsData() {
         try {
             const res = await Api.get(
@@ -30,10 +32,12 @@ class InsightServices {
             return error
         }
     }
+
     static async BlogsDetailData(id) {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
     }
+
     static async EventsData() {
         try {
             const res = await Api.get(
@@ -44,10 +48,12 @@ class InsightServices {
             return error
         }
     }
+
     static async EventsDetailData(id) {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
     }
+
     static async InsightsData() {
         try {
             const res = await Api.get(
@@ -58,9 +64,21 @@ class InsightServices {
             return error
         }
     }
+
     static async InsightsDetailData(id) {
         const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
         return res.body
+    }
+
+    static async StaticPageDetail(queryParams) {
+        const response = await Api.get(getURI('pages'), queryParams)
+
+        if (response.body !== undefined && response.body.items !== undefined && response.body.items.length) {
+            const result = await Api.get(getURI('pages') + response.body.items[0].id)
+            return result.body
+        }
+
+        return response.body
     }
 }
 

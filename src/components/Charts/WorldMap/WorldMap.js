@@ -6,7 +6,7 @@ import * as am4charts from '@amcharts/amcharts4/charts'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { Link } from 'react-router-dom'
-import CountryServices from '../../../services/countryServices'
+import CountryServices from '../../../services/CountryServices'
 import formatNumber from '../../formatNumber/FormatNumber'
 
 const WorldMap = ({ data }) => {
@@ -14,7 +14,7 @@ const WorldMap = ({ data }) => {
     const [countryData, setCountryData] = useState([])
 
     useEffect(() => {
-        CountryServices.CountryData().then((response) => {
+        CountryServices.Countries().then((response) => {
             if (response) {
                 const countries = response.reduce((acc, current) => {
                     return { [current.name]: current, ...acc }
@@ -1844,7 +1844,7 @@ const WorldMap = ({ data }) => {
                 ZW: '13061000'
             }
         })
-        
+
         chart.data = data
 
         return () => {

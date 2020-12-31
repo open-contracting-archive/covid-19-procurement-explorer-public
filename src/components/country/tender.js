@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { get } from 'lodash'
 import { Link, useParams } from 'react-router-dom'
 import Select from 'react-select'
-import CountryProfileServices from '../../services/countryProfileServices'
+import CountryServices from '../../services/CountryServices'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Loader from '../Loader/Loader'
@@ -20,7 +20,7 @@ const Tender = ({ selectedCountry }) => {
     ]
 
     useEffect(() => {
-        CountryProfileServices.CountryProfileTenderData(selectedCountry).then(
+        CountryServices.CountryProfileTenderData(selectedCountry).then(
             (response) => {
                 if (response) {
                     // setTenderData(response)
@@ -33,7 +33,7 @@ const Tender = ({ selectedCountry }) => {
     }, [])
 
     const LoadMoreTenderData = () => {
-        CountryProfileServices.LoadMoreTenderData(pagination).then(
+        CountryServices.LoadMoreTenderData(pagination).then(
             (response) => {
                 if (response) {
                     // setTenderData(tenderData, ...response)
