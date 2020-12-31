@@ -84,7 +84,7 @@ const Suppliers = () => {
     let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const tempTableData = tempArray.map((index) => {
         return (
-            <Link className="table-row" key={index} to="/supplier-profile">
+            <Link className="table-row" key={index} to="/supplier/21633086">
                 <td className="uppercase">SERVICIOS DE LABORATORIO CLÍNICO</td>
                 <td>Mexico</td>
                 <td>21</td>
@@ -100,13 +100,16 @@ const Suppliers = () => {
         <div>
             <div className="flex flex-wrap -mx-3 mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <div className="bg-white rounded p-4">
+                    <div className="bg-white rounded p-4 h-full">
                         <h3 className="uppercase font-bold  text-primary-dark">
                             Suppliers
                         </h3>
                         <div className="flex items-end">
                             <div className=" text-primary-dark w-2/5">
-                                <AreaChart data={area_chart_data} />
+                                <AreaChart
+                                    data={area_chart_data}
+                                    colorValue="#FE5151"
+                                />
                                 <p>
                                     <strong className="text-xl inline-block mr-3">
                                         21,800
@@ -127,7 +130,10 @@ const Suppliers = () => {
                         </h3>
                         <div className="flex items-end">
                             <div className=" text-primary-dark pb-4 w-2/5">
-                                <AreaChart data={area_chart_data} />
+                                <AreaChart
+                                    data={area_chart_data}
+                                    colorValue="#3EEDA4"
+                                />
                                 <p>
                                     <strong className="text-xl inline-block mr-3">
                                         87M
@@ -154,7 +160,10 @@ const Suppliers = () => {
                         </h3>
                         <div className="flex items-end">
                             <div className=" text-primary-dark pb-4 w-2/5">
-                                <AreaChart data={area_chart_data} />
+                                <AreaChart
+                                    data={area_chart_data}
+                                    colorValue="#FE5151"
+                                />
                                 <p>
                                     <strong className="text-xl inline-block mr-3">
                                         218

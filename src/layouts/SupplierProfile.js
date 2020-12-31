@@ -15,7 +15,16 @@ import useTrans from '../hooks/useTrans'
 import { ReactComponent as DownloadIcon } from '../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../assets/img/icons/ic_fullscreen.svg'
-import AreaChart from "../components/Charts/AreaChart/AreaChart";
+import AreaChart from '../components/Charts/AreaChart/AreaChart'
+import {
+    ContractsRedFlags,
+    GlobalSuppliers,
+    ProductDistribution,
+    ProductsTimeline,
+    TopSuppliers,
+    TotalContracts,
+    TotalSpending
+} from '../components/Visualizations'
 
 const top_supply_bar_data = [
     {
@@ -249,24 +258,24 @@ const stacked_chart_data = [
 
 // Sankey Chart data
 const sankey_chart_data = [
-    {from: 'A', to: 'D', value: 10},
-    {from: 'B', to: 'D', value: 8},
-    {from: 'B', to: 'E', value: 4},
-    {from: 'C', to: 'E', value: 3},
-    {from: 'D', to: 'G', value: 5},
-    {from: 'D', to: 'I', value: 2},
-    {from: 'D', to: 'H', value: 3},
-    {from: 'E', to: 'H', value: 6},
-    {from: 'G', to: 'J', value: 5},
-    {from: 'I', to: 'J', value: 1},
-    {from: 'H', to: 'J', value: 9}
+    { from: 'A', to: 'D', value: 10 },
+    { from: 'B', to: 'D', value: 8 },
+    { from: 'B', to: 'E', value: 4 },
+    { from: 'C', to: 'E', value: 3 },
+    { from: 'D', to: 'G', value: 5 },
+    { from: 'D', to: 'I', value: 2 },
+    { from: 'D', to: 'H', value: 3 },
+    { from: 'E', to: 'H', value: 6 },
+    { from: 'G', to: 'J', value: 5 },
+    { from: 'I', to: 'J', value: 1 },
+    { from: 'H', to: 'J', value: 9 }
 ]
 
 const barColorValue = '#ABBABF'
 const colors = ['#ABBABF', '#DCEAEE']
 
 const SupplierProfile = () => {
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     let history = useHistory()
     const handle = useFullScreenHandle()
 
@@ -275,9 +284,9 @@ const SupplierProfile = () => {
     }
 
     const options = [
-        {value: 'option-1', label: 'Option 1'},
-        {value: 'option-2', label: 'Option 2'},
-        {value: 'option-3', label: 'Option 3'}
+        { value: 'option-1', label: 'Option 1' },
+        { value: 'option-2', label: 'Option 2' },
+        { value: 'option-3', label: 'Option 3' }
     ]
 
     let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -330,64 +339,7 @@ const SupplierProfile = () => {
                     </div>
                 </div>
                 <div className="w-full px-2 mb-4">
-                    <div className="bg-white rounded p-4 simple-tab">
-                        <FullScreen handle={handle}>
-                            <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                                Global suppliers
-                            </h3>
-
-                            <Tabs>
-                                <TabList>
-                                    <Tab>{trans('By contract value')}</Tab>
-                                    <Tab>{trans('By number of contracts')}</Tab>
-                                </TabList>
-
-                                <div className="flex">
-                                    <div className="flex-1">
-                                        <TabPanel>
-                                            <SankeyChart
-                                                data={sankey_chart_data}
-                                            />
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <SankeyChart
-                                                data={sankey_chart_data}
-                                            />
-                                        </TabPanel>
-                                    </div>
-                                </div>
-                            </Tabs>
-                        </FullScreen>
-
-                        <div
-                            className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                             text-primary-blue -mx-6 px-6">
-                            <div className="flex">
-                                <span className="flex items-center">
-                                    <DownloadIcon className="mr-2 inline-block" />{' '}
-                                    <span className="cursor-pointer">
-                                        Download
-                                    </span>
-                                </span>
-                                <span className="ml-8 flex items-center">
-                                    <ShareIcon className="mr-2 inline-block" />{' '}
-                                    <span className="cursor-pointer">
-                                        Share
-                                    </span>
-                                </span>
-                            </div>
-                            <div>
-                                <span className="flex items-center">
-                                    <button onClick={handle.enter}>
-                                        <span className="cursor-pointer">
-                                            View full screen
-                                        </span>
-                                        <FullViewIcon className="ml-2 inline-block" />
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    <GlobalSuppliers />
                 </div>
             </div>
             <div
@@ -398,7 +350,7 @@ const SupplierProfile = () => {
                 <div className="container mx-auto px-4 ">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <div className="bg-white rounded p-4 h-full">
+                            {/* <div className="bg-white rounded p-4 h-full">
                                 <h3 className="uppercase font-bold  text-primary-dark">
                                     Total Income
                                 </h3>
@@ -422,10 +374,11 @@ const SupplierProfile = () => {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            <TotalSpending label="Total income" />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <div className="bg-white rounded p-4">
+                            {/* <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark">
                                     Total contracts
                                 </h3>
@@ -449,7 +402,8 @@ const SupplierProfile = () => {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            <TotalContracts />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="bg-white rounded p-4 py-2 mb-2 simple-tab h-full">
@@ -508,7 +462,7 @@ const SupplierProfile = () => {
                             </div>
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <div className="bg-white rounded p-4">
+                            {/* <div className="bg-white rounded p-4">
                                 <h3 className="uppercase font-bold  text-primary-dark">
                                     Products timeline
                                 </h3>
@@ -519,22 +473,26 @@ const SupplierProfile = () => {
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            <ProductsTimeline />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <BarListSection
+                            {/* <BarListSection
                                 label="Product distribution"
                                 bar_data={top_supply_bar_data}
-                            />
+                            /> */}
+                            <ProductDistribution />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <BarListSection
+                            {/* <BarListSection
                                 label="Top suppliers"
                                 bar_data={top_supply_bar_data}
-                            />
+                            /> */}
+                            <TopSuppliers />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <ContractRedFlag />
+                            {/* <ContractRedFlag /> */}
+                            <ContractsRedFlags />
                         </div>
                     </div>
                     {/* Table */}
@@ -586,50 +544,50 @@ const SupplierProfile = () => {
                     </div>
                     <table className="table">
                         <thead>
-                        <tr>
-                            <th style={{width: '20%'}}>
+                            <tr>
+                                <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Buyer{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{width: '10%'}}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{width: '10%'}}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{width: '10%'}}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of suppliers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{width: '10%'}}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{width: '10%'}}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{width: '10%'}}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>
