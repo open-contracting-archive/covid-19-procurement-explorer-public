@@ -101,10 +101,10 @@ function CountryDataTab({ countryCode }) {
                     </div>
 
                     <div className="w-full px-2 mb-6">
-                        <ContractsCorrelation
+                        {/* <ContractsCorrelation
                             label="Covid/Contracts Quantity Correlation"
                             country={countryCode}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>

@@ -61,7 +61,7 @@ const GlobalDataTab = () => {
                         <ContractsRedFlags />
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <ContractsCorrelation />
+                        {/* <ContractsCorrelation /> */}
                     </div>
                 </div>
             </div>
