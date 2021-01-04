@@ -1,7 +1,7 @@
 import React from 'react'
 import 'react-accessible-accordion/dist/fancy-example.css'
 import useTrans from '../../../../hooks/useTrans'
-import formatNumber from '../../../../components/formatNumber/FormatNumber'
+import formatNumber from '../../../../components/FormatNumber/FormatNumber'
 import ContractsIndicator from '../../../../components/ContractsIndicator/ContractsIndicator'
 
 const CountryEquity = ({ profileData }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import AreaChart from './AreaChart'
-import formatNumber from '../../formatNumber/FormatNumber'
+import formatNumber from '../../FormatNumber/FormatNumber'
 
 const AreaChartBlock = ({ totalAmount, chartData, percentage, currency }) => {
     return (
