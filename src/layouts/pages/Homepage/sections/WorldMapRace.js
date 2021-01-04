@@ -46,7 +46,8 @@ const WorldMapRace = () => {
     ]
 
     useEffect(() => {
-        CountryServices.GetGlobalMapData().then((response) => {
+        CountryServices.GetGlobalMapData()
+            .then((response) => {
             setDataFromApi(response)
         })
     }, [])

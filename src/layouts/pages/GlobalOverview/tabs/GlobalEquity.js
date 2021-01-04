@@ -1,12 +1,9 @@
 import React from 'react'
-
 import 'react-accessible-accordion/dist/fancy-example.css'
 import useTrans from '../../../../hooks/useTrans'
-import { formatNumber } from '../../../../helpers/number'
 import ContractsIndicator from '../../../../components/ContractsIndicator/ContractsIndicator'
 import Select from 'react-select'
 import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort.svg'
-import { ReactComponent as FlagIcon } from '../../../../assets/img/icons/ic_flag.svg'
 
 const GlobalEquity = () => {
     const { trans } = useTrans()

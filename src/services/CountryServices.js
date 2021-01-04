@@ -57,7 +57,7 @@ class CountryServices {
 
     static async GetGlobalMapData() {
         try {
-            const res = await Api.get(getURI('visualization/world-map-race'))
+            const res = await Api.get(getURI('visualization.world-map-race'))
 
             return res.body
         } catch (error) {

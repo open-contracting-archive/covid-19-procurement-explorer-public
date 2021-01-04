@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import CountryMap from "../../../../components/Charts/CountryMap/CountryMap";
-import { ReactComponent as DownloadIcon } from "../../../../assets/img/icons/ic_download.svg";
-import { ReactComponent as ShareIcon } from "../../../../assets/img/icons/ic_share.svg";
-import { ReactComponent as FullViewIcon } from "../../../../assets/img/icons/ic_fullscreen.svg";
-import VisualizationServices from "../../../../services/visualizationServices";
-import useTrans from "../../../../hooks/useTrans";
-import Loader from "../../../../components/Loader/Loader";
+import CountryMap from "../../../../components/Charts/CountryMap/CountryMap"
+import { ReactComponent as DownloadIcon } from "../../../../assets/img/icons/ic_download.svg"
+import { ReactComponent as ShareIcon } from "../../../../assets/img/icons/ic_share.svg"
+import { ReactComponent as FullViewIcon } from "../../../../assets/img/icons/ic_fullscreen.svg"
+import VisualizationServices from "../../../../services/visualizationServices"
+import useTrans from "../../../../hooks/useTrans"
+import Loader from "../../../../components/Loader/Loader"
 
 const CountryMapElement = ({ countryData }) => {
     const [loading, setLoading] = useState(true)
@@ -19,18 +19,18 @@ const CountryMapElement = ({ countryData }) => {
     useEffect(() => {
         // Fetch country specific data
         if (countryData && countryData.country_code_alpha_2 !== undefined) {
-            VisualizationServices.CountryMap({country: countryData.country_code_alpha_2})
+            VisualizationServices.CountryMap({ country: countryData.country_code_alpha_2 })
                 .then((response) => {
-                    setCountryVisualizationData(response.result
-                        .map((data) => {
-                            return ({
-                                id: data.country_code,
-                                value:
-                                    contractType === 'value'
-                                        ? data.amount_usd
-                                        : data.tender_count
-                            })
-                        }))
+                    const mapData = [
+                        {
+                            id: response.country_code,
+                            value:
+                                contractType === 'value'
+                                    ? response.amount_usd
+                                    : response.tender_count
+                        }
+                    ]
+                    setCountryVisualizationData(mapData)
                     setLoading(false)
                 })
         }
