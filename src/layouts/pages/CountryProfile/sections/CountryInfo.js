@@ -1,5 +1,5 @@
 import React from 'react'
-import formatNumber from '../../../../components/FormatNumber/FormatNumber'
+import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
 import useTrans from '../../../../hooks/useTrans'
 

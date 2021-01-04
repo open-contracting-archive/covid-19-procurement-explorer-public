@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort.svg'
-import { API_URL } from '../../../../helpers'
+import { API_URL } from '../../../../helpers/api'
 import InsightServices from '../../../../services/insightServices'
 
 const CountryInsights = () => {
@@ -19,7 +19,7 @@ const CountryInsights = () => {
             setLoading(false)
         })
     }, [])
-    
+
     const options = [
         { value: 'option-1', label: 'Option 1' },
         { value: 'option-2', label: 'Option 2' },

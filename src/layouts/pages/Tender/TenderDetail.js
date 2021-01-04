@@ -9,7 +9,7 @@ import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import CountryServices from '../../../services/CountryServices'
 import AwardedItems from './tabs/AwardedItems'
-import FormatNumber from '../../../components/FormatNumber/FormatNumber'
+import FormatNumber from '../../../helpers/number'
 
 const TenderDetail = () => {
     const [tenderInfo, setTenderInfo] = useState()

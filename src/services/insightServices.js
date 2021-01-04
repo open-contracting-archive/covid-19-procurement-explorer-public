@@ -1,5 +1,5 @@
 import Api from './api'
-import { API_URL, getURI } from '../helpers'
+import { API_URL, getURI } from '../helpers/api'
 
 class InsightServices {
     static async NewsData() {

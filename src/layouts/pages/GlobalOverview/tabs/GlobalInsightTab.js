@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort.svg'
-import { API_URL } from '../../../../helpers'
+import { API_URL } from '../../../../helpers/api'
 import InsightServices from '../../../../services/insightServices'
 
 const GlobalInsights = () => {

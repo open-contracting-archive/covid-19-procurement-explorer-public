@@ -7,7 +7,7 @@ import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { Link } from 'react-router-dom'
 import CountryServices from '../../../services/CountryServices'
-import formatNumber from '../../FormatNumber/FormatNumber'
+import { formatNumber } from '../../../helpers/number'
 
 const WorldMap = ({ data }) => {
     const worldMapChartDiv = useRef(null)

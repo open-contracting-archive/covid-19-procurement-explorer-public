@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
-import LanguageSwitcherSelector from '../../components/LanguageSwitcher/LanguageSwitcherSelector'
+import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher'
 
 const Header = () => {
     const [isHome, setIsHome] = useState(true)
@@ -64,7 +64,7 @@ const Header = () => {
                                 </NavLink>
                             </li>
                         </ul>
-                        <LanguageSwitcherSelector />
+                        <LanguageSwitcher />
                     </div>
                 </div>
             </header>
