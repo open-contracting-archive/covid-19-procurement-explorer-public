@@ -1,5 +1,5 @@
 import Api from './api'
-import { getURI } from '../helpers'
+import { getURI } from '../helpers/api'
 
 class VisualizationServices {
     static async GlobalMap() {

@@ -11,7 +11,7 @@ const languages = [
     { code: 'es', name: 'Spanish' }
 ]
 
-const LanguageSwitcherSelector = () => {
+const LanguageSwitcher = () => {
     const currentLocale = useSelector((state) => state.general.currentLocale)
 
     const dispatch = useDispatch()
@@ -45,4 +45,4 @@ const LanguageSwitcherSelector = () => {
     )
 }
 
-export default LanguageSwitcherSelector
+export default LanguageSwitcher

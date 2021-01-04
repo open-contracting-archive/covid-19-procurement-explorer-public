@@ -13,7 +13,7 @@ import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_ch
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
 import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
-import CountryContractMapServices from '../../../../services/countryContractMapServices'
+import CountryServices from '../../../../services/CountryServices'
 import Loader from '../../../../components/Loader/Loader'
 
 const WorldMapRace = () => {
@@ -46,7 +46,8 @@ const WorldMapRace = () => {
     ]
 
     useEffect(() => {
-        CountryContractMapServices.GetGlobalMapData().then((response) => {
+        CountryServices.GetGlobalMapData()
+            .then((response) => {
             setDataFromApi(response)
         })
     }, [])

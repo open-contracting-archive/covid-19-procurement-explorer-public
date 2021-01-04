@@ -9,7 +9,7 @@ import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import CountryServices from '../../../services/CountryServices'
 import AwardedItems from './tabs/AwardedItems'
-import FormatNumber from '../../../components/FormatNumber/FormatNumber'
+import { formatNumber } from '../../../helpers/number'
 
 const TenderDetail = () => {
     const [tenderInfo, setTenderInfo] = useState()
@@ -127,7 +127,7 @@ const TenderDetail = () => {
                         </p>
                         <p className="font-bold text-xl">
                             {tenderInfo &&
-                                FormatNumber(tenderInfo.contract_value_usd)}
+                            formatNumber(tenderInfo.contract_value_usd)}
                             <span className="font-normal text-base uppercase">
                                 USD
                             </span>
@@ -177,7 +177,7 @@ const TenderDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className="container mx-auto px-4 "></div>
+            <div className="container mx-auto px-4" />
             <Tabs>
                 <div className="container mx-auto px-4 ">
                     <TabList>

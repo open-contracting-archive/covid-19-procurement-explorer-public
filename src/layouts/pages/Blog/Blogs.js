@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import { API_URL } from '../../../helpers'
+import { API_URL } from '../../../helpers/api'
 import InsightServices from '../../../services/insightServices'
 import Loader from '../../../components/Loader/Loader'
 import {formatDate} from "../../../helpers/date";

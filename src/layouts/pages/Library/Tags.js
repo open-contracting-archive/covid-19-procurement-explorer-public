@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import * as dayjs from 'dayjs'
-import { API_URL } from '../../../helpers'
+import { API_URL } from '../../../helpers/api'
 
 function Tags() {
     return (

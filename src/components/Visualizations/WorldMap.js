@@ -7,7 +7,7 @@ import GlobalMap from '../GlobalMap/GlobalMap'
 import {ReactComponent as DownloadIcon} from '../../assets/img/icons/ic_download.svg'
 import {ReactComponent as ShareIcon} from '../../assets/img/icons/ic_share.svg'
 import {ReactComponent as FullViewIcon} from '../../assets/img/icons/ic_fullscreen.svg'
-import {CONTINENTS} from '../../helpers'
+import {CONTINENTS} from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
 
 const WorldMap = () => {
