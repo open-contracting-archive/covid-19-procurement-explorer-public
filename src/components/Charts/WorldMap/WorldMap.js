@@ -7,7 +7,7 @@ import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { Link } from 'react-router-dom'
 import CountryServices from '../../../services/CountryServices'
-import formatNumber from '../../formatNumber/FormatNumber'
+import formatNumber from '../../FormatNumber/FormatNumber'
 
 const WorldMap = ({ data }) => {
     const worldMapChartDiv = useRef(null)
@@ -330,19 +330,21 @@ const WorldMap = ({ data }) => {
                 return latitude
             })
 
-            imageTemplate.adapter.add('longitude', function (
-                longitude,
-                target
-            ) {
-                let polygon = polygonSeries.getPolygonById(target.dataItem.id)
-                if (polygon) {
-                    target.disabled = false
-                    return polygon.visualLongitude
-                } else {
-                    target.disabled = true
+            imageTemplate.adapter.add(
+                'longitude',
+                function (longitude, target) {
+                    let polygon = polygonSeries.getPolygonById(
+                        target.dataItem.id
+                    )
+                    if (polygon) {
+                        target.disabled = false
+                        return polygon.visualLongitude
+                    } else {
+                        target.disabled = true
+                    }
+                    return longitude
                 }
-                return longitude
-            })
+            )
 
             // END OF MAP
 

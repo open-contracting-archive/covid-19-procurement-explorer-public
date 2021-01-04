@@ -1,5 +1,5 @@
 import React from 'react'
-import formatNumber from '../formatNumber/FormatNumber'
+import formatNumber from '../FormatNumber/FormatNumber'
 
 function BarListChart({ data, byValue }) {
     return (

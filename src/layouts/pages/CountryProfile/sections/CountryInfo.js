@@ -1,7 +1,7 @@
-import React from "react"
-import formatNumber from "../../../../components/formatNumber/FormatNumber";
-import { formatDate } from "../../../../helpers/date";
-import useTrans from "../../../../hooks/useTrans";
+import React from 'react'
+import formatNumber from '../../../../components/FormatNumber/FormatNumber'
+import { formatDate } from '../../../../helpers/date'
+import useTrans from '../../../../hooks/useTrans'
 
 const CountryInfo = ({ country }) => {
     const { trans } = useTrans()
@@ -37,10 +37,7 @@ const CountryInfo = ({ country }) => {
                                     {trans('Healthcare budget')}
                                 </span>
                                 <h2 className="text-xl">
-                                    $
-                                    {formatNumber(
-                                        country.healthcare_budget
-                                    )}
+                                    ${formatNumber(country.healthcare_budget)}
                                 </h2>
                                 <span className="block font-normal">
                                     {trans('per capita')}
@@ -54,7 +51,9 @@ const CountryInfo = ({ country }) => {
                                 </span>
                                 <h2 className="text-xl">
                                     {country.healthcare_gdp_pc}
-                                    <span className="inline-block uppercase text-sm tracking-tight">%</span>
+                                    <span className="inline-block uppercase text-sm tracking-tight">
+                                        %
+                                    </span>
                                 </h2>
                             </div>
                         </div>
@@ -82,7 +81,9 @@ const CountryInfo = ({ country }) => {
                                 </span>
                                 <h2 className="text-xl">
                                     {country.covid_cases_total &&
-                                    country.covid_cases_total.toLocaleString('en')}
+                                        country.covid_cases_total.toLocaleString(
+                                            'en'
+                                        )}
                                 </h2>
                             </div>
                         </div>
@@ -93,7 +94,9 @@ const CountryInfo = ({ country }) => {
                                 </span>
                                 <h2 className="text-xl">
                                     {country.covid_deaths_total &&
-                                    country.covid_deaths_total.toLocaleString('en')}
+                                        country.covid_deaths_total.toLocaleString(
+                                            'en'
+                                        )}
                                 </h2>
                             </div>
                         </div>
@@ -113,15 +116,14 @@ const CountryInfo = ({ country }) => {
                     </div>
                 </div>
             </div>
-            <div
-                className="absolute"
-                style={{ top: '-30px', right: '25px' }}>
+            <div className="absolute" style={{ top: '-30px', right: '25px' }}>
                 <p className="text-blue-40">
-                    <span className="opacity-75">
-                        Last updated on{' '}
-                    </span>
+                    <span className="opacity-75">Last updated on </span>
                     <span>
-                        {formatDate(country.covid_data_last_updated, 'h:mm a MMM D, YYYY')}
+                        {formatDate(
+                            country.covid_data_last_updated,
+                            'h:mm a MMM D, YYYY'
+                        )}
                     </span>
                 </p>
             </div>

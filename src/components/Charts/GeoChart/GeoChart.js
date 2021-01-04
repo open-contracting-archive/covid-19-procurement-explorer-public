@@ -3,7 +3,7 @@ import { select, geoPath, geoMercator } from 'd3'
 import { Link } from 'react-router-dom'
 import useResizeObserver from '../../../hooks/useResizeObserver'
 import CountryServices from '../../../services/CountryServices'
-import formatNumber from '../../formatNumber/FormatNumber'
+import formatNumber from '../../FormatNumber/FormatNumber'
 
 function GeoChart({ data }) {
     const svgRef = useRef()

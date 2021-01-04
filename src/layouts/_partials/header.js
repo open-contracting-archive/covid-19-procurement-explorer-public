@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
-import LanguageSwitcherSelector from '../../components/language-switcher/languageSwitcherSelector'
+import LanguageSwitcherSelector from '../../components/LanguageSwitcher/languageSwitcherSelector'
 
 const Header = () => {
     const [isHome, setIsHome] = useState(true)
@@ -38,12 +38,16 @@ const Header = () => {
                     <div className="flex items-center text-sm">
                         <ul className="flex">
                             <li className="mr-8">
-                                <NavLink activeClassName="active" to="/pages/about">
+                                <NavLink
+                                    activeClassName="active"
+                                    to="/pages/about">
                                     {trans('About')}
                                 </NavLink>
                             </li>
                             <li className="mr-8">
-                                <NavLink activeClassName="active" to="/global-overview">
+                                <NavLink
+                                    activeClassName="active"
+                                    to="/global-overview">
                                     {trans('Data')}
                                 </NavLink>
                             </li>
@@ -53,7 +57,9 @@ const Header = () => {
                                 </NavLink>
                             </li>
                             <li className="mr-8">
-                                <NavLink activeClassName="active" to="/resources">
+                                <NavLink
+                                    activeClassName="active"
+                                    to="/resources">
                                     {trans('Resources')}
                                 </NavLink>
                             </li>
