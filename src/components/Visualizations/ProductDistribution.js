@@ -14,10 +14,11 @@ function ProductDistribution(params) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductDistribution(params).then((response) => {
-            setProductDistribution(response)
-            setLoading(false)
-        })
+        VisualizationServices.ProductDistribution(params)
+            .then((response) => {
+                setProductDistribution(response)
+                setLoading(false)
+            })
     }, [])
 
     // ===========================================================================

@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { select, geoPath, geoMercator } from 'd3'
 import { Link } from 'react-router-dom'
 import useResizeObserver from '../../../hooks/useResizeObserver'
-import CountryServices from '../../../services/countryServices'
+import CountryServices from '../../../services/CountryServices'
 import formatNumber from '../../formatNumber/FormatNumber'
 
 function GeoChart({ data }) {
@@ -12,7 +12,7 @@ function GeoChart({ data }) {
     const [countryData, setCountryData] = useState([])
 
     useEffect(() => {
-        CountryServices.CountryData().then((response) => {
+        CountryServices.Countries().then((response) => {
             if (response) {
                 const countries = response.reduce((acc, current) => {
                     return { [current.name]: current, ...acc }

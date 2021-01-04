@@ -5,7 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 
-function Monopolization({label, params}) {
+function Monopolization({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -17,10 +17,11 @@ function Monopolization({label, params}) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.monopolization(params).then((response) => {
-            setMonopolization(response)
-            setLoading(false)
-        })
+        VisualizationServices.monopolization(params)
+            .then((response) => {
+                setMonopolization(response)
+                setLoading(false)
+            })
     }, [])
 
     // ===========================================================================
@@ -47,10 +48,8 @@ function Monopolization({label, params}) {
         })
     }
 
-    // Monopolization
     const monopolizationLineChartDataRaw =
         monopolization && lineChartData(monopolization.line_chart)
-
     const monopolizationLineChartData =
         monopolizationLineChartDataRaw &&
         sortDate(monopolizationLineChartDataRaw)
@@ -61,7 +60,7 @@ function Monopolization({label, params}) {
         <div className="bg-white rounded p-4 h-full">
             <div>
                 <h3 className="uppercase font-bold  text-primary-dark">
-                    {label}
+                    {trans(label)}
                 </h3>
                 {loading ? (
                     <Loader sm />
@@ -72,7 +71,7 @@ function Monopolization({label, params}) {
                             totalAmount={monopolizationAmount}
                             percentage={monopolizationPercentage}
                         />
-                        <div className="flex-1"></div>
+                        <div className="flex-1" />
                     </div>
                 )}
             </div>

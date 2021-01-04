@@ -4,7 +4,8 @@ const initialState = {
     currentCountry: null,
     currentLocale: 'en',
     translations: { en: {}, es: {} },
-    currency: 'usd'
+    currency: 'usd',
+    countries: []
 }
 
 const GeneralReducer = (state = initialState, { type, payload }) => {
@@ -20,6 +21,9 @@ const GeneralReducer = (state = initialState, { type, payload }) => {
 
         case types.SET_CURRENCY:
             return { ...state, currency: payload }
+
+        case types.SET_COUNTRIES:
+            return { ...state, countries: payload }
 
         default:
             return state

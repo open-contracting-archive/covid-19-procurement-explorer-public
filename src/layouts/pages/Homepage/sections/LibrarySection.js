@@ -50,7 +50,7 @@ const LibrarySection = () => {
                         data.slice(0, 6).map((eachdata) => {
                             return (
                                 <Link
-                                    to={eachdata.contents_type === "News" ? `/news-detail/${eachdata.id}` : `/blogs-detail/${eachdata.id}`}
+                                    to={eachdata.contents_type === "News" ? `/news/${eachdata.id}` : `/blogs/${eachdata.id}`}
                                     key={eachdata.id}>
                                     <div>
                                         <div className="library__tag">
