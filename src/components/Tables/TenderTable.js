@@ -2,23 +2,23 @@ import React, { Fragment, useState, useEffect } from "react"
 import Select from 'react-select'
 import { get, pickBy, identity } from 'lodash'
 import { Link } from 'react-router-dom'
-import { ReactComponent as SortIcon } from "../../assets/img/icons/ic_sort.svg";
-import { ReactComponent as FlagIcon } from "../../assets/img/icons/ic_flag.svg";
-import Loader from "../Loader/Loader";
-import VisualizationServices from "../../services/visualizationServices";
-import useTrans from "../../hooks/useTrans";
-import { formatDate } from "../../helpers/date";
+import { ReactComponent as SortIcon } from "../../assets/img/icons/ic_sort.svg"
+import { ReactComponent as FlagIcon } from "../../assets/img/icons/ic_flag.svg"
+import Loader from "../Loader/Loader"
+import VisualizationServices from "../../services/visualizationServices"
+import useTrans from "../../hooks/useTrans"
+import { formatDate } from "../../helpers/date"
 
 function TenderTable(props) {
     const options = [
-        {value: 'option-1', label: 'Option 1'},
-        {value: 'option-2', label: 'Option 2'},
-        {value: 'option-3', label: 'Option 3'}
+        { value: 'option-1', label: 'Option 1' },
+        { value: 'option-2', label: 'Option 2' },
+        { value: 'option-3', label: 'Option 3' }
     ]
     const [tenderList, setTenderList] = useState([])
     const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(false)
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const queryParams = identity(pickBy(props))
 
     useEffect(() => {
@@ -26,7 +26,7 @@ function TenderTable(props) {
     }, [])
 
     const LoadTenderList = () => {
-        VisualizationServices.TenderList({...queryParams, ...pagination})
+        VisualizationServices.TenderList({ ...queryParams, ...pagination })
             .then((response) => {
                     if (response) {
                         setTenderList([...tenderList, ...response.results])
@@ -47,8 +47,6 @@ function TenderTable(props) {
 
     return (
         <div>
-            <h1>{props.country}</h1>
-            <h1>{hasCountry()}</h1>
             {loading ? (
                 <Fragment>
                     <div className="mb-12 flex gap-8 justify-between">
@@ -140,7 +138,7 @@ function TenderTable(props) {
                     <table className="table">
                         <thead>
                         <tr>
-                            <th style={{width: '25%'}}>
+                            <th style={{ width: '25%' }}>
                                 <span className="flex items-center">
                                     {trans('Project Title')}{' '}
                                     <SortIcon className="ml-1 cursor-pointer" />
@@ -158,25 +156,25 @@ function TenderTable(props) {
                                     <SortIcon className="ml-1 cursor-pointer" />
                                 </span>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <span className="flex items-center">
                                     {trans('Method')}{' '}
                                     <SortIcon className="ml-1 cursor-pointer" />
                                 </span>
                             </th>
-                            <th style={{width: '20%'}}>
+                            <th style={{ width: '20%' }}>
                                 <span className="flex items-center">
                                     {trans('Product Category')}{' '}
                                     <SortIcon className="ml-1 cursor-pointer" />
                                 </span>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <span className="flex items-center">
                                     {trans('Date')}{' '}
                                     <SortIcon className="ml-1 cursor-pointer" />
                                 </span>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <span className="flex items-center">
                                     {trans('Value (USD)')}{' '}
                                     <SortIcon className="ml-1 cursor-pointer" />

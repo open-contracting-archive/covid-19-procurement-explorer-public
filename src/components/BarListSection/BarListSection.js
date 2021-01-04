@@ -8,7 +8,7 @@ function BarListSection({ bar_data, label, byValue, byNumber }) {
     return (
         <div className="bg-white rounded p-6 pb-0">
             <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                {label}
+                {trans(label)}
             </h3>
             <div className="flex">
                 <div className="flex-1">

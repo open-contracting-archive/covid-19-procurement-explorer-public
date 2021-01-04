@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import useTrans from '../../../hooks/useTrans'
-import CountryServices from '../../../services/CountryServices'
 import CountryData from './tabs/CountryData'
 import CountryInsights from './tabs/CountryInsights'
 import CountryContracts from "./tabs/CountryContracts"
@@ -12,41 +11,40 @@ import CountryBuyers from './tabs/CountryBuyers'
 import CountrySuppliers from './tabs/CountrySuppliers'
 import CountryInfo from "./sections/CountryInfo"
 import CountryMapElement from "./sections/CountryMapElement"
+import { first } from "lodash"
 
 const CountryDetail = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    // const [countries, setCountries] = useState([]) // List of all countries
+    const countries = useSelector((state) => state.general.countries)
     const [countryData, setCountryData] = useState({})
-    const [countryCode, setCountryCode] = useState(null)
+    const [countryCode, setCountryCode] = useState()
     const { trans } = useTrans()
     let { slug } = useParams()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
-    // useEffect(() => {
-    //     // Fetch list of all countries
-    //     CountryServices.Countries()
-    //         .then((response) => {
-    //             if (response) {
-    //                 const countries = response.reduce((acc, current) => {
-    //                     return { [current.name]: current, ...acc }
-    //                 }, {})
-    //                 setCountries(countries)
-    //             }
-    //         })
-    // }, [])
-
     useEffect(() => {
-        // Fetch country specific data
-        CountryServices.CountryProfileData(slug)
-            .then((response) => {
-                setCountryData(response)
-                setCountryCode(response.country_code_alpha_2)
-            })
-    }, [slug])
+        let country = first(Object.keys(countries)
+            .map((key) => countries[key])
+            .filter((country) => country.slug === slug))
+
+        if (country) {
+            setCountryData(country)
+            setCountryCode(country.country_code_alpha_2)
+        }
+    }, [countries, slug])
+
+    // useEffect(() => {
+    //     // Fetch country specific data
+    //     CountryServices.CountryProfileData(slug)
+    //         .then((response) => {
+    //             setCountryData(response)
+    //             setCountryCode(response.country_code_alpha_2)
+    //         })
+    // }, [slug])
 
     return (
         <section className="pt-20 -mt-8 bg-blue-0">
@@ -56,7 +54,7 @@ const CountryDetail = () => {
                         {slug}
                     </h2>
                     <div className="flex flex-wrap -mx-4 -mb-4">
-                        <CountryMapElement countryData={countryData} />
+                        <CountryMapElement countryCode={countryCode} />
                         <CountryInfo country={countryData} />
                     </div>
                 </div>
@@ -82,7 +80,7 @@ const CountryDetail = () => {
                             <CountryData countryCode={countryCode} />
                         </TabPanel>
                         <TabPanel>
-                            <CountryInsights country={countryCode} />
+                            <CountryInsights countryCode={countryCode} />
                         </TabPanel>
                         <TabPanel>
                             <CountryContracts country={countryCode} />

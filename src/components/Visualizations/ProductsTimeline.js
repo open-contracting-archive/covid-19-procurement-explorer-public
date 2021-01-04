@@ -7,132 +7,60 @@ import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_downlo
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import VisualizationServices from "../../services/visualizationServices"
+import { groupBy } from "lodash"
+import { formatDate } from "../../helpers/date"
+import { slugify } from "../../helpers/general"
 
-// Products Timeline Stacked Chart Data
-const stacked_chart_data = [
-    {
-        month: 'Apr',
-        ppe: 2.5,
-        ventilator: 2.5,
-        covid_tests: 2.1,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.2,
-        medicines: 0.1,
-        sanitizing_supplies: 0.4,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'May',
-        ppe: 2.6,
-        ventilator: 2.7,
-        covid_tests: 2.2,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.9,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Jun',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.7,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Jul',
-        ppe: 2.5,
-        ventilator: 2.5,
-        covid_tests: 2.1,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.2,
-        medicines: 0.1,
-        sanitizing_supplies: 0.2,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Aug',
-        ppe: 2.6,
-        ventilator: 2.7,
-        covid_tests: 2.2,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.7,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Sep',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.1,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Oct',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 0.7,
-        medical_consumables: 1.5,
-        other: 2
-    },
-    {
-        month: 'Nov',
-        ppe: 2.8,
-        ventilator: 2.9,
-        covid_tests: 2.4,
-        vaccine: 0.3,
-        construction_works_and_materials: 0.3,
-        medicines: 0.1,
-        sanitizing_supplies: 1,
-        medical_consumables: 1.5,
-        other: 2
-    }
-]
-
-function ProductsTimeline({label, params}) {
+const ProductsTimeline = ({ label, params }) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
+    const [apiData, setApiData] = useState([])
+    const [chartData, setChartData] = useState([])
+    const [chartType, setChartType] = useState('number')
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
+    useEffect(() => {
+        VisualizationServices.ProductTimeline(params)
+            .then((response) => {
+                setApiData(response)
+            })
+    }, [])
 
     useEffect(() => {
+        const groupedData = groupBy(apiData, (item) => formatDate(item.date, "MMM YYYY"))
+        const chartData = Object.keys(groupedData)
+            .map((key) => {
+                let products = {}
+                groupedData[key].forEach((item) => {
+                    products[slugify(item.product_name)] = chartType === 'value' ? item.amount_usd : item.tender_count
+                })
+
+                return {
+                    month: key,
+                    ...products
+                }
+            })
+        setChartData(chartData)
         setLoading(false)
-    }, [])
+    }, [apiData, chartType])
 
     // ===========================================================================
     // Handlers and functions
     // ===========================================================================
+    const toggleChartView = () => {
+        setChartType(chartType === 'value' ? 'number' : 'value')
+    }
 
     return (
         <div className="bg-white rounded p-4 h-full simple-tab">
-            {loading ? (
-                <Loader />
-            ) : (
+            {loading ? (<Loader />) : (
                 <Tabs>
                     <FullScreen handle={handle}>
                         <div className="flex items-center justify-between">
@@ -148,10 +76,10 @@ function ProductsTimeline({label, params}) {
                         </div>
                         <div>
                             <TabPanel>
-                                <StackedChart data={stacked_chart_data} />
+                                <StackedChart data={chartData} />
                             </TabPanel>
                             <TabPanel>
-                                <StackedChart data={stacked_chart_data} />
+                                <StackedChart data={chartData} />
                             </TabPanel>
                         </div>
                     </FullScreen>

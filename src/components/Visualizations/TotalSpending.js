@@ -21,14 +21,14 @@ import {
     ModalTransition
 } from 'react-simple-hook-modal'
 
-function TotalSpending({label, params}) {
+function TotalSpending({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [totalSpending, setTotalSpending] = useState()
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
-    const {isModalOpen, openModal, closeModal} = useModal()
+    const { isModalOpen, openModal, closeModal } = useModal()
 
     useEffect(() => {
         VisualizationServices.TotalSpending(params).then((response) => {
@@ -85,7 +85,7 @@ function TotalSpending({label, params}) {
     }
 
     const barColorValue = '#ABBABF'
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     return (

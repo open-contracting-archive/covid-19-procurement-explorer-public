@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Loader from "../../../../components/Loader/Loader"
 import {
     AverageBidsPerContract,
     ContractStatus,
@@ -10,15 +11,24 @@ import {
     TotalSpending,
     TopSuppliers,
     TopBuyers,
-    GlobalSuppliers,
+    CountrySuppliers,
     ProductDistribution,
     ContractsCorrelation,
     ContractsRedFlags,
     Concentration
 } from '../../../../components/Visualizations'
+import CountryPartnerSlider from "../../../../components/CountryPartnerSlider/CountryPartnerSlider"
 
 function CountryData({ countryCode }) {
-    return (
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        if (countryCode !== undefined && countryCode !== null) {
+            setLoading(false)
+        }
+    }, [countryCode])
+
+    return loading ? (<Loader />) : (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
                 <div className="flex flex-wrap -mx-3 -mb-6">
@@ -73,7 +83,9 @@ function CountryData({ countryCode }) {
                     </div>
 
                     <div className="w-full lg:w-1/2 px-2 mb-6">
-                        <Concentration label="Concentration" />
+                        <Concentration
+                            label="Concentration"
+                            params={{ country: countryCode }} />
                     </div>
 
                     <div className="w-full lg:w-1/2 px-2 mb-6">
@@ -83,12 +95,14 @@ function CountryData({ countryCode }) {
                         />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-6">
-                        <TopBuyers label="Top Buyers" params={{ country: countryCode }} />
+                        <TopBuyers
+                            label="Top Buyers"
+                            params={{ country: countryCode }} />
                     </div>
 
                     <div className="w-full px-2 mb-6">
-                        <GlobalSuppliers
-                            label="Global suppliers"
+                        <CountrySuppliers
+                            label="Country Suppliers"
                             params={{ country: countryCode }}
                         />
                     </div>
@@ -104,6 +118,9 @@ function CountryData({ countryCode }) {
                             label="Covid/Contracts Quantity Correlation"
                             params={{ country: countryCode }}
                         />
+                    </div>
+                    <div className="w-full px-2 mb-6">
+                        <CountryPartnerSlider />
                     </div>
                 </div>
             </div>
