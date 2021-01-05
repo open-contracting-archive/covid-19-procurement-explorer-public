@@ -115,7 +115,7 @@ function TopBuyers({ label, params, viewLink }) {
                     />
                     <Link
                         to={viewLink}
-                        className="text-primary-blue pt-3 pl-6 inline-block">
+                        className="text-primary-blue pt-3 pl-6 pb-6 inline-block">
                         View All
                     </Link>
                 </Fragment>

@@ -46,19 +46,19 @@ const GlobalDataTab = () => {
                         <ProductsTimeline label="Products timeline" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <TopSuppliers label="Top Suppliers" />
+                        <TopSuppliers
+                            label="Top Suppliers"
+                            viewLink="/global-overview/suppliers"
+                        />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <TopBuyers
                             label="Top Buyers"
-                            viewLink="/global-overview/suppliers"
+                            viewLink="/global-overview/buyers"
                         />
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <GlobalSuppliers
-                            label="Global suppliers"
-                            viewLink="/global-overview/suppliers"
-                        />
+                        <GlobalSuppliers label="Global suppliers" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <ProductDistribution />
