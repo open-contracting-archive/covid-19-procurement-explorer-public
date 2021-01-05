@@ -1,4 +1,4 @@
-const SI_SYMBOL = ['', 'k', 'M', 'B', 'T', 'P', 'E']
+const SI_SYMBOL = ['', 'K', 'M', 'B', 'T', 'P', 'E']
 
 export const formatNumber = (number) => {
     // what tier? (determines SI symbol)

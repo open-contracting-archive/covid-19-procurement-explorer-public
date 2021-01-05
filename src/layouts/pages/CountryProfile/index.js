@@ -23,11 +23,9 @@ const CountryDetail = () => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        let country = first(
-            Object.keys(countries)
-                .map((key) => countries[key])
-                .filter((country) => country.slug === slug)
-        )
+        let country = Object.keys(countries)
+            .map((key) => countries[key])
+            .find((country) => country.slug === slug)
 
         if (country) {
             setCountryData(country)

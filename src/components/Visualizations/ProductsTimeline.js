@@ -7,10 +7,10 @@ import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_downlo
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import VisualizationServices from "../../services/visualizationServices"
-import { groupBy } from "lodash"
-import { formatDate } from "../../helpers/date"
-import { slugify } from "../../helpers/general"
+import VisualizationServices from '../../services/visualizationServices'
+import { groupBy } from 'lodash'
+import { formatDate } from '../../helpers/date'
+import { slugify } from '../../helpers/general'
 
 const ProductsTimeline = ({ label, params }) => {
     // ===========================================================================
@@ -28,31 +28,32 @@ const ProductsTimeline = ({ label, params }) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductTimeline(params)
-            .then((response) => {
-                setApiData(response)
-            })
+        VisualizationServices.ProductTimeline(params).then((response) => {
+            setApiData(response)
+        })
     }, [])
 
     useEffect(() => {
-        const groupedData = groupBy(apiData, (item) => formatDate(item.date, "MMM YYYY"))
-        const chartData = Object.keys(groupedData)
-            .map((key) => {
-                let products = {}
-                groupedData[key].forEach((item) => {
-                    products[slugify(item.product_name)] = chartType === 'value' ? item.amount_usd : item.tender_count
-                })
-
-                return {
-                    month: key,
-                    ...products
-                }
+        const groupedData = groupBy(apiData, (item) =>
+            formatDate(item.date, 'MMM YYYY')
+        )
+        const chartData = Object.keys(groupedData).map((key) => {
+            let products = {}
+            groupedData[key].forEach((item) => {
+                products[slugify(item.product_name)] =
+                    chartType === 'value' ? item.amount_usd : item.tender_count
             })
+
+            return {
+                month: key,
+                ...products
+            }
+        })
         setChartData(chartData)
         setLoading(false)
     }, [apiData, chartType])
 
-    console.log(chartData, 'ChartData')
+    // console.log(chartData, 'ChartData')
 
     // ===========================================================================
     // Handlers and functions
@@ -63,7 +64,9 @@ const ProductsTimeline = ({ label, params }) => {
 
     return (
         <div className="bg-white rounded p-4 h-full simple-tab">
-            {loading ? (<Loader />) : (
+            {loading ? (
+                <Loader />
+            ) : (
                 <Tabs>
                     <FullScreen handle={handle}>
                         <div className="flex items-center justify-between">

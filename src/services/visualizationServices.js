@@ -187,6 +187,23 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
+    static async BuyerTableList(params) {
+        try {
+            const res = await Api.get(getURI('buyers'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async SupplierTableList(params) {
+        try {
+            const res = await Api.get(getURI('suppliers'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationServices

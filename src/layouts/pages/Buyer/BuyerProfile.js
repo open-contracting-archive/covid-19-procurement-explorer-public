@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 import Select from 'react-select'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import {
@@ -25,6 +25,8 @@ const BuyerProfile = () => {
     const previousPage = () => {
         history.goBack()
     }
+
+    const { id } = useParams()
 
     const options = [
         { value: 'option-1', label: 'Option 1' },
@@ -90,37 +92,67 @@ const BuyerProfile = () => {
                 <div className="container mx-auto px-4 ">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <TotalSpending label="Total Spending" />
+                            <TotalSpending label="Total Spending" buyer={id} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <TotalContracts />
+                            <TotalContracts
+                                label="Total contracts"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <AverageBidsPerContract />
+                            <AverageBidsPerContract
+                                label="Average bid"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <Monopolization />
+                            <Monopolization
+                                label="Monopolization"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <ContractStatus />
+                            <ContractStatus
+                                label="Contract status"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <div className="flex flex-col justify-between h-full">
-                                <EquityIndicators />
-                                <DirectOpen />
+                                <EquityIndicators
+                                    label="Equity indicator"
+                                    params={{ buyer: id }}
+                                />
+                                <DirectOpen
+                                    label="Direct/Open"
+                                    params={{ buyer: id }}
+                                />
                             </div>
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <ProductsTimeline />
+                            <ProductsTimeline
+                                label="Product timeline"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <ProductDistribution />
+                            <ProductDistribution
+                                label="Product distribution"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <TopSuppliers />
+                            <TopSuppliers
+                                label="Top suppliers"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <ContractsRedFlags />
+                            <ContractsRedFlags
+                                label="Contracts red flags"
+                                params={{ buyer: id }}
+                            />
                         </div>
                     </div>
                     {/* Table */}
@@ -172,50 +204,50 @@ const BuyerProfile = () => {
                     </div>
                     <table className="table">
                         <thead>
-                        <tr>
-                            <th style={{ width: '20%' }}>
+                            <tr>
+                                <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Buyer{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of suppliers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

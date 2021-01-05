@@ -45,10 +45,10 @@ const area_chart_data = [
     }
 ]
 
-function Buyers() {
+function Buyers({ label }) {
     return (
         <div className="bg-white rounded p-4 h-full">
-            <h3 className="uppercase font-bold  text-primary-dark">Buyers</h3>
+            <h3 className="uppercase font-bold  text-primary-dark">{label ? label : 'Buyers'}</h3>
             <div className="flex items-end">
                 <div className=" text-primary-dark w-2/5">
                     <AreaChart data={area_chart_data} colorValue="#FE5151" />

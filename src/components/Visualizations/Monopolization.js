@@ -17,11 +17,10 @@ function Monopolization({ label, params }) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.monopolization(params)
-            .then((response) => {
-                setMonopolization(response)
-                setLoading(false)
-            })
+        VisualizationServices.monopolization(params).then((response) => {
+            setMonopolization(response)
+            setLoading(false)
+        })
     }, [])
 
     // ===========================================================================
@@ -65,15 +64,15 @@ function Monopolization({ label, params }) {
                 {loading ? (
                     <Loader sm />
                 ) : (
-                    <div className="flex items-end">
-                        <AreaChartBlock
-                            chartData={monopolizationLineChartData}
-                            totalAmount={monopolizationAmount}
-                            percentage={monopolizationPercentage}
-                        />
-                        <div className="flex-1" />
-                    </div>
-                )}
+                        <div className="flex items-end">
+                            <AreaChartBlock
+                                chartData={monopolizationLineChartData}
+                                totalAmount={monopolizationAmount}
+                                percentage={monopolizationPercentage}
+                            />
+                            <div className="flex-1" />
+                        </div>
+                    )}
             </div>
         </div>
     )

@@ -1,13 +1,13 @@
-import React, { Fragment, useState, useEffect } from "react"
+import React, { Fragment, useState, useEffect } from 'react'
 import Select from 'react-select'
 import { get, pickBy, identity } from 'lodash'
 import { Link } from 'react-router-dom'
-import { ReactComponent as SortIcon } from "../../assets/img/icons/ic_sort.svg"
-import { ReactComponent as FlagIcon } from "../../assets/img/icons/ic_flag.svg"
-import Loader from "../Loader/Loader"
-import VisualizationServices from "../../services/visualizationServices"
-import useTrans from "../../hooks/useTrans"
-import { formatDate } from "../../helpers/date"
+import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
+import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
+import Loader from '../Loader/Loader'
+import VisualizationServices from '../../services/visualizationServices'
+import useTrans from '../../hooks/useTrans'
+import { formatDate } from '../../helpers/date'
 
 function TenderTable(props) {
     const options = [
@@ -26,19 +26,24 @@ function TenderTable(props) {
     }, [])
 
     const LoadTenderList = () => {
-        VisualizationServices.TenderList({ ...queryParams, ...pagination })
-            .then((response) => {
-                    if (response) {
-                        setTenderList([...tenderList, ...response.results])
-                        setPagination(response.next)
-                    }
-                    setLoading(true)
-                }
-            )
+        VisualizationServices.TenderList({
+            ...queryParams,
+            ...pagination
+        }).then((response) => {
+            if (response) {
+                setTenderList([...tenderList, ...response.results])
+                setPagination(response.next)
+            }
+            setLoading(true)
+        })
     }
 
     const hasCountry = () => {
-        return props.country !== undefined && props.country !== null && props.country !== ""
+        return (
+            props.country !== undefined &&
+            props.country !== null &&
+            props.country !== ''
+        )
     }
 
     const tableRowClass = (hasRedFlags) => {
@@ -50,34 +55,30 @@ function TenderTable(props) {
             {loading ? (
                 <Fragment>
                     <div className="mb-12 flex gap-8 justify-between">
-                        <div className="w-40">
-                            <p className="mb-2 uppercase text-xs opacity-50 leading-none">
+                        {/* <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
                                 Project title
                             </p>
                             <input
                                 type="text"
                                 className="px-2 py-1 select-filter text-sm"
                             />
-                        </div>
-                        {!hasCountry ? (
-                            <div className="w-40">
-                                <p className="uppercase text-xs opacity-50 leading-none">
-                                    Country
-                                </p>
-                                <Select
-                                    className="select-filter text-sm"
-                                    classNamePrefix="select-filter"
-                                    options={options}
-                                    defaultValue={options[0]}
-                                />
-                            </div>
-                        ) : (
-                            ''
-                        )}
+                        </div>) : ('')} */}
 
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Products
+                                Contract title
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Buyer
                             </p>
                             <Select
                                 className="select-filter text-sm"
@@ -108,6 +109,19 @@ function TenderTable(props) {
                                 defaultValue={options[0]}
                             />
                         </div>
+
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Product category
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
                                 Data range
@@ -130,65 +144,54 @@ function TenderTable(props) {
                                 defaultValue={options[0]}
                             />
                         </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Status
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
                     </div>
                     <table className="table">
                         <thead>
-                        <tr>
-                            <th style={{ width: '25%' }}>
-                                <span className="flex items-center">
-                                    {trans('Project Title')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th>
-                                <span className="flex items-center">
-                                    {trans('Buyer')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th>
-                                <span className="flex items-center">
-                                    {trans('Supplier')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
-                                <span className="flex items-center">
-                                    {trans('Method')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th style={{ width: '20%' }}>
-                                <span className="flex items-center">
-                                    {trans('Product Category')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
-                                <span className="flex items-center">
-                                    {trans('Date')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
-                                <span className="flex items-center">
-                                    {trans('Value (USD)')}{' '}
-                                    <SortIcon className="ml-1 cursor-pointer" />
-                                </span>
-                            </th>
-                            <th />
-                        </tr>
+                            <tr>
+                                <th style={{ width: '25%' }}>
+                                    <span className="flex items-center">
+                                        {trans('Contract Title')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th>
+                                    <span className="flex items-center">
+                                        {trans('Buyer')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th>
+                                    <span className="flex items-center">
+                                        {trans('Supplier')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '10%' }}>
+                                    <span className="flex items-center">
+                                        {trans('Method')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '20%' }}>
+                                    <span className="flex items-center">
+                                        {trans('Product Category')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '10%' }}>
+                                    <span className="flex items-center">
+                                        {trans('Date')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th style={{ width: '10%' }}>
+                                    <span className="flex items-center">
+                                        {trans('Value (USD)')}{' '}
+                                        <SortIcon className="ml-1 cursor-pointer" />
+                                    </span>
+                                </th>
+                                <th />
+                            </tr>
                         </thead>
                         <tbody>
                             {tenderList &&

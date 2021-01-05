@@ -84,7 +84,7 @@ const StackedChart = ({ data }) => {
             'Medical Consumables (except tests)'
         )
         createSeries('medicines', 'Medicines')
-        createSeries('ventilator', 'Ventilator')
+        createSeries('ventilators', 'Ventilators')
 
         createSeries('sanitizing-supplies', 'Sanitizing Supplies')
         createSeries('goods-services', 'Goods/Services')
