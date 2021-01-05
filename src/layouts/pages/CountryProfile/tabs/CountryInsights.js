@@ -6,7 +6,7 @@ import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort
 import { API_URL } from '../../../../helpers/api'
 import InsightServices from '../../../../services/insightServices'
 
-const CountryInsights = () => {
+const CountryInsights = (countryCode) => {
     const [insightsDetail, setInsightsDetail] = useState({})
     const [insightsData, setInsightsData] = useState([])
     const [loading, setLoading] = useState(true)

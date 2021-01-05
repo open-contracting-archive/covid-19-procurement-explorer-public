@@ -19,6 +19,7 @@ const apiRoutes = {
     'visualization.world-map': 'api/v1/visualization/world-map/',
     'visualization.country-map': 'api/v1/visualization/country-map/',
     'visualization.world-map-race': 'api/v1/visualization/world-map-race/',
+    'visualization.product-timeline': 'api/v1/visualization/product-timeline/',
 
     // table api
     'tenders': 'api/v1/tender/',
@@ -30,7 +31,7 @@ const apiRoutes = {
     'countries': 'api/v1/country/',
 
     // cms api
-    'pages': 'api/v2/pages/',
+    'pages': 'api/v2/pages/'
 }
 
 export const getURI = (routeName) => {

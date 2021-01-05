@@ -177,6 +177,15 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
+    static async ProductTimeline(params) {
+        try {
+            const res = await Api.get(getURI('visualization.product-timeline'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationServices

@@ -8,18 +8,17 @@ import VisualizationServices from "../../../../services/visualizationServices"
 import useTrans from "../../../../hooks/useTrans"
 import Loader from "../../../../components/Loader/Loader"
 
-const CountryMapElement = ({ countryData }) => {
+const CountryMapElement = ({ countryCode }) => {
     const [loading, setLoading] = useState(true)
     const [contractType, setContractType] = useState('value')
-    const [countryVisualizationData, setCountryVisualizationData] = useState([])
+    // const [countryVisualizationData, setCountryVisualizationData] = useState([])
     const [mapData, setMapData] = useState()
     const handle = useFullScreenHandle()
     const { trans } = useTrans()
 
     useEffect(() => {
-        // Fetch country specific data
-        if (countryData && countryData.country_code_alpha_2 !== undefined) {
-            VisualizationServices.CountryMap({ country: countryData.country_code_alpha_2 })
+        if (countryCode !== undefined && countryCode !== null) {
+            VisualizationServices.CountryMap({ country: countryCode })
                 .then((response) => {
                     const mapData = [
                         {
@@ -30,27 +29,11 @@ const CountryMapElement = ({ countryData }) => {
                                     : response.tender_count
                         }
                     ]
-                    setCountryVisualizationData(mapData)
+                    setMapData(mapData)
                     setLoading(false)
                 })
         }
-    }, [countryData, contractType])
-
-    // useEffect(() => {
-    //     let countryMapData = {}
-    //     const parsedCountryMapData =
-    //         countryVisualizationData &&
-    //         countryVisualizationData.map((data) => {
-    //                 return (countryMapData = {
-    //                     id: data.country_code,
-    //                     value:
-    //                         contractType === 'value'
-    //                             ? data.amount_usd
-    //                             : data.tender_count
-    //                 })
-    //             })
-    //     setMapData(parsedCountryMapData)
-    // }, [ countryVisualizationData, contractType])
+    }, [countryCode])
 
     const isActiveTab = (type) => {
         return contractType === type ? 'active' : ''
@@ -73,7 +56,7 @@ const CountryMapElement = ({ countryData }) => {
 
                     <div className="h-full">
                         {loading ? (<Loader />) : (
-                            <CountryMap data={mapData} countryCode={countryData.country_code_alpha_2} />
+                            <CountryMap data={mapData} countryCode={countryCode} />
                         )}
                     </div>
                 </div>
