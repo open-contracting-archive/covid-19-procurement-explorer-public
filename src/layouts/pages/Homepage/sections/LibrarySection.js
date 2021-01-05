@@ -15,14 +15,22 @@ const LibrarySection = () => {
 
     useEffect(
         () => {
-            InsightServices.NewsData().then((newsresponse) => {
-                InsightServices.BlogsData().then((blogsresponse) => {
-                    setBlogsData(blogsresponse.items)
-                    setNewsData(newsresponse.items)
-                    setData(newsresponse.items, blogsresponse.items)
-                    setLoading(false)
-                })
+            InsightServices.NewsData().then((response) => {
+                setNewsData(response.items)
+                setLoading(false)
             })
+            InsightServices.BlogsData().then((response) => {
+                setBlogsData(response.items)
+            })
+            // InsightServices.BlogsData().then((blogsresponse)=> {
+            //     InsightServices.NewsData().then((newsresponse)  => {
+            //         setBlogsData(blogsresponse.items)
+            //         setNewsData(newsresponse.items)
+            //         setData(newsresponse.items, blogsresponse.items)     
+            //         setLoading(false)
+            //     })
+                
+            // })
         },
         [newsId],
         [blogsId]
@@ -46,8 +54,8 @@ const LibrarySection = () => {
                     <Loader sm/>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        {data &&
-                        data.slice(0, 6).map((eachdata) => {
+                        {/* {data &&
+                        data.slice(0, 12).map((eachdata) => {
                             return (
                                 <Link
                                     to={eachdata.contents_type === "News" ? `/news/${eachdata.id}` : `/blogs/${eachdata.id}`}
@@ -65,7 +73,47 @@ const LibrarySection = () => {
                                     </div>
                                 </Link>
                             )
-                        })}
+                        })} */}
+                        {newsData &&
+                            newsData.slice(0, 4).map((news) => {
+                                return (
+                                    <Link
+                                    to={`/news/${news.id}`}
+                                        key={news.id}>
+                                        <div>
+                                            <div className="library__tag">
+                                                <p className="uppercase">{news.contents_type}</p>
+                                            </div>
+                                            <h4 className="library__heading ">
+                                                {news.title}
+                                            </h4>
+                                            <p className="library__date">
+                                                {formatDate(news.published_date, 'MMM DD, YYYY')}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                )
+                            })}
+                            {blogsData &&
+                                blogsData.slice(0, 2).map((blogs) => {
+                                    return (
+                                        <Link
+                                        to={`/blogs/${blogs.id}`}
+                                            key={blogs.id}>
+                                        <div>
+                                            <div className="library__tag">
+                                                <p className="uppercase">{blogs.contents_type}</p>
+                                            </div>
+                                            <h4 className="library__heading ">
+                                                {blogs.title}
+                                            </h4>
+                                            <p className="library__date">
+                                                {formatDate(blogs.published_date, 'MMM DD, YYYY')}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                )
+                            })}
                     </div>
                 )}
             </div>

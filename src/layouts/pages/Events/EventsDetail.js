@@ -7,6 +7,7 @@ import socialIcons from '../../../assets/img/icons/social'
 import InsightServices from '../../../services/insightServices'
 import Loader from '../../../components/Loader/Loader'
 import {formatDate} from "../../../helpers/date";
+import ShareButtons from "../share"
 
 const EventsDetail = () => {
     const [eventsDetail, setEventsDetail] = useState({})
@@ -23,6 +24,12 @@ const EventsDetail = () => {
     const handleClick = () => {
         history.push("/tags");
     }
+
+    const url = () => {
+        window.location.href;
+    } 
+
+    const twitterHandle = "covid19";
 
     useEffect(() => {
         InsightServices.EventsDetailData(eventsId).then((response) => {
@@ -123,18 +130,7 @@ const EventsDetail = () => {
                                             Share on
                                         </p>
                                         <div className="flex">
-                                            <a href="" className="social-icon">
-                                                <socialIcons.fbIcon />
-                                            </a>
-                                            <a href="" className="social-icon">
-                                                <socialIcons.twitterIcon />
-                                            </a>
-                                            <a href="" className="social-icon">
-                                                <socialIcons.linkedIcon />
-                                            </a>
-                                            <a href="" className="social-icon">
-                                                <socialIcons.mailIcon />
-                                            </a>
+                                            <ShareButtons  url={url} twitterHandle={twitterHandle}/>
                                         </div>
                                     </div>
                                 </div>
@@ -144,18 +140,7 @@ const EventsDetail = () => {
                                     Share on
                                 </p>
                                 <div className="flex">
-                                    <a href="" className="social-icon">
-                                        <socialIcons.fbIcon />
-                                    </a>
-                                    <a href="" className="social-icon">
-                                        <socialIcons.twitterIcon />
-                                    </a>
-                                    <a href="" className="social-icon">
-                                        <socialIcons.linkedIcon />
-                                    </a>
-                                    <a href="" className="social-icon">
-                                        <socialIcons.mailIcon />
-                                    </a>
+                                    <ShareButtons  url={url} twitterHandle={twitterHandle}/>
                                 </div>
                             </div>
                         </div>
