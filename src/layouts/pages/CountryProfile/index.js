@@ -1,17 +1,12 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import useTrans from '../../../hooks/useTrans'
 import CountryData from './tabs/CountryData'
-import CountryInsights from './tabs/CountryInsights'
-import CountryContracts from "./tabs/CountryContracts"
-import CountryEquity from './tabs/CountryEquity'
-import CountryBuyers from './tabs/CountryBuyers'
-import CountrySuppliers from './tabs/CountrySuppliers'
-import CountryInfo from "./sections/CountryInfo"
-import CountryMapElement from "./sections/CountryMapElement"
-import { first } from "lodash"
+import CountryInfo from './sections/CountryInfo'
+import CountryMapElement from './sections/CountryMapElement'
+import { first } from 'lodash'
 
 const CountryDetail = () => {
     // ===========================================================================
@@ -27,9 +22,11 @@ const CountryDetail = () => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        let country = first(Object.keys(countries)
-            .map((key) => countries[key])
-            .filter((country) => country.slug === slug))
+        let country = first(
+            Object.keys(countries)
+                .map((key) => countries[key])
+                .filter((country) => country.slug === slug)
+        )
 
         if (country) {
             setCountryData(country)
@@ -53,50 +50,77 @@ const CountryDetail = () => {
                     <h2 className="font-normal mb-5 text-2xl text-primary-dark capitalize">
                         {slug}
                     </h2>
-                    <div className="flex flex-wrap -mx-4 -mb-4">
+                    <div className="flex flex-wrap -mb-4">
                         <CountryMapElement countryCode={countryCode} />
                         <CountryInfo country={countryData} />
                     </div>
                 </div>
             </section>
-            <Tabs>
+            <div className="container mx-auto mt-12">
+                <div className="secondary-nav">
+                    <ul>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/data`}>
+                                {trans('Data')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/insights`}>
+                                {trans('Insights')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/contracts`}>
+                                {trans('Contracts')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/equity`}>
+                                {trans('Equity')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/buyers`}>
+                                {trans('Buyers')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/suppliers`}>
+                                {trans('Suppliers')}
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                activeClassName="active"
+                                to={`/country/${slug}/products`}>
+                                {trans('Products')}
+                            </NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                style={{
+                    borderTop: '5px solid #1fbbec'
+                }}
+                className="py-16 bg-primary-gray px-4">
                 <div className="container mx-auto">
-                    <TabList>
-                        <Tab>{trans('Data')}</Tab>
-                        <Tab>{trans('Insights')}</Tab>
-                        <Tab>{trans('Contracts')}</Tab>
-                        <Tab>{trans('Equity')}</Tab>
-                        <Tab>{trans('Buyers')}</Tab>
-                        <Tab>{trans('Suppliers')}</Tab>
-                    </TabList>
+                    <CountryData countryCode={countryCode} slug={slug} />
                 </div>
-                <div
-                    style={{
-                        borderTop: '5px solid #1fbbec'
-                    }}
-                    className="py-16 bg-primary-gray px-4">
-                    <div className="container mx-auto">
-                        <TabPanel>
-                            <CountryData countryCode={countryCode} />
-                        </TabPanel>
-                        <TabPanel>
-                            <CountryInsights countryCode={countryCode} />
-                        </TabPanel>
-                        <TabPanel>
-                            <CountryContracts country={countryCode} />
-                        </TabPanel>
-                        <TabPanel>
-                            <CountryEquity profileData={countryData} />
-                        </TabPanel>
-                        <TabPanel>
-                            <CountryBuyers country={countryCode} />
-                        </TabPanel>
-                        <TabPanel>
-                            <CountrySuppliers country={countryCode} />
-                        </TabPanel>
-                    </div>
-                </div>
-            </Tabs>
+            </div>
         </section>
     )
 }

@@ -11,6 +11,7 @@ const apiRoutes = {
     'visualization.top-suppliers': 'api/v1/visualization/top-suppliers/',
     'visualization.top-buyers': 'api/v1/visualization/top-buyers/',
     'visualization.product-distribution': 'api/v1/visualization/product-distribution/',
+    'visualization.product-timeline': 'api/v1/visualization/product-timeline/',
     'visualization.contract-status': 'api/v1/visualization/contract-status/',
     'visualization.quantity-correlation': 'api/v1/visualization/quantity-correlation/',
     'visualization.monopolization': 'api/v1/visualization/monopolization/',
@@ -19,7 +20,6 @@ const apiRoutes = {
     'visualization.world-map': 'api/v1/visualization/world-map/',
     'visualization.country-map': 'api/v1/visualization/country-map/',
     'visualization.world-map-race': 'api/v1/visualization/world-map-race/',
-    'visualization.product-timeline': 'api/v1/visualization/product-timeline/',
 
     // table api
     'tenders': 'api/v1/tender/',

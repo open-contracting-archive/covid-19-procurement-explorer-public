@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader'
 import BarListChart from '../BarListSection/BarListChart'
 import { Link } from 'react-router-dom'
 
-function TopSuppliers({ label, params }) {
+function TopSuppliers({ label, params, viewLink }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -89,7 +89,7 @@ function TopSuppliers({ label, params }) {
                                                 data={topSuppliersDataByValue}
                                             />
                                             <Link
-                                                to=""
+                                                to={viewLink}
                                                 className="text-primary-blue pt-3 inline-block">
                                                 View All
                                             </Link>
@@ -99,7 +99,7 @@ function TopSuppliers({ label, params }) {
                                                 data={topSuppliersDataByNumber}
                                             />
                                             <Link
-                                                to=""
+                                                to={viewLink}
                                                 className="text-primary-blue pt-3 inline-block">
                                                 View All
                                             </Link>

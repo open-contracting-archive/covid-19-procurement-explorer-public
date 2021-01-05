@@ -19,7 +19,6 @@ const HorizontalBarChart = ({ data, colors }) => {
             am4charts.XYChart
         )
         chart.padding(40, 40, 40, 40)
-        // chart.exporting.menu = new am4core.ExportMenu()
 
         chart.numberFormatter.bigNumberPrefixes = [
             { number: 1e3, suffix: 'K' },

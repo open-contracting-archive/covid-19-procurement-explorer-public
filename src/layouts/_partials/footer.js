@@ -29,7 +29,7 @@ const Footer = () => {
                         <h4 className="mb-2">Explore</h4>
                         <ul>
                             <li className="opacity-50 mb-1">
-                                <Link to="/global-overview">Data</Link>
+                                <Link to="/global-overview/data">Data</Link>
                             </li>
                             <li className="opacity-50 mb-1">Countries</li>
                             <li className="opacity-50 mb-1">Tenders</li>

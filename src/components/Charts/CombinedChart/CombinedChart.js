@@ -15,7 +15,6 @@ const CombinedChart = ({ data, type }) => {
 
         // Create chart instance
         let chart = am4core.create(combinedchartDiv.current, am4charts.XYChart)
-        // chart.exporting.menu = new am4core.ExportMenu()
 
         // Create axes
         let dateAxis = chart.xAxes.push(new am4charts.DateAxis())

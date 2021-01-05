@@ -12,7 +12,6 @@ const StackedChart = ({ data }) => {
         // Themes begin
         am4core.useTheme(am4themes_animated)
         // Themes end
-        am4core.options.queue = true
 
         // Create chart instance
         let chart = am4core.create(stackedChart.current, am4charts.XYChart)
@@ -26,7 +25,14 @@ const StackedChart = ({ data }) => {
             am4core.color('#8DD3C7'),
             am4core.color('#D9D9D9'),
             am4core.color('#FDB462'),
-            am4core.color('#FFED6F')
+            am4core.color('#FFED6F'),
+            am4core.color('#60695C'),
+            am4core.color('#99F7AB'),
+            am4core.color('#D6EFFF'),
+            am4core.color('#FE654F'),
+            am4core.color('#6E44FF'),
+            am4core.color('#CE96A6'),
+            am4core.color('#C5D6D8')
         ]
 
         // Create axes
@@ -68,17 +74,31 @@ const StackedChart = ({ data }) => {
             return series
         }
 
-        createSeries('ppe', 'PPE')
-        createSeries('ventilator', 'Ventilator')
-        createSeries('covid_tests', 'Covid Tests')
-        createSeries('vaccine', 'Vaccine')
         createSeries(
-            'construction_works_and_materials',
-            'Construction works & materials'
+            'construction-works--materials',
+            'Construction Works & Materials'
+        )
+        createSeries('covid-tests--testing', 'Covid Tests & Testing')
+        createSeries(
+            'medical-consumables-except-tests',
+            'Medical Consumables (except tests)'
         )
         createSeries('medicines', 'Medicines')
-        createSeries('sanitizing_supplies', 'Sanitizing supplies')
-        createSeries('medical_consumables', 'Medical consumables')
+        createSeries('ventilator', 'Ventilator')
+
+        createSeries('sanitizing-supplies', 'Sanitizing Supplies')
+        createSeries('goods-services', 'Goods/Services')
+        createSeries(
+            'personal-protective-equipment',
+            'Personal Protective Equipment'
+        )
+        createSeries('other-medical-equipment', 'Other Medical Equipment')
+        createSeries('goodsservices', 'Goods/Services')
+        createSeries('not-classified', 'Not Classified')
+        createSeries('ventilator', 'Ventilator')
+        createSeries('medical-consumables', 'Medical Consumables')
+        createSeries('others', 'Others')
+        createSeries('vaccine', 'Vaccine')
         createSeries('other', 'Other')
 
         // Legend
@@ -101,7 +121,7 @@ const StackedChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={stackedChart} style={{ width: '100%', height: '345px' }} />
+    return <div ref={stackedChart} style={{ width: '100%', height: '500px' }} />
 }
 
 export default StackedChart

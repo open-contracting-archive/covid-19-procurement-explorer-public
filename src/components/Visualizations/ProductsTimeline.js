@@ -17,6 +17,7 @@ const ProductsTimeline = ({ label, params }) => {
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
+    const [productTimeline, setProductTimeline] = useState()
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
     const [apiData, setApiData] = useState([])
@@ -50,6 +51,8 @@ const ProductsTimeline = ({ label, params }) => {
         setChartData(chartData)
         setLoading(false)
     }, [apiData, chartType])
+
+    console.log(chartData, 'ChartData')
 
     // ===========================================================================
     // Handlers and functions

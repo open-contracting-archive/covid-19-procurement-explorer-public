@@ -4,9 +4,7 @@ import { getURI } from '../helpers/api'
 class VisualizationServices {
     static async GlobalMap() {
         try {
-            const res = await Api.get(
-                getURI('visualization.world-map')
-            )
+            const res = await Api.get(getURI('visualization.world-map'))
             return res.body
         } catch (error) {
             console.log(error)
@@ -180,7 +178,10 @@ class VisualizationServices {
 
     static async ProductTimeline(params) {
         try {
-            const res = await Api.get(getURI('visualization.product-timeline'), params)
+            const res = await Api.get(
+                getURI('visualization.product-timeline'),
+                params
+            )
             return res.body
         } catch (error) {
             console.log(error)

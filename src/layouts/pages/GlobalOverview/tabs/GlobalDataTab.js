@@ -49,10 +49,16 @@ const GlobalDataTab = () => {
                         <TopSuppliers label="Top Suppliers" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <TopBuyers label="Top Buyers" />
+                        <TopBuyers
+                            label="Top Buyers"
+                            viewLink="/global-overview/suppliers"
+                        />
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <GlobalSuppliers label="Global suppliers" />
+                        <GlobalSuppliers
+                            label="Global suppliers"
+                            viewLink="/global-overview/suppliers"
+                        />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <ProductDistribution />
@@ -61,7 +67,7 @@ const GlobalDataTab = () => {
                         <ContractsRedFlags />
                     </div>
                     <div className="w-full px-2 mb-4">
-                         <ContractsCorrelation />
+                        <ContractsCorrelation label="Covid/Contracts quantity correlation" />
                     </div>
                 </div>
             </div>

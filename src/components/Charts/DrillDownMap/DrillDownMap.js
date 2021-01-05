@@ -30,7 +30,6 @@ const DrillDownMap = () => {
 
         // Create chart instance
         let chart = am4core.create(drillDownMap.current, am4maps.MapChart)
-        chart.exporting.menu = new am4core.ExportMenu()
 
         // Set projection
         chart.projection = new am4maps.projections.Mercator()
