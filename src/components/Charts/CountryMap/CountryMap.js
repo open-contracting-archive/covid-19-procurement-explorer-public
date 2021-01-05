@@ -17,7 +17,6 @@ const CountryMap = ({ data, countryCode }) => {
         // Create chart instance
         let chart = am4core.create(countryMapChartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
-        // chart.exporting.menu = new am4core.ExportMenu()
 
         // Set map definition
         chart.geodata = am4geodata_worldLow

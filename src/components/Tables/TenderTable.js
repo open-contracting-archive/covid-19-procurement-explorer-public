@@ -51,22 +51,29 @@ function TenderTable(props) {
                 <Fragment>
                     <div className="mb-12 flex gap-8 justify-between">
                         <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
+                            <p className="mb-2 uppercase text-xs opacity-50 leading-none">
                                 Project title
                             </p>
-                            <input type="text" className="select-filter text-sm" />
-                        </div>
-                        {!hasCountry ? (<div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Country
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
+                            <input
+                                type="text"
+                                className="px-2 py-1 select-filter text-sm"
                             />
-                        </div>) : ('')}
+                        </div>
+                        {!hasCountry ? (
+                            <div className="w-40">
+                                <p className="uppercase text-xs opacity-50 leading-none">
+                                    Country
+                                </p>
+                                <Select
+                                    className="select-filter text-sm"
+                                    classNamePrefix="select-filter"
+                                    options={options}
+                                    defaultValue={options[0]}
+                                />
+                            </div>
+                        ) : (
+                            ''
+                        )}
 
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
@@ -184,42 +191,60 @@ function TenderTable(props) {
                         </tr>
                         </thead>
                         <tbody>
-                        {tenderList &&
-                        tenderList.map((tender, index) => {
-                            return (
-                                <Link
-                                    key={index}
-                                    to={`/tender/${tender.id}`}
-                                    className={tableRowClass(tender.red_flag)}>
-                                    <td className="uppercase">
-                                        {tender.contract_title}
-                                    </td>
-                                    <td className="uppercase">
-                                        {get(tender, 'buyer.buyer_name')}
-                                    </td>
-                                    <td className="uppercase">
-                                        {get(tender, 'supplier.supplier_name')}
-                                    </td>
-                                    <td className="capitalize">
-                                        {tender.procurement_procedure}
-                                    </td>
-                                    <td>
-                                        {get(tender, 'product.product_name')}
-                                    </td>
-                                    <td>
-                                        {formatDate(tender.contract_date)}
-                                    </td>
-                                    <td>
-                                        {tender.contract_value_usd && tender.contract_value_usd.toLocaleString('en')}
-                                    </td>
-                                    <td>
-                                        {tender.red_flag && (
-                                            <span className="mr-4"><FlagIcon /></span>
-                                        )}
-                                    </td>
-                                </Link>
-                            )
-                        })}
+                            {tenderList &&
+                                tenderList.map((tender, index) => {
+                                    return (
+                                        <Link
+                                            key={index}
+                                            to={`/tender/${tender.id}`}
+                                            className={tableRowClass(
+                                                tender.red_flag
+                                            )}>
+                                            <td className="uppercase">
+                                                {tender.contract_title}
+                                            </td>
+                                            <td className="uppercase">
+                                                {get(
+                                                    tender,
+                                                    'buyer.buyer_name'
+                                                )}
+                                            </td>
+                                            <td className="uppercase">
+                                                {get(
+                                                    tender,
+                                                    'supplier.supplier_name'
+                                                )}
+                                            </td>
+                                            <td className="capitalize">
+                                                {tender.procurement_procedure}
+                                            </td>
+                                            <td>
+                                                {get(
+                                                    tender,
+                                                    'product.product_name'
+                                                )}
+                                            </td>
+                                            <td>
+                                                {formatDate(
+                                                    tender.contract_date
+                                                )}
+                                            </td>
+                                            <td>
+                                                {tender.contract_value_usd &&
+                                                    tender.contract_value_usd.toLocaleString(
+                                                        'en'
+                                                    )}
+                                            </td>
+                                            <td>
+                                                {tender.red_flag && (
+                                                    <span className="mr-4">
+                                                        <FlagIcon />
+                                                    </span>
+                                                )}
+                                            </td>
+                                        </Link>
+                                    )
+                                })}
                         </tbody>
                     </table>
                     <div className="text-center mt-8">

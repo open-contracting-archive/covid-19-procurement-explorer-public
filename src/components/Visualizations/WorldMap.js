@@ -47,7 +47,7 @@ const WorldMap = () => {
                             : data.tender_count,
                     url: `/country/${data.country
                         .toLowerCase()
-                        .replace(' ', '-')}`
+                        .replace(' ', '-')}/data`
                 })
             })
         setMapData(parsedMapData)

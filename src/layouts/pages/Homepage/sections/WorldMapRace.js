@@ -20,7 +20,10 @@ const WorldMapRace = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+
+    const [loading, setLoading] = useState(true)
     const [contractType, setContractType] = useState('value')
+    const [raceBarType, setRaceBarType] = useState('value')
     const [sliderData, setSliderData] = useState([])
     const [yearMonth, setYearMonth] = useState('2020-01')
     const [dataFromApi, setDataFromApi] = useState()
@@ -46,11 +49,53 @@ const WorldMapRace = () => {
     ]
 
     useEffect(() => {
-        CountryServices.GetGlobalMapData()
-            .then((response) => {
+        CountryServices.GetGlobalMapData().then((response) => {
+            //Race Bar Chart Formatted Api Data
+            const raceBarChartformatted = response.result.reduce(
+                (formattedData, d) => ({
+                    ...formattedData,
+                    [d.month]: d.details.map((detail) => ({
+                        country: detail.country,
+                        value:
+                            raceBarType === 'value'
+                                ? detail.amount_usd
+                                : detail.tender_count
+                    }))
+                }),
+                {}
+            )
+            setRaceBarDataApi(raceBarChartformatted)
+
+            // const mapChartformatted = response.result.reduce(
+            //     (formattedData, d) => ({
+            //         ...formattedData,
+            //         [d.month]: d.details.map((detail) => ({
+            //             [detail.country_code]: {
+            //                 value: detail.amount_usd,
+            //                 number: detail.tender_count,
+            //                 url: `/country/${detail.country
+            //                     .toLowerCase()
+            //                     .replace(' ', '-')}`
+            //             }
+            //         }))
+            //     }),
+            //     {}
+            // )
+
+            // setContractDataApi(mapChartformatted)
+            // setYearMonth(dataFromApi && dataFromApi.result[0].month)
+
+            // const keys =
+            //     dataFromApi &&
+            //     dataFromApi.result.map((data) => {
+            //         return data.month
+            //     })
+            // setSliderData(keys)
+
             setDataFromApi(response)
+            setLoading(false)
         })
-    }, [])
+    }, [contractType, raceBarType])
 
     useEffect(() => {
         let dateObject = {}
@@ -66,7 +111,7 @@ const WorldMapRace = () => {
                                 number: detail.tender_count,
                                 url: `/country/${detail.country
                                     .toLowerCase()
-                                    .replace(' ', '-')}`
+                                    .replace(' ', '-')}/data`
                             }
                         }
                     }
@@ -86,29 +131,6 @@ const WorldMapRace = () => {
             })
         setSliderData(keys)
     }, [dataFromApi])
-
-    // console.log(contractDataApi, 'Map Data')
-
-    useEffect(() => {
-        let raceBarDateObject = {}
-        dataFromApi &&
-            dataFromApi.result.map((data) => {
-                let raceBarCountryObject = data.details.map((detail) => {
-                    return {
-                        country: detail.country,
-                        value: detail.amount_usd
-                    }
-                })
-                raceBarDateObject = {
-                    ...raceBarDateObject,
-                    [data.month]: raceBarCountryObject
-                }
-            })
-
-        setRaceBarDataApi(raceBarDateObject)
-    }, [dataFromApi])
-
-    // console.log(raceBarDataApi)
 
     const handleContinentChange = (selectedOption) => {
         setSelectedContinent(selectedOption)
@@ -283,13 +305,13 @@ const WorldMapRace = () => {
                                                 <ul className="contract-switch flex">
                                                     <li
                                                         className={`mr-4 cursor-pointer ${
-                                                            contractType ===
+                                                            raceBarType ===
                                                             'value'
                                                                 ? 'active'
                                                                 : ''
                                                         }`}
                                                         onClick={() =>
-                                                            setContractType(
+                                                            setRaceBarType(
                                                                 'value'
                                                             )
                                                         }>
@@ -299,13 +321,13 @@ const WorldMapRace = () => {
                                                     </li>
                                                     <li
                                                         className={`cursor-pointer ${
-                                                            contractType ===
+                                                            raceBarType ===
                                                             'number'
                                                                 ? 'active'
                                                                 : ''
                                                         }`}
                                                         onClick={() =>
-                                                            setContractType(
+                                                            setRaceBarType(
                                                                 'number'
                                                             )
                                                         }>
@@ -331,9 +353,13 @@ const WorldMapRace = () => {
                                                     }
                                                 />
                                             </div>
-                                            <RaceBarChart
-                                                data={raceBarDataApi}
-                                            />
+                                            {loading ? (
+                                                <Loader />
+                                            ) : (
+                                                <RaceBarChart
+                                                    data={raceBarDataApi}
+                                                />
+                                            )}
                                         </TabPanel>
                                         <TabPanel>
                                             Table Section coming soon !!

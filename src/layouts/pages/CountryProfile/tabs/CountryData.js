@@ -19,7 +19,7 @@ import {
 } from '../../../../components/Visualizations'
 import CountryPartnerSlider from "../../../../components/CountryPartnerSlider/CountryPartnerSlider"
 
-function CountryData({ countryCode }) {
+function CountryData({ countryCode,slug }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -75,7 +75,7 @@ function CountryData({ countryCode }) {
                         </div>
                     </div>
 
-                    <div className="w-full lg:w-1/2 px-2 mb-6">
+                    <div className="w-full px-2 mb-6">
                         <ProductsTimeline
                             label="Products timeline"
                             params={{ country: countryCode }}
@@ -92,12 +92,15 @@ function CountryData({ countryCode }) {
                         <TopSuppliers
                             label="Top Suppliers"
                             params={{ country: countryCode }}
+                            viewLink={`/country/${slug}/suppliers`}
                         />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-6">
                         <TopBuyers
                             label="Top Buyers"
-                            params={{ country: countryCode }} />
+                            params={{ country: countryCode }}
+                            viewLink={`/country/${slug}/buyers`}
+                        />
                     </div>
 
                     <div className="w-full px-2 mb-6">
@@ -108,7 +111,9 @@ function CountryData({ countryCode }) {
                     </div>
 
                     <div className="w-full lg:w-1/2 px-2 mb-6">
-                        <ProductDistribution params={{ country: countryCode }} />
+                        <ProductDistribution
+                            params={{ country: countryCode }}
+                        />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-6">
                         <ContractsRedFlags />

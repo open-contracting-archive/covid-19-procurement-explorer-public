@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
 import VisualizationServices from '../../services/visualizationServices'
@@ -43,7 +43,7 @@ const top_buyer_bar_data = [
     }
 ]
 
-function TopBuyers({ label, params }) {
+function TopBuyers({ label, params, viewLink }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -104,16 +104,22 @@ function TopBuyers({ label, params }) {
             {loading ? (
                 <Loader />
             ) : (
-                <BarListSection
-                    label={label}
-                    bar_data={top_buyer_bar_data}
-                    byNumber={topBuyersDataByNumber && topBuyersDataByNumber}
-                    byValue={topBuyersDataByValue && topBuyersDataByValue}
-                />
+                <Fragment>
+                    <BarListSection
+                        label={label}
+                        bar_data={top_buyer_bar_data}
+                        byNumber={
+                            topBuyersDataByNumber && topBuyersDataByNumber
+                        }
+                        byValue={topBuyersDataByValue && topBuyersDataByValue}
+                    />
+                    <Link
+                        to={viewLink}
+                        className="text-primary-blue pt-3 pl-6 inline-block">
+                        View All
+                    </Link>
+                </Fragment>
             )}
-            <Link to="" className="text-primary-blue pt-3 pl-6 inline-block">
-                View All
-            </Link>
         </div>
     )
 }

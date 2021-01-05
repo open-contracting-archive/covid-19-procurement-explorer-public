@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const SimpleBarChart = ({ data, barColorValue, axisRotation }) => {
+const SimpleBarChart = ({ data, barColorValue }) => {
     const barchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -15,7 +15,6 @@ const SimpleBarChart = ({ data, barColorValue, axisRotation }) => {
 
         // Create chart instance
         let chart = am4core.create(barchartDiv.current, am4charts.XYChart)
-        am4core.options.queue = true
 
         // Add chart download option
         // chart.exporting.menu = new am4core.ExportMenu()

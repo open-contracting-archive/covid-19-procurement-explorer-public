@@ -15,7 +15,6 @@ const AreaChart = ({ data, apiData, colorValue }) => {
 
         // Create chart instance
         let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
-        am4core.options.queue = true
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.renderer.grid.template.location = 0
