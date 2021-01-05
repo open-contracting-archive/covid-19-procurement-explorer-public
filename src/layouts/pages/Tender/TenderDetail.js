@@ -14,7 +14,7 @@ import { formatNumber } from '../../../helpers/number'
 const TenderDetail = () => {
     const [tenderInfo, setTenderInfo] = useState()
     let history = useHistory()
-    const { trans } = useTrans()
+    const { trans } = useTrans()     
     let { id: countryId, tenderId } = useParams()
     window.scrollTo(0, 0)
 
@@ -32,8 +32,8 @@ const TenderDetail = () => {
 
     // console.log(tenderInfo)
 
-    return (
-        <section className="pt-8">
+    return (   
+        <section className="pt-8">    
             <div className="container mx-auto px-4 ">
                 <div className="text-sm mb-4 text-blue-5">
                     <span

@@ -83,5 +83,8 @@
 button,
 a,
 Tab{
-    @apply outline-none;
+    outline: none;
+    &:focus{
+        outline: none;
+    }
 }

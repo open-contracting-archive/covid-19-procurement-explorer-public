@@ -7,7 +7,7 @@ import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort
 
 const GlobalEquity = () => {
     const { trans } = useTrans()
-
+    
     const options = [
         { value: 'option-1', label: 'Option 1' },
         { value: 'option-2', label: 'Option 2' },
