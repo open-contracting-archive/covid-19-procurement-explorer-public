@@ -10,7 +10,7 @@ import {
 const ShareButtons = ({title, url, twitterHandle, tags}) => {
 
     return(
-        <div>
+        <div className="flex">
           <FacebookShareButton url={url} className="social-icon">
                 <socialIcons.fbIcon />
          </FacebookShareButton>

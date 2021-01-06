@@ -15,6 +15,7 @@ import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_tab
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import CountryServices from '../../../../services/CountryServices'
 import Loader from '../../../../components/Loader/Loader'
+import ShareButtons from "../../share"
 
 const WorldMapRace = () => {
     // ===========================================================================
@@ -47,6 +48,12 @@ const WorldMapRace = () => {
         { value: 'north_america', label: 'North America' },
         { value: 'middle_east', label: 'Middle East' }
     ]
+
+    const url = () => {
+        window.location.href;
+    } 
+
+    const twitterHandle = "covid19";
 
     useEffect(() => {
         CountryServices.GetGlobalMapData().then((response) => {
@@ -380,9 +387,12 @@ const WorldMapRace = () => {
                                 <DownloadIcon className="mr-2 inline-block" />{' '}
                                 <span className="cursor-pointer">Download</span>
                             </span>
-                            <span className="ml-8 flex items-center">
+                            <span className="worldmap-share ml-8 flex items-center relative">
                                 <ShareIcon className="mr-2 inline-block" />{' '}
                                 <span className="cursor-pointer">Share</span>
+                                <div className="worldmap-share--buttons absolute px-6 py-6 rounded bg-white">
+                                <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                </div>
                             </span>
                         </div>
                         <div>
