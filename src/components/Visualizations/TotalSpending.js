@@ -35,7 +35,7 @@ function TotalSpending({ label, params }) {
             setTotalSpending(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions
@@ -98,22 +98,22 @@ function TotalSpending({ label, params }) {
             {loading ? (
                 <Loader sm />
             ) : (
-                <div className="flex items-end">
-                    {/* Line area chart */}
-                    <AreaChartBlock
-                        chartData={totalSpendingAreaChartData}
-                        totalAmount={totalSpendingAmount}
-                        percentage={totalSpendingPercentage}
-                        currency={currency}
-                    />
-                    <div className="flex-1">
-                        <SimpleBarChart
-                            data={totalSpendingBarChartData}
-                            barColorValue={barColorValue}
+                    <div className="flex items-end">
+                        {/* Line area chart */}
+                        <AreaChartBlock
+                            chartData={totalSpendingAreaChartData}
+                            totalAmount={totalSpendingAmount}
+                            percentage={totalSpendingPercentage}
+                            currency={currency}
                         />
+                        <div className="flex-1">
+                            <SimpleBarChart
+                                data={totalSpendingBarChartData}
+                                barColorValue={barColorValue}
+                            />
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
             <Modal
                 id="any-unique-identifier"
                 isOpen={isModalOpen}

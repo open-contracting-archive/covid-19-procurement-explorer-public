@@ -20,7 +20,7 @@ const pie_chart_data = [
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function EquityIndicators({label,params}) {
+function EquityIndicators({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================

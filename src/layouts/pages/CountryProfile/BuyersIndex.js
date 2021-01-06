@@ -6,24 +6,41 @@ import CountryServices from '../../../services/CountryServices'
 import CountryBuyers from './tabs/CountryBuyers'
 import CountryInfo from './sections/CountryInfo'
 import CountryMapElement from './sections/CountryMapElement'
+import { useSelector } from 'react-redux'
 
 const CountryDetailBuyers = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [countryData, setCountryData] = useState({})
-    const [countryCode, setCountryCode] = useState(null)
+    const [countryCode, setCountryCode] = useState()
+    const countries = useSelector((state) => state.general.countries)
     const { trans } = useTrans()
     let { slug } = useParams()
     window.scrollTo(0, 800)
 
+
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
     useEffect(() => {
-        // Fetch country specific data
-        CountryServices.CountryProfileData(slug).then((response) => {
-            setCountryData(response)
-            setCountryCode(response.country_code_alpha_2)
-        })
-    }, [slug])
+        let country = Object.keys(countries)
+            .map((key) => countries[key])
+            .find((country) => country.slug === slug)
+
+        if (country) {
+            setCountryData(country)
+            setCountryCode(country.country_code_alpha_2)
+        }
+    }, [countries, slug])
+
+    // useEffect(() => {
+    //     // Fetch country specific data
+    //     CountryServices.CountryProfileData(slug).then((response) => {
+    //         setCountryData(response)
+    //         setCountryCode(response.country_code_alpha_2)
+    //     })
+    // }, [slug])
 
     return (
         <section className="pt-20 -mt-8 bg-blue-0">

@@ -24,7 +24,7 @@ function TotalContracts({ label, params }) {
             setTotalContracts(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions
@@ -61,26 +61,26 @@ function TotalContracts({ label, params }) {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {label}
+                {label ? label : 'Total contracts'}
             </h3>
             {loading ? (
                 <Loader sm />
             ) : (
-                <div className="flex items-end">
-                    {/* Line are chart */}
-                    <AreaChartBlock
-                        chartData={totalContractLineChartData}
-                        totalAmount={totalContractAmount}
-                        percentage={Math.round(totalContractPercentage, 2)}
-                    />
-                    <div className="flex-1">
-                        <SimpleBarChart
-                            data={totalContractBarChartData}
-                            barColorValue={barColorValue}
+                    <div className="flex items-end">
+                        {/* Line are chart */}
+                        <AreaChartBlock
+                            chartData={totalContractLineChartData}
+                            totalAmount={totalContractAmount}
+                            percentage={Math.round(totalContractPercentage, 2)}
                         />
+                        <div className="flex-1">
+                            <SimpleBarChart
+                                data={totalContractBarChartData}
+                                barColorValue={barColorValue}
+                            />
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
         </div>
     )
 }

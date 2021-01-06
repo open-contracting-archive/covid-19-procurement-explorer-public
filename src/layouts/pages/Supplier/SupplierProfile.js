@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 import Select from 'react-select'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { Tabs, Tab, TabPanel, TabList } from 'react-tabs'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import PieChart from '../../../components/Charts/PieChart/PieChart'
@@ -34,6 +34,7 @@ const colors = ['#ABBABF', '#DCEAEE']
 const SupplierProfile = () => {
     const { trans } = useTrans()
     let history = useHistory()
+    const { id } = useParams()
     const handle = useFullScreenHandle()
 
     const previousPage = () => {
@@ -132,7 +133,7 @@ const SupplierProfile = () => {
                                     </div>
                                 </div>
                             </div> */}
-                            <TotalSpending label="Total income" />
+                            <TotalSpending label="Total income" supplier={id} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             {/* <div className="bg-white rounded p-4">
@@ -301,50 +302,50 @@ const SupplierProfile = () => {
                     </div>
                     <table className="table">
                         <thead>
-                        <tr>
-                            <th style={{ width: '20%' }}>
+                            <tr>
+                                <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Buyer{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         # of suppliers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

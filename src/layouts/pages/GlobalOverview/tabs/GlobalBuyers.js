@@ -14,10 +14,10 @@ const GlobalBuyers = () => {
                     <Buyers label="Buyers" />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalContracts label="Total Contracts" />
+                    <TotalContracts label="Total Contracts" params={{ buyer: "notnull" }} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalSpending label="Total Spending" />
+                    <TotalSpending label="Total Spending" params={{ buyer: "notnull" }} />
                 </div>
             </div>
             <BuyerTable />
