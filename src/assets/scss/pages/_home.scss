@@ -64,6 +64,19 @@
         pointer-events: none;
     }
 }
+.countrySelector{
+    width: fit-content;
+    &::after {
+        content: '';
+        position: absolute;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #293E45;
+        right: 7px;
+        top: 28px;
+        pointer-events: none;
+    }
+}
 
 .library {
     &__tag {
@@ -86,5 +99,22 @@ Tab{
     outline: none;
     &:focus{
         outline: none;
+    }
+}
+.currency{
+    border: 1px solid #1FBBEC;
+}
+.worldmap-share{
+    transition: all .4s ease;
+    .worldmap-share--buttons{
+        border: 1px solid #1FBBEC;
+        display: none;
+        bottom: 0;
+        transition: all .4s ease;
+    }
+    &:hover{
+        .worldmap-share--buttons{
+            display: block;
+        }
     }
 }

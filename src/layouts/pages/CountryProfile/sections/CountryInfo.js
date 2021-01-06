@@ -2,6 +2,7 @@ import React from 'react'
 import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
 import useTrans from '../../../../hooks/useTrans'
+import CurrencySwitcher from '../../../../components/CurrencySwitcher/CurrencySwitcher'
 
 const CountryInfo = ({ country }) => {
     const { trans } = useTrans()
@@ -116,7 +117,7 @@ const CountryInfo = ({ country }) => {
                     </div>
                 </div>
             </div>
-            <div className="absolute" style={{ top: '-30px', right: '25px' }}>
+            <div className="absolute inline-flex items-center" style={{ top: '-50px', right: '25px' }}>
                 <p className="text-blue-40">
                     <span className="opacity-75">Last updated on </span>
                     <span>
@@ -126,6 +127,7 @@ const CountryInfo = ({ country }) => {
                         )}
                     </span>
                 </p>
+                <CurrencySwitcher/>
             </div>
         </div>
     )
