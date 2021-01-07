@@ -2,13 +2,13 @@ import React from 'react'
 import ContractsIndicator from '../../../../components/ContractsIndicator/ContractsIndicator'
 import { TenderTable } from '../../../../components/Tables'
 
-const CountryContracts = (props) => {
+const CountryContracts = ({ country }) => {
     return (
         <div>
             <div className="w-full px-2 mb-16 global-profile">
-                <ContractsIndicator country={props.country} />
+                <ContractsIndicator country={country} />
             </div>
-            <TenderTable params={{ country: props.country }} />
+            <TenderTable params={{ country: country }} />
         </div>
     )
 }

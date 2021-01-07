@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import {useHistory, Link, useParams} from 'react-router-dom'
-import {get} from 'lodash'
-import {API_URL} from '../../../helpers/api'
-import socialIcons from '../../../assets/img/icons/social'
+import React, { useEffect, useState } from 'react'
+import { useHistory, Link, useParams } from 'react-router-dom'
+import { get } from 'lodash'
+import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import {formatDate} from "../../../helpers/date";
+import { formatDate } from "../../../helpers/date"
 import ShareButtons from "../share"
 
 const BlogsDetail = () => {
@@ -13,20 +12,20 @@ const BlogsDetail = () => {
     const [blogsData, setBlogsData] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
-    let {id: blogsId} = useParams()
+    let { id: blogsId } = useParams()
 
     const previousPage = () => {
         history.goBack()
     }
 
     const handleClick = () => {
-        history.push("/tags");
+        history.push("/tags")
     }
 
     const url = () => {
-        window.location.href;
+        window.location.href
     }
-    const twitterHandle = "covid19";   
+    const twitterHandle = "covid19"
 
     useEffect(() => {
         CmsPageService.BlogDetail(blogsId).then((response) => {
@@ -42,7 +41,7 @@ const BlogsDetail = () => {
     return (
         <>
             {loading ? (
-                <Loader/>
+                <Loader />
             ) : (
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
@@ -58,7 +57,7 @@ const BlogsDetail = () => {
                                 Blogs
                             </Link>{' '}
                         </div>
-                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
+                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {blogsDetail.title}
                         </h2>
                         {get(
@@ -116,7 +115,7 @@ const BlogsDetail = () => {
                                             Share on
                                         </p>
                                         <div className="flex">
-                                            <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                            <ShareButtons url={url} twitterHandle={twitterHandle} />
                                         </div>
                                     </div>
                                 </div>
@@ -126,14 +125,14 @@ const BlogsDetail = () => {
                                     Share on
                                 </p>
                                 <div className="flex">
-                                    <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                    <ShareButtons url={url} twitterHandle={twitterHandle} />
                                 </div>
                             </div>
                         </div>
                         {blogsData.length !== 1 ?
                             <>
 
-                                <hr className="mb-10 text-primary-gray"/>
+                                <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">Related Blogs</h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
@@ -176,11 +175,11 @@ const BlogsDetail = () => {
                                             })}
                                     </div>
                                     <div className="flex justify-center items-center mt-12">
-                                        <hr className="text-primary-gray flex-1"/>
+                                        <hr className="text-primary-gray flex-1" />
                                         <Link to="/blogs" className="text-blue-20 px-4">
                                             View all blogs --&gt;{' '}
                                         </Link>
-                                        <hr className="text-primary-gray flex-1"/>
+                                        <hr className="text-primary-gray flex-1" />
                                     </div>
                                 </div>
                             </>

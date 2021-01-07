@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
-import socialIcons from '../../../assets/img/icons/social'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import {formatDate} from "../../../helpers/date";
-import {FacebookShareButton, FacebookIcon} from "react-share";
+import { formatDate } from "../../../helpers/date"
 import ShareButtons from "../share"
-
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
@@ -23,18 +20,16 @@ const NewsDetail = () => {
     }
 
     const handleClick = () => {
-        history.push("/tags");
+        history.push("/tags")
     }
 
     const url = () => {
-        window.location.href;
+        window.location.href
     }
-    const twitterHandle = "covid19";
-    // const tags = props.data.markdownRemark.frontmatter.tags;
+    const twitterHandle = "covid19"
 
     useEffect(() => {
         CmsPageService.NewsDetail(newsId).then((response) => {
-            // console.log(response)
             setNewsDetail(response)
             setLoading(false)
         })
@@ -44,9 +39,8 @@ const NewsDetail = () => {
     }, [newsId])
 
 
-
     return (
-        <>
+        <Fragment>
             {loading ? (
                 <Loader />
             ) : (
@@ -54,32 +48,32 @@ const NewsDetail = () => {
                     <div className="container mx-auto px-4 news-detail">
                         <div className="text-sm mb-4 text-blue-5">
                             <Link to="/library"
-                                className="cursor-pointer text-primary-blue">
+                                  className="cursor-pointer text-primary-blue">
                                 Library
                             </Link>{' '}
                             /
                             <Link to="/news"
-                                className="cursor-pointer text-primary-blue"
-                                >
+                                  className="cursor-pointer text-primary-blue"
+                            >
                                 News
                             </Link>{' '}
                         </div>
-                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
+                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {newsDetail.title}
                         </h2>
                         {get(
                             newsDetail,
-                             'content_image.meta.download_url'
-                            ) &&
-                            <div className="img-wrapper mb-6 md:mb-10">
-                                <img
-                                    src={`${API_URL}${get(
-                                        newsDetail,
-                                        'content_image.meta.download_url'
-                                    )}`}
-                                    alt={get(newsDetail, 'content_image.title')}
-                                />
-                            </div>
+                            'content_image.meta.download_url'
+                        ) &&
+                        <div className="img-wrapper mb-6 md:mb-10">
+                            <img
+                                src={`${API_URL}${get(
+                                    newsDetail,
+                                    'content_image.meta.download_url'
+                                )}`}
+                                alt={get(newsDetail, 'content_image.title')}
+                            />
+                        </div>
                         }
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 news-detail__metadata">
@@ -113,7 +107,7 @@ const NewsDetail = () => {
                                         <p className="inline-block lg:block font-bold opacity-40 mb-2">
                                             Tags
                                         </p>
-                                         <div className="tags flex flex-wrap">
+                                        <div className="tags flex flex-wrap">
                                             {newsDetail.tags && newsDetail.tags.map(news => (
                                                 <a href="#" className="tag" key={news} onClick={handleClick}>{news}</a>
                                             ))}
@@ -124,7 +118,7 @@ const NewsDetail = () => {
                                             Share on
                                         </p>
                                         <div className="flex">
-                                            <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                            <ShareButtons url={url} twitterHandle={twitterHandle} />
                                         </div>
                                     </div>
                                 </div>
@@ -134,17 +128,17 @@ const NewsDetail = () => {
                                     Share on
                                 </p>
                                 <div className="flex">
-                                    <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                    <ShareButtons url={url} twitterHandle={twitterHandle} />
                                 </div>
                             </div>
                         </div>
                         {newsData.length !== 1 ?
                             <>
-                            <hr className="mb-10 text-primary-gray" />
-                            <div className="mb-20">
-                                <h2 className="text-xl mb-6">Other News</h2>
-                                <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
-                                    {newsData &&
+                                <hr className="mb-10 text-primary-gray" />
+                                <div className="mb-20">
+                                    <h2 className="text-xl mb-6">Other News</h2>
+                                    <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
+                                        {newsData &&
                                         newsData
                                             .filter((news) => news.id != newsId)
                                             .slice(0, 3)
@@ -155,18 +149,18 @@ const NewsDetail = () => {
                                                         to={`/news/${news.id}`}
                                                         key={news.id}>
                                                         {get(
-                                                        news,
-                                                        'content_image.meta.download_url'
+                                                            news,
+                                                            'content_image.meta.download_url'
                                                         ) &&
-                                                            <div className="img-wrapper">
-                                                                <img
-                                                                    src={`${API_URL}${get(
-                                                                        news,
-                                                                        'content_image.meta.download_url'
-                                                                    )}`}
-                                                                    alt=""
-                                                                />
-                                                            </div>
+                                                        <div className="img-wrapper">
+                                                            <img
+                                                                src={`${API_URL}${get(
+                                                                    news,
+                                                                    'content_image.meta.download_url'
+                                                                )}`}
+                                                                alt=""
+                                                            />
+                                                        </div>
                                                         }
                                                         <div>
                                                             <h3 className="news-caption__title">
@@ -179,21 +173,21 @@ const NewsDetail = () => {
                                                     </Link>
                                                 )
                                             })}
+                                    </div>
+                                    <div className="flex justify-center items-center mt-12">
+                                        <hr className="text-primary-gray flex-1" />
+                                        <Link to="/news" className="text-blue-20 px-4">
+                                            View all news --&gt;{' '}
+                                        </Link>
+                                        <hr className="text-primary-gray flex-1" />
+                                    </div>
                                 </div>
-                                <div className="flex justify-center items-center mt-12">
-                                    <hr className="text-primary-gray flex-1"/>
-                                    <Link to="/news" className="text-blue-20 px-4">
-                                        View all news --&gt;{' '}
-                                    </Link>
-                                    <hr className="text-primary-gray flex-1"/>
-                                </div>
-                            </div>
-                        </>: ""
-                    }
+                            </> : ""
+                        }
                     </div>
                 </section>
             )}
-        </>
+        </Fragment>
     )
 }
 

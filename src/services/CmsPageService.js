@@ -1,5 +1,5 @@
 import Api from './api'
-import { API_URL, getURI } from '../helpers/api'
+import { getURI } from '../helpers/api'
 
 class CmsPageService {
     static async NewsList(queryParams) {
@@ -90,8 +90,8 @@ class CmsPageService {
         }
     }
 
-    static async StaticPageDetail(queryParams) {
-        const response = await Api.get(getURI('pages'), queryParams)
+    static async StaticPageDetailBySlug(slug) {
+        const response = await Api.get(getURI('pages'), { slug })
 
         if (response.body !== undefined && response.body.items !== undefined && response.body.items.length) {
             const result = await Api.get(getURI('pages') + response.body.items[0].id)
@@ -118,18 +118,13 @@ class CmsPageService {
             return error
         }
     }
-    
+
     static async ResourceDetail(id) {
         const res = await Api.get(getURI('pages') + `/${id}`)
 
         return res.body
     }
 
-
-    // static async InsightsDetailData(id) {
-    //     const res = await Api.get(await `${API_URL}api/v2/pages/${id}`)
-    //     return res.body
-    // }
 }
 
 export default CmsPageService

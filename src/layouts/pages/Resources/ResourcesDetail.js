@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import {useHistory, Link, useParams} from 'react-router-dom'
-import {get} from 'lodash'
-import {API_URL} from '../../../helpers/api'
-import socialIcons from '../../../assets/img/icons/social'
+import React, { useEffect, useState, Fragment } from 'react'
+import { useHistory, Link, useParams } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import {formatDate} from "../../../helpers/date";
+import { formatDate } from "../../../helpers/date"
 import ShareButtons from "../share"
 import pdfImage from '../../../assets/img/ic_pdf.svg'
 
@@ -17,23 +14,18 @@ const ResourcesDetail = () => {
     let { id: resourcesId } = useParams()
     window.scrollTo(0, 0)
 
-    // const previousPage = () => {
-    //     history.goBack()
-    // }
-
     const handleClick = () => {
-        history.push("/tags");
+        history.push("/tags")
     }
 
     const url = () => {
-        window.location.href;
+        window.location.href
     }
 
-    const twitterHandle = "covid19";
+    const twitterHandle = "covid19"
 
     useEffect(() => {
         CmsPageService.ResourceDetail(resourcesId).then((response) => {
-            // console.log(response)
             setResourcesDetail(response)
             setLoading(false)
         })
@@ -42,24 +34,20 @@ const ResourcesDetail = () => {
         })
     }, [resourcesId])
 
-    
-
     return (
-        <>
-            {loading ? (
-                <Loader />
-            ) : (
+        <Fragment>
+            {loading ? (<Loader />) : (
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
                         <div className="text-sm mb-4 text-blue-5">
                             <Link to="/library"
-                                className="cursor-pointer text-primary-blue">
+                                  className="cursor-pointer text-primary-blue">
                                 Library
                             </Link>{' '}
                             /
                             <Link to="/resources"
-                                className="cursor-pointer text-primary-blue"
-                                >
+                                  className="cursor-pointer text-primary-blue"
+                            >
                                 Resources
                             </Link>{' '}
                         </div>
@@ -67,7 +55,7 @@ const ResourcesDetail = () => {
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 detail__metadata ">
                                 <div className="resource-download flex flex-wrap justify-center px-6 py-10 rounded mb-6">
-                                    <img src={pdfImage} alt="" className="mb-6"/>
+                                    <img src={pdfImage} alt="" className="mb-6" />
                                     <div className="download flex  justify-center">
                                         <svg
                                             width="24"
@@ -90,32 +78,17 @@ const ResourcesDetail = () => {
                                 </div>
                             </div>
                             <div className="details md:mx-10 mx-0 b-24">
-                                <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-10 md:mb-10 uppercase text-primary-dark">
+                                <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-10 md:mb-10 text-primary-dark">
                                     {resourcesDetail.title}
                                 </h2>
-                                {/* <div className="mb-10 resources-detail__content">
-                                    <p>This is the dummy text</p>
-                                    <ul>
-                                        <li className="relative mb-4 pl-6 list-none">This plan intends to prepare and strengthen the health system response that is capable to minimise the adverse impact of COVID-19 pandemic.</li>
-                                        <li className="relative mb-4 pl-6 list-none">This plan intends to prepare and strengthen the health system response that is capable to minimise the adverse impact of COVID-19 pandemic.</li>
-                                        <li className="relative mb-4 pl-6 list-none">This plan intends to prepare and strengthen the health system response that is capable to minimise the adverse impact of COVID-19 pandemic.</li>
-                                        <li className="relative mb-4 pl-6 list-none">This plan intends to prepare and strengthen the health system response that is capable to minimise the adverse impact of COVID-19 pandemic.</li>
-                                    </ul>
-                                </div> */}
                                 <div
                                     className="mb-10 resources-detail__content"
                                     dangerouslySetInnerHTML={{
                                         __html: resourcesDetail.rendered_description
                                     }}>
-                                    {/* {eventsDetail.body} */}
                                 </div>
                                 <hr className="mb-6 text-primary-gray" />
-                                <a
-                                    className="text-blue-20 test-base"
-                                    href="#">
-                                    {' '}
-                                    View more{' '}
-                                </a>
+                                {/*<a className="text-blue-20 test-base" href="#">View more</a>*/}
                                 <table className="my-10 text-left">
                                     <tr>
                                         <th className="px-6 py-6 font-bold opacity-50">Published on</th>
@@ -131,31 +104,29 @@ const ResourcesDetail = () => {
                                     </tr>
                                     <tr>
                                         <th className="px-6 py-6 font-bold opacity-50">Topic</th>
-                                        <td className="px-6 py-6"></td>
+                                        <td className="px-6 py-6" />
                                     </tr>
                                     <tr>
                                         <th className="px-6 py-6 font-bold opacity-50">Language</th>
-                                        <td className="px-6 py-6"></td>
+                                        <td className="px-6 py-6" />
                                     </tr>
-
                                 </table>
-
                             </div>
                             <div className="related-section">
                                 <p className="font-bold opacity-40 mb-2">
                                     Share on
                                 </p>
                                 <div className="flex">
-                                    <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                    <ShareButtons url={url} twitterHandle={twitterHandle} />
                                 </div>
                                 <div className="related mb-4 mt-10">
                                     <p className="font-bold opacity-40 mb-4">
                                         Related Resources
                                     </p>
-                                {resourcesData &&
+                                    {resourcesData &&
                                     resourcesData
                                         .filter(
-                                            (resources) => resources.id != resourcesId
+                                            (resources) => resources.id !== resourcesId
                                         )
                                         .slice(0, 3)
                                         .map((resources) => {
@@ -174,7 +145,7 @@ const ResourcesDetail = () => {
                     </div>
                 </section>
             )}
-        </>
+        </Fragment>
     )
 }
 

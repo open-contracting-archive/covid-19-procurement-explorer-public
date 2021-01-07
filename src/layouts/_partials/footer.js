@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import FooterImage from '../../assets/img/icons/cc-img.png'
-import useTrans from "../../hooks/useTrans";
+import useTrans from "../../hooks/useTrans"
 
 const Footer = () => {
     const { trans } = useTrans()
@@ -32,8 +32,12 @@ const Footer = () => {
                                 <Link to="/global-overview/data">Data</Link>
                             </li>
                             <li className="opacity-50 mb-1">Countries</li>
-                            <li className="opacity-50 mb-1">Tenders</li>
-                            <li className="opacity-50 mb-1">Suppliers</li>
+                            <li className="opacity-50 mb-1">
+                                <Link to="/global-overview/contracts">Tenders</Link>
+                            </li>
+                            <li className="opacity-50 mb-1">
+                                <Link to="/global-overview/suppliers">Suppliers</Link>
+                            </li>
                             <li className="opacity-50 ">
                                 <Link to="/resources">Resources</Link>
                             </li>
