@@ -53,7 +53,6 @@ const ProductsTimeline = ({ label, params }) => {
         setLoading(false)
     }, [apiData, chartType])
 
-    // console.log(chartData, 'ChartData')
 
     // ===========================================================================
     // Handlers and functions
@@ -93,13 +92,9 @@ const ProductsTimeline = ({ label, params }) => {
             )}
             <div
                 className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                             text-primary-blue -mx-6 px-6">
+                                             text-primary-blue -mx-4 px-4">
                 <div className="flex">
                     <span className="flex items-center">
-                        <DownloadIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Download</span>
-                    </span>
-                    <span className="ml-8 flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>

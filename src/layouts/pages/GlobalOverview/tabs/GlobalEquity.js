@@ -16,7 +16,7 @@ const GlobalEquity = () => {
 
     return (
         <div>
-            <div className="w-full px-2 mb-12 global-profile">
+            <div className="w-full mb-12 global-profile">
                 <ContractsIndicator />
             </div>
 

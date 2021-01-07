@@ -9456,6 +9456,11 @@ react@^16.13.1:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
 
+reactjs-hooks-pagination@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/reactjs-hooks-pagination/-/reactjs-hooks-pagination-1.0.17.tgz#1acc591f989c88c80cd595cde2df56fce8d118a1"
+  integrity sha512-QnwFaqLtCpJxVI9IjgJPmHkvQ342SnAFuBjThaeA/TomcHtiZJTxZE8SlD3pQBGyP1XKBnJsVypyXISSuO5Scg==
+
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"

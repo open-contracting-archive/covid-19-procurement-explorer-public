@@ -6,7 +6,6 @@ import useTrans from '../../../../hooks/useTrans'
 import Map from '../../../../components/Charts/Map/Map'
 import RaceMap from '../../../../components/Charts/RaceMap/RaceMap'
 import RaceBarChart from '../../../../components/Charts/RaceBarChart/RaceBarChart'
-import { ReactComponent as DownloadIcon } from '../../../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../../../assets/img/icons/ic_fullscreen.svg'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
@@ -15,7 +14,8 @@ import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_tab
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import CountryServices from '../../../../services/CountryServices'
 import Loader from '../../../../components/Loader/Loader'
-import ShareButtons from "../../share"
+import ShareButtons from '../../share'
+import TenderTable from '../../../../components/Tables/TenderTable'
 
 const WorldMapRace = () => {
     // ===========================================================================
@@ -50,10 +50,10 @@ const WorldMapRace = () => {
     ]
 
     const url = () => {
-        window.location.href;
-    } 
+        window.location.href
+    }
 
-    const twitterHandle = "covid19";
+    const twitterHandle = 'covid19'
 
     useEffect(() => {
         CountryServices.GetGlobalMapData().then((response) => {
@@ -241,9 +241,11 @@ const WorldMapRace = () => {
                                             </Tab>
                                         </TabList>
                                     </div>
-                                    <div className="flex-1 relative">
+                                    <div
+                                        className="flex-1 relative"
+                                        style={{ width: 'calc(100% - 91px)' }}>
                                         <TabPanel>
-                                            <div className="flex justify-end">
+                                            <div className="flex justify-end world-map-chart">
                                                 <ul className="contract-switch flex">
                                                     <li
                                                         className={`mr-4 cursor-pointer ${
@@ -369,7 +371,7 @@ const WorldMapRace = () => {
                                             )}
                                         </TabPanel>
                                         <TabPanel>
-                                            Table Section coming soon !!
+                                            <TenderTable homepage />
                                         </TabPanel>
                                         <TabPanel>
                                             Sources section coming soon !!
@@ -383,15 +385,14 @@ const WorldMapRace = () => {
                         className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-6 px-6">
                         <div className="flex">
-                            <span className="flex items-center">
-                                <DownloadIcon className="mr-2 inline-block" />{' '}
-                                <span className="cursor-pointer">Download</span>
-                            </span>
-                            <span className="worldmap-share ml-8 flex items-center relative">
+                            <span className="worldmap-share flex items-center relative">
                                 <ShareIcon className="mr-2 inline-block" />{' '}
                                 <span className="cursor-pointer">Share</span>
                                 <div className="worldmap-share--buttons absolute px-6 py-6 rounded bg-white">
-                                <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                    <ShareButtons
+                                        url={url}
+                                        twitterHandle={twitterHandle}
+                                    />
                                 </div>
                             </span>
                         </div>

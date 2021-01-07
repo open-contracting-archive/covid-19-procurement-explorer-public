@@ -6,7 +6,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function TotalContracts({ label, params }) {
+function TotalContracts({ label = 'Total Contracts', params }) {
     const barColorValue = '#ABBABF'
 
     // ===========================================================================
@@ -60,27 +60,30 @@ function TotalContracts({ label, params }) {
 
     return (
         <div className="bg-white rounded p-4 h-full">
-            <h3 className="uppercase font-bold  text-primary-dark">
-                {label ? label : 'Total contracts'}
-            </h3>
+            <h3 className="uppercase font-bold  text-primary-dark">{label}</h3>
             {loading ? (
                 <Loader sm />
             ) : (
-                    <div className="flex items-end">
-                        {/* Line are chart */}
-                        <AreaChartBlock
-                            chartData={totalContractLineChartData}
-                            totalAmount={totalContractAmount}
-                            percentage={Math.round(totalContractPercentage, 2)}
+                <div className="flex items-end">
+                    {/* Line are chart */}
+                    <AreaChartBlock
+                        chartData={totalContractLineChartData}
+                        totalAmount={totalContractAmount}
+                        percentage={Math.round(totalContractPercentage, 2)}
+                        colorValue={
+                            Math.round(totalContractPercentage, 2) < 0 ? '#FE5151' : '#3EEDA4'
+                        }
+                    />
+                    <div className="flex-1">
+                        <SimpleBarChart
+                            data={totalContractBarChartData}
+                            barColorValue={barColorValue}
+                            chartKey="method"
+                            chartValue="value"
                         />
-                        <div className="flex-1">
-                            <SimpleBarChart
-                                data={totalContractBarChartData}
-                                barColorValue={barColorValue}
-                            />
-                        </div>
                     </div>
-                )}
+                </div>
+            )}
         </div>
     )
 }

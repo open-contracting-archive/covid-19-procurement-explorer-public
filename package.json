@@ -26,6 +26,7 @@
     "react-share": "^4.3.1",
     "react-simple-hook-modal": "^1.1.0",
     "react-tabs": "^3.1.1",
+    "reactjs-hooks-pagination": "^1.0.17",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "resize-observer-polyfill": "^1.5.1",

@@ -8,9 +8,9 @@ const CountryInfo = ({ country }) => {
     const { trans } = useTrans()
 
     return (
-        <div className="w-full md:w-1/2 lg:w-38 px-4 pl-2 mb-4 relative">
-            <div className="flex flex-col  text-primary-dark font-bold">
-                <div className="p-8 py-6 bg-yellow-20 rounded-t-md ">
+        <div className="w-full md:w-1/2 lg:w-38 px-4 mb-4 relative">
+            <div className="flex flex-col  text-primary-dark font-bold h-full">
+                <div className="p-8 py-6 bg-yellow-20 rounded-t-md h-full">
                     <div className="flex flex-wrap -mx-4 -mb-4">
                         <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
                             <div>
@@ -58,19 +58,6 @@ const CountryInfo = ({ country }) => {
                                 </h2>
                             </div>
                         </div>
-                        <div className="w-full px-4 mb-4">
-                            <div>
-                                <p className="text-sm font-normal">
-                                    {trans('Source')}:
-                                    <a
-                                        href={country.source}
-                                        className="ml-1 underline font-bold"
-                                        title="John Hopkins University">
-                                        {trans('John Hopkins University')}
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className="px-8 py-16 text-white bg-primary-dark rounded-b-md">
@@ -101,23 +88,12 @@ const CountryInfo = ({ country }) => {
                                 </h2>
                             </div>
                         </div>
-                        <div className="w-full px-4 mb-4">
-                            <div>
-                                <p className="text-sm font-normal">
-                                    {trans('Source')}:
-                                    <a
-                                        href={country.source}
-                                        className="ml-1 text-white underline font-bold"
-                                        title="John Hopkins University">
-                                        {trans('John Hopkins University')}
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div className="md:absolute static mt-2 md:mt-0 inline-flex items-center" style={{ top: '-50px', right: '25px', width: 'fit-content' }}>
+            <div
+                className="md:absolute static mt-2 md:mt-0 inline-flex items-center"
+                style={{ top: '-50px', right: '25px', width: 'fit-content' }}>
                 <p className="text-blue-40">
                     <span className="opacity-75">Last updated on </span>
                     <span>
@@ -127,7 +103,7 @@ const CountryInfo = ({ country }) => {
                         )}
                     </span>
                 </p>
-                <CurrencySwitcher/>
+                <CurrencySwitcher />
             </div>
         </div>
     )

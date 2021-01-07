@@ -16,7 +16,8 @@ import {
     ProductsTimeline,
     TopSuppliers,
     TotalContracts,
-    TotalSpending
+    TotalSpending,
+    BuyerProductTimeline
 } from '../../../components/Visualizations'
 import VisualizationServices from '../../../services/visualizationServices'
 import { TenderTable } from '../../../components/Tables'
@@ -28,7 +29,8 @@ const BuyerProfile = () => {
     const [buyerInfo, setBuyerInfo] = useState()
     const { trans } = useTrans()
     let history = useHistory()
-
+    window.scrollTo(0, 0)
+    
     const previousPage = () => {
         history.goBack()
     }
@@ -82,6 +84,8 @@ const BuyerProfile = () => {
                         <p className="mr-2 text-sm">{get(buyerInfo, 'country_name')}</p>
                     </div>
                 </div>
+
+                <BuyerProductTimeline label="Products Timeline" />
             </div>
             <div
                 style={{
@@ -129,7 +133,7 @@ const BuyerProfile = () => {
                                 />
                             </div>
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <div className="w-full px-2 mb-6">
                             <ProductsTimeline
                                 label="Product timeline"
                                 params={{ buyer: id }}

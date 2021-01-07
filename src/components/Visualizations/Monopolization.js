@@ -64,15 +64,21 @@ function Monopolization({ label, params }) {
                 {loading ? (
                     <Loader sm />
                 ) : (
-                        <div className="flex items-end">
-                            <AreaChartBlock
-                                chartData={monopolizationLineChartData}
-                                totalAmount={monopolizationAmount}
-                                percentage={monopolizationPercentage}
-                            />
-                            <div className="flex-1" />
-                        </div>
-                    )}
+                    <div className="flex items-end">
+                        <AreaChartBlock
+                            chartData={monopolizationLineChartData}
+                            totalAmount={monopolizationAmount}
+                            percentage={monopolizationPercentage}
+                            colorValue={
+                                monopolizationPercentage <= 0
+                                    ? '#3EEDA4'
+                                    : '#FE5151 '
+                            }
+                            monopolization
+                        />
+                        <div className="flex-1" />
+                    </div>
+                )}
             </div>
         </div>
     )

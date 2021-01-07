@@ -1,6 +1,11 @@
 @import './news';
 @import './library';
 @import './resources';
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     @apply antialiased leading-snug;
     color: #293e45;
@@ -318,4 +323,67 @@ header {
             }
         }
     }
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .page-item {
+        margin-right: 12px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &.active {
+            background: #1fbbec;
+        }
+    }
+
+    .page-link {
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+}
+
+.swiper-container.swiper-container-horizontal {
+    padding-bottom: 40px;
+}
+
+.amcharts-amexport-item {
+    width: auto !important;
+    padding: 4px 8px !important;
+    opacity: 1 !important;
+    background-color: #fff !important;
+    border: 1px solid rgb(69, 190, 236);
+    color: rgb(69, 190, 236) !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+}
+
+.amcharts-amexport-top .amcharts-amexport-item > .amcharts-amexport-menu {
+    top: -3px !important;
+    left: 2px;
+}
+
+.amcharts-amexport-label {
+    padding: 0 4px !important;
+    cursor: pointer !important;
+}
+
+.map-wrapper {
+    .amcharts-amexport-menu-level-0.amcharts-amexport-top {
+        right: 44px !important;
+    }
+}
+
+svg tspan {
+    text-transform: capitalize;
 }

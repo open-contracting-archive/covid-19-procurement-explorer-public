@@ -20,7 +20,7 @@ const pie_chart_data = [
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function EquityIndicators({ label, params }) {
+function EquityIndicators({ label, params, heightFull }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -65,7 +65,7 @@ function EquityIndicators({ label, params }) {
                 <Tabs>
                     <div className="flex items-center justify-between">
                         <h3 className="uppercase font-bold  text-primary-dark">
-                            {trans(label ? label : "Equity Indicators")}
+                            {trans(label ? label : 'Equity Indicators')}
                         </h3>
                         <div className="flex">
                             <TabList>
@@ -78,34 +78,22 @@ function EquityIndicators({ label, params }) {
                     <div className="mt-2">
                         <TabPanel>
                             <div className="flex items-end">
-                                <div className=" text-primary-dark">
-                                    <span>
-                                        <strong className="text-xl inline-block mr-3">
-                                            51
-                                        </strong>
-                                    </span>
-                                </div>
                                 <div className="flex-1">
                                     <PieChart
                                         data={equityByValue}
                                         colors={colors}
+                                        large={heightFull ? true : false}
                                     />
                                 </div>
                             </div>
                         </TabPanel>
                         <TabPanel>
                             <div className="flex items-end">
-                                <div className=" text-primary-dark">
-                                    <span>
-                                        <strong className="text-xl inline-block mr-3">
-                                            51
-                                        </strong>
-                                    </span>
-                                </div>
                                 <div className="flex-1">
                                     <PieChart
                                         data={equityByNumber}
                                         colors={colors}
+                                        large={heightFull ? true : false}
                                     />
                                 </div>
                             </div>

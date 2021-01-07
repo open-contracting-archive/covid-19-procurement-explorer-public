@@ -1,79 +1,131 @@
-import React from 'react'
-import mexicanaImage from '../../assets/img/mexicana.svg'
-import { Link } from 'react-router-dom'
+import React, { Fragment, useState, useEffect } from 'react'
+import { API_URL } from '../../helpers/api'
+import Loader from '../../components/Loader/Loader'
+import VisualizationServices from '../../services/visualizationServices'
+import useTrans from '../../hooks/useTrans'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
+import 'swiper/components/navigation/navigation.scss'
+import 'swiper/components/pagination/pagination.scss'
+import 'swiper/components/scrollbar/scrollbar.scss'
 
-const CountryPartnerSlider = () => {
+// install Swiper components
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
+
+const CountryPartnerSlider = ({ params }) => {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
+    const [loading, setLoading] = useState(true)
+    const [countryPartner, setCountryPartner] = useState([])
+    const { trans } = useTrans()
+
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
+    useEffect(() => {
+        VisualizationServices.CountryPartners(params)
+            .then((response) => {
+                if (!response.error) {
+                    setCountryPartner(response)
+                }
+
+                setLoading(false)
+            })
+            .catch(() => setLoading(false))
+    }, [params])
+
     return (
-        <Swiper
-            spaceBetween={50}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-        >
-            <SwiperSlide>
-                <div className="bg-white rounded p-4 simple-tab text-primary-dark">
-                    <h3 className="uppercase font-bold  mb-6">
-                        Country partner organization
-                    </h3>
-                    <h2 className="text-xl mb-2 ">Transparency Mexicana</h2>
-                    <div className="flex justify-between px-12 md:flex-nowrap flex-wrap">
-                        <div className="w-full md:w-1/2">
-                            <p className="text-base  mb-6 md:mb-2">At the beginning of 1999, a group of Mexicans concerned about global
-                                corruption problems, particularly those of our country, decided to create
-                                Transparencia Mexicana. It is a non- governmental organization that faces the problem
-                                of corruption from a comprehensive perspective, through public policies and private attitudes
-                                that go beyond the political slogan, to generate concrete changes in the institutional
-                                framework and in the culture of the legality in Mexico.</p>
-                        </div>
-                        <div className="text-sm mb-6">
-                            <p className="">Website</p>
-                            <a href="" className="mb-6 text-blue-20">https://www.tm.org.mx/</a>
-                            <p className="">Email</p>
-                            <a href="" className="mb-6 text-blue-20">info@tm.org.mx</a>
-                        </div>
-                        <div className="">
-                            <img src={mexicanaImage} alt="" className="" />
-                        </div>
-
-                    </div>
-                    <Link to="/resources" className="text-blue-20 opacity-50">
-                        &lt;-- Previous{' '}
-                    </Link>
-                </div>
-            </SwiperSlide>
-            <SwiperSlide>
-                <div className="bg-white rounded p-4 simple-tab text-primary-dark">
-                    <h3 className="uppercase font-bold  mb-6">
-                        Country partner organization
-                    </h3>
-                    <h2 className="text-xl mb-2 ">Transparency Mexicana</h2>
-                    <div className="flex justify-between px-12 md:flex-nowrap flex-wrap">
-                        <div className="w-full md:w-1/2">
-                            <p className="text-base  mb-6 md:mb-2">At the beginning of 1999, a group of Mexicans concerned about global
-                                corruption problems, particularly those of our country, decided to create
-                                Transparencia Mexicana. It is a non- governmental organization that faces the problem
-                                of corruption from a comprehensive perspective, through public policies and private attitudes
-                                that go beyond the political slogan, to generate concrete changes in the institutional
-                                framework and in the culture of the legality in Mexico.</p>
-                        </div>
-                        <div className="text-sm mb-6">
-                            <p className="">Website</p>
-                            <a href="" className="mb-6 text-blue-20">https://www.tm.org.mx/</a>
-                            <p className="">Email</p>
-                            <a href="" className="mb-6 text-blue-20">info@tm.org.mx</a>
-                        </div>
-                        <div className="">
-                            <img src={mexicanaImage} alt="" className="" />
-                        </div>
-
-                    </div>
-                    <Link to="/resources" className="text-blue-20 opacity-50">
-                        &lt;-- Previous{' '}
-                    </Link>
-                </div>
-            </SwiperSlide>
-        </Swiper>
+        <div className="bg-white rounded p-4 pb-8 simple-tab text-primary-dark">
+            <h3 className="uppercase font-bold mb-6">
+                {trans('Country partner organization')}
+            </h3>
+            {loading ? (
+                <Loader />
+            ) : (
+                <Fragment>
+                    {countryPartner.length ? (
+                        <Swiper
+                            spaceBetween={50}
+                            slidesPerView={1}
+                            navigation
+                            pagination={{ clickable: true }}>
+                            {countryPartner &&
+                                countryPartner.map((index, key) => {
+                                    return (
+                                        <SwiperSlide key={key}>
+                                            <div>
+                                                <h2 className="text-xl mb-2 md:px-10">
+                                                    {index.name}
+                                                </h2>
+                                                <div className="flex flex-wrap px-10">
+                                                    <div className="w-full md:w-1/2 mb-4">
+                                                        <p className="text-base pr-8 lg:pr-10 ">
+                                                            {index.description}
+                                                        </p>
+                                                    </div>
+                                                    <div className="w-full md:w-1/2">
+                                                        <div className="flex justify-between">
+                                                            <div>
+                                                                <div className="mb-6">
+                                                                    <span className="block mb-2">
+                                                                        {trans(
+                                                                            'Website'
+                                                                        )}
+                                                                    </span>
+                                                                    <a
+                                                                        href=""
+                                                                        className="text-blue-20"
+                                                                        target="_blank">
+                                                                        {
+                                                                            index.website
+                                                                        }
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <span className="block mb-2">
+                                                                        {trans(
+                                                                            'Email'
+                                                                        )}
+                                                                    </span>
+                                                                    <a
+                                                                        href={`maitlo:${index.email}`}
+                                                                        className="text-blue-20">
+                                                                        {
+                                                                            index.email
+                                                                        }
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <img
+                                                                    src={`${API_URL}/media/${index.logo.replaceAll(
+                                                                        '"',
+                                                                        ''
+                                                                    )}`}
+                                                                    alt={
+                                                                        index.name
+                                                                    }
+                                                                    className=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                })}
+                        </Swiper>
+                    ) : (
+                        <p className="text-primary-dark text-opacity-75 text-center py-16">
+                            No country partner organizations data available.
+                        </p>
+                    )}
+                </Fragment>
+            )}
+        </div>
     )
 }
 export default CountryPartnerSlider
