@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
-import InsightServices from '../../../services/insightServices'
+import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import {formatDate} from "../../../helpers/date";
 
@@ -19,7 +19,7 @@ const Blogs = () => {
     }
 
     useEffect(() => {
-        InsightServices.BlogsData().then((response) => {
+        CmsPageService.BlogList().then((response) => {
             setBlogsData(response.items)
             setLoading(false)
         })

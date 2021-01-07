@@ -3,7 +3,7 @@ import {useHistory, Link, useParams} from 'react-router-dom'
 import {get} from 'lodash'
 import {API_URL} from '../../../helpers/api'
 import socialIcons from '../../../assets/img/icons/social'
-import InsightServices from '../../../services/insightServices'
+import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import {formatDate} from "../../../helpers/date";
 import ShareButtons from "../share"
@@ -25,16 +25,16 @@ const BlogsDetail = () => {
 
     const url = () => {
         window.location.href;
-    } 
-    const twitterHandle = "covid19";
+    }
+    const twitterHandle = "covid19";   
 
     useEffect(() => {
-        InsightServices.BlogsDetailData(blogsId).then((response) => {
+        CmsPageService.BlogDetail(blogsId).then((response) => {
             // console.log(response)
             setBlogsDetail(response)
             setLoading(false)
         })
-        InsightServices.BlogsData().then((response) => {
+        CmsPageService.BlogList().then((response) => {
             setBlogsData(response.items)
         })
     }, [blogsId])

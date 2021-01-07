@@ -4,7 +4,7 @@ import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort.svg'
 import { API_URL } from '../../../../helpers/api'
-import InsightServices from '../../../../services/insightServices'
+import CmsPageService from '../../../../services/CmsPageService'
 import Loader from '../../../../components/Loader/Loader'
 
 const GlobalInsights = () => {
@@ -15,7 +15,7 @@ const GlobalInsights = () => {
     let { id: insightsId } = useParams()
 
     useEffect(() => {
-        InsightServices.InsightsData().then((response) => {
+        CmsPageService.InsightList().then((response) => {
             setInsightsData(response.items)
             setLoading(false)
         })

@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import * as dayjs from 'dayjs'
 import { API_URL } from '../../../helpers/api'
 import socialIcons from '../../../assets/img/icons/social'
-import InsightServices from '../../../services/insightServices'
+import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import {formatDate} from "../../../helpers/date";
 import ShareButtons from "../share"
@@ -27,17 +27,17 @@ const EventsDetail = () => {
 
     const url = () => {
         window.location.href;
-    } 
+    }
 
     const twitterHandle = "covid19";
 
     useEffect(() => {
-        InsightServices.EventsDetailData(eventsId).then((response) => {
+        CmsPageService.EventDetail(eventsId).then((response) => {
             // console.log(response)
             setEventsDetail(response)
             setLoading(false)
         })
-        InsightServices.EventsData().then((response) => {
+        CmsPageService.EventList().then((response) => {
             setEventsData(response.items)
         })
     }, [eventsId])
