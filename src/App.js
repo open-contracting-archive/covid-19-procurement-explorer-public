@@ -156,12 +156,12 @@ function App() {
                     <Route exact path="/events" component={Events} />
                     <Route exact path="/events/:id" component={EventsDetail} />
                     <Route exact path="/resources" component={Resources} />
-                    <Route exact path="/resources/:id" component={ResourcesDetail}/>
+                    <Route exact path="/resources/:id" component={ResourcesDetail} />
                     <Route path="/library" component={Library} />
                     <Route path="/tags" component={Tags} />
-                    <Route path="/tender/:tenderId" component={TenderDetail} />
-                    <Route path="/buyer/:id" component={BuyerProfile} />
-                    <Route path="/supplier/:id" component={SupplierProfile} />
+                    <Route path="/contracts/:contractId" component={TenderDetail} />
+                    <Route path="/buyers/:id" component={BuyerProfile} />
+                    <Route path="/suppliers/:id" component={SupplierProfile} />
                     <Route path="/pages/:slug" component={StaticPage} />
                     <Route component={NotFound} />
                 </Switch>

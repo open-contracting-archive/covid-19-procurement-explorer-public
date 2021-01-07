@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Select from 'react-select'
 import { get, pickBy, identity } from 'lodash'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Loader from '../Loader/Loader'
@@ -9,7 +9,10 @@ import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
 import { formatDate } from '../../helpers/date'
 
-function TenderTable(props) {
+function TenderTable({ params }) {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
     const options = [
         { value: 'option-1', label: 'Option 1' },
         { value: 'option-2', label: 'Option 2' },
@@ -19,16 +22,28 @@ function TenderTable(props) {
     const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(false)
     const { trans } = useTrans()
-    const queryParams = identity(pickBy(props))
+    const queryParams = identity(pickBy(params))
+    const history = useHistory()
 
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
     useEffect(() => {
-        LoadTenderList()
-    }, [])
+        LoadContractList()
+    }, [params])
 
-    const LoadTenderList = () => {
-        VisualizationServices.TenderList({
-            ...queryParams,
-            ...pagination
+
+    // ===========================================================================
+    // Helpers and functions
+    // ===========================================================================
+    const showDetail = (id) => {
+        let path = `/contracts/${id}`
+        history.push(path)
+    }
+
+    const LoadContractList = () => {
+        VisualizationServices.ContractList({
+            ...queryParams
         }).then((response) => {
             if (response) {
                 setTenderList([...tenderList, ...response.results])
@@ -40,14 +55,14 @@ function TenderTable(props) {
 
     const hasCountry = () => {
         return (
-            props.country !== undefined &&
-            props.country !== null &&
-            props.country !== ''
+            params.country !== undefined &&
+            params.country !== null &&
+            params.country !== ''
         )
     }
 
     const tableRowClass = (hasRedFlags) => {
-        return hasRedFlags ? 'table-row has-red-flag' : 'table-row'
+        return hasRedFlags ? 'table-row has-red-flag cursor-pointer' : 'table-row cursor-pointer'
     }
 
     return (
@@ -154,18 +169,22 @@ function TenderTable(props) {
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
                                 </th>
-                                <th>
-                                    <span className="flex items-center">
-                                        {trans('Buyer')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th>
-                                    <span className="flex items-center">
-                                        {trans('Supplier')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
+                                {!get(params, "buyer") && (
+                                    <th>
+                                        <span className="flex items-center">
+                                            {trans('Buyer')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                )}
+                                {!get(params, "supplier") && (
+                                    <th>
+                                        <span className="flex items-center">
+                                            {trans('Supplier')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                )}
                                 <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         {trans('Method')}{' '}
@@ -197,27 +216,31 @@ function TenderTable(props) {
                             {tenderList &&
                                 tenderList.map((tender, index) => {
                                     return (
-                                        <Link
+                                        <tr
                                             key={index}
-                                            to={`/tender/${tender.id}`}
+                                            onClick={() => showDetail(tender.id)}
                                             className={tableRowClass(
                                                 tender.red_flag
                                             )}>
                                             <td className="uppercase">
                                                 {tender.contract_title}
                                             </td>
-                                            <td className="uppercase">
-                                                {get(
-                                                    tender,
-                                                    'buyer.buyer_name'
-                                                )}
-                                            </td>
-                                            <td className="uppercase">
-                                                {get(
-                                                    tender,
-                                                    'supplier.supplier_name'
-                                                )}
-                                            </td>
+                                            {!get(params, "buyer") && (
+                                                <td className="uppercase">
+                                                    {get(
+                                                        tender,
+                                                        'buyer.buyer_name'
+                                                    )}
+                                                </td>
+                                            )}
+                                            {!get(params, "supplier") && (
+                                                <td className="uppercase">
+                                                    {get(
+                                                        tender,
+                                                        'supplier.supplier_name'
+                                                    )}
+                                                </td>
+                                            )}
                                             <td className="capitalize">
                                                 {tender.procurement_procedure}
                                             </td>
@@ -245,7 +268,7 @@ function TenderTable(props) {
                                                     </span>
                                                 )}
                                             </td>
-                                        </Link>
+                                        </tr>
                                     )
                                 })}
                         </tbody>
@@ -253,14 +276,14 @@ function TenderTable(props) {
                     <div className="text-center mt-8">
                         <button
                             className="text-primary-blue"
-                            onClick={LoadTenderList}>
+                            onClick={LoadContractList}>
                             Load more
                         </button>
                     </div>
                 </Fragment>
             ) : (
-                <Loader />
-            )}
+                    <Loader />
+                )}
         </div>
     )
 }

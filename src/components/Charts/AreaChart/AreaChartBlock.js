@@ -19,7 +19,7 @@ const AreaChartBlock = ({ totalAmount, chartData, percentage, currency }) => {
             <p
                 className={`text-sm  font-bold ${
                     percentage < 0 ? 'text-red-30' : 'text-green-30'
-                }`}>
+                    }`}>
                 {percentage}%
             </p>
         </div>

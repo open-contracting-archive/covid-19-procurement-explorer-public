@@ -42,7 +42,7 @@ function SupplierTable({ params }) {
     }
 
     const showDetail = (id) => {
-        let path = `/supplier/${id}`
+        let path = `/suppliers/${id}`
         history.push(path)
     }
 

@@ -32,8 +32,7 @@ function BuyerTable({ params }) {
 
     const LoadBuyersList = () => {
         VisualizationServices.BuyerTableList({
-            ...queryParams,
-            ...pagination
+            ...queryParams
         }).then((response) => {
             if (response) {
                 setBuyersList([...buyersList, ...response.results])
@@ -44,7 +43,7 @@ function BuyerTable({ params }) {
     }
 
     const showDetail = (id) => {
-        let path = `/buyer/${id}`
+        let path = `/buyers/${id}`
         history.push(path)
     }
 

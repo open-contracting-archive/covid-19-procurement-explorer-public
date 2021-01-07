@@ -10,12 +10,13 @@ import useTrans from '../../../hooks/useTrans'
 import CountryServices from '../../../services/CountryServices'
 import AwardedItems from './tabs/AwardedItems'
 import { formatNumber } from '../../../helpers/number'
+import { formatDate } from '../../../helpers/date'
 
 const TenderDetail = () => {
     const [tenderInfo, setTenderInfo] = useState()
     let history = useHistory()
-    const { trans } = useTrans()     
-    let { id: countryId, tenderId } = useParams()
+    const { trans } = useTrans()
+    let { id: countryId, contractId } = useParams()
     window.scrollTo(0, 0)
 
     const previousPage = () => {
@@ -23,23 +24,21 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryServices.CountryProfileTenderDetailData(tenderId).then(
+        CountryServices.ContractDetailData(contractId).then(
             (response) => {
                 setTenderInfo(response)
             }
         )
-    }, [])
+    }, [contractId])
 
-    // console.log(tenderInfo)
-
-    return (   
-        <section className="pt-8">    
+    return (
+        <section className="pt-8">
             <div className="container mx-auto px-4 ">
                 <div className="text-sm mb-4 text-blue-5">
                     <span
                         className="cursor-pointer text-primary-blue"
                         onClick={previousPage}>
-                        {trans('Tender')}{' '}
+                        {trans('Contracts')}{' '}
                     </span>{' '}
                     /
                 </div>
@@ -49,13 +48,13 @@ const TenderDetail = () => {
                 <div className="flex flex-wrap mb-5 text-primary-dark">
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <RedIcon />
-                        <p className="mx-2 text-sm">3 Red flags identified</p>
+                        <p className="mx-2 text-sm">0 Red flags identified</p>
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <span
                             className={`status-indicator ${
                                 tenderInfo && tenderInfo.status
-                            }`}></span>
+                                }`}></span>
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.status}
                         </p>
@@ -63,13 +62,12 @@ const TenderDetail = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag
                             className="rounded-sm mr-2"
-                            code={`${
+                            code={
                                 tenderInfo &&
                                 get(
                                     tenderInfo,
                                     'country_alpha_code'
-                                ).toLowerCase()
-                            }`}
+                                ).toLowerCase()}
                         />
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.country_name}
@@ -82,7 +80,7 @@ const TenderDetail = () => {
                             {trans('Contract signed')}
                         </p>
                         <p className="font-bold text-sm">
-                            {tenderInfo && tenderInfo.contract_date}
+                            {formatDate(tenderInfo && tenderInfo.contract_date, 'MMM D, YYYY')}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
@@ -104,10 +102,11 @@ const TenderDetail = () => {
                             {trans('Tender value')}
                         </p>
                         <p className="font-bold text-xl">
-                            62K{' '}
+                            {/* 62K{' '}
                             <span className="font-normal text-base uppercase">
                                 USD
-                            </span>
+                            </span> */}
+                            -
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -115,10 +114,11 @@ const TenderDetail = () => {
                             {trans('Award value')}
                         </p>
                         <p className="font-bold text-xl">
-                            59K{' '}
+                            {/* 59K{' '}
                             <span className="font-normal text-base uppercase">
                                 USD
-                            </span>
+                            </span> */}
+                            -
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -127,7 +127,7 @@ const TenderDetail = () => {
                         </p>
                         <p className="font-bold text-xl">
                             {tenderInfo &&
-                            formatNumber(tenderInfo.contract_value_usd)}
+                                formatNumber(tenderInfo.contract_value_usd)}
                             <span className="font-normal text-base uppercase">
                                 USD
                             </span>
@@ -152,8 +152,9 @@ const TenderDetail = () => {
                             {trans('Procurement entity address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            CIAD-Centro de Investigación en Alimentación y
-                            Desarrollo, A.C. #0389ZY998
+                            {/* CIAD-Centro de Investigación en Alimentación y
+                            Desarrollo, A.C. #0389ZY998 */}
+                            -
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7 md:row-start-2">
