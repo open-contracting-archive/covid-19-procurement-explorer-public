@@ -46,6 +46,35 @@ const RaceMap = ({
         // Create chart instance
         let chart = am4core.create(mapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
+        chart.exporting.menu = new am4core.ExportMenu()
+        chart.exporting.filePrefix = 'race_map_chart'
+        chart.exporting.menu.items = [
+            {
+                label: 'Download',
+                menu: [
+                    {
+                        label: 'Image',
+                        menu: [
+                            { type: 'png', label: 'PNG' },
+                            { type: 'jpg', label: 'JPG' },
+                            { type: 'pdf', label: 'PDF' }
+                        ]
+                    },
+                    {
+                        label: 'Data',
+                        menu: [
+                            { type: 'json', label: 'JSON' },
+                            { type: 'csv', label: 'CSV' },
+                            { type: 'pdfdata', label: 'PDF' }
+                        ]
+                    },
+                    {
+                        label: 'Print',
+                        type: 'print'
+                    }
+                ]
+            }
+        ]
 
         // Set map definition
         chart.geodata = am4geodata_worldLow
@@ -63,7 +92,7 @@ const RaceMap = ({
         polygonSeries.heatRules.push({
             property: 'fill',
             target: polygonSeries.mapPolygons.template,
-            min: chart.colors.getIndex(1).brighten(1),
+            min: chart.colors.getIndex(1).brighten(-0.1),
             max: chart.colors.getIndex(1).brighten(-0.5)
         })
 
@@ -73,20 +102,6 @@ const RaceMap = ({
         // Set heatmap values for each state
         polygonSeries.data = data
         // console.log(polygonSeries.data)
-
-        // Set up heat legend
-        let heatLegend = chart.createChild(am4maps.HeatLegend)
-        heatLegend.series = polygonSeries
-        heatLegend.align = 'center'
-        heatLegend.valign = 'bottom'
-        heatLegend.width = am4core.percent(60)
-        heatLegend.marginBottom = am4core.percent(8)
-
-        heatLegend.series = polygonSeries
-        heatLegend.orientation = 'horizontal'
-        heatLegend.padding(20, 20, 20, 20)
-        heatLegend.valueAxis.renderer.labels.template.fontSize = 10
-        heatLegend.valueAxis.renderer.minGridDistance = 40
 
         polygonSeries.mapPolygons.template.events.on('over', (event) => {
             handleHover(event.target)
@@ -109,6 +124,27 @@ const RaceMap = ({
             heatLegend.valueAxis.hideTooltip()
         })
 
+        // Configure series tooltip
+        let polygonTemplate = polygonSeries.mapPolygons.template
+        polygonTemplate.tooltipText = '{name}: {value}'
+        polygonTemplate.nonScalingStroke = true
+        polygonTemplate.strokeWidth = 0.5
+        polygonTemplate.url = '{url}'
+        polygonSeries.calculateVisualCenter = true
+        polygonTemplate.tooltipPosition = 'fixed'
+
+        // Set up heat legend
+        let heatLegend = chart.createChild(am4maps.HeatLegend)
+        heatLegend.series = polygonSeries
+        heatLegend.align = 'center'
+        heatLegend.valign = 'bottom'
+        heatLegend.width = am4core.percent(60)
+        heatLegend.marginBottom = am4core.percent(8)
+        heatLegend.orientation = 'horizontal'
+        heatLegend.padding(20, 20, 20, 20)
+        heatLegend.valueAxis.renderer.labels.template.fontSize = 10
+        heatLegend.valueAxis.renderer.minGridDistance = 40
+
         chart.zoomControl = new am4maps.ZoomControl()
         chart.zoomControl.valign = 'top'
 
@@ -117,23 +153,7 @@ const RaceMap = ({
         chart.homeGeoPoint = {
             latitude: (coordinates && coordinates.lat) || 0,
             longitude: (coordinates && coordinates.long) || 0
-            // latitude: 55.85406929584602,
-            // longitude: 28.24904034876191
         }
-
-        // Configure series tooltip
-        let polygonTemplate = polygonSeries.mapPolygons.template
-        polygonTemplate.tooltipText = '{name}: {value}'
-        polygonTemplate.nonScalingStroke = true
-        polygonTemplate.strokeWidth = 0.5
-        // polygonTemplate.url = '/country/mexico'
-        polygonTemplate.url = '{url}'
-
-        // polygonSeries.mapPolygons.template.propertyFields.url = 'url'
-
-        // Create hover state and set alternative fill color
-        let hs = polygonTemplate.states.create('hover')
-        hs.properties.fill = am4core.color('#3c5bdc')
 
         chart.events.on('ready', function () {
             createSlider()

@@ -15,13 +15,9 @@ import CompareChart from '../Charts/CompareChart/CompareChart'
 import useTrans from '../../hooks/useTrans'
 import 'react-simple-hook-modal/dist/styles.css'
 
-import {
-    Modal,
-    useModal,
-    ModalTransition
-} from 'react-simple-hook-modal'
+import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 
-function TotalSpending({ label, params }) {
+function TotalSpending({ label = 'Total Spending', params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -93,27 +89,32 @@ function TotalSpending({ label, params }) {
             onClick={openModal}
             className="bg-white rounded p-4 h-full cursor-pointer">
             <h3 className="uppercase font-bold text-primary-dark">
-                {trans(label ? label : "Total Spending")}
+                {trans(label ? label : 'Total Spending')}
             </h3>
             {loading ? (
                 <Loader sm />
             ) : (
-                    <div className="flex items-end">
-                        {/* Line area chart */}
-                        <AreaChartBlock
-                            chartData={totalSpendingAreaChartData}
-                            totalAmount={totalSpendingAmount}
-                            percentage={totalSpendingPercentage}
-                            currency={currency}
+                <div className="flex items-end">
+                    {/* Line area chart */}
+                    <AreaChartBlock
+                        chartData={totalSpendingAreaChartData}
+                        totalAmount={totalSpendingAmount}
+                        percentage={totalSpendingPercentage}
+                        colorValue={
+                            totalSpendingPercentage < 0 ? '#FE5151' : '#3EEDA4'
+                        }
+                        currency={currency}
+                    />
+                    <div className="flex-1">
+                        <SimpleBarChart
+                            data={totalSpendingBarChartData}
+                            barColorValue={barColorValue}
+                            chartKey="method"
+                            chartValue="value"
                         />
-                        <div className="flex-1">
-                            <SimpleBarChart
-                                data={totalSpendingBarChartData}
-                                barColorValue={barColorValue}
-                            />
-                        </div>
                     </div>
-                )}
+                </div>
+            )}
             <Modal
                 id="any-unique-identifier"
                 isOpen={isModalOpen}
@@ -125,7 +126,7 @@ function TotalSpending({ label, params }) {
                 </button>
                 <div>
                     <h3 className="uppercase font-bold text-primary-dark">
-                        {trans(label ? label : "Total Spending")}
+                        {trans(label ? label : 'Total Spending')}
                     </h3>
 
                     <div className="bg-white rounded mt-4">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Loader from "../../../../components/Loader/Loader"
+import Loader from '../../../../components/Loader/Loader'
 import {
     AverageBidsPerContract,
     ContractStatus,
@@ -17,9 +17,9 @@ import {
     ContractsRedFlags,
     Concentration
 } from '../../../../components/Visualizations'
-import CountryPartnerSlider from "../../../../components/CountryPartnerSlider/CountryPartnerSlider"
+import CountryPartnerSlider from '../../../../components/CountryPartnerSlider/CountryPartnerSlider'
 
-function CountryData({ countryCode,slug }) {
+function CountryData({ countryCode, slug }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -28,7 +28,9 @@ function CountryData({ countryCode,slug }) {
         }
     }, [countryCode])
 
-    return loading ? (<Loader />) : (
+    return loading ? (
+        <Loader />
+    ) : (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
                 <div className="flex flex-wrap -mx-3 -mb-6">
@@ -83,12 +85,6 @@ function CountryData({ countryCode,slug }) {
                     </div>
 
                     <div className="w-full lg:w-1/2 px-2 mb-6">
-                        <Concentration
-                            label="Concentration"
-                            params={{ country: countryCode }} />
-                    </div>
-
-                    <div className="w-full lg:w-1/2 px-2 mb-6">
                         <TopSuppliers
                             label="Top Suppliers"
                             params={{ country: countryCode }}
@@ -100,6 +96,13 @@ function CountryData({ countryCode,slug }) {
                             label="Top Buyers"
                             params={{ country: countryCode }}
                             viewLink={`/country/${slug}/buyers`}
+                        />
+                    </div>
+
+                    <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <Concentration
+                            label="Concentration"
+                            params={{ country: countryCode }}
                         />
                     </div>
 
@@ -125,7 +128,9 @@ function CountryData({ countryCode,slug }) {
                         />
                     </div>
                     <div className="w-full px-2 mb-6">
-                        <CountryPartnerSlider />
+                        <CountryPartnerSlider
+                            params={{ country: countryCode }}
+                        />
                     </div>
                 </div>
             </div>

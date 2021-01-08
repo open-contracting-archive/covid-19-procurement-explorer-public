@@ -67,6 +67,9 @@ function AverageBidsPerContract({ label, params }) {
                         chartData={averageBidsLineChartData}
                         totalAmount={averageBidsAmount}
                         percentage={averageBidsPercentage}
+                        colorValue={
+                            averageBidsPercentage < 0 ? '#FE5151' : '#3EEDA4'
+                        }
                     />
                     <div className="flex-1" />
                 </div>

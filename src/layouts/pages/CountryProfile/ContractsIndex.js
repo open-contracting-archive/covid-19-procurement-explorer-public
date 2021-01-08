@@ -31,7 +31,7 @@ const CountryDetailContracts = () => {
                     <h2 className="font-normal mb-5 text-2xl text-primary-dark capitalize">
                         {slug}
                     </h2>
-                    <div className="flex flex-wrap -mx-4 -mb-4">
+                    <div className="flex flex-wrap -mb-4">
                         <CountryMapElement countryData={countryData} />
                         <CountryInfo country={countryData} />
                     </div>

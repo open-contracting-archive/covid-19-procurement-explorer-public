@@ -49,62 +49,59 @@ function DirectOpen({ label, params, heightFull }) {
         })
 
     return (
-        <div className={`bg-white rounded p-4 simple-tab ${heightFull ? 'h-full' : ''}`}>
+        <div
+            className={`bg-white rounded p-4 simple-tab ${
+                heightFull ? 'h-full' : ''
+            }`}>
             {loading ? (
                 <Loader sm />
             ) : (
-                    <Tabs>
-                        <div className="flex items-center justify-between">
-                            <h3 className="uppercase font-bold  text-primary-dark">
-                                {trans(label ? label : "Direct/Open")}
-                            </h3>
-                            <div className="flex">
-                                <TabList>
-                                    <Tab>{trans('By value')}</Tab>
-                                    <Tab>{trans('By number')}</Tab>
-                                </TabList>
-                            </div>
+                <Tabs>
+                    <div className="flex items-center justify-between">
+                        <h3 className="uppercase font-bold  text-primary-dark">
+                            {trans(label ? label : 'Direct/Open')}
+                        </h3>
+                        <div className="flex">
+                            <TabList>
+                                <Tab>{trans('By value')}</Tab>
+                                <Tab>{trans('By number')}</Tab>
+                            </TabList>
                         </div>
+                    </div>
 
-                        <div className={`${heightFull ? "mt-10" : "mt-2"}`}>
-                            <TabPanel>
-                                <div className="flex items-end">
-                                    <div className=" text-primary-dark">
+                    <div className={`${heightFull ? 'mt-10' : 'mt-2'}`}>
+                        <TabPanel>
+                            <div className="flex items-end">
+                                {/* <div className=" text-primary-dark">
                                         <span>
                                             <strong className="text-xl inline-block mr-3">
                                                 51
                                         </strong>
                                         </span>
-                                    </div>
-                                    <div className="flex-1">
-                                        <PieChart
-                                            data={directOpenByValue}
-                                            colors={colors}
-                                            large={heightFull ? true : false}
-                                        />
-                                    </div>
+                                    </div> */}
+                                <div className="flex-1">
+                                    <PieChart
+                                        data={directOpenByValue}
+                                        colors={colors}
+                                        large={heightFull ? true : false}
+                                    />
                                 </div>
-                            </TabPanel>
-                            <TabPanel>
-                                <div className="flex items-end">
-                                    <div className=" text-primary-dark">
-                                        <span>
-                                            <strong className="text-xl inline-block mr-3">
-                                                51
-                                        </strong>
-                                        </span>
-                                    </div>
-                                    <div className="flex-1">
-                                        <PieChart
-                                            data={directOpenByNumber}
-                                            colors={colors}
-                                        />
-                                    </div>
+                            </div>
+                        </TabPanel>
+                        <TabPanel>
+                            <div className="flex items-end">
+                                <div className="flex-1">
+                                    <PieChart
+                                        data={directOpenByNumber}
+                                        colors={colors}
+                                        large={heightFull ? true : false}
+                                    />
                                 </div>
-                            </TabPanel>
-                        </div>
-                    </Tabs>
-                )}
+                            </div>
+                        </TabPanel>
+                    </div>
+                </Tabs>
+            )}
         </div>
     )
 }

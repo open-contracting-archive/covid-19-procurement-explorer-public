@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import {FullScreen, useFullScreenHandle} from 'react-full-screen'
+import React, { useState, useEffect } from 'react'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
 import GlobalMap from '../GlobalMap/GlobalMap'
-import {ReactComponent as DownloadIcon} from '../../assets/img/icons/ic_download.svg'
-import {ReactComponent as ShareIcon} from '../../assets/img/icons/ic_share.svg'
-import {ReactComponent as FullViewIcon} from '../../assets/img/icons/ic_fullscreen.svg'
-import {CONTINENTS} from '../../helpers/country'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import { CONTINENTS } from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
 
 const WorldMap = () => {
@@ -56,17 +56,17 @@ const WorldMap = () => {
     // ===========================================================================
     // Handler and functions
     // ===========================================================================
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const handle = useFullScreenHandle()
     const options = [
-        {value: 'all', label: 'All Continent'},
-        {value: 'asia', label: 'Asia'},
-        {value: 'europe', label: 'Europe'},
-        {value: 'africa', label: 'Africa'},
-        {value: 'oceania', label: 'Oceania'},
-        {value: 'south_america', label: 'South America'},
-        {value: 'north_america', label: 'North America'},
-        {value: 'middle_east', label: 'Middle East'}
+        { value: 'all', label: 'All Continent' },
+        { value: 'asia', label: 'Asia' },
+        { value: 'europe', label: 'Europe' },
+        { value: 'africa', label: 'Africa' },
+        { value: 'oceania', label: 'Oceania' },
+        { value: 'south_america', label: 'South America' },
+        { value: 'north_america', label: 'North America' },
+        { value: 'middle_east', label: 'Middle East' }
     ]
     const handleContinentChange = (selectedOption, value) => {
         setSelectedContinent(selectedOption)
@@ -138,11 +138,7 @@ const WorldMap = () => {
              text-primary-blue -mx-6 px-6">
                         <div className="flex">
                             <span className="flex items-center">
-                                <DownloadIcon className="mr-2 inline-block"/>{' '}
-                                <span className="cursor-pointer">Download</span>
-                            </span>
-                            <span className="ml-8 flex items-center">
-                                <ShareIcon className="mr-2 inline-block"/>{' '}
+                                <ShareIcon className="mr-2 inline-block" />{' '}
                                 <span className="cursor-pointer">Share</span>
                             </span>
                         </div>
@@ -152,7 +148,7 @@ const WorldMap = () => {
                                     <span className="cursor-pointer">
                                         View full screen
                                     </span>
-                                    <FullViewIcon className="ml-2 inline-block"/>
+                                    <FullViewIcon className="ml-2 inline-block" />
                                 </button>
                             </span>
                         </div>

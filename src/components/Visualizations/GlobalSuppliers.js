@@ -9,7 +9,7 @@ import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullsc
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../services/visualizationServices'
 
-function GlobalSuppliers({label,params}) {
+function GlobalSuppliers({ label, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -65,7 +65,7 @@ function GlobalSuppliers({label,params}) {
         globalSuppliers && getSuppliersData(globalSuppliers, 'by_value')
 
     return (
-        <div className="bg-white rounded p-4 simple-tab">
+        <div className="bg-white border rounded p-4 simple-tab">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                     {label}
@@ -109,13 +109,9 @@ function GlobalSuppliers({label,params}) {
 
             <div
                 className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                             text-primary-blue -mx-6 px-6">
+                                             text-primary-blue -mx-4 px-4">
                 <div className="flex">
                     <span className="flex items-center">
-                        <DownloadIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Download</span>
-                    </span>
-                    <span className="ml-8 flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>

@@ -5,7 +5,6 @@ import VisualizationServices from '../../services/visualizationServices'
 import CombinedChart from '../Charts/CombinedChart/CombinedChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { dateDiff } from '../../helpers/date'
@@ -110,13 +109,9 @@ function ContractsCorrelation({label, params}) {
 
             <div
                 className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                text-primary-blue -mx-6 px-6">
+                                text-primary-blue -mx-4 px-6">
                 <div className="flex">
                     <span className="flex items-center">
-                        <DownloadIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Download</span>
-                    </span>
-                    <span className="ml-8 flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>

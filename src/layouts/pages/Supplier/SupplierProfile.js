@@ -90,13 +90,18 @@ const SupplierProfile = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag
                             className="rounded-sm mr-2"
-                            code={supplierInfo && get(supplierInfo, 'country_code').toLowerCase()}
+                            code={
+                                supplierInfo &&
+                                get(supplierInfo, 'country_code').toLowerCase()
+                            }
                         />
-                        <p className="mr-2 text-sm">{get(supplierInfo, 'country_name')}</p>
+                        <p className="mr-2 text-sm">
+                            {get(supplierInfo, 'country_name')}
+                        </p>
                     </div>
                 </div>
-                <div className="w-full px-2 mb-4">
-                    <GlobalSuppliers />
+                <div className="w-full px-2 mb-10">
+                    <GlobalSuppliers label="Product flow" />
                 </div>
             </div>
             <div
@@ -107,7 +112,10 @@ const SupplierProfile = () => {
                 <div className="container mx-auto px-4 ">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <TotalSpending label="Total income" params={{ supplier: id }} />
+                            <TotalSpending
+                                label="Total income"
+                                params={{ supplier: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <TotalContracts params={{ supplier: id }} />
@@ -116,13 +124,22 @@ const SupplierProfile = () => {
                             <DirectOpen heightFull params={{ supplier: id }} />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <ProductsTimeline label="Product timeline" params={{ supplier: id }} />
+                            <ProductsTimeline
+                                label="Product timeline"
+                                params={{ supplier: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <ProductDistribution label="Product Distribution" params={{ supplier: id }} />
+                            <ProductDistribution
+                                label="Product Distribution"
+                                params={{ supplier: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <TopSuppliers label="Top suppliers" params={{ supplier: id }} />
+                            <TopSuppliers
+                                label="Top suppliers"
+                                params={{ supplier: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
                             <ContractsRedFlags />
@@ -130,7 +147,6 @@ const SupplierProfile = () => {
                     </div>
                     {/* Table */}
                     <TenderTable params={{ supplier: id }} />
-
                 </div>
             </div>
         </section>

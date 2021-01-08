@@ -2,14 +2,17 @@ import React from 'react'
 import AreaChart from './AreaChart'
 import { formatNumber } from '../../../helpers/number'
 
-const AreaChartBlock = ({ totalAmount, chartData, percentage, currency }) => {
+const AreaChartBlock = ({
+    totalAmount,
+    chartData,
+    percentage,
+    currency,
+    colorValue,
+    monopolization
+}) => {
     return (
         <div className=" text-primary-dark pb-4 w-2/5">
-            <AreaChart
-                data={chartData}
-                apiData
-                colorValue={percentage < 0 ? '#FE5151' : '#3EEDA4'}
-            />
+            <AreaChart data={chartData} apiData colorValue={colorValue} />
             <p className="mt-2">
                 <strong className="text-xl inline-block mr-3">
                     {formatNumber(totalAmount)}

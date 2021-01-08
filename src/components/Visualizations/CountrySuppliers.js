@@ -42,7 +42,9 @@ function CountrySuppliers({ label, params }) {
                     from: item.product_name,
                     to: item.country_name,
                     value:
-                        type === 'by_value' ? item.amount_usd : item.tender_count
+                        type === 'by_value'
+                            ? item.amount_usd
+                            : item.tender_count
                 }
             })
         let set2 =
@@ -53,7 +55,9 @@ function CountrySuppliers({ label, params }) {
                     from: item.supplier_name,
                     to: item.product_name,
                     value:
-                        type === 'by_value' ? item.amount_usd : item.tender_count
+                        type === 'by_value'
+                            ? item.amount_usd
+                            : item.tender_count
                 }
             })
         return [...set2, ...set1]
@@ -75,7 +79,9 @@ function CountrySuppliers({ label, params }) {
                         <Tab>{trans('By contract value')}</Tab>
                         <Tab>{trans('By number of contracts')}</Tab>
                     </TabList>
-                    {loading ? (<Loader />) : (
+                    {loading ? (
+                        <Loader />
+                    ) : (
                         <div className="flex">
                             <div className="flex-1">
                                 <TabPanel>
@@ -99,10 +105,6 @@ function CountrySuppliers({ label, params }) {
                                              text-primary-blue -mx-6 px-6">
                 <div className="flex">
                     <span className="flex items-center">
-                        <DownloadIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Download</span>
-                    </span>
-                    <span className="ml-8 flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>

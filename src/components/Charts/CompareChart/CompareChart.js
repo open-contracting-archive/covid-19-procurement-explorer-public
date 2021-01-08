@@ -62,6 +62,35 @@ const CompareChart = () => {
         let chart = am4core.create(compareChart.current, am4charts.XYChart)
         chart.padding(0, 15, 0, 15)
         chart.colors.step = 3
+        chart.exporting.menu = new am4core.ExportMenu()
+        chart.exporting.filePrefix = 'contracts_and_equity_indicators_chart'
+        chart.exporting.menu.items = [
+            {
+                label: 'Download',
+                menu: [
+                    {
+                        label: 'Image',
+                        menu: [
+                            { type: 'png', label: 'PNG' },
+                            { type: 'jpg', label: 'JPG' },
+                            { type: 'pdf', label: 'PDF' }
+                        ]
+                    },
+                    {
+                        label: 'Data',
+                        menu: [
+                            { type: 'json', label: 'JSON' },
+                            { type: 'csv', label: 'CSV' },
+                            { type: 'pdfdata', label: 'PDF' }
+                        ]
+                    },
+                    {
+                        label: 'Print',
+                        type: 'print'
+                    }
+                ]
+            }
+        ]
 
         // the following line makes value axes to be arranged vertically.
         chart.leftAxesContainer.layout = 'vertical'

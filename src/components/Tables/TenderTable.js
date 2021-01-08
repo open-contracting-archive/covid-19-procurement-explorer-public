@@ -9,7 +9,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
 import { formatDate } from '../../helpers/date'
 
-function TenderTable({ params }) {
+function TenderTable({ homepage, params }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -20,7 +20,7 @@ function TenderTable({ params }) {
     ]
     const [tenderList, setTenderList] = useState([])
     const [pagination, setPagination] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     const queryParams = identity(pickBy(params))
     const history = useHistory()
@@ -31,7 +31,6 @@ function TenderTable({ params }) {
     useEffect(() => {
         LoadContractList()
     }, [params])
-
 
     // ===========================================================================
     // Helpers and functions
@@ -49,7 +48,7 @@ function TenderTable({ params }) {
                 setTenderList([...tenderList, ...response.results])
                 setPagination(response.next)
             }
-            setLoading(true)
+            setLoading(false)
         })
     }
 
@@ -62,23 +61,36 @@ function TenderTable({ params }) {
     }
 
     const tableRowClass = (hasRedFlags) => {
-        return hasRedFlags ? 'table-row has-red-flag cursor-pointer' : 'table-row cursor-pointer'
+        return hasRedFlags
+            ? 'table-row has-red-flag cursor-pointer'
+            : 'table-row cursor-pointer'
     }
 
     return (
         <div>
             {loading ? (
+                <Loader />
+            ) : (
                 <Fragment>
-                    <div className="mb-12 flex gap-8 justify-between">
-                        {/* <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Project title
-                            </p>
-                            <input
-                                type="text"
-                                className="px-2 py-1 select-filter text-sm"
-                            />
-                        </div>) : ('')} */}
+                    <div
+                        className={`mb-12 flex gap-8 justify-between ${
+                            homepage ? 'hidden' : ''
+                        }`}>
+                        {!hasCountry ? (
+                            <div className="w-40">
+                                <p className="uppercase text-xs opacity-50 leading-none">
+                                    Country
+                                </p>
+                                <Select
+                                    className="select-filter text-sm"
+                                    classNamePrefix="select-filter"
+                                    options={options}
+                                    defaultValue={options[0]}
+                                />
+                            </div>
+                        ) : (
+                            ''
+                        )}
 
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
@@ -160,130 +172,228 @@ function TenderTable({ params }) {
                             />
                         </div>
                     </div>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th style={{ width: '25%' }}>
-                                    <span className="flex items-center">
-                                        {trans('Contract Title')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                {!get(params, "buyer") && (
-                                    <th>
+                    <div className="custom-scrollbar table-scroll">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th style={{ width: '25%' }}>
                                         <span className="flex items-center">
-                                            {trans('Buyer')}{' '}
+                                            {trans('Contract Title')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
                                     </th>
-                                )}
-                                {!get(params, "supplier") && (
-                                    <th>
+                                    {!get(params, 'buyer') && (
+                                        <th>
+                                            <span className="flex items-center">
+                                                {trans('Buyer')}{' '}
+                                                <SortIcon className="ml-1 cursor-pointer" />
+                                            </span>
+                                        </th>
+                                    )}
+                                    {!get(params, 'supplier') && (
+                                        <th>
+                                            <span className="flex items-center">
+                                                {trans('Supplier')}{' '}
+                                                <SortIcon className="ml-1 cursor-pointer" />
+                                            </span>
+                                        </th>
+                                    )}
+                                    <th style={{ width: '10%' }}>
                                         <span className="flex items-center">
-                                            {trans('Supplier')}{' '}
+                                            {trans('Method')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
                                     </th>
-                                )}
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        {trans('Method')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '20%' }}>
-                                    <span className="flex items-center">
-                                        {trans('Product Category')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        {trans('Date')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        {trans('Value (USD)')}{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th />
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tenderList &&
-                                tenderList.map((tender, index) => {
-                                    return (
-                                        <tr
-                                            key={index}
-                                            onClick={() => showDetail(tender.id)}
-                                            className={tableRowClass(
-                                                tender.red_flag
-                                            )}>
-                                            <td className="uppercase">
-                                                {tender.contract_title}
-                                            </td>
-                                            {!get(params, "buyer") && (
-                                                <td className="uppercase">
-                                                    {get(
-                                                        tender,
-                                                        'buyer.buyer_name'
+                                    <th style={{ width: '20%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Product Category')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                    <th style={{ width: '10%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Date')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                    <th style={{ width: '10%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Value (USD)')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                    <th />
+                                </tr>
+                            </thead>
+
+                            {homepage ? (
+                                <tbody>
+                                    {tenderList &&
+                                        tenderList
+                                            .slice(0, 10)
+                                            .map((tender, index) => {
+                                                return (
+                                                    <tr
+                                                        key={index}
+                                                        onClick={() =>
+                                                            showDetail(
+                                                                tender.id
+                                                            )
+                                                        }
+                                                        className={tableRowClass(
+                                                            tender.red_flag
+                                                        )}>
+                                                        <td className="uppercase">
+                                                            {
+                                                                tender.contract_title
+                                                            }
+                                                        </td>
+                                                        {!get(
+                                                            params,
+                                                            'buyer'
+                                                        ) && (
+                                                            <td className="uppercase">
+                                                                {get(
+                                                                    tender,
+                                                                    'buyer.buyer_name'
+                                                                )}
+                                                            </td>
+                                                        )}
+                                                        {!get(
+                                                            params,
+                                                            'supplier'
+                                                        ) && (
+                                                            <td className="uppercase">
+                                                                {get(
+                                                                    tender,
+                                                                    'supplier.supplier_name'
+                                                                )}
+                                                            </td>
+                                                        )}
+                                                        <td className="capitalize">
+                                                            {
+                                                                tender.procurement_procedure
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            {get(
+                                                                tender,
+                                                                'product.product_name'
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {formatDate(
+                                                                tender.contract_date
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {tender.contract_value_usd &&
+                                                                tender.contract_value_usd.toLocaleString(
+                                                                    'en'
+                                                                )}
+                                                        </td>
+                                                        <td>
+                                                            {tender.red_flag && (
+                                                                <span className="mr-4">
+                                                                    <FlagIcon />
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })}
+                                </tbody>
+                            ) : (
+                                <tbody>
+                                    {tenderList &&
+                                        tenderList.map((tender, index) => {
+                                            return (
+                                                <tr
+                                                    key={index}
+                                                    onClick={() =>
+                                                        showDetail(tender.id)
+                                                    }
+                                                    className={tableRowClass(
+                                                        tender.red_flag
+                                                    )}>
+                                                    <td className="uppercase">
+                                                        {tender.contract_title}
+                                                    </td>
+                                                    {!get(params, 'buyer') && (
+                                                        <td className="uppercase">
+                                                            {get(
+                                                                tender,
+                                                                'buyer.buyer_name'
+                                                            )}
+                                                        </td>
                                                     )}
-                                                </td>
-                                            )}
-                                            {!get(params, "supplier") && (
-                                                <td className="uppercase">
-                                                    {get(
-                                                        tender,
-                                                        'supplier.supplier_name'
+                                                    {!get(
+                                                        params,
+                                                        'supplier'
+                                                    ) && (
+                                                        <td className="uppercase">
+                                                            {get(
+                                                                tender,
+                                                                'supplier.supplier_name'
+                                                            )}
+                                                        </td>
                                                     )}
-                                                </td>
-                                            )}
-                                            <td className="capitalize">
-                                                {tender.procurement_procedure}
-                                            </td>
-                                            <td>
-                                                {get(
-                                                    tender,
-                                                    'product.product_name'
-                                                )}
-                                            </td>
-                                            <td>
-                                                {formatDate(
-                                                    tender.contract_date
-                                                )}
-                                            </td>
-                                            <td>
-                                                {tender.contract_value_usd &&
-                                                    tender.contract_value_usd.toLocaleString(
-                                                        'en'
-                                                    )}
-                                            </td>
-                                            <td>
-                                                {tender.red_flag && (
-                                                    <span className="mr-4">
-                                                        <FlagIcon />
-                                                    </span>
-                                                )}
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                        </tbody>
-                    </table>
-                    <div className="text-center mt-8">
-                        <button
-                            className="text-primary-blue"
-                            onClick={LoadContractList}>
-                            Load more
-                        </button>
+                                                    <td className="capitalize">
+                                                        {
+                                                            tender.procurement_procedure
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {get(
+                                                            tender,
+                                                            'product.product_name'
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {formatDate(
+                                                            tender.contract_date
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {tender.contract_value_usd &&
+                                                            tender.contract_value_usd.toLocaleString(
+                                                                'en'
+                                                            )}
+                                                    </td>
+                                                    <td>
+                                                        {tender.red_flag && (
+                                                            <span className="mr-4">
+                                                                <FlagIcon />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
+                                </tbody>
+                            )}
+                        </table>
                     </div>
+
+                    {homepage ? (
+                        <div className="text-center my-8">
+                            <Link
+                                to="/global-overview/contracts"
+                                className="text-primary-blue">
+                                View all
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className="text-center mt-8">
+                            <button
+                                className="text-primary-blue"
+                                onClick={LoadContractList}>
+                                Load more
+                            </button>
+                        </div>
+                    )}
                 </Fragment>
-            ) : (
-                    <Loader />
-                )}
+            )}
         </div>
     )
 }

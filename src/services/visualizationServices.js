@@ -188,6 +188,18 @@ class VisualizationServices {
         }
     }
 
+    static async ProductTimelineRace(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.product-timeline-race'),
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     static async BuyerTableList(params) {
         try {
             const res = await Api.get(getURI('buyers'), params)
@@ -196,6 +208,7 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
     static async SupplierTableList(params) {
         try {
             const res = await Api.get(getURI('suppliers'), params)
@@ -204,6 +217,7 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
     static async BuyerDetail(id) {
         try {
             const res = await Api.get(`${getURI('buyer-detail')}/${id}`)
@@ -212,9 +226,22 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
     static async SupplierDetail(id) {
         try {
             const res = await Api.get(`${getURI('supplier-detail')}/${id}`)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    static async CountryPartners(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.country-partners'),
+                params
+            )
             return res.body
         } catch (error) {
             console.log(error)

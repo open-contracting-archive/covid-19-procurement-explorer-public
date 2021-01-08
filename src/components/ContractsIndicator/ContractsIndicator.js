@@ -19,118 +19,168 @@ function ContractIndicators() {
                     Contracts and equity indicators
                 </h3>
 
-                <div className="flex simple-tab">
-                    <Tabs>
-                        <div className="flex mb-5">
-                            <TabList>
-                                <Tab>{trans('By contract value')}</Tab>
-                                <Tab>{trans('By number of contracts')}</Tab>
-                            </TabList>
-                        </div>
-
-                        <ul className="flex items-center mb-8">
-                            <li className="active text-sm bg-blue-50 mr-2 text-white rounded-full py-2 px-4">
-                                Contracts with red flags
+                <div className="simple-tab">
+                    <div className="flex justify-end world-map-chart mb-8">
+                        <ul className="contract-switch flex">
+                            <li className="mr-4 cursor-pointer active">
+                                {trans('By contract value')}
                             </li>
-                            <li className="active text-sm bg-blue-0 mr-2 hover:bg-primary-5 rounded-full py-2 px-4">
-                                Spending per equity groups
+                            <li className="mr-4 cursor-pointer">
+                                {trans('By number of contracts')}
                             </li>
                         </ul>
+                    </div>
 
-                        <div className="flex">
-                            <div>
-                                <div className="w-80 mr-12">
-                                    <ul>
-                                        <li
-                                            className="active py-2 flex items-center justify-between
+                    <div className="flex">
+                        <div>
+                            <div className="w-80 mr-12">
+                                <ul>
+                                    <li
+                                        className="active py-2 flex items-center justify-between
                                                         border-b border-blue-0 text-blue-50">
-                                            <div className="flex items-center">
-                                                <div className="contract-line">
-                                                    <span className="line red"></span>
-                                                </div>
-                                                <div className="contract-text">
-                                                    <span>
-                                                        Direct Contracts
-                                                    </span>
-                                                </div>
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line red"></span>
                                             </div>
-                                            <Checkbox />
-                                        </li>
-                                        <li className="py-2 border-b border-blue-0 text-blue-50 flex items-center justify-between">
-                                            <div className="flex items-center">
-                                                <div className="contract-line">
-                                                    <span className="line purple"></span>
-                                                </div>
-                                                <div className="contract-text opacity-50">
-                                                    <span>
-                                                        Contract value is higher
-                                                        or lower than the
-                                                        average for this item
-                                                        category
-                                                    </span>
-                                                </div>
+                                            <div className="contract-text">
+                                                <span>Poverty</span>
                                             </div>
-                                            <Checkbox />
-                                        </li>
-                                        <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
-                                            <div className="flex items-center">
-                                                <div className="contract-line">
-                                                    <span className="line mint"></span>
-                                                </div>
-                                                <div className="contract-text opacity-50">
-                                                    <span>
-                                                        Contract value is higher
-                                                        tender value
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line purple"></span>
                                             </div>
-                                            <Checkbox />
-                                        </li>
-                                        <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
-                                            <div className="flex items-center">
-                                                <div className="contract-line">
-                                                    <span className="line green"></span>
-                                                </div>
-                                                <div className="contract-text opacity-50">
-                                                    <span>
-                                                        Contract is awarded to
-                                                        supplier that has won a
-                                                        disproportionate number
-                                                        of contracts of the same
-                                                        type
-                                                    </span>
-                                                </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Unemployment</span>
                                             </div>
-                                            <Checkbox />
-                                        </li>
-                                        <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
-                                            <div className="flex items-center">
-                                                <div className="contract-line">
-                                                    <span className="line blue"></span>
-                                                </div>
-                                                <div className="contract-text opacity-50">
-                                                    <span>
-                                                        Contract is awarded to
-                                                        supplier that has
-                                                        similar information
-                                                    </span>
-                                                </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line mint"></span>
                                             </div>
-                                            <Checkbox />
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="flex-1">
-                                <TabPanel>
-                                    <CompareChart />
-                                </TabPanel>
-                                <TabPanel>
-                                    <CompareChart />
-                                </TabPanel>
+                                            <div className="contract-text opacity-50">
+                                                <span>
+                                                    Prisoners/ ex-prisoners
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line green"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Homelessness</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Disability</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>
+                                                    Gender, Sexual orientaion,
+                                                    sex
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Ethnicity</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Religion</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Mental Health</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Age</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>General</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                    <li className="py-2 border-b border-blue-0 text-blue-50 opacity-50 flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <div className="contract-line">
+                                                <span className="line blue"></span>
+                                            </div>
+                                            <div className="contract-text opacity-50">
+                                                <span>Migration</span>
+                                            </div>
+                                        </div>
+                                        <Checkbox />
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </Tabs>
+                        <div className="flex-1">
+                            <CompareChart />
+                        </div>
+                    </div>
                 </div>
             </FullScreen>
             <div
@@ -138,10 +188,6 @@ function ContractIndicators() {
                                              text-primary-blue -mx-6 px-6">
                 <div className="flex">
                     <span className="flex items-center">
-                        <DownloadIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Download</span>
-                    </span>
-                    <span className="ml-8 flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>
