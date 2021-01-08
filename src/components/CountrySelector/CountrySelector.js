@@ -1,5 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
     setCurrentLocale,
     setTranslations
@@ -13,30 +15,36 @@ const countries = [
 ]
 
 const CountrySelector = () => {
-    
-    const currentLocale = useSelector((state) => state.general.currentLocale)
+    const countries = useSelector((state) => state.general.countries)
+    let { countrySlug } = useParams()
+    const history = useHistory()
+    // const currentLocale = useSelector((state) => state.general.currentLocale)
+    // const dispatch = useDispatch()
 
-    const dispatch = useDispatch()
+    const onChange = (event) => {
+        let countrySlug = event.target.value
+        let path = countrySlug === 'global' ? `/global-overview/data` : `/country/${countrySlug}/data`
+        history.push(path)
 
-    const onChange = (e) => {
-        dispatch(setCurrentLocale(e.target.value))
-        CountryServices.getTranslations(e.target.value).then(
-            (response) => {
-                dispatch(setTranslations(response))
-            }
-        )
+        // dispatch(setCurrentLocale(countrySlug))
+        // CountryServices.getTranslations(countrySlug).then(
+        //     (response) => {
+        //         dispatch(setTranslations(response))
+        //     }
+        // )
     }
     return (
         <div className="countrySelector inline-flex items-center relative">
             <select
                 className="cursor-pointer outline-none appearance-none pr-6 font-normal mb-5 text-2xl text-primary-dark capitalize bg-transparent"
                 onChange={onChange}>
-                {countries.map((countries, index) => (
+                {countries.map((country, index) => (
                     <option
                         key={index}
-                        value={countries.name}
-                        defaultValue={currentLocale === countries.name}>
-                        {countries.name}
+                        value={country.slug}
+                        selected={countrySlug === country.slug}
+                        defaultValue={countrySlug === country.slug}>
+                        {country.name}
                     </option>
                 ))}
             </select>

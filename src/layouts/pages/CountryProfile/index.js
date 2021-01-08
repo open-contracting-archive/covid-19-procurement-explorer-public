@@ -1,119 +1,79 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import useTrans from '../../../hooks/useTrans'
-import CountryData from './tabs/CountryData'
-import CountryInfo from './sections/CountryInfo'
-import CountryMapElement from './sections/CountryMapElement'
-import { first } from 'lodash'
-import CountrySelector from '../../../components/CountrySelector/CountrySelector'
 import { setCountryCurrency } from '../../../store/reducers/general/action'
+import CountrySelector from "../../../components/CountrySelector/CountrySelector"
+import CountryMapElement from "./sections/CountryMapElement"
+import CountryInfo from "./sections/CountryInfo"
+import CountryData from "./tabs/CountryData"
+import CountryInsights from "./tabs/CountryInsights"
+import CountryContracts from "./tabs/CountryContracts"
+import TabNavigator from "./sections/TabNavigator"
+import CountryEquity from "./tabs/CountryEquity"
+import CountryBuyers from "./tabs/CountryBuyers"
+import CountrySuppliers from "./tabs/CountrySuppliers"
+import CountryProducts from "./tabs/CountryProducts"
+import { DATA, INSIGHTS, CONTRACTS, EQUITY, BUYERS, SUPPLIERS, PRODUCTS, METHODOLOGY } from "../../../constants/Tab"
 
-const CountryDetail = () => {
-    // ===========================================================================
-    // State and variables
-    // ===========================================================================
+const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
     const [countryData, setCountryData] = useState({})
     const [countryCode, setCountryCode] = useState()
     const { trans } = useTrans()
-    let { slug } = useParams()
+    let { countrySlug } = useParams()
+    let { tabSlug } = useParams()
     const dispatch = useDispatch()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        let country = Object.keys(countries)
-            .map((key) => countries[key])
-            .find((country) => country.slug === slug)
+        let country = countries.find((country) => country.slug === countrySlug)
 
         if (country) {
             setCountryData(country)
             setCountryCode(country.country_code_alpha_2)
             dispatch(setCountryCurrency(country.currency))
         }
-    }, [countries, slug])
+    }, [countries, countrySlug])
 
-    // useEffect(() => {
-    //     // Fetch country specific data
-    //     CountryServices.CountryProfileData(slug)
-    //         .then((response) => {
-    //             setCountryData(response)
-    //             setCountryCode(response.country_code_alpha_2)
-    //         })
-    // }, [slug])
+    const renderTab = () => {
+        switch (tabSlug) {
+            case DATA:
+                return (<CountryData countryCode={countryCode} slug={countrySlug} />)
+            case INSIGHTS:
+                return (<CountryInsights countryData={countryData} />)
+            case CONTRACTS:
+                return (<CountryContracts country={countryCode} />)
+            case EQUITY:
+                return (<CountryEquity profileData={countryData} />)
+            case BUYERS:
+                return (<CountryBuyers country={countryCode} />)
+            case SUPPLIERS:
+                return (<CountrySuppliers country={countryCode} />)
+            case PRODUCTS:
+                return (<CountryProducts country={countryCode} />)
+            case METHODOLOGY: //to create component
+                return (<div>Methodology page</div>)
+            default:
+                return (<CountryData countryCode={countryCode} slug={countrySlug} />)
+        }
+    }
 
     return (
         <section className="pt-20 -mt-8 bg-blue-0">
             <section className="px-4">
                 <div className="container mx-auto">
-                    {/* <h2 className="font-normal mb-5 text-2xl text-primary-dark capitalize"> */}
-                    {/* {slug} */}
-                    <CountrySelector countryCode={countryCode} slug={slug} />
-                    {/* </h2> */}
+                    <CountrySelector countryCode={countryCode} slug={countrySlug} />
                     <div className="flex flex-wrap -mb-4">
                         <CountryMapElement countryCode={countryCode} />
                         <CountryInfo country={countryData} />
                     </div>
                 </div>
             </section>
-            <div className="container mx-auto mt-12">
-                <div className="secondary-nav">
-                    <ul>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/data`}>
-                                {trans('Data')}
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/insights`}>
-                                {trans('Insights')}
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/contracts`}>
-                                {trans('Contracts')}
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/equity`}>
-                                {trans('Equity')}
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/buyers`}>
-                                {trans('Buyers')}
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/suppliers`}>
-                                {trans('Suppliers')}
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                activeClassName="active"
-                                to={`/country/${slug}/products`}>
-                                {trans('Products')}
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
+            <TabNavigator endpoint={"country"} countrySlug={countrySlug} />
 
             <div
                 style={{
@@ -121,11 +81,10 @@ const CountryDetail = () => {
                 }}
                 className="py-16 bg-primary-gray px-4">
                 <div className="container mx-auto">
-                    <CountryData countryCode={countryCode} slug={slug} />
+                    {renderTab()}
                 </div>
             </div>
         </section>
     )
 }
-
-export default CountryDetail
+export default CountryProfile

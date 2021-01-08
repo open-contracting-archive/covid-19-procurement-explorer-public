@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
-import { get } from 'lodash'
-import * as dayjs from 'dayjs'
-import { API_URL } from '../../../helpers/api'
-import socialIcons from '../../../assets/img/icons/social'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import {formatDate} from "../../../helpers/date";
+import { formatDate } from "../../../helpers/date"
 import ShareButtons from "../share"
 
 const EventsDetail = () => {
@@ -22,18 +18,17 @@ const EventsDetail = () => {
     }
 
     const handleClick = () => {
-        history.push("/tags");
+        history.push("/tags")
     }
 
     const url = () => {
-        window.location.href;
+        window.location.href
     }
 
-    const twitterHandle = "covid19";
+    const twitterHandle = "covid19"
 
     useEffect(() => {
         CmsPageService.EventDetail(eventsId).then((response) => {
-            // console.log(response)
             setEventsDetail(response)
             setLoading(false)
         })
@@ -43,41 +38,25 @@ const EventsDetail = () => {
     }, [eventsId])
 
     return (
-        <>
-            {loading ? (
-                <Loader />
-            ) : (
+        <Fragment>
+            {loading ? (<Loader />) : (
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
                         <div className="text-sm mb-4 text-blue-5">
                             <Link to="/library"
-                                className="cursor-pointer text-primary-blue">
+                                  className="cursor-pointer text-primary-blue">
                                 Library
                             </Link>{' '}
                             /
                             <Link to="/events"
-                                className="cursor-pointer text-primary-blue"
-                                onClick={previousPage}>
+                                  className="cursor-pointer text-primary-blue"
+                                  onClick={previousPage}>
                                 Events
                             </Link>{' '}
                         </div>
-                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
+                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {eventsDetail.title}
                         </h2>
-                        {/* {get(
-                            eventsDetail,
-                            'event_image.meta.download_url'
-                        ) &&
-                            <div className="img-wrapper mb-6 md:mb-10">
-                                <img
-                                    src={`${API_URL}${get(
-                                        eventsDetail,
-                                        'event_image.meta.download_url'
-                                    )}`}
-                                    alt={get(eventsDetail, 'event_image.title')}
-                                />
-                            </div>
-                        } */}
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 events-detail__metadata">
                                 <div className="time mb-8">
@@ -91,12 +70,12 @@ const EventsDetail = () => {
                                         {eventsDetail.time_from}
                                     </p>
                                     {eventsDetail.time_to &&
-                                        <>
-                                            /
-                                            <p className="to ml-1 inline-block">
-                                                {eventsDetail.time_to}
-                                            </p>
-                                        </>
+                                    <Fragment>
+                                        /
+                                        <p className="to ml-1 inline-block">
+                                            {eventsDetail.time_to}
+                                        </p>
+                                    </Fragment>
                                     }
                                 </div>
                                 <div className="organization mb-8">
@@ -116,7 +95,7 @@ const EventsDetail = () => {
                                     </p>
                                 </div>
                             </div>
-                        <div>
+                            <div>
                                 <div
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
@@ -130,7 +109,7 @@ const EventsDetail = () => {
                                             Share on
                                         </p>
                                         <div className="flex">
-                                            <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                            <ShareButtons url={url} twitterHandle={twitterHandle} />
                                         </div>
                                     </div>
                                 </div>
@@ -140,80 +119,79 @@ const EventsDetail = () => {
                                     Share on
                                 </p>
                                 <div className="flex">
-                                    <ShareButtons  url={url} twitterHandle={twitterHandle}/>
+                                    <ShareButtons url={url} twitterHandle={twitterHandle} />
                                 </div>
                             </div>
                         </div>
                         {eventsData.length !== 1 ?
-                        <>
-                            <hr className="mb-10 text-primary-gray" />
-                            <div className="mb-20">
-                                <h2 className="text-xl mb-6">Other Events</h2>
-                                <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
-                                    {eventsData &&
+                            <>
+                                <hr className="mb-10 text-primary-gray" />
+                                <div className="mb-20">
+                                    <h2 className="text-xl mb-6">Other Events</h2>
+                                    <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
+                                        {eventsData &&
                                         eventsData
                                             .filter(
-                                                (events) => events.id != eventsId
+                                                (events) => events.id !== eventsId
                                             )
                                             .slice(0, 3)
-                                            .map((events) => {
+                                            .map((events, index) => {
                                                 return (
-                                                    <>
+                                                    <Fragment key={index}>
                                                         <Link
                                                             className="events-thumbnail bg-blue-0 "
                                                             to={`/events/${events.id}`}
                                                             key={events.id}>
-                                                                    <div className="card__item h-full px-8 py-8">
-                                                                            <div className="card__day text-4xl leading-none">
-                                                                                {formatDate(events.event_date, 'DD')}
-                                                                            </div>
-                                                                            <div className="card__month text-base uppercase">
-                                                                                {formatDate(events.event_date, 'MMMM')}
-                                                                            </div>
-                                                                            <div className="card__caption">
-                                                                                <h3 className="card__title mt-8 mb-4 text-lg">
-                                                                                    {events.title}
-                                                                                </h3>
-                                                                                <div className="card__time opacity-50 text-base mb-4 uppercase flex">
-                                                                                    <p className="from mr-1">
-                                                                                        {events.time_from}
-                                                                                    </p>
+                                                            <div className="card__item h-full px-8 py-8">
+                                                                <div className="card__day text-4xl leading-none">
+                                                                    {formatDate(events.event_date, 'DD')}
+                                                                </div>
+                                                                <div className="card__month text-base uppercase">
+                                                                    {formatDate(events.event_date, 'MMMM')}
+                                                                </div>
+                                                                <div className="card__caption">
+                                                                    <h3 className="card__title mt-8 mb-4 text-lg">
+                                                                        {events.title}
+                                                                    </h3>
+                                                                    <div className="card__time opacity-50 text-base mb-4 uppercase flex">
+                                                                        <p className="from mr-1">
+                                                                            {events.time_from}
+                                                                        </p>
 
-                                                                                    {events.time_to &&
-                                                                                        <>
-                                                                                            -
-                                                                                            <p className="to ml-1">
-                                                                                                {events.time_to}
-                                                                                            </p>
-                                                                                        </>
-                                                                                    }
-                                                                                </div>
+                                                                        {events.time_to &&
+                                                                        <Fragment>
+                                                                            -
+                                                                            <p className="to ml-1">
+                                                                                {events.time_to}
+                                                                            </p>
+                                                                        </Fragment>
+                                                                        }
+                                                                    </div>
 
-                                                                                <p className="card__venue text-base">
-                                                                                    {events.location}
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                </Link>
-                                                    </>
+                                                                    <p className="card__venue text-base">
+                                                                        {events.location}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </Link>
+                                                    </Fragment>
                                                 )
                                             })}
+                                    </div>
+                                    <div className="flex justify-center items-center mt-12">
+                                        <hr className="text-primary-gray flex-1" />
+                                        <Link to="/events" className="text-blue-20 px-4">
+                                            View all events --&gt;{' '}
+                                        </Link>
+                                        <hr className="text-primary-gray flex-1" />
+                                    </div>
                                 </div>
-                                <div className="flex justify-center items-center mt-12">
-                                    <hr className="text-primary-gray flex-1"/>
-                                    <Link to="/events" className="text-blue-20 px-4">
-                                        View all events --&gt;{' '}
-                                    </Link>
-                                    <hr className="text-primary-gray flex-1"/>
-                                </div>
-                            </div>
-                        </>: ""
+                            </> : ""
                         }
-
                     </div>
                 </section>
             )}
-        </>
+        </Fragment>
     )
 }
 

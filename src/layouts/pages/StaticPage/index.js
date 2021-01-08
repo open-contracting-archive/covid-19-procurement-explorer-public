@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react"
 import { useParams, Redirect } from 'react-router-dom'
-import CmsPageService from "../../../services/CmsPageService";
-import Loader from "../../../components/Loader/Loader";
+import CmsPageService from "../../../services/CmsPageService"
+import Loader from "../../../components/Loader/Loader"
 
 const StaticPage = () => {
     let { slug } = useParams()
@@ -10,8 +10,7 @@ const StaticPage = () => {
     window.scrollTo(0, 0)
 
     useEffect(() => {
-        let queryParams = { slug }
-        CmsPageService.StaticPageDetail(queryParams)
+        CmsPageService.StaticPageDetailBySlug(slug)
             .then((response) => {
                 setPageDetail(response)
                 setLoading(false)
