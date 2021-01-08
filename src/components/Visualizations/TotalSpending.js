@@ -24,7 +24,14 @@ function TotalSpending({ label = 'Total Spending', params }) {
     const [totalSpending, setTotalSpending] = useState()
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
     const { isModalOpen, openModal, closeModal } = useModal()
+
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
 
     useEffect(() => {
         VisualizationServices.TotalSpending(params).then((response) => {

@@ -25,16 +25,18 @@ const apiRoutes = {
     'visualization.country-map': 'api/v1/visualization/country-map/',
     'visualization.world-map-race': 'api/v1/visualization/world-map-race/',
     'visualization.country-partners': 'api/v1/visualization/country-partners/',
+    'visualization.buyer-summary': 'api/v1/visualization/buyer-summary/',
+    'visualization.supplier-summary': 'api/v1/visualization/supplier-summary/',
 
     // Detail api
     'buyer-detail': 'api/v1/buyers',
     'supplier-detail': 'api/v1/suppliers',
 
     // table api
-    'contracts': 'api/v1/contracts/',
-    'buyers': 'api/v1/buyers/',
-    'suppliers': 'api/v1/suppliers/',
-    'products': 'api/v1/product/',
+    contracts: 'api/v1/contracts/',
+    buyers: 'api/v1/buyers/',
+    suppliers: 'api/v1/suppliers/',
+    products: 'api/v1/product/',
 
     // country api
     countries: 'api/v1/country/',

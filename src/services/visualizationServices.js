@@ -247,6 +247,30 @@ class VisualizationServices {
             console.log(error)
         }
     }
+
+    static async BuyerSummary(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.buyer-summary'),
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    static async SupplierSummary(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.supplier-summary'),
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationServices
