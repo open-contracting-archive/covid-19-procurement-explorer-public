@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
-import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
-import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
-import { Tabs, Tab, TabPanel, TabList } from 'react-tabs'
-import PieChart from '../../../components/Charts/PieChart/PieChart'
 import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import {
