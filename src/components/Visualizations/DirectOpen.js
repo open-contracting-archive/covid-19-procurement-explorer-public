@@ -8,7 +8,7 @@ import VisualizationServices from '../../services/visualizationServices'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function DirectOpen({label,params}) {
+function DirectOpen({ label, params, heightFull }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -49,61 +49,62 @@ function DirectOpen({label,params}) {
         })
 
     return (
-        <div className="bg-white rounded p-4 simple-tab">
+        <div className={`bg-white rounded p-4 simple-tab ${heightFull ? 'h-full' : ''}`}>
             {loading ? (
                 <Loader sm />
             ) : (
-                <Tabs>
-                    <div className="flex items-center justify-between">
-                        <h3 className="uppercase font-bold  text-primary-dark">
-                            {label}
-                        </h3>
-                        <div className="flex">
-                            <TabList>
-                                <Tab>{trans('By value')}</Tab>
-                                <Tab>{trans('By number')}</Tab>
-                            </TabList>
+                    <Tabs>
+                        <div className="flex items-center justify-between">
+                            <h3 className="uppercase font-bold  text-primary-dark">
+                                {trans(label ? label : "Direct/Open")}
+                            </h3>
+                            <div className="flex">
+                                <TabList>
+                                    <Tab>{trans('By value')}</Tab>
+                                    <Tab>{trans('By number')}</Tab>
+                                </TabList>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="mt-2">
-                        <TabPanel>
-                            <div className="flex items-end">
-                                <div className=" text-primary-dark">
-                                    <span>
-                                        <strong className="text-xl inline-block mr-3">
-                                            51
+                        <div className={`${heightFull ? "mt-10" : "mt-2"}`}>
+                            <TabPanel>
+                                <div className="flex items-end">
+                                    <div className=" text-primary-dark">
+                                        <span>
+                                            <strong className="text-xl inline-block mr-3">
+                                                51
                                         </strong>
-                                    </span>
+                                        </span>
+                                    </div>
+                                    <div className="flex-1">
+                                        <PieChart
+                                            data={directOpenByValue}
+                                            colors={colors}
+                                            large={heightFull ? true : false}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex-1">
-                                    <PieChart
-                                        data={directOpenByValue}
-                                        colors={colors}
-                                    />
-                                </div>
-                            </div>
-                        </TabPanel>
-                        <TabPanel>
-                            <div className="flex items-end">
-                                <div className=" text-primary-dark">
-                                    <span>
-                                        <strong className="text-xl inline-block mr-3">
-                                            51
+                            </TabPanel>
+                            <TabPanel>
+                                <div className="flex items-end">
+                                    <div className=" text-primary-dark">
+                                        <span>
+                                            <strong className="text-xl inline-block mr-3">
+                                                51
                                         </strong>
-                                    </span>
+                                        </span>
+                                    </div>
+                                    <div className="flex-1">
+                                        <PieChart
+                                            data={directOpenByNumber}
+                                            colors={colors}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex-1">
-                                    <PieChart
-                                        data={directOpenByNumber}
-                                        colors={colors}
-                                    />
-                                </div>
-                            </div>
-                        </TabPanel>
-                    </div>
-                </Tabs>
-            )}
+                            </TabPanel>
+                        </div>
+                    </Tabs>
+                )}
         </div>
     )
 }

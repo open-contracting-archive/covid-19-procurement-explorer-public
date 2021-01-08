@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { get } from 'lodash'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
@@ -17,8 +18,14 @@ import {
     TotalContracts,
     TotalSpending
 } from '../../../components/Visualizations'
+import VisualizationServices from '../../../services/visualizationServices'
+import { TenderTable } from '../../../components/Tables'
 
 const BuyerProfile = () => {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
+    const [buyerInfo, setBuyerInfo] = useState()
     const { trans } = useTrans()
     let history = useHistory()
 
@@ -34,27 +41,27 @@ const BuyerProfile = () => {
         { value: 'option-3', label: 'Option 3' }
     ]
 
-    let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    const tempTableData = tempArray.map((index) => {
-        return (
-            <tr className="table-row" key={index}>
-                <td className="uppercase">SERVICIOS DE LABORATORIO CLÍNICO</td>
-                <td>Mexico</td>
-                <td>21</td>
-                <td>3</td>
-                <td>5</td>
-                <td>2,352,045</td>
-                <td className="uppercase">1.2</td>
-            </tr>
-        )
-    })
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
+    useEffect(() => {
+        VisualizationServices.BuyerDetail(id).then((response) => {
+            setBuyerInfo(response)
+        })
+    }, [id])
+
+
+    // ===========================================================================
+    // Handlers and functions
+    // ===========================================================================
+    window.scrollTo(0, 0)
 
     return (
         <section className="pt-8">
             <div className="container mx-auto px-4 ">
                 <div className="text-sm mb-4 text-blue-5">
                     <span className="cursor-pointer text-primary-blue">
-                        Mexico
+                        {get(buyerInfo, 'country_name')}
                     </span>{' '}
                     /{' '}
                     <span
@@ -64,23 +71,15 @@ const BuyerProfile = () => {
                     </span>
                 </div>
                 <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">
-                    CONALITEG-DIRECCIÓN DE RECURSOS MATERIALES Y SERVICIOS
-                    GENERALES #011L6J001
+                    {get(buyerInfo, 'buyer_name')}
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag
                             className="rounded-sm mr-2"
-                            // code={`${
-                            //     tenderInfo &&
-                            //     get(
-                            //         tenderInfo,
-                            //         'country_alpha_code'
-                            //     ).toLowerCase()
-                            // }`}
-                            code="mx"
+                            code={buyerInfo && get(buyerInfo, 'country_code').toLowerCase()}
                         />
-                        <p className="mr-2 text-sm">Mexico</p>
+                        <p className="mr-2 text-sm">{get(buyerInfo, 'country_name')}</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +91,7 @@ const BuyerProfile = () => {
                 <div className="container mx-auto px-4 ">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <TotalSpending label="Total Spending" buyer={id} />
+                            <TotalSpending label="Total Spending" params={{ buyer: id }} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <TotalContracts
@@ -156,104 +155,7 @@ const BuyerProfile = () => {
                         </div>
                     </div>
                     {/* Table */}
-                    <div className="mb-12 flex gap-8">
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Buyers
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Products
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Country
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Value range
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                    </div>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th style={{ width: '20%' }}>
-                                    <span className="flex items-center">
-                                        Buyer{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        Country{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        # of contracts{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        # of suppliers{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        product categories
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        value (usd)
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        % red flags
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>{tempTableData}</tbody>
-                    </table>
-                    <div className="text-center mt-8">
-                        <button className="text-primary-blue">Load more</button>
-                    </div>
+                    <TenderTable params={{ buyer: id }} />
                 </div>
             </div>
         </section>

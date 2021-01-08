@@ -65,7 +65,7 @@ function EquityIndicators({ label, params }) {
                 <Tabs>
                     <div className="flex items-center justify-between">
                         <h3 className="uppercase font-bold  text-primary-dark">
-                            {label}
+                            {trans(label ? label : "Equity Indicators")}
                         </h3>
                         <div className="flex">
                             <TabList>

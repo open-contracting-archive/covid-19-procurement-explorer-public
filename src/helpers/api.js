@@ -21,8 +21,12 @@ const apiRoutes = {
     'visualization.country-map': 'api/v1/visualization/country-map/',
     'visualization.world-map-race': 'api/v1/visualization/world-map-race/',
 
+    // Detail api
+    'buyer-detail': 'api/v1/buyers',
+    'supplier-detail': 'api/v1/suppliers',
+
     // table api
-    'tenders': 'api/v1/tender/',
+    'contracts': 'api/v1/contracts/',
     'buyers': 'api/v1/buyers/',
     'suppliers': 'api/v1/suppliers/',
     'products': 'api/v1/product/',

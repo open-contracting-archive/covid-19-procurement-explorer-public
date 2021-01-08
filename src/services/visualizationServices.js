@@ -167,9 +167,9 @@ class VisualizationServices {
         }
     }
 
-    static async TenderList(params) {
+    static async ContractList(params) {
         try {
-            const res = await Api.get(getURI('tenders'), params)
+            const res = await Api.get(getURI('contracts'), params)
             return res.body
         } catch (error) {
             console.log(error)
@@ -199,6 +199,22 @@ class VisualizationServices {
     static async SupplierTableList(params) {
         try {
             const res = await Api.get(getURI('suppliers'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async BuyerDetail(id) {
+        try {
+            const res = await Api.get(`${getURI('buyer-detail')}/${id}`)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async SupplierDetail(id) {
+        try {
+            const res = await Api.get(`${getURI('supplier-detail')}/${id}`)
             return res.body
         } catch (error) {
             console.log(error)

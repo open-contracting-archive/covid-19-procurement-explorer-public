@@ -9,7 +9,7 @@ const CountryContracts = (props) => {
             <div className="w-full px-2 mb-16 global-profile">
                 <ContractsIndicator country={props.country} />
             </div>
-            <TenderTable country={props.country} />
+            <TenderTable params={{ country: props.country }} />
         </div>
     )
 }

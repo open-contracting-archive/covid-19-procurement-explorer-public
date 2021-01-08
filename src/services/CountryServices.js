@@ -39,9 +39,9 @@ class CountryServices {
         }
     }
 
-    static async CountryProfileTenderDetailData(tenderId) {
+    static async ContractDetailData(contractsId) {
         try {
-            const response = await Api.get(getURI('tenders' + `/${tenderId}`))
+            const response = await Api.get(`${getURI('contracts')}/${contractsId}`)
             return response.body
         } catch (error) {
             console.log(error)
