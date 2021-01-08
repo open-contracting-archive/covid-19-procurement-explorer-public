@@ -88,7 +88,7 @@ const LibrarySection = () => {
                                                 {news.title}
                                             </h4>
                                             <p className="library__date">
-                                                {formatDate(news.published_date, 'MMM DD, YYYY')}
+                                                {formatDate(news.published_date)}
                                             </p>
                                         </div>
                                     </Link>
@@ -108,7 +108,7 @@ const LibrarySection = () => {
                                                 {blogs.title}
                                             </h4>
                                             <p className="library__date">
-                                                {formatDate(blogs.published_date, 'MMM DD, YYYY')}
+                                                {formatDate(blogs.published_date)}
                                             </p>
                                         </div>
                                     </Link>

@@ -14,7 +14,7 @@ import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_tab
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import CountryServices from '../../../../services/CountryServices'
 import Loader from '../../../../components/Loader/Loader'
-import ShareButtons from '../../share'
+import ShareButtons from '../../../../components/Library/ShareButtons'
 import TenderTable from '../../../../components/Tables/TenderTable'
 
 const WorldMapRace = () => {
@@ -52,8 +52,6 @@ const WorldMapRace = () => {
     const url = () => {
         window.location.href
     }
-
-    const twitterHandle = 'covid19'
 
     useEffect(() => {
         CountryServices.GetGlobalMapData().then((response) => {
@@ -107,27 +105,27 @@ const WorldMapRace = () => {
     useEffect(() => {
         let dateObject = {}
         dataFromApi &&
-            dataFromApi.result.map((data) => {
-                let countryObject = {}
-                data.details.map((detail) => {
-                    if (detail.country_code !== 'ALL') {
-                        countryObject = {
-                            ...countryObject,
-                            [detail.country_code]: {
-                                value: detail.amount_usd,
-                                number: detail.tender_count,
-                                url: `/country/${detail.country
-                                    .toLowerCase()
-                                    .replace(' ', '-')}/data`
-                            }
+        dataFromApi.result.map((data) => {
+            let countryObject = {}
+            data.details.map((detail) => {
+                if (detail.country_code !== 'ALL') {
+                    countryObject = {
+                        ...countryObject,
+                        [detail.country_code]: {
+                            value: detail.amount_usd,
+                            number: detail.tender_count,
+                            url: `/country/${detail.country
+                                .toLowerCase()
+                                .replace(' ', '-')}/data`
                         }
                     }
-                })
-                dateObject = {
-                    ...dateObject,
-                    [data.month]: countryObject
                 }
             })
+            dateObject = {
+                ...dateObject,
+                [data.month]: countryObject
+            }
+        })
         setContractDataApi(dateObject)
         setYearMonth(dataFromApi && dataFromApi.result[0].month)
 
@@ -305,7 +303,7 @@ const WorldMapRace = () => {
                                                 coordinates={
                                                     continent[
                                                         selectedContinent.value
-                                                    ]
+                                                        ]
                                                 }
                                             />
                                         </TabPanel>
@@ -389,10 +387,7 @@ const WorldMapRace = () => {
                                 <ShareIcon className="mr-2 inline-block" />{' '}
                                 <span className="cursor-pointer">Share</span>
                                 <div className="worldmap-share--buttons absolute px-6 py-6 rounded bg-white">
-                                    <ShareButtons
-                                        url={url}
-                                        twitterHandle={twitterHandle}
-                                    />
+                                    <ShareButtons url={url} />
                                 </div>
                             </span>
                         </div>

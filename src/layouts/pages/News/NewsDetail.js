@@ -1,63 +1,42 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import { useHistory, Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import { formatDate } from "../../../helpers/date"
-import ShareButtons from "../share"
+import ShareButtons from "../../../components/Library/ShareButtons"
+import TagList from "../../../components/website/Library/TagList"
+import Breadcrumb from "../../../components/website/Library/Breadcrumb"
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
     const [newsData, setNewsData] = useState([])
     const [loading, setLoading] = useState(true)
-    let history = useHistory()
     let { id: newsId } = useParams()
-    window.scrollTo(0, 0)
-
-    const previousPage = () => {
-        history.goBack()
-    }
-
-    const handleClick = () => {
-        history.push("/tags")
-    }
-
     const url = () => {
         window.location.href
     }
-    const twitterHandle = "covid19"
 
     useEffect(() => {
-        CmsPageService.NewsDetail(newsId).then((response) => {
-            setNewsDetail(response)
-            setLoading(false)
-        })
-        CmsPageService.NewsList().then((response) => {
-            setNewsData(response.items)
-        })
+        CmsPageService.NewsDetail(newsId)
+            .then((response) => {
+                setNewsDetail(response)
+                setLoading(false)
+            })
+        CmsPageService.NewsList()
+            .then((response) => {
+                setNewsData(response.items)
+            })
     }, [newsId])
-
 
     return (
         <Fragment>
-            {loading ? (
-                <Loader />
-            ) : (
+            {loading ? (<Loader />) : (
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
-                        <div className="text-sm mb-4 text-blue-5">
-                            <Link to="/library"
-                                  className="cursor-pointer text-primary-blue">
-                                Library
-                            </Link>{' '}
-                            /
-                            <Link to="/news"
-                                  className="cursor-pointer text-primary-blue"
-                            >
-                                News
-                            </Link>{' '}
-                        </div>
+                        <Breadcrumb item={'news'} />
+
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {newsDetail.title}
                         </h2>
@@ -84,42 +63,22 @@ const NewsDetail = () => {
                                     {formatDate(newsDetail.published_date, 'MMMM DD, YYYY')}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
-                                    <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                        Tags
-                                    </p>
-                                    <div className="tags flex flex-wrap">
-                                        {newsDetail.tags && newsDetail.tags.map(news => (
-                                            <a href="#" className="tag" key={news} onClick={handleClick}>{news}</a>
-                                        ))}
-                                    </div>
+                                    <TagList item={newsDetail} />
                                 </div>
                             </div>
                             <div>
-                                <div
-                                    className="mb-10 news-detail__content"
-                                    dangerouslySetInnerHTML={{
-                                        __html: newsDetail.body
-                                    }}>
-                                    {/* {newsDetail.body} */}
+                                <div className="mb-10 news-detail__content"
+                                     dangerouslySetInnerHTML={{ __html: newsDetail.rendered_body }}>
                                 </div>
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
                                     <div className="block lg:hidden mb-6 md:mb-0">
-                                        <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                            Tags
-                                        </p>
-                                        <div className="tags flex flex-wrap">
-                                            {newsDetail.tags && newsDetail.tags.map(news => (
-                                                <a href="#" className="tag" key={news} onClick={handleClick}>{news}</a>
-                                            ))}
-                                        </div>
+                                        <TagList item={newsDetail} />
                                     </div>
                                     <div className="flex">
                                         <p className="font-bold opacity-40 mr-4">
                                             Share on
                                         </p>
-                                        <div className="flex">
-                                            <ShareButtons url={url} twitterHandle={twitterHandle} />
-                                        </div>
+                                        <ShareButtons url={url} />
                                     </div>
                                 </div>
                             </div>
@@ -127,9 +86,7 @@ const NewsDetail = () => {
                                 <p className="font-bold opacity-40 mb-2">
                                     Share on
                                 </p>
-                                <div className="flex">
-                                    <ShareButtons url={url} twitterHandle={twitterHandle} />
-                                </div>
+                                <ShareButtons url={url} />
                             </div>
                         </div>
                         {newsData.length !== 1 ?
@@ -140,7 +97,7 @@ const NewsDetail = () => {
                                     <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {newsData &&
                                         newsData
-                                            .filter((news) => news.id != newsId)
+                                            .filter((news) => news.id !== newsId)
                                             .slice(0, 3)
                                             .map((news) => {
                                                 return (
