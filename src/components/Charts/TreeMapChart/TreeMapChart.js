@@ -52,7 +52,7 @@ const TreeMapChart = ({ data }) => {
         chart.dataFields.value = 'count'
         chart.dataFields.name = 'name'
         chart.dataFields.children = 'children'
-        // chart.homeText = 'US Car Sales 2017'
+        chart.homeText = 'Products'
 
         // enable navigation
         chart.navigationBar = new am4charts.NavigationBar()

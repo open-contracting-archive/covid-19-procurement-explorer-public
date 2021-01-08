@@ -243,7 +243,7 @@ const WorldMapRace = () => {
                                         className="flex-1 relative"
                                         style={{ width: 'calc(100% - 91px)' }}>
                                         <TabPanel>
-                                            <div className="flex justify-end world-map-chart">
+                                            <div className="flex justify-end world-map-chart mb-4">
                                                 <ul className="contract-switch flex">
                                                     <li
                                                         className={`mr-4 cursor-pointer ${

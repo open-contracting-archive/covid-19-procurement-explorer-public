@@ -14,7 +14,6 @@ const RaceMap = ({
 }) => {
     const mapchartDiv = useRef(null)
     const [data, setData] = useState({})
-    // const [yearMonthMapData, setYearMonthMapData] = useState(yearMonth)
     let yearMonthMapData = yearMonth
 
     const extractData = (selectedKey) => {
@@ -31,10 +30,6 @@ const RaceMap = ({
     useEffect(() => {
         let mapData = extractData(yearMonthMapData)
         setData(mapData)
-        // if (contractData) {
-        //     // console.log(yearMonthMapData)
-        //     setData(extractData(yearMonthMapData))
-        // }
     }, [yearMonthMapData, contractData, contractType])
 
     useLayoutEffect(() => {
