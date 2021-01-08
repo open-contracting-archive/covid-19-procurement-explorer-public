@@ -155,11 +155,8 @@ function App() {
                     <Route exact path="/blogs/:id" component={BlogsDetail} />
                     <Route exact path="/events" component={Events} />
                     <Route exact path="/events/:id" component={EventsDetail} />
-                    <Route path="/resources" component={Resources} />
-                    <Route
-                        path="/resources-detail"
-                        component={ResourcesDetail}
-                    />
+                    <Route exact path="/resources" component={Resources} />
+                    <Route exact path="/resources/:id" component={ResourcesDetail}/>
                     <Route path="/library" component={Library} />
                     <Route path="/tags" component={Tags} />
                     <Route path="/tender/:tenderId" component={TenderDetail} />

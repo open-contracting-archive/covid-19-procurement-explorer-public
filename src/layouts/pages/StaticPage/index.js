@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react"
 import { useParams, Redirect } from 'react-router-dom'
-import InsightServices from "../../../services/insightServices";
+import CmsPageService from "../../../services/CmsPageService";
 import Loader from "../../../components/Loader/Loader";
 
 const StaticPage = () => {
@@ -11,7 +11,7 @@ const StaticPage = () => {
 
     useEffect(() => {
         let queryParams = { slug }
-        InsightServices.StaticPageDetail(queryParams)
+        CmsPageService.StaticPageDetail(queryParams)
             .then((response) => {
                 setPageDetail(response)
                 setLoading(false)

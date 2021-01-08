@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
-import InsightServices from '../../../services/insightServices'
+import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import { formatDate } from "../../../helpers/date";
 
@@ -16,7 +16,7 @@ function Events() {
     }
 
     useEffect(() => {
-        InsightServices.EventsData().then((response) => {
+        CmsPageService.EventList().then((response) => {
             setEventsData(response.items)
             setLoading(false)
         })

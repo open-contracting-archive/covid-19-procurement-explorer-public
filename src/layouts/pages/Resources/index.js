@@ -1,30 +1,36 @@
-import React, { Fragment, useState } from 'react'
+import React, { useEffect, Fragment, useState } from 'react'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 import Select from 'react-select'
+import { useHistory, Link, useParams } from 'react-router-dom'
+import CmsPageService from '../../../services/CmsPageService'
+import Loader from '../../../components/Loader/Loader'
+import { formatDate } from "../../../helpers/date";
 
 const Resources = () => {
+    const [resourcesDetail, setResourcesDetail] = useState({})
+    const [resourcesData, setResourcesData] = useState([])
+    const [loading, setLoading] = useState(true)
+    let history = useHistory()
+    let { id: resourcesId } = useParams()
+    window.scrollTo(0, 0)
+
+    const previousPage = () => {
+        history.goBack()
+    }
+
     const options = [
         { value: 'option-1', label: 'Option 1' },
         { value: 'option-2', label: 'Option 2' },
         { value: 'option-3', label: 'Option 3' }
     ]
 
-    let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    const tempTableData = tempArray.map((index) => {
-        return (
-            <tr className="table-row" key={index}>
-                <td className="uppercase">
-                    Health sector emergency response plan
-                </td>
-                <td>Mexico</td>
-                <td className="uppercase">Open</td>
-            </tr>
-        )
-    })
-    const previousPage = () => {
-        history.goBack()
-    }
-
+    useEffect(() => {
+        CmsPageService.ResourceList().then((response) => {
+            setResourcesData(response.items)
+            setLoading(false)
+        })
+    }, [])
+    
     return (
         <div className=" resources">
             <section className="px-4 resources__cards pt-24 pb-12 -mt-8">
@@ -93,7 +99,7 @@ const Resources = () => {
                             />
                         </div>
                     </div>
-                    <table className="table">
+                    <table className="table table__resources">
                         <thead>
                         <tr>
                             <th style={{ width: '35%' }}>
@@ -117,15 +123,24 @@ const Resources = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr className="table-row">
-                            <td className="uppercase">
-                                Health sector emergency response plan
-                            </td>
-                            <td>Mexico</td>
-                            <td className="uppercase">Open</td>
-                        </tr>
-                        {tempTableData}
+                        {resourcesData &&
+                            resourcesData.map((resources) => {
+                                return (
+                                <tr className="table-row" key={resources.id}>
+                                    <Link
+                                        to={`/resources/${resources.id}`}
+                                        >
+                                        <td className="uppercase">
+                                            {resources.title}
+                                        </td>
+                                    </Link>
+                                    <td>{resources.location}</td>
+                                     <td className="uppercase">Open</td>
+                                </tr>
+                                )
+                            })}
                         </tbody>
+
                     </table>
                 </div>
             </section>

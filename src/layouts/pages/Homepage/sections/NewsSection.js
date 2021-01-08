@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {get} from 'lodash'
 import {API_URL} from '../../../../helpers/api'
-import InsightServices from '../../../../services/insightServices'
+import CmsPageService from '../../../../services/CmsPageService'
 import Loader from '../../../../components/Loader/Loader'
 import {formatDate} from "../../../../helpers/date";
 
@@ -11,7 +11,7 @@ const NewsSection = () => {
     const [noData, setNoData] = useState(true)
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        InsightServices.NewsData()
+        CmsPageService.NewsList()
             .then((response) => {
                 // console.log(response)
                 setNewsData(response.items)

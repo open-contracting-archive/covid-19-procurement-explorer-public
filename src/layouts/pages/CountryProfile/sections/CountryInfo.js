@@ -117,7 +117,7 @@ const CountryInfo = ({ country }) => {
                     </div>
                 </div>
             </div>
-            <div className="absolute inline-flex items-center" style={{ top: '-50px', right: '25px' }}>
+            <div className="md:absolute static mt-2 md:mt-0 inline-flex items-center" style={{ top: '-50px', right: '25px', width: 'fit-content' }}>
                 <p className="text-blue-40">
                     <span className="opacity-75">Last updated on </span>
                     <span>

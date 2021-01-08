@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useHistory, Link, useParams} from 'react-router-dom'
-import InsightServices from '../../../../services/insightServices'
+import CmsPageService from '../../../../services/CmsPageService'
 import {formatDate} from "../../../../helpers/date";
 import Loader from "../../../../components/Loader/Loader";
 
@@ -15,21 +15,21 @@ const LibrarySection = () => {
 
     useEffect(
         () => {
-            InsightServices.NewsData().then((response) => {
+            CmsPageService.NewsList().then((response) => {
                 setNewsData(response.items)
                 setLoading(false)
             })
-            InsightServices.BlogsData().then((response) => {
+            CmsPageService.BlogList().then((response) => {
                 setBlogsData(response.items)
             })
             // InsightServices.BlogsData().then((blogsresponse)=> {
             //     InsightServices.NewsData().then((newsresponse)  => {
             //         setBlogsData(blogsresponse.items)
             //         setNewsData(newsresponse.items)
-            //         setData(newsresponse.items, blogsresponse.items)     
+            //         setData(newsresponse.items, blogsresponse.items)
             //         setLoading(false)
             //     })
-                
+
             // })
         },
         [newsId],

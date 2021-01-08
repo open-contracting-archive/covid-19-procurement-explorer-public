@@ -3,7 +3,7 @@ import { useHistory, Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import socialIcons from '../../../assets/img/icons/social'
-import InsightServices from '../../../services/insightServices'
+import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import {formatDate} from "../../../helpers/date";
 import {FacebookShareButton, FacebookIcon} from "react-share";
@@ -18,7 +18,7 @@ const NewsDetail = () => {
     let { id: newsId } = useParams()
     window.scrollTo(0, 0)
 
-    const previousPage = () => {     
+    const previousPage = () => {
         history.goBack()
     }
 
@@ -28,22 +28,22 @@ const NewsDetail = () => {
 
     const url = () => {
         window.location.href;
-    } 
+    }
     const twitterHandle = "covid19";
     // const tags = props.data.markdownRemark.frontmatter.tags;
 
     useEffect(() => {
-        InsightServices.NewsDetailData(newsId).then((response) => {
+        CmsPageService.NewsDetail(newsId).then((response) => {
             // console.log(response)
             setNewsDetail(response)
             setLoading(false)
         })
-        InsightServices.NewsData().then((response) => {
+        CmsPageService.NewsList().then((response) => {
             setNewsData(response.items)
         })
     }, [newsId])
 
-   
+
 
     return (
         <>
