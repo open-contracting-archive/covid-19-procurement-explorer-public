@@ -1,71 +1,44 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-    setCurrentLocale,
-    setTranslations
-} from '../../store/reducers/general/action'
-import CountryServices from '../../services/CountryServices'
-
-const mexiciancurrency = [
-    { code: 'MXN', name: 'Mexician' }
-]
-
-const americiancurrency = [
-    { code: 'USD', name: 'Dollor' }
-]
+import { setCurrency } from '../../store/reducers/general/action'
 
 const CurrencySwitcher = () => {
-    const currentLocale = useSelector((state) => state.general.currentLocale)
+    const selectedCurrency = useSelector((state) => state.general.currency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
 
     const dispatch = useDispatch()
 
-    const onChange = (e) => {
-        dispatch(setCurrentLocale(e.target.value))
-        CountryServices.getTranslations(e.target.value).then(
-            (response) => {
-                dispatch(setTranslations(response))
-            }
-        )
+    const changeCurrency = (currency) => {
+        dispatch(setCurrency(currency))
     }
+
     return (
-        <div className="currency relative ml-3 border-blue-0 rounded">
+        <div className="currency relative ml-3 border-blue-0 rounded-md overflow-hidden text-sm">
             <button
                 style={{
                     padding: '6px 8px'
                 }}
-                className="cursor-pointer outline-none appearance-none font-bold opacity-50"
-                onChange={onChange}>
-                {mexiciancurrency.map((mexiciancurrency, index) => (
-                    // <option
-                    //     key={index}
-                    //     value={mexiciancurrency.code}
-                    //     defaultValue={currentLocale === mexiciancurrency.code}>
-                    //     {mexiciancurrency.code}
-                    // </option>
-                    <>
-                    {mexiciancurrency.code}
-                    </>
-                ))}
-                
+                className={`cursor-pointer outline-none appearance-none font-bold uppercase ${
+                    selectedCurrency === 'usd'
+                        ? 'text-white bg-primary-dark'
+                        : 'opacity-50'
+                } `}
+                onClick={() => changeCurrency('usd')}>
+                USD
             </button>
             <button
                 style={{
                     padding: '6px 8px'
                 }}
-                className="cursor-pointer outline-none appearance-none font-bold text-white bg-primary-dark rounded"
-                onChange={onChange}>
-                {americiancurrency.map((americiancurrency, index) => (
-                    // <option
-                    //     key={index}
-                    //     value={americiancurrency.code}
-                    //     defaultValue={currentLocale === americiancurrency.code}>
-                    //     {americiancurrency.code}
-                    // </option>
-                    <>
-                        {americiancurrency.code}
-                    </>
-                ))}
-                
+                className={`cursor-pointer outline-none appearance-none font-bold uppercase ${
+                    selectedCurrency === 'local'
+                        ? 'text-white bg-primary-dark'
+                        : 'opacity-50'
+                }`}
+                onClick={() => changeCurrency('local')}>
+                {countryCurrency || '---'}
             </button>
         </div>
     )

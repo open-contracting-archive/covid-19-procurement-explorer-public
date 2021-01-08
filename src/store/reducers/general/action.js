@@ -3,7 +3,19 @@ import * as types from './type'
 
 export const setCurrentCountry = createAction(types.SET_CURRENT_COUNTRY)
 
-export const setCurrency = createAction(types.SET_CURRENCY)
+export const setCurrency = (currency) => {
+    return {
+        type: types.SET_CURRENCY,
+        payload: currency
+    }
+}
+
+export const setCountryCurrency = (currency) => {
+    return {
+        type: types.SET_COUNTRY_CURRENCY,
+        payload: currency
+    }
+}
 
 export const setCurrentLocale = (locale) => {
     window.localStorage.setItem('locale', locale)

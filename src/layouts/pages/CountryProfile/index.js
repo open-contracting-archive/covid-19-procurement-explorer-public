@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import useTrans from '../../../hooks/useTrans'
 import CountryData from './tabs/CountryData'
@@ -8,6 +8,7 @@ import CountryInfo from './sections/CountryInfo'
 import CountryMapElement from './sections/CountryMapElement'
 import { first } from 'lodash'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
+import { setCountryCurrency } from '../../../store/reducers/general/action'
 
 const CountryDetail = () => {
     // ===========================================================================
@@ -18,6 +19,7 @@ const CountryDetail = () => {
     const [countryCode, setCountryCode] = useState()
     const { trans } = useTrans()
     let { slug } = useParams()
+    const dispatch = useDispatch()
 
     // ===========================================================================
     // Hooks
@@ -30,6 +32,7 @@ const CountryDetail = () => {
         if (country) {
             setCountryData(country)
             setCountryCode(country.country_code_alpha_2)
+            dispatch(setCountryCurrency(country.currency))
         }
     }, [countries, slug])
 
@@ -47,8 +50,8 @@ const CountryDetail = () => {
             <section className="px-4">
                 <div className="container mx-auto">
                     {/* <h2 className="font-normal mb-5 text-2xl text-primary-dark capitalize"> */}
-                        {/* {slug} */}
-                        <CountrySelector countryCode={countryCode} slug={slug}/>
+                    {/* {slug} */}
+                    <CountrySelector countryCode={countryCode} slug={slug} />
                     {/* </h2> */}
                     <div className="flex flex-wrap -mb-4">
                         <CountryMapElement countryCode={countryCode} />

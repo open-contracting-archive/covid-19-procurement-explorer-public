@@ -1,66 +1,77 @@
-import React from 'react'
-import AreaChart from '../Charts/AreaChart/AreaChart'
+import React, { useState, useEffect } from 'react'
+import VisualizationServices from '../../services/visualizationServices'
+import { formatDate, dateDiff } from '../../helpers/date'
+import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
+import Loader from '../Loader/Loader'
 
-// Add Area Chart data
-const area_chart_data = [
-    {
-        month: 'FEB',
-        value: 22324,
-        expenses: 21.1
-    },
-    {
-        month: 'MAR',
-        value: 45990,
-        expenses: 30.5
-    },
-    {
-        month: 'APR',
-        value: 10003,
-        expenses: 34.9
-    },
-    {
-        month: 'MAY',
-        value: 77070,
-        expenses: 23.1
-    },
-    {
-        month: 'JUN',
-        value: 23489,
-        expenses: 28.2
-    },
-    {
-        month: 'JUL',
-        value: 58902,
-        expenses: 31.9
-    },
-    {
-        month: 'AUG',
-        value: 29190,
-        expenses: 31.9
-    },
-    {
-        month: 'SEP',
-        value: 45908,
-        expenses: 31.9
+function Buyers({ label, params }) {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
+    const [loading, setLoading] = useState(true)
+    const [buyerSummary, setBuyerSummary] = useState()
+
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
+    useEffect(() => {
+        VisualizationServices.BuyerSummary(params).then((response) => {
+            setBuyerSummary(response)
+            setLoading(false)
+        })
+    }, [params])
+
+    // ===========================================================================
+    // Handlers and functions
+    // ===========================================================================
+    // Function to manage data for line chart
+    const lineChartData = (chartData) => {
+        return (
+            chartData &&
+            chartData.map((data) => {
+                return {
+                    date: formatDate(data.month, 'MMMM YYYY'),
+                    value: data.buyer_count
+                }
+            })
+        )
     }
-]
 
-function Buyers({ label }) {
+    // Function to sort by date
+    const sortDate = (data) => {
+        return data.sort((date1, date2) => {
+            return dateDiff(date1.date, date2.date)
+        })
+    }
+
+    // Buyer summary
+    const buyerSummaryLineChartDataRaw =
+        buyerSummary && lineChartData(buyerSummary.trend)
+    const buyerSummaryLineChartData =
+        buyerSummaryLineChartDataRaw && sortDate(buyerSummaryLineChartDataRaw)
+    const buyerSummaryAmount = buyerSummary && buyerSummary.total
+    const buyerSummaryPercentage = buyerSummary && buyerSummary.percentage
+
     return (
         <div className="bg-white rounded p-4 h-full">
-            <h3 className="uppercase font-bold  text-primary-dark">{label ? label : 'Buyers'}</h3>
-            <div className="flex items-end">
-                <div className=" text-primary-dark w-2/5">
-                    <AreaChart data={area_chart_data} colorValue="#FE5151" />
-                    <p>
-                        <strong className="text-xl inline-block mr-3">
-                            21,800
-                        </strong>
-                    </p>
-                    <p className="text-sm text-red-30 font-bold">-11%</p>
+            <h3 className="uppercase font-bold  text-primary-dark">
+                {label ? label : 'Buyers'}
+            </h3>
+            {loading ? (
+                <Loader sm />
+            ) : (
+                <div className="flex items-end">
+                    <AreaChartBlock
+                        chartData={buyerSummaryLineChartData}
+                        totalAmount={buyerSummaryAmount}
+                        percentage={buyerSummaryPercentage}
+                        colorValue={
+                            buyerSummaryPercentage < 0 ? '#FE5151' : '#3EEDA4'
+                        }
+                    />
+                    <div className="flex-1" />
                 </div>
-                <div className="flex-1" />
-            </div>
+            )}
         </div>
     )
 }
