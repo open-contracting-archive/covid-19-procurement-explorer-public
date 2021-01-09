@@ -387,3 +387,13 @@ header {
 svg tspan {
     text-transform: capitalize;
 }
+
+.breadcrumb-separator:after {
+  content: " / ";
+}
+
+.text-field {
+  border-bottom: 2px solid #1fbbec;
+  padding: 8px 0 9px 0;
+  background-color: inherit;
+}

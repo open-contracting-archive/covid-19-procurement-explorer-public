@@ -26,8 +26,8 @@ const InsightTable = (props) => {
 
     const getCountryName = (countryId) => {
         const country = countries.find((country) => country.id === countryId)
-        return country ? country.name : countryId
 
+        return country ? country.name : countryId
     }
 
     const showDetail = (type, id) => {
@@ -46,14 +46,9 @@ const InsightTable = (props) => {
             <div className="mb-12 flex gap-8 ">
                 <div className="w-40">
                     <p className="uppercase text-xs opacity-50 leading-none">
-                        Titles
+                        Title
                     </p>
-                    <Select
-                        className="select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={options}
-                        defaultValue={options[0]}
-                    />
+                    <input type="text" name="title" className="text-field text-sm" placeholder="ALL" />
                 </div>
                 <div className="w-40">
                     <p className="uppercase text-xs opacity-50 leading-none">
@@ -79,7 +74,29 @@ const InsightTable = (props) => {
                 </div>
                 <div className="w-40">
                     <p className="uppercase text-xs opacity-50 leading-none">
-                        Sector
+                        Topic
+                    </p>
+                    <Select
+                        className="select-filter text-sm"
+                        classNamePrefix="select-filter"
+                        options={options}
+                        defaultValue={options[0]}
+                    />
+                </div>
+                <div className="w-40">
+                    <p className="uppercase text-xs opacity-50 leading-none">
+                        Year
+                    </p>
+                    <Select
+                        className="select-filter text-sm"
+                        classNamePrefix="select-filter"
+                        options={options}
+                        defaultValue={options[0]}
+                    />
+                </div>
+                <div className="w-40">
+                    <p className="uppercase text-xs opacity-50 leading-none">
+                        Language
                     </p>
                     <Select
                         className="select-filter text-sm"
@@ -119,7 +136,7 @@ const InsightTable = (props) => {
                             return (
                                 <tr key={index}
                                     onClick={() => showDetail(insight.contents_type, insight.id)}
-                                    className={"cursor-pointer"}>
+                                    className="cursor-pointer">
                                     <td>{insight.title}</td>
                                     <td>{getCountryName(insight.country.id)}</td>
                                     <td>{insight.contents_type}</td>

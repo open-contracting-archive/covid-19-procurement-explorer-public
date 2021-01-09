@@ -175,201 +175,201 @@ function TenderTable({ homepage, params }) {
                     <div className="custom-scrollbar table-scroll">
                         <table className="table">
                             <thead>
-                                <tr>
-                                    <th style={{ width: '25%' }}>
+                            <tr>
+                                <th style={{ width: '25%' }}>
                                         <span className="flex items-center">
                                             {trans('Contract Title')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
-                                    </th>
-                                    {!get(params, 'buyer') && (
-                                        <th>
+                                </th>
+                                {!get(params, 'buyer') && (
+                                    <th>
                                             <span className="flex items-center">
                                                 {trans('Buyer')}{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                    )}
-                                    {!get(params, 'supplier') && (
-                                        <th>
+                                    </th>
+                                )}
+                                {!get(params, 'supplier') && (
+                                    <th>
                                             <span className="flex items-center">
                                                 {trans('Supplier')}{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                    )}
-                                    <th style={{ width: '10%' }}>
+                                    </th>
+                                )}
+                                <th style={{ width: '10%' }}>
                                         <span className="flex items-center">
                                             {trans('Method')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
-                                    </th>
-                                    <th style={{ width: '20%' }}>
+                                </th>
+                                <th style={{ width: '20%' }}>
                                         <span className="flex items-center">
                                             {trans('Product Category')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
-                                    </th>
-                                    <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                         <span className="flex items-center">
                                             {trans('Date')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
-                                    </th>
-                                    <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                         <span className="flex items-center">
                                             {trans('Value (USD)')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
-                                    </th>
-                                    <th />
-                                </tr>
+                                </th>
+                                <th />
+                            </tr>
                             </thead>
 
                             {homepage ? (
                                 <tbody>
-                                    {tenderList &&
-                                        tenderList
-                                            .slice(0, 10)
-                                            .map((tender, index) => {
-                                                return (
-                                                    <tr
-                                                        key={index}
-                                                        onClick={() =>
-                                                            showDetail(
-                                                                tender.id
-                                                            )
-                                                        }
-                                                        className={tableRowClass(
-                                                            tender.red_flag
-                                                        )}>
-                                                        <td className="uppercase">
-                                                            {
-                                                                tender.contract_title
-                                                            }
-                                                        </td>
-                                                        {!get(
-                                                            params,
-                                                            'buyer'
-                                                        ) && (
-                                                            <td className="uppercase">
-                                                                {get(
-                                                                    tender,
-                                                                    'buyer.buyer_name'
-                                                                )}
-                                                            </td>
+                                {tenderList &&
+                                tenderList
+                                    .slice(0, 10)
+                                    .map((tender, index) => {
+                                        return (
+                                            <tr
+                                                key={index}
+                                                onClick={() =>
+                                                    showDetail(
+                                                        tender.id
+                                                    )
+                                                }
+                                                className={tableRowClass(
+                                                    tender.red_flag
+                                                )}>
+                                                <td className="uppercase">
+                                                    {
+                                                        tender.contract_title
+                                                    }
+                                                </td>
+                                                {!get(
+                                                    params,
+                                                    'buyer'
+                                                ) && (
+                                                    <td className="uppercase">
+                                                        {get(
+                                                            tender,
+                                                            'buyer.buyer_name'
                                                         )}
-                                                        {!get(
-                                                            params,
-                                                            'supplier'
-                                                        ) && (
-                                                            <td className="uppercase">
-                                                                {get(
-                                                                    tender,
-                                                                    'supplier.supplier_name'
-                                                                )}
-                                                            </td>
+                                                    </td>
+                                                )}
+                                                {!get(
+                                                    params,
+                                                    'supplier'
+                                                ) && (
+                                                    <td className="uppercase">
+                                                        {get(
+                                                            tender,
+                                                            'supplier.supplier_name'
                                                         )}
-                                                        <td className="capitalize">
-                                                            {
-                                                                tender.procurement_procedure
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            {get(
-                                                                tender,
-                                                                'product.product_name'
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {formatDate(
-                                                                tender.contract_date
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {tender.contract_value_usd &&
-                                                                tender.contract_value_usd.toLocaleString(
-                                                                    'en'
-                                                                )}
-                                                        </td>
-                                                        <td>
-                                                            {tender.red_flag && (
-                                                                <span className="mr-4">
+                                                    </td>
+                                                )}
+                                                <td className="capitalize">
+                                                    {
+                                                        tender.procurement_procedure
+                                                    }
+                                                </td>
+                                                <td>
+                                                    {get(
+                                                        tender,
+                                                        'product.product_name'
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {formatDate(
+                                                        tender.contract_date
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {tender.contract_value_usd &&
+                                                    tender.contract_value_usd.toLocaleString(
+                                                        'en'
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {tender.red_flag && (
+                                                        <span className="mr-4">
                                                                     <FlagIcon />
                                                                 </span>
-                                                            )}
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             ) : (
                                 <tbody>
-                                    {tenderList &&
-                                        tenderList.map((tender, index) => {
-                                            return (
-                                                <tr
-                                                    key={index}
-                                                    onClick={() =>
-                                                        showDetail(tender.id)
-                                                    }
-                                                    className={tableRowClass(
-                                                        tender.red_flag
-                                                    )}>
-                                                    <td className="uppercase">
-                                                        {tender.contract_title}
-                                                    </td>
-                                                    {!get(params, 'buyer') && (
-                                                        <td className="uppercase">
-                                                            {get(
-                                                                tender,
-                                                                'buyer.buyer_name'
-                                                            )}
-                                                        </td>
+                                {tenderList &&
+                                tenderList.map((tender, index) => {
+                                    return (
+                                        <tr
+                                            key={index}
+                                            onClick={() =>
+                                                showDetail(tender.id)
+                                            }
+                                            className={tableRowClass(
+                                                tender.red_flag
+                                            )}>
+                                            <td className="uppercase">
+                                                {tender.contract_title}
+                                            </td>
+                                            {!get(params, 'buyer') && (
+                                                <td className="uppercase">
+                                                    {get(
+                                                        tender,
+                                                        'buyer.buyer_name'
                                                     )}
-                                                    {!get(
-                                                        params,
-                                                        'supplier'
-                                                    ) && (
-                                                        <td className="uppercase">
-                                                            {get(
-                                                                tender,
-                                                                'supplier.supplier_name'
-                                                            )}
-                                                        </td>
+                                                </td>
+                                            )}
+                                            {!get(
+                                                params,
+                                                'supplier'
+                                            ) && (
+                                                <td className="uppercase">
+                                                    {get(
+                                                        tender,
+                                                        'supplier.supplier_name'
                                                     )}
-                                                    <td className="capitalize">
-                                                        {
-                                                            tender.procurement_procedure
-                                                        }
-                                                    </td>
-                                                    <td>
-                                                        {get(
-                                                            tender,
-                                                            'product.product_name'
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {formatDate(
-                                                            tender.contract_date
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {tender.contract_value_usd &&
-                                                            tender.contract_value_usd.toLocaleString(
-                                                                'en'
-                                                            )}
-                                                    </td>
-                                                    <td>
-                                                        {tender.red_flag && (
-                                                            <span className="mr-4">
+                                                </td>
+                                            )}
+                                            <td className="capitalize">
+                                                {
+                                                    tender.procurement_procedure
+                                                }
+                                            </td>
+                                            <td>
+                                                {get(
+                                                    tender,
+                                                    'product.product_name'
+                                                )}
+                                            </td>
+                                            <td>
+                                                {formatDate(
+                                                    tender.contract_date
+                                                )}
+                                            </td>
+                                            <td>
+                                                {tender.contract_value_usd &&
+                                                tender.contract_value_usd.toLocaleString(
+                                                    'en'
+                                                )}
+                                            </td>
+                                            <td>
+                                                {tender.red_flag && (
+                                                    <span className="mr-4">
                                                                 <FlagIcon />
                                                             </span>
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })}
+                                                )}
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
                                 </tbody>
                             )}
                         </table>

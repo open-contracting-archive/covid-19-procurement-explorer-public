@@ -1,62 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory, Link, useParams } from 'react-router-dom'
+import React, { useEffect, useState, Fragment } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import { formatDate } from "../../../helpers/date"
-import ShareButtons from "../share"
+import ShareButtons from "../../../components/Library/ShareButtons"
+import TagList from "../../../components/website/Library/TagList"
+import Breadcrumb from "../../../components/website/Library/Breadcrumb"
 
 const BlogsDetail = () => {
     const [blogsDetail, setBlogsDetail] = useState({})
     const [blogsData, setBlogsData] = useState([])
     const [loading, setLoading] = useState(true)
-    let history = useHistory()
-    let { id: blogsId } = useParams()
-
-    const previousPage = () => {
-        history.goBack()
-    }
-
-    const handleClick = () => {
-        history.push("/tags")
-    }
-
+    let { id: blogId } = useParams()
     const url = () => {
         window.location.href
     }
-    const twitterHandle = "covid19"
 
     useEffect(() => {
-        CmsPageService.BlogDetail(blogsId).then((response) => {
-            // console.log(response)
-            setBlogsDetail(response)
-            setLoading(false)
-        })
-        CmsPageService.BlogList().then((response) => {
-            setBlogsData(response.items)
-        })
-    }, [blogsId])
+        CmsPageService.BlogDetail(blogId)
+            .then((response) => {
+                setBlogsDetail(response)
+                setLoading(false)
+            })
+        CmsPageService.BlogList()
+            .then((response) => {
+                setBlogsData(response.items)
+            })
+    }, [blogId])
 
     return (
-        <>
-            {loading ? (
-                <Loader />
-            ) : (
+        <Fragment>
+            {loading ? (<Loader />) : (
                 <section className="pt-8">
                     <div className="container mx-auto px-4 news-detail">
-                        <div className="text-sm mb-4 text-blue-5">
-                            <Link to="/library"
-                                  className="cursor-pointer text-primary-blue">
-                                Library
-                            </Link>{' '}
-                            /
-                            <Link to="/blogs"
-                                  className="cursor-pointer text-primary-blue"
-                            >
-                                Blogs
-                            </Link>{' '}
-                        </div>
+                        <Breadcrumb item={'blog'} />
+
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {blogsDetail.title}
                         </h2>
@@ -80,43 +60,24 @@ const BlogsDetail = () => {
                                     Published on
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {formatDate(blogsDetail.published_date, 'MMMM DD, YYYY')}
+                                    {formatDate(blogsDetail.published_date)}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
-                                    <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                        Tags
-                                    </p>
-                                    <div className="tags flex flex-wrap">
-                                        {blogsDetail.tags && blogsDetail.tags.map(blogs => (
-                                            <a href="#" className="tag" key={blogs} onClick={handleClick}>{blogs}</a>
-                                        ))}
-                                    </div>
+                                    <TagList item={blogsDetail} />
                                 </div>
                             </div>
                             <div>
-                                <div
-                                    className="mb-10 blogs-detail__content"
-                                    dangerouslySetInnerHTML={{
-                                        __html: blogsDetail.body
-                                    }}></div>
+                                <div className="mb-10 blogs-detail__content"
+                                     dangerouslySetInnerHTML={{ __html: blogsDetail.rendered_body }} />
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
                                     <div className="block lg:hidden mb-6 md:mb-0">
-                                        <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                            Tags
-                                        </p>
-                                        <div className="tags flex flex-wrap">
-                                            {blogsDetail.tags && blogsDetail.tags.map(blogs => (
-                                                <a href="#" className="tag" key={blogs} onClick={handleClick}>{blogs}</a>
-                                            ))}
-                                        </div>
+                                        <TagList item={blogsDetail} />
                                     </div>
                                     <div className="flex">
                                         <p className="font-bold opacity-40 mr-4">
                                             Share on
                                         </p>
-                                        <div className="flex">
-                                            <ShareButtons url={url} twitterHandle={twitterHandle} />
-                                        </div>
+                                        <ShareButtons url={url} />
                                     </div>
                                 </div>
                             </div>
@@ -124,21 +85,18 @@ const BlogsDetail = () => {
                                 <p className="font-bold opacity-40 mb-2">
                                     Share on
                                 </p>
-                                <div className="flex">
-                                    <ShareButtons url={url} twitterHandle={twitterHandle} />
-                                </div>
+                                <ShareButtons url={url} />
                             </div>
                         </div>
                         {blogsData.length !== 1 ?
                             <>
-
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">Related Blogs</h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {blogsData &&
                                         blogsData
-                                            .filter((blogs) => blogs.id != blogsId)
+                                            .filter((blogs) => blogs.id !== blogId)
                                             .slice(0, 3)
                                             .map((blogs) => {
                                                 return (
@@ -166,7 +124,7 @@ const BlogsDetail = () => {
                                                                     </h3>
                                                                 </Link>
                                                                 <p className="blogs-caption__date">
-                                                                    {formatDate(blogs.published_date, 'MMMM DD, YYYY')}
+                                                                    {formatDate(blogs.published_date)}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -187,7 +145,7 @@ const BlogsDetail = () => {
                     </div>
                 </section>
             )}
-        </>
+        </Fragment>
     )
 }
 
