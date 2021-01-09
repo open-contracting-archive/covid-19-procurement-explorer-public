@@ -7,7 +7,7 @@ module.exports = function override(config, env) {
 		...config.plugins,
 		new WebpackNotifierPlugin({
 			alwaysNotify: true,
-			title: "Covid Procurement 2019",
+			title: "Covid-19 Procurement Explorer",
 			contentImage: join(__dirname, "public/logo192.png"),
 		}),
 	];
