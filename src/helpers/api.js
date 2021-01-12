@@ -44,7 +44,10 @@ const apiRoutes = {
     countries: 'api/v1/country/',
 
     // cms api
-    pages: 'api/v2/pages/'
+    pages: 'api/v2/pages/',
+
+    // filter parameter
+    'filter-parameter': 'api/v1/visualization/filter-parameters/'
 }
 
 export const getURI = (routeName) => {

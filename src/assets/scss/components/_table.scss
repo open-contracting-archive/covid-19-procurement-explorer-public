@@ -1,6 +1,14 @@
 .table-scroll {
     height: 700px;
     overflow-y: auto;
+
+    thead {
+        th {
+            position: sticky;
+            top: 0;
+            @apply bg-primary-gray;
+        }
+    }
 }
 
 table {
@@ -94,16 +102,16 @@ table {
             }
         }
     }
-    &__resources{
-        tbody tr{
+    &__resources {
+        tbody tr {
             vertical-align: top;
             border-bottom: 1px solid #f1f1f1;
             background-color: #fff;
-            &:hover{
+            &:hover {
                 @apply bg-blue-0;
             }
-            td{
-                border:0;
+            td {
+                border: 0;
             }
         }
     }
