@@ -1,10 +1,10 @@
 import Api from './api'
 import { getURI } from '../helpers/api'
 
-class ContractServices {
-    static async FilterParameter() {
+class ContractService {
+    static async ContractList(params) {
         try {
-            const res = await Api.get(getURI('filter-parameter'))
+            const res = await Api.get(getURI('contracts'), params)
             return res.body
         } catch (error) {
             console.log(error)
@@ -12,4 +12,4 @@ class ContractServices {
     }
 }
 
-export default ContractServices
+export default ContractService

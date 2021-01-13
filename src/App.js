@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCountries, setCurrentLocale, setTranslations } from './store/reducers/general/action'
-import CountryServices from "./services/CountryServices"
+import { setContractMethods, setContractStates, setCountries, setCurrentLocale, setEquityIndicators, setProductCategories, setTranslations } from './store/reducers/general/action'
+import CountryService from "./services/CountryService"
 import Header from './layouts/_partials/header'
 import Footer from './layouts/_partials/footer'
 import NotFound from './components/NotFound/NotFound'
@@ -12,7 +12,7 @@ import CountryProfile from './layouts/pages/CountryProfile'
 import Library from './layouts/pages/Library'
 import News from './layouts/pages/News'
 import NewsDetail from './layouts/pages/News/NewsDetail'
-import Blogs from './layouts/pages/Blog/Blogs'
+import Blogs from './layouts/pages/Blog'
 import BlogsDetail from './layouts/pages/Blog/BlogsDetail'
 import Events from './layouts/pages/Events'
 import EventsDetail from './layouts/pages/Events/EventsDetail'
@@ -23,6 +23,8 @@ import Tags from './layouts/pages/Library/Tags'
 import TenderDetail from './layouts/pages/Tender/TenderDetail'
 import BuyerProfile from './layouts/pages/Buyer/BuyerProfile'
 import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
+import GeneralService from "./services/GeneralService"
+import equities from './store/static-data/equities.json'
 
 function App() {
     const dispatch = useDispatch()
@@ -33,7 +35,7 @@ function App() {
             setCurrentLocale(window.localStorage.getItem('locale') || 'es')
         )
 
-        CountryServices.getTranslations(currentLocale).then((response) => {
+        CountryService.getTranslations(currentLocale).then((response) => {
             if (response) {
                 dispatch(setTranslations(response))
             }
@@ -41,12 +43,21 @@ function App() {
     }, [dispatch, currentLocale])
 
     useEffect(() => {
-        CountryServices.Countries()
+        CountryService.Countries()
             .then((response) => {
                 if (response) {
                     dispatch(setCountries(response))
                 }
             })
+
+        GeneralService.getStaticFilters(currentLocale).then((response) => {
+            if (response) {
+                dispatch(setContractMethods(response.method))
+                dispatch(setContractStates(response.status))
+                dispatch(setProductCategories(response.products))
+                dispatch(setEquityIndicators(equities))
+            }
+        })
     }, [dispatch])
 
     return (

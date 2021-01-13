@@ -9,6 +9,7 @@ import Loader from "../../../components/Loader/Loader"
 import { API_URL } from '../../../helpers/api'
 
 const Tags = () => {
+    window.scrollTo(0, 0)
     const query = useQuery()
     const tag = query.get('tag')
     const type = query.get('type')

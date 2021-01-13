@@ -7,7 +7,7 @@ import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
 import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
-import CountryServices from '../../../services/CountryServices'
+import CountryService from '../../../services/CountryService'
 import AwardedItems from './tabs/AwardedItems'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
@@ -24,7 +24,7 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryServices.ContractDetailData(contractId).then(
+        CountryService.ContractDetailData(contractId).then(
             (response) => {
                 setTenderInfo(response)
             }

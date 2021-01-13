@@ -29,6 +29,7 @@ const apiRoutes = {
     'visualization.buyer-summary': 'api/v1/visualization/buyer-summary/',
     'visualization.supplier-summary': 'api/v1/visualization/supplier-summary/',
     'visualization.product-summary': 'api/v1/visualization/product-summary/',
+    'visualization.equity-summary': 'api/v1/visualization/equity-summary/',
 
     // Detail api
     'buyer-detail': 'api/v1/buyers',
@@ -46,8 +47,12 @@ const apiRoutes = {
     // cms api
     pages: 'api/v2/pages/',
 
-    // filter parameter
-    'filter-parameter': 'api/v1/visualization/filter-parameters/'
+    // filter parameters
+    'filter-parameter': 'api/v1/visualization/filter-parameters/',
+    //todo: make correction; 'filters' to 'filter'
+    'filter-parameters-static': 'api/v1/visualization/filters-parameters/static/',
+    'filter-parameters-buyers': 'api/v1/visualization/filters-parameters/buyers',
+    'filter-parameters-suppliers': 'api/v1/visualization/filters-parameters/suppliers'
 }
 
 export const getURI = (routeName) => {

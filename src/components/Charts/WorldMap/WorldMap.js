@@ -5,14 +5,14 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
-import CountryServices from '../../../services/CountryServices'
+import CountryService from '../../../services/CountryService'
 
 const WorldMap = ({ data }) => {
     const worldMapChartDiv = useRef(null)
     const [countryData, setCountryData] = useState([])
 
     useEffect(() => {
-        CountryServices.Countries().then((response) => {
+        CountryService.Countries().then((response) => {
             if (response) {
                 const countries = response.reduce((acc, current) => {
                     return { [current.name]: current, ...acc }

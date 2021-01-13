@@ -11,4 +11,16 @@ export const useQuery = () => {
     return new URLSearchParams(window.location.search)
 }
 
+// convert to Camel Case
+export const toCamelCase = (string) => {
+    var arr = string.match(/[a-z]+|\d+/gi)
+    return arr.map((m, i) => {
+        let low = m.toLowerCase()
+        if (i !== 0) {
+            low = low.split('').map((s, k) => k === 0 ? s.toUpperCase() : s).join``
+        }
+        return low
+    }).join``
+}
+
 export const twitterHandle = "covid19"

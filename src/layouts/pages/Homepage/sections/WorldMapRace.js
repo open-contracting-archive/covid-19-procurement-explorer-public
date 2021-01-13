@@ -12,7 +12,7 @@ import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_ch
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
 import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
-import CountryServices from '../../../../services/CountryServices'
+import CountryService from '../../../../services/CountryService'
 import Loader from '../../../../components/Loader/Loader'
 import ShareButtons from '../../../../components/Library/ShareButtons'
 import TenderTable from '../../../../components/Tables/TenderTable'
@@ -54,7 +54,7 @@ const WorldMapRace = () => {
     }
 
     useEffect(() => {
-        CountryServices.GetGlobalMapData().then((response) => {
+        CountryService.GetGlobalMapData().then((response) => {
             //Race Bar Chart Formatted Api Data
             const raceBarChartformatted = response.result.reduce(
                 (formattedData, d) => ({
@@ -184,14 +184,6 @@ const WorldMapRace = () => {
         }
     }
 
-    if (!contractDataApi) {
-        return <Loader />
-    }
-
-    if (!raceBarDataApi) {
-        return <Loader />
-    }
-
     return (
         <section className="pt-16 bg-primary-gray pb-24">
             <div className="text-center mb-10">
@@ -202,187 +194,188 @@ const WorldMapRace = () => {
                     {trans('Countries')}
                 </h3>
                 <p className="text-base text-opacity-50  text-primary-dark">
-                    {trans('Government spendings to fight COVID-19')}
+                    {trans('Government spending to fight COVID-19')}
                 </p>
             </div>
-            <div className="container mx-auto">
-                <div className="bg-white rounded p-6 simple-tab">
-                    <FullScreen handle={handle}>
-                        <Tabs>
-                            <div className="flex">
-                                <div className="flex w-full">
-                                    <div className="worldmap-tab">
-                                        <TabList>
-                                            <Tab>
-                                                <MapIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+            {!contractDataApi || !raceBarDataApi ? (<Loader />) : (
+                <div className="container mx-auto">
+                    <div className="bg-white rounded p-6 simple-tab">
+                        <FullScreen handle={handle}>
+                            <Tabs>
+                                <div className="flex">
+                                    <div className="flex w-full">
+                                        <div className="worldmap-tab">
+                                            <TabList>
+                                                <Tab>
+                                                    <MapIcon className="inline-block" />
+                                                    <span className="text-sm mt-1 inline-block">
                                                     {trans('Map')}
                                                 </span>
-                                            </Tab>
-                                            <Tab>
-                                                <ChartsIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                </Tab>
+                                                <Tab>
+                                                    <ChartsIcon className="inline-block" />
+                                                    <span className="text-sm mt-1 inline-block">
                                                     {trans('Charts')}
                                                 </span>
-                                            </Tab>
-                                            <Tab>
-                                                <TableIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                </Tab>
+                                                <Tab>
+                                                    <TableIcon className="inline-block" />
+                                                    <span className="text-sm mt-1 inline-block">
                                                     {trans('Table')}
                                                 </span>
-                                            </Tab>
-                                            <Tab>
-                                                <SourcesIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                </Tab>
+                                                <Tab>
+                                                    <SourcesIcon className="inline-block" />
+                                                    <span className="text-sm mt-1 inline-block">
                                                     {trans('Sources')}
                                                 </span>
-                                            </Tab>
-                                        </TabList>
-                                    </div>
-                                    <div
-                                        className="flex-1 relative"
-                                        style={{ width: 'calc(100% - 91px)' }}>
-                                        <TabPanel>
-                                            <div className="flex justify-end world-map-chart mb-4">
-                                                <ul className="contract-switch flex">
-                                                    <li
-                                                        className={`mr-4 cursor-pointer ${
-                                                            contractType ===
-                                                            'value'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            setContractType(
+                                                </Tab>
+                                            </TabList>
+                                        </div>
+                                        <div
+                                            className="flex-1 relative"
+                                            style={{ width: 'calc(100% - 91px)' }}>
+                                            <TabPanel>
+                                                <div className="flex justify-end world-map-chart mb-4">
+                                                    <ul className="contract-switch flex">
+                                                        <li
+                                                            className={`mr-4 cursor-pointer ${
+                                                                contractType ===
                                                                 'value'
-                                                            )
-                                                        }>
-                                                        {trans(
-                                                            'By contract value'
-                                                        )}
-                                                    </li>
-                                                    <li
-                                                        className={`cursor-pointer ${
-                                                            contractType ===
-                                                            'number'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            setContractType(
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setContractType(
+                                                                    'value'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By contract value'
+                                                            )}
+                                                        </li>
+                                                        <li
+                                                            className={`cursor-pointer ${
+                                                                contractType ===
                                                                 'number'
-                                                            )
-                                                        }>
-                                                        {trans(
-                                                            'By number of contracts'
-                                                        )}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
-                                                <Select
-                                                    className="select-filter text-sm"
-                                                    classNamePrefix="select-filter"
-                                                    options={options}
-                                                    value={selectedContinent}
-                                                    defaultValue={options[0]}
-                                                    onChange={(
-                                                        selectedOption
-                                                    ) =>
-                                                        handleContinentChange(
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setContractType(
+                                                                    'number'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By number of contracts'
+                                                            )}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
+                                                    <Select
+                                                        className="select-filter text-sm"
+                                                        classNamePrefix="select-filter"
+                                                        options={options}
+                                                        value={selectedContinent}
+                                                        defaultValue={options[0]}
+                                                        onChange={(
                                                             selectedOption
-                                                        )
+                                                        ) =>
+                                                            handleContinentChange(
+                                                                selectedOption
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <RaceMap
+                                                    contractData={contractDataApi}
+                                                    contractType={contractType}
+                                                    yearMonth={yearMonth}
+                                                    sliderData={sliderData || []}
+                                                    coordinates={
+                                                        continent[
+                                                            selectedContinent.value
+                                                            ]
                                                     }
                                                 />
-                                            </div>
-                                            <RaceMap
-                                                contractData={contractDataApi}
-                                                contractType={contractType}
-                                                yearMonth={yearMonth}
-                                                sliderData={sliderData || []}
-                                                coordinates={
-                                                    continent[
-                                                        selectedContinent.value
-                                                        ]
-                                                }
-                                            />
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <div className="flex justify-end">
-                                                <ul className="contract-switch flex">
-                                                    <li
-                                                        className={`mr-4 cursor-pointer ${
-                                                            raceBarType ===
-                                                            'value'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            setRaceBarType(
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <div className="flex justify-end">
+                                                    <ul className="contract-switch flex">
+                                                        <li
+                                                            className={`mr-4 cursor-pointer ${
+                                                                raceBarType ===
                                                                 'value'
-                                                            )
-                                                        }>
-                                                        {trans(
-                                                            'By contract value'
-                                                        )}
-                                                    </li>
-                                                    <li
-                                                        className={`cursor-pointer ${
-                                                            raceBarType ===
-                                                            'number'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            setRaceBarType(
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setRaceBarType(
+                                                                    'value'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By contract value'
+                                                            )}
+                                                        </li>
+                                                        <li
+                                                            className={`cursor-pointer ${
+                                                                raceBarType ===
                                                                 'number'
-                                                            )
-                                                        }>
-                                                        {trans(
-                                                            'By number of contracts'
-                                                        )}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
-                                                <Select
-                                                    className="select-filter text-sm"
-                                                    classNamePrefix="select-filter"
-                                                    options={options}
-                                                    value={selectedContinent}
-                                                    defaultValue={options[0]}
-                                                    onChange={(
-                                                        selectedOption
-                                                    ) =>
-                                                        handleContinentChange(
+                                                                    ? 'active'
+                                                                    : ''
+                                                            }`}
+                                                            onClick={() =>
+                                                                setRaceBarType(
+                                                                    'number'
+                                                                )
+                                                            }>
+                                                            {trans(
+                                                                'By number of contracts'
+                                                            )}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
+                                                    <Select
+                                                        className="select-filter text-sm"
+                                                        classNamePrefix="select-filter"
+                                                        options={options}
+                                                        value={selectedContinent}
+                                                        defaultValue={options[0]}
+                                                        onChange={(
                                                             selectedOption
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                            {loading ? (
-                                                <Loader />
-                                            ) : (
-                                                <RaceBarChart
-                                                    data={raceBarDataApi}
-                                                />
-                                            )}
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <TenderTable homepage />
-                                        </TabPanel>
-                                        <TabPanel>
-                                            Sources section coming soon !!
-                                        </TabPanel>
+                                                        ) =>
+                                                            handleContinentChange(
+                                                                selectedOption
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                {loading ? (
+                                                    <Loader />
+                                                ) : (
+                                                    <RaceBarChart
+                                                        data={raceBarDataApi}
+                                                    />
+                                                )}
+                                            </TabPanel>
+                                            <TabPanel>
+                                                <TenderTable homepage />
+                                            </TabPanel>
+                                            <TabPanel>
+                                                Sources section coming soon !!
+                                            </TabPanel>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Tabs>
-                    </FullScreen>
-                    <div
-                        className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
+                            </Tabs>
+                        </FullScreen>
+                        <div
+                            className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-6 px-6">
-                        <div className="flex">
+                            <div className="flex">
                             <span className="worldmap-share flex items-center relative">
                                 <ShareIcon className="mr-2 inline-block" />{' '}
                                 <span className="cursor-pointer">Share</span>
@@ -390,8 +383,8 @@ const WorldMapRace = () => {
                                     <ShareButtons url={url} />
                                 </div>
                             </span>
-                        </div>
-                        <div>
+                            </div>
+                            <div>
                             <span className="flex items-center">
                                 <button onClick={handle.enter}>
                                     <span className="cursor-pointer">
@@ -400,16 +393,17 @@ const WorldMapRace = () => {
                                     <FullViewIcon className="ml-2 inline-block" />
                                 </button>
                             </span>
+                            </div>
                         </div>
                     </div>
+                    <p className="mt-6 text-center text-sm">
+                        Don’t see your country data?{' '}
+                        <a href="#" className="text-primary-blue">
+                            Here’s how you can add your country data
+                        </a>
+                    </p>
                 </div>
-                <p className="mt-6 text-center text-sm">
-                    Don’t see your country data?{' '}
-                    <a href="#" className="text-primary-blue">
-                        Here’s how you can add your country data
-                    </a>
-                </p>
-            </div>
+            )}
         </section>
     )
 }

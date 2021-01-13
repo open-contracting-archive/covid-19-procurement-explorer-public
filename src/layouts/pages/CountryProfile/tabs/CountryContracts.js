@@ -1,14 +1,27 @@
 import React from 'react'
-import ContractsIndicator from '../../../../components/ContractsIndicator/ContractsIndicator'
+import { ContractsRedFlags } from "../../../../components/Visualizations"
 import { TenderTable } from '../../../../components/Tables'
 
-const CountryContracts = ({ country }) => {
+const CountryContracts = (props) => {
+    function renderMainVisualization() {
+        if (props.countryCode) {
+            return (<ContractsRedFlags params={{ country: props.countryCode }} />)
+        }
+    }
+
+    function renderTable() {
+        if (props.countryCode) {
+            return (<TenderTable params={{ country: props.countryCode }} />)
+        }
+    }
+
     return (
         <div>
-            <div className="w-full px-2 mb-16 global-profile">
-                <ContractsIndicator country={country} />
+            <div className="w-full mb-12 global-profile">
+                {/*{renderMainVisualization()}*/}
             </div>
-            <TenderTable params={{ country: country }} />
+
+            {renderTable()}
         </div>
     )
 }

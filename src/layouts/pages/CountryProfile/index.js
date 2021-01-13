@@ -19,7 +19,7 @@ import { DATA, INSIGHTS, CONTRACTS, EQUITY, BUYERS, SUPPLIERS, PRODUCTS, METHODO
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
     const [countryData, setCountryData] = useState({})
-    const [countryCode, setCountryCode] = useState()
+    const [countryCode, setCountryCode] = useState('')
     const { trans } = useTrans()
     let { countrySlug } = useParams()
     let { tabSlug } = useParams()
@@ -43,11 +43,11 @@ const CountryProfile = () => {
             case DATA:
                 return (<CountryData countryCode={countryCode} slug={countrySlug} />)
             case INSIGHTS:
-                return (<CountryInsights countryData={countryData} />)
+                return (<CountryInsights countryId={countryData.id} />)
             case CONTRACTS:
-                return (<CountryContracts country={countryCode} />)
+                return (<CountryContracts countryCode={countryCode} />)
             case EQUITY:
-                return (<CountryEquity profileData={countryData} />)
+                return (<CountryEquity countryCode={countryCode} />)
             case BUYERS:
                 return (<CountryBuyers country={countryCode} />)
             case SUPPLIERS:

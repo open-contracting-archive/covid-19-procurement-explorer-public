@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import SankeyChart from '../Charts/SankeyChart/SankeyChart'
-import Loader from '../Loader/Loader'
-import useTrans from '../../hooks/useTrans'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import SankeyChart from '../../Charts/SankeyChart/SankeyChart'
+import Loader from '../../Loader/Loader'
+import useTrans from '../../../hooks/useTrans'
+import { ReactComponent as DownloadIcon } from '../../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../../assets/img/icons/ic_fullscreen.svg'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationServices from '../../../services/visualizationServices'
 
 function CountrySuppliers({ label, params }) {
     // ===========================================================================
