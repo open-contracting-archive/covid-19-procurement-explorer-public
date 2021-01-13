@@ -30,7 +30,7 @@ const BuyerProfile = () => {
     const { trans } = useTrans()
     let history = useHistory()
     window.scrollTo(0, 0)
-    
+
     const previousPage = () => {
         history.goBack()
     }
@@ -51,7 +51,6 @@ const BuyerProfile = () => {
             setBuyerInfo(response)
         })
     }, [id])
-
 
     // ===========================================================================
     // Handlers and functions
@@ -79,13 +78,20 @@ const BuyerProfile = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag
                             className="rounded-sm mr-2"
-                            code={buyerInfo && get(buyerInfo, 'country_code').toLowerCase()}
+                            code={
+                                buyerInfo &&
+                                get(buyerInfo, 'country_code').toLowerCase()
+                            }
                         />
-                        <p className="mr-2 text-sm">{get(buyerInfo, 'country_name')}</p>
+                        <p className="mr-2 text-sm">
+                            {get(buyerInfo, 'country_name')}
+                        </p>
                     </div>
                 </div>
 
-                <BuyerProductTimeline label="Products Timeline" />
+                <div className="border border-blue-0 rounded mb-10">
+                    <BuyerProductTimeline label="Products Timeline" />
+                </div>
             </div>
             <div
                 style={{
@@ -95,7 +101,10 @@ const BuyerProfile = () => {
                 <div className="container mx-auto px-4 ">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full lg:w-1/3 px-2 mb-6">
-                            <TotalSpending label="Total Spending" params={{ buyer: id }} />
+                            <TotalSpending
+                                label="Total Spending"
+                                params={{ buyer: id }}
+                            />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <TotalContracts

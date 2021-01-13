@@ -235,7 +235,7 @@ class VisualizationServices {
             console.log(error)
         }
     }
-    
+
     static async CountryPartners(params) {
         try {
             const res = await Api.get(
@@ -259,11 +259,23 @@ class VisualizationServices {
             console.log(error)
         }
     }
-    
+
     static async SupplierSummary(params) {
         try {
             const res = await Api.get(
                 getURI('visualization.supplier-summary'),
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async ProductSummary(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.product-summary'),
                 params
             )
             return res.body

@@ -13,7 +13,8 @@ const apiRoutes = {
     'visualization.product-distribution':
         'api/v1/visualization/product-distribution/',
     'visualization.product-timeline': 'api/v1/visualization/product-timeline/',
-    'visualization.product-timeline-race': 'api/v1/visualization/product-timeline-race/',
+    'visualization.product-timeline-race':
+        'api/v1/visualization/product-timeline-race/',
     'visualization.contract-status': 'api/v1/visualization/contract-status/',
     'visualization.quantity-correlation':
         'api/v1/visualization/quantity-correlation/',
@@ -27,6 +28,7 @@ const apiRoutes = {
     'visualization.country-partners': 'api/v1/visualization/country-partners/',
     'visualization.buyer-summary': 'api/v1/visualization/buyer-summary/',
     'visualization.supplier-summary': 'api/v1/visualization/supplier-summary/',
+    'visualization.product-summary': 'api/v1/visualization/product-summary/',
 
     // Detail api
     'buyer-detail': 'api/v1/buyers',

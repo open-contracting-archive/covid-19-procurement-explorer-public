@@ -14,10 +14,10 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import CompareChart from '../Charts/CompareChart/CompareChart'
 import useTrans from '../../hooks/useTrans'
 import 'react-simple-hook-modal/dist/styles.css'
-
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
+import HelpText from '../../components/HelpText/HelpText'
 
-function TotalSpending({ label = 'Total Spending', params }) {
+function TotalSpending({ label = 'Total Spending', params, helpText }) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -59,7 +59,7 @@ function TotalSpending({ label = 'Total Spending', params }) {
     // Function to sort by date
     const sortDate = (data) => {
         return data.sort((date1, date2) => {
-            return dateDiff(date1, date2)
+            return dateDiff(date1.date, date2.date)
         })
     }
 
@@ -69,6 +69,7 @@ function TotalSpending({ label = 'Total Spending', params }) {
         lineChartData(get(totalSpending[currency], 'line_chart'))
     const totalSpendingAreaChartData =
         totalSpendingAreaChartDataRaw && sortDate(totalSpendingAreaChartDataRaw)
+
     const totalSpendingAmount =
         totalSpending && get(totalSpending[currency], 'total')
     const totalSpendingPercentage =
@@ -95,9 +96,12 @@ function TotalSpending({ label = 'Total Spending', params }) {
         <div
             onClick={openModal}
             className="bg-white rounded p-4 h-full cursor-pointer">
-            <h3 className="uppercase font-bold text-primary-dark">
-                {trans(label ? label : 'Total Spending')}
-            </h3>
+            <div className="flex items-center">
+                <h3 className="uppercase font-bold text-primary-dark inline-block">
+                    {trans(label ? label : 'Total Spending')}
+                </h3>
+                <HelpText helpTextInfo={helpText} />
+            </div>
             {loading ? (
                 <Loader sm />
             ) : (

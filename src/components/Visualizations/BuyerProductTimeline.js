@@ -51,7 +51,7 @@ function BuyerProductTimeline({ label, params }) {
     const barColorValue = '#ABBABF'
 
     return (
-        <div className="bg-white rounded p-4 h-full border mb-10">
+        <div className="bg-white rounded p-4 h-full mb-10">
             <FullScreen handle={handle}>
                 <div className="flex justify-between">
                     <h3 className="uppercase font-bold  text-primary-dark">
