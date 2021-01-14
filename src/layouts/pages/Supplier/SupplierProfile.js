@@ -8,7 +8,7 @@ import {
     GlobalSuppliers,
     ProductDistribution,
     ProductsTimeline,
-    TopSuppliers,
+    TopBuyers,
     TotalContracts,
     TotalSpending,
     DirectOpen
@@ -132,8 +132,8 @@ const SupplierProfile = () => {
                             />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-6">
-                            <TopSuppliers
-                                label="Top suppliers"
+                            <TopBuyers
+                                label="Top Buyers"
                                 params={{ supplier: id }}
                             />
                         </div>
