@@ -37,7 +37,6 @@ const ContractEquityIndicators = ({ params }) => {
 
     // Prepare chart data
     useEffect(() => {
-        console.log('processing data')
         let chartData = []
         let grouped = groupBy(originalData, (item) => {
             return formatDate(item.month, 'YYYY-MM')

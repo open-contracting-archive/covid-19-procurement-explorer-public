@@ -10,6 +10,24 @@ class ContractService {
             console.log(error)
         }
     }
+
+    static async FilterBuyersParameter(params) {
+        try {
+            const res = await Api.get(getURI('filter-parameters-buyers'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async FilterSuppliersParameter(params) {
+        try {
+            const res = await Api.get(getURI('filter-parameters-suppliers'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default ContractService
