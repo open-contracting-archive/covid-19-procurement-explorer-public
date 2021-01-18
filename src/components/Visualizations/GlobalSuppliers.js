@@ -65,7 +65,7 @@ function GlobalSuppliers({ label, params }) {
         globalSuppliers && getSuppliersData(globalSuppliers, 'by_value')
 
     return (
-        <div className="bg-white border rounded p-4 simple-tab">
+        <div className="bg-white border border-blue-0 rounded p-4 simple-tab">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                     {label}
