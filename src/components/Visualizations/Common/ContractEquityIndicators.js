@@ -13,7 +13,8 @@ import { toCamelCase } from "../../../helpers/general"
 import Default from "../../../constants/Default"
 import ContractView from "../../../constants/ContractView"
 
-const ContractEquityIndicators = ({ params }) => {
+const ContractEquityIndicators = (props) => {
+    const { params } = props
     const equities = useSelector((state) => state.general.equities)
     const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)

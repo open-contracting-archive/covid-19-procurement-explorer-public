@@ -5,10 +5,11 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function AverageBidsPerContract({ label, params }) {
+const AverageBidsPerContract = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [averageBids, setAverageBids] = useState()
     const { trans } = useTrans()
@@ -21,7 +22,7 @@ function AverageBidsPerContract({ label, params }) {
             setAverageBids(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions

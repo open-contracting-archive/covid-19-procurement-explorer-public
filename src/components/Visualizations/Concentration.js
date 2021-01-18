@@ -3,10 +3,11 @@ import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
 import VisualizationServices from '../../services/visualizationServices'
 
-function Concentration({ label, params }) {
+const Concentration = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [productDistribution, setProductDistribution] = useState()
 
@@ -19,7 +20,7 @@ function Concentration({ label, params }) {
                 setProductDistribution(response)
                 setLoading(false)
             })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions

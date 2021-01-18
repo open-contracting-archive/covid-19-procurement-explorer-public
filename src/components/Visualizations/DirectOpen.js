@@ -8,10 +8,11 @@ import VisualizationServices from '../../services/visualizationServices'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
-function DirectOpen({ label, params, heightFull }) {
+const DirectOpen = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params, heightFull } = props
     const [loading, setLoading] = useState(true)
     const [directOpen, setDirectOpen] = useState()
     const currency = useSelector((state) => state.general.currency)
@@ -20,13 +21,12 @@ function DirectOpen({ label, params, heightFull }) {
     // ===========================================================================
     // Hooks
     // ===========================================================================
-
     useEffect(() => {
         VisualizationServices.DirectOpen(params).then((response) => {
             setDirectOpen(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions

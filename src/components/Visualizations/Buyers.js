@@ -4,10 +4,11 @@ import { formatDate, dateDiff } from '../../helpers/date'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 
-function Buyers({ label, params }) {
+const Buyers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [buyerSummary, setBuyerSummary] = useState()
 

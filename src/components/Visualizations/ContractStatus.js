@@ -20,12 +20,13 @@ const contract_status_data = [
     }
 ]
 
-function ContractStatus({ label, params }) {
+const ContractStatus = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [contractStatus, setContractStatus] = useState()
+    const [contractStatus, setContractStatus] = useState([])
     const { trans } = useTrans()
 
     // ===========================================================================
@@ -37,7 +38,7 @@ function ContractStatus({ label, params }) {
                 setContractStatus(response)
                 setLoading(false)
             })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions

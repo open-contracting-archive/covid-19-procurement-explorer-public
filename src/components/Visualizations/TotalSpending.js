@@ -17,27 +17,26 @@ import 'react-simple-hook-modal/dist/styles.css'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import HelpText from '../../components/HelpText/HelpText'
 
-function TotalSpending({ label = 'Total Spending', params, helpText }) {
+const TotalSpending = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const [totalSpending, setTotalSpending] = useState()
+    const { label = 'Total Spending', params, helpText } = props
+    const [totalSpending, setTotalSpending] = useState([])
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector(
-        (state) => state.general.countryCurrency
-    )
+    const countryCurrency = useSelector((state) => state.general.countryCurrency)
     const { isModalOpen, openModal, closeModal } = useModal()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
-
     useEffect(() => {
-        VisualizationServices.TotalSpending(params).then((response) => {
-            setTotalSpending(response)
-            setLoading(false)
-        })
+        VisualizationServices.TotalSpending(params)
+            .then((response) => {
+                setTotalSpending(response)
+                setLoading(false)
+            })
     }, [params])
 
     // ===========================================================================
@@ -94,7 +93,7 @@ function TotalSpending({ label = 'Total Spending', params, helpText }) {
 
     return (
         <div
-            onClick={openModal}
+            // onClick={openModal}
             className="bg-white rounded p-4 h-full cursor-pointer">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">

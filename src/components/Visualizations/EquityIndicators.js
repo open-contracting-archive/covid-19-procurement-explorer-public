@@ -6,24 +6,13 @@ import Loader from '../Loader/Loader'
 import VisualizationServices from '../../services/visualizationServices'
 import { useSelector } from 'react-redux'
 
-// Add Pie Chart data
-const pie_chart_data = [
-    {
-        value: 'Value',
-        number: 30
-    },
-    {
-        value: 'Number',
-        number: 70
-    }
-]
-
 const colors = ['#ABBABF', '#DCEAEE']
 
-function EquityIndicators({ label, params, heightFull }) {
+const EquityIndicators = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params, heightFull } = props
     const [loading, setLoading] = useState(true)
     const [equity, setEquity] = useState()
     const { trans } = useTrans()
@@ -32,11 +21,12 @@ function EquityIndicators({ label, params, heightFull }) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.Equity(params).then((response) => {
-            setEquity(response)
-            setLoading(false)
-        })
-    }, [])
+        VisualizationServices.Equity(params)
+            .then((response) => {
+                setEquity(response)
+                setLoading(false)
+            })
+    }, [params])
 
     const currency = useSelector((state) => state.general.currency)
 

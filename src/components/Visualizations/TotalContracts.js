@@ -6,12 +6,13 @@ import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
-function TotalContracts({ label = 'Total Contracts', params }) {
+const TotalContracts = (props) => {
     const barColorValue = '#ABBABF'
 
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label = 'Total Contracts', params } = props
     const [loading, setLoading] = useState(true)
     const [totalContracts, setTotalContracts] = useState()
     const { trans } = useTrans()

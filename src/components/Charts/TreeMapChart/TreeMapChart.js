@@ -1,5 +1,5 @@
 /* Imports */
-import React, { Fragment, useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -7,39 +7,19 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 const TreeMapChart = ({ data }) => {
     const treeMapChart = useRef(null)
 
+    function processData(data) {
+        return data.map(({ name, value }) => {
+            return { name, children: [{ name, count: value }] }
+        })
+    }
+
     useLayoutEffect(() => {
+        // console.log('date updated')
         /* Chart code */
         // Themes begin
         am4core.useTheme(am4themes_animated)
+
         // Themes end
-
-        function processData(data) {
-            let treeData = []
-
-            let smallBrands = { name: 'Other', children: [] }
-
-            for (var brand in data) {
-                let brandData = { name: brand, children: [] }
-                let brandTotal = 0
-                for (var model in data[brand]) {
-                    brandTotal += data[brand][model]
-
-                    if (data[brand][model] > 100) {
-                        brandData.children.push({
-                            name: model,
-                            count: data[brand][model]
-                        })
-                    }
-                }
-
-                // only bigger brands
-                if (brandTotal > 200000) {
-                    treeData.push(brandData)
-                }
-            }
-
-            return treeData
-        }
 
         // Create chart instance
         let chart = am4core.create(treeMapChart.current, am4charts.TreeMap)
@@ -52,7 +32,6 @@ const TreeMapChart = ({ data }) => {
         chart.dataFields.value = 'count'
         chart.dataFields.name = 'name'
         chart.dataFields.children = 'children'
-        chart.homeText = 'Products'
 
         // enable navigation
         chart.navigationBar = new am4charts.NavigationBar()
@@ -89,7 +68,8 @@ const TreeMapChart = ({ data }) => {
         bullet1.locationY = 0.5
         bullet1.label.text = '{name}'
         bullet1.label.fill = am4core.color('#ffffff')
-        bullet1.label.fontSize = 9
+        bullet1.label.fontSize = 14
+        bullet1.label.wrap = true
         bullet1.label.fillOpacity = 0.7
 
         chart.data = processData(data)
