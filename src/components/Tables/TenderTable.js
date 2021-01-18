@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import Select from 'react-select'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { get, has, identity, pickBy } from 'lodash'
 import ContractService from '../../services/ContractService'
@@ -89,6 +89,7 @@ const TenderTable = (props) => {
     const [suppliersFilterOption, setSuppliersFilterOption] = useState([])
     const { trans } = useTrans()
     const history = useHistory()
+    let { countrySlug } = useParams()
 
     // ===========================================================================
     // Hooks
@@ -96,6 +97,17 @@ const TenderTable = (props) => {
     useEffect(() => {
         LoadContractList()
     }, [selectedFilters])
+
+    useEffect(() => {
+        if (countrySlug && countrySlug != 'global') {
+            getBuyersFilterParameter({
+                country: params.country
+            })
+            getSuppliersFilterParameter({
+                country: params.country
+            })
+        }
+    }, [params])
 
     // ===========================================================================
     // Helpers and functions
@@ -494,7 +506,10 @@ const TenderTable = (props) => {
                             {!tenderList.length && (
                                 <div
                                     className="flex items-center justify-center bg-white rounded-md"
-                                    style={{ height: '75%' }}>
+                                    style={{
+                                        height: '75%',
+                                        minHeight: '250px'
+                                    }}>
                                     <p>No data available</p>
                                 </div>
                             )}
