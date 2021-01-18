@@ -33,3 +33,31 @@ export const setCountries = (countries) => {
         payload: countries
     }
 }
+
+export const setContractMethods = (methods) => {
+    return {
+        type: types.SET_CONTRACT_METHODS,
+        payload: methods
+    }
+}
+
+export const setContractStates = (states) => {
+    return {
+        type: types.SET_CONTRACT_STATES,
+        payload: states
+    }
+}
+
+export const setProductCategories = (productCategories) => {
+    return {
+        type: types.SET_PRODUCT_CATEGORIES,
+        payload: productCategories
+    }
+}
+
+export const setEquityIndicators = (equityIndicators) => {
+    return {
+        type: types.SET_EQUITY_INDICATORS,
+        payload: equityIndicators
+    }
+}

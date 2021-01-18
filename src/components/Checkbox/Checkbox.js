@@ -1,15 +1,20 @@
 import React from 'react'
 
-function Checkbox() {
+function Checkbox(props) {
+
     return (
         <div className="styled-checkbox">
             <input
                 className="styled-checkbox-input"
-                id="styled-checkbox-1"
+                id={props.id}
                 type="checkbox"
-                value="value1"
+                value={props.value}
+                checked={props.checked}
+                onChange={(e) => {
+                    props.itemSelected(e.target.value)
+                }}
             />
-            <label htmlFor="styled-checkbox-1"></label>
+            <label htmlFor={props.id} />
         </div>
     )
 }

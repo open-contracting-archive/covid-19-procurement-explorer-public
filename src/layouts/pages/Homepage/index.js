@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import useTrans from '../../../hooks/useTrans'
 import WorldMapRace from './sections/WorldMapRace'
 import NewsSection from './sections/NewsSection'
@@ -33,8 +34,8 @@ const Home = () => {
                                 height: '200px'
                             }}
                             className="[ flex flex-wrap md:flex-no-wrap justify-center ] pt-12 w-full text-white bg-primary-dark">
-                            <a
-                                href="/global-overview/data"
+                            <Link
+                                to="/global-overview/data"
                                 className="flex [ mr-12 mb-10 ] text-center">
                                 <div>
                                     <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
@@ -44,8 +45,8 @@ const Home = () => {
                                         {trans('Stats from countries')}
                                     </p>
                                 </div>
-                            </a>
-                            <a href="/library" className="flex text-center">
+                            </Link>
+                            <Link to="/library" className="flex text-center">
                                 <div>
                                     <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
                                         {trans('Explore library')}
@@ -54,7 +55,7 @@ const Home = () => {
                                         {trans('Best practices and resources')}
                                     </p>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -65,7 +66,7 @@ const Home = () => {
                 <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
             </section>
 
-             <WorldMapRace/>
+            <WorldMapRace />
 
             <NewsSection />
 

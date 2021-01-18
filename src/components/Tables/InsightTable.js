@@ -1,20 +1,21 @@
 import React, { Fragment, useState, useEffect } from "react"
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { identity, pickBy } from 'lodash'
 import Select from 'react-select'
 import CmsPageService from "../../services/CmsPageService"
 import Loader from '../Loader/Loader'
 import { ReactComponent as SortIcon } from "../../assets/img/icons/ic_sort.svg"
 
-const InsightTable = (props) => {
+const InsightTable = ({ params }) => {
     const countries = useSelector((state) => state.general.countries)
     const [insightList, setInsightList] = useState([])
     const [loading, setLoading] = useState(true)
     const history = useHistory()
 
     useEffect(() => {
-        const queryParams = props.country !== undefined ? { country: props.country.id } : {}
-        CmsPageService.InsightList(queryParams)
+        let queryParameters = identity(pickBy(params))
+        CmsPageService.InsightList(queryParameters)
             .then((result) => {
                 setInsightList(result)
                 setLoading(false)
@@ -22,7 +23,7 @@ const InsightTable = (props) => {
             .catch(() => {
                 setLoading(false)
             })
-    }, props)
+    }, [params])
 
     const getCountryName = (countryId) => {
         const country = countries.find((country) => country.id === countryId)

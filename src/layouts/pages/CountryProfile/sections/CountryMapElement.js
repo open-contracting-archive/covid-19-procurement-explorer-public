@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import VisualizationServices from '../../../../services/visualizationServices'
 import CountryMap from '../../../../components/Charts/CountryMap/CountryMap'
+import useTrans from '../../../../hooks/useTrans'
+import Loader from '../../../../components/Loader/Loader'
 import { ReactComponent as DownloadIcon } from '../../../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../../../assets/img/icons/ic_fullscreen.svg'
-import VisualizationServices from '../../../../services/visualizationServices'
-import useTrans from '../../../../hooks/useTrans'
-import Loader from '../../../../components/Loader/Loader'
 
 const CountryMapElement = ({ countryCode }) => {
     const [loading, setLoading] = useState(true)
     const [contractType, setContractType] = useState('value')
-    // const [countryVisualizationData, setCountryVisualizationData] = useState([])
     const [mapData, setMapData] = useState()
     const handle = useFullScreenHandle()
     const { trans } = useTrans()
 
     useEffect(() => {
-        if (countryCode !== undefined && countryCode !== null) {
+        if (countryCode) {
             VisualizationServices.CountryMap({ country: countryCode })
                 .then((response) => {
                     const mapData = [

@@ -167,15 +167,6 @@ class VisualizationServices {
         }
     }
 
-    static async ContractList(params) {
-        try {
-            const res = await Api.get(getURI('contracts'), params)
-            return res.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     static async ProductTimeline(params) {
         try {
             const res = await Api.get(
@@ -272,10 +263,24 @@ class VisualizationServices {
         }
     }
 
+
     static async ProductSummary(params) {
         try {
             const res = await Api.get(
                 getURI('visualization.product-summary'),
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async EquitySummary(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.equity-summary'),
+
                 params
             )
             return res.body

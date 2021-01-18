@@ -1,15 +1,23 @@
 import React from 'react'
+import { ContractsRedFlags } from "../../../../components/Visualizations"
 import { TenderTable } from '../../../../components/Tables'
-import ContractsIndicator from '../../../../components/ContractsIndicator/ContractsIndicator'
 
 const GlobalContracts = () => {
+    function renderMainVisualization() {
+        return (<ContractsRedFlags />)
+    }
+
+    function renderTable() {
+        return (<TenderTable />)
+    }
+
     return (
         <div>
-            {/* <div className="w-full px-2 mb-16 global-profile">
-                <ContractsIndicator />
-            </div> */}
+            <div className="w-full mb-12 global-profile">
+                {/*{renderMainVisualization()}*/}
+            </div>
 
-            <TenderTable params={{}} />
+            {renderTable()}
         </div>
     )
 }

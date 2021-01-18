@@ -1,12 +1,17 @@
 import * as types from './type'
+import Default from "../../../constants/Default"
 
 const initialState = {
     currentCountry: null,
-    currentLocale: 'en',
+    currentLocale: Default.LOCALE,
     translations: { en: {}, es: {} },
-    currency: 'usd',
+    currency: Default.CURRENCY_USD,
     countryCurrency: '',
-    countries: []
+    countries: [],
+    equities: [],
+    contractMethods: [],
+    contractStates: [],
+    productCategories: []
 }
 
 const GeneralReducer = (state = initialState, { type, payload }) => {
@@ -28,6 +33,18 @@ const GeneralReducer = (state = initialState, { type, payload }) => {
 
         case types.SET_COUNTRIES:
             return { ...state, countries: payload }
+
+        case types.SET_CONTRACT_METHODS:
+            return { ...state, contractMethods: payload }
+
+        case types.SET_CONTRACT_STATES:
+            return { ...state, contractStates: payload }
+
+        case types.SET_PRODUCT_CATEGORIES:
+            return { ...state, productCategories: payload }
+
+        case types.SET_EQUITY_INDICATORS:
+            return { ...state, equities: payload }
 
         default:
             return state

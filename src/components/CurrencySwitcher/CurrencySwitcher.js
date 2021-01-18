@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrency } from '../../store/reducers/general/action'
+import Default from "../../constants/Default"
 
 const CurrencySwitcher = () => {
     const selectedCurrency = useSelector((state) => state.general.currency)
@@ -25,7 +26,7 @@ const CurrencySwitcher = () => {
                         ? 'text-white bg-primary-dark'
                         : 'opacity-50'
                 } `}
-                onClick={() => changeCurrency('usd')}>
+                onClick={() => changeCurrency(Default.CURRENCY_USD)}>
                 USD
             </button>
             <button
@@ -37,7 +38,7 @@ const CurrencySwitcher = () => {
                         ? 'text-white bg-primary-dark'
                         : 'opacity-50'
                 }`}
-                onClick={() => changeCurrency('local')}>
+                onClick={() => changeCurrency(Default.CURRENCY_LOCAL)}>
                 {countryCurrency || '---'}
             </button>
         </div>

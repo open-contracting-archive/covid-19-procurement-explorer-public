@@ -2,7 +2,7 @@ import axios from "axios"
 import Api from './api'
 import { API_URL, getURI } from '../helpers/api'
 
-class CountryServices {
+class CountryService {
     static async Countries() {
         try {
             const response = await Api.get(getURI('countries'))
@@ -66,4 +66,4 @@ class CountryServices {
     }
 }
 
-export default CountryServices
+export default CountryService

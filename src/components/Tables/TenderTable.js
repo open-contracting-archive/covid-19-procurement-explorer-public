@@ -1,15 +1,14 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import Select from 'react-select'
-import { get, pickBy, identity } from 'lodash'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
-import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
+import { get, has, identity, pickBy } from 'lodash'
+import ContractService from '../../services/ContractService'
 import Loader from '../Loader/Loader'
-import VisualizationServices from '../../services/visualizationServices'
 import useTrans from '../../hooks/useTrans'
 import { formatDate } from '../../helpers/date'
-import ContractServices from '../../services/ContractServices'
+import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
+import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 
 const options = [
     { value: 'option-1', label: 'Option 1' },
@@ -17,93 +16,56 @@ const options = [
     { value: 'option-3', label: 'Option 3' }
 ]
 
-const valueRange = [
-    {
-        value: {
-            sign: 'lt',
-            value: 1000
-        },
-        label: '< 1,000'
-    },
-    {
-        value: {
-            sign: 'gt',
-            value: 1000
-        },
-        label: '> 1,000'
-    },
-    {
-        value: {
-            sign: 'lt',
-            value: 10000
-        },
-        label: '< 10,000'
-    },
-    {
-        value: {
-            sign: 'gt',
-            value: 10000
-        },
-        label: '> 10,000'
-    },
-    {
-        value: {
-            sign: 'lt',
-            value: 100000
-        },
-        label: '< 100,000'
-    },
-    {
-        value: {
-            sign: 'gt',
-            value: 100000
-        },
-        label: '> 100,000'
-    },
-    {
-        value: {
-            sign: 'lt',
-            value: 1000000
-        },
-        label: '< 1,000,000'
-    },
-    {
-        value: {
-            sign: 'gt',
-            value: 1000000
-        },
-        label: '> 1,000,000'
-    },
-
-    {
-        value: {
-            sign: 'lt',
-            value: 100000000
-        },
-        label: '< 100,000,000'
-    },
-    {
-        value: {
-            sign: 'gt',
-            value: 100000000
-        },
-        label: '> 100,000,000'
-    }
-]
-
-function TenderTable({ homepage, params }) {
+const TenderTable = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { params } = props
     const countries = useSelector((state) => state.general.countries)
+    const contractMethods = useSelector((state) => state.general.contractMethods)
+    const productCategories = useSelector((state) => state.general.productCategories)
     const [tenderList, setTenderList] = useState([])
     const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(true)
-    const [filterParameter, setFilterParameter] = useState({})
-    const [filterOptions, setFilterOptions] = useState({})
-    const [filterLoading, setFilterLoading] = useState(false)
-    const [selectedFilters, setSelectedFilters] = useState({})
-    const [contractTitleParameter, setContractTitleParameter] = useState()
+    const [selectedFilters, setSelectedFilters] = useState(() => identity(pickBy(params)))
+    const [contractTitleParameter, setContractTitleParameter] = useState('')
+
+    const countrySelectList = useMemo(() => {
+        return [{ label: 'All ', value: '' }, ...countries
+            .filter((country) => country.name !== 'Global')
+            .map((country) => {
+                return { label: country.name, value: country.country_code_alpha_2 }
+            })
+            .sort((a, b) => {
+                return a.label < b.label ? -1 : 0
+            })]
+    }, [countries])
+    const contractMethodSelectList = useMemo(() => {
+        return [{ label: 'All', value: '' }, ...contractMethods]
+    }, [contractMethods])
+    const productSelectList = useMemo(() => {
+        return [{ label: 'All', value: '' }, ...productCategories
+            .map((productCategory) => {
+                return { label: productCategory.name, value: productCategory.id }
+            })
+            .sort((a, b) => {
+                return a.label < b.label ? -1 : 0
+            })]
+    }, [productCategories])
+    const valueRanges = useMemo(() => {
+        return [{ label: 'All', value: '' },
+            ...[
+                { sign: 'lt', value: 1000 },
+                { sign: 'gt', value: 1000 },
+                { sign: 'gt', value: 10000 },
+                { sign: 'gt', value: 100000 },
+                { sign: 'gt', value: 1000000 },
+                { sign: 'gt', value: 100000000 }
+            ].map((item) => {
+                return { value: item, label: `${item.sign === 'gt' ? '>' : '<'} ${item.value.toLocaleString()}` }
+            })]
+    }, [])
+
     const { trans } = useTrans()
     const history = useHistory()
 
@@ -111,90 +73,59 @@ function TenderTable({ homepage, params }) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        setSelectedFilters(identity(pickBy(params)))
-    }, [params])
-
-    // useEffect(() => {
-    //     const data = countries.map((country) => {
-    //         return {
-    //             label: country.name,
-    //             value: country.country_code_alpha_2
-    //         }
-    //     })
-    //     setFilterOptions({ ...filterOptions, countries: data })
-    // }, [countries])
-
-    useEffect(() => {
         LoadContractList()
     }, [selectedFilters])
-
-    // console.log(countries)
-
-    useEffect(() => {
-        const countryParameter = countries.map((country) => {
-            return {
-                label: country.name,
-                value: country.country_code_alpha_2
-            }
-        })
-        // console.log(countryParameter)
-
-        ContractServices.FilterParameter().then((response) => {
-            const data = response
-            const productParameter =
-                data.product &&
-                data.product.map((product) => {
-                    return {
-                        label: product.name,
-                        value: product.id
-                    }
-                })
-
-            const methodParameter =
-                data.contracts &&
-                data.contracts.method.map((method) => {
-                    return {
-                        label: method.label,
-                        value: method.value
-                    }
-                })
-            setFilterOptions({
-                ...filterOptions,
-                products: productParameter,
-                countries: countryParameter,
-                methods: methodParameter
-            })
-        })
-    }, [countries])
-    // console.log(filterOptions)
 
     // ===========================================================================
     // Helpers and functions
     // ===========================================================================
     const showDetail = (id) => {
-        let path = `/contracts/${id}`
-        history.push(path)
+        history.push(`/contracts/${id}`)
     }
 
     const LoadContractList = () => {
-        VisualizationServices.ContractList({
+        console.log('running')
+        ContractService.ContractList({
             ...selectedFilters
         }).then((response) => {
             if (response) {
                 setTenderList([...response.results])
                 setPagination(response.next)
-                setFilterLoading(false)
             }
             setLoading(false)
         })
     }
-    // console.log(selectedFilters)
 
     const hasCountry = () => {
         return (
+            has(params, 'country') &&
             params.country !== undefined &&
             params.country !== null &&
             params.country !== ''
+        )
+    }
+    const hasBuyer = () => {
+        return (
+            has(params, 'buyer') &&
+            params.buyer !== undefined &&
+            params.buyer !== null &&
+            params.buyer !== ''
+        )
+    }
+    const hasSupplier = () => {
+        return (
+            has(params, 'supplier') &&
+            params.supplier !== undefined &&
+            params.supplier !== null &&
+            params.supplier !== ''
+        )
+    }
+    const hasProduct = () => {
+        return (
+            has(params, 'product') &&
+            params.product !== undefined &&
+            params.product !== null &&
+            params.product !== ''
         )
     }
 
@@ -204,9 +135,7 @@ function TenderTable({ homepage, params }) {
             : 'table-row cursor-pointer'
     }
 
-    const handleFilter = (selected) => {
-        setFilterLoading(true)
-        // console.log(selected)
+    const appendFilter = (selected) => {
         setSelectedFilters((previous) => {
             return {
                 ...previous,
@@ -217,7 +146,7 @@ function TenderTable({ homepage, params }) {
 
     const handleInputSubmit = (event, contractTitle) => {
         event.preventDefault()
-        handleFilter({ title: contractTitle })
+        appendFilter({ title: contractTitle })
     }
 
     // console.log(dateRange)
@@ -225,115 +154,96 @@ function TenderTable({ homepage, params }) {
 
     return (
         <div>
-            {loading ? (
-                <Loader />
-            ) : (
-                <Fragment>
-                    <div
-                        className={`mb-12 flex gap-8 justify-between ${
-                            homepage ? 'hidden' : ''
-                        }`}>
-                        {!hasCountry() ? (
-                            <div className="w-40">
-                                <p className="uppercase text-xs opacity-50 leading-none">
-                                    Country
-                                </p>
-                                <Select
-                                    className="select-filter text-sm"
-                                    classNamePrefix="select-filter"
-                                    options={filterOptions.countries}
-                                    onChange={(selectedOption) =>
-                                        handleFilter({
-                                            country: selectedOption.value
-                                        })
-                                    }
-                                />
-                            </div>
-                        ) : (
-                            ''
-                        )}
-
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Contract title
-                            </p>
-                            <form
-                                className="mt-2 select-filter--input"
-                                onSubmit={(event) =>
-                                    handleInputSubmit(
-                                        event,
-                                        contractTitleParameter
+            <Fragment>
+                <div
+                    className="mb-12 flex gap-8 justify-between">
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            Contract title
+                        </p>
+                        <form
+                            className="mt-2 select-filter--input"
+                            onSubmit={(event) =>
+                                handleInputSubmit(
+                                    event,
+                                    contractTitleParameter
+                                )
+                            }>
+                            <input
+                                type="text"
+                                className="select-filter"
+                                placeholder="Enter contract name"
+                                value={contractTitleParameter}
+                                onChange={(e) =>
+                                    setContractTitleParameter(
+                                        e.target.value
                                     )
-                                }>
-                                <input
-                                    type="text"
-                                    className="select-filter"
-                                    placeholder="Enter contract name"
-                                    value={contractTitleParameter}
-                                    onChange={(e) =>
-                                        setContractTitleParameter(
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                            </form>
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Buyer
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Supplier
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Method
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={filterOptions.methods}
-                                onChange={(selectedOption) =>
-                                    handleFilter({
-                                        procurement_procedure:
-                                            selectedOption.value
-                                    })
                                 }
                             />
-                        </div>
+                        </form>
+                    </div>
 
+                    {!hasCountry() && (
                         <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none whitespace-no-wrap">
-                                Product category
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                {trans('Country')}
                             </p>
                             <Select
                                 className="select-filter text-sm"
                                 classNamePrefix="select-filter"
-                                options={filterOptions.products}
-                                onChange={(selectedOption) =>
-                                    handleFilter({
-                                        product: selectedOption.value
-                                    })
-                                }
+                                options={countrySelectList}
+                                onChange={(selectedOption) => appendFilter({ country: selectedOption.value })}
                             />
                         </div>
+                    )}
 
-                        {/* <div className="w-40">
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            Buyer
+                        </p>
+                        <Select
+                            className="select-filter text-sm"
+                            classNamePrefix="select-filter"
+                            options={options}
+                            defaultValue={options[0]}
+                        />
+                    </div>
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            Supplier
+                        </p>
+                        <Select
+                            className="select-filter text-sm"
+                            classNamePrefix="select-filter"
+                            options={options}
+                            defaultValue={options[0]}
+                        />
+                    </div>
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            Method
+                        </p>
+                        <Select
+                            className="select-filter text-sm"
+                            classNamePrefix="select-filter"
+                            options={contractMethodSelectList}
+                            onChange={(selectedOption) => appendFilter({ procurement_procedure: selectedOption.value })}
+                        />
+                    </div>
+
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none whitespace-no-wrap">
+                            Product category
+                        </p>
+                        <Select
+                            className="select-filter text-sm"
+                            classNamePrefix="select-filter"
+                            options={productSelectList}
+                            onChange={(selectedOption) => appendFilter({ product: selectedOption.value })}
+                        />
+                    </div>
+
+                    {/* <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
                                 Data range
                             </p>
@@ -370,257 +280,126 @@ function TenderTable({ homepage, params }) {
                                 </div>
                             </div>
                         </div> */}
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Value range
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={valueRange}
-                                // defaultValue={options[0]}
-                                onChange={(selectedOption) =>
-                                    handleFilter({
-                                        contract_value_usd:
-                                            selectedOption.value.value,
-                                        value_comparison:
-                                            selectedOption.value.sign
-                                    })
-                                }
-                            />
-                            {/* ?contract_value_usd=1200000&value_comparison=gt  */}
-                        </div>
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            Value range
+                        </p>
+                        <Select
+                            className="select-filter text-sm"
+                            classNamePrefix="select-filter"
+                            options={valueRanges}
+                            onChange={(selectedOption) =>
+                                appendFilter({
+                                    contract_value_usd:
+                                    selectedOption.value.value,
+                                    value_comparison:
+                                    selectedOption.value.sign
+                                })
+                            }
+                        />
                     </div>
-                    {filterLoading ? (
-                        <Loader />
-                    ) : (
-                        <div className="custom-scrollbar table-scroll">
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: '25%' }}>
+                </div>
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <div className="custom-scrollbar table-scroll">
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th style={{ width: '25%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Contract Title')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                </th>
+                                {!hasCountry() && (
+                                    <th>
                                             <span className="flex items-center">
-                                                {trans('Contract Title')}{' '}
+                                                {trans('Country')}{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                        {!get(params, 'buyer') && (
-                                            <th>
-                                                <span className="flex items-center">
-                                                    {trans('Buyer')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
-                                                </span>
-                                            </th>
-                                        )}
-                                        {!get(params, 'supplier') && (
-                                            <th>
-                                                <span className="flex items-center">
-                                                    {trans('Supplier')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
-                                                </span>
-                                            </th>
-                                        )}
-                                        <th style={{ width: '10%' }}>
+                                    </th>
+                                )}
+                                {!hasBuyer() && (
+                                    <th>
                                             <span className="flex items-center">
-                                                {trans('Method')}{' '}
+                                                {trans('Buyer')}{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                        <th style={{ width: '20%' }}>
+                                    </th>
+                                )}
+                                {!hasSupplier() && (
+                                    <th>
+                                            <span className="flex items-center">
+                                                {trans('Supplier')}{' '}
+                                                <SortIcon className="ml-1 cursor-pointer" />
+                                            </span>
+                                    </th>
+                                )}
+                                <th style={{ width: '10%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Method')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                </th>
+                                {!hasSupplier() && (
+                                    <th>
                                             <span className="flex items-center">
                                                 {trans('Product Category')}{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
-                                            <span className="flex items-center">
-                                                {trans('Date')}{' '}
-                                                <SortIcon className="ml-1 cursor-pointer" />
-                                            </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
-                                            <span className="flex items-center">
-                                                {trans('Value (USD)')}{' '}
-                                                <SortIcon className="ml-1 cursor-pointer" />
-                                            </span>
-                                        </th>
-                                        <th />
-                                    </tr>
-                                </thead>
-
-                                {homepage ? (
-                                    <tbody>
-                                        {tenderList &&
-                                            tenderList
-                                                .slice(0, 10)
-                                                .map((tender, index) => {
-                                                    return (
-                                                        <tr
-                                                            key={index}
-                                                            onClick={() =>
-                                                                showDetail(
-                                                                    tender.id
-                                                                )
-                                                            }
-                                                            className={tableRowClass(
-                                                                tender.red_flag
-                                                            )}>
-                                                            <td className="uppercase">
-                                                                {
-                                                                    tender.contract_title
-                                                                }
-                                                            </td>
-                                                            {!get(
-                                                                params,
-                                                                'buyer'
-                                                            ) && (
-                                                                <td className="uppercase">
-                                                                    {get(
-                                                                        tender,
-                                                                        'buyer.buyer_name'
-                                                                    )}
-                                                                </td>
-                                                            )}
-                                                            {!get(
-                                                                params,
-                                                                'supplier'
-                                                            ) && (
-                                                                <td className="uppercase">
-                                                                    {get(
-                                                                        tender,
-                                                                        'supplier.supplier_name'
-                                                                    )}
-                                                                </td>
-                                                            )}
-                                                            <td className="capitalize">
-                                                                {
-                                                                    tender.procurement_procedure
-                                                                }
-                                                            </td>
-                                                            <td>
-                                                                {get(
-                                                                    tender,
-                                                                    'product.product_name'
-                                                                )}
-                                                            </td>
-                                                            <td>
-                                                                {formatDate(
-                                                                    tender.contract_date
-                                                                )}
-                                                            </td>
-                                                            <td>
-                                                                {tender.contract_value_usd &&
-                                                                    tender.contract_value_usd.toLocaleString(
-                                                                        'en'
-                                                                    )}
-                                                            </td>
-                                                            <td>
-                                                                {tender.red_flag && (
-                                                                    <span className="mr-4">
-                                                                        <FlagIcon />
-                                                                    </span>
-                                                                )}
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })}
-                                    </tbody>
-                                ) : (
-                                    <tbody>
-                                        {tenderList &&
-                                            tenderList.map((tender, index) => {
-                                                return (
-                                                    <tr
-                                                        key={index}
-                                                        onClick={() =>
-                                                            showDetail(
-                                                                tender.id
-                                                            )
-                                                        }
-                                                        className={tableRowClass(
-                                                            tender.red_flag
-                                                        )}>
-                                                        <td className="uppercase">
-                                                            {
-                                                                tender.contract_title
-                                                            }
-                                                        </td>
-                                                        {!get(
-                                                            params,
-                                                            'buyer'
-                                                        ) && (
-                                                            <td className="uppercase">
-                                                                {get(
-                                                                    tender,
-                                                                    'buyer.buyer_name'
-                                                                )}
-                                                            </td>
-                                                        )}
-                                                        {!get(
-                                                            params,
-                                                            'supplier'
-                                                        ) && (
-                                                            <td className="uppercase">
-                                                                {get(
-                                                                    tender,
-                                                                    'supplier.supplier_name'
-                                                                )}
-                                                            </td>
-                                                        )}
-                                                        <td className="capitalize">
-                                                            {
-                                                                tender.procurement_procedure
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            {get(
-                                                                tender,
-                                                                'product_category'
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {formatDate(
-                                                                tender.contract_date
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {tender.contract_value_usd &&
-                                                                tender.contract_value_usd.toLocaleString(
-                                                                    'en'
-                                                                )}
-                                                        </td>
-                                                        <td>
-                                                            {tender.red_flag && (
-                                                                <span className="mr-4">
-                                                                    <FlagIcon />
-                                                                </span>
-                                                            )}
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
-                                    </tbody>
+                                    </th>
                                 )}
-                            </table>
-                            {!tenderList.length && (
-                                <div
-                                    className="flex items-center justify-center bg-white rounded-md"
-                                    style={{ height: '90%' }}>
-                                    <p>No data available</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                                <th style={{ width: '10%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Date')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                </th>
+                                <th style={{ width: '10%' }}>
+                                        <span className="flex items-center">
+                                            {trans('Value (USD)')}{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                </th>
+                                <th />
+                            </tr>
+                            </thead>
 
-                    {homepage ? (
-                        <div className="text-center my-8">
-                            <Link
-                                to="/global-overview/contracts"
-                                className="text-primary-blue">
-                                View all
-                            </Link>
-                        </div>
-                    ) : (
+                            <tbody>
+                            {tenderList &&
+                            tenderList.map((tender, index) => {
+                                return (
+                                    <tr
+                                        key={index}
+                                        onClick={() => showDetail(tender.id)}
+                                        className={tableRowClass(tender.red_flag)}>
+                                        <td>{tender.contract_title}</td>
+                                        {!hasCountry() && (
+                                            <td>{tender.country_name}</td>
+                                        )}
+                                        {!hasBuyer() && (
+                                            <td>{get(tender, 'buyer.buyer_name')}</td>
+                                        )}
+                                        {!hasSupplier() && (
+                                            <td>{get(tender, 'supplier.supplier_name')}</td>
+                                        )}
+                                        <td className="capitalize">{tender.procurement_procedure}</td>
+                                        {!hasProduct() && (
+                                            <td>{get(tender, 'product_category')}</td>
+                                        )}
+                                        <td>{formatDate(tender.contract_date)}</td>
+                                        <td>
+                                            {tender.contract_value_usd && tender.contract_value_usd.toLocaleString('en')}
+                                        </td>
+                                        <td>
+                                            {tender.red_flag && (<span className="mr-4"><FlagIcon /></span>)}
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
                         <div className="text-center mt-8">
                             <button
                                 className="text-primary-blue"
@@ -628,9 +407,16 @@ function TenderTable({ homepage, params }) {
                                 Load more
                             </button>
                         </div>
-                    )}
-                </Fragment>
-            )}
+                        {!tenderList.length && (
+                            <div
+                                className="flex items-center justify-center bg-white rounded-md"
+                                style={{ height: '90%' }}>
+                                <p>No data available</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </Fragment>
         </div>
     )
 }
