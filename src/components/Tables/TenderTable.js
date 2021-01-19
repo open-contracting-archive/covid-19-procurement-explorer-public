@@ -246,33 +246,40 @@ const TenderTable = (props) => {
                             />
                         </div>
                     )}
-
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
-                            Buyer
-                        </p>
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={buyersFilterOption}
-                            onChange={(selectedOption) =>
-                                appendFilter({ buyer: selectedOption.value })
-                            }
-                        />
-                    </div>
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
-                            Supplier
-                        </p>
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={suppliersFilterOption}
-                            onChange={(selectedOption) =>
-                                appendFilter({ supplier: selectedOption.value })
-                            }
-                        />
-                    </div>
+                    {!hasBuyer() && (
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Buyer
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={buyersFilterOption}
+                                onChange={(selectedOption) =>
+                                    appendFilter({
+                                        buyer: selectedOption.value
+                                    })
+                                }
+                            />
+                        </div>
+                    )}
+                    {!hasSupplier() && (
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Supplier
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={suppliersFilterOption}
+                                onChange={(selectedOption) =>
+                                    appendFilter({
+                                        supplier: selectedOption.value
+                                    })
+                                }
+                            />
+                        </div>
+                    )}
                     <div className="w-40">
                         <p className="uppercase text-xs opacity-50 leading-none">
                             Method
@@ -375,7 +382,7 @@ const TenderTable = (props) => {
                                             </span>
                                         </th>
                                         {!hasCountry() && (
-                                            <th>
+                                            <th style={{ width: '10%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Country')}{' '}
                                                     <SortIcon className="ml-1 cursor-pointer" />
@@ -383,7 +390,7 @@ const TenderTable = (props) => {
                                             </th>
                                         )}
                                         {!hasBuyer() && (
-                                            <th>
+                                            <th style={{ width: '15%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Buyer')}{' '}
                                                     <SortIcon className="ml-1 cursor-pointer" />
@@ -391,7 +398,7 @@ const TenderTable = (props) => {
                                             </th>
                                         )}
                                         {!hasSupplier() && (
-                                            <th>
+                                            <th style={{ width: '15%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Supplier')}{' '}
                                                     <SortIcon className="ml-1 cursor-pointer" />
@@ -404,14 +411,12 @@ const TenderTable = (props) => {
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
                                         </th>
-                                        {!hasSupplier() && (
-                                            <th>
-                                                <span className="flex items-center">
-                                                    {trans('Product Category')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
-                                                </span>
-                                            </th>
-                                        )}
+                                        <th style={{ width: '15%' }}>
+                                            <span className="flex items-center">
+                                                {trans('Product Category')}{' '}
+                                                <SortIcon className="ml-1 cursor-pointer" />
+                                            </span>
+                                        </th>
                                         <th style={{ width: '10%' }}>
                                             <span className="flex items-center">
                                                 {trans('Date')}{' '}
