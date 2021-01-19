@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
@@ -24,11 +24,9 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryService.ContractDetailData(contractId).then(
-            (response) => {
-                setTenderInfo(response)
-            }
-        )
+        CountryService.ContractDetailData(contractId).then((response) => {
+            setTenderInfo(response)
+        })
     }, [contractId])
 
     return (
@@ -54,7 +52,7 @@ const TenderDetail = () => {
                         <span
                             className={`status-indicator ${
                                 tenderInfo && tenderInfo.status
-                                }`}></span>
+                            }`}></span>
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.status}
                         </p>
@@ -67,7 +65,8 @@ const TenderDetail = () => {
                                 get(
                                     tenderInfo,
                                     'country_alpha_code'
-                                ).toLowerCase()}
+                                ).toLowerCase()
+                            }
                         />
                         <p className="mr-2 text-sm">
                             {tenderInfo && tenderInfo.country_name}
@@ -80,7 +79,10 @@ const TenderDetail = () => {
                             {trans('Contract signed')}
                         </p>
                         <p className="font-bold text-sm">
-                            {formatDate(tenderInfo && tenderInfo.contract_date, 'MMM D, YYYY')}
+                            {formatDate(
+                                tenderInfo && tenderInfo.contract_date,
+                                'MMM D, YYYY'
+                            )}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
@@ -95,7 +97,7 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Number of bidders')}
                         </p>
-                        <p className="font-bold text-xl">7</p>
+                        <p className="font-bold text-xl">-</p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
@@ -126,8 +128,9 @@ const TenderDetail = () => {
                             {trans('Contract value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {tenderInfo &&
-                                formatNumber(tenderInfo.contract_value_usd)}
+                            {(tenderInfo &&
+                                formatNumber(tenderInfo.contract_value_usd)) ||
+                                '-'}{' '}
                             <span className="font-normal text-base uppercase">
                                 USD
                             </span>
@@ -145,7 +148,7 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Procuring entity')}
                         </p>
-                        <p className="font-bold text-sm uppercase">CIAD</p>
+                        <p className="font-bold text-sm uppercase">-</p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
@@ -161,25 +164,32 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Supplier')}
                         </p>
-                        <p className="font-bold text-sm uppercase">
-                            {get(tenderInfo, 'supplier.supplier_name')}
-                            {/* {tenderInfo.supplier &&
+                        <Link
+                            to={`/suppliers/${get(
+                                tenderInfo,
+                                'supplier.supplier_id'
+                            )}`}>
+                            <p className="font-bold text-sm uppercase">
+                                {get(tenderInfo, 'supplier.supplier_name')}
+                                {/* {tenderInfo.supplier &&
                                 tenderInfo.supplier.supplier_name} */}
-                        </p>
+                            </p>
+                        </Link>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-10 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
                             {trans('Supplier address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(tenderInfo, 'supplier.supplier_address')}
+                            {get(tenderInfo, 'supplier.supplier_address') ||
+                                '-'}
                             {/* {tenderInfo && tenderInfo.supplier.supplier_address} */}
                         </p>
                     </div>
                 </div>
             </div>
-            <div className="container mx-auto px-4" />
-            <Tabs>
+            {/* <div className="container mx-auto px-4" /> */}
+            {/* <Tabs>
                 <div className="container mx-auto px-4 ">
                     <TabList>
                         <Tab>{trans('Awarded items')}</Tab>
@@ -196,7 +206,7 @@ const TenderDetail = () => {
                         </TabPanel>
                     </div>
                 </div>
-            </Tabs>
+            </Tabs> */}
         </section>
     )
 }
