@@ -7,35 +7,38 @@ import Loader from '../../../../components/Loader/Loader'
 import { ReactComponent as DownloadIcon } from '../../../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../../../assets/img/icons/ic_fullscreen.svg'
+import ContractView from "../../../../constants/ContractView"
 
 const CountryMapElement = ({ countryCode }) => {
     const [loading, setLoading] = useState(true)
-    const [contractType, setContractType] = useState('value')
-    const [mapData, setMapData] = useState()
+    const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [originalData, setOriginalData] = useState({})
+    const [mapData, setMapData] = useState([])
     const handle = useFullScreenHandle()
     const { trans } = useTrans()
 
     useEffect(() => {
-        if (countryCode) {
-            VisualizationServices.CountryMap({ country: countryCode })
-                .then((response) => {
-                    const mapData = [
-                        {
-                            id: response.country_code,
-                            value:
-                                contractType === 'value'
-                                    ? response.amount_usd
-                                    : response.tender_count
-                        }
-                    ]
-                    setMapData(mapData)
-                    setLoading(false)
-                })
-        }
+        VisualizationServices.CountryMap({ country: countryCode })
+            .then((response) => {
+                setOriginalData(response)
+                setLoading(false)
+            })
     }, [countryCode])
 
+    useEffect(() => {
+        if (originalData.country_code) {
+            const mapDataFormatted = [
+                {
+                    id: originalData.country_code,
+                    value: viewType === ContractView.VALUE ? originalData.amount_usd : originalData.tender_count
+                }
+            ]
+            setMapData(mapDataFormatted)
+        }
+    }, [originalData, viewType])
+
     const isActiveTab = (type) => {
-        return contractType === type ? 'active' : ''
+        return viewType === type ? 'active' : ''
     }
 
     return (
@@ -45,17 +48,13 @@ const CountryMapElement = ({ countryCode }) => {
                     <div className="flex justify-end">
                         <ul className="contract-switch flex">
                             <li
-                                className={`mr-4 cursor-pointer ${isActiveTab(
-                                    'value'
-                                )}`}
-                                onClick={() => setContractType('value')}>
+                                className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
+                                onClick={() => setViewType(ContractView.VALUE)}>
                                 {trans('By contract value')}
                             </li>
                             <li
-                                className={`mr-4 cursor-pointer ${isActiveTab(
-                                    'number'
-                                )}`}
-                                onClick={() => setContractType('value')}>
+                                className={`mr-4 cursor-pointer ${isActiveTab(ContractView.NUMBER)}`}
+                                onClick={() => setViewType(ContractView.NUMBER)}>
                                 {trans('By number of contracts')}
                             </li>
                         </ul>

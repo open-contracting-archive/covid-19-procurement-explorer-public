@@ -1,125 +1,96 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
-import BarListSection from '../BarListSection/BarListSection'
+import { isEmpty, sumBy } from 'lodash'
 import VisualizationServices from '../../services/visualizationServices'
 import { Link } from 'react-router-dom'
+import useTrans from "../../hooks/useTrans"
+import BarListChart from "../BarListSection/BarListChart"
+import ContractView from "../../constants/ContractView"
+import Default from "../../constants/Default"
 
-const top_buyer_bar_data = [
-    {
-        name: 'Kit de detección single',
-        value: '5%'
-    },
-    {
-        name: 'TaqPath 1-Step RT-qPC',
-        value: '68%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'TECNOLOGIA Y CALIFORNIA',
-        value: '45%'
-    },
-    {
-        name: 'REACTIVOS EXPERIMENT',
-        value: '12%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    },
-    {
-        name: 'LABORATORIO MEDICO',
-        value: '85%'
-    }
-]
-
-function TopBuyers({ label, params, viewLink }) {
+const TopBuyers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params, viewLink } = props
     const [loading, setLoading] = useState(true)
-    const [topBuyers, setTopBuyers] = useState()
+    const currency = useSelector((state) => state.general.currency)
+    const [originalData, setOriginalData] = useState([])
+    const [chartData, setChartData] = useState([])
+    const [viewType, setViewType] = useState(ContractView.VALUE)
+    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TopBuyers(params).then((response) => {
-            setTopBuyers(response)
-            setLoading(false)
-        })
-    }, [])
+        VisualizationServices.TopBuyers(params)
+            .then((response) => {
+                setOriginalData(response)
+                setLoading(false)
+            })
+    }, [params])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Top buyers
-    const calculateBuyersChartPercentage = (data, type) => {
-        if (type == 'by_value') {
-            let total = data.by_value.reduce((acc, current) => {
-                return acc + current.amount_local
-            }, 0)
-
-            let topSuppliersChartData = data.by_value.map((data) => {
+    useEffect(() => {
+        if (!isEmpty(originalData)) {
+            let dataSet = viewType === ContractView.VALUE ? originalData.by_value : originalData.by_number
+            let total = sumBy(dataSet, ((item) => {
+                return viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
+            }))
+            let chartDataFormatted = dataSet.map((item) => {
+                let actualValue = viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
                 return {
-                    name: data.buyer_name,
-                    value: Math.ceil((data.amount_local / total) * 100),
-                    amount: data.amount_local
+                    name: item.buyer_name,
+                    value: Math.ceil((actualValue / total) * 100),
+                    amount: actualValue
                 }
             })
-            return topSuppliersChartData
+            setChartData(chartDataFormatted)
         }
-        if (type == 'by_number') {
-            let total = data.by_number.reduce((acc, current) => {
-                return acc + current.tender_count
-            }, 0)
+    }, [originalData, viewType])
 
-            let topSuppliersChartData = data.by_number.map((data) => {
-                return {
-                    name: data.buyer_name,
-                    value: Math.ceil((data.tender_count / total) * 100),
-                    amount: data.tender_count
-                }
-            })
-            return topSuppliersChartData
-        }
+    const isActiveTab = (type) => {
+        return viewType === type ? 'active' : ''
     }
-    const topBuyersDataByNumber =
-        topBuyers && calculateBuyersChartPercentage(topBuyers, 'by_number')
-    const topBuyersDataByValue =
-        topBuyers && calculateBuyersChartPercentage(topBuyers, 'by_value')
 
     return (
         <div className="bg-white rounded h-full">
-            {loading ? (
-                <Loader />
-            ) : (
-                <Fragment>
-                    <BarListSection
-                        label={label}
-                        bar_data={top_buyer_bar_data}
-                        byNumber={
-                            topBuyersDataByNumber && topBuyersDataByNumber
-                        }
-                        byValue={topBuyersDataByValue && topBuyersDataByValue}
-                    />
-                    <Link
-                        to={viewLink}
-                        className="text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                        View All
-                    </Link>
-                </Fragment>
-            )}
+            <div className="bg-white rounded p-6 pb-0">
+                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                    {trans(label)}
+                </h3>
+                <div className="flex justify-end world-map-chart mb-4">
+                    <ul className="contract-switch flex">
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
+                            onClick={() => setViewType(ContractView.VALUE)}>
+                            {trans('By contract value')}
+                        </li>
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.NUMBER)}`}
+                            onClick={() => setViewType(ContractView.NUMBER)}>
+                            {trans('By number of contracts')}
+                        </li>
+                    </ul>
+                </div>
+                {loading ? (<Loader />) : (
+                    <div className="flex">
+                        <div className="flex-1">
+                            <div className="flex-1 simple-tab -mt-10">
+                                <div className="mt-10">
+                                    <BarListChart data={chartData} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <Link
+                to={viewLink}
+                className="text-primary-blue pt-3 pl-6 pb-6 inline-block">
+                View All
+            </Link>
         </div>
     )
 }

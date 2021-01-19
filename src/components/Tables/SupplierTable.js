@@ -7,7 +7,8 @@ import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 
-function SupplierTable({ params }) {
+const SupplierTable = (props) => {
+    const { params } = props
     const [suppliersList, setSuppliersList] = useState([])
     const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(true)

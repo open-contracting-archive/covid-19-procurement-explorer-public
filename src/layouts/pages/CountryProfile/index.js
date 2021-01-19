@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import useTrans from '../../../hooks/useTrans'
 import { setCountryCurrency } from '../../../store/reducers/general/action'
 import CountrySelector from "../../../components/CountrySelector/CountrySelector"
 import CountryMapElement from "./sections/CountryMapElement"
@@ -19,10 +18,8 @@ import { DATA, INSIGHTS, CONTRACTS, EQUITY, BUYERS, SUPPLIERS, PRODUCTS, METHODO
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
     const [countryData, setCountryData] = useState({})
-    const [countryCode, setCountryCode] = useState('')
-    const { trans } = useTrans()
-    let { countrySlug } = useParams()
-    let { tabSlug } = useParams()
+    const { countrySlug } = useParams()
+    const { tabSlug } = useParams()
     const dispatch = useDispatch()
 
     // ===========================================================================
@@ -33,7 +30,6 @@ const CountryProfile = () => {
 
         if (country) {
             setCountryData(country)
-            setCountryCode(country.country_code_alpha_2)
             dispatch(setCountryCurrency(country.currency))
         }
     }, [countries, countrySlug])
@@ -41,23 +37,23 @@ const CountryProfile = () => {
     const renderTab = () => {
         switch (tabSlug) {
             case DATA:
-                return (<CountryData countryCode={countryCode} slug={countrySlug} />)
+                return (<CountryData countryCode={countryData.country_code_alpha_2} />)
             case INSIGHTS:
                 return (<CountryInsights countryId={countryData.id} />)
             case CONTRACTS:
-                return (<CountryContracts countryCode={countryCode} />)
+                return (<CountryContracts countryCode={countryData.country_code_alpha_2} />)
             case EQUITY:
-                return (<CountryEquity countryCode={countryCode} />)
+                return (<CountryEquity countryCode={countryData.country_code_alpha_2} />)
             case BUYERS:
-                return (<CountryBuyers country={countryCode} />)
+                return (<CountryBuyers countryCode={countryData.country_code_alpha_2} />)
             case SUPPLIERS:
-                return (<CountrySuppliers country={countryCode} />)
+                return (<CountrySuppliers countryCode={countryData.country_code_alpha_2} />)
             case PRODUCTS:
-                return (<CountryProducts country={countryCode} />)
+                return (<CountryProducts countryCode={countryData.country_code_alpha_2} />)
             case METHODOLOGY: //to create component
                 return (<div>Methodology page</div>)
             default:
-                return (<CountryData countryCode={countryCode} slug={countrySlug} />)
+                return (<CountryData countryCode={countryData.country_code_alpha_2} />)
         }
     }
 
@@ -65,9 +61,9 @@ const CountryProfile = () => {
         <section className="pt-20 -mt-8 bg-blue-0">
             <section className="px-4">
                 <div className="container mx-auto">
-                    <CountrySelector countryCode={countryCode} slug={countrySlug} />
+                    <CountrySelector />
                     <div className="flex flex-wrap -mb-4">
-                        <CountryMapElement countryCode={countryCode} />
+                        <CountryMapElement countryCode={countryData.country_code_alpha_2} />
                         <CountryInfo country={countryData} />
                     </div>
                 </div>

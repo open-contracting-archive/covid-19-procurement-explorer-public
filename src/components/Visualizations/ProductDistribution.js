@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
-import BarListSection from '../BarListSection/BarListSection'
+import { isEmpty, sumBy } from 'lodash'
 import VisualizationServices from '../../services/visualizationServices'
+import useTrans from "../../hooks/useTrans"
+import BarListChart from "../BarListSection/BarListChart"
+import ContractView from "../../constants/ContractView"
+import Default from "../../constants/Default"
 
-const ProductDistribution = ({ params }) => {
+const ProductDistribution = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [productDistribution, setProductDistribution] = useState()
+    const currency = useSelector((state) => state.general.currency)
+    const [originalData, setOriginalData] = useState([])
+    const [chartData, setChartData] = useState([])
+    const [viewType, setViewType] = useState(ContractView.VALUE)
+    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -16,65 +26,72 @@ const ProductDistribution = ({ params }) => {
     useEffect(() => {
         VisualizationServices.ProductDistribution(params)
             .then((response) => {
-                setProductDistribution(response)
+                setOriginalData(response)
                 setLoading(false)
             })
-    }, [])
+    }, [params])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    const calculateProductChartPercentage = (data, type) => {
-        if (type === 'by_value') {
-            let total = data.reduce((acc, current) => {
-                return acc + current.amount_usd
-            }, 0)
+    useEffect(() => {
+        if (!isEmpty(originalData)) {
+            let total = sumBy(originalData, ((item) => {
+                return viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
+            }))
+            let chartDataFormatted = originalData
+                .sort((a, b) => {
+                    if (viewType === ContractView.NUMBER) {
+                        return a.tender_count > b.tender_count ? -1 : 0
+                    }
 
-            return data.map((data) => {
-                return {
-                    name: data.product_name,
-                    value: Math.ceil((data.amount_usd / total) * 100),
-                    amount: data.amount_usd
-                }
-            })
+                    return a.amount_usd > b.amount_usd ? -1 : 0
+                })
+                .map((item) => {
+                    let actualValue = viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
+                    return {
+                        name: item.product_name,
+                        value: Math.ceil((actualValue / total) * 100),
+                        amount: actualValue
+                    }
+                })
+            setChartData(chartDataFormatted)
         }
+    }, [originalData, viewType])
 
-        if (type === 'by_number') {
-            let total = data.reduce((acc, current) => {
-                return acc + current.tender_count
-            }, 0)
-
-            return data.map((data) => {
-                return {
-                    name: data.product_name,
-                    value: Math.ceil((data.tender_count / total) * 100),
-                    amount: data.tender_count
-                }
-            })
-        }
+    const isActiveTab = (type) => {
+        return viewType === type ? 'active' : ''
     }
-    const productDistributionDataByNumber =
-        productDistribution &&
-        calculateProductChartPercentage(productDistribution, 'by_number')
-    const productDistributionDataByValue =
-        productDistribution &&
-        calculateProductChartPercentage(productDistribution, 'by_value')
 
     return (
         <div className="bg-white rounded h-full">
-            {loading ? (<Loader />) : (
-                <BarListSection
-                    label="Product distribution"
-                    byNumber={
-                        productDistributionDataByNumber &&
-                        productDistributionDataByNumber
-                    }
-                    byValue={
-                        productDistributionDataByValue &&
-                        productDistributionDataByValue
-                    }
-                />
-            )}
+            <div className="bg-white rounded p-6 pb-0">
+                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                    {trans(label)}
+                </h3>
+                <div className="flex justify-end world-map-chart mb-4">
+                    <ul className="contract-switch flex">
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
+                            onClick={() => setViewType(ContractView.VALUE)}>
+                            {trans('By contract value')}
+                        </li>
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.NUMBER)}`}
+                            onClick={() => setViewType(ContractView.NUMBER)}>
+                            {trans('By number of contracts')}
+                        </li>
+                    </ul>
+                </div>
+                {loading ? (<Loader />) : (
+                    <div className="flex">
+                        <div className="flex-1">
+                            <div className="flex-1 simple-tab -mt-10">
+                                <div className="mt-10">
+                                    <BarListChart data={chartData} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

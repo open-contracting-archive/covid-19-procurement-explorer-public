@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import * as dayjs from 'dayjs'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
+import { dateDiff, formatDate } from "../../helpers/date"
 
-function Monopolization({ label, params }) {
+const Monopolization = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [monopolization, setMonopolization] = useState()
     const { trans } = useTrans()
@@ -17,11 +18,12 @@ function Monopolization({ label, params }) {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.monopolization(params).then((response) => {
-            setMonopolization(response)
-            setLoading(false)
-        })
-    }, [])
+        VisualizationServices.monopolization(params)
+            .then((response) => {
+                setMonopolization(response)
+                setLoading(false)
+            })
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions
@@ -33,7 +35,7 @@ function Monopolization({ label, params }) {
             chartData &&
             chartData.map((data) => {
                 return {
-                    date: dayjs(data.date).format('MMMM YYYY'),
+                    date: formatDate(data.date, 'MMMM YYYY'),
                     value: data.value
                 }
             })
@@ -43,7 +45,7 @@ function Monopolization({ label, params }) {
     // Function to sort by date
     const sortDate = (data) => {
         return data.sort((date1, date2) => {
-            return dayjs(date1.date).diff(dayjs(date2.date))
+            return dateDiff(date1.date, date2.date)
         })
     }
 

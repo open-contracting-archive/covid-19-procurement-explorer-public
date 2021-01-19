@@ -7,16 +7,15 @@ import Loader from '../../components/Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import VisualizationServices from '../../services/visualizationServices'
 
-function BuyerProductTimeline({ label, params }) {
+const BuyerProductTimeline = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [chartData, setChartData] = useState([])
     const [apiData, setApiData] = useState([])
-    const [buyerProductTimelineType, setBuyerProductTimelineType] = useState(
-        'value'
-    )
+    const [buyerProductTimelineType, setBuyerProductTimelineType] = useState('value')
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
@@ -28,7 +27,7 @@ function BuyerProductTimeline({ label, params }) {
             setApiData(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     useEffect(() => {
         const groupedData = apiData.slice(-1).pop()

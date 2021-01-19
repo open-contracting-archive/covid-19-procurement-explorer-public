@@ -64,7 +64,7 @@ const GlobalData = () => {
                         <GlobalSuppliers label="Global suppliers" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <ProductDistribution />
+                        <ProductDistribution label="Product Distribution" />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <ContractsRedFlags />

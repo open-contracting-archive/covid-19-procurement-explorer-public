@@ -9,13 +9,14 @@ import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { dateDiff } from '../../helpers/date'
 
-function ContractsCorrelation({label, params}) {
+const ContractsCorrelation = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [quantityCorrelation, setQuantityCorrelation] = useState()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     // ===========================================================================
@@ -29,7 +30,7 @@ function ContractsCorrelation({label, params}) {
                 }
                 setLoading(false)
             })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions

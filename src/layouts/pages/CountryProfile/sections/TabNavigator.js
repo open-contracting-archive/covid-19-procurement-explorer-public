@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom'
 import useTrans from "../../../../hooks/useTrans"
 import { tabItems } from "../../../../constants/Tab"
 
-const TabNavigator = ({ endpoint, countrySlug }) => {
+const TabNavigator = (props) => {
+    const { endpoint, countrySlug } = props
     const { trans } = useTrans()
     const pathTo = (tabItem) => {
         return countrySlug !== undefined ? `/${endpoint}/${countrySlug}/${tabItem}` : `/${endpoint}/${tabItem}`

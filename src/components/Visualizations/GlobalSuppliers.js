@@ -9,10 +9,11 @@ import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullsc
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../services/visualizationServices'
 
-function GlobalSuppliers({ label, params }) {
+const GlobalSuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const [globalSuppliers, setGlobalSuppliers] = useState()
     const { trans } = useTrans()
@@ -26,7 +27,7 @@ function GlobalSuppliers({ label, params }) {
             setGlobalSuppliers(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     // ===========================================================================
     // Handlers and functions

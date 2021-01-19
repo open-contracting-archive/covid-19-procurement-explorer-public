@@ -1,116 +1,96 @@
 import React, { useEffect, useState } from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import VisualizationServices from '../../services/visualizationServices'
-import useTrans from '../../hooks/useTrans'
+import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
-import BarListChart from '../BarListSection/BarListChart'
+import { isEmpty, sumBy } from 'lodash'
+import VisualizationServices from '../../services/visualizationServices'
 import { Link } from 'react-router-dom'
+import useTrans from "../../hooks/useTrans"
+import BarListChart from "../BarListSection/BarListChart"
+import ContractView from "../../constants/ContractView"
+import Default from "../../constants/Default"
 
-function TopSuppliers({ label, params, viewLink }) {
+const TopSuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params, viewLink } = props
     const [loading, setLoading] = useState(true)
-    const [topSuppliers, setTopSuppliers] = useState()
+    const currency = useSelector((state) => state.general.currency)
+    const [originalData, setOriginalData] = useState([])
+    const [chartData, setChartData] = useState([])
+    const [viewType, setViewType] = useState(ContractView.VALUE)
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TopSuppliers(params).then((response) => {
-            setTopSuppliers(response)
-            setLoading(false)
-        })
-    }, [])
+        VisualizationServices.TopSuppliers(params)
+            .then((response) => {
+                setOriginalData(response)
+                setLoading(false)
+            })
+    }, [params])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Top suppliers
-    const calculateBarChartPercentage = (data, type) => {
-        if (type === 'by_value') {
-            let total = data.by_value.reduce((acc, current) => {
-                return acc + current.amount_usd
-            }, 0)
-
-            return data.by_value.map((data) => {
+    useEffect(() => {
+        if (!isEmpty(originalData)) {
+            let dataSet = viewType === ContractView.VALUE ? originalData.by_value : originalData.by_number
+            let total = sumBy(dataSet, ((item) => {
+                return viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
+            }))
+            let chartDataFormatted = dataSet.map((item) => {
+                let actualValue = viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
                 return {
-                    name: data.supplier_name,
-                    value: Math.ceil((data.amount_usd / total) * 100),
-                    amount: data.amount_usd
+                    name: item.supplier_name,
+                    value: Math.ceil((actualValue / total) * 100),
+                    amount: actualValue
                 }
             })
+            setChartData(chartDataFormatted)
         }
+    }, [originalData, viewType])
 
-        if (type === 'by_number') {
-            let total = data.by_number.reduce((acc, current) => {
-                return acc + current.tender_count
-            }, 0)
-
-            return data.by_number.map((data) => {
-                return {
-                    name: data.supplier_name,
-                    value: Math.ceil((data.tender_count / total) * 100),
-                    amount: data.tender_count
-                }
-            })
-        }
+    const isActiveTab = (type) => {
+        return viewType === type ? 'active' : ''
     }
-    const topSuppliersDataByNumber =
-        topSuppliers && calculateBarChartPercentage(topSuppliers, 'by_number')
-    const topSuppliersDataByValue =
-        topSuppliers && calculateBarChartPercentage(topSuppliers, 'by_value')
 
     return (
         <div className="bg-white rounded h-full">
-            <div className="bg-white rounded p-6 h-full">
+            <div className="bg-white rounded p-6 pb-0">
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {label}
+                    {trans(label)}
                 </h3>
-                <div className="flex">
-                    <div className="flex-1">
-                        <div className="flex-1 simple-tab -mt-10">
-                            <Tabs>
-                                <div className="flex justify-end">
-                                    <TabList>
-                                        <Tab>{trans('By contract value')}</Tab>
-                                        <Tab>
-                                            {trans('By number of contracts')}
-                                        </Tab>
-                                    </TabList>
+                <div className="flex justify-end world-map-chart mb-4">
+                    <ul className="contract-switch flex">
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
+                            onClick={() => setViewType(ContractView.VALUE)}>
+                            {trans('By contract value')}
+                        </li>
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.NUMBER)}`}
+                            onClick={() => setViewType(ContractView.NUMBER)}>
+                            {trans('By number of contracts')}
+                        </li>
+                    </ul>
+                </div>
+                {loading ? (<Loader />) : (
+                    <div className="flex">
+                        <div className="flex-1">
+                            <div className="flex-1 simple-tab -mt-10">
+                                <div className="mt-10">
+                                    <BarListChart data={chartData} />
                                 </div>
-                                {loading ? (
-                                    <Loader />
-                                ) : (
-                                    <div className="mt-10">
-                                        <TabPanel>
-                                            <BarListChart
-                                                data={topSuppliersDataByValue}
-                                            />
-                                            <Link
-                                                to={viewLink}
-                                                className="text-primary-blue pt-3 inline-block">
-                                                View All
-                                            </Link>
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <BarListChart
-                                                data={topSuppliersDataByNumber}
-                                            />
-                                            <Link
-                                                to={viewLink}
-                                                className="text-primary-blue pt-3 inline-block">
-                                                View All
-                                            </Link>
-                                        </TabPanel>
-                                    </div>
-                                )}
-                            </Tabs>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
+            <Link
+                to={viewLink}
+                className="text-primary-blue pt-3 pl-6 pb-6 inline-block">
+                View All
+            </Link>
         </div>
     )
 }
