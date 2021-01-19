@@ -17,35 +17,6 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         // Create chart instance
         let chart = am4core.create(globalMapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
-        chart.exporting.menu = new am4core.ExportMenu()
-        chart.exporting.filePrefix = 'global_map_chart'
-        chart.exporting.menu.items = [
-            {
-                label: 'Download',
-                menu: [
-                    {
-                        label: 'Image',
-                        menu: [
-                            { type: 'png', label: 'PNG' },
-                            { type: 'jpg', label: 'JPG' },
-                            { type: 'pdf', label: 'PDF' }
-                        ]
-                    },
-                    {
-                        label: 'Data',
-                        menu: [
-                            { type: 'json', label: 'JSON' },
-                            { type: 'csv', label: 'CSV' },
-                            { type: 'pdfdata', label: 'PDF' }
-                        ]
-                    },
-                    {
-                        label: 'Print',
-                        type: 'print'
-                    }
-                ]
-            }
-        ]
 
         // Set map definition
         chart.geodata = am4geodata_worldLow

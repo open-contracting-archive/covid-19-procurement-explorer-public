@@ -13,7 +13,6 @@ const NewsSection = () => {
     useEffect(() => {
         CmsPageService.NewsList()
             .then((response) => {
-                // console.log(response)
                 setNewsData(response.items)
                 setLoading(false)
                 setNoData(false)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import useTrans from '../../hooks/useTrans'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import Loader from '../../components/Loader/Loader'
@@ -15,7 +16,9 @@ const BuyerProductTimeline = (props) => {
     const [loading, setLoading] = useState(true)
     const [chartData, setChartData] = useState([])
     const [apiData, setApiData] = useState([])
-    const [buyerProductTimelineType, setBuyerProductTimelineType] = useState('value')
+    const [buyerProductTimelineType, setBuyerProductTimelineType] = useState(
+        'value'
+    )
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
@@ -90,7 +93,7 @@ const BuyerProductTimeline = (props) => {
                     <>
                         <SimpleBarChart
                             data={chartData}
-                            height="500px"
+                            height="600px"
                             barColorValue={barColorValue}
                             chartKey="product"
                             chartValue="value"
@@ -99,7 +102,11 @@ const BuyerProductTimeline = (props) => {
                         <div
                             className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-4 px-4">
-                            <div className="flex">
+                            <div className="flex items-center">
+                                <div className="flex items-center mr-6">
+                                    <DownloadIcon className="mr-2 inline-block" />
+                                    <span>Download</span>
+                                </div>
                                 <span className="worldmap-share flex items-center relative">
                                     <ShareIcon className="mr-2 inline-block" />{' '}
                                     <span className="cursor-pointer">
@@ -107,6 +114,7 @@ const BuyerProductTimeline = (props) => {
                                     </span>
                                 </span>
                             </div>
+
                             <div>
                                 <span className="flex items-center">
                                     <button onClick={handle.enter}>

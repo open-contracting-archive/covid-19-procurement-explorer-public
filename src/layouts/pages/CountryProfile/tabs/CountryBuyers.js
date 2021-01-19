@@ -24,13 +24,16 @@ const CountryBuyers = (props) => {
                 <div className="w-full lg:w-1/3 px-2 mb-6">
                     <TotalSpending
                         label="Total Spending"
+                        helpText="This is a help text for the total income visualization"
                         params={{ country: countryCode, buyer: 'notnull' }}
                     />
                 </div>
             </div>
             <BuyerTable params={{ country: countryCode }} />
         </div>
-    ) : ('')
+    ) : (
+        ''
+    )
 }
 
 export default CountryBuyers

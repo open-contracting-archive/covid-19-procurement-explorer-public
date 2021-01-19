@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationServices from '../../services/visualizationServices'
-import useTrans from "../../hooks/useTrans"
-import BarListChart from "../BarListSection/BarListChart"
-import ContractView from "../../constants/ContractView"
-import Default from "../../constants/Default"
+import useTrans from '../../hooks/useTrans'
+import BarListChart from '../BarListSection/BarListChart'
+import ContractView from '../../constants/ContractView'
+import Default from '../../constants/Default'
 
 const ProductDistribution = (props) => {
     // ===========================================================================
@@ -24,18 +24,21 @@ const ProductDistribution = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductDistribution(params)
-            .then((response) => {
-                setOriginalData(response)
-                setLoading(false)
-            })
+        VisualizationServices.ProductDistribution(params).then((response) => {
+            setOriginalData(response)
+            setLoading(false)
+        })
     }, [params])
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
-            let total = sumBy(originalData, ((item) => {
-                return viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
-            }))
+            let total = sumBy(originalData, (item) => {
+                return viewType === ContractView.NUMBER
+                    ? item.tender_count
+                    : currency === Default.CURRENCY_LOCAL
+                    ? item.amount_local
+                    : item.amount_usd
+            })
             let chartDataFormatted = originalData
                 .sort((a, b) => {
                     if (viewType === ContractView.NUMBER) {
@@ -45,11 +48,17 @@ const ProductDistribution = (props) => {
                     return a.amount_usd > b.amount_usd ? -1 : 0
                 })
                 .map((item) => {
-                    let actualValue = viewType === ContractView.NUMBER ? item.tender_count : (currency === Default.CURRENCY_LOCAL ? item.amount_local : item.amount_usd)
+                    let actualValue =
+                        viewType === ContractView.NUMBER
+                            ? item.tender_count
+                            : currency === Default.CURRENCY_LOCAL
+                            ? item.amount_local
+                            : item.amount_usd
                     return {
                         name: item.product_name,
                         value: Math.ceil((actualValue / total) * 100),
-                        amount: actualValue
+                        amount: actualValue,
+                        id: item.product_id
                     }
                 })
             setChartData(chartDataFormatted)
@@ -63,29 +72,42 @@ const ProductDistribution = (props) => {
     return (
         <div className="bg-white rounded h-full">
             <div className="bg-white rounded p-6 pb-0">
-                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {trans(label)}
-                </h3>
-                <div className="flex justify-end world-map-chart mb-4">
-                    <ul className="contract-switch flex">
-                        <li
-                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
-                            onClick={() => setViewType(ContractView.VALUE)}>
-                            {trans('By contract value')}
-                        </li>
-                        <li
-                            className={`mr-4 cursor-pointer ${isActiveTab(ContractView.NUMBER)}`}
-                            onClick={() => setViewType(ContractView.NUMBER)}>
-                            {trans('By number of contracts')}
-                        </li>
-                    </ul>
+                <div className="flex items-center justify-between flex-wrap">
+                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                        {trans(label)}
+                    </h3>
+                    <div className="flex justify-end world-map-chart mb-4">
+                        <ul className="contract-switch flex">
+                            <li
+                                className={`mr-4 cursor-pointer ${isActiveTab(
+                                    ContractView.VALUE
+                                )}`}
+                                onClick={() => setViewType(ContractView.VALUE)}>
+                                {trans('By contract value')}
+                            </li>
+                            <li
+                                className={`mr-4 cursor-pointer ${isActiveTab(
+                                    ContractView.NUMBER
+                                )}`}
+                                onClick={() =>
+                                    setViewType(ContractView.NUMBER)
+                                }>
+                                {trans('By number of contracts')}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                {loading ? (<Loader />) : (
+                {loading ? (
+                    <Loader />
+                ) : (
                     <div className="flex">
                         <div className="flex-1">
                             <div className="flex-1 simple-tab -mt-10">
                                 <div className="mt-10">
-                                    <BarListChart data={chartData} />
+                                    <BarListChart
+                                        data={chartData}
+                                        text="products"
+                                    />
                                 </div>
                             </div>
                         </div>

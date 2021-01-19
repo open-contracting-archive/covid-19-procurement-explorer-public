@@ -5,6 +5,7 @@ import VisualizationServices from '../../services/visualizationServices'
 import CombinedChart from '../Charts/CombinedChart/CombinedChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import { dateDiff } from '../../helpers/date'
@@ -23,13 +24,12 @@ const ContractsCorrelation = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.QuantityCorrelation(params)
-            .then((response) => {
-                if (response) {
-                    setQuantityCorrelation(response)
-                }
-                setLoading(false)
-            })
+        VisualizationServices.QuantityCorrelation(params).then((response) => {
+            if (response) {
+                setQuantityCorrelation(response)
+            }
+            setLoading(false)
+        })
     }, [params])
 
     // ===========================================================================
@@ -111,12 +111,17 @@ const ContractsCorrelation = (props) => {
             <div
                 className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                 text-primary-blue -mx-4 px-6">
-                <div className="flex">
+                <div className="flex items-center">
+                    <div className="flex items-center mr-6">
+                        <DownloadIcon className="mr-2 inline-block" />
+                        <span>Download</span>
+                    </div>
                     <span className="flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>
                     </span>
                 </div>
+
                 <div>
                     <span className="flex items-center">
                         <button onClick={handle.enter}>
