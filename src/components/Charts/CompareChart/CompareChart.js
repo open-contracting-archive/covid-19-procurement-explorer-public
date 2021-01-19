@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
-import { toCamelCase } from "../../../helpers/general"
+import { toCamelCase } from '../../../helpers/general'
 
 const CompareChart = ({ chartData, equities }) => {
     const compareChart = useRef(null)
@@ -27,28 +27,6 @@ const CompareChart = ({ chartData, equities }) => {
         // uncomment this line if you want to change order of axes
         //chart.bottomAxesContainer.reverseOrder = true;
 
-        // Download feature
-        chart.exporting.menu = new am4core.ExportMenu()
-        chart.exporting.filePrefix = 'contracts_and_equity_indicators_chart'
-        chart.exporting.menu.items = [{
-            label: 'Download',
-            menu: [{
-                label: 'Image',
-                menu: [
-                    { type: 'png', label: 'PNG' },
-                    { type: 'jpg', label: 'JPG' },
-                    { type: 'pdf', label: 'PDF' }
-                ]
-            }, {
-                label: 'Data',
-                menu: [
-                    { type: 'json', label: 'JSON' },
-                    { type: 'csv', label: 'CSV' },
-                    { type: 'pdfdata', label: 'PDF' }
-                ]
-            }, { label: 'Print', type: 'print' }]
-        }]
-
         let dateAxis = chart.xAxes.push(new am4charts.DateAxis())
         dateAxis.renderer.grid.template.location = 0
         dateAxis.renderer.ticks.template.length = 8
@@ -71,7 +49,9 @@ const CompareChart = ({ chartData, equities }) => {
         valueAxis.renderer.baseGrid.disabled = true
         // height of axis
         valueAxis.height = am4core.percent(65)
-        valueAxis.renderer.gridContainer.background.fill = am4core.color('#000000')
+        valueAxis.renderer.gridContainer.background.fill = am4core.color(
+            '#000000'
+        )
         valueAxis.renderer.gridContainer.background.fillOpacity = 0.05
         valueAxis.renderer.inside = true
         valueAxis.renderer.labels.template.verticalCenter = 'bottom'
@@ -92,7 +72,9 @@ const CompareChart = ({ chartData, equities }) => {
         valueAxis2.renderer.labels.template.padding(2, 2, 2, 2)
         //valueAxis.renderer.maxLabelPosition = 0.95;
         valueAxis2.renderer.fontSize = '0.8em'
-        valueAxis2.renderer.gridContainer.background.fill = am4core.color('#000000')
+        valueAxis2.renderer.gridContainer.background.fill = am4core.color(
+            '#000000'
+        )
         valueAxis2.renderer.gridContainer.background.fillOpacity = 0.05
 
         let volumeSeries = chart.series.push(new am4charts.StepLineSeries())
@@ -113,7 +95,7 @@ const CompareChart = ({ chartData, equities }) => {
             equitySeries.dataFields.dateX = 'month'
             equitySeries.dataFields.valueY = toCamelCase(equityItem.equity)
             // equitySeries.dataFields.valueYShow = 'changePercent'
-            equitySeries.tooltipText = "{name}: {valueY}"
+            equitySeries.tooltipText = '{name}: {valueY}'
             equitySeries.name = equityItem.equity
             equitySeries.tooltip.getFillFromObject = false
             equitySeries.tooltip.getStrokeFromObject = true
@@ -130,9 +112,7 @@ const CompareChart = ({ chartData, equities }) => {
         }
     }, [chartData, equities])
 
-    return (
-        <div className="h-full w-full" ref={compareChart} />
-    )
+    return <div className="h-full w-full" ref={compareChart} />
 }
 
 export default CompareChart

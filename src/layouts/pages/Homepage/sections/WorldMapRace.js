@@ -7,6 +7,7 @@ import Map from '../../../../components/Charts/Map/Map'
 import RaceMap from '../../../../components/Charts/RaceMap/RaceMap'
 import RaceBarChart from '../../../../components/Charts/RaceBarChart/RaceBarChart'
 import { ReactComponent as ShareIcon } from '../../../../assets/img/icons/ic_share.svg'
+import { ReactComponent as DownloadIcon } from '../../../../assets/img/icons/ic_download.svg'
 import { ReactComponent as FullViewIcon } from '../../../../assets/img/icons/ic_fullscreen.svg'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
@@ -105,27 +106,27 @@ const WorldMapRace = () => {
     useEffect(() => {
         let dateObject = {}
         dataFromApi &&
-        dataFromApi.result.map((data) => {
-            let countryObject = {}
-            data.details.map((detail) => {
-                if (detail.country_code !== 'ALL') {
-                    countryObject = {
-                        ...countryObject,
-                        [detail.country_code]: {
-                            value: detail.amount_usd,
-                            number: detail.tender_count,
-                            url: `/country/${detail.country
-                                .toLowerCase()
-                                .replace(' ', '-')}/data`
+            dataFromApi.result.map((data) => {
+                let countryObject = {}
+                data.details.map((detail) => {
+                    if (detail.country_code !== 'ALL') {
+                        countryObject = {
+                            ...countryObject,
+                            [detail.country_code]: {
+                                value: detail.amount_usd,
+                                number: detail.tender_count,
+                                url: `/country/${detail.country
+                                    .toLowerCase()
+                                    .replace(' ', '-')}/data`
+                            }
                         }
                     }
+                })
+                dateObject = {
+                    ...dateObject,
+                    [data.month]: countryObject
                 }
             })
-            dateObject = {
-                ...dateObject,
-                [data.month]: countryObject
-            }
-        })
         setContractDataApi(dateObject)
         setYearMonth(dataFromApi && dataFromApi.result[0].month)
 
@@ -197,7 +198,9 @@ const WorldMapRace = () => {
                     {trans('Government spending to fight COVID-19')}
                 </p>
             </div>
-            {!contractDataApi || !raceBarDataApi ? (<Loader />) : (
+            {!contractDataApi || !raceBarDataApi ? (
+                <Loader />
+            ) : (
                 <div className="container mx-auto">
                     <div className="bg-white rounded p-6 simple-tab">
                         <FullScreen handle={handle}>
@@ -209,32 +212,34 @@ const WorldMapRace = () => {
                                                 <Tab>
                                                     <MapIcon className="inline-block" />
                                                     <span className="text-sm mt-1 inline-block">
-                                                    {trans('Map')}
-                                                </span>
+                                                        {trans('Map')}
+                                                    </span>
                                                 </Tab>
                                                 <Tab>
                                                     <ChartsIcon className="inline-block" />
                                                     <span className="text-sm mt-1 inline-block">
-                                                    {trans('Charts')}
-                                                </span>
+                                                        {trans('Charts')}
+                                                    </span>
                                                 </Tab>
                                                 <Tab>
                                                     <TableIcon className="inline-block" />
                                                     <span className="text-sm mt-1 inline-block">
-                                                    {trans('Table')}
-                                                </span>
+                                                        {trans('Table')}
+                                                    </span>
                                                 </Tab>
                                                 <Tab>
                                                     <SourcesIcon className="inline-block" />
                                                     <span className="text-sm mt-1 inline-block">
-                                                    {trans('Sources')}
-                                                </span>
+                                                        {trans('Sources')}
+                                                    </span>
                                                 </Tab>
                                             </TabList>
                                         </div>
                                         <div
                                             className="flex-1 relative"
-                                            style={{ width: 'calc(100% - 91px)' }}>
+                                            style={{
+                                                width: 'calc(100% - 91px)'
+                                            }}>
                                             <TabPanel>
                                                 <div className="flex justify-end world-map-chart mb-4">
                                                     <ul className="contract-switch flex">
@@ -277,8 +282,12 @@ const WorldMapRace = () => {
                                                         className="select-filter text-sm"
                                                         classNamePrefix="select-filter"
                                                         options={options}
-                                                        value={selectedContinent}
-                                                        defaultValue={options[0]}
+                                                        value={
+                                                            selectedContinent
+                                                        }
+                                                        defaultValue={
+                                                            options[0]
+                                                        }
                                                         onChange={(
                                                             selectedOption
                                                         ) =>
@@ -289,14 +298,19 @@ const WorldMapRace = () => {
                                                     />
                                                 </div>
                                                 <RaceMap
-                                                    contractData={contractDataApi}
+                                                    contractData={
+                                                        contractDataApi
+                                                    }
                                                     contractType={contractType}
                                                     yearMonth={yearMonth}
-                                                    sliderData={sliderData || []}
+                                                    sliderData={
+                                                        sliderData || []
+                                                    }
                                                     coordinates={
                                                         continent[
-                                                            selectedContinent.value
-                                                            ]
+                                                            selectedContinent
+                                                                .value
+                                                        ]
                                                     }
                                                 />
                                             </TabPanel>
@@ -342,8 +356,12 @@ const WorldMapRace = () => {
                                                         className="select-filter text-sm"
                                                         classNamePrefix="select-filter"
                                                         options={options}
-                                                        value={selectedContinent}
-                                                        defaultValue={options[0]}
+                                                        value={
+                                                            selectedContinent
+                                                        }
+                                                        defaultValue={
+                                                            options[0]
+                                                        }
                                                         onChange={(
                                                             selectedOption
                                                         ) =>
@@ -375,24 +393,33 @@ const WorldMapRace = () => {
                         <div
                             className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-6 px-6">
-                            <div className="flex">
-                            <span className="worldmap-share flex items-center relative">
-                                <ShareIcon className="mr-2 inline-block" />{' '}
-                                <span className="cursor-pointer">Share</span>
-                                <div className="worldmap-share--buttons absolute px-6 py-6 rounded bg-white">
-                                    <ShareButtons url={url} />
+                            <div className="flex items-center">
+                                <div className="flex items-center mr-6">
+                                    <DownloadIcon className="mr-2 inline-block" />
+                                    <span>Download</span>
                                 </div>
-                            </span>
+
+                                <div className="flex">
+                                    <span className="worldmap-share flex items-center relative">
+                                        <ShareIcon className="mr-2 inline-block" />{' '}
+                                        <span className="cursor-pointer">
+                                            Share
+                                        </span>
+                                        <div className="worldmap-share--buttons absolute px-6 py-6 rounded bg-white">
+                                            <ShareButtons url={url} />
+                                        </div>
+                                    </span>
+                                </div>
                             </div>
                             <div>
-                            <span className="flex items-center">
-                                <button onClick={handle.enter}>
-                                    <span className="cursor-pointer">
-                                        View full screen
-                                    </span>
-                                    <FullViewIcon className="ml-2 inline-block" />
-                                </button>
-                            </span>
+                                <span className="flex items-center">
+                                    <button onClick={handle.enter}>
+                                        <span className="cursor-pointer">
+                                            View full screen
+                                        </span>
+                                        <FullViewIcon className="ml-2 inline-block" />
+                                    </button>
+                                </span>
                             </div>
                         </div>
                     </div>

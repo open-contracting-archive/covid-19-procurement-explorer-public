@@ -136,11 +136,19 @@ const WorldMap = () => {
                     <div
                         className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
              text-primary-blue -mx-6 px-6">
-                        <div className="flex">
-                            <span className="flex items-center">
-                                <ShareIcon className="mr-2 inline-block" />{' '}
-                                <span className="cursor-pointer">Share</span>
-                            </span>
+                        <div className="flex items-center">
+                            <div className="flex items-center mr-6">
+                                <DownloadIcon className="mr-2 inline-block" />
+                                <span>Download</span>
+                            </div>
+                            <div className="flex">
+                                <span className="flex items-center">
+                                    <ShareIcon className="mr-2 inline-block" />{' '}
+                                    <span className="cursor-pointer">
+                                        Share
+                                    </span>
+                                </span>
+                            </div>
                         </div>
                         <div>
                             <span className="flex items-center">

@@ -20,7 +20,7 @@ const GlobalData = () => {
     return (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
-                <div className="flex flex-wrap -mx-3 -mb-4">
+                <div className="flex flex-wrap -mx-2 -mb-4">
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <TotalSpending
                             helpText="This is a help text for the total spending visualization"

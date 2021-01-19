@@ -41,35 +41,6 @@ const RaceMap = ({
         // Create chart instance
         let chart = am4core.create(mapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
-        chart.exporting.menu = new am4core.ExportMenu()
-        chart.exporting.filePrefix = 'race_map_chart'
-        chart.exporting.menu.items = [
-            {
-                label: 'Download',
-                menu: [
-                    {
-                        label: 'Image',
-                        menu: [
-                            { type: 'png', label: 'PNG' },
-                            { type: 'jpg', label: 'JPG' },
-                            { type: 'pdf', label: 'PDF' }
-                        ]
-                    },
-                    {
-                        label: 'Data',
-                        menu: [
-                            { type: 'json', label: 'JSON' },
-                            { type: 'csv', label: 'CSV' },
-                            { type: 'pdfdata', label: 'PDF' }
-                        ]
-                    },
-                    {
-                        label: 'Print',
-                        type: 'print'
-                    }
-                ]
-            }
-        ]
 
         // Set map definition
         chart.geodata = am4geodata_worldLow
@@ -83,12 +54,14 @@ const RaceMap = ({
         // Exclude Antartica
         polygonSeries.exclude = ['AQ']
 
+        chart.colors.list = [am4core.color('#F0F9E8'), am4core.color('#08589E')]
+
         //Set min/max fill color for each area
         polygonSeries.heatRules.push({
             property: 'fill',
             target: polygonSeries.mapPolygons.template,
-            min: chart.colors.getIndex(1).brighten(-0.1),
-            max: chart.colors.getIndex(1).brighten(-0.5)
+            min: chart.colors.getIndex(0),
+            max: chart.colors.getIndex(1)
         })
 
         // Make map load polygon (like country names) data from GeoJSON
@@ -139,6 +112,8 @@ const RaceMap = ({
         heatLegend.padding(20, 20, 20, 20)
         heatLegend.valueAxis.renderer.labels.template.fontSize = 10
         heatLegend.valueAxis.renderer.minGridDistance = 40
+        heatLegend.minColor = am4core.color('#A8DDB5')
+        heatLegend.maxColor = am4core.color('#08589E')
 
         chart.zoomControl = new am4maps.ZoomControl()
         chart.zoomControl.valign = 'top'

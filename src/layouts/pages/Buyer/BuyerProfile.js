@@ -90,7 +90,10 @@ const BuyerProfile = () => {
                 </div>
 
                 <div className="border border-blue-0 rounded mb-10">
-                    <BuyerProductTimeline label="Products Timeline" />
+                    <BuyerProductTimeline
+                        label="Products Timeline"
+                        params={{ buyer: id }}
+                    />
                 </div>
             </div>
             <div
@@ -103,6 +106,7 @@ const BuyerProfile = () => {
                         <div className="w-full lg:w-1/3 px-2 mb-6">
                             <TotalSpending
                                 label="Total Spending"
+                                helpText="This is a help text for the total spending visualization"
                                 params={{ buyer: id }}
                             />
                         </div>
@@ -160,7 +164,7 @@ const BuyerProfile = () => {
                                 params={{ buyer: id }}
                             />
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <div className="w-full px-2 mb-6">
                             <ContractsRedFlags
                                 label="Contracts red flags"
                                 params={{ buyer: id }}

@@ -14,35 +14,6 @@ const StackedChart = ({ data }) => {
 
         // Create chart instance
         let chart = am4core.create(stackedChart.current, am4charts.XYChart)
-        chart.exporting.menu = new am4core.ExportMenu()
-        chart.exporting.filePrefix = 'timeline_chart'
-        chart.exporting.menu.items = [
-            {
-                label: 'Download',
-                menu: [
-                    {
-                        label: 'Image',
-                        menu: [
-                            { type: 'png', label: 'PNG' },
-                            { type: 'jpg', label: 'JPG' },
-                            { type: 'pdf', label: 'PDF' }
-                        ]
-                    },
-                    {
-                        label: 'Data',
-                        menu: [
-                            { type: 'json', label: 'JSON' },
-                            { type: 'csv', label: 'CSV' },
-                            { type: 'pdfdata', label: 'PDF' }
-                        ]
-                    },
-                    {
-                        label: 'Print',
-                        type: 'print'
-                    }
-                ]
-            }
-        ]
 
         chart.colors.list = [
             am4core.color('#BEBADA'),

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, Link, useParams } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import { formatDate } from "../../../helpers/date";
+import { formatDate } from '../../../helpers/date'
 
 function Events() {
     const [eventsData, setEventsData] = useState([])
@@ -26,21 +26,18 @@ function Events() {
             {loading ? (
                 <Loader />
             ) : (
-
                 <div className="">
                     <section className="px-4 events events__upcoming pt-24 pb-16 -mt-8">
                         <div className="container mx-auto">
                             <div className="text-sm mb-4 text-blue-5">
-                            <span
-                                className="cursor-pointer text-primary-blue"
-                                onClick={previousPage}>
-                                Library
-                            </span>{' '}
+                                <span
+                                    className="cursor-pointer text-primary-blue"
+                                    onClick={previousPage}>
+                                    Library
+                                </span>{' '}
                                 /
                             </div>
-                            <h2 className="text-2xl mb-10">
-                                Events
-                            </h2>
+                            <h2 className="text-2xl mb-10">Events</h2>
                             <div className="text-left">
                                 <p className="text-xl blue-50 pb-10">
                                     Upcoming Events
@@ -48,46 +45,56 @@ function Events() {
                             </div>
                             <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
                                 {eventsData &&
-                                eventsData.slice(0, 3).map((events) => {
-                                    return (
-                                        <Link
-                                            className="events-thumbnail"
-                                            to={`/events/${events.id}`}
-                                            key={events.id}>
-                                            <div className="card__item h-full px-8 py-8">
-                                                <div className="card__day text-4xl leading-none">
-                                                    {formatDate(events.event_date, 'DD')}
-                                                </div>
-                                                <div className="card__month text-base uppercase">
-                                                    {formatDate(events.event_date, 'MMMM')}
-                                                </div>
-                                                <div className="card__caption">
-                                                    <h3 className="card__title mt-8 mb-4 text-lg">
-                                                        {events.title}
-                                                    </h3>
-                                                    <div className="card__time opacity-50 text-base mb-4 uppercase flex">
-                                                        <p className="from mr-1">
-                                                            {events.time_from}
-                                                        </p>
-
-                                                        {events.time_to &&
-                                                        <>
-                                                            -
-                                                            <p className="to ml-1">
-                                                                {events.time_to}
-                                                            </p>
-                                                        </>
-                                                        }
+                                    eventsData.slice(0, 3).map((events) => {
+                                        return (
+                                            <Link
+                                                className="events-thumbnail"
+                                                to={`/events/${events.id}`}
+                                                key={events.id}>
+                                                <div className="card__item h-full px-8 py-8">
+                                                    <div className="card__day text-4xl leading-none">
+                                                        {formatDate(
+                                                            events.event_date,
+                                                            'DD'
+                                                        )}
                                                     </div>
+                                                    <div className="card__month text-base uppercase">
+                                                        {formatDate(
+                                                            events.event_date,
+                                                            'MMMM'
+                                                        )}
+                                                    </div>
+                                                    <div className="card__caption">
+                                                        <h3 className="card__title mt-8 mb-4 text-lg">
+                                                            {events.title}
+                                                        </h3>
+                                                        <div className="card__time opacity-50 text-base mb-4 uppercase flex">
+                                                            <p className="from mr-1">
+                                                                {
+                                                                    events.time_from
+                                                                }
+                                                            </p>
 
-                                                    <p className="card__venue text-base">
-                                                        {events.location}
-                                                    </p>
+                                                            {events.time_to && (
+                                                                <>
+                                                                    -
+                                                                    <p className="to ml-1">
+                                                                        {
+                                                                            events.time_to
+                                                                        }
+                                                                    </p>
+                                                                </>
+                                                            )}
+                                                        </div>
+
+                                                        <p className="card__venue text-base">
+                                                            {events.location}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </Link>
-                                    )
-                                })}
+                                            </Link>
+                                        )
+                                    })}
                             </div>
                         </div>
                     </section>
@@ -101,51 +108,62 @@ function Events() {
                             </div>
                             <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
                                 {eventsData &&
-                                eventsData.slice(3, 9).map((events) => {
-                                    return (
-                                        <Link
-                                            className="events-thumbnail"
-                                            to={`/events/${events.id}`}
-                                            key={events.id}>
-                                            <div className="card__item h-full px-8 py-8">
-                                                <div className="card__day text-4xl">
-                                                    {formatDate(events.event_date, 'DD')}
-                                                </div>
-                                                <div className="card__month text-base uppercase">
-                                                    {formatDate(events.event_date, 'MMMM')}
-                                                </div>
-                                                <div className="card__caption">
-                                                    <h3 className="card__title mt-8 mb-4 text-lg">
-                                                        {events.title}
-                                                    </h3>
-                                                    <div className="card__time opacity-50 text-base mb-4 uppercase flex">
-                                                        <p className="from mr-1">
-                                                            {events.time_from}
-                                                        </p>
-                                                        -
-                                                        <p className="to ml-1">
-                                                            {events.time_to}
+                                    eventsData.slice(3, 9).map((events) => {
+                                        return (
+                                            <Link
+                                                className="events-thumbnail"
+                                                to={`/events/${events.id}`}
+                                                key={events.id}>
+                                                <div className="card__item h-full px-8 py-8">
+                                                    <div className="card__day text-4xl">
+                                                        {formatDate(
+                                                            events.event_date,
+                                                            'DD'
+                                                        )}
+                                                    </div>
+                                                    <div className="card__month text-base uppercase">
+                                                        {formatDate(
+                                                            events.event_date,
+                                                            'MMMM'
+                                                        )}
+                                                    </div>
+                                                    <div className="card__caption">
+                                                        <h3 className="card__title mt-8 mb-4 text-lg">
+                                                            {events.title}
+                                                        </h3>
+                                                        <div className="card__time opacity-50 text-base mb-4 uppercase flex">
+                                                            <p className="from mr-1">
+                                                                {
+                                                                    events.time_from
+                                                                }
+                                                            </p>
+                                                            -
+                                                            <p className="to ml-1">
+                                                                {events.time_to}
+                                                            </p>
+                                                        </div>
+
+                                                        <p className="card__venue text-base">
+                                                            {events.location}
                                                         </p>
                                                     </div>
-
-                                                    <p className="card__venue text-base">
-                                                        {events.location}
-                                                    </p>
                                                 </div>
-                                            </div>
-                                        </Link>
-                                    )
-                                })}
+                                            </Link>
+                                        )
+                                    })}
                             </div>
-                            {eventsData.length !== 0 ?
-                                <div className="flex justify-center pt-10">
-                                    <Link to="/events" className="text-white bg-primary-blue px-32 py-4 rounded">
-                                        Load more
-                                    </Link>
-                                </div>
-                                : <p> There are no Past Events Records</p>
-                            }
-
+                            {eventsData.length === 0 ? (
+                                <p> There are no Past Events Records</p>
+                            ) : (
+                                ''
+                            )}
+                            {/* <div className="flex justify-center pt-10">
+                                <Link
+                                    to="/events"
+                                    className="text-white bg-primary-blue px-32 py-4 rounded">
+                                    Load more
+                                </Link>
+                            </div> */}
                         </div>
                     </section>
                 </div>

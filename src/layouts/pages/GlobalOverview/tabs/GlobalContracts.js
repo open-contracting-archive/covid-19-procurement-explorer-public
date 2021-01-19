@@ -13,10 +13,9 @@ const GlobalContracts = () => {
 
     return (
         <div>
-            <div className="w-full mb-12 global-profile">
-                {/*{renderMainVisualization()}*/}
-            </div>
-
+            {/* <div className="w-full mb-12 global-profile">
+                {renderMainVisualization()}
+            </div> */}
             {renderTable()}
         </div>
     )

@@ -8,17 +8,15 @@
 
         .news-caption__title {
             @apply leading-snug overflow-hidden;
-            max-height: 56px;
         }
     }
 
     &__title {
         @apply text-lg leading-tight;
-        overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
-        max-height: 56px;
+        overflow: hidden;
     }
 
     &__date {
@@ -194,7 +192,6 @@
     .blogs-caption__title,
     .news-caption__title {
         @apply mb-1;
-        max-height: 54px;
         overflow: hidden;
     }
 }
@@ -202,6 +199,10 @@
     .blogs-caption__title {
         font-size: 1.375rem;
         line-height: 1.25;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     .blogs-caption__date {
         font-size: 0.875rem;
@@ -216,4 +217,24 @@
 }
 .form-search {
     width: 348px;
+}
+
+.events {
+    .card__title {
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+.resources {
+    .card__title {
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }

@@ -66,7 +66,7 @@ const GlobalSuppliers = (props) => {
         globalSuppliers && getSuppliersData(globalSuppliers, 'by_value')
 
     return (
-        <div className="bg-white border border-blue-0 rounded p-4 simple-tab">
+        <div className="bg-white rounded p-4 simple-tab">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                     {label}
@@ -111,7 +111,11 @@ const GlobalSuppliers = (props) => {
             <div
                 className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-4 px-4">
-                <div className="flex">
+                <div className="flex items-center">
+                    <div className="flex items-center mr-6">
+                        <DownloadIcon className="mr-2 inline-block" />
+                        <span>Download</span>
+                    </div>
                     <span className="flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
                         <span className="cursor-pointer">Share</span>

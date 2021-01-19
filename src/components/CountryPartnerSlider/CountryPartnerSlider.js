@@ -67,7 +67,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                     </div>
                                                     <div className="w-full md:w-1/2">
                                                         <div className="flex justify-between">
-                                                            <div>
+                                                            <div className="pr-4">
                                                                 <div className="mb-6">
                                                                     <span className="block mb-2">
                                                                         {trans(

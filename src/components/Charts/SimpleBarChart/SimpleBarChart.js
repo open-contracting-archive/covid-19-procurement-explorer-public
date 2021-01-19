@@ -66,7 +66,7 @@ const SimpleBarChart = ({
     return (
         <div
             ref={barchartDiv}
-            style={{ width: '100%', height: `${height || '170px'}` }}
+            style={{ width: '100%', height: `${height || ''}` }}
         />
     )
 }

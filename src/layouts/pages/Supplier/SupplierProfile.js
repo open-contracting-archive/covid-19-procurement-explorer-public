@@ -29,12 +29,6 @@ const SupplierProfile = () => {
         history.goBack()
     }
 
-    const options = [
-        { value: 'option-1', label: 'Option 1' },
-        { value: 'option-2', label: 'Option 2' },
-        { value: 'option-3', label: 'Option 3' }
-    ]
-
     // ===========================================================================
     // Hooks
     // ===========================================================================
@@ -43,31 +37,15 @@ const SupplierProfile = () => {
             setSupplierInfo(response)
         })
     }, [])
-    // console.log(supplierInfo)
 
     // ===========================================================================
     // Handlers and functions
     // ===========================================================================
     window.scrollTo(0, 0)
 
-    let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    const tempTableData = tempArray.map((index) => {
-        return (
-            <tr className="table-row" key={index}>
-                <td className="uppercase">SERVICIOS DE LABORATORIO CLÍNICO</td>
-                <td>Mexico</td>
-                <td>21</td>
-                <td>3</td>
-                <td>5</td>
-                <td>2,352,045</td>
-                <td className="uppercase">1.2</td>
-            </tr>
-        )
-    })
-
     return (
         <section className="pt-8">
-            <div className="container mx-auto px-4 ">
+            <div className="container mx-auto">
                 <div className="text-sm mb-4 text-blue-5">
                     <span className="cursor-pointer text-primary-blue">
                         {get(supplierInfo, 'country_name')}
@@ -97,7 +75,9 @@ const SupplierProfile = () => {
                     </div>
                 </div>
                 <div className="w-full px-2 mb-10">
-                    <GlobalSuppliers label="Product flow" />
+                    <div className="rounded border border-blue-0 bg-white">
+                        <GlobalSuppliers label="Product flow" />
+                    </div>
                 </div>
             </div>
             <div
@@ -105,39 +85,39 @@ const SupplierProfile = () => {
                     borderTop: '5px solid #1fbbec'
                 }}
                 className="pt-16 pb-24 bg-primary-gray">
-                <div className="container mx-auto px-4 ">
-                    <div className="flex flex-wrap -mx-3 mb-6">
-                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                <div className="container mx-auto">
+                    <div className="flex flex-wrap -mx-2 mb-6">
+                        <div className="w-full lg:w-1/3 px-2 mb-4">
                             <TotalSpending
                                 label="Total income"
                                 params={{ supplier: id }}
                             />
                         </div>
-                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                        <div className="w-full lg:w-1/3 px-2 mb-4">
                             <TotalContracts params={{ supplier: id }} />
                         </div>
-                        <div className="w-full lg:w-1/3 px-2 mb-6">
+                        <div className="w-full lg:w-1/3 px-2 mb-4">
                             <DirectOpen heightFull params={{ supplier: id }} />
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <div className="w-full px-2 mb-4">
                             <ProductsTimeline
                                 label="Product timeline"
                                 params={{ supplier: id }}
                             />
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <div className="w-full lg:w-1/2 px-2 mb-4">
                             <ProductDistribution
                                 label="Product Distribution"
                                 params={{ supplier: id }}
                             />
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <div className="w-full lg:w-1/2 px-2 mb-4">
                             <TopBuyers
                                 label="Top Buyers"
                                 params={{ supplier: id }}
                             />
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-6">
+                        <div className="w-full px-2 mb-4">
                             <ContractsRedFlags />
                         </div>
                     </div>
