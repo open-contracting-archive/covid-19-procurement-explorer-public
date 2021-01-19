@@ -19,7 +19,7 @@
     "react-iframe": "^1.8.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.0",
+    "react-scripts": "4.0.1",
     "react-select": "^3.1.1",
     "react-share": "^4.3.1",
     "react-simple-hook-modal": "^1.1.0",
@@ -30,7 +30,19 @@
     "resize-observer-polyfill": "^1.5.1",
     "swiper": "^6.4.5",
     "web-vitals": "^0.2.4",
-    "webpack-notifier": "^1.12.0"
+    "webpack-notifier": "^1.12.0",
+    "workbox-background-sync": "^5.1.3",
+    "workbox-broadcast-update": "^5.1.3",
+    "workbox-cacheable-response": "^5.1.3",
+    "workbox-core": "^5.1.3",
+    "workbox-expiration": "^5.1.3",
+    "workbox-google-analytics": "^5.1.3",
+    "workbox-navigation-preload": "^5.1.3",
+    "workbox-precaching": "^5.1.3",
+    "workbox-range-requests": "^5.1.3",
+    "workbox-routing": "^5.1.3",
+    "workbox-strategies": "^5.1.3",
+    "workbox-streams": "^5.1.3"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -39,7 +51,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
