@@ -8,3 +8,7 @@ export const formatDate = (dateString, format = Default.DISPLAY_DATE_SHORT) => {
 export const dateDiff = (fromDateString, toDateString) => {
     return dayjs(fromDateString).diff(toDateString)
 }
+
+export const formatTime = (timeString, format = 'h:mm A') => {
+    return dayjs('2020-01-01T' + timeString).format(format)
+}

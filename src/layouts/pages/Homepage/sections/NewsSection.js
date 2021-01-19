@@ -1,21 +1,22 @@
-import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
-import {get} from 'lodash'
-import {API_URL} from '../../../../helpers/api'
+import React, { useEffect, useState, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { get } from 'lodash'
+import { API_URL } from '../../../../helpers/api'
 import CmsPageService from '../../../../services/CmsPageService'
 import Loader from '../../../../components/Loader/Loader'
-import {formatDate} from "../../../../helpers/date";
+import { formatDate } from "../../../../helpers/date"
+import useTrans from "../../../../hooks/useTrans"
 
 const NewsSection = () => {
-    const [newsData, setNewsData] = useState([])
-    const [noData, setNoData] = useState(true)
+    const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
+    const { trans } = useTrans()
+
     useEffect(() => {
-        CmsPageService.NewsList()
+        CmsPageService.NewsList({ limit: 5 })
             .then((response) => {
-                setNewsData(response.items)
+                setNewsList(response.items)
                 setLoading(false)
-                setNoData(false)
             })
             .catch(() => setLoading(false))
     }, [])
@@ -26,64 +27,40 @@ const NewsSection = () => {
                 <div className="text-center mb-10">
                     <h3 className="uppercase text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
-                            Explore
+                            {trans('Explore')}
                         </span>
-                        News
+                        {trans('News')}
                     </h3>
                     <p className="text-base text-opacity-50  text-primary-dark">
                         Updates from all around the world on Covid-19
                     </p>
                 </div>
-                {loading ? (
-                    <Loader/>
-                ) : noData ? (
-                    <p className="text-sm text-primary-dark text-opacity-40 text-center py-16">
-                        No news available
-                    </p>
-                ) : (
-                    <>
+                {loading ? (<Loader sm />) : newsList.length ? (
+                    <Fragment>
                         <div className="grid grid-cols-12 grid-rows-2 gap-5 news-wrapper">
-                            {newsData &&
-                            newsData.slice(0, 5).map((news, index) => {
+                            {newsList.map((news, index) => {
                                 return (
                                     <div
-                                        className="news-item"
-                                        key={news.id}>
+                                        key={news.id}
+                                        className="news-item">
                                         <Link
                                             to={`/news/${news.id}`}
                                             className="news-link">
                                             <div className="img-wrapper img-gradient">
-                                                {get(
-                                                    news,
-                                                    'content_image.meta.download_url'
-                                                ) &&
-
+                                                {get(news, 'content_image.meta.download_url') && (
                                                     <img
-                                                        src={`${API_URL}${get(
-                                                             news,
-                                                            'content_image.meta.download_url'
-                                                        )}`}
+                                                        src={`${API_URL}${get(news, 'content_image.meta.download_url')}`}
                                                         className="news-img"
-                                                        alt={get(
-                                                            news,
-                                                            'content_image.title'
-                                                        )}
-                                                    />
-                                                }
+                                                        alt={get(news, 'content_image.title')} />
+                                                )}
                                             </div>
-
                                             <div
-                                                className={`news-caption ${
-                                                    index === 0
-                                                        ? 'news-caption--large'
-                                                        : ''
-                                                }`}>
+                                                className={`news-caption ${index === 0 ? 'news-caption--large' : ''}`}>
                                                 <h3 className="news-caption__title">
                                                     {news.title}
                                                 </h3>
                                                 <p className="news-caption__date">
                                                     {formatDate(news.published_date, 'MMM DD, YYYY')}
-
                                                 </p>
                                             </div>
                                         </Link>
@@ -94,10 +71,14 @@ const NewsSection = () => {
 
                         <div className="flex justify-center mt-12">
                             <Link to="/news" className="text-blue-20">
-                                View all news --&gt;{' '}
+                                {trans('View all news')} --&gt;{' '}
                             </Link>
                         </div>
-                    </>
+                    </Fragment>
+                ) : (
+                    <p className="text-sm text-primary-dark text-opacity-40 text-center py-16">
+                        {trans('No news available')}
+                    </p>
                 )}
             </div>
         </section>

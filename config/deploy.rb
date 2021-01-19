@@ -3,7 +3,7 @@ lock '3.7.2'
 # Application #
 #####################################################################################
 set :application,     "COVID19_PROCUREMENT_EXPLORER"
-set :branch,          ENV["branch"] || "main"
+set :branch,          ENV["branch"] || "master"
 set :user,            ENV["user"] || ENV["USER"] || "covid19"
 
 # SCM #
@@ -35,7 +35,7 @@ set :keep_releases,       1
 
 # Slack Integration #
 #####################################################################################
-set :slack_webhook_url,     "https://hooks.slack.com/services/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"
+set :slack_webhook_url,     "https://hooks.slack.com/services/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"
 
 # Rollbar Integration #
 #####################################################################################
@@ -50,13 +50,13 @@ set :current_timestamp, DateTime.now.to_time.to_i
 
 # Set node library #
 #######################################################################################
-#append  :linked_files, ".env"
+# append  :linked_files, ".env"
 # append  :linked_dirs, "node_modules"
-
+#
 # set :nvm_type, :user
-# set :nvm_node, "v12.7.0"
+# set :nvm_node, "v14.4.0"
 # set :nvm_map_bins, %w{node npm yarn}
-
+#
 # set :yarn_roles, :all
 # set :yarn_flags, %w(--silent --no-progress)
 # set :yarn_env_variables, {}
@@ -113,16 +113,6 @@ namespace :covid19 do
         end
     end
 
-    desc "Symbolic link for shared folders"
-    task :create_symlink do
-        on roles(:app) do
-            within release_path do
-                execute "rm -rf #{release_path}/node_modules"
-                execute "ln -s #{shared_path}/lib/node_modules #{release_path}/node_modules"
-            end
-        end
-    end
-
     desc "Create ver.txt"
     task :create_ver_txt do
         on roles(:all) do
@@ -145,7 +135,7 @@ namespace :devops do
     task :set_up do
         on roles(:all) do
             invoke "covid19:create_overlay_folder"
-            invoke "covid19:create_library_folder"
+            # invoke "covid19:create_library_folder"
         end
     end
 
@@ -240,9 +230,8 @@ end
 namespace :deploy do
     after :starting, "slack:start"
     after :updated, "environment:set_variables"
-    # after :updated, "npm:run_build"
-    # after :updated, "yarn:run_build"
-    # after :published, "covid19:create_symlink"
+#     after :updated, "npm:run_build"
+#     after :updated, "yarn:run_build"
     after :finished, "covid19:create_ver_txt"
     after :finished, "slack:deployed"
     after :failed, "slack:notify_deploy_failed"

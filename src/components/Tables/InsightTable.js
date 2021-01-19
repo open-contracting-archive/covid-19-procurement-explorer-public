@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react"
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { identity, pickBy } from 'lodash'
+import { identity, pickBy, get } from 'lodash'
 import Select from 'react-select'
 import CmsPageService from "../../services/CmsPageService"
 import Loader from '../Loader/Loader'
@@ -25,9 +25,14 @@ const InsightTable = ({ params }) => {
             })
     }, [params])
 
-    const getCountryName = (countryId) => {
-        const country = countries.find((country) => country.id === countryId)
+    const getCountryName = (insight) => {
+        const countryId = get(insight, 'country.id', null)
 
+        if (!countryId) {
+            return ''
+        }
+
+        const country = countries.find((country) => country.id === countryId)
         return country ? country.name : countryId
     }
 
@@ -139,7 +144,7 @@ const InsightTable = ({ params }) => {
                                     onClick={() => showDetail(insight.contents_type, insight.id)}
                                     className="cursor-pointer">
                                     <td>{insight.title}</td>
-                                    <td>{getCountryName(insight.country.id)}</td>
+                                    <td>{getCountryName(insight)}</td>
                                     <td>{insight.contents_type}</td>
                                 </tr>
                             )
