@@ -44,7 +44,7 @@ const SankeyChart = ({ data }) => {
         // Create chart instance
         let chart = am4core.create(sankeyChart.current, am4charts.SankeyDiagram)
         chart.hiddenState.properties.opacity = 0
-        
+
         let hoverState = chart.links.template.states.create('hover')
         hoverState.properties.fillOpacity = 0.6
 
@@ -72,6 +72,12 @@ const SankeyChart = ({ data }) => {
 
         chart.data = data
         chart.logo.disabled = true
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
 
         return () => {
             chart.dispose()

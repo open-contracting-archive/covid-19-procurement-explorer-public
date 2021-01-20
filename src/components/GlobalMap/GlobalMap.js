@@ -29,13 +29,17 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
 
         // Exclude Antartica
         polygonSeries.exclude = ['AQ']
+        polygonSeries.calculateVisualCenter = true
+        polygonSeries.mapPolygons.template.tooltipPosition = 'fixed'
+
+        chart.colors.list = [am4core.color('#F0F9E8'), am4core.color('#08589E')]
 
         //Set min/max fill color for each area
         polygonSeries.heatRules.push({
             property: 'fill',
             target: polygonSeries.mapPolygons.template,
-            min: chart.colors.getIndex(1).brighten(1),
-            max: chart.colors.getIndex(1).brighten(-0.3)
+            min: chart.colors.getIndex(0),
+            max: chart.colors.getIndex(1)
         })
 
         // Make map load polygon (like country names) data from GeoJSON
@@ -44,41 +48,6 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         // Set heatmap values for each state
         if (data) {
             polygonSeries.data = data
-        } else {
-            polygonSeries.data = [
-                {
-                    id: 'UA',
-                    value: 8447100
-                },
-                {
-                    id: 'US',
-                    value: 4447100
-                },
-                {
-                    id: 'UK',
-                    value: 626932,
-                    url: '/country/united-kingdom'
-                },
-                {
-                    id: 'KE',
-                    value: 5130632,
-                    url: '/country/kenya'
-                },
-                {
-                    id: 'MD',
-                    value: 2673400,
-                    url: '/country/moldova'
-                },
-                {
-                    id: 'KG',
-                    value: 33871648
-                },
-                {
-                    id: 'MX',
-                    value: 50871648,
-                    url: '/country/mexico'
-                }
-            ]
         }
 
         // Set up heat legend
@@ -122,7 +91,6 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         polygonTemplate.nonScalingStroke = true
         polygonTemplate.strokeWidth = 0.5
         polygonTemplate.url = '{url}'
-        // polygonTemplate.url = '/country/mexico'
 
         // Zoom control
         chart.zoomControl = new am4maps.ZoomControl()
@@ -133,15 +101,19 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         chart.homeGeoPoint = {
             latitude: (coordinates && coordinates.lat) || 0,
             longitude: (coordinates && coordinates.long) || 0
-            // latitude: 55.85406929584602,
-            // longitude: 28.24904034876191
         }
 
         // Create hover state and set alternative fill color
         let hs = polygonTemplate.states.create('hover')
-        hs.properties.fill = am4core.color('#3c5bdc')
+
         chart.data = data
         chart.logo.disabled = true
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
 
         return () => {
             chart.dispose()

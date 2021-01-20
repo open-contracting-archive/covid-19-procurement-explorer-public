@@ -22,7 +22,6 @@ const WorldMapRace = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-
     const [loading, setLoading] = useState(true)
     const [contractType, setContractType] = useState('value')
     const [raceBarType, setRaceBarType] = useState('value')
@@ -38,7 +37,6 @@ const WorldMapRace = () => {
 
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
-
     const options = [
         { value: 'all', label: 'All Continent' },
         { value: 'asia', label: 'Asia' },
@@ -56,7 +54,6 @@ const WorldMapRace = () => {
 
     useEffect(() => {
         CountryService.GetGlobalMapData().then((response) => {
-            //Race Bar Chart Formatted Api Data
             const raceBarChartformatted = response.result.reduce(
                 (formattedData, d) => ({
                     ...formattedData,
@@ -71,37 +68,10 @@ const WorldMapRace = () => {
                 {}
             )
             setRaceBarDataApi(raceBarChartformatted)
-
-            // const mapChartformatted = response.result.reduce(
-            //     (formattedData, d) => ({
-            //         ...formattedData,
-            //         [d.month]: d.details.map((detail) => ({
-            //             [detail.country_code]: {
-            //                 value: detail.amount_usd,
-            //                 number: detail.tender_count,
-            //                 url: `/country/${detail.country
-            //                     .toLowerCase()
-            //                     .replace(' ', '-')}`
-            //             }
-            //         }))
-            //     }),
-            //     {}
-            // )
-
-            // setContractDataApi(mapChartformatted)
-            // setYearMonth(dataFromApi && dataFromApi.result[0].month)
-
-            // const keys =
-            //     dataFromApi &&
-            //     dataFromApi.result.map((data) => {
-            //         return data.month
-            //     })
-            // setSliderData(keys)
-
             setDataFromApi(response)
             setLoading(false)
         })
-    }, [contractType, raceBarType])
+    }, [raceBarType])
 
     useEffect(() => {
         let dateObject = {}
@@ -380,7 +350,9 @@ const WorldMapRace = () => {
                                                 )}
                                             </TabPanel>
                                             <TabPanel>
-                                                <TenderTable homepage />
+                                                <div className="pb-4">
+                                                    <TenderTable />
+                                                </div>
                                             </TabPanel>
                                             <TabPanel>
                                                 Sources section coming soon !!
