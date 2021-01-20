@@ -10,6 +10,7 @@ import useTrans from '../../hooks/useTrans'
 import { formatDate } from '../../helpers/date'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
+import TableLoader from '../Loader/TableLoader'
 
 const TenderTable = (props) => {
     // ===========================================================================
@@ -24,7 +25,7 @@ const TenderTable = (props) => {
         (state) => state.general.productCategories
     )
     const [tenderList, setTenderList] = useState([])
-    const [pagination, setPagination] = useState('')
+    // const [pagination, setPagination] = useState('')
     const [loading, setLoading] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(() =>
         identity(pickBy(params))
@@ -130,7 +131,7 @@ const TenderTable = (props) => {
         }).then((response) => {
             if (response) {
                 setTenderList([...response.results])
-                setPagination(response.next)
+                // setPagination(response.next)
                 setTotalItems(response.count)
                 setTableLoading(false)
             }
@@ -175,7 +176,8 @@ const TenderTable = (props) => {
             : 'table-row cursor-pointer'
     }
     const appendFilter = (selected) => {
-        setLoading(true)
+        // setLoading(true)
+        setTableLoading(true)
         setSelectedFilters((previous) => {
             return {
                 ...previous,
@@ -535,13 +537,7 @@ const TenderTable = (props) => {
                                     </div>
                                 )}
                             </div>
-                            {tableLoading && (
-                                <div
-                                    style={{ height: 'calc(100% - 46px)' }}
-                                    className="absolute bottom-0 left-0 w-full rounded-md bg-opacity-50 bg-primary-dark text-lg font-bold flex items-center justify-center text-white">
-                                    Loading...
-                                </div>
-                            )}
+                            {tableLoading && <TableLoader />}
                         </div>
                         {tenderList.length > 0 && (
                             <div>

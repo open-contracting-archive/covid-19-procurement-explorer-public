@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import {get} from 'lodash'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import Breadcrumb from "../../../components/website/Library/Breadcrumb"
+import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 
 const Resources = () => {
@@ -50,9 +50,7 @@ const Resources = () => {
                 <div className="container mx-auto">
                     <Breadcrumb />
 
-                    <h2 className="text-2xl">
-                        Resources
-                    </h2>
+                    <h2 className="text-2xl">Resources</h2>
                 </div>
             </section>
             <section className="resources__table py-12 bg-primary-gray">
@@ -65,7 +63,12 @@ const Resources = () => {
                             <p className="uppercase text-xs opacity-50 leading-none">
                                 Title
                             </p>
-                            <input type="text" name="title" className="text-field text-sm" placeholder="ALL" />
+                            <input
+                                type="text"
+                                name="title"
+                                className="text-field text-sm"
+                                placeholder="ALL"
+                            />
                         </div>
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
@@ -123,29 +126,31 @@ const Resources = () => {
                             />
                         </div>
                     </div>
-                    {loading ? (<Loader />) : (
+                    {loading ? (
+                        <Loader />
+                    ) : (
                         <table className="table table__resources">
                             <thead>
-                            <tr>
-                                <th style={{ width: '35%' }}>
-                                    <span className="flex items-center">
-                                        Title{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '15%' }}>
-                                    <span className="flex items-center">
-                                        Country{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        Type{' '}
-                                        <SortIcon className="ml-1 cursor-pointer" />
-                                    </span>
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th style={{ width: '35%' }}>
+                                        <span className="flex items-center">
+                                            Title{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                    <th style={{ width: '15%' }}>
+                                        <span className="flex items-center">
+                                            Country{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                    <th style={{ width: '10%' }}>
+                                        <span className="flex items-center">
+                                            Type{' '}
+                                            <SortIcon className="ml-1 cursor-pointer" />
+                                        </span>
+                                    </th>
+                                </tr>
                             </thead>
                             <tbody>
                             {resourcesData &&
