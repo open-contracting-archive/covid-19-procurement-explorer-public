@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import {get} from 'lodash'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import Breadcrumb from "../../../components/website/Library/Breadcrumb"
@@ -20,9 +21,14 @@ const Resources = () => {
         { value: 'option-3', label: 'Option 3' }
     ]
 
-    const getCountryName = (countryId) => {
-        const country = countries.find((country) => country.id === countryId)
+    const getCountryName = (resource) => {
+        const countryId = get(resource, 'country.id', null)
 
+        if (!countryId) {
+            return ''
+        }
+
+        const country = countries.find((country) => country.id === countryId)
         return country ? country.name : countryId
     }
 
@@ -148,7 +154,7 @@ const Resources = () => {
                                     <tr className="table-row cursor-pointer" key={index}
                                         onClick={() => showDetail(resource.id)}>
                                         <td>{resource.title}</td>
-                                        <td>{getCountryName(resource.country.id)}</td>
+                                        <td>{ getCountryName(resource)}</td>
                                         <td>{resource.resource_type}</td>
                                     </tr>
                                 )

@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import { formatDate } from "../../../helpers/date"
+import { formatDate, formatTime } from "../../../helpers/date"
 import ShareButtons from "../../../components/Library/ShareButtons"
 import Breadcrumb from "../../../components/website/Library/Breadcrumb"
 
@@ -11,12 +11,10 @@ const EventsDetail = () => {
     const [eventsData, setEventsData] = useState([])
     const [loading, setLoading] = useState(true)
     let { id: eventsId } = useParams()
-
-    const url = () => {
-        window.location.href
-    }
+    window.scrollTo(0, 0)
 
     useEffect(() => {
+        setLoading(true)
         CmsPageService.EventDetail(eventsId).then((response) => {
             setEventsDetail(response)
             setLoading(false)
@@ -27,12 +25,11 @@ const EventsDetail = () => {
     }, [eventsId])
 
     return (
-        <Fragment>
-            {loading ? (<Loader />) : (
-                <section className="pt-8">
-                    <div className="container mx-auto px-4 news-detail">
-                        <Breadcrumb item={'events'} />
-
+        <section className="pt-8">
+            <div className="container mx-auto px-4 news-detail">
+                <Breadcrumb item={'events'} />
+                {loading ? (<Loader />) : (
+                    <Fragment>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {eventsDetail.title}
                         </h2>
@@ -46,16 +43,13 @@ const EventsDetail = () => {
                                         {formatDate(eventsDetail.event_date, 'MMMM')}
                                     </div>
                                     <p className="from mr-1 inline-block">
-                                        {eventsDetail.time_from}
+                                        {formatTime(eventsDetail.time_from)}
                                     </p>
-                                    {eventsDetail.time_to &&
-                                    <Fragment>
-                                        /
+                                    {eventsDetail.time_to && (
                                         <p className="to ml-1 inline-block">
-                                            {eventsDetail.time_to}
+                                            - {formatTime(eventsDetail.time_to)}
                                         </p>
-                                    </Fragment>
-                                    }
+                                    )}
                                 </div>
                                 <div className="organization mb-8">
                                     <p className="block font-bold opacity-40 mb-2">
@@ -83,7 +77,7 @@ const EventsDetail = () => {
                                         <p className="font-bold opacity-40 mr-4">
                                             Share on
                                         </p>
-                                        <ShareButtons url={url} />
+                                        <ShareButtons url={window.location.href} />
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +85,7 @@ const EventsDetail = () => {
                                 <p className="font-bold opacity-40 mb-2">
                                     Share on
                                 </p>
-                                <ShareButtons url={url} />
+                                <ShareButtons url={window.location.href} />
                             </div>
                         </div>
                         {eventsData.length !== 1 ?
@@ -126,19 +120,14 @@ const EventsDetail = () => {
                                                                     </h3>
                                                                     <div className="card__time opacity-50 text-base mb-4 uppercase flex">
                                                                         <p className="from mr-1">
-                                                                            {events.time_from}
+                                                                            {formatTime(events.time_from)}
                                                                         </p>
-
-                                                                        {events.time_to &&
-                                                                        <Fragment>
-                                                                            -
+                                                                        {events.time_to && (
                                                                             <p className="to ml-1">
-                                                                                {events.time_to}
+                                                                                - {formatTime(events.time_to)}
                                                                             </p>
-                                                                        </Fragment>
-                                                                        }
+                                                                        )}
                                                                     </div>
-
                                                                     <p className="card__venue text-base">
                                                                         {events.location}
                                                                     </p>
@@ -159,10 +148,10 @@ const EventsDetail = () => {
                                 </div>
                             </> : ""
                         }
-                    </div>
-                </section>
-            )}
-        </Fragment>
+                    </Fragment>
+                )}
+            </div>
+        </section>
     )
 }
 

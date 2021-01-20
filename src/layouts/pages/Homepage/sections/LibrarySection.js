@@ -1,40 +1,25 @@
-import React, {useEffect, useState} from 'react'
-import {useHistory, Link, useParams} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
-import {formatDate} from "../../../../helpers/date";
-import Loader from "../../../../components/Loader/Loader";
+import { formatDate } from "../../../../helpers/date"
+import Loader from "../../../../components/Loader/Loader"
+import useTrans from "../../../../hooks/useTrans"
 
 const LibrarySection = () => {
-    const [newsData, setNewsData] = useState([])
-    const [blogsData, setBlogsData] = useState([])
     const [loading, setLoading] = useState(true)
-    const [data, setData] = useState([])
-    let history = useHistory()
-    let {id: newsId} = useParams()
-    let {id: blogsId} = useParams()
+    const [insightList, setInsightList] = useState([])
+    const { trans } = useTrans()
 
-    useEffect(
-        () => {
-            CmsPageService.NewsList().then((response) => {
-                setNewsData(response.items)
+    useEffect(() => {
+        CmsPageService.InsightList({
+            fields: '_,title,id,slug,contents_type,published_date',
+            limit: 6
+        })
+            .then((response) => {
+                setInsightList(response.items)
                 setLoading(false)
             })
-            CmsPageService.BlogList().then((response) => {
-                setBlogsData(response.items)
-            })
-            // InsightServices.BlogsData().then((blogsresponse)=> {
-            //     InsightServices.NewsData().then((newsresponse)  => {
-            //         setBlogsData(blogsresponse.items)
-            //         setNewsData(newsresponse.items)
-            //         setData(newsresponse.items, blogsresponse.items)
-            //         setLoading(false)
-            //     })
-
-            // })
-        },
-        [newsId],
-        [blogsId]
-    )
+    }, [])
 
     return (
         <section className="bg-primary-gray py-24 px-4">
@@ -42,78 +27,35 @@ const LibrarySection = () => {
                 <div className="text-center mb-20">
                     <h3 className="uppercase text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
-                            Explore
+                            {trans('Explore')}
                         </span>
-                        Library
+                        {trans('Library')}
                     </h3>
                     <p className="text-base text-opacity-50  text-primary-dark">
-                        Find insights, analysis and best practices
+                        {trans('Find insights, analysis and best practices')}
                     </p>
                 </div>
-                {loading ? (
-                    <Loader sm/>
-                ) : (
+                {loading ? (<Loader sm />) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        {/* {data &&
-                        data.slice(0, 12).map((eachdata) => {
-                            return (
-                                <Link
-                                    to={eachdata.contents_type === "News" ? `/news/${eachdata.id}` : `/blogs/${eachdata.id}`}
-                                    key={eachdata.id}>
-                                    <div>
-                                        <div className="library__tag">
-                                            <p className="uppercase">{eachdata.contents_type}</p>
-                                        </div>
-                                        <h4 className="library__heading ">
-                                            {eachdata.title}
-                                        </h4>
-                                        <p className="library__date">
-                                            {formatDate(eachdata.published_date, 'MMM DD, YYYY')}
-                                        </p>
+                        {insightList.length ? insightList.map((insightItem) => (
+                            <Link
+                                key={insightItem.id}
+                                to={`/news/${insightItem.id}`}>
+                                <div>
+                                    <div className="library__tag">
+                                        <p className="uppercase">{insightItem.contents_type}</p>
                                     </div>
-                                </Link>
-                            )
-                        })} */}
-                        {newsData &&
-                            newsData.slice(0, 4).map((news) => {
-                                return (
-                                    <Link
-                                    to={`/news/${news.id}`}
-                                        key={news.id}>
-                                        <div>
-                                            <div className="library__tag">
-                                                <p className="uppercase">{news.contents_type}</p>
-                                            </div>
-                                            <h4 className="library__heading ">
-                                                {news.title}
-                                            </h4>
-                                            <p className="library__date">
-                                                {formatDate(news.published_date)}
-                                            </p>
-                                        </div>
-                                    </Link>
-                                )
-                            })}
-                            {blogsData &&
-                                blogsData.slice(0, 2).map((blogs) => {
-                                    return (
-                                        <Link
-                                        to={`/blogs/${blogs.id}`}
-                                            key={blogs.id}>
-                                        <div>
-                                            <div className="library__tag">
-                                                <p className="uppercase">{blogs.contents_type}</p>
-                                            </div>
-                                            <h4 className="library__heading ">
-                                                {blogs.title}
-                                            </h4>
-                                            <p className="library__date">
-                                                {formatDate(blogs.published_date)}
-                                            </p>
-                                        </div>
-                                    </Link>
-                                )
-                            })}
+                                    <h4 className="library__heading ">
+                                        {insightItem.title}
+                                    </h4>
+                                    <p className="library__date">
+                                        {formatDate(insightItem.published_date)}
+                                    </p>
+                                </div>
+                            </Link>
+                        )) : (
+                            <p>{trans('No records')}</p>
+                        )}
                     </div>
                 )}
             </div>

@@ -7,9 +7,9 @@ require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
 # Include Node essentials
-# require "capistrano/nvm"
-# require "capistrano/npm"
-# require "capistrano/yarn"
+#require "capistrano/nvm"
+#require "capistrano/npm"
+#require "capistrano/yarn"
 
 # Include tasks from other gems included in your Gemfile
 #

@@ -14,11 +14,10 @@ const NewsDetail = () => {
     const [newsData, setNewsData] = useState([])
     const [loading, setLoading] = useState(true)
     let { id: newsId } = useParams()
-    const url = () => {
-        window.location.href
-    }
+    window.scrollTo(0, 0)
 
     useEffect(() => {
+        setLoading(true)
         CmsPageService.NewsDetail(newsId)
             .then((response) => {
                 setNewsDetail(response)
@@ -31,27 +30,19 @@ const NewsDetail = () => {
     }, [newsId])
 
     return (
-        <Fragment>
-            {loading ? (<Loader />) : (
-                <section className="pt-8">
-                    <div className="container mx-auto px-4 news-detail">
-                        <Breadcrumb item={'news'} />
-
+        <section className="pt-8">
+            <div className="container mx-auto px-4 news-detail">
+                <Breadcrumb item={'news'} />
+                {loading ? (<Loader />) : (
+                    <Fragment>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {newsDetail.title}
                         </h2>
-                        {get(
-                            newsDetail,
-                            'content_image.meta.download_url'
-                        ) &&
+                        {get(newsDetail, 'content_image.meta.download_url') &&
                         <div className="img-wrapper mb-6 md:mb-10">
                             <img
-                                src={`${API_URL}${get(
-                                    newsDetail,
-                                    'content_image.meta.download_url'
-                                )}`}
-                                alt={get(newsDetail, 'content_image.title')}
-                            />
+                                src={`${API_URL}${get(newsDetail, 'content_image.meta.download_url')}`}
+                                alt={get(newsDetail, 'content_image.title')} />
                         </div>
                         }
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
@@ -78,7 +69,7 @@ const NewsDetail = () => {
                                         <p className="font-bold opacity-40 mr-4">
                                             Share on
                                         </p>
-                                        <ShareButtons url={url} />
+                                        <ShareButtons url={window.location.href} />
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +77,7 @@ const NewsDetail = () => {
                                 <p className="font-bold opacity-40 mb-2">
                                     Share on
                                 </p>
-                                <ShareButtons url={url} />
+                                <ShareButtons url={window.location.href} />
                             </div>
                         </div>
                         {newsData.length !== 1 ?
@@ -111,12 +102,8 @@ const NewsDetail = () => {
                                                         ) &&
                                                         <div className="img-wrapper">
                                                             <img
-                                                                src={`${API_URL}${get(
-                                                                    news,
-                                                                    'content_image.meta.download_url'
-                                                                )}`}
-                                                                alt=""
-                                                            />
+                                                                src={`${API_URL}${get(news, 'content_image.meta.download_url')}`}
+                                                                alt="" />
                                                         </div>
                                                         }
                                                         <div>
@@ -141,10 +128,10 @@ const NewsDetail = () => {
                                 </div>
                             </> : ""
                         }
-                    </div>
-                </section>
-            )}
-        </Fragment>
+                    </Fragment>
+                )}
+            </div>
+        </section>
     )
 }
 

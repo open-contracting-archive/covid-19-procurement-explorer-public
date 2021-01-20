@@ -8,7 +8,8 @@ import {
 } from 'react-share'
 import { twitterHandle } from "../../helpers/general"
 
-const ShareButtons = ({ title, url, tags }) => {
+const ShareButtons = (props) => {
+    const { url } = props
 
     return (
         <div className="flex">

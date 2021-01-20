@@ -8,8 +8,10 @@ class CmsPageService {
                 getURI('pages'),
                 {
                     type: "content.InsightsPage",
-                    fields: "*",
+                    // fields: "*",
+                    fields: '_,title,id,slug,content_image',
                     contents_type: "News",
+                    order: "-published_date",
                     ...queryParams
                 }
             )
@@ -34,6 +36,7 @@ class CmsPageService {
                     type: "content.InsightsPage",
                     fields: "*",
                     contents_type: "Blog",
+                    order: "-published_date",
                     ...queryParams
                 }
             )
@@ -57,6 +60,7 @@ class CmsPageService {
                 {
                     type: "content.EventsPage",
                     fields: "*",
+                    order: "-event_date",
                     ...queryParams
                 }
             )
@@ -80,6 +84,7 @@ class CmsPageService {
                 {
                     type: "content.InsightsPage",
                     fields: "*",
+                    order: "-published_date",
                     ...queryParams
                 }
             )
@@ -109,6 +114,7 @@ class CmsPageService {
                 {
                     type: "content.ResourcesPage",
                     fields: "*",
+                    order: "-published_date",
                     ...queryParams
                 }
             )
