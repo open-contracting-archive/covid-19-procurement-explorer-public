@@ -78,19 +78,19 @@ const GlobalSuppliers = (props) => {
                         <Tab>{trans('By number of contracts')}</Tab>
                     </TabList>
 
-                    <ul className="flex items-center my-4">
+                    {/* <ul className="flex items-center my-4">
                         <li className="inline-block mr-2 px-4 py-2 rounded-full bg-blue-50 text-white">
                             {trans('Global suppliers chain')}
                         </li>
                         <li className="inline-block mr-2 px-4 py-2 rounded-full bg-blue-0">
                             {trans('Global distribution chain')}
                         </li>
-                    </ul>
+                    </ul> */}
 
                     {loading ? (
                         <Loader />
                     ) : (
-                        <div className="flex">
+                        <div className="flex mt-4">
                             <div className="flex-1">
                                 <TabPanel>
                                     <SankeyChart

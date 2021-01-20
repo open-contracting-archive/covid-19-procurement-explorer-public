@@ -20,6 +20,12 @@ const CompareChart = ({ chartData, equities }) => {
         chart.cursor = new am4charts.XYCursor()
         chart.data = chartData
         chart.logo.disabled = true
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
 
         // the following line makes value axes to be arranged vertically.
         chart.leftAxesContainer.layout = 'vertical'

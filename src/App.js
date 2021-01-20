@@ -25,6 +25,7 @@ import BuyerProfile from './layouts/pages/Buyer/BuyerProfile'
 import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
 import GeneralService from "./services/GeneralService"
 import equities from './store/static-data/equities.json'
+import GlobalProductProfile from './components/GlobalProductProfile/GlobalProductProfile'
 
 function App() {
     const dispatch = useDispatch()
@@ -66,12 +67,30 @@ function App() {
                 <Header />
                 <Switch>
                     <Route exact path="/" component={Home} />
-
-                    <Route path="/global-overview/:tabSlug" component={GlobalOverview} />
-                    <Route path="/global-overview/" component={GlobalOverview} />
-
-                    <Route path="/country/:countrySlug/:tabSlug" component={CountryProfile} />
-                    <Route path="/country/:countrySlug/" component={CountryProfile} />
+                    <Route
+                        path="/products/:id"
+                        component={GlobalProductProfile}
+                    />
+                    <Route
+                        path="/global-overview/:tabSlug"
+                        component={GlobalOverview}
+                    />
+                    <Route
+                        path="/global-overview/"
+                        component={GlobalOverview}
+                    />
+                    {/* <Route
+                        path="/country/:countrySlug/products/:slug"
+                        component={CountryProductProfile}
+                    /> */}
+                    <Route
+                        path="/country/:countrySlug/:tabSlug"
+                        component={CountryProfile}
+                    />
+                    <Route
+                        path="/country/:countrySlug/"
+                        component={CountryProfile}
+                    />
 
                     <Route exact path="/news" component={News} />
                     <Route exact path="/news/:id" component={NewsDetail} />
@@ -80,10 +99,17 @@ function App() {
                     <Route exact path="/events" component={Events} />
                     <Route exact path="/events/:id" component={EventsDetail} />
                     <Route exact path="/resources" component={Resources} />
-                    <Route exact path="/resources/:id" component={ResourcesDetail} />
+                    <Route
+                        exact
+                        path="/resources/:id"
+                        component={ResourcesDetail}
+                    />
                     <Route path="/library" component={Library} />
                     <Route path="/tags" component={Tags} />
-                    <Route path="/contracts/:contractId" component={TenderDetail} />
+                    <Route
+                        path="/contracts/:contractId"
+                        component={TenderDetail}
+                    />
                     <Route path="/buyers/:id" component={BuyerProfile} />
                     <Route path="/suppliers/:id" component={SupplierProfile} />
                     <Route path="/pages/:slug" component={StaticPage} />

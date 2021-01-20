@@ -16,17 +16,6 @@ const PieChart = ({ data, colors, large }) => {
         // Create chart instance
         let chart = am4core.create(piechartDiv.current, am4charts.PieChart)
 
-        chart.numberFormatter.bigNumberPrefixes = [
-            { number: 1e3, suffix: 'K' },
-            { number: 1e6, suffix: 'M' },
-            { number: 1e9, suffix: 'G' },
-            { number: 1e12, suffix: 'T' },
-            { number: 1e15, suffix: 'P' },
-            { number: 1e18, suffix: 'E' },
-            { number: 1e21, suffix: 'Z' },
-            { number: 1e24, suffix: 'Y' }
-        ]
-
         // Add and configure Series
         let pieSeries = chart.series.push(new am4charts.PieSeries())
         pieSeries.dataFields.value = 'number'
@@ -81,6 +70,12 @@ const PieChart = ({ data, colors, large }) => {
 
         chart.data = data
         chart.logo.disabled = true
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
 
         return () => {
             chart.dispose()
