@@ -32,6 +32,7 @@ const GlobalSuppliers = (props) => {
     // ===========================================================================
     // Handlers and functions
     // ===========================================================================
+    
     // Global Suppliers Visualization
     const getSuppliersData = (data, type) => {
         let suppliersData = {}
