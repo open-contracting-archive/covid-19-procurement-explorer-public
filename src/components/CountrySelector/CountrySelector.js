@@ -38,7 +38,7 @@ const CountrySelector = () => {
                     <option
                         key={index}
                         value={country.slug}>
-                        {country.name}
+                        {country.slug === 'global' ? 'Global Overview' : country.name}
                     </option>
                 ))}
             </select>

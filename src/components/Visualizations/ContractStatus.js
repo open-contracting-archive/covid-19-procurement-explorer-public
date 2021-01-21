@@ -1,24 +1,12 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import SimpleBarListSection from '../SimpleBarListSection/SimpleBarListSection'
+import React, { useEffect, useState } from 'react'
+import { isEmpty, sumBy } from 'lodash'
+import { useSelector } from 'react-redux'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import Loader from '../Loader/Loader'
-
-// Contract Status Data
-const contract_status_data = [
-    {
-        name: 'Active',
-        value: '0%'
-    },
-    {
-        name: 'Completed',
-        value: '0%'
-    },
-    {
-        name: 'Cancelled',
-        value: '0%'
-    }
-]
+import ContractView from "../../constants/ContractView"
+import Default from "../../constants/Default"
+import SimpleBarListChart from "../SimpleBarListSection/SimpleBarListChart"
 
 const ContractStatus = (props) => {
     // ===========================================================================
@@ -26,7 +14,10 @@ const ContractStatus = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [contractStatus, setContractStatus] = useState([])
+    const currency = useSelector((state) => state.general.currency)
+    const [originalData, setOriginalData] = useState([])
+    const [chartData, setChartData] = useState([])
+    const [viewType, setViewType] = useState(ContractView.VALUE)
     const { trans } = useTrans()
 
     // ===========================================================================
@@ -35,72 +26,80 @@ const ContractStatus = (props) => {
     useEffect(() => {
         VisualizationServices.ContractStatus(params)
             .then((response) => {
-                setContractStatus(response)
+                setOriginalData(response)
                 setLoading(false)
             })
     }, [params])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Contract status
-    const calculateContractStatusChartPercentage = (data, type) => {
-        if (type === 'by_value') {
-            let total = data.reduce((acc, current) => {
-                return acc + current.amount_local
-            }, 0)
-
-            return data.map((data) => {
+    useEffect(() => {
+        if (!isEmpty(originalData)) {
+            let total = sumBy(originalData, (item) => {
+                return viewType === ContractView.NUMBER
+                    ? item.tender_count
+                    : currency === Default.CURRENCY_LOCAL
+                        ? item.amount_local
+                        : item.amount_usd
+            })
+            let chartDataFormatted = originalData.map((item) => {
+                let actualValue =
+                    viewType === ContractView.NUMBER
+                        ? item.tender_count
+                        : currency === Default.CURRENCY_LOCAL
+                        ? item.amount_local
+                        : item.amount_usd
                 return {
-                    name: data.status,
-                    value: Math.ceil((data.amount_local / total) * 100),
-                    amount: data.amount_local
+                    name: item.status,
+                    value: Math.ceil((actualValue / total) * 100),
+                    amount: actualValue
                 }
             })
+            setChartData(chartDataFormatted)
         }
+    }, [originalData, viewType])
 
-        if (type === 'by_number') {
-            let total = data.reduce((acc, current) => {
-                return acc + current.tender_count
-            }, 0)
-
-            return data.map((data) => {
-                return {
-                    name: data.status,
-                    value: Math.ceil((data.tender_count / total) * 100),
-                    amount: data.tender_count
-                }
-            })
-        }
+    const isActiveTab = (type) => {
+        return viewType === type ? 'active' : ''
     }
-    const contractStatusDataByNumber =
-        contractStatus &&
-        calculateContractStatusChartPercentage(contractStatus, 'by_number')
-    const contractStatusDataByValue =
-        contractStatus &&
-        calculateContractStatusChartPercentage(contractStatus, 'by_value')
 
     return (
-        <Fragment>
-            <div className="bg-white rounded p-4 h-full">
-                {loading ? (
-                    <Loader sm />
-                ) : (
-                    <SimpleBarListSection
-                        label={label}
-                        bar_data={contract_status_data}
-                        byNumber={
-                            contractStatusDataByNumber &&
-                            contractStatusDataByNumber
-                        }
-                        byValue={
-                            contractStatusDataByValue &&
-                            contractStatusDataByValue
-                        }
-                    />
-                )}
+        <div className="bg-white rounded p-6 pb-0 h-full">
+            <div className="flex items-center justify-between">
+                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                    {trans(label)}
+                </h3>
+                <div className="flex justify-end world-map-chart mb-4">
+                    <ul className="contract-switch flex">
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(
+                                ContractView.VALUE
+                            )}`}
+                            onClick={() => setViewType(ContractView.VALUE)}>
+                            {trans('By value')}
+                        </li>
+                        <li
+                            className={`mr-4 cursor-pointer ${isActiveTab(
+                                ContractView.NUMBER
+                            )}`}
+                            onClick={() =>
+                                setViewType(ContractView.NUMBER)
+                            }>
+                            {trans('By number')}
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </Fragment>
+            {loading ? (<Loader />) : (
+                <div className="flex">
+                    <div className="flex-1">
+                        <div className="flex-1 simple-tab -mt-10">
+                            <div className="mt-10">
+                                <SimpleBarListChart data={chartData} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     )
 }
 

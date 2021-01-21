@@ -21,10 +21,11 @@ const TotalContracts = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalContracts(params).then((response) => {
-            setTotalContracts(response)
-            setLoading(false)
-        })
+        VisualizationServices.TotalContracts(params)
+            .then((response) => {
+                setTotalContracts(response)
+                setLoading(false)
+            })
     }, [params])
 
     // ===========================================================================
@@ -62,9 +63,7 @@ const TotalContracts = (props) => {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">{label}</h3>
-            {loading ? (
-                <Loader sm />
-            ) : (
+            {loading ? (<Loader sm />) : (
                 <div className="flex items-end">
                     {/* Line are chart */}
                     <AreaChartBlock
