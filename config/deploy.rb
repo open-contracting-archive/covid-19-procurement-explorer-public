@@ -51,15 +51,15 @@ set :current_timestamp, DateTime.now.to_time.to_i
 # Set node library #
 #######################################################################################
 # append  :linked_files, ".env"
-# append  :linked_dirs, "node_modules"
-#
-# set :nvm_type, :user
-# set :nvm_node, "v14.4.0"
-# set :nvm_map_bins, %w{node npm yarn}
-#
-# set :yarn_roles, :all
-# set :yarn_flags, %w(--silent --no-progress)
-# set :yarn_env_variables, {}
+append  :linked_dirs, "node_modules"
+
+set :nvm_type, :user
+set :nvm_node, "v14.4.0"
+set :nvm_map_bins, %w{node npm yarn}
+
+set :yarn_roles, :all
+set :yarn_flags, %w(--silent --no-progress)
+set :yarn_env_variables, {}
 
 # set :npm_flags, '--silent --no-progress'
 
@@ -228,11 +228,11 @@ task :app_ver do
 end
 
 namespace :deploy do
-    after :starting, "slack:start"
+#     after :starting, "slack:start"
     after :updated, "environment:set_variables"
 #     after :updated, "npm:run_build"
-#     after :updated, "yarn:run_build"
+    after :updated, "yarn:run_build"
     after :finished, "covid19:create_ver_txt"
-    after :finished, "slack:deployed"
-    after :failed, "slack:notify_deploy_failed"
+#     after :finished, "slack:deployed"
+#     after :failed, "slack:notify_deploy_failed"
 end
