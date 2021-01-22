@@ -59,5 +59,5 @@ const apiRoutes = {
 }
 
 export const getURI = (routeName) => {
-    return API_URL + get(apiRoutes, routeName)
+    return `${API_URL}/${get(apiRoutes, routeName)}`
 }

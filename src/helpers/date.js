@@ -12,3 +12,7 @@ export const dateDiff = (fromDateString, toDateString) => {
 export const formatTime = (timeString, format = 'h:mm A') => {
     return dayjs('2020-01-01T' + timeString).format(format)
 }
+
+export const formatYearText = (yearMonth) => {
+    return yearMonth ? dayjs(yearMonth + '-01T').format('MMM, YYYY') : yearMonth
+}

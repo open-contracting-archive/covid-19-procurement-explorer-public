@@ -3,21 +3,21 @@ import React, {
     useLayoutEffect,
     useEffect,
     useRef,
-    useState,
-    useCallback
+    useState
 } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+import { formatYearText } from "../../../helpers/date"
 
 const RaceMap = ({
-    sliderData,
-    contractType,
-    contractData,
-    yearMonth,
-    coordinates
-}) => {
+                     sliderData,
+                     contractType,
+                     contractData,
+                     yearMonth,
+                     coordinates
+                 }) => {
     const mapchartDiv = useRef(null)
     const [data, setData] = useState({})
     let yearMonthMapData = yearMonth
@@ -37,26 +37,6 @@ const RaceMap = ({
         let mapData = extractData(yearMonthMapData)
         setData(mapData)
     }, [yearMonthMapData, contractData, contractType])
-
-    const formatYearText = useCallback((yearText) => {
-        const [year, month] = yearText.split('-')
-        const months = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ]
-
-        return `${months[month - 1] || month}, ${year}`
-    }, [])
 
     useLayoutEffect(() => {
         /* Chart code */
