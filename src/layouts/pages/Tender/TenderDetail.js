@@ -90,25 +90,35 @@ const TenderDetail = () => {
                             {trans('Procurement procedure')}
                         </p>
                         <p className="font-bold text-sm capitalize">
-                            {tenderInfo && tenderInfo.procurement_procedure}
+                            {(tenderInfo && tenderInfo.procurement_procedure) ||
+                                '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
                             {trans('Number of bidders')}
                         </p>
-                        <p className="font-bold text-xl">-</p>
+                        <p className="font-bold text-xl">
+                            {(tenderInfo &&
+                                formatNumber(tenderInfo.bidders_no)) ||
+                                '-'}
+                        </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
                             {trans('Tender value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {/* 62K{' '}
-                            <span className="font-normal text-base uppercase">
-                                USD
-                            </span> */}
-                            -
+                            {tenderInfo && tenderInfo.tender_usd ? (
+                                <>
+                                    {formatNumber(tenderInfo.tender_usd)}{' '}
+                                    <span className="font-normal text-base uppercase">
+                                        USD
+                                    </span>
+                                </>
+                            ) : (
+                                '-'
+                            )}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -116,11 +126,16 @@ const TenderDetail = () => {
                             {trans('Award value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {/* 59K{' '}
-                            <span className="font-normal text-base uppercase">
-                                USD
-                            </span> */}
-                            -
+                            {tenderInfo && tenderInfo.award_usd ? (
+                                <>
+                                    {formatNumber(tenderInfo.award_usd)}{' '}
+                                    <span className="font-normal text-base uppercase">
+                                        USD
+                                    </span>
+                                </>
+                            ) : (
+                                '-'
+                            )}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -128,12 +143,18 @@ const TenderDetail = () => {
                             {trans('Contract value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {(tenderInfo &&
-                                formatNumber(tenderInfo.contract_value_usd)) ||
-                                '-'}{' '}
-                            <span className="font-normal text-base uppercase">
-                                USD
-                            </span>
+                            {tenderInfo && tenderInfo.contract_value_usd ? (
+                                <>
+                                    {formatNumber(
+                                        tenderInfo.contract_value_usd
+                                    )}{' '}
+                                    <span className="font-normal text-base uppercase">
+                                        USD
+                                    </span>
+                                </>
+                            ) : (
+                                '-'
+                            )}
                         </p>
                     </div>
                 </div>
@@ -148,16 +169,24 @@ const TenderDetail = () => {
                         <p className="text-sm uppercase mb-1">
                             {trans('Procuring entity')}
                         </p>
-                        <p className="font-bold text-sm uppercase">-</p>
+                        <p className="font-bold text-sm uppercase">
+                            <Link
+                                to={`/buyers/${get(
+                                    tenderInfo,
+                                    'buyer.buyer_id'
+                                )}`}>
+                                <p className="font-bold text-sm uppercase">
+                                    {get(tenderInfo, 'buyer.buyer_name')}
+                                </p>
+                            </Link>
+                        </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
                             {trans('Procurement entity address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {/* CIAD-Centro de Investigación en Alimentación y
-                            Desarrollo, A.C. #0389ZY998 */}
-                            -
+                            {get(tenderInfo, 'buyer.buyer_address') || '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7 md:row-start-2">
@@ -171,8 +200,6 @@ const TenderDetail = () => {
                             )}`}>
                             <p className="font-bold text-sm uppercase">
                                 {get(tenderInfo, 'supplier.supplier_name')}
-                                {/* {tenderInfo.supplier &&
-                                tenderInfo.supplier.supplier_name} */}
                             </p>
                         </Link>
                     </div>
@@ -183,7 +210,6 @@ const TenderDetail = () => {
                         <p className="font-bold text-sm uppercase">
                             {get(tenderInfo, 'supplier.supplier_address') ||
                                 '-'}
-                            {/* {tenderInfo && tenderInfo.supplier.supplier_address} */}
                         </p>
                     </div>
                 </div>

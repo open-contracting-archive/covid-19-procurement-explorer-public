@@ -32,8 +32,8 @@ const apiRoutes = {
     'visualization.equity-summary': 'api/v1/visualization/equity-summary/',
 
     // Detail api
-    'buyer-detail': 'api/v1/buyers',
-    'supplier-detail': 'api/v1/suppliers',
+    'buyer-detail': 'api/v1/visualization/buyers',
+    'supplier-detail': 'api/v1/visualization/suppliers',
 
     // table api
     contracts: 'api/v1/contracts/',
@@ -50,9 +50,12 @@ const apiRoutes = {
     // filter parameters
     'filter-parameter': 'api/v1/visualization/filter-parameters/',
     //todo: make correction; 'filters' to 'filter'
-    'filter-parameters-static': 'api/v1/visualization/filters-parameters/static/',
-    'filter-parameters-buyers': 'api/v1/visualization/filters-parameters/buyers',
-    'filter-parameters-suppliers': 'api/v1/visualization/filters-parameters/suppliers'
+    'filter-parameters-static':
+        'api/v1/visualization/filters-parameters/static/',
+    'filter-parameters-buyers':
+        'api/v1/visualization/filters-parameters/buyers',
+    'filter-parameters-suppliers':
+        'api/v1/visualization/filters-parameters/suppliers'
 }
 
 export const getURI = (routeName) => {

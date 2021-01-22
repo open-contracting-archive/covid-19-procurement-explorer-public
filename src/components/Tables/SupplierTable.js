@@ -203,22 +203,22 @@ const SupplierTable = (props) => {
                     />
                 </div>
 
-                {/*<div className="w-40">*/}
-                {/*    <p className="uppercase text-xs opacity-50 leading-none">*/}
-                {/*        {trans('Value range')}*/}
-                {/*    </p>*/}
-                {/*    <Select*/}
-                {/*        className="select-filter text-sm"*/}
-                {/*        classNamePrefix="select-filter"*/}
-                {/*        options={valueRanges}*/}
-                {/*        onChange={(selectedOption) =>*/}
-                {/*            appendFilter({*/}
-                {/*                contract_value_usd: selectedOption.value.value,*/}
-                {/*                value_comparison: selectedOption.value.sign*/}
-                {/*            })*/}
-                {/*        }*/}
-                {/*    />*/}
-                {/*</div>*/}
+                <div className="w-40">
+                    <p className="uppercase text-xs opacity-50 leading-none">
+                        {trans('Value range')}
+                    </p>
+                    <Select
+                        className="select-filter text-sm"
+                        classNamePrefix="select-filter"
+                        options={valueRanges}
+                        onChange={(selectedOption) =>
+                            appendFilter({
+                                contract_value_usd: selectedOption.value.value,
+                                value_comparison: selectedOption.value.sign
+                            })
+                        }
+                    />
+                </div>
             </div>
 
             <div className="relative">
