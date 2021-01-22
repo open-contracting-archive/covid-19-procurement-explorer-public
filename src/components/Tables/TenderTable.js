@@ -16,7 +16,7 @@ const TenderTable = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { params } = props
+    const { params, page } = props
     const countries = useSelector((state) => state.general.countries)
     const contractMethods = useSelector(
         (state) => state.general.contractMethods
@@ -114,6 +114,19 @@ const TenderTable = (props) => {
             })
         }
     }, [params])
+
+    useEffect(() => {
+        if (page === 'suppliers') {
+            getBuyersFilterParameter({
+                country: params.country
+            })
+        }
+        if (page === 'buyers') {
+            getSuppliersFilterParameter({
+                country: params.country
+            })
+        }
+    }, [page])
 
     // ===========================================================================
     // Helpers and functions
@@ -449,7 +462,7 @@ const TenderTable = (props) => {
                                                     <SortIcon className="ml-1 cursor-pointer" />
                                                 </span>
                                             </th>
-                                            <th />
+                                            <th style={{ width: '3%' }} />
                                         </tr>
                                     </thead>
 
