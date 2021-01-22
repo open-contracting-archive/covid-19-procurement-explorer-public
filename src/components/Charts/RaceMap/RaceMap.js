@@ -1,5 +1,11 @@
 /* Imports */
-import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
+import React, {
+    useLayoutEffect,
+    useEffect,
+    useRef,
+    useState,
+    useCallback
+} from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
@@ -32,6 +38,26 @@ const RaceMap = ({
         setData(mapData)
     }, [yearMonthMapData, contractData, contractType])
 
+    const formatYearText = useCallback((yearText) => {
+        const [year, month] = yearText.split('-')
+        const months = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ]
+
+        return `${months[month - 1] || month}, ${year}`
+    }, [])
+
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
@@ -41,6 +67,14 @@ const RaceMap = ({
         // Create chart instance
         let chart = am4core.create(mapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
+
+        let label = chart.createChild(am4core.Label)
+        label.x = am4core.percent(97)
+        label.y = am4core.percent(95)
+        label.horizontalCenter = 'right'
+        label.verticalCenter = 'middle'
+        label.dy = -130
+        label.fontSize = 42
 
         // Set map definition
         chart.geodata = am4geodata_worldLow
@@ -69,7 +103,6 @@ const RaceMap = ({
 
         // Set heatmap values for each state
         polygonSeries.data = data
-        // console.log(polygonSeries.data)
 
         polygonSeries.mapPolygons.template.events.on('over', (event) => {
             handleHover(event.target)
@@ -160,7 +193,7 @@ const RaceMap = ({
                 let index = Math.round((sliderData.length - 1) * slider.start)
                 const updatedData = extractData(sliderData[index])
 
-                // console.log(sliderData[index], 'Slider Data')
+                label.text = formatYearText(sliderData[index])
 
                 for (var i = 0; i < updatedData.length; i++) {
                     let di = updatedData[i]
@@ -169,14 +202,8 @@ const RaceMap = ({
                     if (polygon) {
                         polygon.dataItem.dataContext.value = di.value
                     }
-
-                    // polygonSeries.heatRules.getIndex(0).maxValue =
-                    //     maxPC[currentType]
-
                     polygonSeries.invalidateRawData()
                 }
-
-                // polygonSeries.data = updatedData
             })
 
             playButton = sliderContainer.createChild(am4core.PlayButton)
@@ -237,7 +264,7 @@ const RaceMap = ({
 
             chart = null
         }
-    }, [data, coordinates])
+    }, [data, coordinates, formatYearText])
 
     return (
         <div className="map-wrapper pb-6">
