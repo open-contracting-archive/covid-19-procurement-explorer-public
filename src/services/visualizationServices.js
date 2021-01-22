@@ -2,9 +2,9 @@ import Api from './api'
 import { getURI } from '../helpers/api'
 
 class VisualizationServices {
-    static async GlobalMap() {
+    static async GlobalMap(params) {
         try {
-            const res = await Api.get(getURI('visualization.world-map'))
+            const res = await Api.get(getURI('visualization.world-map'), params)
             return res.body
         } catch (error) {
             console.log(error)
@@ -227,6 +227,15 @@ class VisualizationServices {
         }
     }
 
+    // static async ProductDetail(id) {
+    //     try {
+    //         const res = await Api.get(`${getURI('product-detail')}/${id}`)
+    //         return res.body
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
     static async CountryPartners(params) {
         try {
             const res = await Api.get(
@@ -262,7 +271,6 @@ class VisualizationServices {
             console.log(error)
         }
     }
-
 
     static async ProductSummary(params) {
         try {

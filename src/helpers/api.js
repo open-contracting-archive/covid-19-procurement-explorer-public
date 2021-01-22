@@ -39,7 +39,7 @@ const apiRoutes = {
     contracts: 'api/v1/contracts/',
     buyers: 'api/v1/buyers/',
     suppliers: 'api/v1/suppliers/',
-    products: 'api/v1/product/',
+    products: 'api/v1/visualization/products/',
 
     // country api
     countries: 'api/v1/country/',

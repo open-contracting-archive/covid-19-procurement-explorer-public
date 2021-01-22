@@ -401,3 +401,38 @@ svg tspan {
 .react-datepicker {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+
+.product-worldmap-tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    flex-direction: column;
+    width: 67px;
+    background: rgba(41, 62, 69, 0.1);
+    border-radius: 4px;
+    padding: 18px 14px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+}
+
+.product-worldmap-tablist.active {
+    position: relative;
+
+    > div {
+        position: relative;
+        color: #fff;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 76px;
+        left: -14px;
+        top: -5px;
+        right: 0px;
+        bottom: -5px;
+        background: #1fbbec;
+        border-radius: 0 4px 4px 0;
+    }
+}

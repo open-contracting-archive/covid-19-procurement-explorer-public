@@ -30,15 +30,6 @@ class CountryService {
         }
     }
 
-    static async LoadMoreTenderData(url) {
-        try {
-            const response = await Api.get(url)
-            return response.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     static async ContractDetailData(contractsId) {
         try {
             const response = await Api.get(`${getURI('contracts')}/${contractsId}`)

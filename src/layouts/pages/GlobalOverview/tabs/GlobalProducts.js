@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductCategoryMap from "../../../../components/Visualizations/Common/ProductCategoryMap"
-import { TenderTable } from "../../../../components/Tables"
+import { ProductTable } from "../../../../components/Tables"
 
 const GlobalProducts = () => {
     function renderMainVisualization() {
@@ -8,7 +8,7 @@ const GlobalProducts = () => {
     }
 
     function renderTable() {
-        return (<TenderTable />)
+        return (<ProductTable />)
     }
 
     return (

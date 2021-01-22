@@ -28,6 +28,15 @@ class ContractService {
             console.log(error)
         }
     }
+
+    static async ProductList(params) {
+        try {
+            const res = await Api.get(getURI('products'), params)
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default ContractService

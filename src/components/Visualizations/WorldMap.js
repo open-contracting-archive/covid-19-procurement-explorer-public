@@ -10,11 +10,12 @@ import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullsc
 import { CONTINENTS } from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
 
-const WorldMap = () => {
+const WorldMap = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [data, setData] = useState({})
+    const { params } = props
     const [contractType, setContractType] = useState('value')
     const [mapData, setMapData] = useState()
     const [selectedContinent, setSelectedContinent] = useState({
@@ -27,11 +28,11 @@ const WorldMap = () => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.GlobalMap().then((response) => {
+        VisualizationServices.GlobalMap(params).then((response) => {
             setData(response)
             setLoading(false)
         })
-    }, [])
+    }, [params])
 
     useEffect(() => {
         let mapData = {}

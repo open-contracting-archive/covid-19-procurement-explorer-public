@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductCategoryMap from "../../../../components/Visualizations/Common/ProductCategoryMap"
-import { TenderTable } from "../../../../components/Tables"
+import { ProductTable } from "../../../../components/Tables"
 
 const CountryProducts = (props) => {
     function renderMainVisualization() {
@@ -11,7 +11,7 @@ const CountryProducts = (props) => {
 
     function renderTable() {
         if (props.countryCode) {
-            return (<TenderTable params={{ country: props.countryCode }} />)
+            return (<ProductTable params={{ country: props.countryCode }} />)
         }
     }
 
