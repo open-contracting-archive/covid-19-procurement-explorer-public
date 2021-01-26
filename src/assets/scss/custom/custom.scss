@@ -389,11 +389,15 @@ svg tspan {
 }
 
 .breadcrumb-separator:after {
-  content: " / ";
+    content: ' / ';
 }
 
 .text-field {
-  border-bottom: 2px solid #1fbbec;
-  padding: 8px 0 9px 0;
-  background-color: inherit;
+    border-bottom: 2px solid #1fbbec;
+    padding: 8px 0 9px 0;
+    background-color: inherit;
+}
+
+.react-datepicker {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }

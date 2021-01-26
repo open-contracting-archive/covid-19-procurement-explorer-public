@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { get, has, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
+import DatePicker from 'react-datepicker'
 import ContractService from '../../services/ContractService'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
@@ -11,6 +12,7 @@ import { formatDate } from '../../helpers/date'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import TableLoader from '../Loader/TableLoader'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const TenderTable = (props) => {
     // ===========================================================================
@@ -35,6 +37,10 @@ const TenderTable = (props) => {
     const [totalItems, setTotalItems] = useState()
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(null)
+    const [showDatePicker, setShowDatePicker] = useState(false)
+    const ref = useRef()
 
     const countrySelectList = useMemo(() => {
         return [
@@ -128,6 +134,15 @@ const TenderTable = (props) => {
         }
     }, [page])
 
+    useEffect(() => {
+        if (startDate && endDate) {
+            appendFilter({
+                date_from: formatDate(startDate, 'YYYY-MM-DD'),
+                date_to: formatDate(endDate, 'YYYY-MM-DD')
+            })
+        }
+    }, [startDate, endDate])
+
     // ===========================================================================
     // Helpers and functions
     // ===========================================================================
@@ -215,6 +230,7 @@ const TenderTable = (props) => {
             setBuyersFilterOption(options)
         })
     }
+
     const getSuppliersFilterParameter = (params) => {
         ContractService.FilterSuppliersParameter(params).then((response) => {
             const options = response.map((supplier) => {
@@ -231,12 +247,33 @@ const TenderTable = (props) => {
         getSuppliersFilterParameter({ country })
         appendFilter({ country, buyer: '', supplier: '' })
     }
+
     const handleInputSubmit = (event, contractTitle) => {
         event.preventDefault()
         appendFilter({ title: contractTitle })
     }
 
-    // console.log(currentPage)
+    const onDateChange = (dates) => {
+        const [start, end] = dates
+        setStartDate(start)
+        setEndDate(end)
+        console.log('picker called')
+    }
+
+    const handleDatePicker = () => {
+        setShowDatePicker(!showDatePicker)
+        if (!showDatePicker) {
+            document.addEventListener('mousedown', handleClickOutside, false)
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside, false)
+        }
+    }
+
+    const handleClickOutside = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+            setShowDatePicker(false)
+        }
+    }
 
     return (
         <div>
@@ -344,43 +381,44 @@ const TenderTable = (props) => {
                         />
                     </div>
 
-                    {/* <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Data range
-                            </p>
-                            <div>
-                                <div className="select-filter--input mt-2">
-                                    <p className="field whitespace-no-wrap">
-                                        {dateRange[0].startDate &&
-                                        dateRange[0].endDate ? (
-                                            `${formatDate(
-                                                dateRange[0].startDate,
-                                                'MMM YYYY'
-                                            )} - ${formatDate(
-                                                dateRange[0].endDate,
-                                                'MMM YYYY'
-                                            )}`
-                                        ) : (
-                                            <span className="opacity-50">
-                                                Select date range
-                                            </span>
-                                        )}
-                                    </p>
-                                </div>
-                                <div className="absolute z-10 shadow-lg">
-                                    <DateRange
-                                        editableDateInputs={true}
-                                        onChange={(item) =>
-                                            setDateRange([item.selection])
-                                        }
-                                        moveRangeOnFirstSelection={false}
-                                        ranges={dateRange}
-                                        startDatePlaceholder="Start date"
-                                        endDatePlaceholder="End date"
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            Data range
+                        </p>
+                        <div ref={ref}>
+                            <div
+                                onClick={handleDatePicker}
+                                className="select-filter--input mt-2">
+                                <p className="field whitespace-no-wrap">
+                                    {startDate && endDate ? (
+                                        `${formatDate(
+                                            startDate,
+                                            "DD MMM 'YY"
+                                        )} - ${formatDate(
+                                            endDate,
+                                            "DD MMM 'YY"
+                                        )}`
+                                    ) : (
+                                        <span className="opacity-50">
+                                            Select date range
+                                        </span>
+                                    )}
+                                </p>
+                            </div>
+                            {showDatePicker && (
+                                <div className="absolute z-10">
+                                    <DatePicker
+                                        selected={startDate}
+                                        onChange={onDateChange}
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        selectsRange
+                                        inline
                                     />
                                 </div>
-                            </div>
-                        </div> */}
+                            )}
+                        </div>
+                    </div>
                     <div className="w-40">
                         <p className="uppercase text-xs opacity-50 leading-none">
                             Value range
