@@ -9,7 +9,7 @@ class CmsPageService {
                 {
                     type: "content.InsightsPage",
                     // fields: "*",
-                    fields: '_,title,id,slug,content_image',
+                    fields: '_,title,id,slug,content_image,featured',
                     contents_type: "News",
                     order: "-published_date",
                     ...queryParams
@@ -131,6 +131,23 @@ class CmsPageService {
         return res.body
     }
 
+    static async InsightSearch(queryParams) {
+        try {
+            const res = await Api.get(
+                getURI('pages'),
+                {
+                    type: "content.InsightsPage",
+                    fields: "*",
+                    // order: "-published_date",
+                    ...queryParams
+                }
+            )
+
+            return res.body
+        } catch (error) {
+            return error
+        }
+    }
 }
 
 export default CmsPageService

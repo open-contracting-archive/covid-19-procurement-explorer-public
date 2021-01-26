@@ -36,11 +36,13 @@ function App() {
             setCurrentLocale(window.localStorage.getItem('locale') || 'es')
         )
 
-        CountryService.getTranslations(currentLocale).then((response) => {
-            if (response) {
-                dispatch(setTranslations(response))
-            }
-        })
+        CountryService.getTranslations(currentLocale)
+            .then((response) => {
+                if (response) {
+                    dispatch(setTranslations(response))
+                }
+            })
+            .catch((error) => console.log(error))
     }, [dispatch, currentLocale])
 
     useEffect(() => {
