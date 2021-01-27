@@ -199,7 +199,7 @@ const BuyerTable = (props) => {
                         options={productSelectList}
                         onChange={(selectedOption) =>
                             appendFilter({
-                                product_id: selectedOption.value
+                                product: selectedOption.value
                             })
                         }
                     />

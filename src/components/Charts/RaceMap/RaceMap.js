@@ -148,6 +148,8 @@ const RaceMap = ({
 
         let sliderAnimation
 
+        label.text = formatYearText('2013-08')
+
         function createSlider() {
             let sliderContainer = chart.createChild(am4core.Container)
 

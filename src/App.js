@@ -1,8 +1,16 @@
 import React, { Fragment, useEffect } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setContractMethods, setContractStates, setCountries, setCurrentLocale, setEquityIndicators, setProductCategories, setTranslations } from './store/reducers/general/action'
-import CountryService from "./services/CountryService"
+import {
+    setContractMethods,
+    setContractStates,
+    setCountries,
+    setCurrentLocale,
+    setEquityIndicators,
+    setProductCategories,
+    setTranslations
+} from './store/reducers/general/action'
+import CountryService from './services/CountryService'
 import Header from './layouts/_partials/header'
 import Footer from './layouts/_partials/footer'
 import NotFound from './components/NotFound/NotFound'
@@ -23,9 +31,9 @@ import Tags from './layouts/pages/Library/Tags'
 import TenderDetail from './layouts/pages/Tender/TenderDetail'
 import BuyerProfile from './layouts/pages/Buyer/BuyerProfile'
 import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
-import GeneralService from "./services/GeneralService"
+import GeneralService from './services/GeneralService'
 import equities from './store/static-data/equities.json'
-import GlobalProductProfile from './components/GlobalProductProfile/GlobalProductProfile'
+import ProductProfile from './layouts/pages/Product/ProductProfile'
 
 function App() {
     const dispatch = useDispatch()
@@ -46,12 +54,11 @@ function App() {
     }, [dispatch, currentLocale])
 
     useEffect(() => {
-        CountryService.Countries()
-            .then((response) => {
-                if (response) {
-                    dispatch(setCountries(response))
-                }
-            })
+        CountryService.Countries().then((response) => {
+            if (response) {
+                dispatch(setCountries(response))
+            }
+        })
 
         GeneralService.getStaticFilters(currentLocale).then((response) => {
             if (response) {
@@ -70,8 +77,8 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route
-                        path="/products/:id"
-                        component={GlobalProductProfile}
+                        path="/global-overview/products/:productId"
+                        component={ProductProfile}
                     />
                     <Route
                         path="/global-overview/:tabSlug"
@@ -81,10 +88,11 @@ function App() {
                         path="/global-overview/"
                         component={GlobalOverview}
                     />
-                    {/* <Route
-                        path="/country/:countrySlug/products/:slug"
-                        component={CountryProductProfile}
-                    /> */}
+
+                    <Route
+                        path="/country/:countrySlug/products/:productId"
+                        component={ProductProfile}
+                    />
                     <Route
                         path="/country/:countrySlug/:tabSlug"
                         component={CountryProfile}
@@ -115,6 +123,7 @@ function App() {
                     <Route path="/buyers/:id" component={BuyerProfile} />
                     <Route path="/suppliers/:id" component={SupplierProfile} />
                     <Route path="/pages/:slug" component={StaticPage} />
+
                     <Route component={NotFound} />
                 </Switch>
             </Fragment>

@@ -34,7 +34,8 @@ const WorldTimelineRaceBarMap = () => {
                 (formattedData, d) => ({
                     ...formattedData,
                     [d.month]: d.details.map((detail) => ({
-                        country: detail.country,
+                        country:
+                            detail.country == 'Global' ? '' : detail.country,
                         value:
                             raceBarType === 'value'
                                 ? detail.amount_usd
@@ -47,6 +48,8 @@ const WorldTimelineRaceBarMap = () => {
             setLoading(false)
         })
     }, [raceBarType])
+
+    console.log(raceBarDataApi, 'Data')
 
     return (
         <div>
