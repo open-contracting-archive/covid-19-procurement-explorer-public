@@ -436,3 +436,10 @@ svg tspan {
         border-radius: 0 4px 4px 0;
     }
 }
+
+.right-direction {
+    .react-tabs__tab-list {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

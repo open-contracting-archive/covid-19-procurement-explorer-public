@@ -54,41 +54,6 @@ const CountryMap = ({ data, countryCode }) => {
             ]
         }
 
-        // Set up heat legend
-        // let heatLegend = chart.createChild(am4maps.HeatLegend)
-        // heatLegend.series = polygonSeries
-        // heatLegend.align = 'center'
-        // heatLegend.valign = 'bottom'
-        // heatLegend.width = am4core.percent(40)
-        // heatLegend.marginRight = am4core.percent(4)
-        // // heatLegend.minValue = 0
-        // // heatLegend.maxValue = 40000000
-        // heatLegend.orientation = 'horizontal'
-        // heatLegend.padding(20, 20, 20, 20)
-        // heatLegend.valueAxis.renderer.labels.template.fontSize = 10
-        // heatLegend.valueAxis.renderer.minGridDistance = 40
-
-        // polygonSeries.mapPolygons.template.events.on('over', (event) => {
-        //     handleHover(event.target)
-        // })
-
-        // polygonSeries.mapPolygons.template.events.on('hit', (event) => {
-        //     handleHover(event.target)
-        // })
-
-        // function handleHover(mapPolygon) {
-        //     if (!isNaN(mapPolygon.dataItem.value)) {
-        //         heatLegend.valueAxis.showTooltipAt(mapPolygon.dataItem.value)
-        //     } else {
-        //         heatLegend.valueAxis.hideTooltip()
-        //     }
-        // }
-
-        // polygonSeries.mapPolygons.template.strokeOpacity = 0.4
-        // polygonSeries.mapPolygons.template.events.on('out', (event) => {
-        //     heatLegend.valueAxis.hideTooltip()
-        // })
-
         // Configure series tooltip
         let polygonTemplate = polygonSeries.mapPolygons.template
         polygonTemplate.tooltipText = '{name}: {value}'
@@ -99,21 +64,14 @@ const CountryMap = ({ data, countryCode }) => {
         chart.zoomControl = new am4maps.ZoomControl()
         chart.zoomControl.valign = 'top'
 
-        // Setting map's initial zoom
-        // chart.homeZoomLevel = (coordinates && coordinates.zoomLevel) || 1
-        // chart.homeGeoPoint = {
-        //     latitude: (coordinates && coordinates.lat) || 0,
-        //     longitude: (coordinates && coordinates.long) || 0
-        //     // latitude: 55.85406929584602,
-        //     // longitude: 28.24904034876191
-        // }
-
-        // Create hover state and set alternative fill color
-        // let hs = polygonTemplate.states.create('hover')
-        // hs.properties.fill = am4core.color('#3c5bdc')
-
         chart.data = data
         chart.logo.disabled = true
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
 
         return () => {
             chart.dispose()

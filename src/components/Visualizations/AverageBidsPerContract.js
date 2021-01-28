@@ -72,7 +72,6 @@ const AverageBidsPerContract = (props) => {
                             averageBidsPercentage < 0 ? '#FE5151' : '#3EEDA4'
                         }
                     />
-                    <div className="flex-1" />
                 </div>
             )}
         </div>

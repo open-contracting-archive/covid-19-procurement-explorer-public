@@ -20,7 +20,7 @@ const WorldMap = (props) => {
     const [mapData, setMapData] = useState()
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
-        label: 'All Continent'
+        label: 'All Continents'
     })
     const [loading, setLoading] = useState(true)
 

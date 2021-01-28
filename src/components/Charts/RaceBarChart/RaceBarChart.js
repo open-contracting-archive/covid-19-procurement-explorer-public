@@ -36,12 +36,6 @@ const RaceBarChart = ({ data }) => {
         let chart = am4core.create(raceBarChartDiv.current, am4charts.XYChart)
         chart.padding(40, 40, 40, 40)
 
-        chart.numberFormatter.bigNumberPrefixes = [
-            { number: 1e3, suffix: 'K' },
-            { number: 1e6, suffix: 'M' },
-            { number: 1e9, suffix: 'B' }
-        ]
-
         let label = chart.plotContainer.createChild(am4core.Label)
         label.x = am4core.percent(97)
         label.y = am4core.percent(95)
@@ -161,6 +155,12 @@ const RaceBarChart = ({ data }) => {
         categoryAxis.sortBySeries = series
 
         chart.data = JSON.parse(JSON.stringify(data[currentYear]))
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
         categoryAxis.zoom({
             start: 0,
             end: data[currentYear].length / chart.data.length

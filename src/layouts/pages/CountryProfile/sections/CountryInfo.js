@@ -60,7 +60,7 @@ const CountryInfo = ({ country }) => {
                         </div>
                     </div>
                 </div>
-                <div className="px-8 py-16 text-white bg-primary-dark rounded-b-md">
+                <div className="p-8 text-white bg-primary-dark rounded-b-md">
                     <div className="flex flex-wrap -mx-4 -mb-4">
                         <div className="w-full xs:w-1/2 px-4 mb-12">
                             <div>

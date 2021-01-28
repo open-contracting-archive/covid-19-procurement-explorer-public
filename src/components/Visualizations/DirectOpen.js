@@ -5,6 +5,7 @@ import PieChart from '../Charts/PieChart/PieChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
+import { formatNumber } from '../../helpers/number'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -72,13 +73,18 @@ const DirectOpen = (props) => {
                     <div className={`${heightFull ? 'mt-10' : 'mt-2'}`}>
                         <TabPanel>
                             <div className="flex items-end">
-                                {/* <div className=" text-primary-dark">
-                                        <span>
-                                            <strong className="text-xl inline-block mr-3">
-                                                51
-                                        </strong>
+                                <div>
+                                    <h3 className="mr-3">
+                                        <span className="text-sm block">
+                                            Open
                                         </span>
-                                    </div> */}
+                                        <span className="text-xl font-bold">
+                                            {formatNumber(
+                                                directOpenByValue[0].number
+                                            )}
+                                        </span>
+                                    </h3>
+                                </div>
                                 <div className="flex-1">
                                     <PieChart
                                         data={directOpenByValue}
@@ -90,13 +96,23 @@ const DirectOpen = (props) => {
                         </TabPanel>
                         <TabPanel>
                             <div className="flex items-end">
-                                <div className="flex-1">
-                                    <PieChart
-                                        data={directOpenByNumber}
-                                        colors={colors}
-                                        large={heightFull ? true : false}
-                                    />
+                                <div>
+                                    <h3 className="mr-3">
+                                        <span className="text-sm block">
+                                            Open
+                                        </span>
+                                        <span className="text-xl font-bold">
+                                            {formatNumber(
+                                                directOpenByNumber[0].number
+                                            )}
+                                        </span>
+                                    </h3>
                                 </div>
+                                <PieChart
+                                    data={directOpenByNumber}
+                                    colors={colors}
+                                    large={heightFull ? true : false}
+                                />
                             </div>
                         </TabPanel>
                     </div>

@@ -87,7 +87,7 @@ const ProductsTimeline = ({ label, params }) => {
                         </ul>
                     </div>
                 </div>
-                {loading ? (
+                {!chartData ? (
                     <Loader />
                 ) : (
                     <div>

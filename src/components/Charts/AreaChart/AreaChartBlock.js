@@ -11,8 +11,12 @@ const AreaChartBlock = ({
     monopolization
 }) => {
     return (
-        <div className=" text-primary-dark pb-4 w-2/5">
-            <AreaChart data={chartData} apiData colorValue={colorValue} />
+        <div className="text-primary-dark pb-4 w-full">
+            <AreaChart
+                data={chartData}
+                apiData
+                colorValue={colorValue}
+            />
             <p className="mt-2">
                 <strong
                     className="text-xl inline-block mr-3"
