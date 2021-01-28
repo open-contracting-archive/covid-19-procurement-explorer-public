@@ -49,12 +49,11 @@ const RaceMap = ({
         chart.chartContainer.wheelable = false
 
         let label = chart.createChild(am4core.Label)
-        label.x = am4core.percent(97)
-        label.y = am4core.percent(95)
-        label.horizontalCenter = 'right'
+        label.x = am4core.percent(45)
+        label.y = am4core.percent(80)
+        label.horizontalCenter = 'left'
         label.verticalCenter = 'middle'
-        label.dy = -130
-        label.fontSize = 42
+        label.fontSize = 24
 
         // Set map definition
         chart.geodata = am4geodata_worldLow

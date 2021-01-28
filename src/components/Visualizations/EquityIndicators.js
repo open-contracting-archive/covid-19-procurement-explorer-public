@@ -5,6 +5,7 @@ import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
 import VisualizationServices from '../../services/visualizationServices'
 import { useSelector } from 'react-redux'
+import { formatNumber } from '../../helpers/number'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -21,11 +22,10 @@ const EquityIndicators = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.Equity(params)
-            .then((response) => {
-                setEquity(response)
-                setLoading(false)
-            })
+        VisualizationServices.Equity(params).then((response) => {
+            setEquity(response)
+            setLoading(false)
+        })
     }, [params])
 
     const currency = useSelector((state) => state.general.currency)
@@ -42,11 +42,13 @@ const EquityIndicators = (props) => {
                 number: currency == 'usd' ? data.amount_usd : data.amount_local
             }
         })
+
     const equityByNumber =
         equity &&
         equity.map((data) => {
             return { value: data.type, number: data.tender_count }
         })
+
     return (
         <div className="bg-white rounded p-4 mb-2 simple-tab relative z-10">
             {loading ? (
@@ -68,24 +70,44 @@ const EquityIndicators = (props) => {
                     <div className="mt-2">
                         <TabPanel>
                             <div className="flex items-end">
-                                <div className="flex-1">
-                                    <PieChart
-                                        data={equityByValue}
-                                        colors={colors}
-                                        large={heightFull ? true : false}
-                                    />
+                                <div>
+                                    <h3 className="mr-3">
+                                        <span className="text-sm block">
+                                            Assigned
+                                        </span>
+                                        <span className="text-xl font-bold">
+                                            {formatNumber(
+                                                equityByValue[0].number
+                                            )}
+                                        </span>
+                                    </h3>
                                 </div>
+                                <PieChart
+                                    data={equityByValue}
+                                    colors={colors}
+                                    large={heightFull ? true : false}
+                                />
                             </div>
                         </TabPanel>
                         <TabPanel>
                             <div className="flex items-end">
-                                <div className="flex-1">
-                                    <PieChart
-                                        data={equityByNumber}
-                                        colors={colors}
-                                        large={heightFull ? true : false}
-                                    />
+                                <div>
+                                    <h3 className="mr-3">
+                                        <span className="text-sm block">
+                                            Assigned
+                                        </span>
+                                        <span className="text-xl font-bold">
+                                            {formatNumber(
+                                                equityByNumber[0].number
+                                            )}
+                                        </span>
+                                    </h3>
                                 </div>
+                                <PieChart
+                                    data={equityByNumber}
+                                    colors={colors}
+                                    large={heightFull ? true : false}
+                                />
                             </div>
                         </TabPanel>
                     </div>

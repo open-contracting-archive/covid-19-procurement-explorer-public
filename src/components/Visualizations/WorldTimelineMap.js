@@ -20,7 +20,7 @@ const WorldTimelineMap = () => {
     const [contractDataApi, setContractDataApi] = useState({})
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
-        label: 'All Continent'
+        label: 'All Continents'
     })
 
     const { trans } = useTrans()

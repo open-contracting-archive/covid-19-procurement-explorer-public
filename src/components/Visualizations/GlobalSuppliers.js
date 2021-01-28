@@ -67,7 +67,7 @@ const GlobalSuppliers = (props) => {
         globalSuppliers && getSuppliersData(globalSuppliers, 'by_value')
 
     return (
-        <div className="bg-white rounded p-4 simple-tab">
+        <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
                     {label}

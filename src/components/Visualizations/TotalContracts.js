@@ -21,11 +21,10 @@ const TotalContracts = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalContracts(params)
-            .then((response) => {
-                setTotalContracts(response)
-                setLoading(false)
-            })
+        VisualizationServices.TotalContracts(params).then((response) => {
+            setTotalContracts(response)
+            setLoading(false)
+        })
     }, [params])
 
     // ===========================================================================
@@ -63,17 +62,23 @@ const TotalContracts = (props) => {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">{label}</h3>
-            {loading ? (<Loader sm />) : (
+            {loading ? (
+                <Loader sm />
+            ) : (
                 <div className="flex items-end">
-                    {/* Line are chart */}
-                    <AreaChartBlock
-                        chartData={totalContractLineChartData}
-                        totalAmount={totalContractAmount}
-                        percentage={Math.round(totalContractPercentage, 2)}
-                        colorValue={
-                            Math.round(totalContractPercentage, 2) < 0 ? '#FE5151' : '#3EEDA4'
-                        }
-                    />
+                    <div className="w-2/5">
+                        <AreaChartBlock
+                            chartData={totalContractLineChartData}
+                            totalAmount={totalContractAmount}
+                            percentage={Math.round(totalContractPercentage, 2)}
+                            colorValue={
+                                Math.round(totalContractPercentage, 2) < 0
+                                    ? '#FE5151'
+                                    : '#3EEDA4'
+                            }
+                        />
+                    </div>
+
                     <div className="flex-1">
                         <SimpleBarChart
                             data={totalContractBarChartData}

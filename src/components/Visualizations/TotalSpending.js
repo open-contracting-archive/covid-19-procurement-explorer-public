@@ -105,16 +105,19 @@ const TotalSpending = (props) => {
                 <Loader sm />
             ) : (
                 <div className="flex items-end">
-                    {/* Line area chart */}
-                    <AreaChartBlock
-                        chartData={totalSpendingAreaChartData}
-                        totalAmount={totalSpendingAmount}
-                        percentage={totalSpendingPercentage}
-                        colorValue={
-                            totalSpendingPercentage < 0 ? '#FE5151' : '#3EEDA4'
-                        }
-                        currency={currency}
-                    />
+                    <div className="w-2/5">
+                        <AreaChartBlock
+                            chartData={totalSpendingAreaChartData}
+                            totalAmount={totalSpendingAmount}
+                            percentage={totalSpendingPercentage}
+                            colorValue={
+                                totalSpendingPercentage < 0
+                                    ? '#FE5151'
+                                    : '#3EEDA4'
+                            }
+                            currency={currency}
+                        />
+                    </div>
                     <div className="flex-1">
                         <SimpleBarChart
                             data={totalSpendingBarChartData}

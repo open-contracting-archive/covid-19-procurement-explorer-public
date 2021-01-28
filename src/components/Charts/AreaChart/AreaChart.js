@@ -60,6 +60,12 @@ const AreaChart = ({ data, apiData, colorValue }) => {
 
         chart.data = data
         chart.logo.disabled = true
+        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.bigNumberPrefixes = [
+            { number: 1e3, suffix: 'K' },
+            { number: 1e6, suffix: 'M' },
+            { number: 1e9, suffix: 'B' }
+        ]
 
         return () => {
             chart.dispose()
@@ -72,7 +78,10 @@ const AreaChart = ({ data, apiData, colorValue }) => {
         <div
             ref={areachartDiv}
             className="relative z-10"
-            style={{ width: '100%', height: '90px' }}
+            style={{
+                width: '100%',
+                height: '90px'
+            }}
         />
     )
 }
