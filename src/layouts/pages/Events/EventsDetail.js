@@ -2,9 +2,9 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import { formatDate, formatTime } from "../../../helpers/date"
-import ShareButtons from "../../../components/Library/ShareButtons"
-import Breadcrumb from "../../../components/website/Library/Breadcrumb"
+import { formatDate, formatTime } from '../../../helpers/date'
+import ShareButtons from '../../../components/Library/ShareButtons'
+import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 
 const EventsDetail = () => {
     const [eventsDetail, setEventsDetail] = useState({})
@@ -28,7 +28,9 @@ const EventsDetail = () => {
         <section className="pt-8">
             <div className="container mx-auto px-4 news-detail">
                 <Breadcrumb item={'events'} />
-                {loading ? (<Loader />) : (
+                {loading ? (
+                    <Loader />
+                ) : (
                     <Fragment>
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {eventsDetail.title}
@@ -37,10 +39,16 @@ const EventsDetail = () => {
                             <div className="mb-4 events-detail__metadata">
                                 <div className="time mb-8">
                                     <div className="card__day text-4xl mb-2 leading-normal">
-                                        {formatDate(eventsDetail.event_date, 'DD')}
+                                        {formatDate(
+                                            eventsDetail.event_date,
+                                            'DD'
+                                        )}
                                     </div>
                                     <div className="card__month text-base uppercase">
-                                        {formatDate(eventsDetail.event_date, 'MMMM')}
+                                        {formatDate(
+                                            eventsDetail.event_date,
+                                            'MMMM'
+                                        )}
                                     </div>
                                     <p className="from mr-1 inline-block">
                                         {formatTime(eventsDetail.time_from)}
@@ -56,7 +64,7 @@ const EventsDetail = () => {
                                         Organization
                                     </p>
                                     <p className="block ml-3 lg:ml-0">
-                                        {eventsDetail.organization}
+                                        {eventsDetail.organization || '-'}
                                     </p>
                                 </div>
                                 <div className="location mb-8">
@@ -64,20 +72,25 @@ const EventsDetail = () => {
                                         Location
                                     </p>
                                     <p className="block ml-3 lg:ml-0">
-                                        {eventsDetail.location}
+                                        {eventsDetail.location || '-'}
                                     </p>
                                 </div>
                             </div>
                             <div>
-                                <div className="mb-10 news-detail__content"
-                                     dangerouslySetInnerHTML={{ __html: eventsDetail.description }}>
-                                </div>
+                                <div
+                                    className="mb-10 news-detail__content"
+                                    dangerouslySetInnerHTML={{
+                                        __html:
+                                            eventsDetail.rendered_description
+                                    }}></div>
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
                                     <div className="flex">
                                         <p className="font-bold opacity-40 mr-4">
                                             Share on
                                         </p>
-                                        <ShareButtons url={window.location.href} />
+                                        <ShareButtons
+                                            url={window.location.href}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -88,66 +101,88 @@ const EventsDetail = () => {
                                 <ShareButtons url={window.location.href} />
                             </div>
                         </div>
-                        {eventsData.length !== 1 ?
+                        {eventsData.length !== 1 ? (
                             <>
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
-                                    <h2 className="text-xl mb-6">Other Events</h2>
+                                    <h2 className="text-xl mb-6">
+                                        Other Events
+                                    </h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
                                         {eventsData &&
-                                        eventsData
-                                            .filter(
-                                                (events) => events.id !== eventsId
-                                            )
-                                            .slice(0, 3)
-                                            .map((events, index) => {
-                                                return (
-                                                    <Fragment key={index}>
-                                                        <Link
-                                                            className="events-thumbnail bg-blue-0 "
-                                                            to={`/events/${events.id}`}
-                                                            key={events.id}>
-                                                            <div className="card__item h-full px-8 py-8">
-                                                                <div className="card__day text-4xl leading-none">
-                                                                    {formatDate(events.event_date, 'DD')}
-                                                                </div>
-                                                                <div className="card__month text-base uppercase">
-                                                                    {formatDate(events.event_date, 'MMMM')}
-                                                                </div>
-                                                                <div className="card__caption">
-                                                                    <h3 className="card__title mt-8 mb-4 text-lg">
-                                                                        {events.title}
-                                                                    </h3>
-                                                                    <div className="card__time opacity-50 text-base mb-4 uppercase flex">
-                                                                        <p className="from mr-1">
-                                                                            {formatTime(events.time_from)}
-                                                                        </p>
-                                                                        {events.time_to && (
-                                                                            <p className="to ml-1">
-                                                                                - {formatTime(events.time_to)}
-                                                                            </p>
+                                            eventsData
+                                                .filter(
+                                                    (events) =>
+                                                        events.id !== eventsId
+                                                )
+                                                .slice(0, 3)
+                                                .map((events, index) => {
+                                                    return (
+                                                        <Fragment key={index}>
+                                                            <Link
+                                                                className="events-thumbnail bg-blue-0 "
+                                                                to={`/events/${events.id}`}
+                                                                key={events.id}>
+                                                                <div className="card__item h-full px-8 py-8">
+                                                                    <div className="card__day text-4xl leading-none">
+                                                                        {formatDate(
+                                                                            events.event_date,
+                                                                            'DD'
                                                                         )}
                                                                     </div>
-                                                                    <p className="card__venue text-base">
-                                                                        {events.location}
-                                                                    </p>
+                                                                    <div className="card__month text-base uppercase">
+                                                                        {formatDate(
+                                                                            events.event_date,
+                                                                            'MMMM'
+                                                                        )}
+                                                                    </div>
+                                                                    <div className="card__caption">
+                                                                        <h3 className="card__title mt-8 mb-4 text-lg">
+                                                                            {
+                                                                                events.title
+                                                                            }
+                                                                        </h3>
+                                                                        <div className="card__time opacity-50 text-base mb-4 uppercase flex">
+                                                                            <p className="from mr-1">
+                                                                                {formatTime(
+                                                                                    events.time_from
+                                                                                )}
+                                                                            </p>
+                                                                            {events.time_to && (
+                                                                                <p className="to ml-1">
+                                                                                    -{' '}
+                                                                                    {formatTime(
+                                                                                        events.time_to
+                                                                                    )}
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
+                                                                        <p className="card__venue text-base">
+                                                                            {
+                                                                                events.location
+                                                                            }
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </Link>
-                                                    </Fragment>
-                                                )
-                                            })}
+                                                            </Link>
+                                                        </Fragment>
+                                                    )
+                                                })}
                                     </div>
                                     <div className="flex justify-center items-center mt-12">
                                         <hr className="text-primary-gray flex-1" />
-                                        <Link to="/events" className="text-blue-20 px-4">
+                                        <Link
+                                            to="/events"
+                                            className="text-blue-20 px-4">
                                             View all events --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>
                                 </div>
-                            </> : ""
-                        }
+                            </>
+                        ) : (
+                            ''
+                        )}
                     </Fragment>
                 )}
             </div>
