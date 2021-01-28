@@ -9,7 +9,7 @@ class CmsPageService {
                 {
                     type: "content.InsightsPage",
                     // fields: "*",
-                    fields: '_,title,id,slug,content_image,featured',
+                    fields: '_,title,id,slug,content_image,featured,published_date',
                     contents_type: "News",
                     order: "-published_date",
                     ...queryParams
