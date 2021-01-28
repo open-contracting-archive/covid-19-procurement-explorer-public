@@ -1,10 +1,7 @@
-import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import Select from 'react-select'
-import { useHistory, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { get, has, identity, pickBy } from 'lodash'
+import React, { Fragment, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { get, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
-import DatePicker from 'react-datepicker'
 import ContractService from '../../services/ContractService'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
@@ -13,134 +10,33 @@ import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import TableLoader from '../Loader/TableLoader'
 import 'react-datepicker/dist/react-datepicker.css'
+import { hasValidProperty } from "../../helpers/general"
+import ContractFilter from "./ContractFilter"
 
 const TenderTable = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { params, page } = props
-    const countries = useSelector((state) => state.general.countries)
-    const contractMethods = useSelector(
-        (state) => state.general.contractMethods
-    )
-    const productCategories = useSelector(
-        (state) => state.general.productCategories
-    )
+    const { params } = props
     const [tenderList, setTenderList] = useState([])
     const [loading, setLoading] = useState(true)
-    const [selectedFilters, setSelectedFilters] = useState(() =>
-        identity(pickBy(params))
-    )
-    const [contractTitleParameter, setContractTitleParameter] = useState('')
+    const [selectedFilters, setSelectedFilters] = useState(() => identity(pickBy(params)))
     const [limit, setLimit] = useState(20)
+    const [sorting, setSorting] = useState(() => {
+        return { column: 'contract_title', direction: '' }
+    })
     const [totalItems, setTotalItems] = useState()
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(null)
-    const [showDatePicker, setShowDatePicker] = useState(false)
-    const ref = useRef()
-
-    const countrySelectList = useMemo(() => {
-        return [
-            { label: 'All ', value: '' },
-            ...countries
-                .filter((country) => country.name !== 'Global')
-                .map((country) => {
-                    return {
-                        label: country.name,
-                        value: country.country_code_alpha_2
-                    }
-                })
-                .sort((a, b) => {
-                    return a.label < b.label ? -1 : 0
-                })
-        ]
-    }, [countries])
-    const contractMethodSelectList = useMemo(() => {
-        return [{ label: 'All', value: '' }, ...contractMethods]
-    }, [contractMethods])
-    const productSelectList = useMemo(() => {
-        return [
-            { label: 'All', value: '' },
-            ...productCategories
-                .map((productCategory) => {
-                    return {
-                        label: productCategory.name,
-                        value: productCategory.id
-                    }
-                })
-                .sort((a, b) => {
-                    return a.label < b.label ? -1 : 0
-                })
-        ]
-    }, [productCategories])
-    const valueRanges = useMemo(() => {
-        return [
-            { label: 'All', value: '' },
-            ...[
-                { sign: 'lt', value: 1000 },
-                { sign: 'gt', value: 1000 },
-                { sign: 'gt', value: 10000 },
-                { sign: 'gt', value: 100000 },
-                { sign: 'gt', value: 1000000 },
-                { sign: 'gt', value: 100000000 }
-            ].map((item) => {
-                return {
-                    value: item,
-                    label: `${
-                        item.sign === 'gt' ? '>' : '<'
-                    } ${item.value.toLocaleString()}`
-                }
-            })
-        ]
-    }, [])
-
-    const [buyersFilterOption, setBuyersFilterOption] = useState([])
-    const [suppliersFilterOption, setSuppliersFilterOption] = useState([])
     const { trans } = useTrans()
     const history = useHistory()
-    let { countrySlug } = useParams()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
         LoadContractList()
-    }, [selectedFilters])
-
-    useEffect(() => {
-        if (countrySlug && countrySlug !== 'global') {
-            getBuyersFilterParameter({
-                country: params.country
-            })
-            getSuppliersFilterParameter({
-                country: params.country
-            })
-        }
-    }, [params])
-
-    useEffect(() => {
-        if (page === 'suppliers') {
-            getBuyersFilterParameter({
-                country: params.country
-            })
-        }
-        if (page === 'buyers') {
-            getSuppliersFilterParameter({
-                country: params.country
-            })
-        }
-    }, [page])
-
-    useEffect(() => {
-        if (startDate && endDate) {
-            appendFilter({
-                date_from: formatDate(startDate, 'YYYY-MM-DD'),
-                date_to: formatDate(endDate, 'YYYY-MM-DD')
-            })
-        }
-    }, [startDate, endDate])
+    }, [selectedFilters, sorting])
 
     // ===========================================================================
     // Helpers and functions
@@ -153,13 +49,13 @@ const TenderTable = (props) => {
         setCurrentPage(get(page, 'selected') || 0)
         ContractService.ContractList({
             ...selectedFilters,
+            ordering: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
         })
             .then((response) => {
                 if (response.results) {
                     setTenderList([...response.results])
-                    // setPagination(response.next)
                     setTotalItems(response.count)
                     setTableLoading(false)
                 }
@@ -172,36 +68,16 @@ const TenderTable = (props) => {
             })
     }
     const hasCountry = () => {
-        return (
-            has(params, 'country') &&
-            params.country !== undefined &&
-            params.country !== null &&
-            params.country !== ''
-        )
+        return hasValidProperty(params, 'country')
     }
     const hasBuyer = () => {
-        return (
-            has(params, 'buyer') &&
-            params.buyer !== undefined &&
-            params.buyer !== null &&
-            params.buyer !== ''
-        )
+        return hasValidProperty(params, 'buyer')
     }
     const hasSupplier = () => {
-        return (
-            has(params, 'supplier') &&
-            params.supplier !== undefined &&
-            params.supplier !== null &&
-            params.supplier !== ''
-        )
+        return hasValidProperty(params, 'supplier')
     }
     const hasProduct = () => {
-        return (
-            has(params, 'product') &&
-            params.product !== undefined &&
-            params.product !== null &&
-            params.product !== ''
-        )
+        return hasValidProperty(params, 'product')
     }
     const tableRowClass = (hasRedFlags) => {
         return hasRedFlags
@@ -209,7 +85,6 @@ const TenderTable = (props) => {
             : 'table-row cursor-pointer'
     }
     const appendFilter = (selected) => {
-        // setLoading(true)
         setTableLoading(true)
         setSelectedFilters((previous) => {
             return {
@@ -218,246 +93,54 @@ const TenderTable = (props) => {
             }
         })
     }
-    const getBuyersFilterParameter = (params) => {
-        if (params.suppliers) {
-            ContractService.FilterBuyersParameter(params).then((response) => {
-                const options = response.map((buyer) => {
-                    return {
-                        label: buyer.name,
-                        value: buyer.id
-                    }
-                })
-                setBuyersFilterOption(options)
-            })
-        }
-    }
 
-    const getSuppliersFilterParameter = (params) => {
-        ContractService.FilterSuppliersParameter(params).then((response) => {
-            const options = response.map((supplier) => {
+    const appendSort = (columnName) => {
+        setSorting((previous) => {
+            if (previous.column === columnName) {
                 return {
-                    label: supplier.name,
-                    value: supplier.id
+                    ...previous,
+                    direction: previous.direction === '-' ? '' : '-'
                 }
-            })
-            setSuppliersFilterOption(options)
+            }
+            return {
+                column: columnName,
+                direction: ''
+            }
         })
-    }
-    const handleCountryFilter = (country) => {
-        getBuyersFilterParameter({ country })
-        getSuppliersFilterParameter({ country })
-        appendFilter({ country, buyer: '', supplier: '' })
-    }
-
-    const handleInputSubmit = (event, contractTitle) => {
-        event.preventDefault()
-        appendFilter({ title: contractTitle })
-    }
-
-    const onDateChange = (dates) => {
-        const [start, end] = dates
-        setStartDate(start)
-        setEndDate(end)
-        console.log('picker called')
-    }
-
-    const handleDatePicker = () => {
-        setShowDatePicker(!showDatePicker)
-        if (!showDatePicker) {
-            document.addEventListener('mousedown', handleClickOutside, false)
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside, false)
-        }
-    }
-
-    const handleClickOutside = (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-            setShowDatePicker(false)
-        }
     }
 
     return (
         <div>
             <Fragment>
-                <div className="mb-12 flex gap-8 justify-between">
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
-                            Contract title
-                        </p>
-                        <form
-                            className="mt-2 select-filter--input"
-                            onSubmit={(event) =>
-                                handleInputSubmit(event, contractTitleParameter)
-                            }>
-                            <input
-                                type="text"
-                                className="select-filter"
-                                placeholder="Enter contract name"
-                                value={contractTitleParameter}
-                                onChange={(e) =>
-                                    setContractTitleParameter(e.target.value)
-                                }
-                            />
-                        </form>
-                    </div>
+                <ContractFilter
+                    params={params}
+                    appendFilter={appendFilter}
+                    hasCountry={hasCountry}
+                    hasBuyer={hasBuyer}
+                    hasSupplier={hasSupplier}
+                    hasProduct={hasProduct}
+                />
 
-                    {!hasCountry() && (
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Country')}
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={countrySelectList}
-                                onChange={(selectedOption) =>
-                                    handleCountryFilter(selectedOption.value)
-                                }
-                            />
-                        </div>
-                    )}
-                    {!hasBuyer() && (
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Buyer
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={buyersFilterOption}
-                                onChange={(selectedOption) =>
-                                    appendFilter({
-                                        buyer: selectedOption.value
-                                    })
-                                }
-                            />
-                        </div>
-                    )}
-                    {!hasSupplier() && (
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Supplier
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={suppliersFilterOption}
-                                onChange={(selectedOption) =>
-                                    appendFilter({
-                                        supplier: selectedOption.value
-                                    })
-                                }
-                            />
-                        </div>
-                    )}
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
-                            Method
-                        </p>
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={contractMethodSelectList}
-                            onChange={(selectedOption) =>
-                                appendFilter({
-                                    procurement_procedure: selectedOption.value
-                                })
-                            }
-                        />
-                    </div>
-
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none whitespace-no-wrap">
-                            Product category
-                        </p>
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={productSelectList}
-                            onChange={(selectedOption) =>
-                                appendFilter({
-                                    product: selectedOption.value
-                                })
-                            }
-                        />
-                    </div>
-
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
-                            Data range
-                        </p>
-                        <div ref={ref}>
-                            <div
-                                onClick={handleDatePicker}
-                                className="select-filter--input mt-2">
-                                <p className="field whitespace-no-wrap">
-                                    {startDate && endDate ? (
-                                        `${formatDate(
-                                            startDate,
-                                            "DD MMM 'YY"
-                                        )} - ${formatDate(
-                                            endDate,
-                                            "DD MMM 'YY"
-                                        )}`
-                                    ) : (
-                                        <span className="opacity-50">
-                                            Select date range
-                                        </span>
-                                    )}
-                                </p>
-                            </div>
-                            {showDatePicker && (
-                                <div className="absolute z-10">
-                                    <DatePicker
-                                        selected={startDate}
-                                        onChange={onDateChange}
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        selectsRange
-                                        inline
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
-                            Value range
-                        </p>
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={valueRanges}
-                            onChange={(selectedOption) =>
-                                appendFilter({
-                                    contract_value_usd:
-                                    selectedOption.value.value,
-                                    value_comparison: selectedOption.value.sign
-                                })
-                            }
-                        />
-                    </div>
-                </div>
                 {loading ? (
                     <Loader />
                 ) : (
-                    <>
+                    <Fragment>
                         <div className="relative">
                             <div className="custom-scrollbar table-scroll">
                                 <table className="table">
                                     <thead>
                                     <tr>
                                         <th style={{ width: '25%' }}>
-                                                <span className="flex items-center">
+                                                <span className="flex items-center cursor-pointer" onClick={() => appendSort('contract_title')}>
                                                     {trans('Contract Title')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
+                                                    <SortIcon className="ml-1" />
                                                 </span>
                                         </th>
                                         {!hasCountry() && (
                                             <th style={{ width: '10%' }}>
                                                     <span className="flex items-center">
                                                         {trans('Country')}{' '}
-                                                        <SortIcon className="ml-1 cursor-pointer" />
+                                                        <SortIcon className="ml-1" />
                                                     </span>
                                             </th>
                                         )}
@@ -465,7 +148,7 @@ const TenderTable = (props) => {
                                             <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
                                                         {trans('Buyer')}{' '}
-                                                        <SortIcon className="ml-1 cursor-pointer" />
+                                                        <SortIcon className="ml-1" />
                                                     </span>
                                             </th>
                                         )}
@@ -473,32 +156,34 @@ const TenderTable = (props) => {
                                             <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
                                                         {trans('Supplier')}{' '}
-                                                        <SortIcon className="ml-1 cursor-pointer" />
+                                                        <SortIcon className="ml-1" />
                                                     </span>
                                             </th>
                                         )}
                                         <th style={{ width: '10%' }}>
-                                                <span className="flex items-center">
+                                                <span className="flex items-center cursor-pointer" onClick={() => appendSort('procurement_procedure')}>
                                                     {trans('Method')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
+                                                    <SortIcon className="ml-1" />
                                                 </span>
                                         </th>
-                                        <th style={{ width: '15%' }}>
+                                        {!hasProduct() && (
+                                            <th style={{ width: '15%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Product Category')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
+                                                    <SortIcon className="ml-1" />
                                                 </span>
-                                        </th>
+                                            </th>
+                                        )}
                                         <th style={{ width: '10%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Date')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
+                                                    <SortIcon className="ml-1" />
                                                 </span>
                                         </th>
                                         <th style={{ width: '10%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Value (USD)')}{' '}
-                                                    <SortIcon className="ml-1 cursor-pointer" />
+                                                    <SortIcon className="ml-1" />
                                                 </span>
                                         </th>
                                         <th style={{ width: '3%' }} />
@@ -574,8 +259,8 @@ const TenderTable = (props) => {
                                                 <td>
                                                     {tender.red_flag && (
                                                         <span className="mr-4">
-                                                                    <FlagIcon />
-                                                                </span>
+                                                            <FlagIcon />
+                                                        </span>
                                                     )}
                                                 </td>
                                             </tr>
@@ -602,21 +287,21 @@ const TenderTable = (props) => {
                                 <div className="text-right mt-2 text-sm">
                                     <p className="text-primary-dark text-opacity-50">
                                         Showing{' '}
-                                        <span className="text-primary-dark text-opacity-75">
+                                        <span className="text-opacity-75">
                                             {1 + currentPage * limit}
                                         </span>{' '}
                                         -{' '}
-                                        <span className="text-primary-dark text-opacity-75">
+                                        <span className="text-opacity-75">
                                             {limit + currentPage * limit >
                                             totalItems
                                                 ? totalItems
                                                 : limit + currentPage * limit}
                                         </span>{' '}
                                         of{' '}
-                                        <span className="text-primary-dark text-opacity-75">
+                                        <span className="text-opacity-75">
                                             {totalItems}
                                         </span>{' '}
-                                        rows
+                                        contracts
                                     </p>
                                 </div>
 
@@ -641,7 +326,7 @@ const TenderTable = (props) => {
                                 </div>
                             </div>
                         )}
-                    </>
+                    </Fragment>
                 )}
             </Fragment>
         </div>

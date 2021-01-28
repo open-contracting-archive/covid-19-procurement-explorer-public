@@ -1,3 +1,5 @@
+import { get, has } from 'lodash'
+
 export const slugify = (text) => {
     return text.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -
@@ -21,6 +23,10 @@ export const toCamelCase = (string) => {
         }
         return low
     }).join``
+}
+
+export const hasValidProperty = (object, property) => {
+    return (has(object, property) && object[property])
 }
 
 export const twitterHandle = "covid19"

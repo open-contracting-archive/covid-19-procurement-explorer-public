@@ -8,6 +8,7 @@ import Loader from '../Loader/Loader'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import ReactPaginate from 'react-paginate'
 import TableLoader from '../Loader/TableLoader'
+import { hasValidProperty } from "../../helpers/general"
 
 const InsightTable = ({ params }) => {
     const countries = useSelector((state) => state.general.countries)
@@ -84,20 +85,8 @@ const InsightTable = ({ params }) => {
             type.toLowerCase() === 'news' ? `/news/${id}` : `/blogs/${id}`
         history.push(path)
     }
-
-    const options = [
-        { value: 'option-1', label: 'Option 1' },
-        { value: 'option-2', label: 'Option 2' },
-        { value: 'option-3', label: 'Option 3' }
-    ]
-
     const hasCountry = () => {
-        return (
-            has(params, 'country') &&
-            params.country !== undefined &&
-            params.country !== null &&
-            params.country !== ''
-        )
+        return hasValidProperty(params, 'country')
     }
 
     const appendFilter = (selected) => {
@@ -196,56 +185,56 @@ const InsightTable = ({ params }) => {
                         <div className="custom-scrollbar table-scroll">
                             <table className="table">
                                 <thead>
-                                    <tr>
-                                        <th style={{ width: '35%' }}>
+                                <tr>
+                                    <th style={{ width: '35%' }}>
                                             <span className="flex items-center">
                                                 Title{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                        <th style={{ width: '15%' }}>
+                                    </th>
+                                    <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
                                                 Country{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
+                                    </th>
+                                    <th style={{ width: '10%' }}>
                                             <span className="flex items-center">
                                                 Type{' '}
                                                 <SortIcon className="ml-1 cursor-pointer" />
                                             </span>
-                                        </th>
-                                    </tr>
+                                    </th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {insightList.items &&
-                                        insightList.items.map(
-                                            (insight, index) => {
-                                                return (
-                                                    <tr
-                                                        key={index}
-                                                        onClick={() =>
-                                                            showDetail(
-                                                                insight.contents_type,
-                                                                insight.id
-                                                            )
-                                                        }
-                                                        className="cursor-pointer">
-                                                        <td>{insight.title}</td>
-                                                        <td>
-                                                            {getCountryName(
-                                                                insight
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {
-                                                                insight.contents_type
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            }
-                                        )}
+                                {insightList.items &&
+                                insightList.items.map(
+                                    (insight, index) => {
+                                        return (
+                                            <tr
+                                                key={index}
+                                                onClick={() =>
+                                                    showDetail(
+                                                        insight.contents_type,
+                                                        insight.id
+                                                    )
+                                                }
+                                                className="cursor-pointer">
+                                                <td>{insight.title}</td>
+                                                <td>
+                                                    {getCountryName(
+                                                        insight
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {
+                                                        insight.contents_type
+                                                    }
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                )}
                                 </tbody>
                             </table>
                             {!insightList.items.length && (

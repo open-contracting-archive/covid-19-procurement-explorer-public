@@ -53,9 +53,9 @@ const apiRoutes = {
     'filter-parameters-static':
         'api/v1/visualization/filters-parameters/static/',
     'filter-parameters-buyers':
-        'api/v1/visualization/filters-parameters/buyers',
+        'api/v1/visualization/filters-parameters/buyers/',
     'filter-parameters-suppliers':
-        'api/v1/visualization/filters-parameters/suppliers'
+        'api/v1/visualization/filters-parameters/suppliers/'
 }
 
 export const getURI = (routeName) => {
