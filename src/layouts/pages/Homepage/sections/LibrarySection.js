@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
-import { formatDate } from "../../../../helpers/date"
-import Loader from "../../../../components/Loader/Loader"
-import useTrans from "../../../../hooks/useTrans"
+import { formatDate } from '../../../../helpers/date'
+import Loader from '../../../../components/Loader/Loader'
+import useTrans from '../../../../hooks/useTrans'
 
 const LibrarySection = () => {
     const [loading, setLoading] = useState(true)
@@ -14,15 +14,14 @@ const LibrarySection = () => {
         CmsPageService.InsightList({
             fields: '_,title,id,slug,contents_type,published_date',
             limit: 6
+        }).then((response) => {
+            setInsightList(response.items)
+            setLoading(false)
         })
-            .then((response) => {
-                setInsightList(response.items)
-                setLoading(false)
-            })
     }, [])
 
     return (
-        <section className="bg-primary-gray py-24 px-4">
+        <section className="py-24 px-4">
             <div className="container mx-auto">
                 <div className="text-center mb-20">
                     <h3 className="uppercase text-3xl font-bold leading-none">
@@ -35,25 +34,33 @@ const LibrarySection = () => {
                         {trans('Find insights, analysis and best practices')}
                     </p>
                 </div>
-                {loading ? (<Loader sm />) : (
+                {loading ? (
+                    <Loader sm />
+                ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        {insightList.length ? insightList.map((insightItem) => (
-                            <Link
-                                key={insightItem.id}
-                                to={`/news/${insightItem.id}`}>
-                                <div>
-                                    <div className="library__tag">
-                                        <p className="uppercase">{insightItem.contents_type}</p>
+                        {insightList.length ? (
+                            insightList.map((insightItem) => (
+                                <Link
+                                    key={insightItem.id}
+                                    to={`/news/${insightItem.id}`}>
+                                    <div>
+                                        <div className="library__tag">
+                                            <p className="uppercase">
+                                                {insightItem.contents_type}
+                                            </p>
+                                        </div>
+                                        <h4 className="library__heading ">
+                                            {insightItem.title}
+                                        </h4>
+                                        <p className="library__date">
+                                            {formatDate(
+                                                insightItem.published_date
+                                            )}
+                                        </p>
                                     </div>
-                                    <h4 className="library__heading ">
-                                        {insightItem.title}
-                                    </h4>
-                                    <p className="library__date">
-                                        {formatDate(insightItem.published_date)}
-                                    </p>
-                                </div>
-                            </Link>
-                        )) : (
+                                </Link>
+                            ))
+                        ) : (
                             <p>{trans('No records')}</p>
                         )}
                     </div>

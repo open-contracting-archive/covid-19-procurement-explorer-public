@@ -6,7 +6,7 @@ import Loader from '../../../../components/Loader/Loader'
 import { transformNews } from '../../../../helpers/transformers'
 
 const FeaturedNewsList = () => {
-    const otherFeaturedNewsLimit = 3
+    const otherFeaturedNewsLimit = 4
     const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
@@ -31,7 +31,7 @@ const FeaturedNewsList = () => {
     return loading ? (
         <Loader />
     ) : (
-        <section className=" news__list px-4 mb-20">
+        <section className=" news__list px-4">
             <div className="container mx-auto">
                 <p className="text-xl mb-6">{trans('Featured News')}</p>
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
@@ -70,17 +70,19 @@ const FeaturedNewsList = () => {
                                     className="news-thumbnail"
                                     to={news.detailUrl}
                                     key={news.id}>
-                                    <div className="news__item">
+                                    <div className="news__item flex">
                                         {news.image && (
-                                            <div className="img-wrapper w-full h-auto">
+                                            <div
+                                                style={{ minWidth: '125px' }}
+                                                className="img-wrapper w-full h-auto">
                                                 <img
-                                                    className="w-full"
+                                                    className="w-full h-full object-cover"
                                                     src={news.image}
                                                     alt={news.title}
                                                 />
                                             </div>
                                         )}
-                                        <div className="news__caption pt-6">
+                                        <div className="news__caption ml-4">
                                             <h3 className="news-caption__title">
                                                 {news.title}
                                             </h3>

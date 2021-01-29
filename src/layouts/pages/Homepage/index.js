@@ -8,6 +8,7 @@ import { ReactComponent as HeroIcon } from '../../../assets/img/icons/covid.svg'
 import { ReactComponent as MouseScroll } from '../../../assets/img/icons/mouse-scroll.svg'
 import { ReactComponent as CircleIcon } from '../../../assets/img/icons/circle-ring.svg'
 import { ReactComponent as BottomCurve } from '../../../assets/img/icons/circle_bottom.svg'
+import LibraryUpcomingEvents from '../Library/sections/LibraryUpcomingEvents'
 
 const Home = () => {
     const { trans } = useTrans()
@@ -69,7 +70,7 @@ const Home = () => {
             <WorldMapRace />
 
             <NewsSection />
-
+            <LibraryUpcomingEvents />
             <LibrarySection />
         </Fragment>
     )
