@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import ReactGA from 'react-ga'
 import {
     setContractMethods,
     setContractStates,
@@ -34,6 +35,11 @@ import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
 import GeneralService from './services/GeneralService'
 import equities from './store/static-data/equities.json'
 import ProductProfile from './layouts/pages/Product/ProductProfile'
+
+if (process.env.NODE_ENV === 'production') {
+    ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
+    ReactGA.pageview(window.location.pathname + window.location.search)
+}
 
 function App() {
     const dispatch = useDispatch()
