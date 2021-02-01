@@ -8,7 +8,6 @@ const CurrencySwitcher = () => {
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
-
     const dispatch = useDispatch()
 
     const changeCurrency = (currency) => {

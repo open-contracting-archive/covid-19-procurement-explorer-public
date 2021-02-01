@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import useTrans from '../../../../hooks/useTrans'
@@ -10,9 +10,9 @@ import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.s
 import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import ShareButtons from '../../../../components/Library/ShareButtons'
-import TenderTable from '../../../../components/Tables/TenderTable'
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
+import { ShortTenderTable } from "../../../../components/Tables"
 
 const WorldMapRace = () => {
     // ===========================================================================
@@ -84,7 +84,7 @@ const WorldMapRace = () => {
                                         </TabPanel>
                                         <TabPanel>
                                             <div className="pb-4">
-                                                <TenderTable />
+                                                <ShortTenderTable />
                                             </div>
                                         </TabPanel>
                                         <TabPanel>
