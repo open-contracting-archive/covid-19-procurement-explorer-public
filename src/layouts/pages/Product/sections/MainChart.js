@@ -81,7 +81,7 @@ const MainChart = (props) => {
                                         ) : (
                                             <div
                                                 className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
-                                                    view === 'map'
+                                                    view === 'map' || view === 'chart'
                                                         ? 'active'
                                                         : ''
                                                 }`}

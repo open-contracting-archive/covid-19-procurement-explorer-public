@@ -1,32 +1,26 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import {
-    setCurrentLocale,
-    setTranslations
-} from '../../store/reducers/general/action'
-import CountryService from '../../services/CountryService'
+import { setCurrentCountry } from "../../store/reducers/general/action"
 
 const CountrySelector = () => {
     const countries = useSelector((state) => state.general.countries)
     let { countrySlug } = useParams()
     let { tabSlug } = useParams()
     const history = useHistory()
-    // const currentLocale = useSelector((state) => state.general.currentLocale)
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const onChange = (event) => {
-        let countrySlug = event.target.value
-        let path = countrySlug === 'global' ? `/global-overview/data` : `/country/${countrySlug}/${tabSlug}`
-        history.push(path)
+        const countrySlug = event.target.value
+        const country = countries.find((item) => item.slug === countrySlug)
+        dispatch(
+            setCurrentCountry(country)
+        )
 
-        // dispatch(setCurrentLocale(countrySlug))
-        // CountryServices.getTranslations(countrySlug).then(
-        //     (response) => {
-        //         dispatch(setTranslations(response))
-        //     }
-        // )
+        const path = countrySlug === 'global' ? `/global-overview/data` : `/country/${countrySlug}/${tabSlug}`
+        // window.location.href = path //todo: remove this
+        history.push(path)
     }
     return (
         <div className="countrySelector inline-flex items-center relative">

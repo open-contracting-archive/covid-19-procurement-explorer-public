@@ -1,40 +1,24 @@
 import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { get, has, identity, pickBy } from 'lodash'
+import { get, identity, pickBy } from 'lodash'
 import ContractService from '../../services/ContractService'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
-import TableLoader from '../Loader/TableLoader'
 import 'react-datepicker/dist/react-datepicker.css'
+import useContractFilters from "../../hooks/useContractFilters"
+import { hasValidProperty } from "../../helpers/general"
 
 const ProductTable = (props) => {
     const { params } = props
     const { countrySlug } = useParams()
-    const countries = useSelector((state) => state.general.countries)
     const [productList, setProductList] = useState([])
     const [loading, setLoading] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(() => identity(pickBy(params)))
+    const { countrySelectList } = useContractFilters()
     const { trans } = useTrans()
     const history = useHistory()
-    const countrySelectList = useMemo(() => {
-        return [
-            { label: 'All ', value: '' },
-            ...countries
-                .filter((country) => country.name !== 'Global')
-                .map((country) => {
-                    return {
-                        label: country.name,
-                        value: country.country_code_alpha_2
-                    }
-                })
-                .sort((a, b) => {
-                    return a.label < b.label ? -1 : 0
-                })
-        ]
-    }, [countries])
 
     useEffect(() => {
         setLoading(true)
@@ -68,12 +52,7 @@ const ProductTable = (props) => {
         })
     }
     const hasCountry = () => {
-        return (
-            has(params, 'country') &&
-            params.country !== undefined &&
-            params.country !== null &&
-            params.country !== ''
-        )
+        return hasValidProperty(params, 'country')
     }
 
     return (
