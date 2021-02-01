@@ -154,6 +154,10 @@ const RaceBarChart = ({ data }) => {
 
         categoryAxis.sortBySeries = series
 
+        chart.cursor = new am4charts.XYCursor()
+        chart.cursor.lineX.opacity = 0
+        chart.cursor.lineY.opacity = 0
+
         chart.data = JSON.parse(JSON.stringify(data[currentYear]))
         chart.numberFormatter.numberFormat = '#.##a'
         chart.numberFormatter.bigNumberPrefixes = [

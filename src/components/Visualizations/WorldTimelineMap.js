@@ -4,9 +4,6 @@ import useTrans from '../../hooks/useTrans'
 import RaceMap from '../../components/Charts/RaceMap/RaceMap'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
-import ShareButtons from '../../components/Library/ShareButtons'
-import TenderTable from '../../components/Tables/TenderTable'
-import { findByDisplayValue } from '@testing-library/react'
 
 const WorldTimelineMap = () => {
     // ===========================================================================
@@ -25,7 +22,7 @@ const WorldTimelineMap = () => {
 
     const { trans } = useTrans()
     const options = [
-        { value: 'all', label: 'All Continent' },
+        { value: 'all', label: 'All Continents' },
         { value: 'asia', label: 'Asia' },
         { value: 'europe', label: 'Europe' },
         { value: 'africa', label: 'Africa' },

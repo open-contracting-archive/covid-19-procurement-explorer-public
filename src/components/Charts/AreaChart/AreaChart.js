@@ -54,7 +54,6 @@ const AreaChart = ({ data, apiData, colorValue }) => {
         lineSeries.segments.template.fillModifier = fillModifier
 
         chart.cursor = new am4charts.XYCursor()
-        chart.cursor.behavior = 'panX'
         chart.cursor.lineX.opacity = 0
         chart.cursor.lineY.opacity = 0
 

@@ -60,7 +60,7 @@ const WorldMap = (props) => {
     const { trans } = useTrans()
     const handle = useFullScreenHandle()
     const options = [
-        { value: 'all', label: 'All Continent' },
+        { value: 'all', label: 'All Continents' },
         { value: 'asia', label: 'Asia' },
         { value: 'europe', label: 'Europe' },
         { value: 'africa', label: 'Africa' },

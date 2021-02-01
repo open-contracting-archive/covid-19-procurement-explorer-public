@@ -104,6 +104,7 @@ const TopBuyers = (props) => {
                                     <BarListChart
                                         data={chartData}
                                         text="buyers"
+                                        currency={currency}
                                     />
                                 </div>
                             </div>
