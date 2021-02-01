@@ -73,7 +73,7 @@ const FeaturedNewsList = () => {
                                     <div className="news__item flex">
                                         {news.image && (
                                             <div
-                                                style={{ minWidth: '125px' }}
+                                                style={{ minWidth: '125px', maxWidth: '125px' }}
                                                 className="img-wrapper w-full h-auto">
                                                 <img
                                                     className="w-full h-full object-cover"

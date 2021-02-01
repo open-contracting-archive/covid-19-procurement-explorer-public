@@ -38,7 +38,7 @@ const BuyerProfile = () => {
     const previousPage = () => {
         history.goBack()
     }
-
+    console.log(buyerInfo)
     // ===========================================================================
     // Hooks
     // ===========================================================================
@@ -86,6 +86,7 @@ const BuyerProfile = () => {
                                         className="rounded-sm mr-2"
                                         code={
                                             buyerInfo &&
+                                            buyerInfo.country_code &&
                                             get(
                                                 buyerInfo,
                                                 'country_code'
