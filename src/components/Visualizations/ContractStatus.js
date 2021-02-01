@@ -80,20 +80,20 @@ const ContractStatus = (props) => {
                             className={`mr-4 cursor-pointer ${isActiveTab(
                                 ContractView.NUMBER
                             )}`}
-                            onClick={() =>
-                                setViewType(ContractView.NUMBER)
-                            }>
+                            onClick={() => setViewType(ContractView.NUMBER)}>
                             {trans('By number')}
                         </li>
                     </ul>
                 </div>
             </div>
-            {loading ? (<Loader />) : (
+            {loading ? (
+                <Loader />
+            ) : (
                 <div className="flex">
                     <div className="flex-1">
                         <div className="flex-1 simple-tab -mt-10">
                             <div className="mt-10">
-                                <SimpleBarListChart data={chartData} />
+                                <SimpleBarListChart data={chartData} currency={currency} />
                             </div>
                         </div>
                     </div>

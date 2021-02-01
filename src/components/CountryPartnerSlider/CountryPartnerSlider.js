@@ -66,7 +66,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                         </p>
                                                     </div>
                                                     <div className="w-full md:w-1/2">
-                                                        <div className="flex justify-between">
+                                                        <div className="flex">
                                                             <div className="pr-4">
                                                                 <div className="mb-6">
                                                                     <span className="block mb-2">
@@ -98,7 +98,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                                     </a>
                                                                 </div>
                                                             </div>
-                                                            <div>
+                                                            <div className="flex-1 text-center">
                                                                 <img
                                                                     src={`${API_URL}/media/${index.logo.replaceAll(
                                                                         '"',
@@ -107,7 +107,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                                     alt={
                                                                         index.name
                                                                     }
-                                                                    className=""
+                                                                    className="mx-auto h-16"
                                                                 />
                                                             </div>
                                                         </div>

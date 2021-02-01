@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { formatNumber } from '../../helpers/number'
 
-function BarListChart({ data, byValue, text }) {
+function BarListChart({ data, byValue, text, currency }) {
     return (
         <div className="custom-horizontal-bar">
             <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
@@ -31,8 +31,16 @@ function BarListChart({ data, byValue, text }) {
                                     </div>
                                     <div className="ml-2 custom-horizontal-bar-amount">
                                         <p>
-                                            {byValue && bar_value.amount ? '$' : ''}
-                                            {formatNumber(bar_value.amount) || '-'}
+                                            {byValue && bar_value.amount
+                                                ? '$'
+                                                : ''}
+                                            {formatNumber(bar_value.amount) ||
+                                                '-'}
+                                            {currency && (
+                                                <span className="uppercase ml-1">
+                                                    {currency}
+                                                </span>
+                                            )}
                                         </p>
                                     </div>
                                 </div>

@@ -109,6 +109,7 @@ const ProductDistribution = (props) => {
                                     <BarListChart
                                         data={chartData}
                                         text={countrySlug ? `country/${countrySlug}/products` : `global-overview/products`}
+                                        currency={currency}
                                     />
                                 </div>
                             </div>

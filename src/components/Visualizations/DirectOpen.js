@@ -32,8 +32,6 @@ const DirectOpen = (props) => {
     // ===========================================================================
     // Handlers and functions
     // ===========================================================================
-    // Function to manage data for line chart
-
     // Direct open chart
     const directOpenByValue =
         directOpen &&
@@ -43,6 +41,7 @@ const DirectOpen = (props) => {
                 number: currency == 'usd' ? data.amount_usd : data.amount_local
             }
         })
+
     const directOpenByNumber =
         directOpen &&
         directOpen.map((data) => {
@@ -78,11 +77,16 @@ const DirectOpen = (props) => {
                                         <span className="text-sm block">
                                             Open
                                         </span>
-                                        <span className="text-xl font-bold">
+                                        <span className="text-xl font-bold mr-2">
                                             {formatNumber(
-                                                directOpenByValue[0].number
+                                                directOpenByValue[1].number
                                             )}
                                         </span>
+                                        {currency && (
+                                            <span className="inline-block uppercase">
+                                                {currency}
+                                            </span>
+                                        )}
                                     </h3>
                                 </div>
                                 <div className="flex-1">
@@ -101,11 +105,16 @@ const DirectOpen = (props) => {
                                         <span className="text-sm block">
                                             Open
                                         </span>
-                                        <span className="text-xl font-bold">
+                                        <span className="text-xl font-bold mr-2">
                                             {formatNumber(
-                                                directOpenByNumber[0].number
+                                                directOpenByNumber[1].number
                                             )}
                                         </span>
+                                        {currency && (
+                                            <span className="inline-block uppercase">
+                                                {currency}
+                                            </span>
+                                        )}
                                     </h3>
                                 </div>
                                 <PieChart

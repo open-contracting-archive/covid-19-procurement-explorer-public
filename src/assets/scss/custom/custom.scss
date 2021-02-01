@@ -220,7 +220,7 @@ header {
     }
 
     .custom-horizontal-bar-progress {
-        margin-left: 17px;
+        margin-left: 12px;
         height: 14px;
         width: calc(100% - 180px);
         background: #dceaee;
@@ -252,7 +252,7 @@ header {
             }
         }
         .custom-horizontal-bar-text {
-            width: 100px;
+            width: 90px;
         }
         .custom-horizontal-bar-progress {
             width: calc(100% - 80px);
@@ -441,5 +441,49 @@ svg tspan {
     .react-tabs__tab-list {
         display: flex;
         justify-content: flex-end;
+    }
+}
+
+.swiper-pagination-bullet-active {
+    background: #1fbbec !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    width: auto !important;
+    height: auto !important;
+    top: 98% !important;
+    color: #1fbbec !important;
+}
+
+.swiper-button-prev:after,
+.swiper-container-rtl .swiper-button-next:after,
+.swiper-button-next:after,
+.swiper-container-rtl .swiper-button-prev:after {
+    font-size: 18px !important;
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+    opacity: 0.2 !important;
+}
+
+.swiper-button-prev {
+    &:before {
+        content: 'Previous';
+        position: absolute;
+        top: 0;
+        left: 18px;
+        font-size: 14px;
+    }
+}
+
+.swiper-button-next {
+    &:before {
+        content: 'Next';
+        position: absolute;
+        top: 0;
+        right: 18px;
+        font-size: 14px;
     }
 }

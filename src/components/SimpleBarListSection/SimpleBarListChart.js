@@ -1,7 +1,7 @@
 import React from 'react'
 import { formatNumber } from '../../helpers/number'
 
-function SimpleBarListChart({ data, byValue }) {
+function SimpleBarListChart({ data, byValue, currency }) {
     return (
         <div className="custom-horizontal-bar simple-bar">
             <ul className="custom-scrollbar">
@@ -24,6 +24,12 @@ function SimpleBarListChart({ data, byValue }) {
                                     <p>
                                         {byValue && bar_value.amount ? '$' : ''}
                                         {formatNumber(bar_value.amount) || '-'}
+
+                                        {currency && (
+                                            <span className="uppercase text-xs ml-1">
+                                                {currency}
+                                            </span>
+                                        )}
                                     </p>
                                 </div>
                             </div>

@@ -75,11 +75,16 @@ const EquityIndicators = (props) => {
                                         <span className="text-sm block">
                                             Assigned
                                         </span>
-                                        <span className="text-xl font-bold">
+                                        <span className="text-xl font-bold mr-2">
                                             {formatNumber(
                                                 equityByValue[0].number
                                             )}
                                         </span>
+                                        {currency && (
+                                            <span className="inline-block uppercase">
+                                                {currency}
+                                            </span>
+                                        )}
                                     </h3>
                                 </div>
                                 <PieChart
@@ -96,11 +101,16 @@ const EquityIndicators = (props) => {
                                         <span className="text-sm block">
                                             Assigned
                                         </span>
-                                        <span className="text-xl font-bold">
+                                        <span className="text-xl font-bold mr-2">
                                             {formatNumber(
                                                 equityByNumber[0].number
                                             )}
                                         </span>
+                                        {currency && (
+                                            <span className="inline-block uppercase">
+                                                {currency}
+                                            </span>
+                                        )}
                                     </h3>
                                 </div>
                                 <PieChart
