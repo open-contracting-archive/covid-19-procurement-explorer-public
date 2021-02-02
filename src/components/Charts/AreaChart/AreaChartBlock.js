@@ -2,14 +2,9 @@ import React from 'react'
 import AreaChart from './AreaChart'
 import { formatNumber } from '../../../helpers/number'
 
-const AreaChartBlock = ({
-    totalAmount,
-    chartData,
-    percentage,
-    currency,
-    colorValue,
-    monopolization
-}) => {
+const AreaChartBlock = (props) => {
+    const { totalAmount, chartData, percentage, currency, colorValue } = props
+
     return (
         <div className="text-primary-dark pb-4 w-full">
             <AreaChart
