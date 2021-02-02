@@ -17,6 +17,9 @@ const DirectOpen = (props) => {
     const [loading, setLoading] = useState(true)
     const [directOpen, setDirectOpen] = useState()
     const currency = useSelector((state) => state.general.currency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
     const { trans } = useTrans()
 
     // ===========================================================================
@@ -84,7 +87,9 @@ const DirectOpen = (props) => {
                                         </span>
                                         {currency && (
                                             <span className="inline-block uppercase">
-                                                {currency}
+                                                {currency === 'local'
+                                                    ? countryCurrency
+                                                    : 'usd'}
                                             </span>
                                         )}
                                     </h3>
@@ -110,11 +115,6 @@ const DirectOpen = (props) => {
                                                 directOpenByNumber[1].number
                                             )}
                                         </span>
-                                        {currency && (
-                                            <span className="inline-block uppercase">
-                                                {currency}
-                                            </span>
-                                        )}
                                     </h3>
                                 </div>
                                 <PieChart

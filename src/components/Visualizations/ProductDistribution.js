@@ -38,8 +38,8 @@ const ProductDistribution = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item.amount_local
+                    : item.amount_usd
             })
             let chartDataFormatted = originalData
                 .sort((a, b) => {
@@ -65,7 +65,7 @@ const ProductDistribution = (props) => {
                 })
             setChartData(chartDataFormatted)
         }
-    }, [originalData, viewType])
+    }, [originalData, viewType, currency])
 
     const isActiveTab = (type) => {
         return viewType === type ? 'active' : ''
@@ -108,8 +108,13 @@ const ProductDistribution = (props) => {
                                 <div className="mt-10">
                                     <BarListChart
                                         data={chartData}
-                                        text={countrySlug ? `country/${countrySlug}/products` : `global-overview/products`}
+                                        text={
+                                            countrySlug
+                                                ? `country/${countrySlug}/products`
+                                                : `global-overview/products`
+                                        }
                                         currency={currency}
+                                        viewType={viewType}
                                     />
                                 </div>
                             </div>

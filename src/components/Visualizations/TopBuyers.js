@@ -60,7 +60,7 @@ const TopBuyers = (props) => {
             })
             setChartData(chartDataFormatted)
         }
-    }, [originalData, viewType])
+    }, [originalData, viewType, currency])
 
     const isActiveTab = (type) => {
         return viewType === type ? 'active' : ''
@@ -105,6 +105,7 @@ const TopBuyers = (props) => {
                                         data={chartData}
                                         text="buyers"
                                         currency={currency}
+                                        viewType={viewType}
                                     />
                                 </div>
                             </div>
