@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import Loader from '../Loader/Loader'
-import ContractView from "../../constants/ContractView"
-import Default from "../../constants/Default"
-import SimpleBarListChart from "../SimpleBarListSection/SimpleBarListChart"
+import ContractView from '../../constants/ContractView'
+import Default from '../../constants/Default'
+import SimpleBarListChart from '../SimpleBarListSection/SimpleBarListChart'
 
 const ContractStatus = (props) => {
     // ===========================================================================
@@ -24,11 +24,10 @@ const ContractStatus = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ContractStatus(params)
-            .then((response) => {
-                setOriginalData(response)
-                setLoading(false)
-            })
+        VisualizationServices.ContractStatus(params).then((response) => {
+            setOriginalData(response)
+            setLoading(false)
+        })
     }, [params])
 
     useEffect(() => {
@@ -37,8 +36,8 @@ const ContractStatus = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item.amount_local
+                    : item.amount_usd
             })
             let chartDataFormatted = originalData.map((item) => {
                 let actualValue =
@@ -55,7 +54,7 @@ const ContractStatus = (props) => {
             })
             setChartData(chartDataFormatted)
         }
-    }, [originalData, viewType])
+    }, [originalData, viewType, currency])
 
     const isActiveTab = (type) => {
         return viewType === type ? 'active' : ''
@@ -93,7 +92,11 @@ const ContractStatus = (props) => {
                     <div className="flex-1">
                         <div className="flex-1 simple-tab -mt-10">
                             <div className="mt-10">
-                                <SimpleBarListChart data={chartData} currency={currency} />
+                                <SimpleBarListChart
+                                    data={chartData}
+                                    currency={currency}
+                                    viewType={viewType}
+                                />
                             </div>
                         </div>
                     </div>

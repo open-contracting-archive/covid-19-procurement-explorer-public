@@ -29,6 +29,9 @@ const EquityIndicators = (props) => {
     }, [params])
 
     const currency = useSelector((state) => state.general.currency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
 
     // ===========================================================================
     // Handlers and functions
@@ -82,7 +85,9 @@ const EquityIndicators = (props) => {
                                         </span>
                                         {currency && (
                                             <span className="inline-block uppercase">
-                                                {currency}
+                                                {currency === 'local'
+                                                    ? countryCurrency
+                                                    : 'usd'}
                                             </span>
                                         )}
                                     </h3>
@@ -106,11 +111,6 @@ const EquityIndicators = (props) => {
                                                 equityByNumber[0].number
                                             )}
                                         </span>
-                                        {currency && (
-                                            <span className="inline-block uppercase">
-                                                {currency}
-                                            </span>
-                                        )}
                                     </h3>
                                 </div>
                                 <PieChart

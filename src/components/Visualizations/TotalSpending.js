@@ -15,7 +15,9 @@ const TotalSpending = (props) => {
     // ===========================================================================
     const { label = 'Total Spending', params, helpText } = props
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector((state) => state.general.countryCurrency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState({
@@ -32,11 +34,10 @@ const TotalSpending = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalSpending(params)
-            .then((response) => {
-                setOriginalData(response)
-                setLoading(false)
-            })
+        VisualizationServices.TotalSpending(params).then((response) => {
+            setOriginalData(response)
+            setLoading(false)
+        })
     }, [params])
 
     useEffect(() => {
@@ -46,12 +47,16 @@ const TotalSpending = (props) => {
 
         setChartData({
             amount: originalData && get(originalData[currency], 'total'),
-            percentage: originalData && get(originalData[currency], 'increment'),
-            areaChartDataRaw: originalData && lineChartData(get(originalData[currency], 'line_chart')),
+            percentage:
+                originalData && get(originalData[currency], 'increment'),
+            areaChartDataRaw:
+                originalData &&
+                lineChartData(get(originalData[currency], 'line_chart')),
             areaChartData: areaChartDataRaw && sortDate(areaChartDataRaw),
-            barChartData: originalData && get(originalData[currency], 'bar_chart')
+            barChartData:
+                originalData && get(originalData[currency], 'bar_chart')
         })
-    }, [originalData])
+    }, [originalData, currency])
 
     // ===========================================================================
     // Handlers and functions
@@ -77,8 +82,7 @@ const TotalSpending = (props) => {
     }
 
     return (
-        <div
-            className="bg-white rounded p-4 h-full cursor-pointer">
+        <div className="bg-white rounded p-4 h-full cursor-pointer">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
                     {trans(label ? label : 'Total Spending')}
@@ -95,9 +99,7 @@ const TotalSpending = (props) => {
                             totalAmount={chartData.amount}
                             percentage={chartData.percentage}
                             colorValue={
-                                chartData.percentage < 0
-                                    ? '#FE5151'
-                                    : '#3EEDA4'
+                                chartData.percentage < 0 ? '#FE5151' : '#3EEDA4'
                             }
                             currency={currency}
                         />

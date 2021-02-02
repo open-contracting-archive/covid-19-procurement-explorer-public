@@ -1,7 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { formatNumber } from '../../helpers/number'
 
-function SimpleBarListChart({ data, byValue, currency }) {
+function SimpleBarListChart({ data, byValue, currency, viewType }) {
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
+
     return (
         <div className="custom-horizontal-bar simple-bar">
             <ul className="custom-scrollbar">
@@ -22,13 +27,30 @@ function SimpleBarListChart({ data, byValue, currency }) {
                                 </div>
                                 <div className="ml-2 custom-horizontal-bar-amount">
                                     <p>
-                                        {byValue && bar_value.amount ? '$' : ''}
-                                        {formatNumber(bar_value.amount) || '-'}
-
-                                        {currency && (
-                                            <span className="uppercase text-xs ml-1">
-                                                {currency}
-                                            </span>
+                                        {/* {bar_value.amount
+                                            ? ` ${
+                                                  viewType === 'value'
+                                                      ? '$'
+                                                      : ''
+                                              }
+                                            ${formatNumber(bar_value.amount)}`
+                                            : '-'} */}
+                                        {bar_value.amount ? (
+                                            <>
+                                                {viewType === 'value'
+                                                    ? '$'
+                                                    : ''}
+                                                {formatNumber(bar_value.amount)}
+                                                {viewType === 'value' && (
+                                                    <span className="uppercase text-xs ml-1">
+                                                        {currency === 'local'
+                                                            ? countryCurrency
+                                                            : 'usd'}
+                                                    </span>
+                                                )}
+                                            </>
+                                        ) : (
+                                            '-'
                                         )}
                                     </p>
                                 </div>
