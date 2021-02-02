@@ -25,7 +25,7 @@ const TotalContracts = (props) => {
             setTotalContracts(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country, params?.buyer, params?.supplier])
 
     // ===========================================================================
     // Handlers and functions

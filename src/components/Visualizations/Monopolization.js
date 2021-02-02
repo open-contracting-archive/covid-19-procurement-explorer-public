@@ -23,7 +23,7 @@ const Monopolization = (props) => {
                 setMonopolization(response)
                 setLoading(false)
             })
-    }, [params])
+    }, [params?.country, params?.buyer])
 
     // ===========================================================================
     // Handlers and functions

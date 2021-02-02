@@ -24,11 +24,12 @@ const ContractStatus = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ContractStatus(params).then((response) => {
-            setOriginalData(response)
-            setLoading(false)
-        })
-    }, [params])
+        VisualizationServices.ContractStatus(params)
+            .then((response) => {
+                setOriginalData(response)
+                setLoading(false)
+            })
+    }, [params?.country, params?.buyer])
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
@@ -36,8 +37,8 @@ const ContractStatus = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                    ? item.amount_local
-                    : item.amount_usd
+                        ? item.amount_local
+                        : item.amount_usd
             })
             let chartDataFormatted = originalData.map((item) => {
                 let actualValue =

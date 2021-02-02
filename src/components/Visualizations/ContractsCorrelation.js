@@ -30,7 +30,7 @@ const ContractsCorrelation = (props) => {
             }
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country])
 
     // ===========================================================================
     // Handlers and functions

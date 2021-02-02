@@ -34,11 +34,12 @@ const TotalSpending = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalSpending(params).then((response) => {
-            setOriginalData(response)
-            setLoading(false)
-        })
-    }, [params])
+        VisualizationServices.TotalSpending(params)
+            .then((response) => {
+                setOriginalData(response)
+                setLoading(false)
+            })
+    }, [params?.country, params?.buyer, params?.supplier])
 
     useEffect(() => {
         const areaChartDataRaw =

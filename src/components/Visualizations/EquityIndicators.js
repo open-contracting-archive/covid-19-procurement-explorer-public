@@ -26,7 +26,7 @@ const EquityIndicators = (props) => {
             setEquity(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country, params?.buyer])
 
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector(

@@ -26,7 +26,7 @@ const CountrySuppliers = (props) => {
             setGlobalSuppliers(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country, params?.product])
 
     // ===========================================================================
     // Handlers and functions

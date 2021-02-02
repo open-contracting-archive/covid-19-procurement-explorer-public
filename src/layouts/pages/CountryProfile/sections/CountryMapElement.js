@@ -10,7 +10,7 @@ import { ReactComponent as ShareIcon } from '../../../../assets/img/icons/ic_sha
 import { ReactComponent as FullViewIcon } from '../../../../assets/img/icons/ic_fullscreen.svg'
 import ContractView from "../../../../constants/ContractView"
 
-const CountryMapElement = ({ countryCode }) => {
+const CountryMapElement = (props) => {
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
@@ -19,12 +19,12 @@ const CountryMapElement = ({ countryCode }) => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        VisualizationServices.CountryMap({ country: countryCode })
+        VisualizationServices.CountryMap({ country: props.countryCode })
             .then((response) => {
                 setOriginalData(response)
                 setLoading(false)
             })
-    }, [countryCode])
+    }, [props?.countryCode])
 
     useEffect(() => {
         if (originalData.country_code) {
@@ -64,7 +64,7 @@ const CountryMapElement = ({ countryCode }) => {
                     <div className="h-full">
                         {loading ? (<Loader />) : (
                             // <CountryMap data={mapData} countryCode={countryCode} />
-                            <CountryDetailMap data={mapData} countryCode={countryCode} />
+                            <CountryDetailMap data={mapData} countryCode={props.countryCode} />
                         )}
                     </div>
                 </div>

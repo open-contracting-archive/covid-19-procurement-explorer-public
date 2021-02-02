@@ -22,7 +22,7 @@ const AverageBidsPerContract = (props) => {
             setAverageBids(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country, params?.buyer])
 
     // ===========================================================================
     // Handlers and functions

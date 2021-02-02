@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { isEmpty } from 'lodash'
 import { setCountryCurrency } from '../../../store/reducers/general/action'
 import CountrySelector from "../../../components/CountrySelector/CountrySelector"
 import CountryMapElement from "./sections/CountryMapElement"
@@ -59,15 +60,17 @@ const CountryProfile = () => {
 
     return (
         <section className="pt-20 -mt-8 bg-blue-0">
-            <section className="px-4">
-                <div className="container mx-auto">
-                    <CountrySelector />
-                    <div className="flex flex-wrap -mb-4">
-                        <CountryMapElement countryCode={countryData.country_code_alpha_2} />
-                        <CountryInfo country={countryData} />
+            {!isEmpty(countryData) && (
+                <section className="px-4">
+                    <div className="container mx-auto">
+                        <CountrySelector />
+                        <div className="flex flex-wrap -mb-4">
+                            <CountryMapElement countryCode={countryData.country_code_alpha_2} />
+                            <CountryInfo country={countryData} />
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             <TabNavigator endpoint={"country"} countrySlug={countrySlug} />
 
