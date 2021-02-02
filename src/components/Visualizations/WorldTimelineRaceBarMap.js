@@ -26,6 +26,7 @@ const WorldTimelineRaceBarMap = () => {
         { value: 'south_america', label: 'South America' },
         { value: 'north_america', label: 'North America' },
         { value: 'middle_east', label: 'Middle East' }
+        
     ]
 
     useEffect(() => {
@@ -33,9 +34,8 @@ const WorldTimelineRaceBarMap = () => {
             const raceBarChartformatted = response.result.reduce(
                 (formattedData, d) => ({
                     ...formattedData,
-                    [d.month]: d.details.map((detail) => ({
-                        country:
-                            detail.country == 'Global' ? '' : detail.country,
+                    [d.month]: d.details.filter(detail => detail.country !== 'Global').map((detail) => ({
+                        country: detail.country,
                         value:
                             raceBarType === 'value'
                                 ? detail.amount_usd
@@ -48,8 +48,6 @@ const WorldTimelineRaceBarMap = () => {
             setLoading(false)
         })
     }, [raceBarType])
-
-    console.log(raceBarDataApi, 'Data')
 
     return (
         <div>
