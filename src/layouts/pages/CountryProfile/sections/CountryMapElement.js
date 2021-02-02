@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../../../services/visualizationServices'
 import CountryMap from '../../../../components/Charts/CountryMap/CountryMap'
+import CountryDetailMap from '../../../../components/Charts/CountryDetailMap/CountryDetailMap'
 import useTrans from '../../../../hooks/useTrans'
 import Loader from '../../../../components/Loader/Loader'
 import { ReactComponent as DownloadIcon } from '../../../../assets/img/icons/ic_download.svg'
@@ -45,7 +46,7 @@ const CountryMapElement = ({ countryCode }) => {
         <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4 bg-white rounded py-6">
             <FullScreen handle={handle}>
                 <div className="relative">
-                    <div className="flex justify-end">
+                    {/* <div className="flex justify-end">
                         <ul className="contract-switch flex">
                             <li
                                 className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
@@ -58,11 +59,12 @@ const CountryMapElement = ({ countryCode }) => {
                                 {trans('By number of contracts')}
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     <div className="h-full">
                         {loading ? (<Loader />) : (
-                            <CountryMap data={mapData} countryCode={countryCode} />
+                            // <CountryMap data={mapData} countryCode={countryCode} />
+                            <CountryDetailMap data={mapData} countryCode={countryCode} />
                         )}
                     </div>
                 </div>

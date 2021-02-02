@@ -159,12 +159,15 @@ const RaceBarChart = ({ data }) => {
         chart.cursor.lineY.opacity = 0
 
         chart.data = JSON.parse(JSON.stringify(data[currentYear]))
+        chart.logo.disabled = true
+
         chart.numberFormatter.numberFormat = '#.##a'
         chart.numberFormatter.bigNumberPrefixes = [
             { number: 1e3, suffix: 'K' },
             { number: 1e6, suffix: 'M' },
             { number: 1e9, suffix: 'B' }
         ]
+
         categoryAxis.zoom({
             start: 0,
             end: data[currentYear].length / chart.data.length

@@ -5,7 +5,7 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const GlobalMap = ({ data, innerMap, coordinates }) => {
+const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
     const globalMapchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -90,7 +90,18 @@ const GlobalMap = ({ data, innerMap, coordinates }) => {
         polygonTemplate.tooltipText = '{name}: {value}'
         polygonTemplate.nonScalingStroke = true
         polygonTemplate.strokeWidth = 0.5
-        polygonTemplate.url = '{url}'
+
+        // Configure series
+        polygonTemplate.tooltipHTML =
+            contractType === 'value'
+                ? '<b>{name}</b> <br> <b>Total Spending: {value}$</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+                : '<b>{name}</b> <br> <b>Total Contracts: {value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+
+        // Set up tooltips
+        polygonSeries.calculateVisualCenter = true
+        polygonTemplate.tooltipPosition = 'fixed'
+        polygonSeries.tooltip.label.interactionsEnabled = true
+        polygonSeries.tooltip.keepTargetHover = true
 
         // Zoom control
         chart.zoomControl = new am4maps.ZoomControl()

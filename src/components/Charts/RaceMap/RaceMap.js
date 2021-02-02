@@ -1,23 +1,18 @@
 /* Imports */
-import React, {
-    useLayoutEffect,
-    useEffect,
-    useRef,
-    useState
-} from 'react'
+import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
-import { formatYearText } from "../../../helpers/date"
+import { formatYearText } from '../../../helpers/date'
 
 const RaceMap = ({
-                     sliderData,
-                     contractType,
-                     contractData,
-                     yearMonth,
-                     coordinates
-                 }) => {
+    sliderData,
+    contractType,
+    contractData,
+    yearMonth,
+    coordinates
+}) => {
     const mapchartDiv = useRef(null)
     const [data, setData] = useState({})
     let yearMonthMapData = yearMonth
@@ -67,6 +62,9 @@ const RaceMap = ({
         // Exclude Antartica
         polygonSeries.exclude = ['AQ']
 
+        // Make map load polygon (like country names) data from GeoJSON
+        polygonSeries.useGeodata = true
+
         chart.colors.list = [am4core.color('#F0F9E8'), am4core.color('#08589E')]
 
         //Set min/max fill color for each area
@@ -76,12 +74,6 @@ const RaceMap = ({
             min: chart.colors.getIndex(0),
             max: chart.colors.getIndex(1)
         })
-
-        // Make map load polygon (like country names) data from GeoJSON
-        polygonSeries.useGeodata = true
-
-        // Set heatmap values for each state
-        polygonSeries.data = data
 
         polygonSeries.mapPolygons.template.events.on('over', (event) => {
             handleHover(event.target)
@@ -104,14 +96,21 @@ const RaceMap = ({
             heatLegend.valueAxis.hideTooltip()
         })
 
-        // Configure series tooltip
-        let polygonTemplate = polygonSeries.mapPolygons.template
-        polygonTemplate.tooltipText = '{name}: {value}'
-        polygonTemplate.nonScalingStroke = true
-        polygonTemplate.strokeWidth = 0.5
-        polygonTemplate.url = '{url}'
+        // Configure series
+        var polygonTemplate = polygonSeries.mapPolygons.template
+        polygonTemplate.tooltipHTML =
+            contractType === 'value'
+                ? '<b>{name}</b> <br> <b>Total Spending: {value}$</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+                : '<b>{name}</b> <br> <b>Total Contracts: {value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+
+        // Set up tooltips
         polygonSeries.calculateVisualCenter = true
         polygonTemplate.tooltipPosition = 'fixed'
+        polygonSeries.tooltip.label.interactionsEnabled = true
+        polygonSeries.tooltip.keepTargetHover = true
+
+        // Set heatmap values for each state
+        polygonSeries.data = data
 
         // Set up heat legend
         let heatLegend = chart.createChild(am4maps.HeatLegend)
@@ -147,11 +146,13 @@ const RaceMap = ({
 
         let sliderAnimation
 
-        label.text = formatYearText('2013-08')
+        const years = Object.keys(data)
+        let currentYearIndex = 0
+        let currentYear = years[currentYearIndex] || ''
+        label.text = formatYearText(currentYear)
 
         function createSlider() {
             let sliderContainer = chart.createChild(am4core.Container)
-
             sliderContainer.width = am4core.percent(100)
             sliderContainer.valign = 'bottom'
             sliderContainer.marginBottom = am4core.percent(4)

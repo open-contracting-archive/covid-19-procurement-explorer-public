@@ -25,18 +25,19 @@ const TotalSpending = (props) => {
     const [totalSpending, setTotalSpending] = useState([])
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector((state) => state.general.countryCurrency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
     const { isModalOpen, openModal, closeModal } = useModal()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalSpending(params)
-            .then((response) => {
-                setTotalSpending(response)
-                setLoading(false)
-            })
+        VisualizationServices.TotalSpending(params).then((response) => {
+            setTotalSpending(response)
+            setLoading(false)
+        })
     }, [params])
 
     // ===========================================================================
