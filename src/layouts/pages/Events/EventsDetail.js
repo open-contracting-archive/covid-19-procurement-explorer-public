@@ -5,12 +5,14 @@ import Loader from '../../../components/Loader/Loader'
 import { formatDate, formatTime } from '../../../helpers/date'
 import ShareButtons from '../../../components/Library/ShareButtons'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
+import useTrans from '../../../hooks/useTrans'
 
 const EventsDetail = () => {
     const [eventsDetail, setEventsDetail] = useState({})
     const [eventsData, setEventsData] = useState([])
     const [loading, setLoading] = useState(true)
     let { id: eventsId } = useParams()
+    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -61,7 +63,7 @@ const EventsDetail = () => {
                                 </div>
                                 <div className="organization mb-8">
                                     <p className="block font-bold opacity-40 mb-2">
-                                        Organization
+                                        {trans('Organization')}
                                     </p>
                                     <p className="block ml-3 lg:ml-0">
                                         {eventsDetail.organization || '-'}
@@ -69,7 +71,7 @@ const EventsDetail = () => {
                                 </div>
                                 <div className="location mb-8">
                                     <p className="block font-bold opacity-40 mb-2">
-                                        Location
+                                        {trans('Location')}
                                     </p>
                                     <p className="block ml-3 lg:ml-0">
                                         {eventsDetail.location || '-'}
@@ -86,7 +88,7 @@ const EventsDetail = () => {
                                 <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
                                     <div className="flex">
                                         <p className="font-bold opacity-40 mr-4">
-                                            Share on
+                                            {trans('Share on')}
                                         </p>
                                         <ShareButtons
                                             url={window.location.href}
@@ -96,7 +98,7 @@ const EventsDetail = () => {
                             </div>
                             <div className="hidden lg:block">
                                 <p className="font-bold opacity-40 mb-2">
-                                    Share on
+                                    {trans('Share on')}
                                 </p>
                                 <ShareButtons url={window.location.href} />
                             </div>
@@ -106,7 +108,7 @@ const EventsDetail = () => {
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
-                                        Other Events
+                                        {trans('Other Events')}
                                     </h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
                                         {eventsData &&
@@ -174,7 +176,7 @@ const EventsDetail = () => {
                                         <Link
                                             to="/events"
                                             className="text-blue-20 px-4">
-                                            View all events --&gt;{' '}
+                                            {trans('View all events')} --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>
