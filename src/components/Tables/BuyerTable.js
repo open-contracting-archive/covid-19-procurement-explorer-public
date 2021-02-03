@@ -227,8 +227,7 @@ const BuyerTable = (props) => {
                                             className={tableRowClass(
                                                 buyer.red_flag
                                             )}>
-                                            <td>
-                                                {' '}
+                                            <td className="hover:text-primary-blue">
                                                 <p
                                                     className="truncate-text"
                                                     title={get(

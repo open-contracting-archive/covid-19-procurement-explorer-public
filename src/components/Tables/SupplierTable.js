@@ -225,7 +225,7 @@ const SupplierTable = (props) => {
                                             className={tableRowClass(
                                                 supplier.red_flag
                                             )}>
-                                            <td>
+                                            <td className="hover:text-primary-blue">
                                                 <p
                                                     className="truncate-text"
                                                     title={get(

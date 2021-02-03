@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
-import useTrans from '../../../hooks/useTrans'
 import TabNavigator from '../CountryProfile/sections/TabNavigator'
 import WorldMap from '../../../components/Visualizations/WorldMap'
 import GlobalData from './tabs/GlobalData'
@@ -26,7 +25,6 @@ const GlobalOverview = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { trans } = useTrans()
     let { tabSlug } = useParams()
 
     const renderTab = () => {
@@ -57,9 +55,6 @@ const GlobalOverview = () => {
             <section className="global-profile -mt-8">
                 <section className="bg-blue-0 pt-20 px-4">
                     <div className="container mx-auto">
-                        {/* <h2 className="font-normal mb-5 text-2xl  text-primary-dark">
-                            {trans('Global Overview')}
-                        </h2> */}
                         <CountrySelector />
                         <WorldMap />
                     </div>

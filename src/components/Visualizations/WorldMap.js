@@ -135,18 +135,18 @@ const WorldMap = (props) => {
                     </FullScreen>
 
                     <div
-                        className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-             text-primary-blue -mx-6 px-6">
+                        className="flex items-center justify-between pt-4 border-t 
+                    border-blue-0 text-sm text-primary-blue -mx-6 px-6">
                         <div className="flex items-center">
                             <div className="flex items-center mr-6">
                                 <DownloadIcon className="mr-2 inline-block" />
-                                <span>Download</span>
+                                <span>{trans('Download')}</span>
                             </div>
                             <div className="flex">
                                 <span className="flex items-center">
                                     <ShareIcon className="mr-2 inline-block" />{' '}
                                     <span className="cursor-pointer">
-                                        Share
+                                        {trans('Share')}
                                     </span>
                                 </span>
                             </div>
@@ -155,7 +155,7 @@ const WorldMap = (props) => {
                             <span className="flex items-center">
                                 <button onClick={handle.enter}>
                                     <span className="cursor-pointer">
-                                        View full screen
+                                        {trans('View full screen')}
                                     </span>
                                     <FullViewIcon className="ml-2 inline-block" />
                                 </button>

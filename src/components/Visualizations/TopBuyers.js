@@ -41,8 +41,8 @@ const TopBuyers = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item.amount_local
+                    : item.amount_usd
             })
             let chartDataFormatted = dataSet.map((item) => {
                 let actualValue =
@@ -68,7 +68,7 @@ const TopBuyers = (props) => {
 
     return (
         <div className="bg-white rounded h-full">
-            <div className="bg-white rounded p-6 pb-0">
+            <div className="bg-white rounded p-6 pb-12">
                 <div className="flex items-center justify-between flex-wrap">
                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                         {trans(label)}
@@ -113,11 +113,6 @@ const TopBuyers = (props) => {
                     </div>
                 )}
             </div>
-            <Link
-                to={viewLink}
-                className="text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                View All
-            </Link>
         </div>
     )
 }

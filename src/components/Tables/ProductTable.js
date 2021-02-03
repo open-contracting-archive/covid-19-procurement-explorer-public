@@ -123,7 +123,7 @@ const ProductTable = (props) => {
                                         key={index}
                                         className="cursor-pointer"
                                         onClick={() => showDetail(product.product_id)}>
-                                        <td>{get(product, 'product_name')}</td>
+                                        <td className="hover:text-primary-blue">{get(product, 'product_name')}</td>
                                         <td>
                                             {get(product, 'tender_count')}
                                         </td>

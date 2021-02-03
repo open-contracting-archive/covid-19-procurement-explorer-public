@@ -100,7 +100,7 @@ const RaceMap = ({
         var polygonTemplate = polygonSeries.mapPolygons.template
         polygonTemplate.tooltipHTML =
             contractType === 'value'
-                ? '<b>{name}</b> <br> <b>Total Spending: {value}$</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+                ? '<b>{name}</b> <br> <b>Total Spending: ${value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
                 : '<b>{name}</b> <br> <b>Total Contracts: {value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
 
         // Set up tooltips
@@ -250,7 +250,7 @@ const RaceMap = ({
 
     return (
         <div className="map-wrapper pb-6">
-            <div ref={mapchartDiv} style={{ width: '100%', height: '750px' }} />
+            <div ref={mapchartDiv} className="race-map-section" />
         </div>
     )
 }

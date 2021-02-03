@@ -8,12 +8,13 @@ import Loader from '../Loader/Loader'
 import { dateDiff, formatDate } from '../../helpers/date'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
+import Visualization from "../../constants/Visualization"
 
 const TotalSpending = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Total Spending', params, helpText } = props
+    const { label = 'Total Spending', params, modalHandler } = props
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
@@ -29,6 +30,7 @@ const TotalSpending = (props) => {
     })
     const barColorValue = '#ABBABF'
     const { trans } = useTrans()
+    const helpText = "This is a help text for the total spending visualization"
 
     // ===========================================================================
     // Hooks
@@ -83,7 +85,7 @@ const TotalSpending = (props) => {
     }
 
     return (
-        <div className="bg-white rounded p-4 h-full cursor-pointer">
+        <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
                     {trans(label ? label : 'Total Spending')}
@@ -114,6 +116,10 @@ const TotalSpending = (props) => {
                         />
                     </div>
                 </div>
+            )}
+            {modalHandler && (
+                <span className="cursor-pointer"
+                      onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>View more</span>
             )}
         </div>
     )

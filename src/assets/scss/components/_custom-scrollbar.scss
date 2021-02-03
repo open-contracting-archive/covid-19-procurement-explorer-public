@@ -1,0 +1,84 @@
+.custom-horizontal-bar {
+    ul {
+        li {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f1f1;
+            margin-bottom: 15px;
+
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+        }
+    }
+    .custom-horizontal-bar-text {
+        width: 180px;
+        flex-shrink: 0;
+
+        h3 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
+    }
+    .custom-horizontal-bar-amount {
+        width: 90px;
+        flex-shrink: 0;
+    }
+
+    .custom-horizontal-bar-progress {
+        margin-left: 12px;
+        height: 14px;
+        width: calc(100% - 180px);
+        background: #dceaee;
+        position: relative;
+
+        span {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background-color: #abbabf;
+            bottom: 0;
+            z-index: 1;
+            transition: all 0.23s ease-in-out;
+        }
+    }
+
+    &.simple-bar {
+        ul {
+            li {
+                border: none;
+                margin-bottom: 0;
+
+                &:last-child {
+                    padding-bottom: 0;
+                }
+            }
+        }
+        .custom-horizontal-bar-text {
+            width: 90px;
+        }
+        .custom-horizontal-bar-progress {
+            width: calc(100% - 80px);
+        }
+    }
+}
+
+.custom-scrollbar {
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px #dceaee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #1fbbec;
+        outline: 1px solid #1fbbec;
+    }
+}

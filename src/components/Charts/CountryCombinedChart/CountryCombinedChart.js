@@ -81,7 +81,7 @@ const CountryCombinedChart = ({ data, type }) => {
     return (
         <div
             ref={combinedchartDiv}
-            style={{ width: '100%', height: '400px' }}
+            className="h-400"
         />
     )
 }

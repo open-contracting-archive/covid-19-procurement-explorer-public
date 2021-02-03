@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import useTrans from '../../hooks/useTrans'
-import RaceBarChart from '../../components/Charts/RaceBarChart/RaceBarChart'
+import BarChartRace from '../../components/Charts/BarChart/BarChartRace'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
 
@@ -26,7 +26,6 @@ const WorldTimelineRaceBarMap = () => {
         { value: 'south_america', label: 'South America' },
         { value: 'north_america', label: 'North America' },
         { value: 'middle_east', label: 'Middle East' }
-        
     ]
 
     useEffect(() => {
@@ -84,7 +83,7 @@ const WorldTimelineRaceBarMap = () => {
             {!raceBarDataApi ? (
                 <Loader />
             ) : (
-                <RaceBarChart data={raceBarDataApi} />
+                <BarChartRace data={raceBarDataApi} />
             )}
         </div>
     )

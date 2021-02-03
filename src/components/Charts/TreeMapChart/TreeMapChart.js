@@ -88,7 +88,7 @@ const TreeMapChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={treeMapChart} style={{ width: '100%', height: '400px' }} />
+    return <div ref={treeMapChart} className="h-400" />
 }
 
 export default TreeMapChart

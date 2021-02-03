@@ -1,31 +1,12 @@
 /* Imports */
-import React, { useLayoutEffect, useRef, useCallback } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+import { formatYearText } from "../../../helpers/date"
 
-const RaceBarChart = ({ data }) => {
+const BarChartRace = ({ data }) => {
     const raceBarChartDiv = useRef(null)
-
-    const formatYearText = useCallback((yearText) => {
-        const [year, month] = yearText.split('-')
-        const months = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ]
-
-        return `${months[month - 1] || month}, ${year}`
-    }, [])
 
     useLayoutEffect(() => {
         /* Chart code */
@@ -38,15 +19,15 @@ const RaceBarChart = ({ data }) => {
 
         let label = chart.plotContainer.createChild(am4core.Label)
         label.x = am4core.percent(97)
-        label.y = am4core.percent(95)
+        label.y = am4core.percent(90)
         label.horizontalCenter = 'right'
         label.verticalCenter = 'middle'
         label.dx = -15
-        label.fontSize = 50
+        label.fontSize = 24
 
         let playButton = chart.plotContainer.createChild(am4core.PlayButton)
         playButton.x = am4core.percent(97)
-        playButton.y = am4core.percent(95)
+        playButton.y = am4core.percent(90)
         playButton.dy = -2
         playButton.verticalCenter = 'middle'
         playButton.events.on('toggled', function (event) {
@@ -65,12 +46,26 @@ const RaceBarChart = ({ data }) => {
         categoryAxis.renderer.minGridDistance = 1
         categoryAxis.renderer.inversed = true
         categoryAxis.renderer.grid.template.disabled = true
+        categoryAxis.renderer.grid.template.strokeOpacity = 0
+        categoryAxis.renderer.minGridDistance = 10
+        categoryAxis.renderer.labels.template.dx = -40
+        categoryAxis.renderer.minWidth = 120
+        categoryAxis.renderer.tooltip.dx = -40
 
         let valueAxis = chart.xAxes.push(new am4charts.ValueAxis())
         valueAxis.min = 0
         valueAxis.rangeChangeEasing = am4core.ease.linear
         valueAxis.rangeChangeDuration = stepDuration
         valueAxis.extraMax = 0.1
+        valueAxis.cursorTooltipEnabled = true
+
+        valueAxis.renderer.inside = true
+        valueAxis.renderer.labels.template.fillOpacity = 0.3
+        valueAxis.renderer.grid.template.strokeOpacity = 0
+        valueAxis.min = 0
+        valueAxis.cursorTooltipEnabled = false
+        valueAxis.renderer.baseGrid.strokeOpacity = 0
+        valueAxis.renderer.labels.template.dy = 20
 
         let series = chart.series.push(new am4charts.ColumnSeries())
         series.dataFields.categoryY = 'country'
@@ -82,12 +77,46 @@ const RaceBarChart = ({ data }) => {
         series.interpolationDuration = stepDuration
         series.interpolationEasing = am4core.ease.linear
 
+        series.tooltip.pointerOrientation = 'vertical'
+        series.tooltip.dy = -30
+        series.columnsContainer.zIndex = 100
+
+        let columnTemplate = series.columns.template
+        columnTemplate.height = am4core.percent(50)
+        columnTemplate.maxHeight = 50
+        columnTemplate.column.cornerRadius(60, 10, 60, 10)
+        columnTemplate.strokeOpacity = 0
+
+        series.mainContainer.mask = undefined
+
         let labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.horizontalCenter = 'right'
         labelBullet.label.text =
             "{values.valueX.workingValue.formatNumber('#.0as')}"
         labelBullet.label.textAlign = 'end'
         labelBullet.label.dx = -10
+
+        var bullet = columnTemplate.createChild(am4charts.CircleBullet)
+        bullet.circle.radius = 20
+        bullet.valign = 'middle'
+        bullet.align = 'left'
+        bullet.isMeasured = true
+        bullet.interactionsEnabled = false
+        bullet.horizontalCenter = 'right'
+        bullet.interactionsEnabled = false
+        bullet.dx = -20
+
+        var image = bullet.createChild(am4core.Image)
+        image.width = 40
+        image.height = 40
+        image.horizontalCenter = 'middle'
+        image.verticalCenter = 'middle'
+        image.propertyFields.href = 'href'
+
+        image.adapter.add('mask', function (mask, target) {
+            var circleBullet = target.parent
+            return circleBullet.circle
+        })
 
         chart.zoomOutButton.disabled = true
 
@@ -106,9 +135,11 @@ const RaceBarChart = ({ data }) => {
 
         function play() {
             interval = setInterval(function () {
-                nextYear()
+                if (chart) {
+                    nextYear()
+                }
             }, stepDuration)
-            nextYear()
+            // nextYear()
         }
 
         function stop() {
@@ -183,9 +214,11 @@ const RaceBarChart = ({ data }) => {
             chart.dispose()
             chart = null
         }
-    }, [data, formatYearText])
+    }, [data])
 
-    return <div ref={raceBarChartDiv} className="race-map-section" />
+    return (
+        <div ref={raceBarChartDiv} style={{ width: '100%', height: '600px' }} />
+    )
 }
 
-export default RaceBarChart
+export default BarChartRace

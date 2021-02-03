@@ -90,45 +90,43 @@ const BuyerProductTimeline = (props) => {
                 {loading ? (
                     <Loader />
                 ) : (
-                    <>
-                        <SimpleBarChart
-                            data={chartData}
-                            height="600px"
-                            barColorValue={barColorValue}
-                            chartKey="product"
-                            chartValue="value"
-                            axisRotation="270"
-                        />
-                        <div
-                            className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                             text-primary-blue -mx-4 px-4">
-                            <div className="flex items-center">
-                                <div className="flex items-center mr-6">
-                                    <DownloadIcon className="mr-2 inline-block" />
-                                    <span>Download</span>
-                                </div>
-                                <span className="worldmap-share flex items-center relative">
-                                    <ShareIcon className="mr-2 inline-block" />{' '}
-                                    <span className="cursor-pointer">
-                                        Share
-                                    </span>
-                                </span>
-                            </div>
-
-                            <div>
-                                <span className="flex items-center">
-                                    <button onClick={handle.enter}>
-                                        <span className="cursor-pointer">
-                                            View full screen
-                                        </span>
-                                        <FullViewIcon className="ml-2 inline-block" />
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </>
+                    <SimpleBarChart
+                        data={chartData}
+                        height="600px"
+                        className="chart-full"
+                        barColorValue={barColorValue}
+                        chartKey="product"
+                        chartValue="value"
+                        axisRotation="270"
+                    />
                 )}
             </FullScreen>
+
+            <div
+                className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
+                                             text-primary-blue -mx-4 px-4">
+                <div className="flex items-center">
+                    <div className="flex items-center mr-6">
+                        <DownloadIcon className="mr-2 inline-block" />
+                        <span>Download</span>
+                    </div>
+                    <span className="flex items-center">
+                        <ShareIcon className="mr-2 inline-block" />{' '}
+                        <span className="cursor-pointer">Share</span>
+                    </span>
+                </div>
+
+                <div>
+                    <span className="flex items-center">
+                        <button onClick={handle.enter}>
+                            <span className="cursor-pointer">
+                                View full screen
+                            </span>
+                            <FullViewIcon className="ml-2 inline-block" />
+                        </button>
+                    </span>
+                </div>
+            </div>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import SankeyChart from '../../Charts/SankeyChart/SankeyChart'
 import Loader from '../../Loader/Loader'
 import useTrans from '../../../hooks/useTrans'
+import { ReactComponent as DownloadIcon } from '../../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../../assets/img/icons/ic_fullscreen.svg'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
@@ -103,17 +104,21 @@ const CountrySuppliers = (props) => {
             <div
                 className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
                                              text-primary-blue -mx-4 px-6 mt-8">
-                <div className="flex">
+                <div className="flex items-center">
+                    <div className="flex items-center mr-6">
+                        <DownloadIcon className="mr-2 inline-block" />
+                        <span>{trans('Download')}</span>
+                    </div>
                     <span className="flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Share</span>
+                        <span className="cursor-pointer">{trans('Share')}</span>
                     </span>
                 </div>
                 <div>
                     <span className="flex items-center">
                         <button onClick={handle.enter}>
                             <span className="cursor-pointer">
-                                View full screen
+                                {trans('View full screen')}
                             </span>
                             <FullViewIcon className="ml-2 inline-block" />
                         </button>

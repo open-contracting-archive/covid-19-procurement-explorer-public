@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Loader from '../../../../components/Loader/Loader'
 import {
     AverageBidsPerContract,
@@ -15,8 +15,7 @@ import {
     CountrySuppliers,
     ProductDistribution,
     ContractsCorrelation,
-    ContractsRedFlags,
-    Concentration
+    ContractsRedFlags
 } from '../../../../components/Visualizations'
 import CountryPartnerSlider from '../../../../components/CountryPartnerSlider/CountryPartnerSlider'
 
@@ -89,19 +88,27 @@ function CountryData(props) {
                             />
                         </div>
 
-                        <div className="w-full lg:w-1/2 px-2 mb-4">
+                        <div className="w-full lg:w-1/2 px-2 mb-4 relative">
                             <TopSuppliers
                                 label="Top Suppliers"
                                 params={{ country: countryCode }}
-                                viewLink={`/country/${countrySlug}/suppliers`}
                             />
+                            <Link
+                                to={`/country/${countrySlug}/suppliers`}
+                                className="absolute -mt-12 text-primary-blue pt-3 pl-6 pb-6 inline-block">
+                                View All
+                            </Link>
                         </div>
-                        <div className="w-full lg:w-1/2 px-2 mb-4">
+                        <div className="w-full lg:w-1/2 px-2 mb-4 relative">
                             <TopBuyers
                                 label="Top Buyers"
                                 params={{ country: countryCode }}
-                                viewLink={`/country/${countrySlug}/buyers`}
                             />
+                            <Link
+                                to={`/country/${countrySlug}/buyers`}
+                                className="absolute -mt-12 text-primary-blue pt-3 pl-6 pb-6 inline-block">
+                                View All
+                            </Link>
                         </div>
                         {/*<div className="w-full lg:w-1/2 px-2 mb-4">*/}
                         {/*    <Concentration*/}
