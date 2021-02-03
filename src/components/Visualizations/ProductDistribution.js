@@ -30,7 +30,7 @@ const ProductDistribution = (props) => {
             setOriginalData(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country, params?.buyer, params?.supplier])
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
@@ -38,8 +38,8 @@ const ProductDistribution = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                    ? item.amount_local
-                    : item.amount_usd
+                        ? item.amount_local
+                        : item.amount_usd
             })
             let chartDataFormatted = originalData
                 .sort((a, b) => {

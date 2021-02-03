@@ -49,7 +49,7 @@ const TenderTable = (props) => {
         setCurrentPage(get(page, 'selected') || 0)
         ContractService.ContractList({
             ...selectedFilters,
-            ordering: sorting.direction + sorting.column,
+            order: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
         })
@@ -138,7 +138,7 @@ const TenderTable = (props) => {
                                         </th>
                                         {!hasCountry() && (
                                             <th style={{ width: '10%' }}>
-                                                    <span className="flex items-center">
+                                                    <span className="flex items-center cursor-pointer" onClick={() => appendSort('country')}>
                                                         {trans('Country')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
@@ -146,7 +146,7 @@ const TenderTable = (props) => {
                                         )}
                                         {!hasBuyer() && (
                                             <th style={{ width: '15%' }}>
-                                                    <span className="flex items-center">
+                                                    <span className="flex items-center cursor-pointer" onClick={() => appendSort('buyer')}>
                                                         {trans('Buyer')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
@@ -154,7 +154,7 @@ const TenderTable = (props) => {
                                         )}
                                         {!hasSupplier() && (
                                             <th style={{ width: '15%' }}>
-                                                    <span className="flex items-center">
+                                                    <span className="flex items-center cursor-pointer" onClick={() => appendSort('supplier')}>
                                                         {trans('Supplier')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
@@ -175,13 +175,13 @@ const TenderTable = (props) => {
                                             </th>
                                         )}
                                         <th style={{ width: '10%' }}>
-                                                <span className="flex items-center">
+                                                <span className="flex items-center cursor-pointer" onClick={() => appendSort('contract_date')}>
                                                     {trans('Date')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
                                         </th>
                                         <th style={{ width: '10%' }}>
-                                                <span className="flex items-center">
+                                                <span className="flex items-center" onClick={() => appendSort('contract_value_usd')}>
                                                     {trans('Value (USD)')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>

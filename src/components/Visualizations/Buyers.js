@@ -20,7 +20,7 @@ const Buyers = (props) => {
             setBuyerSummary(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country])
 
     // ===========================================================================
     // Handlers and functions

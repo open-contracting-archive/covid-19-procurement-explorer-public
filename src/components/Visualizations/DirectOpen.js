@@ -30,7 +30,7 @@ const DirectOpen = (props) => {
             setDirectOpen(response)
             setLoading(false)
         })
-    }, [params])
+    }, [params?.country, params?.buyer, params?.supplier])
 
     // ===========================================================================
     // Handlers and functions
@@ -41,7 +41,7 @@ const DirectOpen = (props) => {
         directOpen.map((data) => {
             return {
                 value: data.procedure,
-                number: currency == 'usd' ? data.amount_usd : data.amount_local
+                number: currency === 'usd' ? data.amount_usd : data.amount_local
             }
         })
 

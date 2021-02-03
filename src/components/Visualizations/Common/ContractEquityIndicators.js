@@ -95,9 +95,9 @@ const ContractEquityIndicators = (props) => {
 
     function handleEquitySelection(equityId) {
         setSelectedEquityIndicators((previous) => {
-            let items = previous
-            if (items.includes(equityId)) {
-                items.splice(items.indexOf(equityId))
+            let items = [...previous]
+            if (items.includes(+equityId)) {
+                items.splice(items.indexOf(+equityId),1)
             } else {
                 items[items.length] = parseInt(equityId)
             }

@@ -7,7 +7,7 @@ import { setCurrentCountry } from "../../store/reducers/general/action"
 const CountrySelector = () => {
     const countries = useSelector((state) => state.general.countries)
     let { countrySlug } = useParams()
-    let { tabSlug } = useParams()
+    let { tabSlug = 'data' } = useParams()
     const history = useHistory()
     const dispatch = useDispatch()
 
