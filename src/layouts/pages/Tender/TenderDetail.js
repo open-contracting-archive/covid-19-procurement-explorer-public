@@ -40,7 +40,9 @@ const TenderDetail = () => {
                     </span>{' '}
                     /
                 </div>
-                <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">
+                <h2
+                    className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark truncate-text"
+                    title={tenderInfo && tenderInfo.contract_title}>
                     {tenderInfo && tenderInfo.contract_title}
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">

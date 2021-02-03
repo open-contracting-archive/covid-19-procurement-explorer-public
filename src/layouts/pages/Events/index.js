@@ -3,11 +3,13 @@ import { useHistory, Link, useParams } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import { formatDate, formatTime } from '../../../helpers/date'
+import useTrans from '../../../hooks/useTrans'
 
 function Events() {
     const [eventsData, setEventsData] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
+    const { trans } = useTrans()
     window.scrollTo(0, 0)
     const previousPage = () => {
         history.goBack()
@@ -35,7 +37,7 @@ function Events() {
                     <h2 className="text-2xl mb-10">Events</h2>
                     <div className="text-left">
                         <p className="text-xl blue-50 pb-10">
-                            Upcoming Events
+                            {trans('Upcoming Events')}
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4 card">
@@ -81,7 +83,7 @@ function Events() {
                 <div className="container mx-auto">
                     <div className="text-left">
                         <p className="text-xl blue-50 pb-6">
-                            Past Events
+                            {trans('Past Events')}
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
@@ -123,7 +125,7 @@ function Events() {
                         })}
                     </div>
                     {eventsData.length === 0 ? (
-                        <p> There are no Past Events Records</p>
+                        <p>{trans('There are no Past Events Records')}</p>
                     ) : (
                         ''
                     )}

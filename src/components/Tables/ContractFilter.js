@@ -202,7 +202,7 @@ const ContractFilter = (props) => {
             )}
             <div className="w-40">
                 <p className="uppercase text-xs opacity-50 leading-none">
-                    {trans('Data range')}
+                    {trans('Date range')}
                 </p>
                 <div ref={ref}>
                     <div

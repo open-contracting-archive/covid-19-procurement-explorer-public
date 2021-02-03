@@ -10,8 +10,8 @@ import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import TableLoader from '../Loader/TableLoader'
 import 'react-datepicker/dist/react-datepicker.css'
-import { hasValidProperty } from "../../helpers/general"
-import ContractFilter from "./ContractFilter"
+import { hasValidProperty } from '../../helpers/general'
+import ContractFilter from './ContractFilter'
 
 const TenderTable = (props) => {
     // ===========================================================================
@@ -20,7 +20,9 @@ const TenderTable = (props) => {
     const { params } = props
     const [tenderList, setTenderList] = useState([])
     const [loading, setLoading] = useState(true)
-    const [selectedFilters, setSelectedFilters] = useState(() => identity(pickBy(params)))
+    const [selectedFilters, setSelectedFilters] = useState(() =>
+        identity(pickBy(params))
+    )
     const [limit, setLimit] = useState(20)
     const [sorting, setSorting] = useState(() => {
         return { column: 'contract_title', direction: '' }
@@ -129,143 +131,205 @@ const TenderTable = (props) => {
                             <div className="custom-scrollbar table-scroll">
                                 <table className="table">
                                     <thead>
-                                    <tr>
-                                        <th style={{ width: '25%' }}>
-                                                <span className="flex items-center cursor-pointer" onClick={() => appendSort('contract_title')}>
+                                        <tr>
+                                            <th style={{ width: '25%' }}>
+                                                <span
+                                                    className="flex items-center cursor-pointer"
+                                                    onClick={() =>
+                                                        appendSort(
+                                                            'contract_title'
+                                                        )
+                                                    }>
                                                     {trans('Contract Title')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                        </th>
-                                        {!hasCountry() && (
-                                            <th style={{ width: '10%' }}>
-                                                    <span className="flex items-center cursor-pointer" onClick={() => appendSort('country')}>
+                                            </th>
+                                            {!hasCountry() && (
+                                                <th style={{ width: '10%' }}>
+                                                    <span
+                                                        className="flex items-center cursor-pointer"
+                                                        onClick={() =>
+                                                            appendSort(
+                                                                'country'
+                                                            )
+                                                        }>
                                                         {trans('Country')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                            </th>
-                                        )}
-                                        {!hasBuyer() && (
-                                            <th style={{ width: '15%' }}>
-                                                    <span className="flex items-center cursor-pointer" onClick={() => appendSort('buyer')}>
+                                                </th>
+                                            )}
+                                            {!hasBuyer() && (
+                                                <th style={{ width: '15%' }}>
+                                                    <span
+                                                        className="flex items-center cursor-pointer"
+                                                        onClick={() =>
+                                                            appendSort('buyer')
+                                                        }>
                                                         {trans('Buyer')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                            </th>
-                                        )}
-                                        {!hasSupplier() && (
-                                            <th style={{ width: '15%' }}>
-                                                    <span className="flex items-center cursor-pointer" onClick={() => appendSort('supplier')}>
+                                                </th>
+                                            )}
+                                            {!hasSupplier() && (
+                                                <th style={{ width: '15%' }}>
+                                                    <span
+                                                        className="flex items-center cursor-pointer"
+                                                        onClick={() =>
+                                                            appendSort(
+                                                                'supplier'
+                                                            )
+                                                        }>
                                                         {trans('Supplier')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                            </th>
-                                        )}
-                                        <th style={{ width: '10%' }}>
-                                                <span className="flex items-center cursor-pointer" onClick={() => appendSort('procurement_procedure')}>
+                                                </th>
+                                            )}
+                                            <th style={{ width: '10%' }}>
+                                                <span
+                                                    className="flex items-center cursor-pointer"
+                                                    onClick={() =>
+                                                        appendSort(
+                                                            'procurement_procedure'
+                                                        )
+                                                    }>
                                                     {trans('Method')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                        </th>
-                                        {!hasProduct() && (
-                                            <th style={{ width: '15%' }}>
-                                                <span className="flex items-center">
-                                                    {trans('Product Category')}{' '}
-                                                    <SortIcon className="ml-1" />
-                                                </span>
                                             </th>
-                                        )}
-                                        <th style={{ width: '10%' }}>
-                                                <span className="flex items-center cursor-pointer" onClick={() => appendSort('contract_date')}>
+                                            {!hasProduct() && (
+                                                <th style={{ width: '15%' }}>
+                                                    <span className="flex items-center">
+                                                        {trans(
+                                                            'Product Category'
+                                                        )}{' '}
+                                                        <SortIcon className="ml-1" />
+                                                    </span>
+                                                </th>
+                                            )}
+                                            <th style={{ width: '10%' }}>
+                                                <span
+                                                    className="flex items-center cursor-pointer"
+                                                    onClick={() =>
+                                                        appendSort(
+                                                            'contract_date'
+                                                        )
+                                                    }>
                                                     {trans('Date')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
-                                                <span className="flex items-center" onClick={() => appendSort('contract_value_usd')}>
+                                            </th>
+                                            <th style={{ width: '10%' }}>
+                                                <span
+                                                    className="flex items-center"
+                                                    onClick={() =>
+                                                        appendSort(
+                                                            'contract_value_usd'
+                                                        )
+                                                    }>
                                                     {trans('Value (USD)')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                        </th>
-                                        <th style={{ width: '3%' }} />
-                                    </tr>
+                                            </th>
+                                            <th style={{ width: '3%' }} />
+                                        </tr>
                                     </thead>
 
                                     <tbody>
-                                    {tenderList &&
-                                    tenderList.map((tender, index) => {
-                                        return (
-                                            <tr
-                                                key={index}
-                                                onClick={() =>
-                                                    showDetail(
-                                                        tender.id
-                                                    )
-                                                }
-                                                className={tableRowClass(
-                                                    tender.red_flag
-                                                )}>
-                                                <td>
-                                                    {
-                                                        tender.contract_title
-                                                    }
-                                                </td>
-                                                {!hasCountry() && (
-                                                    <td>
-                                                        {
-                                                            tender.country_name
+                                        {tenderList &&
+                                            tenderList.map((tender, index) => {
+                                                return (
+                                                    <tr
+                                                        key={index}
+                                                        onClick={() =>
+                                                            showDetail(
+                                                                tender.id
+                                                            )
                                                         }
-                                                    </td>
-                                                )}
-                                                {!hasBuyer() && (
-                                                    <td>
-                                                        {get(
-                                                            tender,
-                                                            'buyer.buyer_name'
+                                                        className={tableRowClass(
+                                                            tender.red_flag
+                                                        )}>
+                                                        <td>
+                                                            <p
+                                                                className="truncate-text"
+                                                                title={
+                                                                    tender.contract_title
+                                                                }>
+                                                                {
+                                                                    tender.contract_title
+                                                                }
+                                                            </p>
+                                                        </td>
+                                                        {!hasCountry() && (
+                                                            <td>
+                                                                {
+                                                                    tender.country_name
+                                                                }
+                                                            </td>
                                                         )}
-                                                    </td>
-                                                )}
-                                                {!hasSupplier() && (
-                                                    <td>
-                                                        {get(
-                                                            tender,
-                                                            'supplier.supplier_name'
+                                                        {!hasBuyer() && (
+                                                            <td>
+                                                                <p
+                                                                    className="truncate-text"
+                                                                    title={get(
+                                                                        tender,
+                                                                        'buyer.buyer_name'
+                                                                    )}>
+                                                                    {get(
+                                                                        tender,
+                                                                        'buyer.buyer_name'
+                                                                    )}
+                                                                </p>
+                                                            </td>
                                                         )}
-                                                    </td>
-                                                )}
-                                                <td className="capitalize">
-                                                    {
-                                                        tender.procurement_procedure
-                                                    }
-                                                </td>
-                                                {!hasProduct() && (
-                                                    <td>
-                                                        {get(
-                                                            tender,
-                                                            'product_category'
+                                                        {!hasSupplier() && (
+                                                            <td>
+                                                                <p
+                                                                    className="truncate-text"
+                                                                    title={get(
+                                                                        tender,
+                                                                        'supplier.supplier_name'
+                                                                    )}>
+                                                                    {get(
+                                                                        tender,
+                                                                        'supplier.supplier_name'
+                                                                    )}
+                                                                </p>
+                                                            </td>
                                                         )}
-                                                    </td>
-                                                )}
-                                                <td>
-                                                    {formatDate(
-                                                        tender.contract_date
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {tender.contract_value_usd &&
-                                                    tender.contract_value_usd.toLocaleString(
-                                                        'en'
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {tender.red_flag && (
-                                                        <span className="mr-4">
-                                                            <FlagIcon />
-                                                        </span>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
+                                                        <td className="capitalize">
+                                                            {
+                                                                tender.procurement_procedure
+                                                            }
+                                                        </td>
+                                                        {!hasProduct() && (
+                                                            <td>
+                                                                {get(
+                                                                    tender,
+                                                                    'product_category'
+                                                                )}
+                                                            </td>
+                                                        )}
+                                                        <td>
+                                                            {formatDate(
+                                                                tender.contract_date
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {tender.contract_value_usd &&
+                                                                tender.contract_value_usd.toLocaleString(
+                                                                    'en'
+                                                                )}
+                                                        </td>
+                                                        <td>
+                                                            {tender.red_flag && (
+                                                                <span className="mr-4">
+                                                                    <FlagIcon />
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })}
                                     </tbody>
                                 </table>
 

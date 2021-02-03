@@ -8,8 +8,8 @@ import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import TableLoader from '../Loader/TableLoader'
-import useContractFilters from "../../hooks/useContractFilters"
-import { hasValidProperty } from "../../helpers/general"
+import useContractFilters from '../../hooks/useContractFilters'
+import { hasValidProperty } from '../../helpers/general'
 
 const SupplierTable = (props) => {
     // ===========================================================================
@@ -26,7 +26,11 @@ const SupplierTable = (props) => {
     const [totalItems, setTotalItems] = useState()
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
-    const { countrySelectList, productSelectList, valueRanges } = useContractFilters()
+    const {
+        countrySelectList,
+        productSelectList,
+        valueRanges
+    } = useContractFilters()
     const history = useHistory()
     const { trans } = useTrans()
 
@@ -164,96 +168,106 @@ const SupplierTable = (props) => {
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
-                        <tr>
-                            <th style={{ width: '20%' }}>
+                            <tr>
+                                <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Supplier{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         Country{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '6%' }}>
+                                </th>
+                                <th style={{ width: '6%' }}>
                                     <span className="flex items-center">
                                         # of contracts{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '6%' }}>
+                                </th>
+                                <th style={{ width: '6%' }}>
                                     <span className="flex items-center">
                                         # of buyers{' '}
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         product categories
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th style={{ width: '8%' }}>
+                                </th>
+                                <th style={{ width: '8%' }}>
                                     <span className="flex items-center">
                                         % red flags
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {suppliersList &&
-                        suppliersList.map((supplier, index) => {
-                            return (
-                                <tr
-                                    key={index}
-                                    onClick={() =>
-                                        showDetail(supplier.supplier_id)
-                                    }
-                                    className={tableRowClass(
-                                        supplier.red_flag
-                                    )}>
-                                    <td>
-                                        {get(supplier, 'supplier_name')}
-                                    </td>
-                                    <td>
-                                        {get(supplier, 'country_name')}
-                                    </td>
-                                    <td>
-                                        {get(supplier, 'tender_count')}
-                                    </td>
-                                    <td>
-                                        {get(supplier, 'buyer_count')}
-                                    </td>
-                                    <td>
-                                        {get(
-                                            supplier,
-                                            'product_category_count'
-                                        )}
-                                    </td>
-                                    <td>
-                                        {supplier.amount_usd &&
-                                        supplier.amount_usd.toLocaleString(
-                                            'en'
-                                        )}
-                                    </td>
-                                    <td>
-                                        {get(
-                                            supplier,
-                                            'average_red_flag'
-                                        )}
-                                    </td>
-                                </tr>
-                            )
-                        })}
+                            {suppliersList &&
+                                suppliersList.map((supplier, index) => {
+                                    return (
+                                        <tr
+                                            key={index}
+                                            onClick={() =>
+                                                showDetail(supplier.supplier_id)
+                                            }
+                                            className={tableRowClass(
+                                                supplier.red_flag
+                                            )}>
+                                            <td>
+                                                <p
+                                                    className="truncate-text"
+                                                    title={get(
+                                                        supplier,
+                                                        'supplier_name'
+                                                    )}>
+                                                    {get(
+                                                        supplier,
+                                                        'supplier_name'
+                                                    )}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                {get(supplier, 'country_name')}
+                                            </td>
+                                            <td>
+                                                {get(supplier, 'tender_count')}
+                                            </td>
+                                            <td>
+                                                {get(supplier, 'buyer_count')}
+                                            </td>
+                                            <td>
+                                                {get(
+                                                    supplier,
+                                                    'product_category_count'
+                                                )}
+                                            </td>
+                                            <td>
+                                                {supplier.amount_usd &&
+                                                    supplier.amount_usd.toLocaleString(
+                                                        'en'
+                                                    )}
+                                            </td>
+                                            <td>
+                                                {get(
+                                                    supplier,
+                                                    'average_red_flag'
+                                                )}
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
                         </tbody>
                     </table>
                     {!suppliersList.length && (

@@ -85,7 +85,7 @@ const Blogs = () => {
                         )
                     })}
                 {blogsData.length === 0 ? (
-                    <p> There are no Blogs Records</p>
+                    <p>{trans('There are no Blogs Records')}</p>
                 ) : (
                     ''
                 )}

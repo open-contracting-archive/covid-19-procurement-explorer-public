@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import FooterImage from '../../assets/img/icons/cc-img.png'
-import useTrans from "../../hooks/useTrans"
+import useTrans from '../../hooks/useTrans'
 
 const Footer = () => {
     const { trans } = useTrans()
@@ -26,29 +26,37 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col-span-6 md:col-span-2">
-                        <h4 className="mb-2">Explore</h4>
+                        <h4 className="mb-2">{trans('Explore')}</h4>
                         <ul>
                             <li className="opacity-50 mb-1">
-                                <Link to="/global-overview/data">Data</Link>
-                            </li>
-                            <li className="opacity-50 mb-1">Countries</li>
-                            <li className="opacity-50 mb-1">
-                                <Link to="/global-overview/contracts">Tenders</Link>
+                                <Link to="/global-overview/data">
+                                    {trans('Data')}
+                                </Link>
                             </li>
                             <li className="opacity-50 mb-1">
-                                <Link to="/global-overview/suppliers">Suppliers</Link>
+                                {trans('Countries')}
+                            </li>
+                            <li className="opacity-50 mb-1">
+                                <Link to="/global-overview/contracts">
+                                    {trans('Tenders')}
+                                </Link>
+                            </li>
+                            <li className="opacity-50 mb-1">
+                                <Link to="/global-overview/suppliers">
+                                    {trans('Suppliers')}
+                                </Link>
                             </li>
                             <li className="opacity-50 ">
-                                <Link to="/resources">Resources</Link>
+                                <Link to="/resources">
+                                    {trans('Resources')}
+                                </Link>
                             </li>
                         </ul>
                     </div>
                     <div className="col-span-6 md:col-span-2">
                         <ul className="mt-5">
                             <li className="opacity-50 mb-1">
-                                <Link to="/pages/about">
-                                    {trans('About')}
-                                </Link>
+                                <Link to="/pages/about">{trans('About')}</Link>
                             </li>
                             <li className="opacity-50 mb-1">
                                 <Link to="/pages/terms-of-use">
@@ -63,7 +71,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-span-12 md:col-span-4">
-                        <p className="mb-3">Subscribe and get weekly updates</p>
+                        <p className="mb-3">{trans('Subscribe and get weekly updates')}</p>
                         <form>
                             <div className="relative flex items-center">
                                 <input
@@ -72,7 +80,7 @@ const Footer = () => {
                                     className="px-3 py-4 w-full rounded-sm  text-primary-dark"
                                 />
                                 <button className=" subscribe absolute right-0 bg-blue-20 h-full p-4">
-                                    Subscribe
+                                    {trans('Subscribe')}
                                 </button>
                             </div>
                         </form>

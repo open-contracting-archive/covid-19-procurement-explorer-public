@@ -62,7 +62,7 @@ const Home = () => {
                 </div>
                 <div className="text-white text-center mt-12 mb-40">
                     <MouseScroll className="m-auto" />
-                    <p className="text-sm mt-3">Scroll down for more</p>
+                    <p className="text-sm mt-3">{trans('Scroll down for more')}</p>
                 </div>
                 <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
             </section>
