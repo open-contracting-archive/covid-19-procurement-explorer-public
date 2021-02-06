@@ -70,7 +70,7 @@ const GlobalSuppliers = (props) => {
         <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={handle}>
                 <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {label}
+                    {trans(label)}
                 </h3>
 
                 <Tabs>
@@ -115,18 +115,18 @@ const GlobalSuppliers = (props) => {
                 <div className="flex items-center">
                     <div className="flex items-center mr-6">
                         <DownloadIcon className="mr-2 inline-block" />
-                        <span>Download</span>
+                        <span>{trans('Download')}</span>
                     </div>
                     <span className="flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Share</span>
+                        <span className="cursor-pointer">{trans('Share')}</span>
                     </span>
                 </div>
                 <div>
                     <span className="flex items-center">
                         <button onClick={handle.enter}>
                             <span className="cursor-pointer">
-                                View full screen
+                                {trans('View full screen')}
                             </span>
                             <FullViewIcon className="ml-2 inline-block" />
                         </button>

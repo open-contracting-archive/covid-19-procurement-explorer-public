@@ -10,7 +10,8 @@ const SimpleBarChart = ({
     height,
     chartKey,
     chartValue,
-    axisRotation
+    axisRotation,
+    className
 }) => {
     const barchartDiv = useRef(null)
 
@@ -72,6 +73,7 @@ const SimpleBarChart = ({
     return (
         <div
             ref={barchartDiv}
+            className={className}
             style={{ width: '100%', height: `${height || ''}` }}
         />
     )

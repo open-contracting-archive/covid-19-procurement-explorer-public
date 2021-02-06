@@ -94,7 +94,7 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
         // Configure series
         polygonTemplate.tooltipHTML =
             contractType === 'value'
-                ? '<b>{name}</b> <br> <b>Total Spending: {value}$</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+                ? '<b>{name}</b> <br> <b>Total Spending: ${value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
                 : '<b>{name}</b> <br> <b>Total Contracts: {value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
 
         // Set up tooltips
@@ -137,11 +137,7 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
         <div className="map-wrapper bg-white rounded-md h-full mt-5">
             <div
                 ref={globalMapchartDiv}
-                style={
-                    innerMap
-                        ? { width: '100%', height: '430px', minHeight: '400px' }
-                        : { width: '100%', height: '500px' }
-                }
+                className="h-500"
             />
         </div>
     )

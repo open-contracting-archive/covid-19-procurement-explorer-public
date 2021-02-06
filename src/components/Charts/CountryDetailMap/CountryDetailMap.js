@@ -87,7 +87,7 @@ const CountryDetailMap = ({ data, countryCode }) => {
         <div className="map-wrapper bg-white rounded-md h-full">
             <div
                 ref={countryMapChartDiv}
-                style={{ width: '100%', height: '430px', minHeight: '400px' }}
+                className="country-map-section"
             />
         </div>
     )

@@ -66,7 +66,7 @@ const ProductsTimeline = ({ label, params }) => {
             <FullScreen handle={handle}>
                 <div className="flex items-center justify-between">
                     <h3 className="uppercase font-bold  text-primary-dark">
-                        {label}
+                        {trans(label)}
                     </h3>
                     <div className="flex justify-end world-map-chart mb-4">
                         <ul className="contract-switch flex">

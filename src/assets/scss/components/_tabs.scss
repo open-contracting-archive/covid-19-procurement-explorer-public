@@ -54,7 +54,8 @@
             margin-bottom: 15px;
             opacity: 0.5;
 
-            &:hover, &:focus {
+            &:hover,
+            &:focus {
                 opacity: 1;
                 > * {
                     color: #1fbbec;
@@ -94,6 +95,29 @@
 
         &.active {
             border-bottom-color: #1fbbec;
+        }
+    }
+}
+
+.simple-tab {
+    .react-tabs {
+        @apply mt-0;
+
+        .react-tabs__tab {
+            background: transparent;
+            color: #293e45;
+            font-size: 16px;
+            padding: 0 0 4px;
+            border-bottom: 4px solid transparent;
+            margin-right: 10px;
+
+            &:last-child {
+                @apply mr-0;
+            }
+        }
+
+        .react-tabs__tab--selected {
+            @apply border-primary-blue;
         }
     }
 }

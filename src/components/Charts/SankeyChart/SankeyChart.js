@@ -86,7 +86,7 @@ const SankeyChart = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={sankeyChart} style={{ width: '100%', height: '400px' }} />
+    return <div ref={sankeyChart} className="h-400" />
 }
 
 export default SankeyChart

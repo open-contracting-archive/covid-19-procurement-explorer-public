@@ -121,12 +121,11 @@ const StackedChart = ({ data }) => {
 
         return () => {
             chart.dispose()
-
             chart = null
         }
     }, [data])
 
-    return <div ref={stackedChart} style={{ width: '100%', height: '500px' }} />
+    return <div ref={stackedChart} className="h-500" />
 }
 
 export default StackedChart

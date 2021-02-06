@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationServices from '../../../../services/visualizationServices'
-import CountryMap from '../../../../components/Charts/CountryMap/CountryMap'
 import CountryDetailMap from '../../../../components/Charts/CountryDetailMap/CountryDetailMap'
 import useTrans from '../../../../hooks/useTrans'
 import Loader from '../../../../components/Loader/Loader'
@@ -63,7 +62,6 @@ const CountryMapElement = (props) => {
 
                     <div className="h-full">
                         {loading ? (<Loader />) : (
-                            // <CountryMap data={mapData} countryCode={countryCode} />
                             <CountryDetailMap data={mapData} countryCode={props.countryCode} />
                         )}
                     </div>

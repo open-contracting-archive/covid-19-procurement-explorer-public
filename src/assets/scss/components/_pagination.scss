@@ -58,3 +58,31 @@
         }
     }
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .page-item {
+        margin-right: 12px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &.active {
+            background: #1fbbec;
+        }
+    }
+
+    .page-link {
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+}

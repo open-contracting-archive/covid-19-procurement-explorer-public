@@ -78,7 +78,7 @@ const DirectOpen = (props) => {
                                 <div>
                                     <h3 className="mr-3">
                                         <span className="text-sm block">
-                                            Open
+                                            {trans('Open')}
                                         </span>
                                         <span className="text-xl font-bold mr-2">
                                             {formatNumber(
@@ -108,7 +108,7 @@ const DirectOpen = (props) => {
                                 <div>
                                     <h3 className="mr-3">
                                         <span className="text-sm block">
-                                            Open
+                                            {trans('Open')}
                                         </span>
                                         <span className="text-xl font-bold mr-2">
                                             {formatNumber(

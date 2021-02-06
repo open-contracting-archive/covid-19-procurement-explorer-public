@@ -248,7 +248,7 @@ const TenderTable = (props) => {
                                                         className={tableRowClass(
                                                             tender.red_flag
                                                         )}>
-                                                        <td>
+                                                        <td className="hover:text-primary-blue">
                                                             <p
                                                                 className="truncate-text"
                                                                 title={

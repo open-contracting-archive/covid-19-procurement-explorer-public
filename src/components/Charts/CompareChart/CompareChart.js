@@ -118,7 +118,7 @@ const CompareChart = ({ chartData, equities }) => {
         }
     }, [chartData, equities])
 
-    return <div className="h-full w-full" ref={compareChart} />
+    return <div className="h-full w-full compare-chart-section" ref={compareChart} />
 }
 
 export default CompareChart

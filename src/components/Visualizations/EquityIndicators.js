@@ -76,7 +76,7 @@ const EquityIndicators = (props) => {
                                 <div>
                                     <h3 className="mr-3">
                                         <span className="text-sm block">
-                                            Assigned
+                                            {trans('Assigned')}
                                         </span>
                                         <span className="text-xl font-bold mr-2">
                                             {formatNumber(
@@ -104,7 +104,7 @@ const EquityIndicators = (props) => {
                                 <div>
                                     <h3 className="mr-3">
                                         <span className="text-sm block">
-                                            Assigned
+                                            {trans('Assigned')}
                                         </span>
                                         <span className="text-xl font-bold mr-2">
                                             {formatNumber(

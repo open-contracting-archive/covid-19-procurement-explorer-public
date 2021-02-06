@@ -1,7 +1,6 @@
 import React from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 import { setCurrentCountry } from "../../store/reducers/general/action"
 
 const CountrySelector = () => {
@@ -19,7 +18,6 @@ const CountrySelector = () => {
         )
 
         const path = countrySlug === 'global' ? `/global-overview/data` : `/country/${countrySlug}/${tabSlug}`
-        // window.location.href = path //todo: remove this
         history.push(path)
     }
     return (

@@ -5,6 +5,7 @@ import useTrans from '../../hooks/useTrans'
 import VisualizationServices from '../../services/visualizationServices'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
+import Visualization from "../../constants/Visualization"
 
 const TotalContracts = (props) => {
     const barColorValue = '#ABBABF'
@@ -12,7 +13,7 @@ const TotalContracts = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Total Contracts', params } = props
+    const { label = 'Total Contracts', params, modalHandler } = props
     const [loading, setLoading] = useState(true)
     const [totalContracts, setTotalContracts] = useState()
     const { trans } = useTrans()
@@ -88,6 +89,10 @@ const TotalContracts = (props) => {
                         />
                     </div>
                 </div>
+            )}
+            {modalHandler && (
+                <span className="cursor-pointer"
+                      onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>View more</span>
             )}
         </div>
     )

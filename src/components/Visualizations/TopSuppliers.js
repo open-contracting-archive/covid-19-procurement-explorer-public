@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationServices from '../../services/visualizationServices'
-import { Link } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
@@ -70,7 +69,7 @@ const TopSuppliers = (props) => {
 
     return (
         <div className="bg-white rounded h-full">
-            <div className="bg-white rounded p-6 pb-0">
+            <div className="bg-white rounded p-6 pb-12">
                 <div className="flex items-center justify-between flex-wrap">
                     <h3 className="uppercase font-bold  text-primary-dark mb-6">
                         {trans(label)}
@@ -115,11 +114,6 @@ const TopSuppliers = (props) => {
                     </div>
                 )}
             </div>
-            <Link
-                to={viewLink}
-                className="text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                View All
-            </Link>
         </div>
     )
 }

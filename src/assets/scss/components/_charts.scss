@@ -1,0 +1,34 @@
+.race-map-section {
+    width: 100%;
+    height: 750px;
+}
+
+.h-500 {
+    width: 100%;
+    height: 500px;
+}
+
+.h-400 {
+    width: 100%;
+    height: 400px;
+}
+
+.country-map-section {
+    width: 100%;
+    height: 430px;
+    min-height: 400px;
+}
+
+.fullscreen-enabled {
+    background: #fff;
+    padding: 50px;
+
+    .race-map-section,
+    .country-map-section,
+    .h-400,
+    .h-500,
+    .chart-full {
+        width: 100%;
+        height: calc(100vh - 120px) !important;
+    }
+}

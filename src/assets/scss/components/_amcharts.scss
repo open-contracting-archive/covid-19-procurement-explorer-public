@@ -1,0 +1,20 @@
+.amcharts-amexport-item {
+    width: auto !important;
+    padding: 4px 8px !important;
+    opacity: 1 !important;
+    background-color: #fff !important;
+    border: 1px solid rgb(69, 190, 236);
+    color: rgb(69, 190, 236) !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+}
+
+.amcharts-amexport-top .amcharts-amexport-item > .amcharts-amexport-menu {
+    top: -3px !important;
+    left: 2px;
+}
+
+.amcharts-amexport-label {
+    padding: 0 4px !important;
+    cursor: pointer !important;
+}

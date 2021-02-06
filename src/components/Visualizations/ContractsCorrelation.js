@@ -114,11 +114,11 @@ const ContractsCorrelation = (props) => {
                 <div className="flex items-center">
                     <div className="flex items-center mr-6">
                         <DownloadIcon className="mr-2 inline-block" />
-                        <span>Download</span>
+                        <span>{trans('Download')}</span>
                     </div>
                     <span className="flex items-center">
                         <ShareIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Share</span>
+                        <span className="cursor-pointer">{trans('Share')}</span>
                     </span>
                 </div>
 
@@ -126,7 +126,7 @@ const ContractsCorrelation = (props) => {
                     <span className="flex items-center">
                         <button onClick={handle.enter}>
                             <span className="cursor-pointer">
-                                View full screen
+                                {trans('View full screen')}
                             </span>
                             <FullViewIcon className="ml-2 inline-block" />
                         </button>

@@ -35,6 +35,7 @@ import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
 import GeneralService from './services/GeneralService'
 import equities from './store/static-data/equities.json'
 import ProductProfile from './layouts/pages/Product/ProductProfile'
+import { ModalProvider } from 'react-simple-hook-modal'
 
 if (process.env.NODE_ENV === 'production') {
     ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
@@ -77,64 +78,77 @@ function App() {
     }, [dispatch])
 
     return (
-        <BrowserRouter>
-            <Fragment>
-                <Header />
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route
-                        path="/global-overview/products/:productId"
-                        component={ProductProfile}
-                    />
-                    <Route
-                        path="/global-overview/:tabSlug"
-                        component={GlobalOverview}
-                    />
-                    <Route
-                        path="/global-overview/"
-                        component={GlobalOverview}
-                    />
+        <ModalProvider>
+            <BrowserRouter>
+                <Fragment>
+                    <Header />
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route
+                            path="/global-overview/products/:productId"
+                            component={ProductProfile}
+                        />
+                        <Route
+                            path="/global-overview/:tabSlug"
+                            component={GlobalOverview}
+                        />
+                        <Route
+                            path="/global-overview/"
+                            component={GlobalOverview}
+                        />
 
-                    <Route
-                        path="/country/:countrySlug/products/:productId"
-                        component={ProductProfile}
-                    />
-                    <Route
-                        path="/country/:countrySlug/:tabSlug"
-                        component={CountryProfile}
-                    />
-                    <Route
-                        path="/country/:countrySlug/"
-                        component={CountryProfile}
-                    />
+                        <Route
+                            path="/country/:countrySlug/products/:productId"
+                            component={ProductProfile}
+                        />
+                        <Route
+                            path="/country/:countrySlug/:tabSlug"
+                            component={CountryProfile}
+                        />
+                        <Route
+                            path="/country/:countrySlug/"
+                            component={CountryProfile}
+                        />
 
-                    <Route exact path="/news" component={News} />
-                    <Route exact path="/news/:id" component={NewsDetail} />
-                    <Route exact path="/blogs" component={Blogs} />
-                    <Route exact path="/blogs/:id" component={BlogsDetail} />
-                    <Route exact path="/events" component={Events} />
-                    <Route exact path="/events/:id" component={EventsDetail} />
-                    <Route exact path="/resources" component={Resources} />
-                    <Route
-                        exact
-                        path="/resources/:id"
-                        component={ResourcesDetail}
-                    />
-                    <Route path="/library" component={Library} />
-                    <Route path="/tags" component={Tags} />
-                    <Route
-                        path="/contracts/:contractId"
-                        component={TenderDetail}
-                    />
-                    <Route path="/buyers/:id" component={BuyerProfile} />
-                    <Route path="/suppliers/:id" component={SupplierProfile} />
-                    <Route path="/pages/:slug" component={StaticPage} />
+                        <Route exact path="/news" component={News} />
+                        <Route exact path="/news/:id" component={NewsDetail} />
+                        <Route exact path="/blogs" component={Blogs} />
+                        <Route
+                            exact
+                            path="/blogs/:id"
+                            component={BlogsDetail}
+                        />
+                        <Route exact path="/events" component={Events} />
+                        <Route
+                            exact
+                            path="/events/:id"
+                            component={EventsDetail}
+                        />
+                        <Route exact path="/resources" component={Resources} />
+                        <Route
+                            exact
+                            path="/resources/:id"
+                            component={ResourcesDetail}
+                        />
+                        <Route path="/library" component={Library} />
+                        <Route path="/tags" component={Tags} />
+                        <Route
+                            path="/contracts/:contractId"
+                            component={TenderDetail}
+                        />
+                        <Route path="/buyers/:id" component={BuyerProfile} />
+                        <Route
+                            path="/suppliers/:id"
+                            component={SupplierProfile}
+                        />
+                        <Route path="/pages/:slug" component={StaticPage} />
 
-                    <Route component={NotFound} />
-                </Switch>
-            </Fragment>
-            <Footer />
-        </BrowserRouter>
+                        <Route component={NotFound} />
+                    </Switch>
+                </Fragment>
+                <Footer />
+            </BrowserRouter>
+        </ModalProvider>
     )
 }
 

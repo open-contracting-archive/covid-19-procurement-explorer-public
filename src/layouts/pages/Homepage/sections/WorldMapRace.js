@@ -12,7 +12,7 @@ import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_s
 import ShareButtons from '../../../../components/Library/ShareButtons'
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
-import { ShortTenderTable } from "../../../../components/Tables"
+import { ShortTenderTable } from '../../../../components/Tables'
 
 const WorldMapRace = () => {
     // ===========================================================================
@@ -38,7 +38,9 @@ const WorldMapRace = () => {
                 </p>
             </div>
             <div className="container mx-auto">
-                <div className="bg-white rounded p-6 simple-tab">
+                <div
+                    className="bg-white rounded p-6 simple-tab flex flex-col justify-between"
+                    style={{ minHeight: '900px' }}>
                     <FullScreen handle={handle}>
                         <Tabs>
                             <div className="flex">
@@ -101,14 +103,14 @@ const WorldMapRace = () => {
                         <div className="flex items-center">
                             <div className="flex items-center mr-6">
                                 <DownloadIcon className="mr-2 inline-block" />
-                                <span>Download</span>
+                                <span>{trans('Download')}</span>
                             </div>
 
                             <div className="flex">
                                 <span className="worldmap-share flex items-center relative">
                                     <ShareIcon className="mr-2 inline-block" />{' '}
                                     <span className="cursor-pointer">
-                                        Share
+                                        {trans('Share')}
                                     </span>
                                     <div className="worldmap-share--buttons absolute px-6 py-6 rounded bg-white">
                                         <ShareButtons url={url} />
@@ -120,7 +122,7 @@ const WorldMapRace = () => {
                             <span className="flex items-center">
                                 <button onClick={handle.enter}>
                                     <span className="cursor-pointer">
-                                        View full screen
+                                        {trans('View full screen')}
                                     </span>
                                     <FullViewIcon className="ml-2 inline-block" />
                                 </button>
@@ -129,9 +131,9 @@ const WorldMapRace = () => {
                     </div>
                 </div>
                 <p className="mt-6 text-center text-sm">
-                    Don’t see your country data?{' '}
-                    <a href="#" className="text-primary-blue">
-                        Here’s how you can add your country data
+                    {trans('Don’t see your country data?')}
+                    <a href="#" className="inline-block ml-2 text-primary-blue">
+                        {trans('Here’s how you can add your country data')}
                     </a>
                 </p>
             </div>
