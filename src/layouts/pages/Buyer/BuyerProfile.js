@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { get, isEmpty } from 'lodash'
-// import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
-// import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import CountryFlag from '../../../components/CountryFlagIcon'
@@ -20,7 +18,7 @@ import {
     TotalSpending,
     BuyerProductTimeline
 } from '../../../components/Visualizations'
-import VisualizationServices from '../../../services/visualizationServices'
+import VisualizationService from '../../../services/VisualizationService'
 import { TenderTable } from '../../../components/Tables'
 import Loader from '../../../components/Loader/Loader'
 
@@ -29,7 +27,7 @@ const BuyerProfile = () => {
     // State and variables
     // ===========================================================================
     const countries = useSelector((state) => state.general.countries)
-    const [buyerInfo, setBuyerInfo] = useState({})
+    const [originalData, setOriginalData] = useState({})
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     let history = useHistory()
@@ -38,16 +36,19 @@ const BuyerProfile = () => {
     const previousPage = () => {
         history.goBack()
     }
-    console.log(buyerInfo)
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.BuyerDetail(id).then((response) => {
+        VisualizationService.BuyerDetail(id).then((response) => {
             // const country = countries.find((country) => country.response)
-            setBuyerInfo(response)
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [countries, id])
 
     // ===========================================================================
@@ -60,12 +61,12 @@ const BuyerProfile = () => {
             {loading ? (
                 <Loader />
             ) : (
-                !isEmpty(buyerInfo) && (
+                !isEmpty(originalData) && (
                     <>
                         <div className="container mx-auto px-4 ">
                             <div className="text-sm mb-4 text-blue-5">
                                 <span className="cursor-pointer text-primary-blue">
-                                    {get(buyerInfo, 'country_name')}
+                                    {get(originalData, 'country_name')}
                                 </span>{' '}
                                 /{' '}
                                 <span
@@ -75,8 +76,8 @@ const BuyerProfile = () => {
                                 </span>
                             </div>
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">
-                                {`${get(buyerInfo, 'name')}  #${get(
-                                    buyerInfo,
+                                {`${get(originalData, 'name')}  #${get(
+                                    originalData,
                                     'code'
                                 )}`}
                             </h2>
@@ -85,16 +86,16 @@ const BuyerProfile = () => {
                                     <CountryFlag
                                         className="rounded-sm mr-2"
                                         code={
-                                            buyerInfo &&
-                                            buyerInfo.country_code &&
+                                            originalData &&
+                                            originalData.country_code &&
                                             get(
-                                                buyerInfo,
+                                                originalData,
                                                 'country_code'
                                             ).toLowerCase()
                                         }
                                     />
                                     <p className="mr-2 text-sm">
-                                        {get(buyerInfo, 'country_name')}
+                                        {get(originalData, 'country_name')}
                                     </p>
                                 </div>
                             </div>
@@ -185,7 +186,7 @@ const BuyerProfile = () => {
                                 <TenderTable
                                     params={{
                                         buyer: id,
-                                        country: buyerInfo.country_code
+                                        country: originalData.country_code
                                     }}
                                     page="buyers"
                                 />

@@ -106,7 +106,6 @@ class CmsPageService {
         return response.body
     }
 
-
     static async ResourceList(queryParams) {
         try {
             const res = await Api.get(

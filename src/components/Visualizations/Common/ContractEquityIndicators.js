@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { identity, pickBy, groupBy } from 'lodash'
 import useTrans from '../../../hooks/useTrans'
-import VisualizationServices from '../../../services/visualizationServices'
+import VisualizationService from '../../../services/VisualizationService'
 import Loader from '../../Loader/Loader'
 import CompareChart from '../../Charts/CompareChart/CompareChart'
 import Checkbox from '../../Checkbox/Checkbox'
@@ -31,7 +31,7 @@ const ContractEquityIndicators = (props) => {
     // Fetch data
     useEffect(() => {
         let queryParameters = identity(pickBy(params))
-        VisualizationServices.EquitySummary(queryParameters)
+        VisualizationService.EquitySummary(queryParameters)
             .then((result) => {
                 setOriginalData(result)
                 setLoading(false)

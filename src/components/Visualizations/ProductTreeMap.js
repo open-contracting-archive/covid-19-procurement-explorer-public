@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import TreeMapChart from '../../components/Charts/TreeMapChart/TreeMapChart'
 import Loader from '../../components/Loader/Loader'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 
 function ProductTreemap({ params }) {
@@ -10,7 +10,7 @@ function ProductTreemap({ params }) {
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
-    const [apiData, setApiData] = useState([])
+    const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const [chartType, setChartType] = useState('value')
     const { trans } = useTrans()
@@ -20,17 +20,21 @@ function ProductTreemap({ params }) {
     // ===========================================================================
 
     useEffect(() => {
-        VisualizationServices.ProductSummary(params).then((response) => {
-            setApiData(response)
+        VisualizationService.ProductSummary(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params])
 
     useEffect(() => {
         let chartDataFormatted = {}
 
-        if (apiData) {
-            apiData.forEach((item) => {
+        if (originalData) {
+            originalData.forEach((item) => {
                 chartDataFormatted[item.product_name] = {
                     [item.product_name]:
                         chartType === 'value'
@@ -42,7 +46,7 @@ function ProductTreemap({ params }) {
 
         setChartData(chartDataFormatted)
         setLoading(false)
-    }, [apiData, chartType])
+    }, [originalData, chartType])
 
     let tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const tempTableData = tempArray.map((index) => {
@@ -72,38 +76,38 @@ function ProductTreemap({ params }) {
                     </div>
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th>
+                        <tr>
+                            <th>
                                     <span className="flex items-center">
                                         Product Category
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th>
+                            </th>
+                            <th>
                                     <span className="flex items-center">
                                         # of contracts
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th>
+                            </th>
+                            <th>
                                     <span className="flex items-center">
                                         # of suppliers
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th>
+                            </th>
+                            <th>
                                     <span className="flex items-center">
                                         # of buyers
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                                <th>
+                            </th>
+                            <th>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                                </th>
-                            </tr>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

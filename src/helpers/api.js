@@ -20,6 +20,7 @@ const apiRoutes = {
         'api/v1/visualization/quantity-correlation/',
     'visualization.monopolization': 'api/v1/visualization/monopolization/',
     'visualization.global-suppliers': 'api/v1/visualization/global-suppliers/',
+    'visualization.country-suppliers': 'api/v1/visualization/country-suppliers/',
     'visualization.equity-indicators':
         'api/v1/visualization/equity-indicators/',
     'visualization.world-map': 'api/v1/visualization/world-map/',

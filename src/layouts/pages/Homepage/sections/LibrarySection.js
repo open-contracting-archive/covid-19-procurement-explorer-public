@@ -18,6 +18,10 @@ const LibrarySection = () => {
             setInsightList(response.items)
             setLoading(false)
         })
+
+        return () => {
+            setInsightList([])
+        }
     }, [])
 
     return (

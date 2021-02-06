@@ -18,7 +18,6 @@ const getThumbnailUrl = (data) => {
 }
 
 export const transformNews = (data) => {
-    console.log(data.published_date)
     return {
         ...data,
         detailUrl: `/news/${data.id}`,

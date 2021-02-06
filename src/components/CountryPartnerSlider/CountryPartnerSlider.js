@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { API_URL } from '../../helpers/api'
 import Loader from '../../components/Loader/Loader'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -18,22 +18,26 @@ const CountryPartnerSlider = ({ params }) => {
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
-    const [countryPartner, setCountryPartner] = useState([])
+    const [originalData, setOriginalData] = useState([])
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.CountryPartners(params)
+        VisualizationService.CountryPartners(params)
             .then((response) => {
                 if (!response.error) {
-                    setCountryPartner(response)
+                    setOriginalData(response)
                 }
 
                 setLoading(false)
             })
             .catch(() => setLoading(false))
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params?.country])
 
     return (
@@ -45,14 +49,14 @@ const CountryPartnerSlider = ({ params }) => {
                 <Loader />
             ) : (
                 <Fragment>
-                    {countryPartner.length ? (
+                    {originalData.length ? (
                         <Swiper
                             spaceBetween={50}
                             slidesPerView={1}
                             navigation
                             pagination={{ clickable: true }}>
-                            {countryPartner &&
-                            countryPartner.map((index, key) => {
+                            {originalData &&
+                            originalData.map((index, key) => {
                                 return (
                                     <SwiperSlide key={key}>
                                         <div>

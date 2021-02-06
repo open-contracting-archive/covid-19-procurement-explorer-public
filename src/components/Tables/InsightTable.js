@@ -45,6 +45,10 @@ const InsightTable = ({ params }) => {
                 setLoading(false)
                 setTableLoading(false)
             })
+
+        return () => {
+            setInsightList([])
+        }
     }
 
     const countrySelectList = useMemo(() => {

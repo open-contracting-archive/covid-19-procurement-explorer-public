@@ -26,6 +26,10 @@ const FeaturedInsights = ({ params }) => {
             .catch(() => {
                 setLoading(false)
             })
+
+        return () => {
+            setInsightList([])
+        }
     }, [params])
 
     return loading ? (<Loader />) : (insightList.items.length ? (

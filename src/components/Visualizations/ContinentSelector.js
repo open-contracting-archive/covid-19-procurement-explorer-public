@@ -6,7 +6,7 @@ const ContinentSelector = (props) => {
     const { handleContinentSelection } = props
     const options = continentSelectList
 
-    return (<div className=" w-1/5 -mt-3">
+    return (
         <Select
             className="select-filter text-sm"
             classNamePrefix="select-filter"
@@ -17,7 +17,7 @@ const ContinentSelector = (props) => {
                 handleContinentSelection(selectedOption)
             }
         />
-    </div>)
+    )
 }
 
 export default ContinentSelector

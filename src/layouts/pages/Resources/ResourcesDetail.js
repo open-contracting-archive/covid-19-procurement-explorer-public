@@ -10,8 +10,8 @@ import { formatDate } from "../../../helpers/date"
 import pdfImage from '../../../assets/img/ic_pdf.svg'
 
 const ResourcesDetail = () => {
-    const [resourcesDetail, setResourcesDetail] = useState({})
-    const [resourcesData, setResourcesData] = useState([])
+    const [resourceDetail, setResourceDetail] = useState({})
+    const [resourceList, setResourceList] = useState([])
     const countries = useSelector((state) => state.general.countries)
     const [loading, setLoading] = useState(true)
     let { id: resourcesId } = useParams()
@@ -31,12 +31,17 @@ const ResourcesDetail = () => {
     useEffect(() => {
         setLoading(true)
         CmsPageService.ResourceDetail(resourcesId).then((response) => {
-            setResourcesDetail(response)
+            setResourceDetail(response)
             setLoading(false)
         })
         CmsPageService.ResourceList().then((response) => {
-            setResourcesData(response.items)
+            setResourceList(response.items)
         })
+
+        return () => {
+            setResourceDetail({})
+            setResourceList([])
+        }
     }, [resourcesId])
 
     return (
@@ -62,7 +67,7 @@ const ResourcesDetail = () => {
                                     </svg>
                                     <a
                                         className="text-blue-20 test-sm ml-1"
-                                        href={get(resourcesDetail, 'document.meta.download_url')}>
+                                        href={get(resourceDetail, 'document.meta.download_url')}>
                                         {' '}
                                         Download{' '}
                                     </a>
@@ -71,24 +76,24 @@ const ResourcesDetail = () => {
                         </div>
                         <div className="details md:mx-10 mx-0 b-24">
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-10 md:mb-10 text-primary-dark">
-                                {resourcesDetail.title}
+                                {resourceDetail.title}
                             </h2>
                             <div className="mb-10 resources-detail__content"
-                                 dangerouslySetInnerHTML={{ __html: resourcesDetail.rendered_description }}>
+                                 dangerouslySetInnerHTML={{ __html: resourceDetail.rendered_description }}>
                             </div>
                             <hr className="mb-6 text-primary-gray" />
                             <table className="my-10 text-left">
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">Published on</th>
-                                    <td className="px-6 py-6">{formatDate(resourcesDetail.meta.first_published_at, 'MMMM DD, YYYY')}</td>
+                                    <td className="px-6 py-6">{formatDate(resourceDetail.meta.first_published_at, 'MMMM DD, YYYY')}</td>
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">Country</th>
-                                    <td className="px-6 py-6">{getCountryName(resourcesDetail)}</td>
+                                    <td className="px-6 py-6">{getCountryName(resourceDetail)}</td>
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">Type</th>
-                                    <td className="px-6 py-6">{resourcesDetail.resource_type}</td>
+                                    <td className="px-6 py-6">{resourceDetail.resource_type}</td>
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">Topic</th>
@@ -110,8 +115,8 @@ const ResourcesDetail = () => {
                                 <p className="font-bold opacity-40 mb-4">
                                     Related Resources
                                 </p>
-                                {resourcesData &&
-                                resourcesData
+                                {resourceList &&
+                                resourceList
                                     .filter(
                                         (resources) => resources.id !== resourcesId
                                     )

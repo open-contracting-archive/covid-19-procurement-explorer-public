@@ -14,7 +14,7 @@ import {
     TotalSpending,
     DirectOpen
 } from '../../../components/Visualizations'
-import VisualizationServices from '../../../services/visualizationServices'
+import VisualizationService from '../../../services/VisualizationService'
 import TenderTable from '../../../components/Tables/TenderTable'
 import Loader from '../../../components/Loader/Loader'
 
@@ -23,7 +23,7 @@ const SupplierProfile = () => {
     // State and variables
     // ===========================================================================
     const countries = useSelector((state) => state.general.countries)
-    const [supplierInfo, setSupplierInfo] = useState({})
+    const [originalData, setOriginalData] = useState({})
     const [country, setCountry] = useState({})
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
@@ -39,12 +39,16 @@ const SupplierProfile = () => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.SupplierDetail(id).then((response) => {
+        VisualizationService.SupplierDetail(id).then((response) => {
             const country = countries.find((country) => country.response)
-            setSupplierInfo(response)
+            setOriginalData(response)
             setCountry(country)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [countries, id])
 
     // ===========================================================================
@@ -57,12 +61,12 @@ const SupplierProfile = () => {
             {loading ? (
                 <Loader />
             ) : (
-                !isEmpty(supplierInfo) && (
+                !isEmpty(originalData) && (
                     <>
                         <div className="container mx-auto">
                             <div className="text-sm mb-4 text-blue-5">
                                 <span className="cursor-pointer text-primary-blue">
-                                    {get(supplierInfo, 'country_name')}
+                                    {get(originalData, 'country_name')}
                                 </span>{' '}
                                 /{' '}
                                 <span
@@ -72,8 +76,8 @@ const SupplierProfile = () => {
                                 </span>
                             </div>
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">
-                                {`${get(supplierInfo, 'name')} #${get(
-                                    supplierInfo,
+                                {`${get(originalData, 'name')} #${get(
+                                    originalData,
                                     'code'
                                 )}`}
                             </h2>
@@ -82,15 +86,15 @@ const SupplierProfile = () => {
                                     <CountryFlag
                                         className="rounded-sm mr-2"
                                         code={
-                                            supplierInfo &&
+                                            originalData &&
                                             get(
-                                                supplierInfo,
+                                                originalData,
                                                 'country_code'
                                             ).toLowerCase()
                                         }
                                     />
                                     <p className="mr-2 text-sm">
-                                        {get(supplierInfo, 'country_name')}
+                                        {get(originalData, 'country_name')}
                                     </p>
                                 </div>
                             </div>
@@ -100,7 +104,7 @@ const SupplierProfile = () => {
                                         label="Product flow"
                                         params={{
                                             supplier: id,
-                                            country: supplierInfo.country_code
+                                            country: originalData.country_code
                                         }}
                                     />
                                 </div>
@@ -119,7 +123,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    supplierInfo.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -128,7 +132,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    supplierInfo.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -138,7 +142,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    supplierInfo.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -148,7 +152,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    supplierInfo.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -158,7 +162,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    supplierInfo.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -168,7 +172,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    supplierInfo.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -180,7 +184,7 @@ const SupplierProfile = () => {
                                 <TenderTable
                                     params={{
                                         supplier: id,
-                                        country: supplierInfo.country_code
+                                        country: originalData.country_code
                                     }}
                                     page="suppliers"
                                 />

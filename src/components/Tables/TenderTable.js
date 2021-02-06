@@ -18,7 +18,7 @@ const TenderTable = (props) => {
     // State and variables
     // ===========================================================================
     const { params } = props
-    const [tenderList, setTenderList] = useState([])
+    const [originalData, setOriginalData] = useState([])
     const [loading, setLoading] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(() =>
         identity(pickBy(params))
@@ -38,6 +38,10 @@ const TenderTable = (props) => {
     // ===========================================================================
     useEffect(() => {
         LoadContractList()
+
+        return () => {
+            setOriginalData([])
+        }
     }, [selectedFilters, sorting])
 
     // ===========================================================================
@@ -57,7 +61,7 @@ const TenderTable = (props) => {
         })
             .then((response) => {
                 if (response.results) {
-                    setTenderList([...response.results])
+                    setOriginalData([...response.results])
                     setTotalItems(response.count)
                     setTableLoading(false)
                 }
@@ -131,8 +135,8 @@ const TenderTable = (props) => {
                             <div className="custom-scrollbar table-scroll">
                                 <table className="table">
                                     <thead>
-                                        <tr>
-                                            <th style={{ width: '25%' }}>
+                                    <tr>
+                                        <th style={{ width: '25%' }}>
                                                 <span
                                                     className="flex items-center cursor-pointer"
                                                     onClick={() =>
@@ -143,9 +147,9 @@ const TenderTable = (props) => {
                                                     {trans('Contract Title')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                            </th>
-                                            {!hasCountry() && (
-                                                <th style={{ width: '10%' }}>
+                                        </th>
+                                        {!hasCountry() && (
+                                            <th style={{ width: '10%' }}>
                                                     <span
                                                         className="flex items-center cursor-pointer"
                                                         onClick={() =>
@@ -156,10 +160,10 @@ const TenderTable = (props) => {
                                                         {trans('Country')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                                </th>
-                                            )}
-                                            {!hasBuyer() && (
-                                                <th style={{ width: '15%' }}>
+                                            </th>
+                                        )}
+                                        {!hasBuyer() && (
+                                            <th style={{ width: '15%' }}>
                                                     <span
                                                         className="flex items-center cursor-pointer"
                                                         onClick={() =>
@@ -168,10 +172,10 @@ const TenderTable = (props) => {
                                                         {trans('Buyer')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                                </th>
-                                            )}
-                                            {!hasSupplier() && (
-                                                <th style={{ width: '15%' }}>
+                                            </th>
+                                        )}
+                                        {!hasSupplier() && (
+                                            <th style={{ width: '15%' }}>
                                                     <span
                                                         className="flex items-center cursor-pointer"
                                                         onClick={() =>
@@ -182,9 +186,9 @@ const TenderTable = (props) => {
                                                         {trans('Supplier')}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                                </th>
-                                            )}
-                                            <th style={{ width: '10%' }}>
+                                            </th>
+                                        )}
+                                        <th style={{ width: '10%' }}>
                                                 <span
                                                     className="flex items-center cursor-pointer"
                                                     onClick={() =>
@@ -195,18 +199,18 @@ const TenderTable = (props) => {
                                                     {trans('Method')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                            </th>
-                                            {!hasProduct() && (
-                                                <th style={{ width: '15%' }}>
+                                        </th>
+                                        {!hasProduct() && (
+                                            <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
                                                         {trans(
                                                             'Product Category'
                                                         )}{' '}
                                                         <SortIcon className="ml-1" />
                                                     </span>
-                                                </th>
-                                            )}
-                                            <th style={{ width: '10%' }}>
+                                            </th>
+                                        )}
+                                        <th style={{ width: '10%' }}>
                                                 <span
                                                     className="flex items-center cursor-pointer"
                                                     onClick={() =>
@@ -217,8 +221,8 @@ const TenderTable = (props) => {
                                                     {trans('Date')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                            </th>
-                                            <th style={{ width: '10%' }}>
+                                        </th>
+                                        <th style={{ width: '10%' }}>
                                                 <span
                                                     className="flex items-center"
                                                     onClick={() =>
@@ -229,111 +233,111 @@ const TenderTable = (props) => {
                                                     {trans('Value (USD)')}{' '}
                                                     <SortIcon className="ml-1" />
                                                 </span>
-                                            </th>
-                                            <th style={{ width: '3%' }} />
-                                        </tr>
+                                        </th>
+                                        <th style={{ width: '3%' }} />
+                                    </tr>
                                     </thead>
 
                                     <tbody>
-                                        {tenderList &&
-                                            tenderList.map((tender, index) => {
-                                                return (
-                                                    <tr
-                                                        key={index}
-                                                        onClick={() =>
-                                                            showDetail(
-                                                                tender.id
-                                                            )
+                                    {originalData &&
+                                    originalData.map((tender, index) => {
+                                        return (
+                                            <tr
+                                                key={index}
+                                                onClick={() =>
+                                                    showDetail(
+                                                        tender.id
+                                                    )
+                                                }
+                                                className={tableRowClass(
+                                                    tender.red_flag
+                                                )}>
+                                                <td className="hover:text-primary-blue">
+                                                    <p
+                                                        className="truncate-text"
+                                                        title={
+                                                            tender.contract_title
+                                                        }>
+                                                        {
+                                                            tender.contract_title
                                                         }
-                                                        className={tableRowClass(
-                                                            tender.red_flag
-                                                        )}>
-                                                        <td className="hover:text-primary-blue">
-                                                            <p
-                                                                className="truncate-text"
-                                                                title={
-                                                                    tender.contract_title
-                                                                }>
-                                                                {
-                                                                    tender.contract_title
-                                                                }
-                                                            </p>
-                                                        </td>
-                                                        {!hasCountry() && (
-                                                            <td>
-                                                                {
-                                                                    tender.country_name
-                                                                }
-                                                            </td>
-                                                        )}
-                                                        {!hasBuyer() && (
-                                                            <td>
-                                                                <p
-                                                                    className="truncate-text"
-                                                                    title={get(
-                                                                        tender,
-                                                                        'buyer.buyer_name'
-                                                                    )}>
-                                                                    {get(
-                                                                        tender,
-                                                                        'buyer.buyer_name'
-                                                                    )}
-                                                                </p>
-                                                            </td>
-                                                        )}
-                                                        {!hasSupplier() && (
-                                                            <td>
-                                                                <p
-                                                                    className="truncate-text"
-                                                                    title={get(
-                                                                        tender,
-                                                                        'supplier.supplier_name'
-                                                                    )}>
-                                                                    {get(
-                                                                        tender,
-                                                                        'supplier.supplier_name'
-                                                                    )}
-                                                                </p>
-                                                            </td>
-                                                        )}
-                                                        <td className="capitalize">
-                                                            {
-                                                                tender.procurement_procedure
-                                                            }
-                                                        </td>
-                                                        {!hasProduct() && (
-                                                            <td>
-                                                                {get(
-                                                                    tender,
-                                                                    'product_category'
-                                                                )}
-                                                            </td>
-                                                        )}
-                                                        <td>
-                                                            {formatDate(
-                                                                tender.contract_date
+                                                    </p>
+                                                </td>
+                                                {!hasCountry() && (
+                                                    <td>
+                                                        {
+                                                            tender.country_name
+                                                        }
+                                                    </td>
+                                                )}
+                                                {!hasBuyer() && (
+                                                    <td>
+                                                        <p
+                                                            className="truncate-text"
+                                                            title={get(
+                                                                tender,
+                                                                'buyer.buyer_name'
+                                                            )}>
+                                                            {get(
+                                                                tender,
+                                                                'buyer.buyer_name'
                                                             )}
-                                                        </td>
-                                                        <td>
-                                                            {tender.contract_value_usd &&
-                                                                tender.contract_value_usd.toLocaleString(
-                                                                    'en'
-                                                                )}
-                                                        </td>
-                                                        <td>
-                                                            {tender.red_flag && (
-                                                                <span className="mr-4">
+                                                        </p>
+                                                    </td>
+                                                )}
+                                                {!hasSupplier() && (
+                                                    <td>
+                                                        <p
+                                                            className="truncate-text"
+                                                            title={get(
+                                                                tender,
+                                                                'supplier.supplier_name'
+                                                            )}>
+                                                            {get(
+                                                                tender,
+                                                                'supplier.supplier_name'
+                                                            )}
+                                                        </p>
+                                                    </td>
+                                                )}
+                                                <td className="capitalize">
+                                                    {
+                                                        tender.procurement_procedure
+                                                    }
+                                                </td>
+                                                {!hasProduct() && (
+                                                    <td>
+                                                        {get(
+                                                            tender,
+                                                            'product_category'
+                                                        )}
+                                                    </td>
+                                                )}
+                                                <td>
+                                                    {formatDate(
+                                                        tender.contract_date
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {tender.contract_value_usd &&
+                                                    tender.contract_value_usd.toLocaleString(
+                                                        'en'
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {tender.red_flag && (
+                                                        <span className="mr-4">
                                                                     <FlagIcon />
                                                                 </span>
-                                                            )}
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                     </tbody>
                                 </table>
 
-                                {!tenderList.length && (
+                                {!originalData.length && (
                                     <div
                                         className="flex items-center justify-center bg-white rounded-md"
                                         style={{
@@ -346,7 +350,7 @@ const TenderTable = (props) => {
                             </div>
                             {tableLoading && <TableLoader />}
                         </div>
-                        {tenderList.length > 0 && (
+                        {originalData.length > 0 && (
                             <div>
                                 <div className="text-right mt-2 text-sm">
                                     <p className="text-primary-dark text-opacity-50">

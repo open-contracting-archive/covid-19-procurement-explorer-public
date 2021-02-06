@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
@@ -12,10 +12,10 @@ const TopSuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params, viewLink } = props
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
-    const [originalData, setOriginalData] = useState([])
+    const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const { trans } = useTrans()
@@ -24,10 +24,14 @@ const TopSuppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TopSuppliers(params).then((response) => {
+        VisualizationService.TopSuppliers(params).then((response) => {
             setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params?.country, params?.buyer])
 
     useEffect(() => {

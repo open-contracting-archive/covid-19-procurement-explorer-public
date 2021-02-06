@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import useTrans from '../../hooks/useTrans'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 import Visualization from "../../constants/Visualization"
@@ -15,17 +15,21 @@ const TotalContracts = (props) => {
     // ===========================================================================
     const { label = 'Total Contracts', params, modalHandler } = props
     const [loading, setLoading] = useState(true)
-    const [totalContracts, setTotalContracts] = useState()
+    const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalContracts(params).then((response) => {
-            setTotalContracts(response)
+        VisualizationService.TotalContracts(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params?.country, params?.buyer, params?.supplier])
 
     // ===========================================================================
@@ -53,12 +57,12 @@ const TotalContracts = (props) => {
 
     // Total contracts data
     const totalContractLineChartDataRaw =
-        totalContracts && lineChartData(totalContracts.line_chart)
+        originalData && lineChartData(originalData.line_chart)
     const totalContractLineChartData =
         totalContractLineChartDataRaw && sortDate(totalContractLineChartDataRaw)
-    const totalContractAmount = totalContracts && totalContracts.total
-    const totalContractPercentage = totalContracts && totalContracts.difference
-    const totalContractBarChartData = totalContracts && totalContracts.bar_chart
+    const totalContractAmount = originalData && originalData.total
+    const totalContractPercentage = originalData && originalData.difference
+    const totalContractBarChartData = originalData && originalData.bar_chart
 
     return (
         <div className="bg-white rounded p-4 h-full">

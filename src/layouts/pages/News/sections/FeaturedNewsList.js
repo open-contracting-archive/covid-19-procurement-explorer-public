@@ -18,15 +18,17 @@ const FeaturedNewsList = () => {
     useEffect(() => {
         CmsPageService.NewsList({ featured: true })
             .then((response) => {
-                // console.log(response)
                 setNewsList(response.items.map((item) => transformNews(item)))
                 setLoading(false)
             })
             .catch((error) => {
                 console.log(error)
             })
+
+        return () => {
+            setNewsList([])
+        }
     }, [])
-    // console.log(newsList)
 
     return loading ? (
         <Loader />
@@ -65,34 +67,34 @@ const FeaturedNewsList = () => {
                     </div>
                     <div className="list__item md:col-span-4">
                         {otherFeaturedNews &&
-                            otherFeaturedNews.map((news) => (
-                                <Link
-                                    className="news-thumbnail"
-                                    to={news.detailUrl}
-                                    key={news.id}>
-                                    <div className="news__item flex">
-                                        {news.image && (
-                                            <div
-                                                style={{ minWidth: '125px', maxWidth: '125px' }}
-                                                className="img-wrapper w-full h-auto">
-                                                <img
-                                                    className="w-full h-full object-cover"
-                                                    src={news.image}
-                                                    alt={news.title}
-                                                />
-                                            </div>
-                                        )}
-                                        <div className="news__caption ml-4">
-                                            <h3 className="news-caption__title">
-                                                {news.title}
-                                            </h3>
-                                            <p className="news-caption__date mt-2">
-                                                {news.formattedPublishDate}
-                                            </p>
+                        otherFeaturedNews.map((news) => (
+                            <Link
+                                className="news-thumbnail"
+                                to={news.detailUrl}
+                                key={news.id}>
+                                <div className="news__item flex">
+                                    {news.image && (
+                                        <div
+                                            style={{ minWidth: '125px', maxWidth: '125px' }}
+                                            className="img-wrapper w-full h-auto">
+                                            <img
+                                                className="w-full h-full object-cover"
+                                                src={news.image}
+                                                alt={news.title}
+                                            />
                                         </div>
+                                    )}
+                                    <div className="news__caption ml-4">
+                                        <h3 className="news-caption__title">
+                                            {news.title}
+                                        </h3>
+                                        <p className="news-caption__date mt-2">
+                                            {news.formattedPublishDate}
+                                        </p>
                                     </div>
-                                </Link>
-                            ))}
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </div>

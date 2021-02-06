@@ -1,7 +1,7 @@
 import Api from './api'
 import { getURI } from '../helpers/api'
 
-class VisualizationServices {
+class VisualizationService {
     static async GlobalMap(params) {
         try {
             const res = await Api.get(getURI('visualization.world-map'), params)
@@ -131,7 +131,7 @@ class VisualizationServices {
         }
     }
 
-    static async monopolization(params) {
+    static async Monopolization(params) {
         try {
             const res = await Api.get(
                 getURI('visualization.monopolization'),
@@ -155,7 +155,7 @@ class VisualizationServices {
         }
     }
 
-    static async Equity(params) {
+    static async EquityIndicators(params) {
         try {
             const res = await Api.get(
                 getURI('visualization.equity-indicators'),
@@ -227,15 +227,6 @@ class VisualizationServices {
         }
     }
 
-    // static async ProductDetail(id) {
-    //     try {
-    //         const res = await Api.get(`${getURI('product-detail')}/${id}`)
-    //         return res.body
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-
     static async CountryPartners(params) {
         try {
             const res = await Api.get(
@@ -298,4 +289,4 @@ class VisualizationServices {
     }
 }
 
-export default VisualizationServices
+export default VisualizationService

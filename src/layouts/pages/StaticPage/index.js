@@ -14,6 +14,10 @@ const StaticPage = () => {
             setPageDetail(response)
             setLoading(false)
         })
+
+        return () => {
+            setPageDetail({})
+        }
     }, [slug])
 
     if (

@@ -8,15 +8,19 @@ import { API_URL } from '../../../../helpers/api'
 import useTrans from '../../../../hooks/useTrans'
 
 const LibraryNews = () => {
-    const [newsList, setNewsData] = useState([])
+    const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.NewsList().then((response) => {
-            setNewsData(response.items)
+            setNewsList(response.items)
             setLoading(false)
         })
+
+        return () => {
+            setNewsList([])
+        }
     }, [])
 
     return (

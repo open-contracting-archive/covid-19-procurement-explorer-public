@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import useTrans from "../../../hooks/useTrans"
-import ContinentSelector from "../../../components/Visualizations/ContinentSelector"
-import ChartFooter from "../../../components/Utilities/ChartFooter"
-import ContractTrend from "../../../components/Visualizations/ContractTrend"
-import Visualization from "../../../constants/Visualization"
-import ContractView from "../../../constants/ContractView"
+import Select from 'react-select'
+import useTrans from "../../../../hooks/useTrans"
+import ChartFooter from "../../../../components/Utilities/ChartFooter"
+import ContractTrend from "../../../../components/Visualizations/ContractTrend"
+import Visualization from "../../../../constants/Visualization"
+import ContractView from "../../../../constants/ContractView"
+import { continentSelectList } from "../../../../helpers/country"
+
+const options = continentSelectList
 
 const visualizations = {
     [Visualization.TOTAL_SPENDING]: 'Total Spending',
@@ -21,7 +24,9 @@ const VisualizationModal = (props) => {
     const { visualizationType, closeModal } = props
     const [selectedContinent, setSelectedContinent] = useState(null)
     const fullScreenHandler = useFullScreenHandle()
+
     const { trans } = useTrans()
+
     const getVisualizationTitle = () => {
         return Object.keys(visualizations).includes(visualizationType) ? visualizations[visualizationType] : ''
     }
@@ -37,6 +42,10 @@ const VisualizationModal = (props) => {
             default:
                 return (<ContractTrend />)
         }
+    }
+
+    const handleContinentSelection = (selectedOption) => {
+        setSelectedContinent(selectedOption)
     }
 
     return (
@@ -56,7 +65,18 @@ const VisualizationModal = (props) => {
                 <div className="bg-white rounded mt-4">
                     <div className="flex simple-tab">
                         <div className="flex-1">
-                            <ContinentSelector handleContinentSelection={(value) => setSelectedContinent(value)} />
+                            <div className="w-1/5 -mt-3">
+                                <Select
+                                    className="select-filter text-sm"
+                                    classNamePrefix="select-filter"
+                                    options={options}
+                                    defaultValue={options[0]}
+                                    isSearchable={false}
+                                    onChange={(selectedOption) =>
+                                        handleContinentSelection(selectedOption)
+                                    }
+                                />
+                            </div>
 
                             {renderMainVisualization()}
                         </div>

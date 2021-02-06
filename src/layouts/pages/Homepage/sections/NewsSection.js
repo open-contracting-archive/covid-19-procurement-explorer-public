@@ -19,6 +19,10 @@ const NewsSection = () => {
                 setLoading(false)
             })
             .catch(() => setLoading(false))
+
+        return () => {
+            setNewsList([])
+        }
     }, [])
 
     return (

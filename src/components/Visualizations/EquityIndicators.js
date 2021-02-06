@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import PieChart from '../Charts/PieChart/PieChart'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import { useSelector } from 'react-redux'
 import { formatNumber } from '../../helpers/number'
 
@@ -15,17 +15,21 @@ const EquityIndicators = (props) => {
     // ===========================================================================
     const { label, params, heightFull } = props
     const [loading, setLoading] = useState(true)
-    const [equity, setEquity] = useState()
+    const [originalData, setOriginalData] = useState([])
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.Equity(params).then((response) => {
-            setEquity(response)
+        VisualizationService.EquityIndicators(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params?.country, params?.buyer])
 
     const currency = useSelector((state) => state.general.currency)
@@ -38,8 +42,8 @@ const EquityIndicators = (props) => {
     // ===========================================================================
     // Equity chart
     const equityByValue =
-        equity &&
-        equity.map((data) => {
+        originalData &&
+        originalData.map((data) => {
             return {
                 value: data.type,
                 number: currency == 'usd' ? data.amount_usd : data.amount_local
@@ -47,8 +51,8 @@ const EquityIndicators = (props) => {
         })
 
     const equityByNumber =
-        equity &&
-        equity.map((data) => {
+        originalData &&
+        originalData.map((data) => {
             return { value: data.type, number: data.tender_count }
         })
 

@@ -13,7 +13,7 @@ import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
 
 const TenderDetail = () => {
-    const [tenderInfo, setTenderInfo] = useState()
+    const [contractDetail, setContractDetail] = useState({})
     let history = useHistory()
     const { trans } = useTrans()
     let { id: countryId, contractId } = useParams()
@@ -24,9 +24,13 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryService.ContractDetailData(contractId).then((response) => {
-            setTenderInfo(response)
+        CountryService.ContractDetail(contractId).then((response) => {
+            setContractDetail(response)
         })
+
+        return () => {
+            setContractDetail({})
+        }
     }, [contractId])
 
     return (
@@ -42,8 +46,8 @@ const TenderDetail = () => {
                 </div>
                 <h2
                     className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark truncate-text"
-                    title={tenderInfo && tenderInfo.contract_title}>
-                    {tenderInfo && tenderInfo.contract_title}
+                    title={contractDetail && contractDetail.contract_title}>
+                    {contractDetail && contractDetail.contract_title}
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
@@ -53,25 +57,25 @@ const TenderDetail = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <span
                             className={`status-indicator ${
-                                tenderInfo && tenderInfo.status
+                                contractDetail && contractDetail.status
                             }`}></span>
                         <p className="mr-2 text-sm">
-                            {tenderInfo && tenderInfo.status}
+                            {contractDetail && contractDetail.status}
                         </p>
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag
                             className="rounded-sm mr-2"
                             code={
-                                tenderInfo &&
+                                contractDetail &&
                                 get(
-                                    tenderInfo,
+                                    contractDetail,
                                     'country_alpha_code'
                                 ).toLowerCase()
                             }
                         />
                         <p className="mr-2 text-sm">
-                            {tenderInfo && tenderInfo.country_name}
+                            {contractDetail && contractDetail.country_name}
                         </p>
                     </div>
                 </div>
@@ -82,7 +86,7 @@ const TenderDetail = () => {
                         </p>
                         <p className="font-bold text-sm">
                             {formatDate(
-                                tenderInfo && tenderInfo.contract_date,
+                                contractDetail && contractDetail.contract_date,
                                 'MMM D, YYYY'
                             )}
                         </p>
@@ -92,8 +96,8 @@ const TenderDetail = () => {
                             {trans('Procurement procedure')}
                         </p>
                         <p className="font-bold text-sm capitalize">
-                            {(tenderInfo && tenderInfo.procurement_procedure) ||
-                                '-'}
+                            {(contractDetail && contractDetail.procurement_procedure) ||
+                            '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -101,9 +105,9 @@ const TenderDetail = () => {
                             {trans('Number of bidders')}
                         </p>
                         <p className="font-bold text-xl">
-                            {(tenderInfo &&
-                                formatNumber(tenderInfo.bidders_no)) ||
-                                '-'}
+                            {(contractDetail &&
+                                formatNumber(contractDetail.bidders_no)) ||
+                            '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -111,9 +115,9 @@ const TenderDetail = () => {
                             {trans('Tender value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {tenderInfo && tenderInfo.tender_usd ? (
+                            {contractDetail && contractDetail.tender_usd ? (
                                 <>
-                                    {formatNumber(tenderInfo.tender_usd)}{' '}
+                                    {formatNumber(contractDetail.tender_usd)}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
                                     </span>
@@ -128,9 +132,9 @@ const TenderDetail = () => {
                             {trans('Award value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {tenderInfo && tenderInfo.award_usd ? (
+                            {contractDetail && contractDetail.award_usd ? (
                                 <>
-                                    {formatNumber(tenderInfo.award_usd)}{' '}
+                                    {formatNumber(contractDetail.award_usd)}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
                                     </span>
@@ -145,10 +149,10 @@ const TenderDetail = () => {
                             {trans('Contract value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {tenderInfo && tenderInfo.contract_value_usd ? (
+                            {contractDetail && contractDetail.contract_value_usd ? (
                                 <>
                                     {formatNumber(
-                                        tenderInfo.contract_value_usd
+                                        contractDetail.contract_value_usd
                                     )}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
@@ -165,7 +169,7 @@ const TenderDetail = () => {
                         <h5 className="text-sm font-normal uppercase mb-2">
                             {trans('Contract description')}
                         </h5>
-                        <p>{tenderInfo && tenderInfo.contract_desc}</p>
+                        <p>{contractDetail && contractDetail.contract_desc}</p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7">
                         <p className="text-sm uppercase mb-1">
@@ -174,11 +178,11 @@ const TenderDetail = () => {
                         <p className="font-bold text-sm uppercase">
                             <Link
                                 to={`/buyers/${get(
-                                    tenderInfo,
+                                    contractDetail,
                                     'buyer.buyer_id'
                                 )}`}>
                                 <p className="font-bold text-sm uppercase">
-                                    {get(tenderInfo, 'buyer.buyer_name')}
+                                    {get(contractDetail, 'buyer.buyer_name')}
                                 </p>
                             </Link>
                         </p>
@@ -188,7 +192,7 @@ const TenderDetail = () => {
                             {trans('Procurement entity address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(tenderInfo, 'buyer.buyer_address') || '-'}
+                            {get(contractDetail, 'buyer.buyer_address') || '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7 md:row-start-2">
@@ -197,11 +201,11 @@ const TenderDetail = () => {
                         </p>
                         <Link
                             to={`/suppliers/${get(
-                                tenderInfo,
+                                contractDetail,
                                 'supplier.supplier_id'
                             )}`}>
                             <p className="font-bold text-sm uppercase">
-                                {get(tenderInfo, 'supplier.supplier_name')}
+                                {get(contractDetail, 'supplier.supplier_name')}
                             </p>
                         </Link>
                     </div>
@@ -210,8 +214,8 @@ const TenderDetail = () => {
                             {trans('Supplier address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(tenderInfo, 'supplier.supplier_address') ||
-                                '-'}
+                            {get(contractDetail, 'supplier.supplier_address') ||
+                            '-'}
                         </p>
                     </div>
                 </div>

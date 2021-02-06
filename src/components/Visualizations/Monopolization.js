@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useTrans from '../../hooks/useTrans'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import { dateDiff, formatDate } from "../../helpers/date"
@@ -11,18 +11,22 @@ const Monopolization = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [monopolization, setMonopolization] = useState()
+    const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.monopolization(params)
+        VisualizationService.Monopolization(params)
             .then((response) => {
-                setMonopolization(response)
+                setOriginalData(response)
                 setLoading(false)
             })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params?.country, params?.buyer])
 
     // ===========================================================================
@@ -50,12 +54,12 @@ const Monopolization = (props) => {
     }
 
     const monopolizationLineChartDataRaw =
-        monopolization && lineChartData(monopolization.line_chart)
+        originalData && lineChartData(originalData.line_chart)
     const monopolizationLineChartData =
         monopolizationLineChartDataRaw &&
         sortDate(monopolizationLineChartDataRaw)
-    const monopolizationAmount = monopolization && monopolization.average
-    const monopolizationPercentage = monopolization && monopolization.difference
+    const monopolizationAmount = originalData && originalData.average
+    const monopolizationPercentage = originalData && originalData.difference
 
     return (
         <div className="bg-white rounded p-4 h-full">

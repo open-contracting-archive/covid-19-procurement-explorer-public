@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
@@ -26,10 +26,14 @@ const ProductDistribution = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductDistribution(params).then((response) => {
+        VisualizationService.ProductDistribution(params).then((response) => {
             setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params?.country, params?.buyer, params?.supplier])
 
     useEffect(() => {

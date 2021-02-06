@@ -18,6 +18,10 @@ const LibraryBlogs = () => {
                 setBlogsData(response.items)
                 setLoading(false)
             })
+
+        return () => {
+            setBlogsData([])
+        }
     }, [])
 
     return (

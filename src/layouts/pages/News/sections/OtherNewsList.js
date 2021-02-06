@@ -7,7 +7,7 @@ import { transformNews } from "../../../../helpers/transformers"
 import useTrans from "../../../../hooks/useTrans"
 
 const OtherNewsList = () => {
-    const [otherNews, setOtherNews] = useState([])
+    const [otherNewsList, setOtherNewsList] = useState([])
     const [loading, setLoading] = useState(true)
     const [loadingMore, setLoadingMore] = useState(false)
     const [pagination, setPagination] = useState(() => {
@@ -18,6 +18,10 @@ const OtherNewsList = () => {
 
     useEffect(() => {
         loadNews()
+
+        return () => {
+            setOtherNewsList([])
+        }
     }, [search])
 
     function loadMoreNews() {
@@ -29,7 +33,7 @@ const OtherNewsList = () => {
         const queryParams = {
             featured: false,
             limit: pagination.limit,
-            offset: otherNews.length
+            offset: otherNewsList.length
         }
 
         if (search) {
@@ -38,7 +42,7 @@ const OtherNewsList = () => {
 
         CmsPageService.NewsList(queryParams)
             .then((response) => {
-                setOtherNews((previous) => {
+                setOtherNewsList((previous) => {
                     return [
                         ...previous,
                         ...response.items.map((item) => transformNews(item))
@@ -88,10 +92,10 @@ const OtherNewsList = () => {
                     {/*</div>*/}
                 </div>
 
-                {loading ? (<Loader />) : otherNews.length ? (
+                {loading ? (<Loader />) : otherNewsList.length ? (
                     <Fragment>
                         <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10 mb-10">
-                            {otherNews.map((news) => (
+                            {otherNewsList.map((news) => (
                                 <Link
                                     className="news-thumbnail"
                                     to={news.detailUrl}
@@ -116,7 +120,7 @@ const OtherNewsList = () => {
                                 </Link>
                             ))}
                         </div>
-                        {otherNews.length < pagination.total && (loadingMore ? (
+                        {otherNewsList.length < pagination.total && (loadingMore ? (
                             <Loader sm />
                         ) : (
                             <div className="flex justify-center pt-10">
