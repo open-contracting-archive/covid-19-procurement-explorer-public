@@ -2,7 +2,7 @@ lock '3.7.2'
 
 # Application #
 #####################################################################################
-set :application,     "COVID19_PROCUREMENT_EXPLORER"
+set :application,     "COVID19_CONCTRACT_EXPLORER"
 set :branch,          ENV["branch"] || "master"
 set :user,            ENV["user"] || ENV["USER"] || "covid19"
 
