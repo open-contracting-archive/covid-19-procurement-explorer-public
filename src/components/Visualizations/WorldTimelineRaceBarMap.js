@@ -11,7 +11,7 @@ const WorldTimelineRaceBarMap = () => {
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [raceBarType, setRaceBarType] = useState('value')
-    const [raceBarDataApi, setRaceBarDataApi] = useState(null)
+    const [originalData, setOriginalData] = useState(null)
     const [selectedContinent, setSelectedContinent] = useState({
         value: 'all',
         label: 'All Continent'
@@ -30,7 +30,7 @@ const WorldTimelineRaceBarMap = () => {
 
     useEffect(() => {
         CountryService.GetGlobalMapData().then((response) => {
-            const raceBarChartformatted = response.result.reduce(
+            const chartData = response.result.reduce(
                 (formattedData, d) => ({
                     ...formattedData,
                     [d.month]: d.details.filter(detail => detail.country !== 'Global').map((detail) => ({
@@ -43,9 +43,13 @@ const WorldTimelineRaceBarMap = () => {
                 }),
                 {}
             )
-            setRaceBarDataApi(raceBarChartformatted)
+            setOriginalData(chartData)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData(null)
+        }
     }, [raceBarType])
 
     return (
@@ -80,10 +84,10 @@ const WorldTimelineRaceBarMap = () => {
                     }
                 />
             </div>
-            {!raceBarDataApi ? (
+            {!originalData ? (
                 <Loader />
             ) : (
-                <BarChartRace data={raceBarDataApi} />
+                <BarChartRace data={originalData} />
             )}
         </div>
     )

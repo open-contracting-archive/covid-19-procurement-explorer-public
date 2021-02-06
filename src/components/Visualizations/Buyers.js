@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
+import useTrans from "../../hooks/useTrans"
 
 const Buyers = (props) => {
     // ===========================================================================
@@ -10,16 +11,21 @@ const Buyers = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [buyerSummary, setBuyerSummary] = useState()
+    const [originalData, setOriginalData] = useState({})
+    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.BuyerSummary(params).then((response) => {
-            setBuyerSummary(response)
+        VisualizationService.BuyerSummary(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params?.country])
 
     // ===========================================================================
@@ -47,16 +53,16 @@ const Buyers = (props) => {
 
     // Buyer summary
     const buyerSummaryLineChartDataRaw =
-        buyerSummary && lineChartData(buyerSummary.trend)
+        originalData && lineChartData(originalData.trend)
     const buyerSummaryLineChartData =
         buyerSummaryLineChartDataRaw && sortDate(buyerSummaryLineChartDataRaw)
-    const buyerSummaryAmount = buyerSummary && buyerSummary.total
-    const buyerSummaryPercentage = buyerSummary && buyerSummary.percentage
+    const buyerSummaryAmount = originalData && originalData.total
+    const buyerSummaryPercentage = originalData && originalData.percentage
 
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {label ? label : 'Buyers'}
+                {trans(label ? label : 'Buyers')}
             </h3>
             {loading ? (
                 <Loader sm />

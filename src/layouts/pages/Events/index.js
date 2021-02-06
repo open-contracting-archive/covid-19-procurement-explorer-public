@@ -6,7 +6,7 @@ import { formatDate, formatTime } from '../../../helpers/date'
 import useTrans from '../../../hooks/useTrans'
 
 function Events() {
-    const [eventsData, setEventsData] = useState([])
+    const [eventList, setEventList] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
     const { trans } = useTrans()
@@ -17,9 +17,13 @@ function Events() {
 
     useEffect(() => {
         CmsPageService.EventList().then((response) => {
-            setEventsData(response.items)
+            setEventList(response.items)
             setLoading(false)
         })
+
+        return () => {
+            setEventList([])
+        }
     }, [])
 
     return loading ? (<Loader />) : (
@@ -41,7 +45,7 @@ function Events() {
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4 card">
-                        {eventsData.slice(0, 3).map((events) => (
+                        {eventList.slice(0, 3).map((events) => (
                             <Link
                                 className="events-thumbnail"
                                 to={`/events/${events.id}`}
@@ -87,8 +91,8 @@ function Events() {
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
-                        {eventsData &&
-                        eventsData.slice(3, 9).map((events) => {
+                        {eventList &&
+                        eventList.slice(3, 9).map((events) => {
                             return (
                                 <Link
                                     key={events.id}
@@ -124,7 +128,7 @@ function Events() {
                             )
                         })}
                     </div>
-                    {eventsData.length === 0 ? (
+                    {eventList.length === 0 ? (
                         <p>{trans('There are no Past Events Records')}</p>
                     ) : (
                         ''

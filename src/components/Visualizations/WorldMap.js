@@ -1,44 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 import GlobalMap from '../GlobalMap/GlobalMap'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
-import { CONTINENTS } from '../../helpers/country'
+import { CONTINENTS, continentSelectList } from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
+import ContractView from "../../constants/ContractView"
+import ChartFooter from "../Utilities/ChartFooter"
+
+const options = continentSelectList
 
 const WorldMap = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const [data, setData] = useState({})
     const { params } = props
-    const [contractType, setContractType] = useState('value')
-    const [mapData, setMapData] = useState()
-    const [selectedContinent, setSelectedContinent] = useState({
-        value: 'all',
-        label: 'All Continents'
-    })
+    const [originalData, setOriginalData] = useState({})
+    const [contractType, setContractType] = useState(ContractView.VALUE)
+    const [mapData, setMapData] = useState({})
+    const [selectedContinent, setSelectedContinent] = useState(options[0])
     const [loading, setLoading] = useState(true)
+    const { trans } = useTrans()
+    const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.GlobalMap(params).then((response) => {
-            setData(response)
+        VisualizationService.GlobalMap(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params])
 
     useEffect(() => {
         let mapData = {}
         const parsedMapData =
-            data.result &&
-            data.result.map((data) => {
+            originalData.result &&
+            originalData.result.map((data) => {
                 return (mapData = {
                     ...mapData,
                     id: data.country_code,
@@ -52,24 +56,12 @@ const WorldMap = (props) => {
                 })
             })
         setMapData(parsedMapData)
-    }, [data, contractType])
+    }, [originalData, contractType])
 
     // ===========================================================================
     // Handler and functions
     // ===========================================================================
-    const { trans } = useTrans()
-    const handle = useFullScreenHandle()
-    const options = [
-        { value: 'all', label: 'All Continents' },
-        { value: 'asia', label: 'Asia' },
-        { value: 'europe', label: 'Europe' },
-        { value: 'africa', label: 'Africa' },
-        { value: 'oceania', label: 'Oceania' },
-        { value: 'south_america', label: 'South America' },
-        { value: 'north_america', label: 'North America' },
-        { value: 'middle_east', label: 'Middle East' }
-    ]
-    const handleContinentChange = (selectedOption, value) => {
+    const handleContinentSelection = (selectedOption) => {
         setSelectedContinent(selectedOption)
     }
 
@@ -77,7 +69,7 @@ const WorldMap = (props) => {
         <div className="flex flex-wrap -mx-4 -mb-4">
             <div className="w-full px-4 mb-4">
                 <div className="bg-white rounded p-6">
-                    <FullScreen handle={handle}>
+                    <FullScreen handle={fullScreenHandler}>
                         <div className="relative">
                             <div className="flex justify-end">
                                 <ul className="contract-switch flex">
@@ -114,7 +106,7 @@ const WorldMap = (props) => {
                                     value={selectedContinent}
                                     defaultValue={options[0]}
                                     onChange={(selectedOption) =>
-                                        handleContinentChange(selectedOption)
+                                        handleContinentSelection(selectedOption)
                                     }
                                 />
                             </div>
@@ -134,34 +126,7 @@ const WorldMap = (props) => {
                         </div>
                     </FullScreen>
 
-                    <div
-                        className="flex items-center justify-between pt-4 border-t 
-                    border-blue-0 text-sm text-primary-blue -mx-6 px-6">
-                        <div className="flex items-center">
-                            <div className="flex items-center mr-6">
-                                <DownloadIcon className="mr-2 inline-block" />
-                                <span>{trans('Download')}</span>
-                            </div>
-                            <div className="flex">
-                                <span className="flex items-center">
-                                    <ShareIcon className="mr-2 inline-block" />{' '}
-                                    <span className="cursor-pointer">
-                                        {trans('Share')}
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                        <div>
-                            <span className="flex items-center">
-                                <button onClick={handle.enter}>
-                                    <span className="cursor-pointer">
-                                        {trans('View full screen')}
-                                    </span>
-                                    <FullViewIcon className="ml-2 inline-block" />
-                                </button>
-                            </span>
-                        </div>
-                    </div>
+                    <ChartFooter fullScreenHandler={fullScreenHandler} />
                 </div>
             </div>
         </div>

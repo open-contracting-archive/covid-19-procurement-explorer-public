@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import useTrans from '../../hooks/useTrans'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 
-function Suppliers({ label, params }) {
+const Suppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [supplierSummary, setSupplierSummary] = useState()
+    const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.SupplierSummary(params).then((response) => {
-            setSupplierSummary(response)
+        VisualizationService.SupplierSummary(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params])
 
     // ===========================================================================
@@ -48,18 +53,18 @@ function Suppliers({ label, params }) {
 
     // Supplier summary
     const supplierSummaryLineChartDataRaw =
-        supplierSummary && lineChartData(supplierSummary.trend)
+        originalData && lineChartData(originalData.trend)
     const supplierSummaryLineChartData =
         supplierSummaryLineChartDataRaw &&
         sortDate(supplierSummaryLineChartDataRaw)
-    const supplierSummaryAmount = supplierSummary && supplierSummary.total
+    const supplierSummaryAmount = originalData && originalData.total
     const supplierSummaryPercentage =
-        supplierSummary && supplierSummary.percentage
+        originalData && originalData.percentage
 
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {label ? label : 'Supplier'}
+                {trans(label ? label : 'Suppliers')}
             </h3>
             {loading ? (
                 <Loader sm />

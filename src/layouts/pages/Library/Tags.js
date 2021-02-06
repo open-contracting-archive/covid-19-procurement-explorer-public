@@ -23,6 +23,10 @@ const Tags = () => {
                 setLoading(false)
             })
             .catch(error => console.log(error))
+
+        return () => {
+            setInsightList([])
+        }
     }, [tag])
 
     return (

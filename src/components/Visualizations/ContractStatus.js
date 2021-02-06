@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { isEmpty, sumBy } from 'lodash'
 import { useSelector } from 'react-redux'
 import useTrans from '../../hooks/useTrans'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import Loader from '../Loader/Loader'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
@@ -24,11 +24,15 @@ const ContractStatus = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ContractStatus(params)
+        VisualizationService.ContractStatus(params)
             .then((response) => {
                 setOriginalData(response)
                 setLoading(false)
             })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params?.country, params?.buyer])
 
     useEffect(() => {

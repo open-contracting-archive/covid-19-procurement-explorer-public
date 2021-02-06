@@ -21,16 +21,7 @@ class CountryService {
         }
     }
 
-    static async CountryProfileTenderData(slug) {
-        try {
-            const response = await Api.get(getURI('tenders', { 'country__name': slug }))
-            return response.body
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    static async ContractDetailData(contractsId) {
+    static async ContractDetail(contractsId) {
         try {
             const response = await Api.get(`${getURI('contracts')}/${contractsId}`)
             return response.body
@@ -41,7 +32,7 @@ class CountryService {
 
     static async getTranslations(currentLocale) {
         const { data: translationData } = await axios.get(
-            `${API_URL}static/translations/${currentLocale}/words.json`
+            `${API_URL}/static/translations/${currentLocale}/words.json`
         )
         return { [currentLocale]: translationData }
     }

@@ -13,7 +13,7 @@ import { hasValidProperty } from "../../helpers/general"
 const ProductTable = (props) => {
     const { params } = props
     const { countrySlug } = useParams()
-    const [productList, setProductList] = useState([])
+    const [originalData, setOriginalData] = useState([])
     const [loading, setLoading] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(() => identity(pickBy(params)))
     const { countrySelectList } = useContractFilters()
@@ -27,13 +27,17 @@ const ProductTable = (props) => {
         })
             .then((response) => {
                 if (response) {
-                    setProductList(response)
+                    setOriginalData(response)
                 }
                 setLoading(false)
             })
             .catch((error) => {
                 setLoading(false)
             })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [selectedFilters])
 
     const showDetail = (id) => {
@@ -117,7 +121,7 @@ const ProductTable = (props) => {
                             <tr>
                                 <td colSpan={5}><Loader sm /></td>
                             </tr>
-                        ) : (productList.length ? productList.map((product, index) => {
+                        ) : (originalData.length ? originalData.map((product, index) => {
                                 return (
                                     <tr
                                         key={index}

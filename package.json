@@ -5,8 +5,8 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.13",
     "@amcharts/amcharts4-geodata": "^4.1.19",
-    "@sentry/react": "^6.0.3",
-    "@sentry/tracing": "^6.0.3",
+    "@sentry/react": "^6.1.0",
+    "@sentry/tracing": "^6.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

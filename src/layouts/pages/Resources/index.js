@@ -9,7 +9,7 @@ import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 
 const Resources = () => {
-    const [resourcesData, setResourcesData] = useState([])
+    const [resourceList, setResourceList] = useState([])
     const countries = useSelector((state) => state.general.countries)
     const [loading, setLoading] = useState(true)
     const history = useHistory()
@@ -39,9 +39,13 @@ const Resources = () => {
 
     useEffect(() => {
         CmsPageService.ResourceList().then((response) => {
-            setResourcesData(response.items)
+            setResourceList(response.items)
             setLoading(false)
         })
+
+        return () => {
+            setResourceList([])
+        }
     }, [])
 
     return (
@@ -153,8 +157,8 @@ const Resources = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                            {resourcesData &&
-                            resourcesData.map((resource, index) => {
+                            {resourceList &&
+                            resourceList.map((resource, index) => {
                                 return (
                                     <tr className="table-row cursor-pointer" key={index}
                                         onClick={() => showDetail(resource.id)}>

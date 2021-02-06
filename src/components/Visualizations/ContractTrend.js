@@ -10,7 +10,7 @@ const ContractTrend = (props) => {
     // State and variables
     // ===========================================================================
     const { viewType = ContractView.VALUE, selectedContinent } = props
-    const [originalData, setOriginalData] = useState([])
+    const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({})
     const [loading, setLoading] = useState(true)
     const dataColumn = viewType === ContractView.VALUE ? 'amount_usd' : 'tender_count'
@@ -21,10 +21,11 @@ const ContractTrend = (props) => {
                 setOriginalData(response.result)
                 setLoading(false)
             })
+
         return () => {
             setOriginalData({})
         }
-    }, [selectedContinent])
+    }, [])
 
     useEffect(() => {
         let chartData
@@ -38,7 +39,7 @@ const ContractTrend = (props) => {
                         )
                         .map((country) => ({
                             country: country.country,
-                            value: country[dataColumn],
+                            value: country[dataColumn]
                             // href: 'https://www.worldometers.info/img/flags/us-flag.gif'
                         }))
                     const sum = filtered.reduce((total, item) => (total += item.value), 0)

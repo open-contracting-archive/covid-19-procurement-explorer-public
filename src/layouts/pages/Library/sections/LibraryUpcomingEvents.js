@@ -6,16 +6,20 @@ import { formatDate, formatTime } from '../../../../helpers/date'
 import Loader from '../../../../components/Loader/Loader'
 
 const LibraryUpcomingEvents = () => {
-    const [eventList, setEventsData] = useState([])
+    const [eventList, setEventList] = useState([])
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.EventList({ limit: 3 })
             .then((response) => {
-                setEventsData(response.items)
+                setEventList(response.items)
                 setLoading(false)
             })
+
+        return () => {
+            setEventList([])
+        }
     }, [])
 
     return (

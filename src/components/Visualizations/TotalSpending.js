@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
@@ -16,11 +16,9 @@ const TotalSpending = (props) => {
     // ===========================================================================
     const { label = 'Total Spending', params, modalHandler } = props
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector(
-        (state) => state.general.countryCurrency
-    )
+    const countryCurrency = useSelector((state) => state.general.countryCurrency)
     const [loading, setLoading] = useState(true)
-    const [originalData, setOriginalData] = useState([])
+    const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({
         amount: '',
         percentage: '',
@@ -36,11 +34,15 @@ const TotalSpending = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.TotalSpending(params)
+        VisualizationService.TotalSpending(params)
             .then((response) => {
                 setOriginalData(response)
                 setLoading(false)
             })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params?.country, params?.buyer, params?.supplier])
 
     useEffect(() => {

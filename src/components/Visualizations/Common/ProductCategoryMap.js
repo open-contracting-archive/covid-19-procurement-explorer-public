@@ -2,34 +2,36 @@ import React, { useState, useEffect } from 'react'
 import Loader from '../../Loader/Loader'
 import TreeMapChart from '../../Charts/TreeMapChart/TreeMapChart'
 import useTrans from '../../../hooks/useTrans'
-import VisualizationServices from '../../../services/visualizationServices'
+import VisualizationService from '../../../services/VisualizationService'
 import ContractView from '../../../constants/ContractView'
 import { isEmpty } from 'lodash'
-import { ReactComponent as DownloadIcon } from '../../../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../../../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../../../assets/img/icons/ic_fullscreen.svg'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import ChartFooter from "../../Utilities/ChartFooter"
 
 const ProductCategoryMap = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const { params } = props
-    const handle = useFullScreenHandle()
     const [loading, setLoading] = useState(true)
+    const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
-    const [viewType, setViewType] = useState(ContractView.VALUE)
     const { trans } = useTrans()
+    const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductSummary(params).then((response) => {
+        VisualizationService.ProductSummary(params).then((response) => {
             setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params])
 
     useEffect(() => {
@@ -55,7 +57,7 @@ const ProductCategoryMap = (props) => {
     return (
         <div className="w-full mb-6">
             <div className="bg-white rounded p-4">
-                <FullScreen handle={handle}>
+                <FullScreen handle={fullScreenHandler}>
                     <div className="flex items-center justify-between mb-2">
                         <h3 className="uppercase font-bold  text-primary-dark">
                             {trans('Product Category Map')}
@@ -86,33 +88,8 @@ const ProductCategoryMap = (props) => {
 
                     {loading ? <Loader /> : <TreeMapChart data={chartData} />}
                 </FullScreen>
-                <div
-                    className="mt-4 flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                             text-primary-blue -mx-4 px-4">
-                    <div className="flex items-center">
-                        <div className="flex items-center mr-6">
-                            <DownloadIcon className="mr-2 inline-block" />
-                            <span>{trans('Download')}</span>
-                        </div>
-                        <span className="flex items-center">
-                            <ShareIcon className="mr-2 inline-block" />{' '}
-                            <span className="cursor-pointer">
-                                {trans('Share')}
-                            </span>
-                        </span>
-                    </div>
 
-                    <div>
-                        <span className="flex items-center">
-                            <button onClick={handle.enter}>
-                                <span className="cursor-pointer">
-                                    {trans('View full screen')}
-                                </span>
-                                <FullViewIcon className="ml-2 inline-block" />
-                            </button>
-                        </span>
-                    </div>
-                </div>
+                <ChartFooter fullScreenHandler={fullScreenHandler} />
             </div>
         </div>
     )

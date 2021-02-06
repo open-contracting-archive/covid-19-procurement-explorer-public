@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import PieChart from '../Charts/PieChart/PieChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import { formatNumber } from '../../helpers/number'
 
 const colors = ['#ABBABF', '#DCEAEE']
@@ -15,21 +15,23 @@ const DirectOpen = (props) => {
     // ===========================================================================
     const { label, params, heightFull } = props
     const [loading, setLoading] = useState(true)
-    const [directOpen, setDirectOpen] = useState()
+    const [originalData, setOriginalData] = useState([])
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector(
-        (state) => state.general.countryCurrency
-    )
+    const countryCurrency = useSelector((state) => state.general.countryCurrency)
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.DirectOpen(params).then((response) => {
-            setDirectOpen(response)
+        VisualizationService.DirectOpen(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params?.country, params?.buyer, params?.supplier])
 
     // ===========================================================================
@@ -37,8 +39,8 @@ const DirectOpen = (props) => {
     // ===========================================================================
     // Direct open chart
     const directOpenByValue =
-        directOpen &&
-        directOpen.map((data) => {
+        originalData &&
+        originalData.map((data) => {
             return {
                 value: data.procedure,
                 number: currency === 'usd' ? data.amount_usd : data.amount_local
@@ -46,8 +48,8 @@ const DirectOpen = (props) => {
         })
 
     const directOpenByNumber =
-        directOpen &&
-        directOpen.map((data) => {
+        originalData &&
+        originalData.map((data) => {
             return { value: data.procedure, number: data.tender_count }
         })
 

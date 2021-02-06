@@ -11,7 +11,7 @@ const ShortTenderTable = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const [tenderList, setTenderList] = useState([])
+    const [originalData, setOriginalData] = useState([])
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     const history = useHistory()
@@ -23,13 +23,17 @@ const ShortTenderTable = () => {
         ContractService.ContractList({ limit: 20 })
             .then((response) => {
                 if (response.results) {
-                    setTenderList([...response.results])
+                    setOriginalData([...response.results])
                 }
                 setLoading(false)
             })
             .catch((error) => {
                 setLoading(false)
             })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [])
 
     // ===========================================================================
@@ -99,7 +103,7 @@ const ShortTenderTable = () => {
                                     </thead>
 
                                     <tbody>
-                                    {tenderList && tenderList.map((tender, index) => {
+                                    {originalData && originalData.map((tender, index) => {
                                         return (
                                             <tr
                                                 key={index}
@@ -168,7 +172,7 @@ const ShortTenderTable = () => {
                                     </tbody>
                                 </table>
 
-                                {!tenderList.length && (
+                                {!originalData.length && (
                                     <div
                                         className="flex items-center justify-center bg-white rounded-md"
                                         style={{

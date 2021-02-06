@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
@@ -6,40 +6,40 @@ import useTrans from '../../hooks/useTrans'
 const contracts_red_flag_data = [
     {
         name: 'Direct contract or single bid received',
-        value: 50
+        value: 0
     },
     {
         name:
             'Contract value is higher or lower than average for this item category',
-        value: 21
+        value: 0
     },
     {
         name: 'Contract value is higher than tender value',
-        value: 150
+        value: 0
     },
     {
         name:
             'Contract is awarded to supplier that has won a disproportionate number of contracts of the same type',
-        value: 10
+        value: 0
     },
     {
         name:
             'Contract is awarded to supplier that has similar information (address, number, legal representative) to other suppliers for the same buyer',
-        value: 39
+        value: 0
     },
     {
         name: 'Direct contract or single bid received',
-        value: 87
+        value: 0
     },
     {
         name:
             'Contract is awarded to supplier that has won a disproportionate number of contracts of the same type',
-        value: 32
+        value: 0
     },
     {
         name:
             'Contract value is higher or lower than average for this item category',
-        value: 76
+        value: 0
     }
 ]
 

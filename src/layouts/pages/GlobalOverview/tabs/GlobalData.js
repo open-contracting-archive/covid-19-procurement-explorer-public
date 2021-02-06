@@ -17,7 +17,7 @@ import {
     ContractsRedFlags,
     ContractsCorrelation
 } from '../../../../components/Visualizations'
-import VisualizationModal from "../../../../pages/GlobalOverview/modal/VisualizationModal"
+import VisualizationModal from "../modal/VisualizationModal"
 import useTrans from "../../../../hooks/useTrans"
 import 'react-simple-hook-modal/dist/styles.css'
 

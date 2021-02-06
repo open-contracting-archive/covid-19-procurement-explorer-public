@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 
@@ -11,17 +11,21 @@ const AverageBidsPerContract = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [averageBids, setAverageBids] = useState()
+    const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.AverageBids(params).then((response) => {
-            setAverageBids(response)
+        VisualizationService.AverageBids(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData({})
+        }
     }, [params?.country, params?.buyer])
 
     // ===========================================================================
@@ -49,11 +53,11 @@ const AverageBidsPerContract = (props) => {
 
     // Average bids
     const averageBidsLineChartDataRaw =
-        averageBids && lineChartData(averageBids.line_chart)
+        originalData && lineChartData(originalData.line_chart)
     const averageBidsLineChartData =
         averageBidsLineChartDataRaw && sortDate(averageBidsLineChartDataRaw)
-    const averageBidsAmount = averageBids && averageBids.average
-    const averageBidsPercentage = averageBids && averageBids.difference
+    const averageBidsAmount = originalData && originalData.average
+    const averageBidsPercentage = originalData && originalData.difference
 
     return (
         <div className="bg-white rounded p-4 h-full">

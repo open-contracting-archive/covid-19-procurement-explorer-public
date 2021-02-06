@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import BarListSection from '../BarListSection/BarListSection'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
 
 const Concentration = (props) => {
     // ===========================================================================
@@ -9,17 +9,21 @@ const Concentration = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
-    const [productDistribution, setProductDistribution] = useState()
+    const [originalData, setOriginalData] = useState([])
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductDistribution(params)
+        VisualizationService.ProductDistribution(params)
             .then((response) => {
-                setProductDistribution(response)
+                setOriginalData(response)
                 setLoading(false)
             })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params])
 
     // ===========================================================================
@@ -55,11 +59,11 @@ const Concentration = (props) => {
         }
     }
     const productDistributionDataByNumber =
-        productDistribution &&
-        calculateProductChartPercentage(productDistribution, 'by_number')
+        originalData &&
+        calculateProductChartPercentage(originalData, 'by_number')
     const productDistributionDataByValue =
-        productDistribution &&
-        calculateProductChartPercentage(productDistribution, 'by_value')
+        originalData &&
+        calculateProductChartPercentage(originalData, 'by_value')
 
     return (
         <div className="bg-white rounded h-full">

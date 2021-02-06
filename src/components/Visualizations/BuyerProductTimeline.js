@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import useTrans from '../../hooks/useTrans'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import Loader from '../../components/Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
-import VisualizationServices from '../../services/visualizationServices'
+import VisualizationService from '../../services/VisualizationService'
+import ChartFooter from "../Utilities/ChartFooter"
 
 const BuyerProductTimeline = (props) => {
     // ===========================================================================
@@ -14,26 +12,30 @@ const BuyerProductTimeline = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
+    const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
-    const [apiData, setApiData] = useState([])
     const [buyerProductTimelineType, setBuyerProductTimelineType] = useState(
         'value'
     )
     const { trans } = useTrans()
-    const handle = useFullScreenHandle()
+    const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationServices.ProductTimelineRace(params).then((response) => {
-            setApiData(response)
+        VisualizationService.ProductTimelineRace(params).then((response) => {
+            setOriginalData(response)
             setLoading(false)
         })
+
+        return () => {
+            setOriginalData([])
+        }
     }, [params])
 
     useEffect(() => {
-        const groupedData = apiData.slice(-1).pop()
+        const groupedData = originalData.slice(-1).pop()
 
         if (groupedData) {
             const formattedData = groupedData.details.map((detail) => {
@@ -48,13 +50,13 @@ const BuyerProductTimeline = (props) => {
             setChartData(formattedData)
             setLoading(false)
         }
-    }, [apiData, buyerProductTimelineType])
+    }, [originalData, buyerProductTimelineType])
 
     const barColorValue = '#ABBABF'
 
     return (
         <div className="bg-white rounded p-4 h-full">
-            <FullScreen handle={handle}>
+            <FullScreen handle={fullScreenHandler}>
                 <div className="flex justify-between">
                     <h3 className="uppercase font-bold  text-primary-dark">
                         {label}
@@ -102,31 +104,7 @@ const BuyerProductTimeline = (props) => {
                 )}
             </FullScreen>
 
-            <div
-                className="flex items-center justify-between pt-4 border-t border-blue-0 text-sm
-                                             text-primary-blue -mx-4 px-4">
-                <div className="flex items-center">
-                    <div className="flex items-center mr-6">
-                        <DownloadIcon className="mr-2 inline-block" />
-                        <span>Download</span>
-                    </div>
-                    <span className="flex items-center">
-                        <ShareIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">Share</span>
-                    </span>
-                </div>
-
-                <div>
-                    <span className="flex items-center">
-                        <button onClick={handle.enter}>
-                            <span className="cursor-pointer">
-                                View full screen
-                            </span>
-                            <FullViewIcon className="ml-2 inline-block" />
-                        </button>
-                    </span>
-                </div>
-            </div>
+            <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
 }

@@ -6,15 +6,19 @@ import useTrans from '../../../../hooks/useTrans'
 import Loader from "../../../../components/Loader/Loader"
 
 const LibraryResources = () => {
-    const [resourceList, setResourcesData] = useState([])
+    const [resourceList, setResourceList] = useState([])
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.ResourceList().then((response) => {
-            setResourcesData(response.items)
+            setResourceList(response.items)
             setLoading(false)
         })
+
+        return () => {
+            setResourceList([])
+        }
     }, [])
 
     return (
