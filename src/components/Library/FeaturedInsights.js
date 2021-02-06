@@ -59,7 +59,7 @@ const FeaturedInsights = ({ params }) => {
                                     {item.title}
                                 </h3>
                                 <p className="news-caption__date">
-                                    {formatDate(item.published_date)}
+                                    {formatDate(item.news_date)}
                                 </p>
                             </div>
                         </Link>

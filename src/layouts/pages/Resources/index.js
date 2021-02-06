@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import {get} from 'lodash'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
+import useCountries from "../../../hooks/useCountries"
 
 const Resources = () => {
     const [resourceList, setResourceList] = useState([])
-    const countries = useSelector((state) => state.general.countries)
+    const {countryNameById} = useCountries()
     const [loading, setLoading] = useState(true)
     const history = useHistory()
     window.scrollTo(0, 0)
@@ -20,17 +20,6 @@ const Resources = () => {
         { value: 'option-2', label: 'Option 2' },
         { value: 'option-3', label: 'Option 3' }
     ]
-
-    const getCountryName = (resource) => {
-        const countryId = get(resource, 'country.id', null)
-
-        if (!countryId) {
-            return ''
-        }
-
-        const country = countries.find((country) => country.id === countryId)
-        return country ? country.name : countryId
-    }
 
     function showDetail(id) {
         let path = `/resources/${id}`
@@ -163,7 +152,7 @@ const Resources = () => {
                                     <tr className="table-row cursor-pointer" key={index}
                                         onClick={() => showDetail(resource.id)}>
                                         <td>{resource.title}</td>
-                                        <td>{ getCountryName(resource)}</td>
+                                        <td>{ countryNameById(get(resource, 'country.id', null))}</td>
                                         <td>{resource.resource_type}</td>
                                     </tr>
                                 )

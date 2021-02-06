@@ -75,7 +75,7 @@ const Blogs = () => {
                                             </span>
                                     </p>
                                     <p>
-                                        {formatDate(blogs.published_date)}
+                                        {formatDate(blogs.news_date)}
                                     </p>
                                 </div>
                                 {/* <p className="blog-caption__details mt-4"> </p> */}

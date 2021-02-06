@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -12,34 +12,6 @@ const SankeyChart = ({ data }) => {
         // Themes begin
         am4core.useTheme(am4themes_animated)
         // Themes end
-
-        function processData(data) {
-            let treeData = []
-
-            let smallBrands = { name: 'Other', children: [] }
-
-            for (var brand in data) {
-                let brandData = { name: brand, children: [] }
-                let brandTotal = 0
-                for (var model in data[brand]) {
-                    brandTotal += data[brand][model]
-
-                    if (data[brand][model] > 100) {
-                        brandData.children.push({
-                            name: model,
-                            count: data[brand][model]
-                        })
-                    }
-                }
-
-                // only bigger brands
-                if (brandTotal > 200000) {
-                    treeData.push(brandData)
-                }
-            }
-
-            return treeData
-        }
 
         // Create chart instance
         let chart = am4core.create(sankeyChart.current, am4charts.SankeyDiagram)

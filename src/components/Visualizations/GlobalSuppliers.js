@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import { isEmpty } from 'lodash'
+import { isEmpty, get } from 'lodash'
 import SankeyChart from '../Charts/SankeyChart/SankeyChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from '../Utilities/ChartFooter'
+import ChartFooter from "../Utilities/ChartFooter"
+import ContractView from "../../constants/ContractView"
 import HelpText from '../../components/HelpText/HelpText'
 
 const GlobalSuppliers = (props) => {
@@ -15,11 +15,12 @@ const GlobalSuppliers = (props) => {
     // ===========================================================================
     const { label, params } = props
     const [loading, setLoading] = useState(true)
+    const [chartType, setChartType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
+    const [chartData, setChartData] = useState([])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
-    const helpText =
-        'Top 10 suppliers in each product category according to contracts value or number of signed contracts'
+    const helpText = 'Top 10 suppliers in each product category according to contracts value or number of signed contracts'
 
     // ===========================================================================
     // Hooks
@@ -35,58 +36,63 @@ const GlobalSuppliers = (props) => {
         }
     }, [params?.country])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-
-    // Global Suppliers Visualization
-    const getSuppliersData = (data, type) => {
-        let suppliersData = {}
-
-        if (isEmpty(data)) {
-            return []
+    useEffect(() => {
+        if (!isEmpty(originalData)) {
+            let set1 = get(originalData, `by_${chartType}.product_country`, [])
+                .map((item) => {
+                    return {
+                        from: item.product_name,
+                        to: item.country_name,
+                        value:
+                            chartType === ContractView.VALUE ? item.amount_usd : item.tender_count
+                    }
+                })
+            let set2 = get(originalData, `by_${chartType}.supplier_product`, [])
+                .map((item) => {
+                    return {
+                        from: item.supplier_name,
+                        to: item.product_name,
+                        value:
+                            chartType === ContractView.VALUE ? item.amount_usd : item.tender_count
+                    }
+                })
+            setChartData([...set2, ...set1])
         }
 
-        let set1 = data[type].product_country.map((item) => {
-            return {
-                ...suppliersData,
-                from: item.product_name,
-                to: item.country_name,
-                value: type === 'by_value' ? item.amount_usd : item.tender_count
-            }
-        })
-        let set2 = data[type].supplier_product.map((item) => {
-            return {
-                ...suppliersData,
-                from: item.supplier_name,
-                to: item.product_name,
-                value: type === 'by_value' ? item.amount_usd : item.tender_count
-            }
-        })
-        return [...set2, ...set1]
-    }
-    const globalSuppliersDataByNumber =
-        originalData && getSuppliersData(originalData, 'by_number')
-    const globalSuppliersDataByValue =
-        originalData && getSuppliersData(originalData, 'by_value')
+        return () => {
+            setChartData([])
+        }
+    }, [originalData, chartType])
 
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex items-center">
-                    <h3 className="uppercase font-bold text-primary-dark inline-block">
-                        {trans(label ? label : 'Global Suppliers')}
+                <div className="flex items-center justify-between">
+                    <h3 className="uppercase font-bold text-primary-dark">
+                        {trans(label)}
                     </h3>
                     <HelpText helpTextInfo={helpText} />
+                    <div className="flex justify-end world-map-chart mb-4">
+                        <ul className="contract-switch flex">
+                            <li
+                                className={`mr-4 cursor-pointer ${
+                                    chartType === 'value' ? 'active' : ''
+                                }`}
+                                onClick={() => setChartType('value')}>
+                                {trans('By contract value')}
+                            </li>
+                            <li
+                                className={`cursor-pointer ${
+                                    chartType === 'number' ? 'active' : ''
+                                }`}
+                                onClick={() => setChartType('number')}>
+                                {trans('By number of contracts')}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <Tabs>
-                    <TabList>
-                        <Tab>{trans('By contract value')}</Tab>
-                        <Tab>{trans('By number of contracts')}</Tab>
-                    </TabList>
-
-                    {/* <ul className="flex items-center my-4">
+                {/* <ul className="flex items-center my-4">
                         <li className="inline-block mr-2 px-4 py-2 rounded-full bg-blue-50 text-white">
                             {trans('Global suppliers chain')}
                         </li>
@@ -95,25 +101,15 @@ const GlobalSuppliers = (props) => {
                         </li>
                     </ul> */}
 
-                    {loading ? (
-                        <Loader />
-                    ) : (
-                        <div className="flex mt-4">
-                            <div className="flex-1">
-                                <TabPanel>
-                                    <SankeyChart
-                                        data={globalSuppliersDataByValue}
-                                    />
-                                </TabPanel>
-                                <TabPanel>
-                                    <SankeyChart
-                                        data={globalSuppliersDataByNumber}
-                                    />
-                                </TabPanel>
-                            </div>
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <div className="flex mt-4">
+                        <div className="flex-1">
+                            <SankeyChart data={chartData} />
                         </div>
-                    )}
-                </Tabs>
+                    </div>
+                )}
             </FullScreen>
 
             <ChartFooter fullScreenHandler={fullScreenHandler} />

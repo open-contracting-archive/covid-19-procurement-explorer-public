@@ -57,7 +57,7 @@ const LibraryBlogs = () => {
                                                 </h3>
                                             </Link>
                                             <p className="blogs-caption__date">
-                                                {formatDate(blog.published_date, 'MMM DD, YYYY')}
+                                                {formatDate(blog.news_date, 'MMM DD, YYYY')}
                                             </p>
                                         </div>
                                     </div>

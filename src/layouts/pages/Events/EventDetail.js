@@ -7,7 +7,7 @@ import ShareButtons from '../../../components/Library/ShareButtons'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
 
-const EventsDetail = () => {
+const EventDetail = () => {
     const [eventDetail, setEventDetail] = useState({})
     const [eventList, setEventList] = useState([])
     const [loading, setLoading] = useState(true)
@@ -89,23 +89,13 @@ const EventsDetail = () => {
                                     dangerouslySetInnerHTML={{
                                         __html:
                                         eventDetail.rendered_description
-                                    }}></div>
-                                <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
-                                    <div className="flex">
-                                        <p className="font-bold opacity-40 mr-4">
-                                            {trans('Share on')}
-                                        </p>
-                                        <ShareButtons
-                                            url={window.location.href}
-                                        />
-                                    </div>
+                                    }} />
+                                <div className="block lg:hidden">
+                                    <ShareButtons />
                                 </div>
                             </div>
                             <div className="hidden lg:block">
-                                <p className="font-bold opacity-40 mb-2">
-                                    {trans('Share on')}
-                                </p>
-                                <ShareButtons url={window.location.href} />
+                                <ShareButtons />
                             </div>
                         </div>
                         {eventList.length !== 1 ? (
@@ -197,4 +187,4 @@ const EventsDetail = () => {
     )
 }
 
-export default EventsDetail
+export default EventDetail

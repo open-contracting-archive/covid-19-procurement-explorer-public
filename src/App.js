@@ -22,11 +22,11 @@ import Library from './layouts/pages/Library'
 import News from './layouts/pages/News'
 import NewsDetail from './layouts/pages/News/NewsDetail'
 import Blogs from './layouts/pages/Blog'
-import BlogsDetail from './layouts/pages/Blog/BlogsDetail'
+import BlogDetail from './layouts/pages/Blog/BlogDetail'
 import Events from './layouts/pages/Events'
-import EventsDetail from './layouts/pages/Events/EventsDetail'
+import EventDetail from './layouts/pages/Events/EventDetail'
 import Resources from './layouts/pages/Resources'
-import ResourcesDetail from './layouts/pages/Resources/ResourcesDetail'
+import ResourceDetail from './layouts/pages/Resources/ResourceDetail'
 import StaticPage from './layouts/pages/StaticPage'
 import Tags from './layouts/pages/Library/Tags'
 import TenderDetail from './layouts/pages/Tender/TenderDetail'
@@ -116,19 +116,19 @@ function App() {
                         <Route
                             exact
                             path="/blogs/:id"
-                            component={BlogsDetail}
+                            component={BlogDetail}
                         />
                         <Route exact path="/events" component={Events} />
                         <Route
                             exact
                             path="/events/:id"
-                            component={EventsDetail}
+                            component={EventDetail}
                         />
                         <Route exact path="/resources" component={Resources} />
                         <Route
                             exact
                             path="/resources/:id"
-                            component={ResourcesDetail}
+                            component={ResourceDetail}
                         />
                         <Route path="/library" component={Library} />
                         <Route path="/tags" component={Tags} />

@@ -64,7 +64,7 @@ const NewsSection = () => {
                                                     {news.title}
                                                 </h3>
                                                 <p className="news-caption__date">
-                                                    {formatDate(news.published_date, 'MMM DD, YYYY')}
+                                                    {formatDate(news.news_date, 'MMM DD, YYYY')}
                                                 </p>
                                             </div>
                                         </Link>

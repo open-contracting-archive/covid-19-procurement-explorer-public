@@ -17,9 +17,6 @@ const WorldMapRace = () => {
     // ===========================================================================
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
-    const url = () => {
-        window.location.href
-    }
 
     return (
         <section className="pt-16 bg-primary-gray pb-24">
