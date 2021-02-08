@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import { formatNumber } from '../../helpers/number'
+import HelpText from '../../components/HelpText/HelpText'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -19,6 +20,8 @@ const DirectOpen = (props) => {
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector((state) => state.general.countryCurrency)
     const { trans } = useTrans()
+    const helpText =
+        'Total value of COVID contracts signed using direct or open procurement methods'
 
     // ===========================================================================
     // Hooks
@@ -63,9 +66,12 @@ const DirectOpen = (props) => {
             ) : (
                 <Tabs>
                     <div className="flex items-center justify-between">
-                        <h3 className="uppercase font-bold  text-primary-dark">
-                            {trans(label ? label : 'Direct/Open')}
-                        </h3>
+                        <div className="flex items-center">
+                            <h3 className="uppercase font-bold text-primary-dark inline-block">
+                                {trans(label ? label : 'Direct/Open')}
+                            </h3>
+                            <HelpText helpTextInfo={helpText} />
+                        </div>
                         <div className="flex">
                             <TabList>
                                 <Tab>{trans('By value')}</Tab>

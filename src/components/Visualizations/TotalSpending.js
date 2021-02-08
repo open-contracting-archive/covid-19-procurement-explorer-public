@@ -28,7 +28,7 @@ const TotalSpending = (props) => {
     })
     const barColorValue = '#ABBABF'
     const { trans } = useTrans()
-    const helpText = "This is a help text for the total spending visualization"
+    const helpText = 'Total value of COVID related contracts'
 
     // ===========================================================================
     // Hooks

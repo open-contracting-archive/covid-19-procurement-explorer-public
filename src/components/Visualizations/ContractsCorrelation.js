@@ -6,7 +6,8 @@ import CombinedChart from '../Charts/CombinedChart/CombinedChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import { dateDiff } from '../../helpers/date'
-import ChartFooter from "../Utilities/ChartFooter"
+import ChartFooter from '../Utilities/ChartFooter'
+import HelpText from '../../components/HelpText/HelpText'
 
 const ContractsCorrelation = (props) => {
     // ===========================================================================
@@ -17,6 +18,8 @@ const ContractsCorrelation = (props) => {
     const [originalData, setOriginalData] = useState([])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
+    const helpText =
+        'Correlation between number of active COVID cases and value of COVID contracts signed'
 
     // ===========================================================================
     // Hooks
@@ -74,9 +77,16 @@ const ContractsCorrelation = (props) => {
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={fullScreenHandler}>
-                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {label}
-                </h3>
+                <div className="flex items-center">
+                    <h3 className="uppercase font-bold text-primary-dark inline-block">
+                        {trans(
+                            label
+                                ? label
+                                : 'COVID/contracts quantity correlation'
+                        )}
+                    </h3>
+                    <HelpText helpTextInfo={helpText} />
+                </div>
                 <Tabs>
                     <TabList>
                         <Tab>{trans('By contract value')}</Tab>

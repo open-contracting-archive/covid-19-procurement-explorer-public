@@ -24,11 +24,10 @@ const ContractStatus = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ContractStatus(params)
-            .then((response) => {
-                setOriginalData(response)
-                setLoading(false)
-            })
+        VisualizationService.ContractStatus(params).then((response) => {
+            setOriginalData(response)
+            setLoading(false)
+        })
 
         return () => {
             setOriginalData([])
@@ -41,8 +40,8 @@ const ContractStatus = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item.amount_local
+                    : item.amount_usd
             })
             let chartDataFormatted = originalData.map((item) => {
                 let actualValue =
@@ -67,11 +66,11 @@ const ContractStatus = (props) => {
 
     return (
         <div className="bg-white rounded p-6 pb-0 h-full">
-            <div className="flex items-center justify-between">
-                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+            <div className="flex items-center justify-between mb-4">
+                <h3 className="uppercase font-bold  text-primary-dark">
                     {trans(label)}
                 </h3>
-                <div className="flex justify-end world-map-chart mb-4">
+                <div className="flex justify-end world-map-chart">
                     <ul className="contract-switch flex">
                         <li
                             className={`mr-4 cursor-pointer ${isActiveTab(
@@ -81,7 +80,7 @@ const ContractStatus = (props) => {
                             {trans('By value')}
                         </li>
                         <li
-                            className={`mr-4 cursor-pointer ${isActiveTab(
+                            className={`cursor-pointer ${isActiveTab(
                                 ContractView.NUMBER
                             )}`}
                             onClick={() => setViewType(ContractView.NUMBER)}>

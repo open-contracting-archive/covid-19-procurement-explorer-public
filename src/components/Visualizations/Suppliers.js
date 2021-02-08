@@ -4,6 +4,7 @@ import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
+import HelpText from '../../components/HelpText/HelpText'
 
 const Suppliers = (props) => {
     // ===========================================================================
@@ -13,6 +14,7 @@ const Suppliers = (props) => {
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
+    const helpText = 'Number of suppliers who cigned at least 1 COVID contract'
 
     // ===========================================================================
     // Hooks
@@ -63,9 +65,12 @@ const Suppliers = (props) => {
 
     return (
         <div className="bg-white rounded p-4 h-full">
-            <h3 className="uppercase font-bold  text-primary-dark">
-                {trans(label ? label : 'Suppliers')}
-            </h3>
+            <div className="flex items-center">
+                <h3 className="uppercase font-bold text-primary-dark inline-block">
+                    {trans(label ? label : 'Suppliers')}
+                </h3>
+                <HelpText helpTextInfo={helpText} />
+            </div>
             {loading ? (
                 <Loader sm />
             ) : (

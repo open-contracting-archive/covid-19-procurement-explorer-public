@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader'
 import VisualizationService from '../../services/VisualizationService'
 import { useSelector } from 'react-redux'
 import { formatNumber } from '../../helpers/number'
+import HelpText from '../../components/HelpText/HelpText'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -17,7 +18,9 @@ const EquityIndicators = (props) => {
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState([])
     const { trans } = useTrans()
-
+    const helpText =
+        'Total value of contracts defined as equitable. More information about equity indicators can be found in the methodology.'
+    
     // ===========================================================================
     // Hooks
     // ===========================================================================
@@ -63,9 +66,12 @@ const EquityIndicators = (props) => {
             ) : (
                 <Tabs>
                     <div className="flex items-center justify-between">
-                        <h3 className="uppercase font-bold  text-primary-dark">
-                            {trans(label ? label : 'Equity Indicators')}
-                        </h3>
+                        <div className="flex items-center">
+                            <h3 className="uppercase font-bold text-primary-dark inline-block">
+                                {trans(label ? label : 'Equity Indicators')}
+                            </h3>
+                            <HelpText helpTextInfo={helpText} />
+                        </div>
                         <div className="flex">
                             <TabList>
                                 <Tab>{trans('By value')}</Tab>

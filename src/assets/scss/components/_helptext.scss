@@ -19,7 +19,7 @@
     pointer-events: none;
     transition: all 0.23s linear;
     left: -6px;
-    z-index: 1;
+    z-index: 999;
 
     &:before {
         content: '';
