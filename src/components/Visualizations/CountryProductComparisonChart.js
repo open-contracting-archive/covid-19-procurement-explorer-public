@@ -121,7 +121,7 @@ const CountryProductChart = (props) => {
     ]
 
     return (
-        <div className="flex flex-wrap -mx-4 -mb-4">
+        <div className="flex flex-wrap -mb-4">
             <div className="w-full px-4 mb-4 border border-blue-0 rounded pb-4">
                 <FullScreen handle={fullScreenHandler}>
                     <h2 className="uppercase font-bold text-primary-dark inline-block px-4 pt-4">

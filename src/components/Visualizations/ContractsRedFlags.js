@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
+import HelpText from '../../components/HelpText/HelpText'
 
 const contracts_red_flag_data = [
     {
@@ -43,12 +44,15 @@ const contracts_red_flag_data = [
     }
 ]
 
-function ContractsRedFlag() {
+function ContractsRedFlag(props) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
+    const { label = 'Contracts with red flags' } = props
     const { trans } = useTrans()
+    const helpText =
+        'The methodology of red flags calculation can be found here.'
 
     // ===========================================================================
     // Hooks
@@ -63,10 +67,13 @@ function ContractsRedFlag() {
                 <Loader />
             ) : (
                 <div>
-                    <h3 className="uppercase font-bold flex items-center text-primary-dark mb-6">
-                        {trans('Contracts with red flags')}
+                    <div className="flex items-center mb-4">
+                        <h3 className="uppercase font-bold text-primary-dark inline-block">
+                            {trans(label ? label : 'Contracts with red flags')}
+                        </h3>
                         <FlagIcon className="ml-2 inline-block" />
-                    </h3>
+                        <HelpText helpTextInfo={helpText} />
+                    </div>
                     <div>
                         <div className="custom-horizontal-bar">
                             <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">

@@ -74,11 +74,11 @@ const TopSuppliers = (props) => {
     return (
         <div className="bg-white rounded h-full">
             <div className="bg-white rounded p-6 pb-12">
-                <div className="flex items-center justify-between flex-wrap">
-                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                <div className="flex items-center justify-between flex-wrap mb-4">
+                    <h3 className="uppercase font-bold  text-primary-dark">
                         {trans(label)}
                     </h3>
-                    <div className="flex justify-end world-map-chart mb-4">
+                    <div className="flex justify-end world-map-chart">
                         <ul className="contract-switch flex">
                             <li
                                 className={`mr-4 cursor-pointer ${isActiveTab(

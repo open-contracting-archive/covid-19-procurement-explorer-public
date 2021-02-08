@@ -5,7 +5,8 @@ import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
-import Visualization from "../../constants/Visualization"
+import Visualization from '../../constants/Visualization'
+import HelpText from '../../components/HelpText/HelpText'
 
 const TotalContracts = (props) => {
     const barColorValue = '#ABBABF'
@@ -17,6 +18,7 @@ const TotalContracts = (props) => {
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
+    const helpText = 'Quantity of COVID related contracts'
 
     // ===========================================================================
     // Hooks
@@ -66,7 +68,13 @@ const TotalContracts = (props) => {
 
     return (
         <div className="bg-white rounded p-4 h-full">
-            <h3 className="uppercase font-bold  text-primary-dark">{label}</h3>
+            <div className="flex items-center">
+                <h3 className="uppercase font-bold text-primary-dark inline-block">
+                    {trans(label ? label : 'Total Contracts')}
+                </h3>
+                <HelpText helpTextInfo={helpText} />
+            </div>
+
             {loading ? (
                 <Loader sm />
             ) : (
@@ -95,8 +103,11 @@ const TotalContracts = (props) => {
                 </div>
             )}
             {modalHandler && (
-                <span className="cursor-pointer"
-                      onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>View more</span>
+                <span
+                    className="cursor-pointer"
+                    onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>
+                    View more
+                </span>
             )}
         </div>
     )

@@ -6,7 +6,8 @@ import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from "../Utilities/ChartFooter"
+import ChartFooter from '../Utilities/ChartFooter'
+import HelpText from '../../components/HelpText/HelpText'
 
 const GlobalSuppliers = (props) => {
     // ===========================================================================
@@ -17,6 +18,8 @@ const GlobalSuppliers = (props) => {
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
+    const helpText =
+        'Top 10 suppliers in each product category according to contracts value or number of signed contracts'
 
     // ===========================================================================
     // Hooks
@@ -49,8 +52,7 @@ const GlobalSuppliers = (props) => {
                 ...suppliersData,
                 from: item.product_name,
                 to: item.country_name,
-                value:
-                    type === 'by_value' ? item.amount_usd : item.tender_count
+                value: type === 'by_value' ? item.amount_usd : item.tender_count
             }
         })
         let set2 = data[type].supplier_product.map((item) => {
@@ -58,8 +60,7 @@ const GlobalSuppliers = (props) => {
                 ...suppliersData,
                 from: item.supplier_name,
                 to: item.product_name,
-                value:
-                    type === 'by_value' ? item.amount_usd : item.tender_count
+                value: type === 'by_value' ? item.amount_usd : item.tender_count
             }
         })
         return [...set2, ...set1]
@@ -72,9 +73,12 @@ const GlobalSuppliers = (props) => {
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={fullScreenHandler}>
-                <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                    {trans(label)}
-                </h3>
+                <div className="flex items-center">
+                    <h3 className="uppercase font-bold text-primary-dark inline-block">
+                        {trans(label ? label : 'Global Suppliers')}
+                    </h3>
+                    <HelpText helpTextInfo={helpText} />
+                </div>
 
                 <Tabs>
                     <TabList>

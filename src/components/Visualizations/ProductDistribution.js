@@ -8,6 +8,7 @@ import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
+import HelpText from '../../components/HelpText/HelpText'
 
 const ProductDistribution = (props) => {
     // ===========================================================================
@@ -21,6 +22,7 @@ const ProductDistribution = (props) => {
     const [chartData, setChartData] = useState([])
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const { trans } = useTrans()
+    const helpText = 'Contracts distribution by type of goods & services'
 
     // ===========================================================================
     // Hooks
@@ -42,8 +44,8 @@ const ProductDistribution = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item.amount_local
+                    : item.amount_usd
             })
             let chartDataFormatted = originalData
                 .sort((a, b) => {
@@ -78,11 +80,14 @@ const ProductDistribution = (props) => {
     return (
         <div className="bg-white rounded h-full">
             <div className="bg-white rounded p-6 pb-0">
-                <div className="flex items-center justify-between flex-wrap">
-                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
-                        {trans(label)}
-                    </h3>
-                    <div className="flex justify-end world-map-chart mb-4">
+                <div className="flex items-center justify-between flex-wrap mb-4">
+                    <div className="flex items-center">
+                        <h3 className="uppercase font-bold text-primary-dark inline-block">
+                            {trans(label ? label : 'Product Distribution')}
+                        </h3>
+                        <HelpText helpTextInfo={helpText} />
+                    </div>
+                    <div className="flex justify-end world-map-chart">
                         <ul className="contract-switch flex">
                             <li
                                 className={`mr-4 cursor-pointer ${isActiveTab(
