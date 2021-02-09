@@ -17,8 +17,8 @@ import {
     ContractsRedFlags,
     ContractsCorrelation
 } from '../../../../components/Visualizations'
-import VisualizationModal from "../modal/VisualizationModal"
-import useTrans from "../../../../hooks/useTrans"
+import VisualizationModal from '../modal/VisualizationModal'
+import useTrans from '../../../../hooks/useTrans'
 import 'react-simple-hook-modal/dist/styles.css'
 
 const GlobalData = () => {
@@ -46,7 +46,8 @@ const GlobalData = () => {
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <TotalContracts
                             label="Total Contracts"
-                            modalHandler={modalHandler} />
+                            modalHandler={modalHandler}
+                        />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <AverageBidsPerContract label="Average bids per contract" />
@@ -70,16 +71,16 @@ const GlobalData = () => {
                         <TopSuppliers label="Top Suppliers" />
                         <Link
                             to="/global-overview/suppliers"
-                            className="absolute -mt-12 text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                            View All
+                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                            View in detail →
                         </Link>
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4 relative">
                         <TopBuyers label="Top Buyers" />
                         <Link
                             to="/global-overview/buyers"
-                            className="absolute -mt-12 text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                            View All
+                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                            View in detail →
                         </Link>
                     </div>
                     <div className="w-full px-2 mb-4">
@@ -100,7 +101,10 @@ const GlobalData = () => {
                 id="any-unique-identifier"
                 isOpen={isModalOpen}
                 transition={ModalTransition.NONE}>
-                <VisualizationModal visualizationType={modalVisualization} closeModal={closeModal} />
+                <VisualizationModal
+                    visualizationType={modalVisualization}
+                    closeModal={closeModal}
+                />
             </Modal>
         </section>
     )

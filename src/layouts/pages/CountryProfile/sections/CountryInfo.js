@@ -8,11 +8,23 @@ const CountryInfo = ({ country }) => {
     const { trans } = useTrans()
 
     return (
-        <div className="w-full md:w-1/2 lg:w-38 px-4 mb-4 relative">
-            <div className="flex flex-col  text-primary-dark font-bold h-full">
-                <div className="p-8 py-6 bg-yellow-20 rounded-t-md h-full">
+        <div className="w-full md:w-1/2 lg:w-38 px-2 my-4 mb-8 md:my-0 md:mb-0">
+            <div className="-mt-10 md:-mt-20 absolute right-0 text-right top-0 mr-2">
+                <CurrencySwitcher />
+                <p className="mt-3 text-blue-40">
+                    <span className="opacity-75">Last updated on </span>
+                    <span>
+                        {formatDate(
+                            country.covid_data_last_updated,
+                            'h:mm a MMM D, YYYY'
+                        )}
+                    </span>
+                </p>
+            </div>
+            <div className="flex flex-col  text-primary-dark font-bold md:h-full">
+                <div className="p-4 md:p-8 md:py-6 bg-yellow-20 rounded-t-md h-full">
                     <div className="flex flex-wrap -mx-4 -mb-4">
-                        <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                        <div className="w-1/2 px-4 mb-4 lg:mb-6">
                             <div>
                                 <span className="font-normal inline-block">
                                     {trans('Population')}{' '}
@@ -22,7 +34,7 @@ const CountryInfo = ({ country }) => {
                                 </h2>
                             </div>
                         </div>
-                        <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                        <div className="w-1/2 px-4 mb-4 lg:mb-6">
                             <div>
                                 <span className="font-normal inline-block">
                                     {trans('GDP')}
@@ -32,7 +44,7 @@ const CountryInfo = ({ country }) => {
                                 </h2>
                             </div>
                         </div>
-                        <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                        <div className="w-1/2 px-4 mb-4 lg:mb-6">
                             <div>
                                 <span className="font-normal inline-block">
                                     {trans('Healthcare budget')}
@@ -45,7 +57,7 @@ const CountryInfo = ({ country }) => {
                                 </span>
                             </div>
                         </div>
-                        <div className="w-full xs:w-1/2 px-4 mb-4 lg:mb-6">
+                        <div className="w-1/2 px-4 mb-4 lg:mb-6">
                             <div>
                                 <span className="font-normal inline-block">
                                     {trans('% of GDP to healthcare')}
@@ -60,11 +72,11 @@ const CountryInfo = ({ country }) => {
                         </div>
                     </div>
                 </div>
-                <div className="p-8 text-white bg-primary-dark rounded-b-md">
+                <div className="p-4 md:p-8 text-white bg-primary-dark rounded-b-md">
                     <div className="flex flex-wrap -mx-4 -mb-4">
-                        <div className="w-full xs:w-1/2 px-4 mb-12">
+                        <div className="w-full xs:w-1/2 px-4 mb-6 md:mb-12">
                             <div>
-                                <span className="font-normal inline-block mb-4">
+                                <span className="text-sm md:text-base font-normal inline-block md:mb-4">
                                     {trans('Covid-19 cases')}
                                 </span>
                                 <h2 className="text-xl">
@@ -75,9 +87,9 @@ const CountryInfo = ({ country }) => {
                                 </h2>
                             </div>
                         </div>
-                        <div className="w-full xs:w-1/2 px-4 mb-12">
+                        <div className="w-full xs:w-1/2 px-4 mb-6 md:mb-12">
                             <div>
-                                <span className="font-normal inline-block mb-4">
+                                <span className="text-sm md:text-base font-normal inline-block md:mb-4">
                                     {trans('Deaths by Covid-19')}
                                 </span>
                                 <h2 className="text-xl">
@@ -90,20 +102,6 @@ const CountryInfo = ({ country }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div
-                className="md:absolute static mt-2 md:mt-0 inline-flex items-center"
-                style={{ top: '-50px', right: '25px', width: 'fit-content' }}>
-                <p className="text-blue-40">
-                    <span className="opacity-75">Last updated on </span>
-                    <span>
-                        {formatDate(
-                            country.covid_data_last_updated,
-                            'h:mm a MMM D, YYYY'
-                        )}
-                    </span>
-                </p>
-                <CurrencySwitcher />
             </div>
         </div>
     )

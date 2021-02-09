@@ -97,7 +97,7 @@ const ContractEquityIndicators = (props) => {
         setSelectedEquityIndicators((previous) => {
             let items = [...previous]
             if (items.includes(+equityId)) {
-                items.splice(items.indexOf(+equityId),1)
+                items.splice(items.indexOf(+equityId), 1)
             } else {
                 items[items.length] = parseInt(equityId)
             }
@@ -158,7 +158,7 @@ const ContractEquityIndicators = (props) => {
     }
 
     return (
-        <div className="bg-white rounded p-6">
+        <div className="bg-white rounded p-4 pb-0 md:pb-4">
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex items-center justify-between">
                     <h3 className="uppercase font-bold  text-primary-dark mb-6">

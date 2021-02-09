@@ -6,7 +6,7 @@ import Loader from '../../Loader/Loader'
 import useTrans from '../../../hooks/useTrans'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../../services/VisualizationService'
-import ChartFooter from "../../Utilities/ChartFooter"
+import ChartFooter from '../../Utilities/ChartFooter'
 
 const CountrySuppliers = (props) => {
     // ===========================================================================
@@ -79,7 +79,7 @@ const CountrySuppliers = (props) => {
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={fullScreenHandler}>
-                <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                <h3 className="uppercase font-bold  text-primary-dark mb-2 md:mb-6">
                     {trans(label)}
                 </h3>
 

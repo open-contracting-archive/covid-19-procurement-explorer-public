@@ -33,13 +33,15 @@ const WorldTimelineRaceBarMap = () => {
             const chartData = response.result.reduce(
                 (formattedData, d) => ({
                     ...formattedData,
-                    [d.month]: d.details.filter(detail => detail.country !== 'Global').map((detail) => ({
-                        country: detail.country,
-                        value:
-                            raceBarType === 'value'
-                                ? detail.amount_usd
-                                : detail.tender_count
-                    }))
+                    [d.month]: d.details
+                        .filter((detail) => detail.country !== 'Global')
+                        .map((detail) => ({
+                            country: detail.country,
+                            value:
+                                raceBarType === 'value'
+                                    ? detail.amount_usd
+                                    : detail.tender_count
+                        }))
                 }),
                 {}
             )
@@ -54,17 +56,17 @@ const WorldTimelineRaceBarMap = () => {
 
     return (
         <div>
-            <div className="flex justify-end">
-                <ul className="contract-switch flex">
+            <div className="flex flex-wrap md:flex-no-wrap md:justify-end world-map-chart mb-4">
+                <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
                     <li
-                        className={`mr-4 cursor-pointer ${
+                        className={`mr-4 cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                             raceBarType === 'value' ? 'active' : ''
                         }`}
                         onClick={() => setRaceBarType('value')}>
                         {trans('By contract value')}
                     </li>
                     <li
-                        className={`cursor-pointer ${
+                        className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                             raceBarType === 'number' ? 'active' : ''
                         }`}
                         onClick={() => setRaceBarType('number')}>
@@ -84,11 +86,7 @@ const WorldTimelineRaceBarMap = () => {
                     }
                 />
             </div>
-            {!originalData ? (
-                <Loader />
-            ) : (
-                <BarChartRace data={originalData} />
-            )}
+            {!originalData ? <Loader /> : <BarChartRace data={originalData} />}
         </div>
     )
 }

@@ -65,12 +65,12 @@ const ContractStatus = (props) => {
     }
 
     return (
-        <div className="bg-white rounded p-6 pb-0 h-full">
-            <div className="flex items-center justify-between mb-4">
-                <h3 className="uppercase font-bold  text-primary-dark">
+        <div className="bg-white rounded p-4 h-full">
+            <div className="flex flex-wrap items-center justify-between mb-4">
+                <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
                     {trans(label)}
                 </h3>
-                <div className="flex justify-end world-map-chart">
+                <div className="w-full md:w-auto flex md:justify-end">
                     <ul className="contract-switch flex">
                         <li
                             className={`mr-4 cursor-pointer ${isActiveTab(

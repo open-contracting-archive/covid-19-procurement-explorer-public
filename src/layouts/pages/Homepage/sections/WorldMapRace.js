@@ -9,7 +9,7 @@ import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_s
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
 import { ShortTenderTable } from '../../../../components/Tables'
-import ChartFooter from "../../../../components/Utilities/ChartFooter"
+import ChartFooter from '../../../../components/Utilities/ChartFooter'
 
 const WorldMapRace = () => {
     // ===========================================================================
@@ -19,59 +19,53 @@ const WorldMapRace = () => {
     const fullScreenHandler = useFullScreenHandle()
 
     return (
-        <section className="pt-16 bg-primary-gray pb-24">
-            <div className="text-center mb-10">
-                <h3 className="uppercase text-3xl font-bold leading-none">
+        <section className="pt-16 bg-primary-gray pb-8 md:pb-24">
+            <div className="text-center mb-6 md:mb-10">
+                <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                     <span className="block text-base font-bold">
                         {trans('Explore')}
                     </span>
                     {trans('Countries')}
                 </h3>
-                <p className="text-base text-opacity-50  text-primary-dark">
+                <p className="text-xs md:text-base text-opacity-50 text-primary-dark">
                     {trans('Government spending to fight COVID-19')}
                 </p>
             </div>
-            <div className="container mx-auto">
-                <div
-                    className="bg-white rounded p-6 simple-tab flex flex-col justify-between"
-                    style={{ minHeight: '900px' }}>
+            <div className="container mx-auto px-2 md:px-0">
+                <div className="md:bg-white md:rounded md:p-4 simple-tab md:flex md:flex-col md:justify-between world-map-section">
                     <FullScreen handle={fullScreenHandler}>
                         <Tabs>
                             <div className="flex">
-                                <div className="flex w-full">
-                                    <div className="worldmap-tab">
+                                <div className="flex flex-wrap md:flex-no-wrap w-full">
+                                    <div className="worldmap-tab w-full md:w-auto">
                                         <TabList>
                                             <Tab>
                                                 <MapIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Map')}
                                                 </span>
                                             </Tab>
                                             <Tab>
                                                 <ChartsIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Charts')}
                                                 </span>
                                             </Tab>
                                             <Tab>
                                                 <TableIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Table')}
                                                 </span>
                                             </Tab>
                                             <Tab>
                                                 <SourcesIcon className="inline-block" />
-                                                <span className="text-sm mt-1 inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Sources')}
                                                 </span>
                                             </Tab>
                                         </TabList>
                                     </div>
-                                    <div
-                                        className="flex-1 relative"
-                                        style={{
-                                            width: 'calc(100% - 91px)'
-                                        }}>
+                                    <div className="bg-white world-map-chart-section py-8 px-3 md:py-0 md:px-0 flex-1 relative">
                                         <TabPanel>
                                             <WorldTimelineMap />
                                         </TabPanel>

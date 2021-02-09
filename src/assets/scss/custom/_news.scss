@@ -1,5 +1,5 @@
 .news-caption {
-    @apply absolute  text-white bottom-0 px-4 pb-1;
+    @apply absolute  text-white bottom-0 px-4 pb-4;
 
     &--large {
         @screen lg {
@@ -14,9 +14,13 @@
     &__title {
         @apply text-lg leading-tight;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+
+        @media only screen and (min-width: 768px) {
+            -webkit-line-clamp: 3;
+        }
     }
 
     &__date {

@@ -95,8 +95,8 @@ function CountryData(props) {
                             />
                             <Link
                                 to={`/country/${countrySlug}/suppliers`}
-                                className="absolute -mt-12 text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                                View All
+                                className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                                View in detail →
                             </Link>
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4 relative">
@@ -106,8 +106,8 @@ function CountryData(props) {
                             />
                             <Link
                                 to={`/country/${countrySlug}/buyers`}
-                                className="absolute -mt-12 text-primary-blue pt-3 pl-6 pb-6 inline-block">
-                                View All
+                                className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                                View in detail →
                             </Link>
                         </div>
                         {/*<div className="w-full lg:w-1/2 px-2 mb-4">*/}

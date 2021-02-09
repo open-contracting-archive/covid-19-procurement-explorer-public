@@ -5,8 +5,8 @@ import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from "../Utilities/ChartFooter"
-import ContractView from "../../constants/ContractView"
+import ChartFooter from '../Utilities/ChartFooter'
+import ContractView from '../../constants/ContractView'
 import HelpText from '../../components/HelpText/HelpText'
 
 const GlobalSuppliers = (props) => {
@@ -20,7 +20,8 @@ const GlobalSuppliers = (props) => {
     const [chartData, setChartData] = useState([])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
-    const helpText = 'Top 10 suppliers in each product category according to contracts value or number of signed contracts'
+    const helpText =
+        'Top 10 suppliers in each product category according to contracts value or number of signed contracts'
 
     // ===========================================================================
     // Hooks
@@ -38,24 +39,34 @@ const GlobalSuppliers = (props) => {
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
-            let set1 = get(originalData, `by_${chartType}.product_country`, [])
-                .map((item) => {
-                    return {
-                        from: item.product_name,
-                        to: item.country_name,
-                        value:
-                            chartType === ContractView.VALUE ? item.amount_usd : item.tender_count
-                    }
-                })
-            let set2 = get(originalData, `by_${chartType}.supplier_product`, [])
-                .map((item) => {
-                    return {
-                        from: item.supplier_name,
-                        to: item.product_name,
-                        value:
-                            chartType === ContractView.VALUE ? item.amount_usd : item.tender_count
-                    }
-                })
+            let set1 = get(
+                originalData,
+                `by_${chartType}.product_country`,
+                []
+            ).map((item) => {
+                return {
+                    from: item.product_name,
+                    to: item.country_name,
+                    value:
+                        chartType === ContractView.VALUE
+                            ? item.amount_usd
+                            : item.tender_count
+                }
+            })
+            let set2 = get(
+                originalData,
+                `by_${chartType}.supplier_product`,
+                []
+            ).map((item) => {
+                return {
+                    from: item.supplier_name,
+                    to: item.product_name,
+                    value:
+                        chartType === ContractView.VALUE
+                            ? item.amount_usd
+                            : item.tender_count
+                }
+            })
             setChartData([...set2, ...set1])
         }
 
@@ -65,24 +76,27 @@ const GlobalSuppliers = (props) => {
     }, [originalData, chartType])
 
     return (
-        <div className="bg-white rounded p-4 simple-tab right-direction">
+        <div className="bg-white rounded p-4 pb-0 md:pb-4 simple-tab right-direction">
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex items-center justify-between">
-                    <h3 className="uppercase font-bold text-primary-dark">
-                        {trans(label)}
-                    </h3>
-                    <HelpText helpTextInfo={helpText} />
-                    <div className="flex justify-end world-map-chart mb-4">
+                <div className="flex items-center justify-between flex-wrap mb-4">
+                    <div className="flex items-center mb-2 md:mb-0">
+                        <h3 className="md:mb-0 w-full md:w-auto uppercase font-bold text-primary-dark">
+                            {trans(label ? label : 'Global Suppliers')}
+                        </h3>
+                        <HelpText helpTextInfo={helpText} />
+                    </div>
+
+                    <div className="w-full md:w-auto flex">
                         <ul className="contract-switch flex">
                             <li
-                                className={`mr-4 cursor-pointer ${
+                                className={`mr-4 cursor-pointer text-xs md:text-base ${
                                     chartType === 'value' ? 'active' : ''
                                 }`}
                                 onClick={() => setChartType('value')}>
                                 {trans('By contract value')}
                             </li>
                             <li
-                                className={`cursor-pointer ${
+                                className={`cursor-pointer text-xs md:text-base ${
                                     chartType === 'number' ? 'active' : ''
                                 }`}
                                 onClick={() => setChartType('number')}>

@@ -55,10 +55,8 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
         heatLegend.series = polygonSeries
         heatLegend.align = 'center'
         heatLegend.valign = 'bottom'
-        heatLegend.width = am4core.percent(40)
+        heatLegend.width = am4core.percent(80)
         heatLegend.marginRight = am4core.percent(4)
-        // heatLegend.minValue = 0
-        // heatLegend.maxValue = 40000000
         heatLegend.orientation = 'horizontal'
         heatLegend.padding(20, 20, 20, 20)
         heatLegend.valueAxis.renderer.labels.template.fontSize = 10
@@ -135,10 +133,7 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
 
     return (
         <div className="map-wrapper bg-white rounded-md h-full mt-5">
-            <div
-                ref={globalMapchartDiv}
-                className="h-500"
-            />
+            <div ref={globalMapchartDiv} className="h-500" />
         </div>
     )
 }

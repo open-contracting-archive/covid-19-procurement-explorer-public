@@ -62,7 +62,7 @@ function ContractsRedFlag(props) {
     }, [])
 
     return (
-        <div className="bg-white rounded p-6 h-full">
+        <div className="bg-white rounded p-4 h-full">
             {loading ? (
                 <Loader />
             ) : (

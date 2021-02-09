@@ -71,22 +71,22 @@ const TopBuyers = (props) => {
 
     return (
         <div className="bg-white rounded h-full">
-            <div className="bg-white rounded p-6 pb-12">
+            <div className="bg-white rounded p-4 pb-12">
                 <div className="flex items-center justify-between flex-wrap mb-4">
-                    <h3 className="uppercase font-bold  text-primary-dark">
+                    <h3 className="mb-2 md:mb-0 w-full md:w-auto uppercase font-bold text-primary-dark">
                         {trans(label)}
                     </h3>
-                    <div className="flex justify-end world-map-chart">
+                    <div className="w-full md:w-auto flex">
                         <ul className="contract-switch flex">
                             <li
-                                className={`mr-4 cursor-pointer ${isActiveTab(
+                                className={`mr-4 cursor-pointer text-xs md:text-base ${isActiveTab(
                                     ContractView.VALUE
                                 )}`}
                                 onClick={() => setViewType(ContractView.VALUE)}>
                                 {trans('By contract value')}
                             </li>
                             <li
-                                className={`mr-4 cursor-pointer ${isActiveTab(
+                                className={`cursor-pointer text-xs md:text-base ${isActiveTab(
                                     ContractView.NUMBER
                                 )}`}
                                 onClick={() =>

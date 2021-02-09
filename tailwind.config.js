@@ -263,6 +263,7 @@ module.exports = {
             ]
         },
         fontSize: {
+            xxs: '0.625rem', // 10px
             xs: '0.75rem', // 12px
             sm: '0.875rem', // 14px
             base: '1rem', // 16px
@@ -391,7 +392,7 @@ module.exports = {
             auto: 'auto'
         },
         gridTemplateColumns: {
-            1: 'repeat(1, minmax(0, 1fr))',    
+            1: 'repeat(1, minmax(0, 1fr))',
             2: 'repeat(2, minmax(0, 1fr))',
             3: 'repeat(3, minmax(0, 1fr))',
             4: 'repeat(4, minmax(0, 1fr))',

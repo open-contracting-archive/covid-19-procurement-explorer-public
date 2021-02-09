@@ -3,18 +3,27 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { isEmpty } from 'lodash'
 import { setCountryCurrency } from '../../../store/reducers/general/action'
-import CountrySelector from "../../../components/CountrySelector/CountrySelector"
-import CountryMapElement from "./sections/CountryMapElement"
-import CountryInfo from "./sections/CountryInfo"
-import CountryData from "./tabs/CountryData"
-import CountryInsights from "./tabs/CountryInsights"
-import CountryContracts from "./tabs/CountryContracts"
-import TabNavigator from "./sections/TabNavigator"
-import CountryEquity from "./tabs/CountryEquity"
-import CountryBuyers from "./tabs/CountryBuyers"
-import CountrySuppliers from "./tabs/CountrySuppliers"
-import CountryProducts from "./tabs/CountryProducts"
-import { DATA, INSIGHTS, CONTRACTS, EQUITY, BUYERS, SUPPLIERS, PRODUCTS, METHODOLOGY } from "../../../constants/Tab"
+import CountrySelector from '../../../components/CountrySelector/CountrySelector'
+import CountryMapElement from './sections/CountryMapElement'
+import CountryInfo from './sections/CountryInfo'
+import CountryData from './tabs/CountryData'
+import CountryInsights from './tabs/CountryInsights'
+import CountryContracts from './tabs/CountryContracts'
+import TabNavigator from './sections/TabNavigator'
+import CountryEquity from './tabs/CountryEquity'
+import CountryBuyers from './tabs/CountryBuyers'
+import CountrySuppliers from './tabs/CountrySuppliers'
+import CountryProducts from './tabs/CountryProducts'
+import {
+    DATA,
+    INSIGHTS,
+    CONTRACTS,
+    EQUITY,
+    BUYERS,
+    SUPPLIERS,
+    PRODUCTS,
+    METHODOLOGY
+} from '../../../constants/Tab'
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -38,50 +47,78 @@ const CountryProfile = () => {
     const renderTab = () => {
         switch (tabSlug) {
             case DATA:
-                return (<CountryData countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountryData
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
             case INSIGHTS:
-                return (<CountryInsights countryId={countryData.id} />)
+                return <CountryInsights countryId={countryData.id} />
             case CONTRACTS:
-                return (<CountryContracts countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountryContracts
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
             case EQUITY:
-                return (<CountryEquity countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountryEquity
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
             case BUYERS:
-                return (<CountryBuyers countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountryBuyers
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
             case SUPPLIERS:
-                return (<CountrySuppliers countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountrySuppliers
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
             case PRODUCTS:
-                return (<CountryProducts countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountryProducts
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
             case METHODOLOGY: //to create component
-                return (<div>Methodology page</div>)
+                return <div>Methodology page</div>
             default:
-                return (<CountryData countryCode={countryData.country_code_alpha_2} />)
+                return (
+                    <CountryData
+                        countryCode={countryData.country_code_alpha_2}
+                    />
+                )
         }
     }
 
     return (
-        <section className="pt-20 -mt-8 bg-blue-0">
+        <section className="pt-10 md:pt-20 -mt-8 bg-blue-0">
             {!isEmpty(countryData) && (
                 <section className="px-4">
                     <div className="container mx-auto">
                         <CountrySelector />
-                        <div className="flex flex-wrap -mb-4">
-                            <CountryMapElement countryCode={countryData.country_code_alpha_2} />
+                        <div className="relative flex flex-wrap -mx-2 -mb-4">
+                            <CountryMapElement
+                                countryCode={countryData.country_code_alpha_2}
+                            />
                             <CountryInfo country={countryData} />
                         </div>
                     </div>
                 </section>
             )}
 
-            <TabNavigator endpoint={"country"} countrySlug={countrySlug} />
+            <TabNavigator endpoint={'country'} countrySlug={countrySlug} />
 
             <div
                 style={{
                     borderTop: '5px solid #1fbbec'
                 }}
-                className="py-16 bg-primary-gray px-4">
-                <div className="container mx-auto">
-                    {renderTab()}
-                </div>
+                className="py-6 md:py-16 bg-primary-gray px-4 overflow-hidden md:overscroll-none">
+                <div className="container mx-auto">{renderTab()}</div>
             </div>
         </section>
     )

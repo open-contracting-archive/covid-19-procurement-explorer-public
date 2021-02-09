@@ -12,8 +12,15 @@
         }
     }
     .custom-horizontal-bar-text {
-        width: 180px;
+        width: 236px;
         flex-shrink: 0;
+        margin-bottom: 8px;
+
+        @media only screen and (min-width: 768px) {
+            width: 180px;
+            margin-bottom: 0;
+            margin-right: 12px;
+        }
 
         h3 {
             overflow: hidden;
@@ -28,11 +35,16 @@
     }
 
     .custom-horizontal-bar-progress {
-        margin-left: 12px;
         height: 14px;
-        width: calc(100% - 180px);
+        width: 100%;
+        margin-bottom: 8px;
         background: #dceaee;
         position: relative;
+
+        @media only screen and (min-width: 768px) {
+            width: calc(100% - 180px);
+            margin-bottom: 0;
+        }
 
         span {
             display: inline-block;

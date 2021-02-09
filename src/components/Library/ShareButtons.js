@@ -6,16 +6,16 @@ import {
     TwitterShareButton,
     EmailShareButton
 } from 'react-share'
-import { twitterHandle } from "../../helpers/general"
-import useTrans from "../../hooks/useTrans"
+import { twitterHandle } from '../../helpers/general'
+import useTrans from '../../hooks/useTrans'
 
 const ShareButtons = (props) => {
     const { url = window.location.href } = props
     const { trans } = useTrans()
 
     return (
-        <div className="flex">
-            <p className="inline-block lg:block font-bold opacity-40 mb-2 mr-4">
+        <div className="flex flex-wrap">
+            <p className="w-full font-bold opacity-40 mb-2">
                 {trans('Share on')}
             </p>
             <div className="flex">
@@ -23,7 +23,10 @@ const ShareButtons = (props) => {
                     <socialIcons.fbIcon />
                 </FacebookShareButton>
 
-                <TwitterShareButton url={url} via={twitterHandle} className="social-icon">
+                <TwitterShareButton
+                    url={url}
+                    via={twitterHandle}
+                    className="social-icon">
                     <socialIcons.twitterIcon />
                 </TwitterShareButton>
 
@@ -37,6 +40,5 @@ const ShareButtons = (props) => {
             </div>
         </div>
     )
-
 }
 export default ShareButtons

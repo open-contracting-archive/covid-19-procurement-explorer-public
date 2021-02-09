@@ -17,7 +17,7 @@ function BarListChart({ data, byValue, text, currency, viewType }) {
                     data.map((bar_value, index) => {
                         return (
                             <li key={index}>
-                                <div className="flex items-center">
+                                <div className="flex flex-wrap md:flex-no-wrap items-center">
                                     <div className="custom-horizontal-bar-text">
                                         <Link
                                             className="hover:text-primary-blue"
@@ -33,7 +33,7 @@ function BarListChart({ data, byValue, text, currency, viewType }) {
                                                 width: `${bar_value.value}%`
                                             }}></span>
                                     </div>
-                                    <div className="ml-2 custom-horizontal-bar-amount">
+                                    <div className="md:ml-2 custom-horizontal-bar-amount">
                                         <p>
                                             {viewType === 'value' ? '$' : ''}
                                             {formatNumber(bar_value.amount) ||
