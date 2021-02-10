@@ -18,14 +18,11 @@ import {
     ContractsCorrelation
 } from '../../../../components/Visualizations'
 import VisualizationModal from '../modal/VisualizationModal'
-import useTrans from '../../../../hooks/useTrans'
 import 'react-simple-hook-modal/dist/styles.css'
 
 const GlobalData = () => {
     const [modalVisualization, setModalVisualization] = useState('')
     const { isModalOpen, openModal, closeModal } = useModal()
-    const { trans } = useTrans()
-
     const modalHandler = (visualization) => {
         setModalVisualization(visualization)
 
@@ -33,42 +30,37 @@ const GlobalData = () => {
             openModal()
         }
     }
+
     return (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
                 <div className="flex flex-wrap -mx-2 -mb-4">
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <TotalSpending
-                            label="Total Spending"
-                            modalHandler={modalHandler}
-                        />
+                        <TotalSpending modalHandler={modalHandler} />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <TotalContracts
-                            label="Total Contracts"
-                            modalHandler={modalHandler}
-                        />
+                        <TotalContracts modalHandler={modalHandler} />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <AverageBidsPerContract label="Average bids per contract" />
+                        <AverageBidsPerContract />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <Monopolization label="Monopolization" />
+                        <Monopolization />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <ContractStatus label="Contract status" />
+                        <ContractStatus />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <div className="flex flex-col justify-between h-full">
-                            <EquityIndicators label="Equity indicators" />
-                            <DirectOpen label="Direct/Open" />
+                            <EquityIndicators />
+                            <DirectOpen modalHandler={modalHandler} />
                         </div>
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <ProductsTimeline label="Products timeline" />
+                        <ProductsTimeline />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4 relative">
-                        <TopSuppliers label="Top Suppliers" />
+                        <TopSuppliers />
                         <Link
                             to="/global-overview/suppliers"
                             className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
@@ -76,7 +68,7 @@ const GlobalData = () => {
                         </Link>
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4 relative">
-                        <TopBuyers label="Top Buyers" />
+                        <TopBuyers />
                         <Link
                             to="/global-overview/buyers"
                             className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
@@ -84,21 +76,21 @@ const GlobalData = () => {
                         </Link>
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <GlobalSuppliers label="Global suppliers" />
+                        <GlobalSuppliers />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <ProductDistribution label="Product Distribution" />
+                        <ProductDistribution />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <ContractsRedFlags />
                     </div>
                     <div className="w-full px-2 mb-4">
-                        <ContractsCorrelation label="Covid/Contracts quantity correlation" />
+                        <ContractsCorrelation />
                     </div>
                 </div>
             </div>
             <Modal
-                id="any-unique-identifier"
+                id="global-data-modal"
                 isOpen={isModalOpen}
                 transition={ModalTransition.NONE}>
                 <VisualizationModal

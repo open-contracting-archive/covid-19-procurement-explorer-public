@@ -12,7 +12,7 @@ const TopBuyers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Top Buyers', params } = props
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
     const [originalData, setOriginalData] = useState({})
@@ -44,8 +44,8 @@ const TopBuyers = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                    ? item.amount_local
-                    : item.amount_usd
+                        ? item.amount_local
+                        : item.amount_usd
             })
             let chartDataFormatted = dataSet.map((item) => {
                 let actualValue =

@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import { isEmpty } from 'lodash'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import { isEmpty, get } from 'lodash'
 import SankeyChart from '../../Charts/SankeyChart/SankeyChart'
 import Loader from '../../Loader/Loader'
 import useTrans from '../../../hooks/useTrans'
-import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../../services/VisualizationService'
-import ChartFooter from '../../Utilities/ChartFooter'
+import ChartFooter from "../../Utilities/ChartFooter"
+import ContractView from "../../../constants/ContractView"
+import ContractViewSwitcher from "../../Utilities/ContractViewSwitcher"
+import HelpText from "../../HelpText/HelpText"
 
 const CountrySuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Country Suppliers', params } = props
     const [loading, setLoading] = useState(true)
+    const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
+    const [chartData, setChartData] = useState([])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
+    const helpText = ''
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.GlobalSuppliers(params).then((response) => {
+        VisualizationService.CountrySuppliers(params).then((response) => {
             setOriginalData(response)
             setLoading(false)
         })
@@ -32,81 +37,59 @@ const CountrySuppliers = (props) => {
         }
     }, [params?.country, params?.product])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Global Suppliers Visualization
-    const getSuppliersData = (data, type) => {
-        let suppliersData = {}
-
-        if (isEmpty(data)) {
-            return []
+    useEffect(() => {
+        if (!isEmpty(originalData)) {
+            // let productBuyer = get(originalData, 'product_buyer', [])
+            //     .map((item) => {
+            //         return {
+            //             from: item.product_name,
+            //             to: item.buyer_name,
+            //             value:
+            //                 viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
+            //         }
+            //     })
+            // let supplierProduct = get(originalData, 'supplier_product', [])
+            //     .map((item) => {
+            //         return {
+            //             from: item.supplier_name,
+            //             to: item.product_name,
+            //             value:
+            //                 viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
+            //         }
+            //     })
+            // setChartData([...supplierProduct, ...productBuyer])
         }
 
-        let set1 =
-            data &&
-            data[type].product_country.map((item) => {
-                return {
-                    ...suppliersData,
-                    from: item.product_name,
-                    to: item.country_name,
-                    value:
-                        type === 'by_value'
-                            ? item.amount_usd
-                            : item.tender_count
-                }
-            })
-        let set2 =
-            data &&
-            data[type].supplier_product.map((item) => {
-                return {
-                    ...suppliersData,
-                    from: item.supplier_name,
-                    to: item.product_name,
-                    value:
-                        type === 'by_value'
-                            ? item.amount_usd
-                            : item.tender_count
-                }
-            })
-        return [...set2, ...set1]
-    }
-    const globalSuppliersDataByNumber =
-        originalData && getSuppliersData(originalData, 'by_number')
-    const globalSuppliersDataByValue =
-        originalData && getSuppliersData(originalData, 'by_value')
+        return () => {
+            setChartData([])
+        }
+    }, [originalData, viewType])
 
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
             <FullScreen handle={fullScreenHandler}>
-                <h3 className="uppercase font-bold  text-primary-dark mb-2 md:mb-6">
-                    {trans(label)}
-                </h3>
+                <div className="flex items-center justify-between">
+                    <div className="flex">
+                        <h3 className="uppercase font-bold  text-primary-dark mb-2 md:mb-6">
+                            {trans(label)}
+                        </h3>
+                        <HelpText helpTextInfo={helpText} />
+                    </div>
 
-                <Tabs>
-                    <TabList>
-                        <Tab>{trans('By contract value')}</Tab>
-                        <Tab>{trans('By number of contracts')}</Tab>
-                    </TabList>
-                    {loading ? (
-                        <Loader />
-                    ) : (
-                        <div className="flex mt-8">
-                            <div className="flex-1">
-                                <TabPanel>
-                                    <SankeyChart
-                                        data={globalSuppliersDataByValue}
-                                    />
-                                </TabPanel>
-                                <TabPanel>
-                                    <SankeyChart
-                                        data={globalSuppliersDataByNumber}
-                                    />
-                                </TabPanel>
-                            </div>
+                    <ContractViewSwitcher
+                        viewType={viewType}
+                        viewHandler={setViewType} />
+                </div>
+
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <div className="flex mt-4">
+                        <div className="flex-1">
+                            <SankeyChart data={chartData} />
                         </div>
-                    )}
-                </Tabs>
+                    </div>
+                )}
             </FullScreen>
 
             <ChartFooter fullScreenHandler={fullScreenHandler} />

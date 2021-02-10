@@ -14,7 +14,7 @@ const EquityIndicators = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params, heightFull } = props
+    const { label = 'Equity indicators', params, heightFull } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState([])
     const { trans } = useTrans()
@@ -68,7 +68,7 @@ const EquityIndicators = (props) => {
                     <div className="flex flex-wrap items-center md:justify-between">
                         <div className="w-full md:w-auto mb-4 md:mb-0 flex items-center">
                             <h3 className="uppercase font-bold text-primary-dark inline-block">
-                                {trans(label ? label : 'Equity Indicators')}
+                                {trans(label)}
                             </h3>
                             <HelpText helpTextInfo={helpText} />
                         </div>

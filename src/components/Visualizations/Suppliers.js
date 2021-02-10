@@ -5,16 +5,17 @@ import { formatDate, dateDiff } from '../../helpers/date'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import HelpText from '../../components/HelpText/HelpText'
+import Visualization from "../../constants/Visualization"
 
 const Suppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Suppliers', params, modalHandler } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
-    const helpText = 'Number of suppliers who cigned at least 1 COVID contract'
+    const helpText = 'Number of suppliers who signed at least 1 COVID contract'
 
     // ===========================================================================
     // Hooks
@@ -67,7 +68,7 @@ const Suppliers = (props) => {
         <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label ? label : 'Suppliers')}
+                    {trans(label)}
                 </h3>
                 <HelpText helpTextInfo={helpText} />
             </div>
@@ -87,6 +88,13 @@ const Suppliers = (props) => {
                     />
                     <div className="flex-1" />
                 </div>
+            )}
+            {modalHandler && (
+                <span
+                    className="cursor-pointer text-sm text-primary-blue block text-right"
+                    onClick={() => modalHandler(Visualization.TOTAL_SUPPLIERS)}>
+                    View in detail →
+                </span>
             )}
         </div>
     )

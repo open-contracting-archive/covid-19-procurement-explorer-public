@@ -155,6 +155,18 @@ class VisualizationService {
         }
     }
 
+    static async CountrySuppliers(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.country-suppliers'),
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     static async EquityIndicators(params) {
         try {
             const res = await Api.get(

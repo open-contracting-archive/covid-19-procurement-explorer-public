@@ -51,11 +51,6 @@ const SupplierProfile = () => {
         }
     }, [countries, id])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    window.scrollTo(0, 0)
-
     return (
         <section className="pt-8">
             {loading ? (

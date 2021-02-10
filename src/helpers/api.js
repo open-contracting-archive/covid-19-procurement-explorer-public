@@ -31,6 +31,9 @@ const apiRoutes = {
     'visualization.supplier-summary': 'api/v1/visualization/supplier-summary/',
     'visualization.product-summary': 'api/v1/visualization/product-summary/',
     'visualization.equity-summary': 'api/v1/visualization/equity-summary/',
+    'visualization.direct-open-contract-trend': 'api/v1/visualization/direct-open-contract-trend/',
+    'visualization.buyer-trend': 'api/v1/visualization/buyer-trend/',
+    'visualization.supplier-trend': 'api/v1/visualization/supplier-trend/',
 
     // Detail api
     'buyer-detail': 'api/v1/visualization/buyers',
