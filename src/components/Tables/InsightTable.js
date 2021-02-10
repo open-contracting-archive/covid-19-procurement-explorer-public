@@ -9,6 +9,7 @@ import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import ReactPaginate from 'react-paginate'
 import TableLoader from '../Loader/TableLoader'
 import { hasValidProperty } from "../../helpers/general"
+import useCountries from "../../hooks/useCountries"
 
 const InsightTable = ({ params }) => {
     const countries = useSelector((state) => state.general.countries)
@@ -21,6 +22,7 @@ const InsightTable = ({ params }) => {
     const [limit, setLimit] = useState(20)
     const [totalItems, setTotalItems] = useState()
     const [currentPage, setCurrentPage] = useState(0)
+    const { countryNameById } = useCountries()
     const history = useHistory()
 
     useEffect(() => {
@@ -72,17 +74,6 @@ const InsightTable = ({ params }) => {
         { value: 'news', label: 'News' },
         { value: 'blog', label: 'Blog' }
     ]
-
-    const getCountryName = (insight) => {
-        const countryId = get(insight, 'country.id', null)
-
-        if (!countryId) {
-            return ''
-        }
-
-        const country = countries.find((country) => country.id === countryId)
-        return country ? country.name : countryId
-    }
 
     const showDetail = (type, id) => {
         let path =
@@ -226,14 +217,10 @@ const InsightTable = ({ params }) => {
                                                 className="cursor-pointer">
                                                 <td>{insight.title}</td>
                                                 <td>
-                                                    {getCountryName(
-                                                        insight
-                                                    )}
+                                                    {countryNameById(get(insight, 'country.id', null))}
                                                 </td>
                                                 <td>
-                                                    {
-                                                        insight.contents_type
-                                                    }
+                                                    {insight.contents_type}
                                                 </td>
                                             </tr>
                                         )

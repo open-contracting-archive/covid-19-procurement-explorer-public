@@ -67,7 +67,7 @@ const ProductsTimeline = ({ label, params }) => {
         <div className="bg-white rounded p-4 h-full simple-tab">
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex items-center justify-between">
-                    <h3 className="uppercase font-bold  text-primary-dark">
+                    <h3 className="uppercase font-bold text-primary-dark">
                         {trans(label)}
                     </h3>
                     <div className="flex justify-end world-map-chart mb-4">

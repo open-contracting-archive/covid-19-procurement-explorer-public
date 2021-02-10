@@ -10,7 +10,7 @@ import TagList from '../../../components/website/Library/TagList'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
 
-const BlogsDetail = () => {
+const BlogDetail = () => {
     const [blogDetail, setBlogDetail] = useState({})
     const [blogList, setBlogList] = useState([])
     const [loading, setLoading] = useState(true)
@@ -68,7 +68,7 @@ const BlogsDetail = () => {
                                     {trans('Published on')}
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
-                                    {formatDate(blogDetail.published_date)}
+                                    {formatDate(blogDetail.news_date)}
                                 </p>
                                 <div className="mt-8 hidden lg:block">
                                     <TagList item={blogDetail} />
@@ -85,21 +85,13 @@ const BlogsDetail = () => {
                                     <div className="block lg:hidden mb-6 md:mb-0">
                                         <TagList item={blogDetail} />
                                     </div>
-                                    <div className="flex">
-                                        <p className="font-bold opacity-40 mr-4">
-                                            {trans('Share on')}
-                                        </p>
-                                        <ShareButtons
-                                            url={window.location.href}
-                                        />
+                                    <div className="block lg:hidden mb-6 md:mb-0">
+                                        <ShareButtons />
                                     </div>
                                 </div>
                             </div>
                             <div className="hidden lg:block">
-                                <p className="font-bold opacity-40 mb-2">
-                                    {trans('Share on')}
-                                </p>
-                                <ShareButtons url={window.location.href} />
+                                <ShareButtons />
                             </div>
                         </div>
                         {blogList.length !== 1 ? (
@@ -146,7 +138,7 @@ const BlogsDetail = () => {
                                                                 </Link>
                                                                 <p className="blogs-caption__date">
                                                                     {formatDate(
-                                                                        blogs.published_date
+                                                                        blogs.news_date
                                                                     )}
                                                                 </p>
                                                             </div>
@@ -176,4 +168,4 @@ const BlogsDetail = () => {
     )
 }
 
-export default BlogsDetail
+export default BlogDetail

@@ -58,7 +58,7 @@ const LibrarySection = () => {
                                         </h4>
                                         <p className="library__date">
                                             {formatDate(
-                                                insightItem.published_date
+                                                insightItem.news_date
                                             )}
                                         </p>
                                     </div>

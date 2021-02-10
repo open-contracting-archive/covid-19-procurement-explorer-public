@@ -70,7 +70,7 @@ const Tags = () => {
                                                         {insight.title}
                                                     </h3>
                                                     <p className="card__date opacity-50 text-sm">
-                                                        {formatDate(insight.published_date, 'MMMM DD, YYYY')}
+                                                        {formatDate(insight.news_date, 'MMMM DD, YYYY')}
                                                     </p>
                                                 </div>
                                             </Link>

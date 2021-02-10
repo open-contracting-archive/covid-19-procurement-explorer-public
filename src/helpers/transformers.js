@@ -21,7 +21,7 @@ export const transformNews = (data) => {
     return {
         ...data,
         detailUrl: `/news/${data.id}`,
-        formattedPublishDate: formatDate(data.published_date),
+        formattedPublishDate: formatDate(data.news_date),
         contentsType: data.type,
         image: getImageUrl(data),
         thumbnail: getThumbnailUrl(data)

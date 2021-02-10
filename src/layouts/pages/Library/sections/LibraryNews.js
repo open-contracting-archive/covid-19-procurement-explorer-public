@@ -49,7 +49,7 @@ const LibraryNews = () => {
                                                     {newsList[0].title}
                                                 </h3>
                                                 <p className="news-caption__date mt-2">
-                                                    {formatDate(newsList[0].published_date, 'MMM DD, YYYY')}
+                                                    {formatDate(newsList[0].news_date, 'MMM DD, YYYY')}
                                                 </p>
                                             </div>
                                         </div>
@@ -81,7 +81,7 @@ const LibraryNews = () => {
                                                     {news.title}
                                                 </h3>
                                                 <p className="news-caption__date mt-2">
-                                                    {formatDate(news.published_date, 'MMM DD, YYYY')}
+                                                    {formatDate(news.news_date, 'MMM DD, YYYY')}
                                                 </p>
                                             </div>
                                         </div>

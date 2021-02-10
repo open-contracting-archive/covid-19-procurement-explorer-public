@@ -61,7 +61,7 @@ const NewsDetail = () => {
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
                                     {formatDate(
-                                        newsDetail.published_date,
+                                        newsDetail.news_date,
                                         'MMMM DD, YYYY'
                                     )}
                                 </p>
@@ -74,26 +74,18 @@ const NewsDetail = () => {
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
                                         __html: newsDetail.rendered_body
-                                    }}></div>
-                                <div className="flex flex-col md:flex-row justify-between mb-6 lg:mb-0">
+                                    }} />
+                                <div className="flex flex-col md:flex-row justify-between">
                                     <div className="block lg:hidden mb-6 md:mb-0">
                                         <TagList item={newsDetail} />
                                     </div>
-                                    <div className="flex">
-                                        <p className="font-bold opacity-40 mr-4">
-                                            Share on
-                                        </p>
-                                        <ShareButtons
-                                            url={window.location.href}
-                                        />
+                                    <div className="block lg:hidden mb-6 md:mb-0">
+                                        <ShareButtons />
                                     </div>
                                 </div>
                             </div>
                             <div className="hidden lg:block">
-                                <p className="font-bold opacity-40 mb-2">
-                                    Share on
-                                </p>
-                                <ShareButtons url={window.location.href} />
+                                <ShareButtons />
                             </div>
                         </div>
                         {newsList.length !== 1 ? (
@@ -134,7 +126,7 @@ const NewsDetail = () => {
                                                             </h3>
                                                             <p className="news-caption__date">
                                                                 {formatDate(
-                                                                    news.published_date,
+                                                                    news.news_date,
                                                                     'MMMM DD, YYYY'
                                                                 )}
                                                             </p>

@@ -1,8 +1,10 @@
 import React, { Fragment } from "react"
 import { useHistory } from 'react-router-dom'
+import useTrans from "../../../hooks/useTrans"
 
 const TagList = ({ item }) => {
     let history = useHistory()
+    const { trans } = useTrans()
     const handleClick = (tagSlug, type) => {
         history.push(`/tags?type=${type}&tag=${tagSlug}`)
     }
@@ -10,7 +12,7 @@ const TagList = ({ item }) => {
     return (
         <Fragment>
             <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                Tags
+                {trans('Tags')}
             </p>
             {item.tags.length ? (
                 <div className="tags flex flex-wrap">
