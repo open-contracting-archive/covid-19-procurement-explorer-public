@@ -6,10 +6,12 @@ import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import { formatDate } from "../../../helpers/date"
 import Breadcrumb from "../../../components/website/Library/Breadcrumb"
+import useTrans from '../../../hooks/useTrans'
 
 const Blogs = () => {
     const [blogList, setBlogList] = useState([])
     const [loading, setLoading] = useState(true)
+    const {trans} = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -30,7 +32,7 @@ const Blogs = () => {
             <div className="container mx-auto">
                 <Breadcrumb />
 
-                <p className="text-2xl mb-10">Blogs</p>
+                <p className="text-2xl mb-10">{trans('Blogs')}</p>
                 {blogList &&
                 blogList.length !== 0 &&
                 blogList.map((blogs) => {

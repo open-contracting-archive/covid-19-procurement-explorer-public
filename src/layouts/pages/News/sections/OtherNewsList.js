@@ -129,13 +129,13 @@ const OtherNewsList = () => {
                                     onClick={() => {
                                         loadMoreNews()
                                     }}>
-                                    Load more
+                                    {trans('Load more')}
                                 </span>
                             </div>
                         ))}
                     </Fragment>
                 ) : (
-                    <p>No other news found</p>
+                    <p>{trans('No other news found')}</p>
                 )}
             </div>
         </section>

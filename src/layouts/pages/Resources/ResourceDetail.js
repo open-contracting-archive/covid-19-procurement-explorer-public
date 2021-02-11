@@ -8,6 +8,7 @@ import Breadcrumb from "../../../components/website/Library/Breadcrumb"
 import { formatDate } from "../../../helpers/date"
 import pdfImage from '../../../assets/img/ic_pdf.svg'
 import useCountries from "../../../hooks/useCountries"
+import useTrans from '../../../hooks/useTrans'
 
 const ResourceDetail = () => {
     const [resourceDetail, setResourceDetail] = useState({})
@@ -15,6 +16,7 @@ const ResourceDetail = () => {
     const [loading, setLoading] = useState(true)
     const { countryNameById } = useCountries()
     let { id: resourcesId } = useParams()
+    const {trans} = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -59,14 +61,14 @@ const ResourceDetail = () => {
                                             className="text-blue-20 test-sm ml-1"
                                             href={get(resourceDetail, 'document.meta.download_url')}>
                                             {' '}
-                                            Download{' '}
+                                            {trans('Download')}{' '}
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         )}
                         <div className="details md:mx-10 mx-0 b-24">
-                            <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-10 md:mb-10 text-primary-dark">
+                            <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-5 text-primary-dark">
                                 {resourceDetail.title}
                             </h2>
                             <div className="mb-10 resources-detail__content"
@@ -75,23 +77,23 @@ const ResourceDetail = () => {
                             <hr className="mb-6 text-primary-gray" />
                             <table className="my-10 text-left">
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">Published on</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Published on')}</th>
                                     <td className="px-6 py-6">{formatDate(resourceDetail.meta.first_published_at, 'MMMM DD, YYYY')}</td>
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">Country</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Country')}</th>
                                     <td className="px-6 py-6">{countryNameById(get(resourceDetail, 'country.id', null))}</td>
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">Type</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Type')}</th>
                                     <td className="px-6 py-6">{resourceDetail.resource_type}</td>
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">Topic</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Topic')}</th>
                                     <td className="px-6 py-6" />
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">Language</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Language')}</th>
                                     <td className="px-6 py-6" />
                                 </tr>
                             </table>
@@ -101,7 +103,7 @@ const ResourceDetail = () => {
 
                             <div className="related mb-4 mt-10">
                                 <p className="font-bold opacity-40 mb-4">
-                                    Related Resources
+                                    {trans('Related Resources')}
                                 </p>
                                 {resourceList &&
                                 resourceList

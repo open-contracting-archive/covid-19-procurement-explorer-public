@@ -86,7 +86,7 @@ const LibraryResources = () => {
                                 <Link
                                     to="/resources"
                                     className="text-blue-20">
-                                    View all resources --&gt;{' '}
+                                        {trans('View all resources')} --&gt;{' '}
                                 </Link>
                             </div>
                         ) : (
