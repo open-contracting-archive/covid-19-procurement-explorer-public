@@ -7,12 +7,14 @@ import Loader from '../../../components/Loader/Loader'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import { ReactComponent as SortIcon } from '../../../assets/img/icons/ic_sort.svg'
 import useCountries from "../../../hooks/useCountries"
+import useTrans from '../../../hooks/useTrans'
 
 const Resources = () => {
     const [resourceList, setResourceList] = useState([])
     const {countryNameById} = useCountries()
     const [loading, setLoading] = useState(true)
     const history = useHistory()
+    const {trans} = useTrans()
     window.scrollTo(0, 0)
 
     const options = [
@@ -43,18 +45,18 @@ const Resources = () => {
                 <div className="container mx-auto">
                     <Breadcrumb />
 
-                    <h2 className="text-2xl">Resources</h2>
+                    <h2 className="text-2xl">{trans('Resources')}</h2>
                 </div>
             </section>
             <section className="resources__table py-12 bg-primary-gray">
                 <div className="container mx-auto">
                     <h2 className="font-normal text-lg mb-6">
-                        Best practices and solutions from our database
+                        {trans('Best practices and solutions from our database')}
                     </h2>
                     <div className="mb-12 flex gap-8 ">
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Title
+                                {trans('Title')}
                             </p>
                             <input
                                 type="text"
@@ -65,7 +67,7 @@ const Resources = () => {
                         </div>
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Country
+                                {trans('Country')}
                             </p>
                             <Select
                                 className="select-filter text-sm"
@@ -76,7 +78,7 @@ const Resources = () => {
                         </div>
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Type
+                                {trans('Type')}
                             </p>
                             <Select
                                 className="select-filter text-sm"
@@ -87,7 +89,7 @@ const Resources = () => {
                         </div>
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Topic
+                                {trans('Topic')}
                             </p>
                             <Select
                                 className="select-filter text-sm"
@@ -98,7 +100,7 @@ const Resources = () => {
                         </div>
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Year
+                                {trans('Year')}
                             </p>
                             <Select
                                 className="select-filter text-sm"
@@ -109,7 +111,7 @@ const Resources = () => {
                         </div>
                         <div className="w-40">
                             <p className="uppercase text-xs opacity-50 leading-none">
-                                Language
+                                {trans('Language')}
                             </p>
                             <Select
                                 className="select-filter text-sm"
@@ -127,19 +129,19 @@ const Resources = () => {
                                 <tr>
                                     <th style={{ width: '35%' }}>
                                         <span className="flex items-center">
-                                            Title{' '}
+                                            {trans('Title')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
                                     </th>
                                     <th style={{ width: '15%' }}>
                                         <span className="flex items-center">
-                                            Country{' '}
+                                            {trans('Country')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
                                     </th>
                                     <th style={{ width: '10%' }}>
                                         <span className="flex items-center">
-                                            Type{' '}
+                                            {trans('Type')}{' '}
                                             <SortIcon className="ml-1 cursor-pointer" />
                                         </span>
                                     </th>

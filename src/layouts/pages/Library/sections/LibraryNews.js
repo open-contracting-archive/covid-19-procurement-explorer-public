@@ -93,7 +93,7 @@ const LibraryNews = () => {
                     {newsList.length !== 0 ? (
                         <div className="flex justify-end pt-10">
                             <Link to="/news" className="text-blue-20">
-                                View all news --&gt;{' '}
+                                {trans('View all news')} --&gt;{' '}
                             </Link>
                         </div>
                     ) : (

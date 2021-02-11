@@ -36,7 +36,7 @@ const NewsSection = () => {
                         {trans('News')}
                     </h3>
                     <p className="text-xs md:text-base text-opacity-50 text-primary-dark">
-                        Updates from all around the world on Covid-19
+                        {trans('Updates from all around the world on Covid-19')}
                     </p>
                 </div>
                 {loading ? (

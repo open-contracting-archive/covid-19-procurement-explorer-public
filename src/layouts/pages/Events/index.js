@@ -34,7 +34,7 @@ function Events() {
                         <span
                             className="cursor-pointer text-primary-blue"
                             onClick={previousPage}>
-                            Library
+                            {trans('Library')}
                         </span>{' '}
                         /
                     </div>
@@ -125,6 +125,7 @@ function Events() {
                                         </div>
                                     </div>
                                 </Link>
+                           
                             )
                         })}
                     </div>

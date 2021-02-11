@@ -8,12 +8,14 @@ import { formatDate } from '../../../helpers/date'
 import ShareButtons from '../../../components/Library/ShareButtons'
 import TagList from '../../../components/website/Library/TagList'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
+import useTrans from '../../../hooks/useTrans'
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
     const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
     let { id: newsId } = useParams()
+    const {trans} = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -57,7 +59,7 @@ const NewsDetail = () => {
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 news-detail__metadata">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                    Published on
+                                    {trans('Published on')}
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
                                     {formatDate(
@@ -92,7 +94,7 @@ const NewsDetail = () => {
                             <>
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
-                                    <h2 className="text-xl mb-6">Other News</h2>
+                                    <h2 className="text-xl mb-6">{trans('Other News')}</h2>
                                     <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {newsList &&
                                         newsList
@@ -140,7 +142,7 @@ const NewsDetail = () => {
                                         <Link
                                             to="/news"
                                             className="text-blue-20 px-4">
-                                            View all news --&gt;{' '}
+                                            {trans('View all news')} --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>
