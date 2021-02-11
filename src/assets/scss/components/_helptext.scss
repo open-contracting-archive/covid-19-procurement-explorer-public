@@ -18,7 +18,7 @@
     top: 30px;
     pointer-events: none;
     transition: all 0.23s linear;
-    left: -6px;
+    right: -6px;
     z-index: 999;
 
     &:before {
@@ -30,6 +30,19 @@
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         border-bottom: 8px solid #454545;
+        right: 8px;
+    }
+
+    @media only screen and (min-width: 768px) {
+        left: -6px;
+        right: auto;
+
+        &:before {
+            content: '';
+            top: -6px;
+            right: auto;
+            left: 8px;
+        }
     }
 }
 

@@ -27,22 +27,19 @@
         @include equalDimension(667px);
 
         @media (max-width: 767px) {
-            @include equalDimension(567px);
+            @include equalDimension(100%);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            padding: 4px;
+            border-radius: 4px;
         }
-        // @media (max-width: 500px){
-        //     @include equalDimension(400px);
-        // }
     }
 
     .inner-circle {
         @include equalDimension(633px);
 
         @media (max-width: 767px) {
-            @include equalDimension(533px);
+            @include equalDimension(100%);
         }
-        // @media (max-width: 500px){
-        //     @include equalDimension(370px);
-        // }
     }
 }
 
@@ -64,17 +61,21 @@
         pointer-events: none;
     }
 }
-.countrySelector{
+.countrySelector {
     width: fit-content;
     &::after {
         content: '';
         position: absolute;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 5px solid #293E45;
+        border-top: 5px solid #293e45;
         right: 7px;
-        top: 28px;
+        top: 13px;
         pointer-events: none;
+
+        @media only screen and (min-width: 768px) {
+            top: 28px;
+        }
     }
 }
 
@@ -95,31 +96,31 @@
 
 button,
 a,
-Tab{
+Tab {
     outline: none;
-    &:focus{
+    &:focus {
         outline: none;
     }
 }
-.currency{
-    border: 1px solid #1FBBEC;
+.currency {
+    border: 1px solid #1fbbec;
 }
-.worldmap-share{
-    transition: all .4s ease;
-    .worldmap-share--buttons{
-        border: 1px solid #1FBBEC;
+.worldmap-share {
+    transition: all 0.4s ease;
+    .worldmap-share--buttons {
+        border: 1px solid #1fbbec;
         display: none;
         bottom: 0;
-        transition: all .4s ease;
+        transition: all 0.4s ease;
     }
-    &:hover{
-        .worldmap-share--buttons{
+    &:hover {
+        .worldmap-share--buttons {
             display: block;
         }
     }
 }
-.countrySelector{
-    option{
+.countrySelector {
+    option {
         @apply text-sm;
     }
 }

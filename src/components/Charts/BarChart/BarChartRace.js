@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
-import { formatYearText } from "../../../helpers/date"
+import { formatYearText } from '../../../helpers/date'
 
 const BarChartRace = ({ data }) => {
     const raceBarChartDiv = useRef(null)
@@ -16,6 +16,7 @@ const BarChartRace = ({ data }) => {
 
         let chart = am4core.create(raceBarChartDiv.current, am4charts.XYChart)
         chart.padding(40, 40, 40, 40)
+        chart.responsive.enabled = true
 
         let label = chart.plotContainer.createChild(am4core.Label)
         label.x = am4core.percent(97)

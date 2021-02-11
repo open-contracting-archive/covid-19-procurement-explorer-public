@@ -15,44 +15,42 @@ const Home = () => {
 
     return (
         <Fragment>
-            <section className="hero-section relative [ mx-auto px-4 ] [ flex flex-col justify-center ]">
-                <div className="outer-circle mt-40 mx-auto relative [ flex justify-center items-center ]">
-                    <CircleIcon className="circle-ring absolute h-full w-full z-negative" />
-                    <HeroIcon className="covid-icon" />
-                    <div className="inner-circle rounded-full bg-yellow-20 overflow-hidden [ flex flex-col justify-center items-center ]">
-                        <div className="[ flex-1 flex flex-col justify-end items-center ] pb-8">
-                            <h1 className="[ text-3xl md:text-4xl font-bold uppercase leading-none ] text-center">
+            <section className="hero-section relative mx-auto px-4 flex flex-col justify-center">
+                <div className="outer-circle mt-40 mx-auto relative flex justify-center items-center">
+                    <CircleIcon className="hidden md:block circle-ring absolute h-full w-full z-negative" />
+                    <HeroIcon className="covid-icon hidden md:block" />
+                    <div className="inner-circle rounded md:rounded-full bg-yellow-20 overflow-hidden flex flex-col justify-center items-center">
+                        <div className="flex-1 text-center pt-16 md:pt-0 pb-6 md:pb-8 px-2 md:flex md:flex-col md:justify-end">
+                            <h1 className="text-xl md:text-4xl font-bold uppercase leading-none text-center">
                                 {trans('EMERGENCY PROCUREMENT')}
                             </h1>
-                            <p className="uppercase mt-6">
+                            <p className="text-xs md:text-base uppercase mt-2 md:mt-6">
                                 {trans(
                                     'DATA, BEST PRACTICES AND RECOMMENDATIONS'
                                 )}
                             </p>
                         </div>
-                        <div
-                            style={{
-                                height: '200px'
-                            }}
-                            className="[ flex flex-wrap md:flex-no-wrap justify-center ] pt-12 w-full text-white bg-primary-dark">
+                        <div className="flex md:flex-no-wrap justify-center pt-12 w-full text-white bg-primary-dark pb-6 md:pb-16">
                             <Link
                                 to="/global-overview/data"
-                                className="flex [ mr-12 mb-10 ] text-center">
+                                className="px-2 md:px-0 md:flex md:mr-12 md:mb-10 text-center">
                                 <div>
-                                    <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
+                                    <p className="text-sm md:text-lg md:font-bold uppercase border-b-2 md:border-b-4 border-primary-blue">
                                         {trans('Explore data')}
                                     </p>
-                                    <p className="text-sm opacity-50 mt-1">
+                                    <p className="text-xxs md:text-sm opacity-50 mt-1">
                                         {trans('Stats from countries')}
                                     </p>
                                 </div>
                             </Link>
-                            <Link to="/library" className="flex text-center">
+                            <Link
+                                to="/library"
+                                className="px-2 md:px-0 md:flex text-center">
                                 <div>
-                                    <p className="[ text-lg font-bold uppercase ] border-b-4 border-primary-blue">
+                                    <p className="text-sm md:text-lg md:font-bold uppercase border-b-2 md:border-b-4 border-primary-blue">
                                         {trans('Explore library')}
                                     </p>
-                                    <p className="text-sm opacity-50 mt-1">
+                                    <p className="text-xxs md:text-sm opacity-50 mt-1">
                                         {trans('Best practices and resources')}
                                     </p>
                                 </div>
@@ -60,7 +58,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="text-white text-center mt-12 mb-40">
+                <div className="text-white text-center mt-12 mb-20 md:mb-40">
                     <MouseScroll className="m-auto" />
                     <p className="text-sm mt-3">
                         {trans('Scroll down for more')}

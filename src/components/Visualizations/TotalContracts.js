@@ -78,8 +78,8 @@ const TotalContracts = (props) => {
             {loading ? (
                 <Loader sm />
             ) : (
-                <div className="flex items-end">
-                    <div className="w-2/5">
+                <div className="flex flex-wrap items-end">
+                    <div className="w-full md:w-2/5">
                         <AreaChartBlock
                             chartData={totalContractLineChartData}
                             totalAmount={totalContractAmount}
@@ -92,7 +92,7 @@ const TotalContracts = (props) => {
                         />
                     </div>
 
-                    <div className="flex-1">
+                    <div className="md:flex-1">
                         <SimpleBarChart
                             data={totalContractBarChartData}
                             barColorValue={barColorValue}
@@ -104,9 +104,9 @@ const TotalContracts = (props) => {
             )}
             {modalHandler && (
                 <span
-                    className="cursor-pointer"
+                    className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>
-                    View more
+                    View in detail →
                 </span>
             )}
         </div>

@@ -20,7 +20,7 @@ const EquityIndicators = (props) => {
     const { trans } = useTrans()
     const helpText =
         'Total value of contracts defined as equitable. More information about equity indicators can be found in the methodology.'
-    
+
     // ===========================================================================
     // Hooks
     // ===========================================================================
@@ -65,14 +65,14 @@ const EquityIndicators = (props) => {
                 <Loader sm />
             ) : (
                 <Tabs>
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
+                    <div className="flex flex-wrap items-center md:justify-between">
+                        <div className="w-full md:w-auto mb-4 md:mb-0 flex items-center">
                             <h3 className="uppercase font-bold text-primary-dark inline-block">
                                 {trans(label ? label : 'Equity Indicators')}
                             </h3>
                             <HelpText helpTextInfo={helpText} />
                         </div>
-                        <div className="flex">
+                        <div className="flex flex-1 md:flex-none md:justify-start">
                             <TabList>
                                 <Tab>{trans('By value')}</Tab>
                                 <Tab>{trans('By number')}</Tab>

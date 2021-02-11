@@ -14,6 +14,7 @@ const StackedChart = ({ data }) => {
 
         // Create chart instance
         let chart = am4core.create(stackedChart.current, am4charts.XYChart)
+        chart.responsive.enabled = true
 
         chart.colors.list = [
             am4core.color('#BEBADA'),
@@ -63,12 +64,6 @@ const StackedChart = ({ data }) => {
             series.columns.template.width = am4core.percent(60)
             series.columns.template.tooltipText =
                 '[bold]{name}[/]\n[font-size:14px]{categoryX}: {valueY}'
-
-            // Add label
-            // let labelBullet = series.bullets.push(new am4charts.LabelBullet())
-            // labelBullet.label.text = '{valueY}'
-            // labelBullet.locationY = 0.5
-            // labelBullet.label.hideOversized = true
 
             return series
         }

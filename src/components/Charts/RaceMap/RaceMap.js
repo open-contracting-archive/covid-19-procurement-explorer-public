@@ -42,13 +42,15 @@ const RaceMap = ({
         // Create chart instance
         let chart = am4core.create(mapchartDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
+        chart.responsive.enabled = true
 
         let label = chart.createChild(am4core.Label)
-        label.x = am4core.percent(45)
         label.y = am4core.percent(80)
-        label.horizontalCenter = 'left'
+        label.horizontalCenter = 'center'
         label.verticalCenter = 'middle'
         label.fontSize = 24
+        label.padding(0, 50, 25, 50)
+        label.align = 'center'
 
         // Set map definition
         chart.geodata = am4geodata_worldLow
@@ -117,7 +119,7 @@ const RaceMap = ({
         heatLegend.series = polygonSeries
         heatLegend.align = 'center'
         heatLegend.valign = 'bottom'
-        heatLegend.width = am4core.percent(60)
+        heatLegend.width = am4core.percent(80)
         heatLegend.marginBottom = am4core.percent(8)
         heatLegend.orientation = 'horizontal'
         heatLegend.padding(20, 20, 20, 20)

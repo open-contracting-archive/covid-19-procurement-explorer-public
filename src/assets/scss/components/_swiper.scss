@@ -6,8 +6,12 @@
 .swiper-button-next {
     width: auto !important;
     height: auto !important;
-    top: 98% !important;
+    top: 100% !important;
     color: #1fbbec !important;
+
+    @media only screen and (min-width: 768px) {
+        top: 98% !important;
+    }
 }
 
 .swiper-button-prev:after,
@@ -44,4 +48,14 @@
 
 .swiper-container.swiper-container-horizontal {
     padding-bottom: 40px;
+}
+
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 0;
+
+    @media only screen and (min-width: 768px) {
+        bottom: 10px;
+    }
 }

@@ -8,7 +8,7 @@ import Loader from '../Loader/Loader'
 import { dateDiff, formatDate } from '../../helpers/date'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
-import Visualization from "../../constants/Visualization"
+import Visualization from '../../constants/Visualization'
 
 const TotalSpending = (props) => {
     // ===========================================================================
@@ -16,7 +16,9 @@ const TotalSpending = (props) => {
     // ===========================================================================
     const { label = 'Total Spending', params, modalHandler } = props
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector((state) => state.general.countryCurrency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({
@@ -34,11 +36,10 @@ const TotalSpending = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TotalSpending(params)
-            .then((response) => {
-                setOriginalData(response)
-                setLoading(false)
-            })
+        VisualizationService.TotalSpending(params).then((response) => {
+            setOriginalData(response)
+            setLoading(false)
+        })
 
         return () => {
             setOriginalData({})
@@ -97,8 +98,8 @@ const TotalSpending = (props) => {
             {loading ? (
                 <Loader sm />
             ) : (
-                <div className="flex items-end">
-                    <div className="w-2/5">
+                <div className="flex flex-wrap items-end">
+                    <div className="w-full md:w-2/5">
                         <AreaChartBlock
                             chartData={chartData.areaChartData}
                             totalAmount={chartData.amount}
@@ -109,7 +110,7 @@ const TotalSpending = (props) => {
                             currency={currency}
                         />
                     </div>
-                    <div className="flex-1">
+                    <div className="md:flex-1">
                         <SimpleBarChart
                             data={chartData.barChartData}
                             barColorValue={barColorValue}
@@ -120,8 +121,11 @@ const TotalSpending = (props) => {
                 </div>
             )}
             {modalHandler && (
-                <span className="cursor-pointer"
-                      onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>View more</span>
+                <span
+                    className="cursor-pointer text-sm text-primary-blue block text-right"
+                    onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>
+                    View in detail →
+                </span>
             )}
         </div>
     )

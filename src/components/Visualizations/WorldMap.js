@@ -6,8 +6,8 @@ import useTrans from '../../hooks/useTrans'
 import GlobalMap from '../GlobalMap/GlobalMap'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
-import ContractView from "../../constants/ContractView"
-import ChartFooter from "../Utilities/ChartFooter"
+import ContractView from '../../constants/ContractView'
+import ChartFooter from '../Utilities/ChartFooter'
 
 const options = continentSelectList
 
@@ -68,13 +68,13 @@ const WorldMap = (props) => {
     return (
         <div className="flex flex-wrap -mx-4 -mb-4">
             <div className="w-full px-4 mb-4">
-                <div className="bg-white rounded p-6">
+                <div className="bg-white rounded p-4">
                     <FullScreen handle={fullScreenHandler}>
                         <div className="relative">
-                            <div className="flex justify-end">
-                                <ul className="contract-switch flex">
+                            <div className="flex flex-wrap md:flex-no-wrap md:justify-end world-map-chart mb-4">
+                                <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
                                     <li
-                                        className={`mr-4 cursor-pointer ${
+                                        className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 mr-2 md:mr-4 ${
                                             contractType === 'value'
                                                 ? 'active'
                                                 : ''
@@ -85,7 +85,7 @@ const WorldMap = (props) => {
                                         {trans('By contract value')}
                                     </li>
                                     <li
-                                        className={`cursor-pointer ${
+                                        className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                                             contractType === 'number'
                                                 ? 'active'
                                                 : ''
@@ -98,7 +98,7 @@ const WorldMap = (props) => {
                                 </ul>
                             </div>
 
-                            <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
+                            <div className="w-full md:w-1/5 md:absolute top-0 left-0 z-10 md:-mt-3">
                                 <Select
                                     className="select-filter text-sm"
                                     classNamePrefix="select-filter"

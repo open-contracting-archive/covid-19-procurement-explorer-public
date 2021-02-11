@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Select from 'react-select'
 import useTrans from '../../hooks/useTrans'
 import RaceMap from '../../components/Charts/RaceMap/RaceMap'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
-import { CONTINENTS, continentSelectList } from "../../helpers/country"
+import { CONTINENTS, continentSelectList } from '../../helpers/country'
 
 const options = continentSelectList
 
@@ -39,24 +39,25 @@ const WorldTimelineMap = () => {
     useEffect(() => {
         let dateObject = {}
 
-        originalData && originalData.result.map((data) => {
-            let countryObject = {}
-            data.details.map((detail) => {
-                if (detail.country_code !== 'ALL') {
-                    countryObject = {
-                        ...countryObject,
-                        [detail.country_code]: {
-                            value: detail.amount_usd,
-                            number: detail.tender_count,
-                            url: `/country/${detail.country
-                                .toLowerCase()
-                                .replace(' ', '-')}/data`
+        originalData &&
+            originalData.result.map((data) => {
+                let countryObject = {}
+                data.details.map((detail) => {
+                    if (detail.country_code !== 'ALL') {
+                        countryObject = {
+                            ...countryObject,
+                            [detail.country_code]: {
+                                value: detail.amount_usd,
+                                number: detail.tender_count,
+                                url: `/country/${detail.country
+                                    .toLowerCase()
+                                    .replace(' ', '-')}/data`
+                            }
                         }
                     }
-                }
+                })
+                dateObject = { ...dateObject, [data.month]: countryObject }
             })
-            dateObject = { ...dateObject, [data.month]: countryObject }
-        })
         setMapData(dateObject)
         setYearMonth(originalData && originalData.result[0].month)
 
@@ -81,22 +82,22 @@ const WorldTimelineMap = () => {
     }
 
     return (
-        <div>
+        <Fragment>
             {!mapData ? (
                 <Loader />
             ) : (
-                <div>
-                    <div className="flex justify-end world-map-chart mb-4">
-                        <ul className="contract-switch flex">
+                <section>
+                    <div className="flex flex-wrap md:flex-no-wrap md:justify-end world-map-chart mb-4">
+                        <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
                             <li
-                                className={`mr-4 cursor-pointer ${
+                                className={`mr-4 cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                                     contractType === 'value' ? 'active' : ''
                                 }`}
                                 onClick={() => setContractType('value')}>
                                 {trans('By contract value')}
                             </li>
                             <li
-                                className={`cursor-pointer ${
+                                className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                                     contractType === 'number' ? 'active' : ''
                                 }`}
                                 onClick={() => setContractType('number')}>
@@ -104,7 +105,7 @@ const WorldTimelineMap = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className="w-1/5 absolute top-0 left-0 z-10 -mt-3">
+                    <div className="w-full md:w-1/5 md:absolute top-0 left-0 z-10 md:-mt-3">
                         <Select
                             className="select-filter text-sm"
                             classNamePrefix="select-filter"
@@ -115,7 +116,6 @@ const WorldTimelineMap = () => {
                             }
                         />
                     </div>
-
                     <RaceMap
                         contractData={mapData}
                         contractType={contractType}
@@ -123,9 +123,9 @@ const WorldTimelineMap = () => {
                         sliderData={sliderData || []}
                         coordinates={CONTINENTS[selectedContinent.value]}
                     />
-                </div>
+                </section>
             )}
-        </div>
+        </Fragment>
     )
 }
 

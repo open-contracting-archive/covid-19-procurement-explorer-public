@@ -93,6 +93,8 @@ header {
     &:not(:last-child) {
         margin-right: 20px;
     }
+
+    margin-bottom: 14px !important;
 }
 
 .arrow-nav {
@@ -152,7 +154,11 @@ header {
 
 .global-profile {
     > section {
-        padding-bottom: 90px;
+        padding-bottom: 24px;
+
+        @media only screen and (min-height: 768px) {
+            padding-bottom: 90px;
+        }
     }
 
     .react-tabs {
@@ -183,11 +189,20 @@ header {
         position: relative;
         display: flex;
         align-items: center;
-        font-size: 22px;
+        font-size: 14px;
         padding-bottom: 0;
 
+        @media only screen and (min-width: 768px) {
+            font-size: 22px;
+        }
+
         li {
-            margin-right: 16px;
+            margin-right: 8px;
+
+            @media only screen and (min-height: 768px) {
+                margin-right: 16px;
+            }
+
             &:last-child {
                 margin-right: 0;
             }
@@ -274,7 +289,9 @@ svg tspan {
 .right-direction {
     .react-tabs__tab-list {
         display: flex;
-        justify-content: flex-end;
+        @media only screen and (min-width: 768px) {
+            justify-content: flex-end;
+        }
     }
 }
 
@@ -319,5 +336,50 @@ svg tspan {
 
     &:after {
         transform: rotate(-45deg);
+    }
+}
+
+.world-map-section {
+    @media only screen and (min-height: 768px) {
+        min-height: 900px;
+    }
+}
+
+.world-map-chart-section {
+    @media only screen and (min-height: 768px) {
+        width: calc(100% - 91px);
+    }
+}
+
+.icon-sort {
+    display: inline-block;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 4px;
+
+    .icon-sort-arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #ccc;
+        margin-bottom: 2px;
+
+        &.active {
+            border-bottom-color: #8d989b;
+        }
+    }
+
+    .icon-sort-arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #ccc;
+
+        &.active {
+            border-top-color: #8d989b;
+        }
     }
 }

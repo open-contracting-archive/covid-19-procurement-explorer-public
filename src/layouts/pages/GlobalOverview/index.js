@@ -53,19 +53,18 @@ const GlobalOverview = () => {
     return (
         <Fragment>
             <section className="global-profile -mt-8">
-                <section className="bg-blue-0 pt-20 px-4">
+                <section className="bg-blue-0 pt-12 md:pt-20 px-4">
                     <div className="container mx-auto">
                         <CountrySelector />
                         <WorldMap />
                     </div>
                 </section>
-
                 <TabNavigator endpoint={'global-overview'} />
                 <div
                     style={{
                         borderTop: '5px solid #1fbbec'
                     }}
-                    className="py-16 bg-primary-gray px-4">
+                    className="py-6 md:py-16 bg-primary-gray px-4 overflow-hidden md:overscroll-none">
                     <div className="container mx-auto">{renderTab()}</div>
                 </div>
             </section>

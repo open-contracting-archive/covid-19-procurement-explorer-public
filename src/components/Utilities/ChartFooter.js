@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import useTrans from '../../hooks/useTrans'
+import {
+    FacebookShareButton,
+    LinkedinShareButton,
+    TwitterShareButton,
+    EmailShareButton
+} from 'react-share'
+import { twitterHandle } from '../../helpers/general'
+import socialIcons from '../../assets/img/icons/social'
 
 const ChartFooter = (props) => {
     const { trans } = useTrans()
@@ -12,7 +20,7 @@ const ChartFooter = (props) => {
                 <div>
                     <span className="flex items-center">
                         <button onClick={props.fullScreenHandler.enter}>
-                            <span className="cursor-pointer">
+                            <span className="hidden md:inline-block cursor-pointer">
                                 {trans('View full screen')}
                             </span>
                             <FullViewIcon className="ml-2 inline-block" />
@@ -25,17 +33,63 @@ const ChartFooter = (props) => {
 
     return (
         <div
-            className="flex items-center justify-between pt-4 border-t mt-10 border-blue-0 text-sm
-                                             text-primary-blue -mx-6 px-6">
+            className="chart-footer bg-white flex items-center justify-between border-t md:mt-4
+             border-blue-0 text-sm text-primary-blue -mx-4 p-4 md:pb-0 rounded-b">
             <div className="flex items-center">
                 <div className="flex items-center mr-6">
                     <DownloadIcon className="mr-2 inline-block" />
                     <span>{trans('Download')}</span>
                 </div>
-                <span className="flex items-center">
-                    <ShareIcon className="mr-2 inline-block" />{' '}
-                    <span className="cursor-pointer">{trans('Share')}</span>
-                </span>
+                <div className="flex items-center relative">
+                    <button>
+                        <ShareIcon className="mr-2 inline-block" />{' '}
+                        <span className="cursor-pointer">{trans('Share')}</span>
+                    </button>
+                    <nav className="share-menu">
+                        <span className="mb-3 inline-block text-primary-dark">
+                            Share on
+                        </span>
+                        <div className="flex flex-col">
+                            <FacebookShareButton
+                                url={window.location.href}
+                                className="social-icon">
+                                <socialIcons.fbIcon />
+                                <span>Facebook</span>
+                            </FacebookShareButton>
+
+                            <TwitterShareButton
+                                url={window.location.href}
+                                via={twitterHandle}
+                                className="social-icon">
+                                <socialIcons.twitterIcon />
+                                <span>Twitter</span>
+                            </TwitterShareButton>
+
+                            <LinkedinShareButton
+                                url={window.location.href}
+                                className="social-icon">
+                                <socialIcons.linkedIcon />
+                                <span>Linkedin</span>
+                            </LinkedinShareButton>
+
+                            <EmailShareButton
+                                url={window.location.href}
+                                className="social-icon">
+                                <socialIcons.mailIcon />
+                                <span>Email</span>
+                            </EmailShareButton>
+                        </div>
+
+                        <span className="block mt-3 pt-3 mb-2 border-t -mx-3 px-3 border-blue-5 text-primary-dark">
+                            Share as
+                        </span>
+
+                        <div className="social-embed flex items-center">
+                            <socialIcons.codingIcon className="w-5" />
+                            <span className="ml-4">Embeded</span>
+                        </div>
+                    </nav>
+                </div>
             </div>
 
             {showFullScreenAction()}

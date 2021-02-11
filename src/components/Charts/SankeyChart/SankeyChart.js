@@ -16,6 +16,7 @@ const SankeyChart = ({ data }) => {
         // Create chart instance
         let chart = am4core.create(sankeyChart.current, am4charts.SankeyDiagram)
         chart.hiddenState.properties.opacity = 0
+        chart.responsive.enabled = true
 
         let hoverState = chart.links.template.states.create('hover')
         hoverState.properties.fillOpacity = 0.6
@@ -53,7 +54,6 @@ const SankeyChart = ({ data }) => {
 
         return () => {
             chart.dispose()
-
             chart = null
         }
     }, [data])

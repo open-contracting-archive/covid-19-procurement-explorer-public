@@ -4,8 +4,8 @@ import { get } from 'lodash'
 import { API_URL } from '../../../../helpers/api'
 import CmsPageService from '../../../../services/CmsPageService'
 import Loader from '../../../../components/Loader/Loader'
-import { formatDate } from "../../../../helpers/date"
-import useTrans from "../../../../hooks/useTrans"
+import { formatDate } from '../../../../helpers/date'
+import useTrans from '../../../../hooks/useTrans'
 
 const NewsSection = () => {
     const [newsList, setNewsList] = useState([])
@@ -26,40 +26,54 @@ const NewsSection = () => {
     }, [])
 
     return (
-        <section className="py-24 px-4">
+        <section className="py-8 md:py-24 px-4">
             <div className="container mx-auto">
-                <div className="text-center mb-10">
-                    <h3 className="uppercase text-3xl font-bold leading-none">
+                <div className="text-center mb-6 md:mb-10">
+                    <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
                             {trans('Explore')}
                         </span>
                         {trans('News')}
                     </h3>
-                    <p className="text-base text-opacity-50  text-primary-dark">
+                    <p className="text-xs md:text-base text-opacity-50 text-primary-dark">
                         Updates from all around the world on Covid-19
                     </p>
                 </div>
-                {loading ? (<Loader sm />) : newsList.length ? (
+                {loading ? (
+                    <Loader sm />
+                ) : newsList.length ? (
                     <Fragment>
-                        <div className="grid grid-cols-12 grid-rows-2 gap-5 news-wrapper">
+                        <div className="grid grid-cols-12 grid-rows-2 gap-2 md:gap-5 news-wrapper">
                             {newsList.map((news, index) => {
                                 return (
-                                    <div
-                                        key={news.id}
-                                        className="news-item">
+                                    <div key={news.id} className="news-item">
                                         <Link
                                             to={`/news/${news.id}`}
                                             className="news-link">
                                             <div className="img-wrapper img-gradient">
-                                                {get(news, 'content_image.meta.download_url') && (
+                                                {get(
+                                                    news,
+                                                    'content_image.meta.download_url'
+                                                ) && (
                                                     <img
-                                                        src={`${API_URL}${get(news, 'content_image.meta.download_url')}`}
+                                                        src={`${API_URL}${get(
+                                                            news,
+                                                            'content_image.meta.download_url'
+                                                        )}`}
                                                         className="news-img"
-                                                        alt={get(news, 'content_image.title')} />
+                                                        alt={get(
+                                                            news,
+                                                            'content_image.title'
+                                                        )}
+                                                    />
                                                 )}
                                             </div>
                                             <div
-                                                className={`news-caption ${index === 0 ? 'news-caption--large' : ''}`}>
+                                                className={`news-caption ${
+                                                    index === 0
+                                                        ? 'news-caption--large'
+                                                        : ''
+                                                }`}>
                                                 <h3 className="news-caption__title">
                                                     {news.title}
                                                 </h3>
@@ -73,7 +87,7 @@ const NewsSection = () => {
                             })}
                         </div>
 
-                        <div className="flex justify-center mt-12">
+                        <div className="text-right md:text-center mt-6 md:mt-12">
                             <Link to="/news" className="text-blue-20">
                                 {trans('View all news')} --&gt;{' '}
                             </Link>

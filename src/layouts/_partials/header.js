@@ -37,26 +37,26 @@ const Header = () => {
                     </div>
                     <div className="flex items-center text-sm">
                         <ul className="flex">
-                            <li className="mr-8">
+                            <li className="hidden md:block mr-3 md:mr-8">
                                 <NavLink
                                     activeClassName="active"
                                     to="/pages/about">
                                     {trans('About')}
                                 </NavLink>
                             </li>
-                            <li className="mr-8">
+                            <li className="mr-3 md:mr-8">
                                 <NavLink
                                     activeClassName="active"
                                     to="/global-overview/data">
                                     {trans('Data')}
                                 </NavLink>
                             </li>
-                            <li className="mr-8">
+                            <li className="mr-3 md:mr-8">
                                 <NavLink activeClassName="active" to="/library">
                                     {trans('Library')}
                                 </NavLink>
                             </li>
-                            <li className="mr-8">
+                            <li className="mr-3 md:mr-8">
                                 <NavLink
                                     activeClassName="active"
                                     to="/resources">

@@ -25,23 +25,23 @@ const LibrarySection = () => {
     }, [])
 
     return (
-        <section className="py-24 px-4">
+        <section className="py-8 md:py-24 px-4">
             <div className="container mx-auto">
-                <div className="text-center mb-20">
-                    <h3 className="uppercase text-3xl font-bold leading-none">
+                <div className="text-center mb-6 md:mb-20">
+                    <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
                             {trans('Explore')}
                         </span>
                         {trans('Library')}
                     </h3>
-                    <p className="text-base text-opacity-50  text-primary-dark">
+                    <p className="text-xs md:text-base text-opacity-50  text-primary-dark">
                         {trans('Find insights, analysis and best practices')}
                     </p>
                 </div>
                 {loading ? (
                     <Loader sm />
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
                         {insightList.length ? (
                             insightList.map((insightItem) => (
                                 <Link
@@ -65,7 +65,7 @@ const LibrarySection = () => {
                                 </Link>
                             ))
                         ) : (
-                            <p>{trans('No records')}</p>
+                            <p className="text-center">{trans('No records')}</p>
                         )}
                     </div>
                 )}

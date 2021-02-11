@@ -4,8 +4,8 @@ import VisualizationService from '../../../../services/VisualizationService'
 import CountryDetailMap from '../../../../components/Charts/CountryDetailMap/CountryDetailMap'
 import useTrans from '../../../../hooks/useTrans'
 import Loader from '../../../../components/Loader/Loader'
-import ContractView from "../../../../constants/ContractView"
-import ChartFooter from "../../../../components/Utilities/ChartFooter"
+import ContractView from '../../../../constants/ContractView'
+import ChartFooter from '../../../../components/Utilities/ChartFooter'
 
 const CountryMapElement = (props) => {
     const [loading, setLoading] = useState(true)
@@ -16,11 +16,12 @@ const CountryMapElement = (props) => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        VisualizationService.CountryMap({ country: props.countryCode })
-            .then((response) => {
+        VisualizationService.CountryMap({ country: props.countryCode }).then(
+            (response) => {
                 setOriginalData(response)
                 setLoading(false)
-            })
+            }
+        )
 
         return () => {
             setOriginalData({})
@@ -32,7 +33,10 @@ const CountryMapElement = (props) => {
             const mapDataFormatted = [
                 {
                     id: originalData.country_code,
-                    value: viewType === ContractView.VALUE ? originalData.amount_usd : originalData.tender_count
+                    value:
+                        viewType === ContractView.VALUE
+                            ? originalData.amount_usd
+                            : originalData.tender_count
                 }
             ]
             setMapData(mapDataFormatted)
@@ -44,10 +48,11 @@ const CountryMapElement = (props) => {
     }
 
     return (
-        <div className="w-full md:w-1/2 lg:w-62 px-4 mb-4 bg-white rounded py-6">
-            <FullScreen handle={fullScreenHandler}>
-                <div className="relative">
-                    {/* <div className="flex justify-end">
+        <div className="mt-10 md:mt-0 w-full md:w-1/2 lg:w-62 px-2">
+            <div className="p-4 pb-0 md:pb-4 bg-white rounded">
+                <FullScreen handle={fullScreenHandler}>
+                    <div className="relative">
+                        {/* <div className="flex justify-end">
                         <ul className="contract-switch flex">
                             <li
                                 className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
@@ -62,15 +67,21 @@ const CountryMapElement = (props) => {
                         </ul>
                     </div> */}
 
-                    <div className="h-full">
-                        {loading ? (<Loader />) : (
-                            <CountryDetailMap data={mapData} countryCode={props.countryCode} />
-                        )}
+                        <div className="h-full">
+                            {loading ? (
+                                <Loader />
+                            ) : (
+                                <CountryDetailMap
+                                    data={mapData}
+                                    countryCode={props.countryCode}
+                                />
+                            )}
+                        </div>
                     </div>
-                </div>
-            </FullScreen>
+                </FullScreen>
 
-            <ChartFooter fullScreenHandler={fullScreenHandler} />
+                <ChartFooter fullScreenHandler={fullScreenHandler} />
+            </div>
         </div>
     )
 }
