@@ -68,7 +68,7 @@ const WorldMap = (props) => {
     return (
         <div className="flex flex-wrap -mx-4 -mb-4">
             <div className="w-full px-4 mb-4">
-                <div className="bg-white rounded p-4">
+                <div className="bg-white rounded p-4 pb-0 md:pb-4">
                     <FullScreen handle={fullScreenHandler}>
                         <div className="relative">
                             <div className="flex flex-wrap md:flex-no-wrap md:justify-end world-map-chart mb-4">

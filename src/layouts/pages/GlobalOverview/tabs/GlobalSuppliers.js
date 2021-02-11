@@ -17,7 +17,7 @@ const GlobalSuppliers = () => {
 
     return (
         <div>
-            <div className="flex flex-wrap -mx-3 mb-16">
+            <div className="flex flex-wrap -mx-3 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
                     <Suppliers label="Suppliers" modalHandler={modalHandler} />
                 </div>

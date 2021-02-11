@@ -6,7 +6,7 @@ import VisualizationService from '../../../services/VisualizationService'
 import ContractView from '../../../constants/ContractView'
 import { isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import ChartFooter from "../../Utilities/ChartFooter"
+import ChartFooter from '../../Utilities/ChartFooter'
 
 const ProductCategoryMap = (props) => {
     // ===========================================================================
@@ -56,16 +56,16 @@ const ProductCategoryMap = (props) => {
 
     return (
         <div className="w-full mb-6">
-            <div className="bg-white rounded p-4">
+            <div className="bg-white rounded p-4 pb-0 md:pb-4">
                 <FullScreen handle={fullScreenHandler}>
-                    <div className="flex items-center justify-between mb-2">
-                        <h3 className="uppercase font-bold  text-primary-dark">
+                    <div className="flex flex-wrap items-center justify-between md:mb-4">
+                        <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
                             {trans('Product Category Map')}
                         </h3>
-                        <div className="flex justify-end world-map-chart">
+                        <div className="w-full md:w-auto flex">
                             <ul className="contract-switch flex">
                                 <li
-                                    className={`mr-4 cursor-pointer ${isActiveTab(
+                                    className={`mr-4 cursor-pointer text-xs md:text-base ${isActiveTab(
                                         ContractView.VALUE
                                     )}`}
                                     onClick={() =>
@@ -74,7 +74,7 @@ const ProductCategoryMap = (props) => {
                                     {trans('By contract value')}
                                 </li>
                                 <li
-                                    className={`cursor-pointer ${isActiveTab(
+                                    className={`cursor-pointer text-xs md:text-base ${isActiveTab(
                                         ContractView.NUMBER
                                     )}`}
                                     onClick={() =>
@@ -86,7 +86,13 @@ const ProductCategoryMap = (props) => {
                         </div>
                     </div>
 
-                    {loading ? <Loader /> : <TreeMapChart data={chartData} />}
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <div className="pb-4">
+                            <TreeMapChart data={chartData} />
+                        </div>
+                    )}
                 </FullScreen>
 
                 <ChartFooter fullScreenHandler={fullScreenHandler} />

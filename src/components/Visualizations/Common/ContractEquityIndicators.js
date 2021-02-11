@@ -108,14 +108,14 @@ const ContractEquityIndicators = (props) => {
 
     function renderChart() {
         return (
-            <div className="flex">
-                <div>
-                    <div className="w-80 mr-12">
+            <div className="flex flex-wrap">
+                <div className="w-full md:w-auto">
+                    <div className="md:w-80 md:mr-12">
                         <ul>
                             {equities.map((item, index) => (
                                 <li
                                     key={index}
-                                    className="active py-2 flex items-center justify-between
+                                    className="active text-sm md:text-base py-1 md:py-2 flex items-center justify-between
                                                         border-b border-blue-0 text-blue-50">
                                     <div className="flex items-center">
                                         <div className="contract-line">
@@ -143,7 +143,7 @@ const ContractEquityIndicators = (props) => {
                         </ul>
                     </div>
                 </div>
-                <div className="flex-1">
+                <div className="mt-4 md:mt-0 w-full md:w-auto md:flex-1">
                     <CompareChart
                         chartData={chartData}
                         equities={equities.filter((equity) =>
@@ -160,38 +160,36 @@ const ContractEquityIndicators = (props) => {
     return (
         <div className="bg-white rounded p-4 pb-0 md:pb-4">
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex items-center justify-between">
-                    <h3 className="uppercase font-bold  text-primary-dark mb-6">
+                <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
+                    <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
                         {trans('Contracts and equity indicators')}
                     </h3>
 
-                    <div className="simple-tab">
-                        <div className="flex justify-end world-map-chart mb-8">
-                            <ul className="contract-switch flex">
-                                <li
-                                    className={
-                                        viewType === 'value'
-                                            ? 'mr-4 cursor-pointer active'
-                                            : 'mr-4 cursor-pointer'
-                                    }
-                                    onClick={() =>
-                                        switchViewType(ContractView.VALUE)
-                                    }>
-                                    {trans('By contract value')}
-                                </li>
-                                <li
-                                    className={
-                                        viewType === 'number'
-                                            ? 'mr-4 cursor-pointer active'
-                                            : 'mr-4 cursor-pointer'
-                                    }
-                                    onClick={() =>
-                                        switchViewType(ContractView.NUMBER)
-                                    }>
-                                    {trans('By number of contracts')}
-                                </li>
-                            </ul>
-                        </div>
+                    <div className="w-full md:w-auto flex mb-4 md:mb-0">
+                        <ul className="contract-switch flex">
+                            <li
+                                className={
+                                    viewType === 'value'
+                                        ? 'mr-4 cursor-pointer text-xs md:text-base active'
+                                        : 'mr-4 cursor-pointer text-xs md:text-base'
+                                }
+                                onClick={() =>
+                                    switchViewType(ContractView.VALUE)
+                                }>
+                                {trans('By contract value')}
+                            </li>
+                            <li
+                                className={
+                                    viewType === 'number'
+                                        ? 'cursor-pointer text-xs md:text-base active'
+                                        : 'cursor-pointer text-xs md:text-base'
+                                }
+                                onClick={() =>
+                                    switchViewType(ContractView.NUMBER)
+                                }>
+                                {trans('By number of contracts')}
+                            </li>
+                        </ul>
                     </div>
                 </div>
 

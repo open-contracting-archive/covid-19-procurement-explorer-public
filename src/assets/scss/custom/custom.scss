@@ -156,7 +156,7 @@ header {
     > section {
         padding-bottom: 24px;
 
-        @media only screen and (min-height: 768px) {
+        @media only screen and (min-width: 768px) {
             padding-bottom: 90px;
         }
     }
@@ -242,9 +242,13 @@ svg tspan {
 }
 
 .text-field {
-    border-bottom: 2px solid #1fbbec;
+    border-bottom: 2px solid #ffffff;
     padding: 8px 0 9px 0;
     background-color: inherit;
+
+    @media only screen and (min-width: 768px) {
+        border-bottom-color: #1fbbec;
+    }
 }
 
 .react-datepicker {
@@ -382,4 +386,15 @@ svg tspan {
             border-top-color: #8d989b;
         }
     }
+}
+
+.filter-ui {
+    padding: 16px;
+    background: #1fbbec;
+    display: inline-block;
+    border-radius: 4px 0 0 4px;
+    position: absolute;
+    top: 114px;
+    right: -18px;
+    z-index: 1;
 }

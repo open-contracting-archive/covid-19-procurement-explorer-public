@@ -15,7 +15,7 @@ const CompareChart = ({ chartData, equities }) => {
 
         // Create chart instance
         let chart = am4core.create(compareChart.current, am4charts.XYChart)
-        chart.padding(0, 15, 0, 15)
+        chart.padding(0, 0, 0, 0)
         chart.colors.step = 3
         chart.cursor = new am4charts.XYCursor()
         chart.data = chartData
@@ -118,7 +118,7 @@ const CompareChart = ({ chartData, equities }) => {
         }
     }, [chartData, equities])
 
-    return <div className="h-full w-full compare-chart-section" ref={compareChart} />
+    return <div className="h-500 compare-chart-section" ref={compareChart} />
 }
 
 export default CompareChart

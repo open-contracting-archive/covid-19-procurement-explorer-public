@@ -133,7 +133,7 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
 
     return (
         <div className="map-wrapper bg-white rounded-md h-full mt-5">
-            <div ref={globalMapchartDiv} className="h-500" />
+            <div ref={globalMapchartDiv} className="h-500 global-map-section" />
         </div>
     )
 }

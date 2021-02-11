@@ -117,7 +117,7 @@ const CountryProfile = () => {
                 style={{
                     borderTop: '5px solid #1fbbec'
                 }}
-                className="py-6 md:py-16 bg-primary-gray px-4 overflow-hidden md:overscroll-none">
+                className="py-6 md:py-16 bg-primary-gray px-4">
                 <div className="container mx-auto">{renderTab()}</div>
             </div>
         </section>

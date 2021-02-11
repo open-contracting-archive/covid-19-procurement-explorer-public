@@ -8,8 +8,10 @@ import Loader from '../Loader/Loader'
 import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import ReactPaginate from 'react-paginate'
 import TableLoader from '../Loader/TableLoader'
-import { hasValidProperty } from "../../helpers/general"
-import useCountries from "../../hooks/useCountries"
+import { hasValidProperty } from '../../helpers/general'
+import useCountries from '../../hooks/useCountries'
+import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
+import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 
 const InsightTable = ({ params }) => {
     const countries = useSelector((state) => state.general.countries)
@@ -24,6 +26,7 @@ const InsightTable = ({ params }) => {
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
     const history = useHistory()
+    const [showFilter, setShowFilter] = useState('hidden')
 
     useEffect(() => {
         LoadInsightList()
@@ -99,9 +102,116 @@ const InsightTable = ({ params }) => {
         appendFilter({ country })
     }
 
+    const handleFilterToggle = () => {
+        setShowFilter(showFilter === 'hidden' ? 'block' : 'hidden')
+    }
+
+    const handleCloseFilter = () => {
+        setShowFilter('hidden')
+    }
+
     return (
-        <>
-            <div className="mb-12 flex gap-8 ">
+        <div className="relative">
+            <div
+                className="md:hidden cursor-pointer"
+                onClick={handleFilterToggle}>
+                <div className="filter-ui">
+                    <FilterIcon />
+                </div>
+            </div>
+
+            {showFilter ? (
+                <div
+                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
+                    <div className="flex justify-between text-white mb-4 md:mb-0">
+                        <span className="text-sm uppercase font-bold">
+                            Filter
+                        </span>
+                        <span
+                            className="filter-close text-sm uppercase font-bold cursor-pointer"
+                            onClick={handleCloseFilter}>
+                            <FilterCloseIcon />
+                        </span>
+                    </div>
+                    <div className="flex -mx-2 -mb-5 flex-wrap">
+                        <div className="w-1/2 md:w-40 px-2 mb-5">
+                            <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
+                                Title
+                            </p>
+                            <input
+                                type="text"
+                                name="title"
+                                className="text-field text-sm"
+                                placeholder="ALL"
+                            />
+                        </div>
+                        {!hasCountry() && (
+                            <div className="w-1/2 md:w-40 px-2 mb-5">
+                                <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
+                                    Country
+                                </p>
+                                <Select
+                                    className="select-filter text-sm"
+                                    classNamePrefix="select-filter"
+                                    options={countrySelectList}
+                                    onChange={(selectedOption) =>
+                                        handleCountryFilter(
+                                            selectedOption.value
+                                        )
+                                    }
+                                />
+                            </div>
+                        )}
+                        <div className="w-1/2 md:w-40 px-2 mb-5">
+                            <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
+                                Type
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={typeSelectList}
+                            />
+                        </div>
+                        {/* <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Topic
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Year
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div>
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                Language
+                            </p>
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                            />
+                        </div> */}
+                    </div>
+                </div>
+            ) : (
+                ''
+            )}
+
+            <div className="hidden mb-12 md:flex gap-8 ">
                 <div className="w-40">
                     <p className="uppercase text-xs opacity-50 leading-none">
                         Title
@@ -172,6 +282,7 @@ const InsightTable = ({ params }) => {
                     />
                 </div> */}
             </div>
+
             {loading ? (
                 <Loader />
             ) : (
@@ -180,52 +291,69 @@ const InsightTable = ({ params }) => {
                         <div className="custom-scrollbar table-scroll">
                             <table className="table">
                                 <thead>
-                                <tr>
-                                    <th style={{ width: '35%' }}>
+                                    <tr>
+                                        <th style={{ width: '35%' }}>
                                             <span className="flex items-center">
                                                 Title{' '}
-                                                <SortIcon className="ml-1 cursor-pointer" />
+                                                <span className="icon-sort">
+                                                    <span className="icon-sort-arrow-up"></span>
+                                                    <span className="icon-sort-arrow-down"></span>
+                                                </span>
                                             </span>
-                                    </th>
-                                    <th style={{ width: '15%' }}>
+                                        </th>
+                                        <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
                                                 Country{' '}
-                                                <SortIcon className="ml-1 cursor-pointer" />
+                                                <span className="icon-sort">
+                                                    <span className="icon-sort-arrow-up"></span>
+                                                    <span className="icon-sort-arrow-down"></span>
+                                                </span>
                                             </span>
-                                    </th>
-                                    <th style={{ width: '10%' }}>
+                                        </th>
+                                        <th style={{ width: '10%' }}>
                                             <span className="flex items-center">
                                                 Type{' '}
-                                                <SortIcon className="ml-1 cursor-pointer" />
+                                                <span className="icon-sort">
+                                                    <span className="icon-sort-arrow-up"></span>
+                                                    <span className="icon-sort-arrow-down"></span>
+                                                </span>
                                             </span>
-                                    </th>
-                                </tr>
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                {insightList.items &&
-                                insightList.items.map(
-                                    (insight, index) => {
-                                        return (
-                                            <tr
-                                                key={index}
-                                                onClick={() =>
-                                                    showDetail(
-                                                        insight.contents_type,
-                                                        insight.id
-                                                    )
-                                                }
-                                                className="cursor-pointer">
-                                                <td>{insight.title}</td>
-                                                <td>
-                                                    {countryNameById(get(insight, 'country.id', null))}
-                                                </td>
-                                                <td>
-                                                    {insight.contents_type}
-                                                </td>
-                                            </tr>
-                                        )
-                                    }
-                                )}
+                                    {insightList.items &&
+                                        insightList.items.map(
+                                            (insight, index) => {
+                                                return (
+                                                    <tr
+                                                        key={index}
+                                                        onClick={() =>
+                                                            showDetail(
+                                                                insight.contents_type,
+                                                                insight.id
+                                                            )
+                                                        }
+                                                        className="cursor-pointer">
+                                                        <td>{insight.title}</td>
+                                                        <td>
+                                                            {countryNameById(
+                                                                get(
+                                                                    insight,
+                                                                    'country.id',
+                                                                    null
+                                                                )
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {
+                                                                insight.contents_type
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            }
+                                        )}
                                 </tbody>
                             </table>
                             {!insightList.items.length && (
@@ -285,7 +413,7 @@ const InsightTable = ({ params }) => {
                     )}
                 </>
             )}
-        </>
+        </div>
     )
 }
 
