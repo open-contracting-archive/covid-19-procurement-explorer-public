@@ -4,6 +4,8 @@
     margin-top: 20px;
     .pagination-items {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     .pagination-item {
         margin: 0 4px;

@@ -3,9 +3,14 @@
         border: none;
         background: none;
         border-radius: 0;
-        border-bottom: 2px solid #1fbbec;
-        color: #293e45;
+        border-bottom: 2px solid #fff;
+        color: #ffffff;
         box-shadow: none;
+
+        @media only screen and (min-width: 768px) {
+            color: #293e45;
+            border-bottom-color: #1fbbec;
+        }
     }
 
     &__value-container[class] {
@@ -25,13 +30,79 @@
         .field {
             padding: 3px 0 5px;
             background: none;
-            border-bottom: 2px solid #1fbbec;
+            border-bottom: 2px solid #fff;
             display: inline-block;
             width: 100%;
             font-size: 14px;
             line-height: 1.4;
             outline: none;
             color: #333;
+
+            @media only screen and (min-width: 768px) {
+                border-bottom-color: #1fbbec;
+            }
+
+            &::-webkit-input-placeholder {
+                /* Chrome/Opera/Safari */
+                color: #fff;
+            }
+            &::-moz-placeholder {
+                /* Firefox 19+ */
+                color: #fff;
+            }
+            &:-ms-input-placeholder {
+                /* IE 10+ */
+                color: #fff;
+            }
+            &:-moz-placeholder {
+                /* Firefox 18- */
+                color: #fff;
+            }
+
+            @media only screen and (min-width: 768px) {
+                &::-webkit-input-placeholder {
+                    /* Chrome/Opera/Safari */
+                    color: gray;
+                }
+                &::-moz-placeholder {
+                    /* Firefox 19+ */
+                    color: gray;
+                }
+                &:-ms-input-placeholder {
+                    /* IE 10+ */
+                    color: gray;
+                }
+                &:-moz-placeholder {
+                    /* Firefox 18- */
+                    color: gray;
+                }
+            }
         }
+    }
+
+    .select-filter__placeholder {
+        color: #fff;
+        @media only screen and (min-width: 768px) {
+            color: hsl(0, 0%, 50%);
+        }
+    }
+
+    .select-filter__single-value {
+        color: #fff;
+
+        @media only screen and (min-width: 768px) {
+            color: hsl(0, 0%, 20%);
+        }
+    }
+
+    .select-filter__indicator {
+        color: #fff;
+        @media only screen and (min-width: 768px) {
+            color: #ccc;
+        }
+    }
+
+    .select-filter__menu {
+        z-index: 9999 !important;
     }
 }
