@@ -7,6 +7,9 @@ import ContractTrend from "../../../../components/Visualizations/ContractTrend"
 import Visualization from "../../../../constants/Visualization"
 import ContractView from "../../../../constants/ContractView"
 import { continentSelectList } from "../../../../helpers/country"
+import DirectOpenContractTrend from "../../../../components/Visualizations/DirectOpenContractTrend"
+import BuyerTrend from "../../../../components/Visualizations/BuyerTrend"
+import SupplierTrend from "../../../../components/Visualizations/SupplierTrend"
 
 const options = continentSelectList
 
@@ -37,8 +40,12 @@ const VisualizationModal = (props) => {
                 return (<ContractTrend viewType={ContractView.VALUE} selectedContinent={selectedContinent} />)
             case Visualization.TOTAL_CONTRACTS:
                 return (<ContractTrend viewType={ContractView.NUMBER} selectedContinent={selectedContinent} />)
-            case Visualization.AVERAGE_BIDS:
-                return (<ContractTrend />)
+            case Visualization.DIRECT_OPEN:
+                return (<DirectOpenContractTrend selectedContinent={selectedContinent} />)
+            case Visualization.TOTAL_BUYERS:
+                return (<BuyerTrend selectedContinent={selectedContinent} />)
+            case Visualization.TOTAL_SUPPLIERS:
+                return (<SupplierTrend selectedContinent={selectedContinent} />)
             default:
                 return (<ContractTrend />)
         }

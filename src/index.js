@@ -11,9 +11,11 @@ import { ModalProvider } from 'react-simple-hook-modal'
 import * as Sentry from "@sentry/react"
 import { Integrations } from "@sentry/tracing"
 
-if (process.env.NODE_ENV === 'production') {
+const sentryDNS = process.env.REACT_APP_SENTRY_DNS
+
+if (process.env.NODE_ENV === 'production' && sentryDNS) {
     Sentry.init({
-        dsn: "https://f2c9b76e5d3f4d229871073fd9f16280@o288126.ingest.sentry.io/5597840",
+        dsn: sentryDNS,
         integrations: [
             new Integrations.BrowserTracing()
         ],

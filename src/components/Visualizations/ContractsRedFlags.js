@@ -48,8 +48,8 @@ function ContractsRedFlag(props) {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const [loading, setLoading] = useState(true)
     const { label = 'Contracts with red flags' } = props
+    const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     const helpText =
         'The methodology of red flags calculation can be found here.'
@@ -69,7 +69,7 @@ function ContractsRedFlag(props) {
                 <div>
                     <div className="flex items-center mb-4">
                         <h3 className="uppercase font-bold text-primary-dark inline-block">
-                            {trans(label ? label : 'Contracts with red flags')}
+                            {trans(label)}
                         </h3>
                         <FlagIcon className="ml-2 inline-block" />
                         <HelpText helpTextInfo={helpText} />

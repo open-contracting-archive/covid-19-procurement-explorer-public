@@ -14,7 +14,7 @@ const ProductDistribution = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Product Distribution', params } = props
     const { countrySlug } = useParams()
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
@@ -44,8 +44,8 @@ const ProductDistribution = (props) => {
                 return viewType === ContractView.NUMBER
                     ? item.tender_count
                     : currency === Default.CURRENCY_LOCAL
-                    ? item.amount_local
-                    : item.amount_usd
+                        ? item.amount_local
+                        : item.amount_usd
             })
             let chartDataFormatted = originalData
                 .sort((a, b) => {
@@ -83,7 +83,7 @@ const ProductDistribution = (props) => {
                 <div className="flex items-center justify-between flex-wrap mb-4">
                     <div className="flex items-center mb-2 md:mb-0">
                         <h3 className="md:mb-0 w-full md:w-auto uppercase font-bold text-primary-dark">
-                            {trans(label ? label : 'Product Distribution')}
+                            {trans(label)}
                         </h3>
                         <HelpText helpTextInfo={helpText} />
                     </div>

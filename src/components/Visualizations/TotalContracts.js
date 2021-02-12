@@ -70,7 +70,7 @@ const TotalContracts = (props) => {
         <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label ? label : 'Total Contracts')}
+                    {trans(label)}
                 </h3>
                 <HelpText helpTextInfo={helpText} />
             </div>

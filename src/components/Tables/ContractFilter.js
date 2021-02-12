@@ -28,6 +28,11 @@ const ContractFilter = (props) => {
                 getSuppliersFilterParameter({ country: params.country })
             }
         }
+
+        return () => {
+            setBuyersFilterOption([])
+            setSuppliersFilterOption([])
+        }
     }, [params])
 
     useEffect(() => {

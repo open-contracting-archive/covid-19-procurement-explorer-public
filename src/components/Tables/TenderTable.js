@@ -13,6 +13,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { hasValidProperty } from '../../helpers/general'
 import ContractFilter from './ContractFilter'
 
+const limit = 20
+
 const TenderTable = (props) => {
     // ===========================================================================
     // State and variables
@@ -23,7 +25,6 @@ const TenderTable = (props) => {
     const [selectedFilters, setSelectedFilters] = useState(() =>
         identity(pickBy(params))
     )
-    const [limit, setLimit] = useState(20)
     const [sorting, setSorting] = useState(() => {
         return { column: 'contract_title', direction: '' }
     })

@@ -5,16 +5,17 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
+import Visualization from "../../constants/Visualization"
 
 const Buyers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Buyers', params, modalHandler } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
-    const helpText = 'Number of buyers who cigned at least 1 COVID contract'
+    const helpText = 'Number of buyers who signed at least 1 COVID contract'
 
     // ===========================================================================
     // Hooks
@@ -65,7 +66,7 @@ const Buyers = (props) => {
         <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label ? label : 'Buyers')}
+                    {trans(label)}
                 </h3>
                 <HelpText helpTextInfo={helpText} />
             </div>
@@ -83,6 +84,13 @@ const Buyers = (props) => {
                     />
                     <div className="flex-1" />
                 </div>
+            )}
+            {modalHandler && (
+                <span
+                    className="cursor-pointer text-sm text-primary-blue block text-right"
+                    onClick={() => modalHandler(Visualization.TOTAL_BUYERS)}>
+                    View in detail →
+                </span>
             )}
         </div>
     )

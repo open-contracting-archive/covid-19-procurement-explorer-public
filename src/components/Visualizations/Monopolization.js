@@ -68,7 +68,7 @@ const Monopolization = (props) => {
             <div>
                 <div className="flex items-center">
                     <h3 className="uppercase font-bold text-primary-dark inline-block">
-                        {trans(label ? label : 'Monopolization')}
+                        {trans(label)}
                     </h3>
                     <HelpText helpTextInfo={helpText} />
                 </div>

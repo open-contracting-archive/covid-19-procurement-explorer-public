@@ -12,7 +12,7 @@ const TopSuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Top Suppliers', params } = props
     const [loading, setLoading] = useState(true)
     const currency = useSelector((state) => state.general.currency)
     const [originalData, setOriginalData] = useState({})

@@ -9,10 +9,11 @@ import { dateDiff, formatDate } from '../../helpers/date'
 import { slugify } from '../../helpers/general'
 import ChartFooter from '../Utilities/ChartFooter'
 
-const ProductsTimeline = ({ label, params }) => {
+const ProductsTimeline = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
+    const { label = 'Products Timeline', params } = props
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const [chartType, setChartType] = useState('value')

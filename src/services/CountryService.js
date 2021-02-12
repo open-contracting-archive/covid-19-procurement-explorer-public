@@ -46,6 +46,36 @@ class CountryService {
             console.log(error)
         }
     }
+
+    static async DirectOpenContractTrend() {
+        try {
+            const res = await Api.get(getURI('visualization.direct-open-contract-trend'))
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async BuyerTrend() {
+        try {
+            const res = await Api.get(getURI('visualization.buyer-trend'))
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async SupplierTrend() {
+        try {
+            const res = await Api.get(getURI('visualization.supplier-trend'))
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default CountryService

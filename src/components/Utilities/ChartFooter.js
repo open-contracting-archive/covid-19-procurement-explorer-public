@@ -14,6 +14,7 @@ import socialIcons from '../../assets/img/icons/social'
 
 const ChartFooter = (props) => {
     const { trans } = useTrans()
+
     function showFullScreenAction() {
         if (props.fullScreenHandler) {
             return (

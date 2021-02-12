@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { isEmpty, get } from 'lodash'
+import { get, isEmpty } from 'lodash'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import SankeyChart from '../Charts/SankeyChart/SankeyChart'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
-import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
 import ChartFooter from '../Utilities/ChartFooter'
 import ContractView from '../../constants/ContractView'
 import HelpText from '../../components/HelpText/HelpText'
+import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
 
 const GlobalSuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Global Suppliers', params } = props
     const [loading, setLoading] = useState(true)
-    const [chartType, setChartType] = useState(ContractView.VALUE)
+    const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
+    const [chartLevel, setChartLevel] = useState('global')
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const helpText =
@@ -39,41 +41,31 @@ const GlobalSuppliers = (props) => {
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
-            let set1 = get(
-                originalData,
-                `by_${chartType}.product_country`,
-                []
-            ).map((item) => {
-                return {
-                    from: item.product_name,
-                    to: item.country_name,
-                    value:
-                        chartType === ContractView.VALUE
-                            ? item.amount_usd
-                            : item.tender_count
-                }
-            })
-            let set2 = get(
-                originalData,
-                `by_${chartType}.supplier_product`,
-                []
-            ).map((item) => {
-                return {
-                    from: item.supplier_name,
-                    to: item.product_name,
-                    value:
-                        chartType === ContractView.VALUE
-                            ? item.amount_usd
-                            : item.tender_count
-                }
-            })
-            setChartData([...set2, ...set1])
+            let productCountry = get(originalData, `by_${viewType}.product_country`, [])
+                .map((item) => {
+                    return {
+                        from: item.product_name,
+                        to: item.country_name,
+                        value:
+                            viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
+                    }
+                })
+            let supplierProduct = get(originalData, `by_${viewType}.supplier_product`, [])
+                .map((item) => {
+                    return {
+                        from: item.supplier_name,
+                        to: item.product_name,
+                        value:
+                            viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
+                    }
+                })
+            setChartData([...supplierProduct, ...productCountry])
         }
 
         return () => {
             setChartData([])
         }
-    }, [originalData, chartType])
+    }, [originalData, viewType])
 
     return (
         <div className="bg-white rounded p-4 pb-0 md:pb-4 simple-tab right-direction">
@@ -81,39 +73,28 @@ const GlobalSuppliers = (props) => {
                 <div className="flex items-center justify-between flex-wrap mb-4">
                     <div className="flex items-center mb-2 md:mb-0">
                         <h3 className="md:mb-0 w-full md:w-auto uppercase font-bold text-primary-dark">
-                            {trans(label ? label : 'Global Suppliers')}
+                            {trans(label)}
                         </h3>
                         <HelpText helpTextInfo={helpText} />
                     </div>
 
-                    <div className="w-full md:w-auto flex">
-                        <ul className="contract-switch flex">
-                            <li
-                                className={`mr-4 cursor-pointer text-xs md:text-base ${
-                                    chartType === 'value' ? 'active' : ''
-                                }`}
-                                onClick={() => setChartType('value')}>
-                                {trans('By contract value')}
-                            </li>
-                            <li
-                                className={`cursor-pointer text-xs md:text-base ${
-                                    chartType === 'number' ? 'active' : ''
-                                }`}
-                                onClick={() => setChartType('number')}>
-                                {trans('By number of contracts')}
-                            </li>
-                        </ul>
-                    </div>
+                    <ContractViewSwitcher
+                        viewType={viewType}
+                        viewHandler={setViewType} />
                 </div>
 
-                {/* <ul className="flex items-center my-4">
-                        <li className="inline-block mr-2 px-4 py-2 rounded-full bg-blue-50 text-white">
-                            {trans('Global suppliers chain')}
-                        </li>
-                        <li className="inline-block mr-2 px-4 py-2 rounded-full bg-blue-0">
-                            {trans('Global distribution chain')}
-                        </li>
-                    </ul> */}
+                <ul className="flex items-center my-4">
+                    <li
+                        className={`inline-block mr-2 px-4 py-2 rounded-full cursor-pointer ${chartLevel === 'global' ? 'bg-blue-50 text-white' : 'bg-blue-0'}`}
+                        onClick={() => setChartLevel('global')}>
+                        {trans('Global suppliers chain')}
+                    </li>
+                    <li
+                        className={`inline-block mr-2 px-4 py-2 rounded-full cursor-pointer ${chartLevel === 'country' ? 'bg-blue-50 text-white' : 'bg-blue-0'}`}
+                        onClick={() => setChartLevel('country')}>
+                        {trans('Global distribution chain')}
+                    </li>
+                </ul>
 
                 {loading ? (
                     <Loader />

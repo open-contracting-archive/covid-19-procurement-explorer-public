@@ -9,7 +9,7 @@ const AverageBidsPerContract = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label, params } = props
+    const { label = 'Average bids per contract', params } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
