@@ -8,17 +8,21 @@ import { dateDiff, formatDate } from '../../helpers/date'
 import Visualization from '../../constants/Visualization'
 import HelpText from '../../components/HelpText/HelpText'
 
-const TotalContracts = (props) => {
-    const barColorValue = '#ABBABF'
+const barColorValue = '#ABBABF'
 
+const TotalContracts = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Total Contracts', params, modalHandler } = props
+    const {
+        label = 'Total Contracts',
+        params,
+        modalHandler,
+        helpText = 'Quantity of COVID related contracts'
+    } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const { trans } = useTrans()
-    const helpText = 'Quantity of COVID related contracts'
 
     // ===========================================================================
     // Hooks

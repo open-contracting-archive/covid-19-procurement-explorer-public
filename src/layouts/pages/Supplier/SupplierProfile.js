@@ -40,9 +40,11 @@ const SupplierProfile = () => {
     // ===========================================================================
     useEffect(() => {
         VisualizationService.SupplierDetail(id).then((response) => {
-            const country = countries.find((country) => country.response)
-            setOriginalData(response)
-            setCountry(country)
+            if (response) {
+                const country = countries.find((country) => country.response)
+                setOriginalData(response)
+                setCountry(country)
+            }
             setLoading(false)
         })
 
@@ -118,7 +120,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    originalData.country_code
+                                                originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -127,7 +129,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    originalData.country_code
+                                                originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -137,37 +139,32 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    originalData.country_code
+                                                originalData.country_code
                                             }}
                                         />
                                     </div>
                                     <div className="w-full px-2 mb-4">
                                         <ProductsTimeline
-                                            label="Product timeline"
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                    originalData.country_code
+                                                originalData.country_code
                                             }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/2 px-2 mb-4">
                                         <ProductDistribution
-                                            label="Product Distribution"
                                             params={{
                                                 supplier: id,
-                                                country:
-                                                    originalData.country_code
+                                                country: originalData.country_code
                                             }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/2 px-2 mb-4">
                                         <TopBuyers
-                                            label="Top Buyers"
                                             params={{
                                                 supplier: id,
-                                                country:
-                                                    originalData.country_code
+                                                country: originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -175,13 +172,12 @@ const SupplierProfile = () => {
                                         <ContractsRedFlags />
                                     </div>
                                 </div>
-                                {/* Table */}
+
                                 <TenderTable
                                     params={{
                                         supplier: id,
                                         country: originalData.country_code
                                     }}
-                                    page="suppliers"
                                 />
                             </div>
                         </div>

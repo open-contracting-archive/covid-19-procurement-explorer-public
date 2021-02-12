@@ -39,25 +39,25 @@ const CountrySuppliers = (props) => {
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
-            // let productBuyer = get(originalData, 'product_buyer', [])
-            //     .map((item) => {
-            //         return {
-            //             from: item.product_name,
-            //             to: item.buyer_name,
-            //             value:
-            //                 viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
-            //         }
-            //     })
-            // let supplierProduct = get(originalData, 'supplier_product', [])
-            //     .map((item) => {
-            //         return {
-            //             from: item.supplier_name,
-            //             to: item.product_name,
-            //             value:
-            //                 viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
-            //         }
-            //     })
-            // setChartData([...supplierProduct, ...productBuyer])
+            let productCountry = get(originalData, `by_${viewType}.product_buyer`, [])
+                .map((item) => {
+                    return {
+                        from: item.product_name,
+                        to: item.buyer_name,
+                        value:
+                            viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
+                    }
+                })
+            let supplierProduct = get(originalData, `by_${viewType}.supplier_product`, [])
+                .map((item) => {
+                    return {
+                        from: item.supplier_name,
+                        to: item.product_name,
+                        value:
+                            viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
+                    }
+                })
+            setChartData([...supplierProduct, ...productCountry])
         }
 
         return () => {

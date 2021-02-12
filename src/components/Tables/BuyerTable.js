@@ -45,7 +45,7 @@ const BuyerTable = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [selectedFilters])
+    }, [params?.country])
 
     // ===========================================================================
     // Helpers and functions

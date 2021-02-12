@@ -12,7 +12,7 @@ const LibrarySection = () => {
 
     useEffect(() => {
         CmsPageService.InsightList({
-            fields: '_,title,id,slug,contents_type,published_date',
+            fields: '_,title,id,slug,contents_type,news_date',
             limit: 6
         }).then((response) => {
             setInsightList(response.items)
