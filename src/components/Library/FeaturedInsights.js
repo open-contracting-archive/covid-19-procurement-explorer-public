@@ -20,7 +20,9 @@ const FeaturedInsights = ({ params }) => {
         }
         CmsPageService.InsightList(queryParameters)
             .then((result) => {
-                setInsightList(result)
+                if (result.items) {
+                    setInsightList(result.items)
+                }
                 setLoading(false)
             })
             .catch(() => {
@@ -30,11 +32,11 @@ const FeaturedInsights = ({ params }) => {
         return () => {
             setInsightList([])
         }
-    }, [params])
+    }, [params?.country])
 
-    return loading ? (<Loader />) : (insightList.items.length ? (
+    return loading ? (<Loader />) : (insightList.length ? (
             <div className="grid grid-cols-12 grid-rows-3 gap-x-16 gap-y-10 main-news mb-12">
-                {insightList.items.map((item) => {
+                {insightList.map((item) => {
                     return (
                         <Link
                             className="main-news__item relative"

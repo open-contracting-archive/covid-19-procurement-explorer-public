@@ -9,9 +9,9 @@ class CmsPageService {
                 {
                     type: "content.InsightsPage",
                     // fields: "*",
-                    fields: '_,title,id,slug,content_image,featured,published_date',
+                    fields: '_,title,id,slug,content_image,featured,news_date',
                     contents_type: "News",
-                    order: "-published_date",
+                    order: "-news_date",
                     ...queryParams
                 }
             )
@@ -36,7 +36,7 @@ class CmsPageService {
                     type: "content.InsightsPage",
                     fields: "*",
                     contents_type: "Blog",
-                    order: "-published_date",
+                    order: "-news_date",
                     ...queryParams
                 }
             )
@@ -83,8 +83,9 @@ class CmsPageService {
                 getURI('pages'),
                 {
                     type: "content.InsightsPage",
-                    fields: "*",
-                    order: "-published_date",
+                    // fields: "*",
+                    fields: '_,title,id,slug,content_image,featured,news_date,country,contents_type',
+                    order: "-news_date",
                     ...queryParams
                 }
             )
@@ -137,7 +138,7 @@ class CmsPageService {
                 {
                     type: "content.InsightsPage",
                     fields: "*",
-                    // order: "-published_date",
+                    // order: "-news_date",
                     ...queryParams
                 }
             )
