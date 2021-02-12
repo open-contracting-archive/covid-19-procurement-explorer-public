@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
-import useTrans from "../../../../hooks/useTrans"
-import ChartFooter from "../../../../components/Utilities/ChartFooter"
-import ContractTrend from "../../../../components/Visualizations/ContractTrend"
-import Visualization from "../../../../constants/Visualization"
-import ContractView from "../../../../constants/ContractView"
-import { continentSelectList } from "../../../../helpers/country"
-import DirectOpenContractTrend from "../../../../components/Visualizations/DirectOpenContractTrend"
-import BuyerTrend from "../../../../components/Visualizations/BuyerTrend"
-import SupplierTrend from "../../../../components/Visualizations/SupplierTrend"
+import useTrans from '../../../../hooks/useTrans'
+import ChartFooter from '../../../../components/Utilities/ChartFooter'
+import ContractTrend from '../../../../components/Visualizations/ContractTrend'
+import Visualization from '../../../../constants/Visualization'
+import ContractView from '../../../../constants/ContractView'
+import { continentSelectList } from '../../../../helpers/country'
+import DirectOpenContractTrend from '../../../../components/Visualizations/DirectOpenContractTrend'
+import BuyerTrend from '../../../../components/Visualizations/BuyerTrend'
+import SupplierTrend from '../../../../components/Visualizations/SupplierTrend'
 
 const options = continentSelectList
 
@@ -31,23 +31,39 @@ const VisualizationModal = (props) => {
     const { trans } = useTrans()
 
     const getVisualizationTitle = () => {
-        return Object.keys(visualizations).includes(visualizationType) ? visualizations[visualizationType] : ''
+        return Object.keys(visualizations).includes(visualizationType)
+            ? visualizations[visualizationType]
+            : ''
     }
 
     const renderMainVisualization = () => {
         switch (visualizationType) {
             case Visualization.TOTAL_SPENDING:
-                return (<ContractTrend viewType={ContractView.VALUE} selectedContinent={selectedContinent} />)
+                return (
+                    <ContractTrend
+                        viewType={ContractView.VALUE}
+                        selectedContinent={selectedContinent}
+                    />
+                )
             case Visualization.TOTAL_CONTRACTS:
-                return (<ContractTrend viewType={ContractView.NUMBER} selectedContinent={selectedContinent} />)
+                return (
+                    <ContractTrend
+                        viewType={ContractView.NUMBER}
+                        selectedContinent={selectedContinent}
+                    />
+                )
             case Visualization.DIRECT_OPEN:
-                return (<DirectOpenContractTrend selectedContinent={selectedContinent} />)
+                return (
+                    <DirectOpenContractTrend
+                        selectedContinent={selectedContinent}
+                    />
+                )
             case Visualization.TOTAL_BUYERS:
-                return (<BuyerTrend selectedContinent={selectedContinent} />)
+                return <BuyerTrend selectedContinent={selectedContinent} />
             case Visualization.TOTAL_SUPPLIERS:
-                return (<SupplierTrend selectedContinent={selectedContinent} />)
+                return <SupplierTrend selectedContinent={selectedContinent} />
             default:
-                return (<ContractTrend />)
+                return <ContractTrend />
         }
     }
 
@@ -56,7 +72,7 @@ const VisualizationModal = (props) => {
     }
 
     return (
-        <div>
+        <div className="bar-chart-race overflow-hidden -m-8 p-4">
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex justify-between">
                     <h3 className="uppercase font-bold text-primary-dark">
@@ -65,14 +81,13 @@ const VisualizationModal = (props) => {
                     <button
                         className="icon-close"
                         title="Close"
-                        onClick={closeModal}>
-                    </button>
+                        onClick={closeModal}></button>
                 </div>
 
-                <div className="bg-white rounded mt-4">
-                    <div className="flex simple-tab">
+                <div className="bg-white rounded mt-2">
+                    <div className="flex">
                         <div className="flex-1">
-                            <div className="w-1/5 -mt-3">
+                            <div className="w-1/5">
                                 <Select
                                     className="select-filter text-sm"
                                     classNamePrefix="select-filter"
