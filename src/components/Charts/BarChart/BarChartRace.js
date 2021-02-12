@@ -39,7 +39,7 @@ const BarChartRace = ({ data }) => {
             }
         })
 
-        let stepDuration = 4000
+        let stepDuration = 1000
 
         let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
         categoryAxis.renderer.grid.template.location = 0
@@ -50,21 +50,20 @@ const BarChartRace = ({ data }) => {
         categoryAxis.renderer.grid.template.strokeOpacity = 0
         categoryAxis.renderer.minGridDistance = 10
         categoryAxis.renderer.labels.template.dx = -40
-        categoryAxis.renderer.minWidth = 120
+        categoryAxis.renderer.minWidth = 100
         categoryAxis.renderer.tooltip.dx = -40
 
         let valueAxis = chart.xAxes.push(new am4charts.ValueAxis())
         valueAxis.min = 0
         valueAxis.rangeChangeEasing = am4core.ease.linear
         valueAxis.rangeChangeDuration = stepDuration
-        valueAxis.extraMax = 0.1
+        // valueAxis.extraMax = 0.1
         valueAxis.cursorTooltipEnabled = true
 
         valueAxis.renderer.inside = true
         valueAxis.renderer.labels.template.fillOpacity = 0.3
         valueAxis.renderer.grid.template.strokeOpacity = 0
         valueAxis.min = 0
-        valueAxis.cursorTooltipEnabled = false
         valueAxis.renderer.baseGrid.strokeOpacity = 0
         valueAxis.renderer.labels.template.dy = 20
 
@@ -92,10 +91,10 @@ const BarChartRace = ({ data }) => {
 
         let labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.horizontalCenter = 'right'
-        labelBullet.label.text =
-            "{values.valueX.workingValue.formatNumber('#.0as')}"
+        labelBullet.label.text = '{valueX.value}'
         labelBullet.label.textAlign = 'end'
-        labelBullet.label.dx = -10
+        labelBullet.label.dx = 45
+        labelBullet.label.width = 100
 
         var bullet = columnTemplate.createChild(am4charts.CircleBullet)
         bullet.circle.radius = 20
@@ -193,7 +192,7 @@ const BarChartRace = ({ data }) => {
         chart.data = JSON.parse(JSON.stringify(data[currentYear]))
         chart.logo.disabled = true
 
-        chart.numberFormatter.numberFormat = '#.##a'
+        chart.numberFormatter.numberFormat = '##.#a'
         chart.numberFormatter.bigNumberPrefixes = [
             { number: 1e3, suffix: 'K' },
             { number: 1e6, suffix: 'M' },
@@ -218,7 +217,10 @@ const BarChartRace = ({ data }) => {
     }, [data])
 
     return (
-        <div ref={raceBarChartDiv} style={{ width: '100%', height: '600px' }} />
+        <div
+            ref={raceBarChartDiv}
+            style={{ width: '100%', height: 'calc(100vh - 220px)' }}
+        />
     )
 }
 

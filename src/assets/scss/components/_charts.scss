@@ -98,8 +98,37 @@
         display: inline-block;
         margin-left: 16px;
     }
+
+    &.email {
+        border-bottom: 1px solid #e9e9e9 !important;
+        padding-bottom: 16px !important;
+        margin-bottom: 0 !important;
+    }
 }
 
 .social-embed {
     color: #797979 !important;
+}
+
+#react-simple-modal-container {
+    .rsm-bg-white {
+        min-height: 95% !important;
+    }
+}
+
+.bar-chart-race {
+    .chart-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding-bottom: 16px;
+
+        .share-menu {
+            bottom: 50px;
+            top: auto;
+            transform: translateY(325px);
+        }
+    }
 }

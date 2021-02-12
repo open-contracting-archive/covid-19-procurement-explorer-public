@@ -307,7 +307,9 @@ svg tspan {
 }
 
 .icon-close {
-    position: relative;
+    position: absolute;
+    top: 16px;
+    right: 16px;
     width: 40px;
     height: 40px;
     display: inline-block;
@@ -317,7 +319,7 @@ svg tspan {
 
     &:hover,
     &:focus {
-        background-color: #f44336;
+        background-color: #de5c52;
         transition: all 0.3s linear;
     }
 

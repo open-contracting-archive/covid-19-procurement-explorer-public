@@ -75,13 +75,13 @@ const ChartFooter = (props) => {
 
                             <EmailShareButton
                                 url={window.location.href}
-                                className="social-icon">
+                                className="social-icon email">
                                 <socialIcons.mailIcon />
                                 <span>Email</span>
                             </EmailShareButton>
                         </div>
 
-                        <span className="block mt-3 pt-3 mb-2 border-t -mx-3 px-3 border-blue-5 text-primary-dark">
+                        <span className="block mt-1 pt-3 mb-2 -mx-3 px-3 text-primary-dark">
                             Share as
                         </span>
 
