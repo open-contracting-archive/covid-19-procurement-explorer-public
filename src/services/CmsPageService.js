@@ -83,7 +83,6 @@ class CmsPageService {
                 getURI('pages'),
                 {
                     type: "content.InsightsPage",
-                    // fields: "*",
                     fields: '_,title,id,slug,content_image,featured,news_date,country,contents_type',
                     order: "-news_date",
                     ...queryParams

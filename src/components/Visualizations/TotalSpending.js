@@ -10,15 +10,19 @@ import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
 import Visualization from '../../constants/Visualization'
 
+const barColorValue = '#ABBABF'
+
 const TotalSpending = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Total Spending', params, modalHandler } = props
+    const {
+        label = 'Total Spending',
+        params,
+        modalHandler,
+        helpText = 'Total value of COVID related contracts'
+    } = props
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector(
-        (state) => state.general.countryCurrency
-    )
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({
@@ -28,9 +32,7 @@ const TotalSpending = (props) => {
         areaChartData: [],
         barChartData: []
     })
-    const barColorValue = '#ABBABF'
     const { trans } = useTrans()
-    const helpText = 'Total value of COVID related contracts'
 
     // ===========================================================================
     // Hooks

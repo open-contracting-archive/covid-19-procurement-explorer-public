@@ -14,20 +14,17 @@ const CountrySuppliers = (props) => {
             <div className="flex flex-wrap -mx-2 mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-4">
                     <Suppliers
-                        label="Suppliers"
                         params={{ country: countryCode }}
                     />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-4">
                     <TotalContracts
-                        label="Total Contracts"
                         params={{ country: countryCode, supplier: 'notnull' }}
                     />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-4">
                     <TotalSpending
-                        label="Total Income"
-                        helpText="This is a help text for the total income visualization"
+                        helpText="Total value of COVID related contracts "
                         params={{ country: countryCode, supplier: 'notnull' }}
                     />
                 </div>

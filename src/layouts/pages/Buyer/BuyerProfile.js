@@ -116,79 +116,87 @@ const BuyerProfile = () => {
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <TotalSpending
-                                            label="Total Spending"
-                                            helpText="This is a help text for the total spending visualization"
                                             params={{ buyer: id }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <TotalContracts
-                                            label="Total contracts"
                                             params={{ buyer: id }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <AverageBidsPerContract
-                                            label="Average bid"
                                             params={{ buyer: id }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <Monopolization
-                                            label="Monopolization"
                                             params={{ buyer: id }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <ContractStatus
-                                            label="Contract status"
-                                            params={{ buyer: id }}
+                                            params={{
+                                                buyer: id,
+                                                country: originalData.country_code
+                                            }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <div className="flex flex-col justify-between h-full">
                                             <EquityIndicators
-                                                label="Equity indicator"
-                                                params={{ buyer: id }}
+                                                params={{
+                                                    buyer: id,
+                                                    country: originalData.country_code
+                                                }}
                                             />
                                             <DirectOpen
-                                                label="Direct/Open"
-                                                params={{ buyer: id }}
+                                                params={{
+                                                    buyer: id,
+                                                    country: originalData.country_code
+                                                }}
                                             />
                                         </div>
                                     </div>
                                     <div className="w-full px-2 mb-6">
                                         <ProductsTimeline
-                                            label="Product timeline"
-                                            params={{ buyer: id }}
+                                            params={{
+                                                buyer: id,
+                                                country: originalData.country_code
+                                            }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/2 px-2 mb-6">
                                         <ProductDistribution
-                                            label="Product distribution"
-                                            params={{ buyer: id }}
+                                            params={{
+                                                buyer: id,
+                                                country: originalData.country_code
+                                            }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/2 px-2 mb-6">
                                         <TopSuppliers
-                                            label="Top suppliers"
-                                            params={{ buyer: id }}
+                                            params={{
+                                                buyer: id,
+                                                country: originalData.country_code
+                                            }}
                                         />
                                     </div>
                                     <div className="w-full px-2 mb-6">
                                         <ContractsRedFlags
-                                            label="Contracts red flags"
-                                            params={{ buyer: id }}
+                                            params={{
+                                                buyer: id,
+                                                country: originalData.country_code
+                                            }}
                                         />
                                     </div>
                                 </div>
-                                {/* Table */}
+
                                 <TenderTable
                                     params={{
                                         buyer: id,
                                         country: originalData.country_code
                                     }}
-                                    page="buyers"
                                 />
                             </div>
                         </div>

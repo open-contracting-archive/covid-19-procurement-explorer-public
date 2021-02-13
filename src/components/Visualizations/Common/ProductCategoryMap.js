@@ -32,7 +32,7 @@ const ProductCategoryMap = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [params])
+    }, [params?.country])
 
     useEffect(() => {
         if (!isEmpty(originalData)) {

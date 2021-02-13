@@ -48,7 +48,7 @@ const ContractFilter = (props) => {
             setBuyersFilterOption([])
             setSuppliersFilterOption([])
         }
-    }, [params])
+    }, [params?.country, params?.supplier, params?.buyer])
 
     useEffect(() => {
         if (startDate && endDate) {
