@@ -1,49 +1,49 @@
-import React, { useState, useEffect, useMemo } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get, has } from 'lodash'
 import Select from 'react-select'
 import CmsPageService from '../../services/CmsPageService'
 import Loader from '../Loader/Loader'
-import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import ReactPaginate from 'react-paginate'
 import TableLoader from '../Loader/TableLoader'
 import { hasValidProperty } from '../../helpers/general'
 import useCountries from '../../hooks/useCountries'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import useTrans from '../../hooks/useTrans'
+import useContentFilters from "../../hooks/useContentFilters"
 
-const InsightTable = ({ params }) => {
-    const countries = useSelector((state) => state.general.countries)
+const limit = 20
+
+const InsightTable = (props) => {
+    const { params } = props
     const [insightList, setInsightList] = useState([])
     const [loading, setLoading] = useState(true)
     const [tableLoading, setTableLoading] = useState(false)
-    const [selectedFilters, setSelectedFilters] = useState(() =>
-        identity(pickBy(params))
-    )
-    const [limit, setLimit] = useState(20)
-    const [totalItems, setTotalItems] = useState()
+    const [selectedFilters, setSelectedFilters] = useState({})
+    const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
-    const history = useHistory()
     const [showFilter, setShowFilter] = useState('hidden')
+    const { contentsTypeSelectList, countrySelectList } = useContentFilters()
+    const history = useHistory()
+    const { trans } = useTrans()
 
     useEffect(() => {
-        LoadInsightList()
-    }, [params, selectedFilters])
-
-    const LoadInsightList = (page) => {
-        setTableLoading(true)
-        setCurrentPage(get(page, 'selected') || 0)
-        CmsPageService.InsightList({
-            ...selectedFilters,
+        let queryParams = {
+            ...identity(pickBy(selectedFilters)),
+            ...identity(pickBy(params)),
             limit: limit,
-            offset: page && page.selected * limit
-        })
+            offset: currentPage * limit
+        }
+
+        setTableLoading(true)
+        CmsPageService.InsightList(queryParams)
             .then((result) => {
-                setInsightList(result)
-                setLoading(false)
+                if (result.items) {
+                    setInsightList(result.items)
+                }
                 setTotalItems(result.meta.total_count)
+                setLoading(false)
                 setTableLoading(false)
             })
             .catch(() => {
@@ -53,30 +53,13 @@ const InsightTable = ({ params }) => {
 
         return () => {
             setInsightList([])
+            setTotalItems(0)
         }
+    }, [params?.country, selectedFilters, currentPage])
+
+    const handlePageChange = (page) => {
+        setCurrentPage(get(page, 'selected') || 0)
     }
-
-    const countrySelectList = useMemo(() => {
-        return [
-            { label: 'All ', value: '8' },
-            ...countries
-                .filter((country) => country.name !== 'Global')
-                .map((country) => {
-                    return {
-                        label: country.name,
-                        value: country.id
-                    }
-                })
-                .sort((a, b) => {
-                    return a.label < b.label ? -1 : 0
-                })
-        ]
-    }, [countries])
-
-    const typeSelectList = [
-        { value: 'news', label: 'News' },
-        { value: 'blog', label: 'Blog' }
-    ]
 
     const showDetail = (type, id) => {
         let path =
@@ -88,7 +71,6 @@ const InsightTable = ({ params }) => {
     }
 
     const appendFilter = (selected) => {
-        // setLoading(true)
         setTableLoading(true)
         setSelectedFilters((previous) => {
             return {
@@ -103,7 +85,7 @@ const InsightTable = ({ params }) => {
     }
 
     const handleFilterToggle = () => {
-        setShowFilter(showFilter === 'hidden' ? 'block' : 'hidden')
+        setShowFilter(showFilter === 'hidden' ? 'flex' : 'hidden')
     }
 
     const handleCloseFilter = () => {
@@ -120,7 +102,7 @@ const InsightTable = ({ params }) => {
                 </div>
             </div>
 
-            {showFilter ? (
+            {/* {showFilter ? (
                 <div
                     className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between text-white mb-4 md:mb-0">
@@ -172,47 +154,14 @@ const InsightTable = ({ params }) => {
                                 options={typeSelectList}
                             />
                         </div>
-                        {/* <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Topic
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Year
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                Language
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div> */}
                     </div>
                 </div>
             ) : (
                 ''
-            )}
+            )} */}
 
-            <div className="hidden mb-12 md:flex gap-8 ">
-                <div className="w-40">
+            <div className={`${showFilter} mb-12 md:flex gap-8 `}>
+                {/* <div className="w-40">
                     <p className="uppercase text-xs opacity-50 leading-none">
                         Title
                     </p>
@@ -222,11 +171,11 @@ const InsightTable = ({ params }) => {
                         className="text-field text-sm"
                         placeholder="ALL"
                     />
-                </div>
+                </div> */}
                 {!hasCountry() && (
                     <div className="w-40">
                         <p className="uppercase text-xs opacity-50 leading-none">
-                            Country
+                            {trans('Country')}
                         </p>
                         <Select
                             className="select-filter text-sm"
@@ -240,12 +189,17 @@ const InsightTable = ({ params }) => {
                 )}
                 <div className="w-40">
                     <p className="uppercase text-xs opacity-50 leading-none">
-                        Type
+                        {trans('Type')}
                     </p>
                     <Select
                         className="select-filter text-sm"
                         classNamePrefix="select-filter"
-                        options={typeSelectList}
+                        options={contentsTypeSelectList}
+                        onChange={(selectedFilter) => {
+                            appendFilter({
+                                contents_type: selectedFilter.value
+                            })
+                        }}
                     />
                 </div>
                 {/* <div className="w-40">
@@ -291,72 +245,72 @@ const InsightTable = ({ params }) => {
                         <div className="custom-scrollbar table-scroll">
                             <table className="table">
                                 <thead>
-                                    <tr>
-                                        <th style={{ width: '35%' }}>
+                                <tr>
+                                    <th style={{ width: '35%' }}>
                                             <span className="flex items-center">
                                                 Title{' '}
                                                 <span className="icon-sort">
-                                                    <span className="icon-sort-arrow-up"></span>
-                                                    <span className="icon-sort-arrow-down"></span>
+                                                    <span className="icon-sort-arrow-up" />
+                                                    <span className="icon-sort-arrow-down" />
                                                 </span>
                                             </span>
-                                        </th>
-                                        <th style={{ width: '15%' }}>
+                                    </th>
+                                    <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
                                                 Country{' '}
                                                 <span className="icon-sort">
-                                                    <span className="icon-sort-arrow-up"></span>
-                                                    <span className="icon-sort-arrow-down"></span>
+                                                    <span className="icon-sort-arrow-up" />
+                                                    <span className="icon-sort-arrow-down" />
                                                 </span>
                                             </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
+                                    </th>
+                                    <th style={{ width: '10%' }}>
                                             <span className="flex items-center">
                                                 Type{' '}
                                                 <span className="icon-sort">
-                                                    <span className="icon-sort-arrow-up"></span>
-                                                    <span className="icon-sort-arrow-down"></span>
+                                                    <span className="icon-sort-arrow-up" />
+                                                    <span className="icon-sort-arrow-down" />
                                                 </span>
                                             </span>
-                                        </th>
-                                    </tr>
+                                    </th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {insightList.items &&
-                                        insightList.items.map(
-                                            (insight, index) => {
-                                                return (
-                                                    <tr
-                                                        key={index}
-                                                        onClick={() =>
-                                                            showDetail(
-                                                                insight.contents_type,
-                                                                insight.id
-                                                            )
-                                                        }
-                                                        className="cursor-pointer">
-                                                        <td>{insight.title}</td>
-                                                        <td>
-                                                            {countryNameById(
-                                                                get(
-                                                                    insight,
-                                                                    'country.id',
-                                                                    null
-                                                                )
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {
-                                                                insight.contents_type
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            }
-                                        )}
+                                {insightList &&
+                                insightList.map(
+                                    (insight, index) => {
+                                        return (
+                                            <tr
+                                                key={index}
+                                                onClick={() =>
+                                                    showDetail(
+                                                        insight.contents_type,
+                                                        insight.id
+                                                    )
+                                                }
+                                                className="cursor-pointer">
+                                                <td>{insight.title}</td>
+                                                <td>
+                                                    {countryNameById(
+                                                        get(
+                                                            insight,
+                                                            'country.id',
+                                                            null
+                                                        )
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {
+                                                        insight.contents_type
+                                                    }
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                )}
                                 </tbody>
                             </table>
-                            {!insightList.items.length && (
+                            {!insightList.length && (
                                 <div
                                     className="flex items-center justify-center bg-white rounded-md"
                                     style={{
@@ -369,7 +323,7 @@ const InsightTable = ({ params }) => {
                         </div>
                         {tableLoading && <TableLoader />}
                     </div>
-                    {insightList.items.length > 0 && (
+                    {insightList.length > 0 && (
                         <div>
                             <div className="text-right mt-2 text-sm">
                                 <p className="text-primary-dark text-opacity-50">
@@ -401,7 +355,7 @@ const InsightTable = ({ params }) => {
                                     pageCount={totalItems / limit}
                                     marginPagesDisplayed={2}
                                     pageRangeDisplayed={10}
-                                    onPageChange={LoadInsightList}
+                                    onPageChange={handlePageChange}
                                     containerClassName={'pagination-items'}
                                     pageClassName={'pagination-item'}
                                     previousClassName={'pagination-item prev'}

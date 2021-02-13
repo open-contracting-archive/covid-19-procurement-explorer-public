@@ -17,7 +17,7 @@ const CountrySelector = () => {
 
         const path =
             countrySlug === 'global'
-                ? `/global-overview/data`
+                ? `/global-overview/${tabSlug}`
                 : `/country/${countrySlug}/${tabSlug}`
         history.push(path)
     }

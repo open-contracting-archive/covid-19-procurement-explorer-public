@@ -3,8 +3,8 @@
         border: none;
         background: none;
         border-radius: 0;
-        border-bottom: 2px solid #fff;
-        color: #ffffff;
+        border-bottom: 2px solid #1fbbec;
+        color: #293e45;
         box-shadow: none;
 
         @media only screen and (min-width: 768px) {
@@ -80,27 +80,27 @@
         }
     }
 
-    .select-filter__placeholder {
-        color: #fff;
-        @media only screen and (min-width: 768px) {
-            color: hsl(0, 0%, 50%);
-        }
-    }
+    // .select-filter__placeholder {
+    //     color: #fff;
+    //     @media only screen and (min-width: 768px) {
+    //         color: hsl(0, 0%, 50%);
+    //     }
+    // }
 
-    .select-filter__single-value {
-        color: #fff;
+    // .select-filter__single-value {
+    //     color: #fff;
 
-        @media only screen and (min-width: 768px) {
-            color: hsl(0, 0%, 20%);
-        }
-    }
+    //     @media only screen and (min-width: 768px) {
+    //         color: hsl(0, 0%, 20%);
+    //     }
+    // }
 
-    .select-filter__indicator {
-        color: #fff;
-        @media only screen and (min-width: 768px) {
-            color: #ccc;
-        }
-    }
+    // .select-filter__indicator {
+    //     color: #fff;
+    //     @media only screen and (min-width: 768px) {
+    //         color: #ccc;
+    //     }
+    // }
 
     .select-filter__menu {
         z-index: 9999 !important;
