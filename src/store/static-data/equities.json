@@ -1,62 +1,62 @@
 [
   {
+    "id": 1,
     "color": "#FF577F",
-    "equity": "Poverty",
-    "equity_category_id": 1
+    "name": "Poverty"
   },
   {
+    "id": 2,
     "color": "#FF884B",
-    "equity": "Unemployment",
-    "equity_category_id": 2
+    "name": "Unemployment"
   },
   {
+    "id": 3,
     "color": "#FFCB22",
-    "equity": "Prisoners / Ex-prisoners",
-    "equity_category_id": 3
+    "name": "Prisoners / Ex-prisoners"
   },
   {
+    "id": 4,
     "color": "#0EC9F2",
-    "equity": "Homelessness",
-    "equity_category_id": 4
+    "name": "Homelessness"
   },
   {
+    "id": 5,
     "color": "#00D1AD",
-    "equity": "Disability",
-    "equity_category_id": 5
+    "name": "Disability"
   },
   {
+    "id": 6,
     "color": "#D6B0B1",
-    "equity": "Gender, Sexual orientation, Sex",
-    "equity_category_id": 6
+    "name": "Gender, Sexual orientation, Sex"
   },
   {
+    "id": 7,
     "color": "#DE90F1",
-    "equity": "Ethnicity",
-    "equity_category_id": 7
+    "name": "Ethnicity"
   },
   {
+    "id": 8,
     "color": "#A4D72E",
-    "equity": "Religion",
-    "equity_category_id": 8
+    "name": "Religion"
   },
   {
+    "id": 9,
     "color": "#84A98C",
-    "equity": "Mental Health",
-    "equity_category_id": 9
+    "name": "Mental Health"
   },
   {
+    "id": 10,
     "color": "#99C1DE",
-    "equity": "Age",
-    "equity_category_id": 10
+    "name": "Age"
   },
   {
+    "id": 11,
     "color": "#ABBABF",
-    "equity": "General",
-    "equity_category_id": 11
+    "name": "General"
   },
   {
+    "id": 12,
     "color": "#FFA69E",
-    "equity": "Migration",
-    "equity_category_id": 12
+    "name": "Migration"
   }
 ]

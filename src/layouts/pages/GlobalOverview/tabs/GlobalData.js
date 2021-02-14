@@ -14,7 +14,7 @@ import {
     TopBuyers,
     GlobalSuppliers,
     ProductDistribution,
-    ContractsRedFlags,
+    ContractRedFlags,
     ContractsCorrelation
 } from '../../../../components/Visualizations'
 import VisualizationModal from '../modal/VisualizationModal'
@@ -82,7 +82,7 @@ const GlobalData = () => {
                         <ProductDistribution />
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4">
-                        <ContractsRedFlags />
+                        <ContractRedFlags />
                     </div>
                     <div className="w-full px-2 mb-4">
                         <ContractsCorrelation />

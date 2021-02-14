@@ -1,69 +1,54 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Loader from "../Loader/Loader"
 import HelpText from "../HelpText/HelpText"
 import ContractViewSwitcher from "./ContractViewSwitcher"
-import { formatNumber } from "../../helpers/number"
-import PieChart from "../Charts/PieChart/PieChart"
-import Visualization from "../../constants/Visualization"
+import useTrans from "../../hooks/useTrans"
 
 const CardContainer = (props) => {
-    const { label, children, helpText, appendClass, modalHandler, viewSwitcher, switchView } = props
+    const {
+        label,
+        helpText = null,
+        loading,
+        symbol,
+        children,
+        appendClass,
+        viewType,
+        viewHandler
+    } = props
+    const { trans } = useTrans()
 
     return (
-        <div className={`bg-white rounded p-4 simple-tab ${appendClass}`}>
+        <div className={`bg-white rounded p-4 ${appendClass}`}>
             <Fragment>
-                <div className="flex flex-wrap items-center md:justify-between">
-                    <div className="w-full md:w-auto mb-4 md:mb-0 flex items-center">
-                        <h3 className="uppercase font-bold text-primary-dark inline-block">
-                            {trans(label)}
-                        </h3>
-                        <HelpText helpTextInfo={helpText} />
-                    </div>
-
-                    {viewSwitcher && (
-                        <ContractViewSwitcher
-                            style={'short'}
-                            viewType={viewType}
-                            viewHandler={switchView} />
-                    )}
-                </div>
-
-                <div className={`${heightFull ? 'mt-10' : 'mt-2'}`}>
-                    <div className="flex items-end">
-                        <div>
-                            <h3 className="mr-3">
-                                    <span className="text-sm block">
-                                        {trans('Open')}
-                                    </span>
-                                <span className="text-xl font-bold mr-2">
-                                        {formatNumber(chartData[1].number)}
-                                    </span>
-                                {currency && (
-                                    <span className="inline-block uppercase">
-                                            {currency === 'local'
-                                                ? countryCurrency
-                                                : 'usd'}
-                                        </span>
-                                )}
+                <div className="flex flex-wrap items-center md:justify-between md:w-auto mb-2 md:mb-4 ">
+                    <div className="w-full flex items-center justify-between">
+                        <div className="flex">
+                            <h3 className="uppercase font-bold text-primary-dark inline-block">
+                                {trans(label)}
                             </h3>
+
+                            {symbol}
+
+                            {helpText && (
+                                <HelpText helpTextInfo={helpText} />
+                            )}
                         </div>
-                        <div className="flex-1">
-                            <PieChart
-                                data={chartData}
-                                colors={colors}
-                                large={heightFull}
-                            />
-                        </div>
+
+                        {viewHandler && (
+                            <ContractViewSwitcher
+                                style={'short'}
+                                viewType={viewType}
+                                viewHandler={viewHandler} />
+                        )}
                     </div>
+
                 </div>
+                {loading ? (<Loader />) : (
+                    <div>
+                        {children}
+                    </div>
+                )}
             </Fragment>
-            {modalHandler && (
-                <span
-                    className="cursor-pointer text-sm text-primary-blue block text-right"
-                    onClick={() => modalHandler(Visualization.DIRECT_OPEN)}>
-                    View in detail →
-                </span>
-            )}
         </div>
     )
 }

@@ -4,7 +4,8 @@ import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { toCamelCase } from '../../../helpers/general'
 
-const CompareChart = ({ chartData, equities }) => {
+const CompareChart = (props) => {
+    const { chartData, indicators } = props
     const compareChart = useRef(null)
 
     useLayoutEffect(() => {
@@ -96,27 +97,27 @@ const CompareChart = ({ chartData, equities }) => {
         volumeSeries.groupFields.valueY = 'sum'
         volumeSeries.tooltip.label.fill = volumeSeries.stroke
 
-        equities.forEach((equityItem) => {
+        indicators.forEach((indicator) => {
             let equitySeries = chart.series.push(new am4charts.LineSeries())
             equitySeries.dataFields.dateX = 'month'
-            equitySeries.dataFields.valueY = toCamelCase(equityItem.equity)
+            equitySeries.dataFields.valueY = toCamelCase(indicator.name)
             // equitySeries.dataFields.valueYShow = 'changePercent'
             equitySeries.tooltipText = '{name}: {valueY}'
-            equitySeries.name = equityItem.equity
+            equitySeries.name = indicator.name
             equitySeries.tooltip.getFillFromObject = false
             equitySeries.tooltip.getStrokeFromObject = true
             equitySeries.tooltip.background.fill = am4core.color('#fff')
             equitySeries.tooltip.background.strokeWidth = 2
             equitySeries.tooltip.label.fill = equitySeries.stroke
-            equitySeries.stroke = equityItem.color
-            equitySeries.fill = equityItem.color
+            equitySeries.stroke = indicator.color
+            equitySeries.fill = indicator.color
         })
 
         return () => {
             chart.dispose()
             chart = null
         }
-    }, [chartData, equities])
+    }, [chartData, indicators])
 
     return <div className="h-500 compare-chart-section" ref={compareChart} />
 }

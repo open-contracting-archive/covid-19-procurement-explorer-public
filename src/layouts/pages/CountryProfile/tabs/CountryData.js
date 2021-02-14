@@ -15,7 +15,7 @@ import {
     CountrySuppliers,
     ProductDistribution,
     ContractsCorrelation,
-    ContractsRedFlags
+    ContractRedFlags
 } from '../../../../components/Visualizations'
 import CountryPartnerSlider from '../../../../components/CountryPartnerSlider/CountryPartnerSlider'
 
@@ -111,7 +111,9 @@ function CountryData(props) {
                             />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4">
-                            <ContractsRedFlags />
+                            <ContractRedFlags
+                                params={{ country: countryCode }}
+                            />
                         </div>
                         <div className="w-full px-2 mb-4">
                             <ContractsCorrelation

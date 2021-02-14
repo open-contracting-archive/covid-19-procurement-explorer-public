@@ -9,6 +9,7 @@ import {
     setCurrentLocale,
     setEquityIndicators,
     setProductCategories,
+    setRedFlags,
     setTranslations
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
@@ -33,7 +34,6 @@ import TenderDetail from './layouts/pages/Tender/TenderDetail'
 import BuyerProfile from './layouts/pages/Buyer/BuyerProfile'
 import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
 import GeneralService from './services/GeneralService'
-import equities from './store/static-data/equities.json'
 import ProductProfile from './layouts/pages/Product/ProductProfile'
 import { ModalProvider } from 'react-simple-hook-modal'
 
@@ -67,14 +67,16 @@ function App() {
             }
         })
 
-        GeneralService.getStaticFilters(currentLocale).then((response) => {
-            if (response) {
-                dispatch(setContractMethods(response.method))
-                dispatch(setContractStates(response.status))
-                dispatch(setProductCategories(response.products))
-                dispatch(setEquityIndicators(equities))
-            }
-        })
+        GeneralService.getStaticFilters(currentLocale)
+            .then((response) => {
+                if (response) {
+                    dispatch(setContractMethods(response.method))
+                    dispatch(setContractStates(response.status))
+                    dispatch(setProductCategories(response.products))
+                    dispatch(setEquityIndicators(response.equity))
+                    dispatch(setRedFlags(response.red_flag))
+                }
+            })
     }, [dispatch])
 
     return (

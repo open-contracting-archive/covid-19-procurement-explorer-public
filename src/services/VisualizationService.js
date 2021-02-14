@@ -299,6 +299,32 @@ class VisualizationService {
             console.log(error)
         }
     }
+
+    static async RedFlagSummary(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.red-flag-summary'),
+
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async ContractRedFlags(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.contract-red-flags'),
+
+                params
+            )
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationService
