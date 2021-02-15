@@ -1,10 +1,10 @@
 import React from 'react'
-import { ContractsRedFlags } from "../../../../components/Visualizations"
+import { RedFlagSummary } from "../../../../components/Visualizations"
 import { TenderTable } from '../../../../components/Tables'
 
 const GlobalContracts = () => {
     function renderMainVisualization() {
-        return (<ContractsRedFlags />)
+        return (<RedFlagSummary />)
     }
 
     function renderTable() {
@@ -13,9 +13,10 @@ const GlobalContracts = () => {
 
     return (
         <div>
-            {/* <div className="w-full mb-12 global-profile">
+            <div className="w-full mb-12 global-profile">
                 {renderMainVisualization()}
-            </div> */}
+            </div>
+
             {renderTable()}
         </div>
     )

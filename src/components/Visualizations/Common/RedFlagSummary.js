@@ -1,47 +1,55 @@
-import React, { useEffect, useState, useMemo, Fragment } from 'react'
+import React, { useEffect, useMemo, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import { identity, pickBy, groupBy } from 'lodash'
-import useTrans from '../../../hooks/useTrans'
-import VisualizationService from '../../../services/VisualizationService'
-import Loader from '../../Loader/Loader'
-import CompareChart from '../../Charts/CompareChart/CompareChart'
-import Checkbox from '../../Checkbox/Checkbox'
-import ChartFooter from '../../Utilities/ChartFooter'
-import { formatDate } from '../../../helpers/date'
-import { toCamelCase } from '../../../helpers/general'
-import Default from '../../../constants/Default'
-import ContractView from '../../../constants/ContractView'
-import { colors } from "../../../constants/Theme"
+import { groupBy, identity, pickBy } from 'lodash'
+import VisualizationService from "../../../services/VisualizationService"
+import ContractView from "../../../constants/ContractView"
+import { formatDate } from "../../../helpers/date"
+import { toCamelCase } from "../../../helpers/general"
+import Default from "../../../constants/Default"
+import useTrans from "../../../hooks/useTrans"
+import Checkbox from "../../Checkbox/Checkbox"
+import CompareChart from "../../Charts/CompareChart/CompareChart"
+import Loader from "../../Loader/Loader"
+import ChartFooter from "../../Utilities/ChartFooter"
 import ContractViewSwitcher from "../../Utilities/ContractViewSwitcher"
+import { colors } from "../../../constants/Theme"
 
-const ContractEquityIndicators = (props) => {
+const RedFlagSummary = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { params } = props
-    const equities = useSelector((state) => state.general.equities.map((equity, index) => ({ ...equity, color: colors[index] })))
+    const {
+        label = 'Contracts with red flags',
+        params,
+        helpText = 'The methodology of red flags calculation can be found here.'
+    } = props
+    const redFlagList = useSelector((state) => state.general.redFlags.map((redFlag, index) => ({ ...redFlag, color: colors[index] })))
     const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
-    const [selectedEquityIndicators, setSelectedEquityIndicators] = useState(() => equities.map((equity) => equity.id))
     const [originalData, setOriginalData] = useState([])
+    const [
+        selectedRedFlags,
+        setSelectedRedFlags
+    ] = useState(() => redFlagList.map((redFlag) => redFlag.id))
     const [chartData, setChartData] = useState([])
+    const indicators = useMemo(() => {
+        return redFlagList.filter((redFlag) => selectedRedFlags.includes(redFlag.id))
+    }, [redFlagList, selectedRedFlags])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
-    const indicators = useMemo(() => {
-        return equities.filter((equity) => selectedEquityIndicators.includes(equity.id))
-    }, [equities, selectedEquityIndicators])
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     // Fetch data
     useEffect(() => {
-        let queryParameters = identity(pickBy(params))
-        VisualizationService.EquitySummary(queryParameters)
+        VisualizationService.RedFlagSummary(identity(pickBy(params)))
             .then((result) => {
-                setOriginalData(result)
+                if (result) {
+                    setOriginalData(result)
+                }
                 setLoading(false)
             })
             .catch((error) => console.log(error))
@@ -49,7 +57,7 @@ const ContractEquityIndicators = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [params?.country])
+    }, [params?.country, params?.buyer, params?.supplier])
 
     // Prepare chart data
     useEffect(() => {
@@ -62,25 +70,25 @@ const ContractEquityIndicators = (props) => {
             let points = {}
             let sum = 0
 
-            equities
-                .filter((equity) =>
-                    selectedEquityIndicators.includes(equity.id)
+            redFlagList
+                .filter((redFlag) =>
+                    selectedRedFlags.includes(redFlag.id)
                 )
-                .forEach((equity) => {
-                    let equityValue = grouped[key].find(
-                        (equityItem) => equity.id === equityItem.equity_category_id
+                .forEach((redFlag) => {
+                    let redFlagData = grouped[key].find(
+                        (redFlagItem) => redFlag.id === redFlagItem.red_flag_id
                     )
 
-                    if (equityValue) {
-                        points[toCamelCase(equity.name)] =
+                    if (redFlagData) {
+                        points[toCamelCase(redFlag.name)] =
                             viewType === ContractView.VALUE
                                 ? currency === Default.CURRENCY_LOCAL
-                                ? equityValue.amount_local
-                                : equityValue.amount_usd
-                                : equityValue.tender_count
-                        sum += points[toCamelCase(equity.name)]
+                                ? redFlagData.amount_local
+                                : redFlagData.amount_usd
+                                : redFlagData.tender_count
+                        sum += points[toCamelCase(redFlag.name)]
                     } else {
-                        points[toCamelCase(equity.name)] = 0
+                        points[toCamelCase(redFlag.name)] = 0
                     }
                 })
 
@@ -97,15 +105,15 @@ const ContractEquityIndicators = (props) => {
 
         setChartData(chartData)
         setLoading(false)
-    }, [originalData, viewType, selectedEquityIndicators, currency])
+    }, [originalData, viewType, selectedRedFlags, currency])
 
-    function handleEquitySelection(equityId) {
-        setSelectedEquityIndicators((previous) => {
+    function handleIndicatorSelection(redFlagId) {
+        setSelectedRedFlags((previous) => {
             let items = [...previous]
-            if (items.includes(+equityId)) {
-                items.splice(items.indexOf(+equityId), 1)
+            if (items.includes(+redFlagId)) {
+                items.splice(items.indexOf(+redFlagId), 1)
             } else {
-                items[items.length] = parseInt(equityId)
+                items[items.length] = parseInt(redFlagId)
             }
 
             return [...new Set(items)]
@@ -124,7 +132,7 @@ const ContractEquityIndicators = (props) => {
                         <div className="w-full md:w-auto">
                             <div className="md:w-80 md:mr-12">
                                 <ul>
-                                    {equities.map((item, index) => (
+                                    {redFlagList.map((item, index) => (
                                         <li
                                             key={index}
                                             className="active text-sm md:text-base py-1 md:py-2 flex items-center justify-between
@@ -143,12 +151,12 @@ const ContractEquityIndicators = (props) => {
                                                 </div>
                                             </div>
                                             <Checkbox
-                                                id={`equity-category-${index}`}
+                                                id={`red-flag-${index}`}
                                                 value={item.id}
-                                                checked={selectedEquityIndicators.includes(
+                                                checked={selectedRedFlags.includes(
                                                     item.id
                                                 )}
-                                                itemSelected={handleEquitySelection}
+                                                itemSelected={handleIndicatorSelection}
                                             />
                                         </li>
                                     ))}
@@ -174,7 +182,7 @@ const ContractEquityIndicators = (props) => {
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
                     <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                        {trans('Contracts and equity indicators')}
+                        {trans(label)}
                     </h3>
 
                     {shouldRenderChart() && (
@@ -193,4 +201,5 @@ const ContractEquityIndicators = (props) => {
         </div>
     )
 }
-export default ContractEquityIndicators
+
+export default RedFlagSummary

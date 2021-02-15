@@ -61,3 +61,10 @@ export const setEquityIndicators = (equityIndicators) => {
         payload: equityIndicators
     }
 }
+
+export const setRedFlags = (redFlags) => {
+    return {
+        type: types.SET_RED_FLAGS,
+        payload: redFlags
+    }
+}

@@ -11,7 +11,8 @@ const initialState = {
     equities: [],
     contractMethods: [],
     contractStates: [],
-    productCategories: []
+    productCategories: [],
+    redFlags: []
 }
 
 const GeneralReducer = (state = initialState, { type, payload }) => {
@@ -45,6 +46,9 @@ const GeneralReducer = (state = initialState, { type, payload }) => {
 
         case types.SET_EQUITY_INDICATORS:
             return { ...state, equities: payload }
+
+        case types.SET_RED_FLAGS:
+            return { ...state, redFlags: payload }
 
         default:
             return state

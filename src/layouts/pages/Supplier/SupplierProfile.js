@@ -5,14 +5,14 @@ import { useHistory, useParams } from 'react-router-dom'
 import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import {
-    ContractsRedFlags,
-    GlobalSuppliers,
-    ProductDistribution,
-    ProductsTimeline,
-    TopBuyers,
-    TotalContracts,
     TotalSpending,
-    DirectOpen
+    TotalContracts,
+    DirectOpen,
+    TopBuyers,
+    ProductsTimeline,
+    ProductDistribution,
+    ContractRedFlags,
+    GlobalSuppliers
 } from '../../../components/Visualizations'
 import VisualizationService from '../../../services/VisualizationService'
 import TenderTable from '../../../components/Tables/TenderTable'
@@ -169,7 +169,7 @@ const SupplierProfile = () => {
                                         />
                                     </div>
                                     <div className="w-full px-2 mb-4">
-                                        <ContractsRedFlags />
+                                        <ContractRedFlags />
                                     </div>
                                 </div>
 

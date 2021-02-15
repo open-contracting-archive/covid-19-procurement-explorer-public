@@ -6,7 +6,7 @@ import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import {
     AverageBidsPerContract,
-    ContractsRedFlags,
+    ContractRedFlags,
     ContractStatus,
     DirectOpen,
     EquityIndicators,
@@ -183,7 +183,7 @@ const BuyerProfile = () => {
                                         />
                                     </div>
                                     <div className="w-full px-2 mb-6">
-                                        <ContractsRedFlags
+                                        <ContractRedFlags
                                             params={{
                                                 buyer: id,
                                                 country: originalData.country_code
