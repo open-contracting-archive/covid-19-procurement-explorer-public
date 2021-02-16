@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import useTrans from '../../hooks/useTrans'
+import FooterImage from '../../assets/img/icons/cc-img.png'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
-import FooterImage from '../../assets/img/icons/cc-img.png'
-import useTrans from '../../hooks/useTrans'
 
 const Footer = () => {
     const { trans } = useTrans()
@@ -58,7 +58,9 @@ const Footer = () => {
                     <div className="col-span-4 md:col-span-2">
                         <ul className="mt-6 pt-1">
                             <li className="opacity-50 mb-1">
-                                <Link to="/pages/about">{trans('About')}</Link>
+                                <Link to="/pages/about">
+                                    {trans('About')}
+                                </Link>
                             </li>
                             <li className="opacity-50 mb-1">
                                 <Link to="/pages/terms-of-use">

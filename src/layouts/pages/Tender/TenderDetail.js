@@ -11,12 +11,14 @@ import CountryService from '../../../services/CountryService'
 import AwardedItems from './tabs/AwardedItems'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
+import Loader from "../../../components/Loader/Loader"
 
 const TenderDetail = () => {
+    const { contractId } = useParams()
+    const [loading, setLoading] = useState(true)
     const [contractDetail, setContractDetail] = useState({})
     let history = useHistory()
     const { trans } = useTrans()
-    let { id: countryId, contractId } = useParams()
     window.scrollTo(0, 0)
 
     const previousPage = () => {
@@ -24,16 +26,21 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryService.ContractDetail(contractId).then((response) => {
-            setContractDetail(response)
-        })
+        CountryService.ContractDetail(contractId)
+            .then((result) => {
+                if (result) {
+                    setContractDetail(result)
+                }
+                setLoading(false)
+            })
 
         return () => {
             setContractDetail({})
+            setLoading(true)
         }
     }, [contractId])
 
-    return (
+    return loading ? (<Loader />) : (
         <section className="pt-8">
             <div className="container mx-auto px-4 ">
                 <div className="text-sm mb-4 text-blue-5">
@@ -58,7 +65,7 @@ const TenderDetail = () => {
                         <span
                             className={`status-indicator ${
                                 contractDetail && contractDetail.status
-                            }`}></span>
+                            }`} />
                         <p className="mr-2 text-sm">
                             {contractDetail && contractDetail.status}
                         </p>
@@ -214,8 +221,7 @@ const TenderDetail = () => {
                             {trans('Supplier address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(contractDetail, 'supplier.supplier_address') ||
-                            '-'}
+                            {get(contractDetail, 'supplier.supplier_address', '-')}
                         </p>
                     </div>
                 </div>

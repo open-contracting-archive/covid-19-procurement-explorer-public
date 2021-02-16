@@ -24,6 +24,7 @@ import {
     PRODUCTS,
     METHODOLOGY
 } from '../../../constants/Tab'
+import CmsPageContent from "../StaticPage/CmsPageContent"
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -84,8 +85,12 @@ const CountryProfile = () => {
                         countryCode={countryData.country_code_alpha_2}
                     />
                 )
-            case METHODOLOGY: //to create component
-                return <div>Methodology page</div>
+            case METHODOLOGY:
+                return (
+                    <CmsPageContent
+                        slug={'methodology'}
+                    />
+                )
             default:
                 return (
                     <CountryData
