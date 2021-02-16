@@ -20,6 +20,7 @@ import {
     SUPPLIERS
 } from '../../../constants/Tab'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
+import CmsPageContent from "../StaticPage/CmsPageContent"
 
 const GlobalOverview = () => {
     // ===========================================================================
@@ -43,8 +44,12 @@ const GlobalOverview = () => {
                 return <GlobalSuppliers />
             case PRODUCTS:
                 return <GlobalProducts />
-            case METHODOLOGY: //to create component
-                return <div>Methodology page</div>
+            case METHODOLOGY:
+                return (
+                    <CmsPageContent
+                        slug={'methodology'}
+                    />
+                )
             default:
                 return <GlobalData />
         }

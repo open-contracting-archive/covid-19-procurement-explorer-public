@@ -1,36 +1,25 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { useParams, Redirect } from 'react-router-dom'
-import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
+import CmsPageService from "../../../services/CmsPageService"
+import Loader from "../../../components/Loader/Loader"
 
-const StaticPage = () => {
-    let { slug } = useParams()
-    const [pageDetail, setPageDetail] = useState({})
+const CmsPageContent = (props) => {
+    const { slug } = props
     const [loading, setLoading] = useState(true)
-    window.scrollTo(0, 0)
+    const [pageDetail, setPageDetail] = useState({})
 
     useEffect(() => {
-        CmsPageService.StaticPageDetailBySlug(slug)
-            .then((response) => {
-                setPageDetail(response)
-                setLoading(false)
-            })
+        CmsPageService.StaticPageDetailBySlug(slug).then((response) => {
+            setPageDetail(response)
+            setLoading(false)
+        })
 
         return () => {
             setPageDetail({})
-            setLoading(true)
         }
     }, [slug])
 
-    if (
-        !loading &&
-        (pageDetail.title === undefined || pageDetail.title === null)
-    ) {
-        return <Redirect to={'/' + slug} />
-    }
-
     return (
-        <section className="pt-8">
+        <section className="pt-4">
             <div className="container mx-auto px-4">
                 {loading ? (
                     <Loader />
@@ -54,5 +43,4 @@ const StaticPage = () => {
         </section>
     )
 }
-
-export default StaticPage
+export default CmsPageContent

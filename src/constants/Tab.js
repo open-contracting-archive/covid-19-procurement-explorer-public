@@ -15,7 +15,7 @@ export const tabItems = () => {
         EQUITY,
         BUYERS,
         SUPPLIERS,
-        PRODUCTS
-        // METHODOLOGY
+        PRODUCTS,
+        METHODOLOGY
     ]
 }

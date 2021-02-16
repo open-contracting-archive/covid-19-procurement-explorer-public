@@ -1,17 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import useTrans from '../../../../hooks/useTrans'
-import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
-import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
-import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
-import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
 import { ShortTenderTable } from '../../../../components/Tables'
 import ChartFooter from '../../../../components/Utilities/ChartFooter'
+import CmsPageContent from "../../StaticPage/CmsPageContent"
+import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
+import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
+import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
+import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
 
-const WorldMapRace = () => {
+const MainVisualization = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -78,7 +80,7 @@ const WorldMapRace = () => {
                                             </div>
                                         </TabPanel>
                                         <TabPanel>
-                                            Sources section coming soon !!
+                                            <CmsPageContent slug={'sources'} />
                                         </TabPanel>
                                     </div>
                                 </div>
@@ -90,13 +92,13 @@ const WorldMapRace = () => {
                 </div>
                 <p className="mt-6 text-center text-sm">
                     {trans('Don’t see your country data?')}
-                    <a href="#" className="inline-block ml-2 text-primary-blue">
+                    <Link to="/pages/add-my-country-data" className="inline-block ml-2 text-primary-blue">
                         {trans('Here’s how you can add your country data')}
-                    </a>
+                    </Link>
                 </p>
             </div>
         </section>
     )
 }
 
-export default WorldMapRace
+export default MainVisualization
