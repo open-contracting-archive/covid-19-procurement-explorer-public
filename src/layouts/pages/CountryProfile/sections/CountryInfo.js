@@ -3,6 +3,7 @@ import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
 import useTrans from '../../../../hooks/useTrans'
 import CurrencySwitcher from '../../../../components/CurrencySwitcher/CurrencySwitcher'
+import Tussell from '../../../../assets/img/tussell.png'
 
 const CountryInfo = ({ country }) => {
     const { trans } = useTrans()
@@ -69,6 +70,13 @@ const CountryInfo = ({ country }) => {
                                     </span>
                                 </h2>
                             </div>
+                        </div>
+                        <div className="w-full px-4 flex items-center justify-between mt-6 mb-5">
+                            <p className="text-xs font-normal underline w-3/5">
+                                UK COVID Procurement data is kindly provided by
+                                Tussell
+                            </p>
+                            <img src={Tussell} alt="" />
                         </div>
                     </div>
                 </div>

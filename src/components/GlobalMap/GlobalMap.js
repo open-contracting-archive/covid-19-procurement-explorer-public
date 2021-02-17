@@ -92,8 +92,8 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
         // Configure series
         polygonTemplate.tooltipHTML =
             contractType === 'value'
-                ? '<b>{name}</b> <br> <b>Total Spending: ${value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
-                : '<b>{name}</b> <br> <b>Total Contracts: {value}</b><br><a href="{url}" style="font-size: 14px">View Details</a>'
+                ? '<b>{name}</b> <br> <b>Total Spending: ${value}</b><br><a href="{url}" class="text-primary-blue" style="font-size: 14px">View Details --&gt;</a>'
+                : '<b>{name}</b> <br> <b>Total Contracts: {value}</b><br><a href="{url}" class="text-primary-blue" style="font-size: 14px">View Details --&gt;</a> '
 
         // Set up tooltips
         polygonSeries.calculateVisualCenter = true

@@ -4,6 +4,8 @@ import useTrans from '../../hooks/useTrans'
 import FooterImage from '../../assets/img/icons/cc-img.png'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
+import OpenContractingPartner from '../../assets/img/open-contracting-partnership.png'
+import TransparencyInternational from '../../assets/img/transparency-international.png'
 
 const Footer = () => {
     const { trans } = useTrans()
@@ -90,6 +92,23 @@ const Footer = () => {
                                 </button>
                             </div>
                         </form>
+                        <div className="mt-8">
+                            <p className="mb-3">
+                                {trans('Portal developed by')}
+                            </p>
+                            <div className="flex items-center flex-wrap">
+                                <img
+                                    src={OpenContractingPartner}
+                                    alt="Open contracting partner logo"
+                                    className="mr-6 mb-4 inline-block"
+                                />
+                                <img
+                                    src={TransparencyInternational}
+                                    alt="Transparency international logo"
+                                    className="mb-4 inline-block"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <FooterIcon
