@@ -1,6 +1,6 @@
 import React from 'react'
 import { RedFlagSummary } from "../../../../components/Visualizations"
-import { TenderTable } from '../../../../components/Tables'
+import { ContractTable } from '../../../../components/Tables'
 
 const CountryContracts = (props) => {
     function renderMainVisualization() {
@@ -11,7 +11,7 @@ const CountryContracts = (props) => {
 
     function renderTable() {
         if (props.countryCode) {
-            return (<TenderTable params={{ country: props.countryCode }} />)
+            return (<ContractTable params={{ country: props.countryCode }} />)
         }
     }
 

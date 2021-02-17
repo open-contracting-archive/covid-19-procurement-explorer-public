@@ -1,6 +1,6 @@
 import React from 'react'
 import { ContractEquityIndicators } from "../../../../components/Visualizations"
-import { TenderTable } from "../../../../components/Tables"
+import { ContractTable } from "../../../../components/Tables"
 
 const GlobalEquity = () => {
     function renderMainVisualization() {
@@ -8,7 +8,7 @@ const GlobalEquity = () => {
     }
 
     function renderTable() {
-        return (<TenderTable />)
+        return (<ContractTable />)
     }
 
     return (

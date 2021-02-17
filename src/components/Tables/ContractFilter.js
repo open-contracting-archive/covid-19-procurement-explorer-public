@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
+import { identity, pickBy } from 'lodash'
 import ContractService from '../../services/ContractService'
 import useTrans from '../../hooks/useTrans'
 import useContractFilters from '../../hooks/useContractFilters'
@@ -37,10 +38,10 @@ const ContractFilter = (props) => {
     useEffect(() => {
         if (params && params.country) {
             if (!params.buyer) {
-                getBuyersFilterParameter({ country: params.country })
+                getBuyersFilterParameter(identity(pickBy(params)))
             }
             if (!params.supplier) {
-                getSuppliersFilterParameter({ country: params.country })
+                getSuppliersFilterParameter(identity(pickBy(params)))
             }
         }
 
@@ -232,7 +233,7 @@ const ContractFilter = (props) => {
                                 onChange={(selectedOption) =>
                                     appendFilter({
                                         procurement_procedure:
-                                            selectedOption.value
+                                        selectedOption.value
                                     })
                                 }
                             />
@@ -304,9 +305,9 @@ const ContractFilter = (props) => {
                                 onChange={(selectedOption) =>
                                     appendFilter({
                                         contract_value_usd:
-                                            selectedOption.value.value,
+                                        selectedOption.value.value,
                                         value_comparison:
-                                            selectedOption.value.sign
+                                        selectedOption.value.sign
                                     })
                                 }
                             />
@@ -472,7 +473,7 @@ const ContractFilter = (props) => {
                             onChange={(selectedOption) =>
                                 appendFilter({
                                     contract_value_usd:
-                                        selectedOption.value.value,
+                                    selectedOption.value.value,
                                     value_comparison: selectedOption.value.sign
                                 })
                             }

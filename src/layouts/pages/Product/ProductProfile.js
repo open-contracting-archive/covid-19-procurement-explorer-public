@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ProductInfo from './sections/ProductInfo'
 import MainChart from './sections/MainChart'
-import { TenderTable } from '../../../components/Tables'
+import { ContractTable } from '../../../components/Tables'
 
 const ProductProfile = () => {
     // ===========================================================================
@@ -38,7 +38,7 @@ const ProductProfile = () => {
             <div className="py-12 bg-primary-gray">
                 <div className="container mx-auto">
                     <div>
-                        <TenderTable params={{ product: productId }} />
+                        <ContractTable params={{ product: productId }} />
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ import {
     GlobalSuppliers
 } from '../../../components/Visualizations'
 import VisualizationService from '../../../services/VisualizationService'
-import TenderTable from '../../../components/Tables/TenderTable'
+import { ContractTable } from '../../../components/Tables'
 import Loader from '../../../components/Loader/Loader'
 
 const SupplierProfile = () => {
@@ -173,7 +173,7 @@ const SupplierProfile = () => {
                                     </div>
                                 </div>
 
-                                <TenderTable
+                                <ContractTable
                                     params={{
                                         supplier: id,
                                         country: originalData.country_code

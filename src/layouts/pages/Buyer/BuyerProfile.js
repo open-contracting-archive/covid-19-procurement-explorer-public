@@ -19,7 +19,7 @@ import {
     BuyerProductTimeline
 } from '../../../components/Visualizations'
 import VisualizationService from '../../../services/VisualizationService'
-import { TenderTable } from '../../../components/Tables'
+import { ContractTable } from '../../../components/Tables'
 import Loader from '../../../components/Loader/Loader'
 
 const BuyerProfile = () => {
@@ -192,7 +192,7 @@ const BuyerProfile = () => {
                                     </div>
                                 </div>
 
-                                <TenderTable
+                                <ContractTable
                                     params={{
                                         buyer: id,
                                         country: originalData.country_code
