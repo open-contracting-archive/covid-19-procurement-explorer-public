@@ -1,0 +1,21 @@
+.error-container {
+    background: #dceaee url('../../assets/img/icons/ic_covid-bg-patterns.svg')
+        no-repeat center/cover;
+
+    @media only screen and (min-width: 768px) {
+        height: calc(100vh - 125px);
+    }
+}
+
+.error-text {
+    width: 260px;
+    height: 280px;
+    background: url('../../assets/img/icons/ic_covid-icon.svg') no-repeat;
+    background-size: 100%;
+
+    @media only screen and (min-width: 768px) {
+        width: 320px;
+        height: 323px;
+        background-size: center cover;
+    }
+}

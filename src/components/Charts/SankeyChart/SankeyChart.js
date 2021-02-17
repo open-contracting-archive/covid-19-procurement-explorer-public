@@ -26,7 +26,7 @@ const SankeyChart = ({ data }) => {
         chart.dataFields.value = 'value'
 
         // for right-most label to fit
-        chart.paddingRight = 30
+        chart.paddingRight = 120
 
         // make nodes draggable
         let nodeTemplate = chart.nodes.template
