@@ -32,25 +32,35 @@ const Footer = () => {
                     <div className="col-span-4 md:col-span-2 mb-8">
                         <h4 className="mb-2">{trans('Explore')}</h4>
                         <ul>
-                            <li className="opacity-50 mb-1">
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 <Link to="/global-overview/data">
                                     {trans('Data')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 mb-1">
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 {trans('Countries')}
                             </li>
-                            <li className="opacity-50 mb-1">
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 <Link to="/global-overview/contracts">
-                                    {trans('Tenders')}
+                                    {trans('Contracts')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 mb-1">
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 <Link to="/global-overview/suppliers">
-                                    {trans('Suppliers')}
+                                    {trans('List of Suppliers')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 ">
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                                <Link to="/global-overview/buyers">
+                                    {trans('List of Buyers')}
+                                </Link>
+                            </li>
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                                <Link to="/global-overview/products">
+                                    {trans('Products')}
+                                </Link>
+                            </li>
+                            <li className="opacity-50 hover:opacity-75 transition">
                                 <Link to="/resources">
                                     {trans('Resources')}
                                 </Link>
@@ -59,17 +69,15 @@ const Footer = () => {
                     </div>
                     <div className="col-span-4 md:col-span-2">
                         <ul className="mt-6 pt-1">
-                            <li className="opacity-50 mb-1">
-                                <Link to="/pages/about">
-                                    {trans('About')}
-                                </Link>
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                                <Link to="/pages/about">{trans('About')}</Link>
                             </li>
-                            <li className="opacity-50 mb-1">
+                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 <Link to="/pages/terms-of-use">
                                     {trans('Terms of use')}
                                 </Link>
                             </li>
-                            <li className="opacity-50">
+                            <li className="opacity-50 hover:opacity-75 transition">
                                 <Link to="/pages/privacy-policy">
                                     {trans('Privacy policy')}
                                 </Link>

@@ -16,7 +16,7 @@ const ContractViewSwitcher = (props) => {
     const { trans } = useTrans()
 
     return (
-        <div className="flex justify-end">
+        <div className="flex flex-1 justify-end">
             <ul className="contract-switch flex">
                 <li
                     className={`mr-4 cursor-pointer ${
