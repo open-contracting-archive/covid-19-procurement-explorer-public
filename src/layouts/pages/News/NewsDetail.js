@@ -9,13 +9,14 @@ import ShareButtons from '../../../components/Library/ShareButtons'
 import TagList from '../../../components/website/Library/TagList'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
+import DefaultImage from '../../../assets/img/default_image.png'
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
     const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
     let { id: newsId } = useParams()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -76,7 +77,8 @@ const NewsDetail = () => {
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
                                         __html: newsDetail.rendered_body
-                                    }} />
+                                    }}
+                                />
                                 <div className="flex flex-col md:flex-row justify-between">
                                     <div className="block lg:hidden mb-6 md:mb-0">
                                         <TagList item={newsDetail} />
@@ -94,48 +96,59 @@ const NewsDetail = () => {
                             <>
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
-                                    <h2 className="text-xl mb-6">{trans('Other News')}</h2>
+                                    <h2 className="text-xl mb-6">
+                                        {trans('Other News')}
+                                    </h2>
                                     <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {newsList &&
-                                        newsList
-                                            .filter(
-                                                (news) => news.id !== newsId
-                                            )
-                                            .slice(0, 3)
-                                            .map((news) => {
-                                                return (
-                                                    <Link
-                                                        className="news-thumbnail"
-                                                        to={`/news/${news.id}`}
-                                                        key={news.id}>
-                                                        {get(
-                                                            news,
-                                                            'content_image.meta.download_url'
-                                                        ) && (
-                                                            <div className="img-wrapper">
-                                                                <img
-                                                                    src={`${API_URL}${get(
-                                                                        news,
-                                                                        'content_image.meta.download_url'
-                                                                    )}`}
-                                                                    alt=""
-                                                                />
-                                                            </div>
-                                                        )}
-                                                        <div>
-                                                            <h3 className="news-caption__title">
-                                                                {news.title}
-                                                            </h3>
-                                                            <p className="news-caption__date">
-                                                                {formatDate(
-                                                                    news.news_date,
-                                                                    'MMMM DD, YYYY'
-                                                                )}
-                                                            </p>
-                                                        </div>
-                                                    </Link>
+                                            newsList
+                                                .filter(
+                                                    (news) => news.id !== newsId
                                                 )
-                                            })}
+                                                .slice(0, 3)
+                                                .map((news) => {
+                                                    return (
+                                                        <Link
+                                                            className="news-thumbnail"
+                                                            to={`/news/${news.id}`}
+                                                            key={news.id}>
+                                                            {get(
+                                                                news,
+                                                                'content_image.meta.download_url'
+                                                            ) != null ? (
+                                                                <div className="img-wrapper">
+                                                                    <img
+                                                                        src={`${API_URL}${get(
+                                                                            news,
+                                                                            'content_image.meta.download_url'
+                                                                        )}`}
+                                                                        alt=""
+                                                                    />
+                                                                </div>
+                                                            ) : (
+                                                                <div className="img-wrapper">
+                                                                    <img
+                                                                        src={
+                                                                            DefaultImage
+                                                                        }
+                                                                        alt="No image"
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                            <div>
+                                                                <h3 className="news-caption__title">
+                                                                    {news.title}
+                                                                </h3>
+                                                                <p className="news-caption__date">
+                                                                    {formatDate(
+                                                                        news.news_date,
+                                                                        'MMMM DD, YYYY'
+                                                                    )}
+                                                                </p>
+                                                            </div>
+                                                        </Link>
+                                                    )
+                                                })}
                                     </div>
                                     <div className="flex justify-center items-center mt-12">
                                         <hr className="text-primary-gray flex-1" />

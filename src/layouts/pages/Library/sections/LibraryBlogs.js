@@ -6,6 +6,7 @@ import useTrans from '../../../../hooks/useTrans'
 import { formatDate } from '../../../../helpers/date'
 import Loader from '../../../../components/Loader/Loader'
 import { API_URL } from '../../../../helpers/api'
+import DefaultImage from '../../../../assets/img/default_image.png'
 
 const LibraryBlogs = () => {
     const [blogList, setBlogsData] = useState([])
@@ -13,11 +14,10 @@ const LibraryBlogs = () => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        CmsPageService.BlogList({ limit: 6 })
-            .then((response) => {
-                setBlogsData(response.items)
-                setLoading(false)
-            })
+        CmsPageService.BlogList({ limit: 6 }).then((response) => {
+            setBlogsData(response.items)
+            setLoading(false)
+        })
 
         return () => {
             setBlogsData([])
@@ -28,11 +28,11 @@ const LibraryBlogs = () => {
         <section className="px-4 py-24 blog">
             <div className="container mx-auto">
                 <div className="text-center">
-                    <p className="text-xl blue-50 pb-10">
-                        {trans('Blogs')}
-                    </p>
+                    <p className="text-xl blue-50 pb-10">{trans('Blogs')}</p>
                 </div>
-                {loading ? (<Loader />) : (blogList.length ? (
+                {loading ? (
+                    <Loader />
+                ) : blogList.length ? (
                     <Fragment>
                         <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10 ">
                             {blogList.map((blog) => {
@@ -40,16 +40,31 @@ const LibraryBlogs = () => {
                                     <div
                                         key={blog.id}
                                         className="blogs-thumbnail">
-                                        {get(blog, 'content_image.meta.download_url') && (
-                                            <Link to={`/blogs/${blog.id}`}>
+                                        <Link to={`/blogs/${blog.id}`}>
+                                            {get(
+                                                blog,
+                                                'content_image.meta.download_url'
+                                            ) ? (
                                                 <div className="img-wrapper">
                                                     <img
                                                         className="h-full object-cover"
-                                                        src={`${API_URL}${get(blog, 'content_image.meta.download_url')}`}
-                                                        alt="" />
+                                                        src={`${API_URL}${get(
+                                                            blog,
+                                                            'content_image.meta.download_url'
+                                                        )}`}
+                                                        alt=""
+                                                    />
                                                 </div>
-                                            </Link>
-                                        )}
+                                            ) : (
+                                                <div className="img-wrapper">
+                                                    <img
+                                                        className="h-full object-cover"
+                                                        src={DefaultImage}
+                                                        alt="No image"
+                                                    />
+                                                </div>
+                                            )}
+                                        </Link>
                                         <div>
                                             <Link to={`/blogs/${blog.id}`}>
                                                 <h3 className="blogs-caption__title">
@@ -57,7 +72,10 @@ const LibraryBlogs = () => {
                                                 </h3>
                                             </Link>
                                             <p className="blogs-caption__date">
-                                                {formatDate(blog.news_date, 'MMM DD, YYYY')}
+                                                {formatDate(
+                                                    blog.news_date,
+                                                    'MMM DD, YYYY'
+                                                )}
                                             </p>
                                         </div>
                                     </div>
@@ -72,7 +90,7 @@ const LibraryBlogs = () => {
                     </Fragment>
                 ) : (
                     <p>{trans('There are no blogs')}</p>
-                ))}
+                )}
             </div>
         </section>
     )
