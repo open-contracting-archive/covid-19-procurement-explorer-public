@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { get } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
 import Loader from '../../../../components/Loader/Loader'
-import { transformNews } from "../../../../helpers/transformers"
-import useTrans from "../../../../hooks/useTrans"
+import { transformNews } from '../../../../helpers/transformers'
+import useTrans from '../../../../hooks/useTrans'
+import DefaultImage from '../../../../assets/img/default_image.png'
 
 const OtherNewsList = () => {
     const [otherNewsList, setOtherNewsList] = useState([])
@@ -49,7 +50,10 @@ const OtherNewsList = () => {
                     ]
                 })
                 setPagination((previous) => {
-                    return { ...previous, total: get(response, 'meta.total_count', 0) }
+                    return {
+                        ...previous,
+                        total: get(response, 'meta.total_count', 0)
+                    }
                 })
                 setLoading(false)
                 setLoadingMore(false)
@@ -92,7 +96,9 @@ const OtherNewsList = () => {
                     {/*</div>*/}
                 </div>
 
-                {loading ? (<Loader />) : otherNewsList.length ? (
+                {loading ? (
+                    <Loader />
+                ) : otherNewsList.length ? (
                     <Fragment>
                         <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10 mb-10">
                             {otherNewsList.map((news) => (
@@ -100,12 +106,20 @@ const OtherNewsList = () => {
                                     className="news-thumbnail"
                                     to={news.detailUrl}
                                     key={news.id}>
-                                    {news.image && (
+                                    {news.image != null ? (
                                         <div className="img-wrapper ">
                                             <img
                                                 className="h-full w-full object-cover"
                                                 src={news.image}
                                                 alt={news.title}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="img-wrapper ">
+                                            <img
+                                                className="h-full w-full object-cover"
+                                                src={DefaultImage}
+                                                alt="No image"
                                             />
                                         </div>
                                     )}
@@ -120,19 +134,20 @@ const OtherNewsList = () => {
                                 </Link>
                             ))}
                         </div>
-                        {otherNewsList.length < pagination.total && (loadingMore ? (
-                            <Loader sm />
-                        ) : (
-                            <div className="flex justify-center pt-10">
-                                <span
-                                    className="text-white bg-primary-blue px-32 py-4 rounded"
-                                    onClick={() => {
-                                        loadMoreNews()
-                                    }}>
-                                    {trans('Load more')}
-                                </span>
-                            </div>
-                        ))}
+                        {otherNewsList.length < pagination.total &&
+                            (loadingMore ? (
+                                <Loader sm />
+                            ) : (
+                                <div className="flex justify-center pt-10">
+                                    <span
+                                        className="text-white bg-primary-blue px-32 py-4 rounded"
+                                        onClick={() => {
+                                            loadMoreNews()
+                                        }}>
+                                        {trans('Load more')}
+                                    </span>
+                                </div>
+                            ))}
                     </Fragment>
                 ) : (
                     <p>{trans('No other news found')}</p>

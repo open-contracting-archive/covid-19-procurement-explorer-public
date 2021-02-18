@@ -4,6 +4,7 @@ import CmsPageService from '../../../../services/CmsPageService'
 import useTrans from '../../../../hooks/useTrans'
 import Loader from '../../../../components/Loader/Loader'
 import { transformNews } from '../../../../helpers/transformers'
+import DefaultImage from '../../../../assets/img/default_image.png'
 
 const FeaturedNewsList = () => {
     const otherFeaturedNewsLimit = 4
@@ -67,34 +68,50 @@ const FeaturedNewsList = () => {
                     </div>
                     <div className="list__item md:col-span-4">
                         {otherFeaturedNews &&
-                        otherFeaturedNews.map((news) => (
-                            <Link
-                                className="news-thumbnail"
-                                to={news.detailUrl}
-                                key={news.id}>
-                                <div className="news__item flex">
-                                    {news.image && (
-                                        <div
-                                            style={{ minWidth: '125px', maxWidth: '125px' }}
-                                            className="img-wrapper w-full h-auto">
-                                            <img
-                                                className="w-full h-full object-cover"
-                                                src={news.image}
-                                                alt={news.title}
-                                            />
+                            otherFeaturedNews.map((news) => (
+                                <Link
+                                    className="news-thumbnail"
+                                    to={news.detailUrl}
+                                    key={news.id}>
+                                    <div className="news__item flex">
+                                        {news.image != null ? (
+                                            <div
+                                                style={{
+                                                    minWidth: '125px',
+                                                    maxWidth: '125px'
+                                                }}
+                                                className="img-wrapper w-full h-auto">
+                                                <img
+                                                    className="w-full h-full object-cover"
+                                                    src={news.image}
+                                                    alt={news.title}
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div
+                                                style={{
+                                                    minWidth: '125px',
+                                                    maxWidth: '125px'
+                                                }}
+                                                className="img-wrapper w-full h-auto">
+                                                <img
+                                                    className="w-full h-full object-cover"
+                                                    src={DefaultImage}
+                                                    alt="No image"
+                                                />
+                                            </div>
+                                        )}
+                                        <div className="news__caption ml-4">
+                                            <h3 className="news-caption__title">
+                                                {news.title}
+                                            </h3>
+                                            <p className="news-caption__date mt-2">
+                                                {news.formattedPublishDate}
+                                            </p>
                                         </div>
-                                    )}
-                                    <div className="news__caption ml-4">
-                                        <h3 className="news-caption__title">
-                                            {news.title}
-                                        </h3>
-                                        <p className="news-caption__date mt-2">
-                                            {news.formattedPublishDate}
-                                        </p>
                                     </div>
-                                </div>
-                            </Link>
-                        ))}
+                                </Link>
+                            ))}
                     </div>
                 </div>
             </div>

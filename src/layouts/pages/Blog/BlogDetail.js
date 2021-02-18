@@ -9,6 +9,7 @@ import ShareButtons from '../../../components/Library/ShareButtons'
 import TagList from '../../../components/website/Library/TagList'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
+import DefaultImage from '../../../assets/img/default_image.png'
 
 const BlogDetail = () => {
     const [blogDetail, setBlogDetail] = useState({})
@@ -45,20 +46,14 @@ const BlogDetail = () => {
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {blogDetail.title}
                         </h2>
-                        {get(
-                            blogDetail,
-                            'content_image.meta.download_url'
-                        ) && (
+                        {get(blogDetail, 'content_image.meta.download_url') && (
                             <div className="img-wrapper mb-6 md:mb-10">
                                 <img
                                     src={`${API_URL}${get(
                                         blogDetail,
                                         'content_image.meta.download_url'
                                     )}`}
-                                    alt={get(
-                                        blogDetail,
-                                        'content_image.title'
-                                    )}
+                                    alt={get(blogDetail, 'content_image.title')}
                                 />
                             </div>
                         )}
@@ -103,49 +98,62 @@ const BlogDetail = () => {
                                     </h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {blogList &&
-                                        blogList
-                                            .filter(
-                                                (blogs) =>
-                                                    blogs.id !== blogId
-                                            )
-                                            .slice(0, 3)
-                                            .map((blogs) => {
-                                                return (
-                                                    <>
-                                                        <div
-                                                            className="blogs-thumbnail"
-                                                            key={blogs.id}>
-                                                            <Link
-                                                                to={`/blogs/${blogs.id}`}>
-                                                                <div className="img-wrapper">
-                                                                    <img
-                                                                        src={`${API_URL}${get(
-                                                                            blogs,
-                                                                            'content_image.meta.download_url'
-                                                                        )}`}
-                                                                        alt=""
-                                                                    />
-                                                                </div>
-                                                            </Link>
-                                                            <div>
+                                            blogList
+                                                .filter(
+                                                    (blogs) =>
+                                                        blogs.id !== blogId
+                                                )
+                                                .slice(0, 3)
+                                                .map((blogs) => {
+                                                    return (
+                                                        <>
+                                                            <div
+                                                                className="blogs-thumbnail"
+                                                                key={blogs.id}>
                                                                 <Link
                                                                     to={`/blogs/${blogs.id}`}>
-                                                                    <h3 className="blogs-caption__title">
-                                                                        {
-                                                                            blogs.title
-                                                                        }
-                                                                    </h3>
+                                                                    <div className="img-wrapper">
+                                                                        {get(
+                                                                            blogs,
+                                                                            'content_image.meta.download_url'
+                                                                        ) !=
+                                                                        null ? (
+                                                                            <img
+                                                                                src={`${API_URL}${get(
+                                                                                    blogs,
+                                                                                    'content_image.meta.download_url'
+                                                                                )}`}
+                                                                                alt=""
+                                                                            />
+                                                                        ) : (
+                                                                            <img
+                                                                                src={
+                                                                                    DefaultImage
+                                                                                }
+                                                                                alt=""
+                                                                            />
+                                                                        )}
+                                                                    </div>
                                                                 </Link>
-                                                                <p className="blogs-caption__date">
-                                                                    {formatDate(
-                                                                        blogs.news_date
-                                                                    )}
-                                                                </p>
+                                                                <div>
+                                                                    <Link
+                                                                        to={`/blogs/${blogs.id}`}>
+                                                                        <h3 className="blogs-caption__title">
+                                                                            {
+                                                                                blogs.title
+                                                                            }
+                                                                        </h3>
+                                                                    </Link>
+                                                                    <p className="blogs-caption__date">
+                                                                        {formatDate(
+                                                                            blogs.news_date
+                                                                        )}
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </>
-                                                )
-                                            })}
+                                                        </>
+                                                    )
+                                                })}
                                     </div>
                                     <div className="flex justify-center items-center mt-12">
                                         <hr className="text-primary-gray flex-1" />
