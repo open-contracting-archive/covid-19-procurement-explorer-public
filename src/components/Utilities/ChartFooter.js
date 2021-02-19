@@ -1,28 +1,38 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
-import useTrans from '../../hooks/useTrans'
+import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     FacebookShareButton,
     LinkedinShareButton,
     TwitterShareButton,
     EmailShareButton
 } from 'react-share'
+import EmbeddedModal from "../Modals/EmbeddedModal"
+import useTrans from '../../hooks/useTrans'
 import { twitterHandle } from '../../helpers/general'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
+import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
+import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import socialIcons from '../../assets/img/icons/social'
 
+const currentLocation = window.location.href
+
 const ChartFooter = (props) => {
-    const { linkText } = props
+    const { fullScreenHandler, embeddedVisualization = null, linkText } = props
+    const { isModalOpen, openModal, closeModal } = useModal()
+    const modalHandler = () => {
+        if (!isModalOpen) {
+            openModal()
+        }
+    }
     const { trans } = useTrans()
 
     function showFullScreenAction() {
-        if (props.fullScreenHandler) {
+        if (fullScreenHandler) {
             return (
                 <div>
                     <span className="flex items-center">
-                        <button onClick={props.fullScreenHandler.enter}>
+                        <button onClick={fullScreenHandler.enter}>
                             <span className="hidden md:inline-block cursor-pointer">
                                 {trans('View full screen')}
                             </span>
@@ -50,47 +60,50 @@ const ChartFooter = (props) => {
                     </button>
                     <nav className="share-menu">
                         <span className="mb-3 inline-block text-primary-dark">
-                            Share on
+                            {trans('Share on')}
                         </span>
                         <div className="flex flex-col">
                             <FacebookShareButton
-                                url={window.location.href}
+                                url={currentLocation}
                                 className="social-icon">
                                 <socialIcons.fbIcon />
-                                <span>Facebook</span>
+                                <span>{trans('Facebook')}</span>
                             </FacebookShareButton>
 
                             <TwitterShareButton
-                                url={window.location.href}
+                                url={currentLocation}
                                 via={twitterHandle}
                                 className="social-icon">
                                 <socialIcons.twitterIcon />
-                                <span>Twitter</span>
+                                <span>{trans('Twitter')}</span>
                             </TwitterShareButton>
 
                             <LinkedinShareButton
-                                url={window.location.href}
+                                url={currentLocation}
                                 className="social-icon">
                                 <socialIcons.linkedIcon />
-                                <span>Linkedin</span>
+                                <span>{trans('LinkedIn')}</span>
                             </LinkedinShareButton>
 
                             <EmailShareButton
-                                url={window.location.href}
+                                url={currentLocation}
                                 className="social-icon email">
                                 <socialIcons.mailIcon />
-                                <span>Email</span>
+                                <span>{trans('Email')}</span>
                             </EmailShareButton>
                         </div>
 
-                        <span className="block mt-1 pt-3 mb-2 -mx-3 px-3 text-primary-dark">
-                            Share as
-                        </span>
-
-                        <div className="social-embed flex items-center">
-                            <socialIcons.codingIcon className="w-5" />
-                            <span className="ml-4">Embeded</span>
-                        </div>
+                        {embeddedVisualization && (
+                            <Fragment>
+                                <span className="block mt-1 pt-3 mb-2 -mx-3 px-3 text-primary-dark">
+                                    {trans('Share as')}
+                                </span>
+                                <div className="social-embed flex items-center cursor-pointer" onClick={() => modalHandler()}>
+                                    <socialIcons.codingIcon className="w-5" />
+                                    <span className="ml-4">{trans('Embedded')}</span>
+                                </div>
+                            </Fragment>
+                        )}
                     </nav>
                 </div>
             </div>
@@ -106,6 +119,16 @@ const ChartFooter = (props) => {
             )}
 
             {showFullScreenAction()}
+
+            <Modal
+                id="embedded-visualization-modal"
+                isOpen={isModalOpen}
+                transition={ModalTransition.NONE}>
+                <EmbeddedModal
+                    params={embeddedVisualization}
+                    closeModal={closeModal}
+                />
+            </Modal>
         </div>
     )
 }

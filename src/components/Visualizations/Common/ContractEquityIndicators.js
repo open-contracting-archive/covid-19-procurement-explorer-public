@@ -10,10 +10,11 @@ import Checkbox from '../../Checkbox/Checkbox'
 import ChartFooter from '../../Utilities/ChartFooter'
 import { formatDate } from '../../../helpers/date'
 import { toCamelCase } from '../../../helpers/general'
-import Default from '../../../constants/Default'
-import ContractView from '../../../constants/ContractView'
+import ContractViewSwitcher from "../../Utilities/ContractViewSwitcher"
+import Visualization from "../../../constants/Visualization"
 import { colors } from '../../../constants/Theme'
-import ContractViewSwitcher from '../../Utilities/ContractViewSwitcher'
+import ContractView from '../../../constants/ContractView'
+import Default from '../../../constants/Default'
 
 const ContractEquityIndicators = (props) => {
     // ===========================================================================
@@ -86,8 +87,8 @@ const ContractEquityIndicators = (props) => {
                         points[toCamelCase(equity.name)] =
                             viewType === ContractView.VALUE
                                 ? currency === Default.CURRENCY_LOCAL
-                                    ? equityValue[Default.AMOUNT_LOCAL]
-                                    : equityValue[Default.AMOUNT_USD]
+                                ? equityValue[Default.AMOUNT_LOCAL]
+                                : equityValue[Default.AMOUNT_USD]
                                 : equityValue[Default.TENDER_COUNT]
                         sum += points[toCamelCase(equity.name)]
                     } else {
@@ -146,7 +147,7 @@ const ContractEquityIndicators = (props) => {
                                                         className="line"
                                                         style={{
                                                             background:
-                                                                item.color
+                                                            item.color
                                                         }}
                                                     />
                                                 </div>
@@ -203,7 +204,9 @@ const ContractEquityIndicators = (props) => {
             </FullScreen>
 
             {shouldRenderChart() && (
-                <ChartFooter fullScreenHandler={fullScreenHandler} />
+                <ChartFooter
+                    fullScreenHandler={fullScreenHandler}
+                    embeddedVisualization={{ key: Visualization.EQUITY_INDICATORS, options: params }} />
             )}
         </div>
     )

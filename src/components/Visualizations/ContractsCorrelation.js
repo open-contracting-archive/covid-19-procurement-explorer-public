@@ -10,8 +10,9 @@ import HelpText from '../../components/HelpText/HelpText'
 import ContractView from '../../constants/ContractView'
 import { dateDiff } from '../../helpers/date'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
-import Default from '../../constants/Default'
 import ErrorHandler from '../ErrorHandler'
+import Visualization from "../../constants/Visualization"
+import Default from '../../constants/Default'
 
 const ContractsCorrelation = (props) => {
     // ===========================================================================
@@ -32,7 +33,7 @@ const ContractsCorrelation = (props) => {
     const helpText =
         'Correlation between number of active COVID cases and value of COVID contracts signed'
     const selectedCurrency =
-        currency == Default.CURRENCY_LOCAL ? countryCurrency : currency
+        currency === Default.CURRENCY_LOCAL ? countryCurrency : currency
 
     // ===========================================================================
     // Hooks
@@ -114,7 +115,9 @@ const ContractsCorrelation = (props) => {
                 )}
             </FullScreen>
 
-            <ChartFooter fullScreenHandler={fullScreenHandler} />
+            <ChartFooter
+                fullScreenHandler={fullScreenHandler}
+                embeddedVisualization={{ key: Visualization.CONTRACTS_CORRELATION, options: params }} />
         </div>
     )
 }

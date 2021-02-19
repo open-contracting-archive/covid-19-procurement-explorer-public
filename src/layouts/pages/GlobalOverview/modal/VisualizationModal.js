@@ -81,7 +81,7 @@ const VisualizationModal = (props) => {
                     <button
                         className="icon-close"
                         title="Close"
-                        onClick={closeModal}></button>
+                        onClick={closeModal} />
                 </div>
 
                 <div className="bg-white rounded mt-2">
@@ -105,6 +105,7 @@ const VisualizationModal = (props) => {
                     </div>
                 </div>
             </FullScreen>
+
             <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
