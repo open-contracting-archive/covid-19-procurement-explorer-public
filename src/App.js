@@ -36,6 +36,7 @@ import SupplierProfile from './layouts/pages/Supplier/SupplierProfile'
 import GeneralService from './services/GeneralService'
 import ProductProfile from './layouts/pages/Product/ProductProfile'
 import { ModalProvider } from 'react-simple-hook-modal'
+import {Helmet} from "react-helmet";
 
 if (process.env.NODE_ENV === 'production') {
     ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
@@ -81,6 +82,12 @@ function App() {
 
     return (
         <ModalProvider>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Covid 19 Contract Explorers</title>
+                <link rel="canonical" href="https://covid19.development.opencontracting.uk0.bigv.io/" />
+                <meta name="description" content="Covid-19 contracts explorer. Welcome." />
+            </Helmet>
             <BrowserRouter>
                 <Fragment>
                     <Header />
