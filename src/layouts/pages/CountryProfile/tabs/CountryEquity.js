@@ -1,6 +1,6 @@
 import React from 'react'
 import { ContractEquityIndicators } from "../../../../components/Visualizations"
-import { TenderTable } from "../../../../components/Tables"
+import { ContractTable } from "../../../../components/Tables"
 
 const CountryEquity = (props) => {
     function renderMainVisualization() {
@@ -11,7 +11,7 @@ const CountryEquity = (props) => {
 
     function renderTable() {
         if (props.countryCode) {
-            return (<TenderTable params={{ country: props.countryCode }} />)
+            return (<ContractTable params={{ country: props.countryCode }} />)
         }
     }
 
