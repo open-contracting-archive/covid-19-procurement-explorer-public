@@ -82,7 +82,7 @@ const WorldMap = (props) => {
                                         onClick={() =>
                                             setContractType('value')
                                         }>
-                                        {trans('By contract value')}
+                                        {trans('By value')}
                                     </li>
                                     <li
                                         className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
@@ -93,12 +93,12 @@ const WorldMap = (props) => {
                                         onClick={() =>
                                             setContractType('number')
                                         }>
-                                        {trans('By number of contracts')}
+                                        {trans('By number')}
                                     </li>
                                 </ul>
                             </div>
 
-                            <div className="w-full md:w-1/5 md:absolute top-0 left-0 z-10 md:-mt-3">
+                            <div className="w-full md:w-1/5 md:absolute top-0 left-0 z-10">
                                 <Select
                                     className="select-filter text-sm"
                                     classNamePrefix="select-filter"

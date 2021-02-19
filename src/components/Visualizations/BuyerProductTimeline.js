@@ -73,7 +73,7 @@ const BuyerProductTimeline = (props) => {
                                 onClick={() =>
                                     setBuyerProductTimelineType('value')
                                 }>
-                                {trans('By contract value')}
+                                {trans('By value')}
                             </li>
                             <li
                                 className={`cursor-pointer ${
@@ -84,7 +84,7 @@ const BuyerProductTimeline = (props) => {
                                 onClick={() =>
                                     setBuyerProductTimelineType('number')
                                 }>
-                                {trans('By number of contracts')}
+                                {trans('By number')}
                             </li>
                         </ul>
                     </div>

@@ -87,34 +87,60 @@ const WorldTimelineMap = () => {
                 <Loader />
             ) : (
                 <section>
-                    <div className="flex flex-wrap md:flex-no-wrap md:justify-end world-map-chart mb-4">
+                    <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart mb-4">
+                        <div className="w-full md:w-1/5">
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                                onChange={(selectedOption) =>
+                                    handleContinentSelection(selectedOption)
+                                }
+                            />
+                        </div>
+                        {contractType === 'value' ? (
+                            <div className="my-4 w-full md:flex justify-center md:my-0 items-center text-center">
+                                <span className="mr-2 text-sm">
+                                    Spending USD
+                                </span>
+                                <div className="toggle-switch">
+                                    <input
+                                        type="checkbox"
+                                        className="toggle-switch-checkbox"
+                                        name="toggleSwitch"
+                                        id="toggleSwitch"
+                                    />
+                                    <label
+                                        className="toggle-switch-label"
+                                        htmlFor="toggleSwitch">
+                                        <span className="toggle-switch-inner"></span>
+                                        <span className="toggle-switch-switch"></span>
+                                    </label>
+                                </div>
+                                <span className="ml-2 text-sm">
+                                    Spending USD per capita
+                                </span>
+                            </div>
+                        ) : (
+                            ''
+                        )}
                         <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
                             <li
                                 className={`mr-4 cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                                     contractType === 'value' ? 'active' : ''
                                 }`}
                                 onClick={() => setContractType('value')}>
-                                {trans('By contract value')}
+                                {trans('By value')}
                             </li>
                             <li
                                 className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                                     contractType === 'number' ? 'active' : ''
                                 }`}
                                 onClick={() => setContractType('number')}>
-                                {trans('By number of contracts')}
+                                {trans('By number')}
                             </li>
                         </ul>
-                    </div>
-                    <div className="w-full md:w-1/5 md:absolute top-0 left-0 z-10 md:-mt-3">
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={options}
-                            defaultValue={options[0]}
-                            onChange={(selectedOption) =>
-                                handleContinentSelection(selectedOption)
-                            }
-                        />
                     </div>
                     <RaceMap
                         contractData={mapData}

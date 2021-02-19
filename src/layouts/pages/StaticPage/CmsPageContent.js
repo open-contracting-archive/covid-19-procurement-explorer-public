@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import CmsPageService from "../../../services/CmsPageService"
-import Loader from "../../../components/Loader/Loader"
+import CmsPageService from '../../../services/CmsPageService'
+import Loader from '../../../components/Loader/Loader'
 
 const CmsPageContent = (props) => {
     const { slug } = props
@@ -35,7 +35,8 @@ const CmsPageContent = (props) => {
                                 className="mb-10"
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body
-                                }} />
+                                }}
+                            />
                         </div>
                     </Fragment>
                 )}

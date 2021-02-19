@@ -71,7 +71,7 @@ const ProductCategoryMap = (props) => {
                                     onClick={() =>
                                         setViewType(ContractView.VALUE)
                                     }>
-                                    {trans('By contract value')}
+                                    {trans('By value')}
                                 </li>
                                 <li
                                     className={`cursor-pointer text-xs md:text-base ${isActiveTab(
@@ -80,7 +80,7 @@ const ProductCategoryMap = (props) => {
                                     onClick={() =>
                                         setViewType(ContractView.NUMBER)
                                     }>
-                                    {trans('By number of contracts')}
+                                    {trans('By number')}
                                 </li>
                             </ul>
                         </div>

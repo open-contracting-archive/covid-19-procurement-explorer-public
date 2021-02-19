@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
+import { isEmpty } from 'lodash'
 import useTrans from '../../hooks/useTrans'
 import BarChartRace from '../../components/Charts/BarChart/BarChartRace'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
+import { continentSelectList } from '../../helpers/country'
+import ContractView from '../../constants/ContractView'
 
 const WorldTimelineRaceBarMap = () => {
     // ===========================================================================
@@ -12,47 +15,62 @@ const WorldTimelineRaceBarMap = () => {
     const [loading, setLoading] = useState(true)
     const [raceBarType, setRaceBarType] = useState('value')
     const [originalData, setOriginalData] = useState(null)
-    const [selectedContinent, setSelectedContinent] = useState({
-        value: 'all',
-        label: 'All Continent'
-    })
+    const [chartData, setChartData] = useState({})
+    const [selectedContinent, setSelectedContinent] = useState(null)
     const { trans } = useTrans()
-    const options = [
-        { value: 'all', label: 'All Continent' },
-        { value: 'asia', label: 'Asia' },
-        { value: 'europe', label: 'Europe' },
-        { value: 'africa', label: 'Africa' },
-        { value: 'oceania', label: 'Oceania' },
-        { value: 'south_america', label: 'South America' },
-        { value: 'north_america', label: 'North America' },
-        { value: 'middle_east', label: 'Middle East' }
-    ]
+    const options = continentSelectList
 
     useEffect(() => {
         CountryService.GetGlobalMapData().then((response) => {
-            const chartData = response.result.reduce(
-                (formattedData, d) => ({
-                    ...formattedData,
-                    [d.month]: d.details
-                        .filter((detail) => detail.country !== 'Global')
-                        .map((detail) => ({
-                            country: detail.country,
-                            value:
-                                raceBarType === 'value'
-                                    ? detail.amount_usd
-                                    : detail.tender_count
-                        }))
-                }),
-                {}
-            )
-            setOriginalData(chartData)
+            setOriginalData(response.result)
             setLoading(false)
         })
 
         return () => {
-            setOriginalData(null)
+            setOriginalData({})
         }
-    }, [raceBarType])
+    }, [])
+
+    useEffect(() => {
+        let chartData
+        if (!isEmpty(originalData)) {
+            chartData = originalData.reduce((formattedData, item) => {
+                let filtered = item.details
+                    .filter((country) => country.country_code !== 'gl')
+                    .filter((country) =>
+                        !selectedContinent || selectedContinent.value === 'all'
+                            ? true
+                            : country.country_continent ===
+                              selectedContinent.value
+                    )
+                    .map((country) => ({
+                        country: country.country,
+                        value:
+                            raceBarType === 'value'
+                                ? country.amount_usd
+                                : country.tender_count
+                        // href: 'https://www.worldometers.info/img/flags/us-flag.gif'
+                    }))
+                const sum = filtered.reduce(
+                    (total, item) => (total += item.value),
+                    0
+                )
+
+                return sum > 0
+                    ? { ...formattedData, [item.month]: filtered }
+                    : { ...formattedData }
+            }, {})
+            setChartData(chartData)
+        }
+
+        return () => {
+            chartData = null
+        }
+    }, [originalData, selectedContinent, raceBarType])
+
+    const handleContinentSelection = (selectedOption) => {
+        setSelectedContinent(selectedOption)
+    }
 
     return (
         <div>
@@ -63,30 +81,36 @@ const WorldTimelineRaceBarMap = () => {
                             raceBarType === 'value' ? 'active' : ''
                         }`}
                         onClick={() => setRaceBarType('value')}>
-                        {trans('By contract value')}
+                        {trans('By contract')}
                     </li>
                     <li
                         className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
                             raceBarType === 'number' ? 'active' : ''
                         }`}
                         onClick={() => setRaceBarType('number')}>
-                        {trans('By number of contracts')}
+                        {trans('By number')}
                     </li>
                 </ul>
             </div>
-            <div className="hidden w-1/5 absolute top-0 left-0 z-10 -mt-3">
+            <div className="w-1/5 absolute top-0 left-0 z-10">
                 <Select
                     className="select-filter text-sm"
                     classNamePrefix="select-filter"
                     options={options}
-                    value={selectedContinent}
                     defaultValue={options[0]}
+                    isSearchable={false}
                     onChange={(selectedOption) =>
-                        handleContinentChange(selectedOption)
+                        handleContinentSelection(selectedOption)
                     }
                 />
             </div>
-            {!originalData ? <Loader /> : <BarChartRace data={originalData} />}
+            {loading ? (
+                <Loader />
+            ) : isEmpty(chartData) ? (
+                'No data available'
+            ) : (
+                !isEmpty(chartData) && <BarChartRace data={chartData} />
+            )}
         </div>
     )
 }

@@ -17,6 +17,7 @@ import Header from './layouts/_partials/header'
 import Footer from './layouts/_partials/footer'
 import NotFound from './components/NotFound/NotFound'
 import Home from './layouts/pages/Homepage'
+import Countries from './layouts/pages/Countries'
 import GlobalOverview from './layouts/pages/GlobalOverview'
 import CountryProfile from './layouts/pages/CountryProfile'
 import Library from './layouts/pages/Library'
@@ -85,8 +86,14 @@ function App() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Covid 19 Contract Explorers</title>
-                <link rel="canonical" href="https://covid19.development.opencontracting.uk0.bigv.io/" />
-                <meta name="description" content="Covid-19 contracts explorer. Welcome." />
+                <link
+                    rel="canonical"
+                    href="https://covid19.development.opencontracting.uk0.bigv.io/"
+                />
+                <meta
+                    name="description"
+                    content="Covid-19 contracts explorer. Welcome."
+                />
             </Helmet>
             <BrowserRouter>
                 <Fragment>
@@ -110,6 +117,10 @@ function App() {
                             path="/country/:countrySlug/products/:productId"
                             component={ProductProfile}
                         />
+                        {/* <Route
+                            path="/countries"
+                            component={Countries}
+                        /> */}
                         <Route
                             path="/country/:countrySlug/:tabSlug"
                             component={CountryProfile}
@@ -122,11 +133,7 @@ function App() {
                         <Route exact path="/news" component={News} />
                         <Route exact path="/news/:id" component={NewsDetail} />
                         <Route exact path="/blogs" component={Blogs} />
-                        <Route
-                            exact
-                            path="/blogs/:id"
-                            component={BlogDetail}
-                        />
+                        <Route exact path="/blogs/:id" component={BlogDetail} />
                         <Route exact path="/events" component={Events} />
                         <Route
                             exact

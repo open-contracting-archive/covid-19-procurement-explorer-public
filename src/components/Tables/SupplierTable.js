@@ -160,7 +160,7 @@ const SupplierTable = (props) => {
                                     {trans('Country')}
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="mt-2 select-filter text-sm"
                                     classNamePrefix="select-filter"
                                     options={countrySelectList}
                                     onChange={(selectedOption) =>
@@ -176,7 +176,7 @@ const SupplierTable = (props) => {
                                 {trans('Product category')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={productSelectList}
                                 onChange={(selectedOption) =>
@@ -192,7 +192,7 @@ const SupplierTable = (props) => {
                                 {trans('Value range')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={valueRanges}
                                 onChange={(selectedOption) =>
@@ -238,7 +238,7 @@ const SupplierTable = (props) => {
                             {trans('Country')}
                         </p>
                         <Select
-                            className="select-filter text-sm"
+                            className="mt-2 select-filter text-sm"
                             classNamePrefix="select-filter"
                             options={countrySelectList}
                             onChange={(selectedOption) =>
@@ -252,7 +252,7 @@ const SupplierTable = (props) => {
                         {trans('Product category')}
                     </p>
                     <Select
-                        className="select-filter text-sm"
+                        className="mt-2 select-filter text-sm"
                         classNamePrefix="select-filter"
                         options={productSelectList}
                         onChange={(selectedOption) =>
@@ -268,7 +268,7 @@ const SupplierTable = (props) => {
                         {trans('Value range')}
                     </p>
                     <Select
-                        className="select-filter text-sm"
+                        className="mt-2 select-filter text-sm"
                         classNamePrefix="select-filter"
                         options={valueRanges}
                         onChange={(selectedOption) =>

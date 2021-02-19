@@ -177,7 +177,7 @@ const ContractFilter = (props) => {
                                     {trans('Country')}
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="mt-2 select-filter text-sm"
                                     classNamePrefix="select-filter"
                                     options={countrySelectList}
                                     onChange={(selectedOption) =>
@@ -194,7 +194,7 @@ const ContractFilter = (props) => {
                                     {trans('Buyer')}
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="mt-2 select-filter text-sm"
                                     classNamePrefix="select-filter"
                                     options={buyersFilterOption}
                                     onChange={(selectedOption) =>
@@ -211,7 +211,7 @@ const ContractFilter = (props) => {
                                     {trans('Supplier')}
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="mt-2 select-filter text-sm"
                                     classNamePrefix="select-filter"
                                     options={suppliersFilterOption}
                                     onChange={(selectedOption) =>
@@ -227,7 +227,7 @@ const ContractFilter = (props) => {
                                 {trans('Method')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={contractMethodSelectList}
                                 onChange={(selectedOption) =>
@@ -245,7 +245,7 @@ const ContractFilter = (props) => {
                                     {trans('Product category')}
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="mt-2 select-filter text-sm"
                                     classNamePrefix="select-filter"
                                     options={productSelectList}
                                     onChange={(selectedOption) =>
@@ -299,7 +299,7 @@ const ContractFilter = (props) => {
                                 {trans('Value range')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={valueRanges}
                                 onChange={(selectedOption) =>
@@ -348,7 +348,7 @@ const ContractFilter = (props) => {
                                 {trans('Country')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={countrySelectList}
                                 onChange={(selectedOption) =>
@@ -363,7 +363,7 @@ const ContractFilter = (props) => {
                                 {trans('Buyer')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={buyersFilterOption}
                                 onChange={(selectedOption) =>
@@ -380,7 +380,7 @@ const ContractFilter = (props) => {
                                 {trans('Supplier')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={suppliersFilterOption}
                                 onChange={(selectedOption) =>
@@ -396,7 +396,7 @@ const ContractFilter = (props) => {
                             {trans('Method')}
                         </p>
                         <Select
-                            className="select-filter text-sm"
+                            className="mt-2 select-filter text-sm"
                             classNamePrefix="select-filter"
                             options={contractMethodSelectList}
                             onChange={(selectedOption) =>
@@ -413,7 +413,7 @@ const ContractFilter = (props) => {
                                 {trans('Product category')}
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={productSelectList}
                                 onChange={(selectedOption) =>
@@ -467,7 +467,7 @@ const ContractFilter = (props) => {
                             {trans('Value range')}
                         </p>
                         <Select
-                            className="select-filter text-sm"
+                            className="mt-2 select-filter text-sm"
                             classNamePrefix="select-filter"
                             options={valueRanges}
                             onChange={(selectedOption) =>
