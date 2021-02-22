@@ -47,7 +47,7 @@ const TotalContracts = (props) => {
             chartData &&
             chartData.map((data) => {
                 return {
-                    date: formatDate(data.date, 'MMMM YYYY'),
+                    date: formatDate(data.date, 'YYYY-MM-DD'),
                     value: data.value
                 }
             })
@@ -61,11 +61,22 @@ const TotalContracts = (props) => {
         })
     }
 
+    // Function to convert date format
+    const convertDate = (data) => {
+        return data.map((data) => {
+            return {
+                ...data,
+                date: formatDate(data.date, 'MMMM YYYY')
+            }
+        })
+    }
+
     // Total contracts data
     const totalContractLineChartDataRaw =
         originalData && lineChartData(originalData.line_chart)
     const totalContractLineChartData =
-        totalContractLineChartDataRaw && sortDate(totalContractLineChartDataRaw)
+        totalContractLineChartDataRaw &&
+        convertDate(sortDate(totalContractLineChartDataRaw))
     const totalContractAmount = originalData && originalData.total
     const totalContractPercentage = originalData && originalData.difference
     const totalContractBarChartData = originalData && originalData.bar_chart

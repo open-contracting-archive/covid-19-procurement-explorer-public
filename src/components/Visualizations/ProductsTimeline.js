@@ -28,6 +28,12 @@ const ProductsTimeline = (props) => {
         })
     }
 
+    // Function to convert date format
+    const convertDate = (data) => {
+        return data.map((data) => {
+            return { ...data, month: formatDate(data.month, 'MMM YYYY') }
+        })
+    }
     // ===========================================================================
     // Hooks
     // ===========================================================================
@@ -43,7 +49,7 @@ const ProductsTimeline = (props) => {
 
     useEffect(() => {
         const groupedData = groupBy(originalData, (item) =>
-            formatDate(item.date, 'MMM YYYY')
+            formatDate(item.date, 'YYYY-MM-DD')
         )
         const chartData = Object.keys(groupedData).map((key) => {
             let products = {}
@@ -58,7 +64,7 @@ const ProductsTimeline = (props) => {
             }
         })
 
-        const finalChartData = sortDate(chartData)
+        const finalChartData = convertDate(sortDate(chartData))
 
         setChartData(finalChartData)
         setLoading(false)

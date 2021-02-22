@@ -7,10 +7,10 @@ import CombinedChart from '../Charts/CombinedChart/CombinedChart'
 import Loader from '../Loader/Loader'
 import ChartFooter from '../Utilities/ChartFooter'
 import HelpText from '../../components/HelpText/HelpText'
-import ContractView from "../../constants/ContractView"
+import ContractView from '../../constants/ContractView'
 import { dateDiff } from '../../helpers/date'
-import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
-import Default from "../../constants/Default"
+import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
+import Default from '../../constants/Default'
 
 const ContractsCorrelation = (props) => {
     // ===========================================================================
@@ -22,7 +22,9 @@ const ContractsCorrelation = (props) => {
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const currency = useSelector((state) => state.general.currency)
-    const countryCurrency = useSelector((state) => state.general.countryCurrency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const helpText =
@@ -47,15 +49,16 @@ const ContractsCorrelation = (props) => {
     useEffect(() => {
         const dataSet = originalData
             .sort((item1, item2) => {
-                return dateDiff(item1.date, item2.date)
+                return dateDiff(item1.month, item2.month)
             })
             .map((item) => {
                 return {
                     date: item.month,
                     activeCase: item.active_cases,
-                    value: viewType === ContractView.NUMBER
-                        ? item.tender_count
-                        : currency === Default.CURRENCY_LOCAL
+                    value:
+                        viewType === ContractView.NUMBER
+                            ? item.tender_count
+                            : currency === Default.CURRENCY_LOCAL
                             ? item.amount_local
                             : item.amount_usd
                 }
@@ -80,9 +83,11 @@ const ContractsCorrelation = (props) => {
 
                     <ContractViewSwitcher
                         viewType={viewType}
-                        viewHandler={setViewType} />
+                        viewHandler={setViewType}
+                    />
                 </div>
-                {loading ? (<Loader />
+                {loading ? (
+                    <Loader />
                 ) : (
                     <div className="flex mt-4">
                         <div className="flex-1">
