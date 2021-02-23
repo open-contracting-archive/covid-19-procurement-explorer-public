@@ -60,7 +60,8 @@ const TotalSpending = (props) => {
             areaChartDataRaw:
                 originalData &&
                 lineChartData(get(originalData[currency], 'line_chart')),
-            areaChartData: areaChartDataRaw && sortDate(areaChartDataRaw),
+            areaChartData:
+                areaChartDataRaw && convertDate(sortDate(areaChartDataRaw)),
             barChartData:
                 originalData && get(originalData[currency], 'bar_chart')
         })
@@ -75,7 +76,7 @@ const TotalSpending = (props) => {
             chartData &&
             chartData.map((data) => {
                 return {
-                    date: formatDate(data.date, 'MMMM YYYY'),
+                    date: formatDate(data.date, 'YYYY-MM-DD'),
                     value: data.value
                 }
             })
@@ -86,6 +87,16 @@ const TotalSpending = (props) => {
     const sortDate = (data) => {
         return data.sort((date1, date2) => {
             return dateDiff(date1.date, date2.date)
+        })
+    }
+
+    // Function to convert date format
+    const convertDate = (data) => {
+        return data.map((data) => {
+            return {
+                ...data,
+                date: formatDate(data.date, 'MMMM YYYY')
+            }
         })
     }
 

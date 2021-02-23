@@ -37,7 +37,7 @@ const AverageBidsPerContract = (props) => {
             chartData &&
             chartData.map((data) => {
                 return {
-                    date: formatDate(data.date, 'MMMM YYYY'),
+                    date: formatDate(data.date, 'YYYY-MM-DD'),
                     value: data.value
                 }
             })
@@ -51,11 +51,22 @@ const AverageBidsPerContract = (props) => {
         })
     }
 
+    // Function to convert date format
+    const convertDate = (data) => {
+        return data.map((data) => {
+            return {
+                ...data,
+                date: formatDate(data.date, 'MMMM YYYY')
+            }
+        })
+    }
+
     // Average bids
     const averageBidsLineChartDataRaw =
         originalData && lineChartData(originalData.line_chart)
     const averageBidsLineChartData =
-        averageBidsLineChartDataRaw && sortDate(averageBidsLineChartDataRaw)
+        averageBidsLineChartDataRaw &&
+        convertDate(sortDate(averageBidsLineChartDataRaw))
     const averageBidsAmount = originalData && originalData.average
     const averageBidsPercentage = originalData && originalData.difference
 

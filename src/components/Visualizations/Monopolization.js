@@ -3,7 +3,7 @@ import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
-import { dateDiff, formatDate } from "../../helpers/date"
+import { dateDiff, formatDate } from '../../helpers/date'
 import HelpText from '../../components/HelpText/HelpText'
 
 const Monopolization = (props) => {
@@ -20,11 +20,10 @@ const Monopolization = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.Monopolization(params)
-            .then((response) => {
-                setOriginalData(response)
-                setLoading(false)
-            })
+        VisualizationService.Monopolization(params).then((response) => {
+            setOriginalData(response)
+            setLoading(false)
+        })
 
         return () => {
             setOriginalData({})
@@ -41,7 +40,7 @@ const Monopolization = (props) => {
             chartData &&
             chartData.map((data) => {
                 return {
-                    date: formatDate(data.date, 'MMMM YYYY'),
+                    date: formatDate(data.date, 'YYYY-MM-DD'),
                     value: data.value
                 }
             })
@@ -55,11 +54,20 @@ const Monopolization = (props) => {
         })
     }
 
+    const convertDate = (data) => {
+        return data.map((data) => {
+            return {
+                ...data,
+                date: formatDate(data.date, 'MMMM YYYY')
+            }
+        })
+    }
+
     const monopolizationLineChartDataRaw =
         originalData && lineChartData(originalData.line_chart)
     const monopolizationLineChartData =
         monopolizationLineChartDataRaw &&
-        sortDate(monopolizationLineChartDataRaw)
+        convertDate(sortDate(monopolizationLineChartDataRaw))
     const monopolizationAmount = originalData && originalData.average
     const monopolizationPercentage = originalData && originalData.difference
 
