@@ -7,6 +7,7 @@ import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import CardContainer from "../Utilities/CardContainer"
+import ErrorHandler from '../ErrorHandler'
 
 const ProductDistribution = (props) => {
     // ===========================================================================
@@ -22,15 +23,23 @@ const ProductDistribution = (props) => {
     const currency = useSelector((state) => state.general.currency)
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
+    const [error, setError] = useState(false)
     const [viewType, setViewType] = useState(ContractView.VALUE)
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductDistribution(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.ProductDistribution(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -81,16 +90,20 @@ const ProductDistribution = (props) => {
             helpText={helpText}
             viewHandler={setViewType}>
             <div className="custom-horizontal-bar">
-                <BarListChart
-                    data={chartData}
-                    text={
-                        countrySlug
-                            ? `country/${countrySlug}/products`
-                            : `global-overview/products`
-                    }
-                    currency={currency}
-                    viewType={viewType}
-                />
+                {!error ? (
+                    <BarListChart
+                        data={chartData}
+                        text={
+                            countrySlug
+                                ? `country/${countrySlug}/products`
+                                : `global-overview/products`
+                        }
+                        currency={currency}
+                        viewType={viewType}
+                    />
+                ) : (
+                    <ErrorHandler />
+                )}
             </div>
         </CardContainer>
     )

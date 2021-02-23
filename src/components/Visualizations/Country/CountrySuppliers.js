@@ -9,6 +9,7 @@ import ChartFooter from "../../Utilities/ChartFooter"
 import ContractView from "../../../constants/ContractView"
 import ContractViewSwitcher from "../../Utilities/ContractViewSwitcher"
 import HelpText from "../../HelpText/HelpText"
+import ErrorHandler from '../../ErrorHandler'
 
 const CountrySuppliers = (props) => {
     // ===========================================================================
@@ -19,6 +20,7 @@ const CountrySuppliers = (props) => {
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const helpText = ''
@@ -27,9 +29,16 @@ const CountrySuppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.CountrySuppliers(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.CountrySuppliers(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -83,12 +92,14 @@ const CountrySuppliers = (props) => {
 
                 {loading ? (
                     <Loader />
-                ) : (
+                ) : !error ? (
                     <div className="flex mt-4">
                         <div className="flex-1">
                             <SankeyChart data={chartData} />
                         </div>
                     </div>
+                ) : (
+                    <ErrorHandler />
                 )}
             </FullScreen>
 

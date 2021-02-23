@@ -7,6 +7,7 @@ import ContractView from '../../../constants/ContractView'
 import { isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import ChartFooter from '../../Utilities/ChartFooter'
+import ErrorHandler from '../../ErrorHandler'
 
 const ProductCategoryMap = (props) => {
     // ===========================================================================
@@ -17,6 +18,7 @@ const ProductCategoryMap = (props) => {
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
@@ -24,9 +26,16 @@ const ProductCategoryMap = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductSummary(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.ProductSummary(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -88,10 +97,12 @@ const ProductCategoryMap = (props) => {
 
                     {loading ? (
                         <Loader />
-                    ) : (
+                    ) : !error ? (
                         <div className="pb-4">
                             <TreeMapChart data={chartData} />
                         </div>
+                    ) : (
+                        <ErrorHandler />
                     )}
                 </FullScreen>
 

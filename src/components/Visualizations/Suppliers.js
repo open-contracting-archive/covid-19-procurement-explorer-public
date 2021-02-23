@@ -6,6 +6,7 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import HelpText from '../../components/HelpText/HelpText'
 import Visualization from "../../constants/Visualization"
+import ErrorHandler from '../ErrorHandler'
 
 const Suppliers = (props) => {
     // ===========================================================================
@@ -14,6 +15,7 @@ const Suppliers = (props) => {
     const { label = 'Suppliers', params, modalHandler } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const helpText = 'Number of suppliers who signed at least 1 COVID contract'
 
@@ -21,9 +23,16 @@ const Suppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.SupplierSummary(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.SupplierSummary(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -74,7 +83,7 @@ const Suppliers = (props) => {
             </div>
             {loading ? (
                 <Loader sm />
-            ) : (
+            ) : !error ? (
                 <div className="flex items-end">
                     <AreaChartBlock
                         chartData={supplierSummaryLineChartData}
@@ -88,8 +97,10 @@ const Suppliers = (props) => {
                     />
                     <div className="flex-1" />
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
-            {modalHandler && (
+            {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_SUPPLIERS)}>

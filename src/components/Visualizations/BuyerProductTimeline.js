@@ -5,6 +5,7 @@ import Loader from '../../components/Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import VisualizationService from '../../services/VisualizationService'
 import ChartFooter from "../Utilities/ChartFooter"
+import ErrorHandler from '../ErrorHandler'
 
 const BuyerProductTimeline = (props) => {
     // ===========================================================================
@@ -14,6 +15,7 @@ const BuyerProductTimeline = (props) => {
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
+    const [error, setError] = useState(false)
     const [buyerProductTimelineType, setBuyerProductTimelineType] = useState(
         'value'
     )
@@ -24,9 +26,16 @@ const BuyerProductTimeline = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductTimelineRace(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.ProductTimelineRace(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -91,7 +100,7 @@ const BuyerProductTimeline = (props) => {
                 </div>
                 {loading ? (
                     <Loader />
-                ) : (
+                ) : !error ? (
                     <SimpleBarChart
                         data={chartData}
                         height="600px"
@@ -101,6 +110,8 @@ const BuyerProductTimeline = (props) => {
                         chartValue="value"
                         axisRotation="270"
                     />
+                ) : (
+                    <ErrorHandler />
                 )}
             </FullScreen>
 

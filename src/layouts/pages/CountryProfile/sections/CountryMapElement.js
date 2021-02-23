@@ -6,22 +6,31 @@ import useTrans from '../../../../hooks/useTrans'
 import Loader from '../../../../components/Loader/Loader'
 import ContractView from '../../../../constants/ContractView'
 import ChartFooter from '../../../../components/Utilities/ChartFooter'
+import ErrorHandler from '../../../../components/ErrorHandler'
 
 const CountryMapElement = (props) => {
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
     const [mapData, setMapData] = useState([])
+    const [error, setError] = useState(false)
     const fullScreenHandler = useFullScreenHandle()
     const { trans } = useTrans()
 
     useEffect(() => {
         VisualizationService.CountryMap({ country: props.countryCode }).then(
-            (response) => {
-                setOriginalData(response)
+            (result) => {
                 setLoading(false)
-            }
-        )
+                    if(result){
+                        setOriginalData(result)
+                    } else{
+                        throw new Error()
+                    }
+                })
+                .catch(()=>{
+                    setError(true)
+                })
+
 
         return () => {
             setOriginalData({})
@@ -70,11 +79,13 @@ const CountryMapElement = (props) => {
                         <div className="h-full">
                             {loading ? (
                                 <Loader />
-                            ) : (
+                            ) : !error ? (
                                 <CountryDetailMap
                                     data={mapData}
                                     countryCode={props.countryCode}
                                 />
+                            ) : (
+                                <ErrorHandler />
                             )}
                         </div>
                     </div>

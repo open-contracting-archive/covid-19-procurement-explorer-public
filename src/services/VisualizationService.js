@@ -5,6 +5,11 @@ class VisualizationService {
     static async GlobalMap(params) {
         try {
             const res = await Api.get(getURI('visualization.world-map'), params)
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -17,6 +22,11 @@ class VisualizationService {
                 getURI('visualization.country-map'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -29,6 +39,11 @@ class VisualizationService {
                 getURI('visualization.total-spending'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -41,6 +56,11 @@ class VisualizationService {
                 getURI('visualization.total-contracts'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -53,6 +73,11 @@ class VisualizationService {
                 getURI('visualization.average-bids'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -65,6 +90,11 @@ class VisualizationService {
                 getURI('visualization.direct-open'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -77,6 +107,11 @@ class VisualizationService {
                 getURI('visualization.top-suppliers'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -89,6 +124,11 @@ class VisualizationService {
                 getURI('visualization.top-buyers'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -101,6 +141,11 @@ class VisualizationService {
                 getURI('visualization.product-distribution'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -113,6 +158,11 @@ class VisualizationService {
                 getURI('visualization.contract-status'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -125,6 +175,11 @@ class VisualizationService {
                 getURI('visualization.quantity-correlation'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -137,6 +192,11 @@ class VisualizationService {
                 getURI('visualization.monopolization'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -149,6 +209,11 @@ class VisualizationService {
                 getURI('visualization.global-suppliers'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -161,6 +226,11 @@ class VisualizationService {
                 getURI('visualization.country-suppliers'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -173,6 +243,11 @@ class VisualizationService {
                 getURI('visualization.equity-indicators'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -185,6 +260,11 @@ class VisualizationService {
                 getURI('visualization.product-timeline'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -197,6 +277,11 @@ class VisualizationService {
                 getURI('visualization.product-timeline-race'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -206,6 +291,11 @@ class VisualizationService {
     static async BuyerTableList(params) {
         try {
             const res = await Api.get(getURI('buyers'), params)
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -215,6 +305,11 @@ class VisualizationService {
     static async SupplierTableList(params) {
         try {
             const res = await Api.get(getURI('suppliers'), params)
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -224,6 +319,11 @@ class VisualizationService {
     static async BuyerDetail(id) {
         try {
             const res = await Api.get(`${getURI('buyer-detail')}/${id}`)
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -233,6 +333,11 @@ class VisualizationService {
     static async SupplierDetail(id) {
         try {
             const res = await Api.get(`${getURI('supplier-detail')}/${id}`)
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -245,6 +350,11 @@ class VisualizationService {
                 getURI('visualization.country-partners'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -257,6 +367,11 @@ class VisualizationService {
                 getURI('visualization.buyer-summary'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -269,6 +384,11 @@ class VisualizationService {
                 getURI('visualization.supplier-summary'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -281,6 +401,11 @@ class VisualizationService {
                 getURI('visualization.product-summary'),
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -294,6 +419,11 @@ class VisualizationService {
 
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -307,6 +437,11 @@ class VisualizationService {
 
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)
@@ -320,6 +455,11 @@ class VisualizationService {
 
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
             return res.body
         } catch (error) {
             console.log(error)

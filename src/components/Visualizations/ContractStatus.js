@@ -7,6 +7,7 @@ import Loader from '../Loader/Loader'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import SimpleBarListChart from '../SimpleBarListSection/SimpleBarListChart'
+import ErrorHandler from '../ErrorHandler'
 
 const ContractStatus = (props) => {
     // ===========================================================================
@@ -18,15 +19,23 @@ const ContractStatus = (props) => {
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ContractStatus(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.ContractStatus(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -91,7 +100,7 @@ const ContractStatus = (props) => {
             </div>
             {loading ? (
                 <Loader />
-            ) : (
+            ) : !error ? (
                 <div className="flex">
                     <div className="flex-1">
                         <div className="flex-1 simple-tab -mt-10">
@@ -105,6 +114,8 @@ const ContractStatus = (props) => {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
         </div>
     )

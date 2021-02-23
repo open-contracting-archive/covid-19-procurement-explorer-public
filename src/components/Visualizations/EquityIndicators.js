@@ -10,6 +10,7 @@ import HelpText from '../../components/HelpText/HelpText'
 import ContractView from "../../constants/ContractView"
 import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
 import useContractTransformers from "../../hooks/useContractTransformers"
+import ErrorHandler from '../ErrorHandler'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -29,6 +30,7 @@ const EquityIndicators = (props) => {
     const [chartData, setChartData] = useState([])
     const [assignedValue, setAssignedValue] = useState(0)
     const currency = useSelector((state) => state.general.currency)
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const { valueField, currencyCode } = useContractTransformers()
 
@@ -36,9 +38,16 @@ const EquityIndicators = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.EquityIndicators(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.EquityIndicators(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -85,7 +94,7 @@ const EquityIndicators = (props) => {
                     viewType={viewType}
                     viewHandler={setViewType} />
             </div>
-            {loading ? (<Loader sm />) : (
+            {loading ? (<Loader sm />) : !error ? (
                 <div className={`${heightFull ? 'mt-10' : 'mt-2'}`}>
                     <div className="flex items-end">
                         <div>
@@ -110,6 +119,8 @@ const EquityIndicators = (props) => {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
         </div>
     )

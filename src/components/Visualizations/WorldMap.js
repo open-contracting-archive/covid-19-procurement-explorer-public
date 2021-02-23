@@ -8,6 +8,7 @@ import { CONTINENTS, continentSelectList } from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
 import ContractView from '../../constants/ContractView'
 import ChartFooter from '../Utilities/ChartFooter'
+import ErrorHandler from '../ErrorHandler'
 
 const options = continentSelectList
 
@@ -21,6 +22,7 @@ const WorldMap = (props) => {
     const [mapData, setMapData] = useState({})
     const [selectedContinent, setSelectedContinent] = useState(options[0])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
@@ -28,9 +30,16 @@ const WorldMap = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.GlobalMap(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.GlobalMap(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -113,7 +122,7 @@ const WorldMap = (props) => {
                             <div>
                                 {loading ? (
                                     <Loader />
-                                ) : (
+                                ) : !error ? (
                                     <GlobalMap
                                         data={mapData}
                                         contractType={contractType}
@@ -121,6 +130,8 @@ const WorldMap = (props) => {
                                             CONTINENTS[selectedContinent.value]
                                         }
                                     />
+                                ) : (
+                                    <ErrorHandler />
                                 )}
                             </div>
                         </div>

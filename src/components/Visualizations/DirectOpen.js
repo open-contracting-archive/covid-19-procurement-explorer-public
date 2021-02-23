@@ -11,6 +11,7 @@ import Visualization from "../../constants/Visualization"
 import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
 import ContractView from "../../constants/ContractView"
 import useContractTransformers from "../../hooks/useContractTransformers"
+import ErrorHandler from '../ErrorHandler'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -31,6 +32,7 @@ const DirectOpen = (props) => {
     const [chartData, setChartData] = useState([])
     const [openValue, setOpenValue] = useState(0)
     const currency = useSelector((state) => state.general.currency)
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const { valueField, currencyCode } = useContractTransformers()
 
@@ -38,9 +40,16 @@ const DirectOpen = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.DirectOpen(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.DirectOpen(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -86,7 +95,7 @@ const DirectOpen = (props) => {
                     viewType={viewType}
                     viewHandler={setViewType} />
             </div>
-            {loading ? (<Loader sm />) : (
+            {loading ? (<Loader sm />) : !error ? (
                 <div className={`${heightFull ? 'mt-10' : 'mt-2'}`}>
                     <div className="flex items-end">
                         <div>
@@ -111,8 +120,10 @@ const DirectOpen = (props) => {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
-            {modalHandler && (
+            { !error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.DIRECT_OPEN)}>

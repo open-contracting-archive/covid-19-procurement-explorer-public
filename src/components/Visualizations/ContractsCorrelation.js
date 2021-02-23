@@ -11,6 +11,7 @@ import ContractView from '../../constants/ContractView'
 import { dateDiff } from '../../helpers/date'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import Default from '../../constants/Default'
+import ErrorHandler from '../ErrorHandler'
 
 const ContractsCorrelation = (props) => {
     // ===========================================================================
@@ -21,6 +22,7 @@ const ContractsCorrelation = (props) => {
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
+    const [error, setError] = useState(false)
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
@@ -34,11 +36,16 @@ const ContractsCorrelation = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.QuantityCorrelation(params).then((response) => {
-            if (response) {
-                setOriginalData(response)
-            }
+        VisualizationService.QuantityCorrelation(params).then((result) => {
             setLoading(false)
+            if (result) {
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -88,12 +95,14 @@ const ContractsCorrelation = (props) => {
                 </div>
                 {loading ? (
                     <Loader />
-                ) : (
+                ) : !error ? (
                     <div className="flex mt-4">
                         <div className="flex-1">
                             <CombinedChart data={chartData} />
                         </div>
                     </div>
+                ) : (
+                    <ErrorHandler />
                 )}
             </FullScreen>
 

@@ -4,6 +4,7 @@ import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
+import ErrorHandler from '../ErrorHandler'
 
 const AverageBidsPerContract = (props) => {
     // ===========================================================================
@@ -12,15 +13,23 @@ const AverageBidsPerContract = (props) => {
     const { label = 'Average bids per contract', params } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.AverageBids(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.AverageBids(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -77,7 +86,7 @@ const AverageBidsPerContract = (props) => {
             </h3>
             {loading ? (
                 <Loader sm />
-            ) : (
+            ) : !error ?  (
                 <div className="flex items-end">
                     <AreaChartBlock
                         chartData={averageBidsLineChartData}
@@ -88,6 +97,8 @@ const AverageBidsPerContract = (props) => {
                         }
                     />
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
         </div>
     )
