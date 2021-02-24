@@ -85,8 +85,8 @@ const ContractTable = (props) => {
     const hasProduct = () => {
         return hasValidProperty(params, 'product')
     }
-    const tableRowClass = (hasRedFlags) => {
-        return hasRedFlags
+    const tableRowClass = (redFlagCount) => {
+        return redFlagCount
             ? 'table-row has-red-flag cursor-pointer'
             : 'table-row cursor-pointer'
     }
@@ -242,7 +242,7 @@ const ContractTable = (props) => {
                                                 showDetail(tender.id)
                                             }
                                             className={tableRowClass(
-                                                tender.red_flag
+                                                tender.red_flag_count
                                             )}>
                                             <td className="hover:text-primary-blue">
                                                 <p
@@ -250,17 +250,11 @@ const ContractTable = (props) => {
                                                     title={
                                                         tender.contract_title
                                                     }>
-                                                    {
-                                                        tender.contract_title
-                                                    }
+                                                    {tender.contract_title}
                                                 </p>
                                             </td>
                                             {!hasCountry() && (
-                                                <td>
-                                                    {
-                                                        tender.country_name
-                                                    }
-                                                </td>
+                                                <td>{tender.country_name}</td>
                                             )}
                                             {!hasBuyer() && (
                                                 <td>
@@ -293,9 +287,7 @@ const ContractTable = (props) => {
                                                 </td>
                                             )}
                                             <td className="capitalize">
-                                                {
-                                                    tender.procurement_procedure
-                                                }
+                                                {tender.procurement_procedure}
                                             </td>
                                             {!hasProduct() && (
                                                 <td>
@@ -312,15 +304,15 @@ const ContractTable = (props) => {
                                             </td>
                                             <td>
                                                 {tender.contract_value_usd &&
-                                                tender.contract_value_usd.toLocaleString(
-                                                    'en'
-                                                )}
+                                                    tender.contract_value_usd.toLocaleString(
+                                                        'en'
+                                                    )}
                                             </td>
                                             <td>
-                                                {tender.red_flag && (
+                                                {tender.red_flag_count > 0 && (
                                                     <span className="mr-4">
-                                                                <FlagIcon />
-                                                            </span>
+                                                        <FlagIcon />
+                                                    </span>
                                                 )}
                                             </td>
                                         </tr>

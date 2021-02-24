@@ -13,7 +13,7 @@ const NewsSection = () => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        CmsPageService.NewsList({ limit: 5 })
+        CmsPageService.NewsList({ limit: 5, featured: true })
             .then((response) => {
                 setNewsList(response.items)
                 setLoading(false)
@@ -78,7 +78,10 @@ const NewsSection = () => {
                                                     {news.title}
                                                 </h3>
                                                 <p className="news-caption__date">
-                                                    {formatDate(news.news_date, 'MMM DD, YYYY')}
+                                                    {formatDate(
+                                                        news.news_date,
+                                                        'MMM DD, YYYY'
+                                                    )}
                                                 </p>
                                             </div>
                                         </Link>

@@ -26,6 +26,8 @@ const Blogs = () => {
         }
     }, [])
 
+    console.log(blogList)
+
     return loading ? (
         <Loader />
     ) : (
@@ -38,8 +40,10 @@ const Blogs = () => {
                     blogList.length !== 0 &&
                     blogList.map((blogs) => {
                         let data =
-                            blogs.body &&
-                            blogs.body.split('\n')[0].replace('<p>', '')
+                            blogs.rendered_body &&
+                            blogs.rendered_body
+                                .split('\n')[0]
+                                .replace(/(<([^>]+)>)/gi, '')
 
                         return (
                             <div
@@ -88,7 +92,7 @@ const Blogs = () => {
                                         <p>{formatDate(blogs.news_date)}</p>
                                     </div>
                                     {/* <p className="blog-caption__details mt-4"> </p> */}
-                                    {blogs.body && (
+                                    {blogs.rendered_body && (
                                         <div className="blog-caption__details mt-4">
                                             {data || ''}
                                         </div>
