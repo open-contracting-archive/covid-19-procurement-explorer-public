@@ -12,7 +12,7 @@ const labels = {
 }
 
 const ContractViewSwitcher = (props) => {
-    const { viewType = ContractView.VALUE, viewHandler, style = 'long' } = props
+    const { viewType = ContractView.VALUE, viewHandler, style = 'short' } = props
     const { trans } = useTrans()
 
     return (

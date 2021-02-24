@@ -83,7 +83,7 @@ const TopBuyers = (props) => {
                                     ContractView.VALUE
                                 )}`}
                                 onClick={() => setViewType(ContractView.VALUE)}>
-                                {trans('By contract value')}
+                                {trans('By value')}
                             </li>
                             <li
                                 className={`cursor-pointer text-xs md:text-base ${isActiveTab(
@@ -92,7 +92,7 @@ const TopBuyers = (props) => {
                                 onClick={() =>
                                     setViewType(ContractView.NUMBER)
                                 }>
-                                {trans('By number of contracts')}
+                                {trans('By number')}
                             </li>
                         </ul>
                     </div>

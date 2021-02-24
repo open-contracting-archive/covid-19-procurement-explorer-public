@@ -84,14 +84,14 @@ const ProductsTimeline = (props) => {
                                     chartType === 'value' ? 'active' : ''
                                 }`}
                                 onClick={() => setChartType('value')}>
-                                {trans('By contract value')}
+                                {trans('By value')}
                             </li>
                             <li
                                 className={`cursor-pointer text-xs md:text-base ${
                                     chartType === 'number' ? 'active' : ''
                                 }`}
                                 onClick={() => setChartType('number')}>
-                                {trans('By number of contracts')}
+                                {trans('By number')}
                             </li>
                         </ul>
                     </div>

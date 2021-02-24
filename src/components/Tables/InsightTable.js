@@ -10,7 +10,7 @@ import { hasValidProperty } from '../../helpers/general'
 import useCountries from '../../hooks/useCountries'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import useTrans from '../../hooks/useTrans'
-import useContentFilters from "../../hooks/useContentFilters"
+import useContentFilters from '../../hooks/useContentFilters'
 
 const limit = 20
 
@@ -133,7 +133,7 @@ const InsightTable = (props) => {
                                     Country
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="mt-2 select-filter text-sm"
                                     classNamePrefix="select-filter"
                                     options={countrySelectList}
                                     onChange={(selectedOption) =>
@@ -149,7 +149,7 @@ const InsightTable = (props) => {
                                 Type
                             </p>
                             <Select
-                                className="select-filter text-sm"
+                                className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
                                 options={typeSelectList}
                             />
@@ -178,7 +178,7 @@ const InsightTable = (props) => {
                             {trans('Country')}
                         </p>
                         <Select
-                            className="select-filter text-sm"
+                            className="mt-2 select-filter text-sm"
                             classNamePrefix="select-filter"
                             options={countrySelectList}
                             onChange={(selectedOption) =>
@@ -192,7 +192,7 @@ const InsightTable = (props) => {
                         {trans('Type')}
                     </p>
                     <Select
-                        className="select-filter text-sm"
+                        className="mt-2 select-filter text-sm"
                         classNamePrefix="select-filter"
                         options={contentsTypeSelectList}
                         onChange={(selectedFilter) => {
@@ -207,7 +207,7 @@ const InsightTable = (props) => {
                         Topic
                     </p>
                     <Select
-                        className="select-filter text-sm"
+                        className="mt-2 select-filter text-sm"
                         classNamePrefix="select-filter"
                         options={options}
                         defaultValue={options[0]}
@@ -218,7 +218,7 @@ const InsightTable = (props) => {
                         Year
                     </p>
                     <Select
-                        className="select-filter text-sm"
+                        className="mt-2 select-filter text-sm"
                         classNamePrefix="select-filter"
                         options={options}
                         defaultValue={options[0]}
@@ -229,7 +229,7 @@ const InsightTable = (props) => {
                         Language
                     </p>
                     <Select
-                        className="select-filter text-sm"
+                        className="mt-2 select-filter text-sm"
                         classNamePrefix="select-filter"
                         options={options}
                         defaultValue={options[0]}
@@ -245,8 +245,8 @@ const InsightTable = (props) => {
                         <div className="custom-scrollbar table-scroll">
                             <table className="table">
                                 <thead>
-                                <tr>
-                                    <th style={{ width: '35%' }}>
+                                    <tr>
+                                        <th style={{ width: '35%' }}>
                                             <span className="flex items-center">
                                                 Title{' '}
                                                 <span className="icon-sort">
@@ -254,8 +254,8 @@ const InsightTable = (props) => {
                                                     <span className="icon-sort-arrow-down" />
                                                 </span>
                                             </span>
-                                    </th>
-                                    <th style={{ width: '15%' }}>
+                                        </th>
+                                        <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
                                                 Country{' '}
                                                 <span className="icon-sort">
@@ -263,8 +263,8 @@ const InsightTable = (props) => {
                                                     <span className="icon-sort-arrow-down" />
                                                 </span>
                                             </span>
-                                    </th>
-                                    <th style={{ width: '10%' }}>
+                                        </th>
+                                        <th style={{ width: '10%' }}>
                                             <span className="flex items-center">
                                                 Type{' '}
                                                 <span className="icon-sort">
@@ -272,42 +272,38 @@ const InsightTable = (props) => {
                                                     <span className="icon-sort-arrow-down" />
                                                 </span>
                                             </span>
-                                    </th>
-                                </tr>
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                {insightList &&
-                                insightList.map(
-                                    (insight, index) => {
-                                        return (
-                                            <tr
-                                                key={index}
-                                                onClick={() =>
-                                                    showDetail(
-                                                        insight.contents_type,
-                                                        insight.id
-                                                    )
-                                                }
-                                                className="cursor-pointer">
-                                                <td>{insight.title}</td>
-                                                <td>
-                                                    {countryNameById(
-                                                        get(
-                                                            insight,
-                                                            'country.id',
-                                                            null
+                                    {insightList &&
+                                        insightList.map((insight, index) => {
+                                            return (
+                                                <tr
+                                                    key={index}
+                                                    onClick={() =>
+                                                        showDetail(
+                                                            insight.contents_type,
+                                                            insight.id
                                                         )
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {
-                                                        insight.contents_type
                                                     }
-                                                </td>
-                                            </tr>
-                                        )
-                                    }
-                                )}
+                                                    className="cursor-pointer">
+                                                    <td>{insight.title}</td>
+                                                    <td>
+                                                        {countryNameById(
+                                                            get(
+                                                                insight,
+                                                                'country.id',
+                                                                null
+                                                            )
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {insight.contents_type}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
                                 </tbody>
                             </table>
                             {!insightList.length && (

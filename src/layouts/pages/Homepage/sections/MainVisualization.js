@@ -7,7 +7,7 @@ import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelin
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
 import { ShortTenderTable } from '../../../../components/Tables'
 import ChartFooter from '../../../../components/Utilities/ChartFooter'
-import CmsPageContent from "../../StaticPage/CmsPageContent"
+import CmsPageContent from '../../StaticPage/CmsPageContent'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
 import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
@@ -92,7 +92,9 @@ const MainVisualization = () => {
                 </div>
                 <p className="mt-6 text-center text-sm">
                     {trans('Don’t see your country data?')}
-                    <Link to="/pages/add-my-country-data" className="inline-block ml-2 text-primary-blue">
+                    <Link
+                        to="/pages/add-my-country-data"
+                        className="inline-block ml-2 text-primary-blue">
                         {trans('Here’s how you can add your country data')}
                     </Link>
                 </p>

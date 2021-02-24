@@ -3,7 +3,7 @@
     height: 500px;
 
     @media only screen and (min-width: 768px) {
-        height: 750px;
+        height: 700px;
     }
 }
 
@@ -116,7 +116,12 @@
     }
 }
 
-.bar-chart-race {
+.bar-chart-race-modal {
+    height: calc(100vh - 78px);
+
+    .race-map-section {
+        height: calc(100vh - 200px);
+    }
     .chart-footer {
         position: absolute;
         bottom: 0;
@@ -128,7 +133,7 @@
         .share-menu {
             bottom: 50px;
             top: auto;
-            transform: translateY(325px);
+            // transform: translateY(20px);
         }
     }
 }

@@ -57,9 +57,7 @@ const LibrarySection = () => {
                                             {insightItem.title}
                                         </h4>
                                         <p className="library__date">
-                                            {formatDate(
-                                                insightItem.news_date
-                                            )}
+                                            {formatDate(insightItem.news_date)}
                                         </p>
                                     </div>
                                 </Link>
@@ -69,6 +67,11 @@ const LibrarySection = () => {
                         )}
                     </div>
                 )}
+            </div>
+            <div className="text-right md:text-center mt-6 md:mt-12">
+                <Link to="/library" className="text-blue-20">
+                    {trans('View library')} --&gt;{' '}
+                </Link>
             </div>
         </section>
     )

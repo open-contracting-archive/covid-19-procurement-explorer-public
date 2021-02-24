@@ -32,7 +32,7 @@ const Header = () => {
                                 Covid-19
                             </span>
                             <span className="block text-blue-20">Contract</span>
-                            Explorer
+                            <span className="text-white">Explorer</span>
                         </NavLink>
                     </div>
                     <div className="flex items-center text-sm">

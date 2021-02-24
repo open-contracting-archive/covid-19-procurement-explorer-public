@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { isEmpty } from 'lodash'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
-import BarChartRace from "../Charts/BarChart/BarChartRace"
+import BarChartRace from '../Charts/BarChart/BarChartRace'
 
 const SupplierTrend = (props) => {
     // ===========================================================================
@@ -15,11 +15,10 @@ const SupplierTrend = (props) => {
     const dataColumn = 'supplier_count'
 
     useEffect(() => {
-        CountryService.SupplierTrend()
-            .then((response) => {
-                setOriginalData(response.result)
-                setLoading(false)
-            })
+        CountryService.SupplierTrend().then((response) => {
+            setOriginalData(response.result)
+            setLoading(false)
+        })
 
         return () => {
             setOriginalData({})
@@ -29,21 +28,28 @@ const SupplierTrend = (props) => {
     useEffect(() => {
         let chartData
         if (!isEmpty(originalData)) {
-            chartData = originalData
-                .reduce((formattedData, item) => {
-                    let filtered = item.details
-                        .filter((country) => country.country_code !== 'gl')
-                        .filter((country) => (!selectedContinent || selectedContinent.value === 'all') ?
-                            true : country.country_continent === selectedContinent.value
-                        )
-                        .map((country) => ({
-                            country: country.country,
-                            value: country[dataColumn]
-                        }))
-                    const sum = filtered.reduce((total, item) => (total += item.value), 0)
+            chartData = originalData.reduce((formattedData, item) => {
+                let filtered = item.details
+                    .filter((country) => country.country_code !== 'gl')
+                    .filter((country) =>
+                        !selectedContinent || selectedContinent.value === 'all'
+                            ? true
+                            : country.country_continent ===
+                              selectedContinent.value
+                    )
+                    .map((country) => ({
+                        country: country.country,
+                        value: country[dataColumn]
+                    }))
+                const sum = filtered.reduce(
+                    (total, item) => (total += item.value),
+                    0
+                )
 
-                    return (sum > 0) ? { ...formattedData, [item.month]: filtered } : { ...formattedData }
-                }, {})
+                return sum > 0
+                    ? { ...formattedData, [item.month]: filtered }
+                    : { ...formattedData }
+            }, {})
             setChartData(chartData)
         }
 
@@ -52,8 +58,16 @@ const SupplierTrend = (props) => {
         }
     }, [originalData, selectedContinent])
 
-    return loading ? (<Loader />) : !isEmpty(chartData) && (
-        <BarChartRace data={chartData} />
+    return (
+        <div>
+            {loading ? (
+                <Loader />
+            ) : isEmpty(chartData) ? (
+                <div className="mt-4">No data available</div>
+            ) : (
+                !isEmpty(chartData) && <BarChartRace data={chartData} />
+            )}
+        </div>
     )
 }
 
