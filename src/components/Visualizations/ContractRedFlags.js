@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import VisualizationService from "../../services/VisualizationService"
 import CardContainer from "../Utilities/CardContainer"
+import ErrorHandler from '../ErrorHandler'
 
 const ContractRedFlags = (props) => {
     // ===========================================================================
@@ -14,6 +15,7 @@ const ContractRedFlags = (props) => {
     } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState([])
+    const [error, setError] = useState(false)
 
     // ===========================================================================
     // Hooks
@@ -21,14 +23,15 @@ const ContractRedFlags = (props) => {
     useEffect(() => {
         VisualizationService.ContractRedFlags(params)
             .then((response) => {
+                setLoading(false)
                 if (response.result) {
                     setOriginalData(response.result)
+                } else{
+                    throw new Error()
                 }
-                setLoading(false)
             })
-            .catch((error) => {
-                console.log(error)
-                setLoading(false)
+            .catch(() => {
+                setError(true)
             })
 
         return () => {
@@ -44,7 +47,7 @@ const ContractRedFlags = (props) => {
             helpText={helpText}
             symbol={<FlagIcon className="ml-2 inline-block" />}>
             <div className="custom-horizontal-bar">
-                <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
+                {!error ? (<ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
                     {originalData.map((item, index) => (
                         <li key={index}>
                             <div className="flex items-center justify-between">
@@ -61,7 +64,9 @@ const ContractRedFlags = (props) => {
                             </div>
                         </li>
                     ))}
-                </ul>
+                </ul>) : (
+                <ErrorHandler />
+            )}
             </div>
         </CardContainer>
     )

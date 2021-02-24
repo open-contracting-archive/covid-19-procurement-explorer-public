@@ -6,6 +6,7 @@ import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
 import Visualization from "../../constants/Visualization"
+import ErrorHandler from '../ErrorHandler'
 
 const Buyers = (props) => {
     // ===========================================================================
@@ -14,6 +15,7 @@ const Buyers = (props) => {
     const { label = 'Buyers', params, modalHandler } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const helpText = 'Number of buyers who signed at least 1 COVID contract'
 
@@ -21,9 +23,16 @@ const Buyers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.BuyerSummary(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.BuyerSummary(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -72,7 +81,7 @@ const Buyers = (props) => {
             </div>
             {loading ? (
                 <Loader sm />
-            ) : (
+            ) : !error ? (
                 <div className="flex items-end">
                     <AreaChartBlock
                         chartData={buyerSummaryLineChartData}
@@ -84,8 +93,10 @@ const Buyers = (props) => {
                     />
                     <div className="flex-1" />
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
-            {modalHandler && (
+            {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_BUYERS)}>

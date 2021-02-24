@@ -7,6 +7,7 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import { dateDiff, formatDate } from '../../helpers/date'
 import Visualization from '../../constants/Visualization'
 import HelpText from '../../components/HelpText/HelpText'
+import ErrorHandler from '../ErrorHandler'
 
 const barColorValue = '#ABBABF'
 
@@ -22,15 +23,24 @@ const TotalContracts = (props) => {
     } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TotalContracts(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.TotalContracts(params)
+        .then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -92,7 +102,7 @@ const TotalContracts = (props) => {
 
             {loading ? (
                 <Loader sm />
-            ) : (
+            ) : !error ? (
                 <div className="flex flex-wrap items-end">
                     <div className="w-full md:w-2/5">
                         <AreaChartBlock
@@ -116,8 +126,10 @@ const TotalContracts = (props) => {
                         />
                     </div>
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
-            {modalHandler && (
+            {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>

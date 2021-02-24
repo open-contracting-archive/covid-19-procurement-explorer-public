@@ -9,6 +9,7 @@ import { dateDiff, formatDate } from '../../helpers/date'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
 import Visualization from '../../constants/Visualization'
+import ErrorHandler from '../ErrorHandler'
 
 const barColorValue = '#ABBABF'
 
@@ -25,6 +26,7 @@ const TotalSpending = (props) => {
     const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
+    const [error, setError] = useState(false)
     const [chartData, setChartData] = useState({
         amount: '',
         percentage: '',
@@ -38,9 +40,16 @@ const TotalSpending = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TotalSpending(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.TotalSpending(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -110,7 +119,7 @@ const TotalSpending = (props) => {
             </div>
             {loading ? (
                 <Loader sm />
-            ) : (
+            ) : !error ? (
                 <div className="flex flex-wrap items-end">
                     <div className="w-full md:w-2/5">
                         <AreaChartBlock
@@ -132,8 +141,10 @@ const TotalSpending = (props) => {
                         />
                     </div>
                 </div>
+            ) : (
+                <ErrorHandler />
             )}
-            {modalHandler && (
+            {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>

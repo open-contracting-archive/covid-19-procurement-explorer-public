@@ -7,6 +7,7 @@ import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
+import ErrorHandler from '../ErrorHandler'
 
 const TopBuyers = (props) => {
     // ===========================================================================
@@ -18,15 +19,23 @@ const TopBuyers = (props) => {
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
     const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TopBuyers(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.TopBuyers(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -99,7 +108,7 @@ const TopBuyers = (props) => {
                 </div>
                 {loading ? (
                     <Loader />
-                ) : (
+                ) : !error ? (
                     <div className="flex">
                         <div className="flex-1">
                             <div className="flex-1 simple-tab -mt-10">
@@ -114,6 +123,8 @@ const TopBuyers = (props) => {
                             </div>
                         </div>
                     </div>
+                ) : (
+                    <ErrorHandler />
                 )}
             </div>
         </div>

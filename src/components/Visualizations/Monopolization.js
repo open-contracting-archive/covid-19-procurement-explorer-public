@@ -5,6 +5,7 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import { dateDiff, formatDate } from '../../helpers/date'
 import HelpText from '../../components/HelpText/HelpText'
+import ErrorHandler from '../ErrorHandler'
 
 const Monopolization = (props) => {
     // ===========================================================================
@@ -13,6 +14,7 @@ const Monopolization = (props) => {
     const { label = 'Monopolization', params } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const helpText = 'Average number of contracts per supplier'
 
@@ -20,9 +22,16 @@ const Monopolization = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.Monopolization(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.Monopolization(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -82,7 +91,7 @@ const Monopolization = (props) => {
                 </div>
                 {loading ? (
                     <Loader sm />
-                ) : (
+                ) : !error ? (
                     <div className="flex items-end">
                         <AreaChartBlock
                             chartData={monopolizationLineChartData}
@@ -97,6 +106,8 @@ const Monopolization = (props) => {
                         />
                         <div className="flex-1" />
                     </div>
+                ): (
+                    <ErrorHandler />
                 )}
             </div>
         </div>

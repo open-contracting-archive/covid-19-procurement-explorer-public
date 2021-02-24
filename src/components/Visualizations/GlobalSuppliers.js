@@ -9,6 +9,7 @@ import ChartFooter from '../Utilities/ChartFooter'
 import ContractView from '../../constants/ContractView'
 import HelpText from '../../components/HelpText/HelpText'
 import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
+import ErrorHandler from '../ErrorHandler'
 
 const GlobalSuppliers = (props) => {
     // ===========================================================================
@@ -20,6 +21,7 @@ const GlobalSuppliers = (props) => {
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
     const [chartLevel, setChartLevel] = useState('global')
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const helpText =
@@ -29,9 +31,16 @@ const GlobalSuppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.GlobalSuppliers(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.GlobalSuppliers(params).then((result) => {
             setLoading(false)
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -98,12 +107,14 @@ const GlobalSuppliers = (props) => {
 
                 {loading ? (
                     <Loader />
-                ) : (
+                ) : !error ? (
                     <div className="flex mt-4">
                         <div className="flex-1">
                             <SankeyChart data={chartData} />
                         </div>
                     </div>
+                ) : (
+                    <ErrorHandler />
                 )}
             </FullScreen>
 

@@ -8,6 +8,7 @@ import { groupBy } from 'lodash'
 import { dateDiff, formatDate } from '../../helpers/date'
 import { slugify } from '../../helpers/general'
 import ChartFooter from '../Utilities/ChartFooter'
+import ErrorHandler from '../ErrorHandler'
 
 const ProductsTimeline = (props) => {
     // ===========================================================================
@@ -18,6 +19,7 @@ const ProductsTimeline = (props) => {
     const [chartData, setChartData] = useState([])
     const [chartType, setChartType] = useState('value')
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
@@ -38,8 +40,15 @@ const ProductsTimeline = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductTimeline(params).then((response) => {
-            setOriginalData(response)
+        VisualizationService.ProductTimeline(params).then((result) => {
+            if(result){
+                setOriginalData(result)
+            } else{
+                throw new Error()
+            }
+        })
+        .catch(()=>{
+            setError(true)
         })
 
         return () => {
@@ -98,10 +107,12 @@ const ProductsTimeline = (props) => {
                 </div>
                 {!chartData ? (
                     <Loader />
-                ) : (
+                ) : !error ? (
                     <div>
                         <StackedChart data={chartData} />
                     </div>
+                ) : (
+                    <ErrorHandler />
                 )}
             </FullScreen>
 
