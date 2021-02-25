@@ -11,7 +11,8 @@ import CountryService from '../../../services/CountryService'
 import AwardedItems from './tabs/AwardedItems'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
-import Loader from "../../../components/Loader/Loader"
+import Loader from '../../../components/Loader/Loader'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const TenderDetail = () => {
     const { contractId } = useParams()
@@ -26,13 +27,12 @@ const TenderDetail = () => {
     }
 
     useEffect(() => {
-        CountryService.ContractDetail(contractId)
-            .then((result) => {
-                if (result) {
-                    setContractDetail(result)
-                }
-                setLoading(false)
-            })
+        CountryService.ContractDetail(contractId).then((result) => {
+            if (result) {
+                setContractDetail(result)
+            }
+            setLoading(false)
+        })
 
         return () => {
             setContractDetail({})
@@ -40,8 +40,15 @@ const TenderDetail = () => {
         }
     }, [contractId])
 
-    return loading ? (<Loader />) : (
+    return loading ? (
+        <Loader />
+    ) : (
         <section className="pt-8">
+            <MetaInformation
+                title={contractDetail && contractDetail.contract_title}
+                description={contractDetail && contractDetail.contract_desc}
+                canonicalLink={window.location.href}
+            />
             <div className="container mx-auto px-4 ">
                 <div className="text-sm mb-4 text-blue-5">
                     <span
@@ -65,7 +72,8 @@ const TenderDetail = () => {
                         <span
                             className={`status-indicator ${
                                 contractDetail && contractDetail.status
-                            }`} />
+                            }`}
+                        />
                         <p className="mr-2 text-sm">
                             {contractDetail && contractDetail.status}
                         </p>
@@ -103,8 +111,9 @@ const TenderDetail = () => {
                             {trans('Procurement procedure')}
                         </p>
                         <p className="font-bold text-sm capitalize">
-                            {(contractDetail && contractDetail.procurement_procedure) ||
-                            '-'}
+                            {(contractDetail &&
+                                contractDetail.procurement_procedure) ||
+                                '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -114,7 +123,7 @@ const TenderDetail = () => {
                         <p className="font-bold text-xl">
                             {(contractDetail &&
                                 formatNumber(contractDetail.bidders_no)) ||
-                            '-'}
+                                '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -156,7 +165,8 @@ const TenderDetail = () => {
                             {trans('Contract value')}
                         </p>
                         <p className="font-bold text-xl">
-                            {contractDetail && contractDetail.contract_value_usd ? (
+                            {contractDetail &&
+                            contractDetail.contract_value_usd ? (
                                 <>
                                     {formatNumber(
                                         contractDetail.contract_value_usd
@@ -221,7 +231,11 @@ const TenderDetail = () => {
                             {trans('Supplier address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(contractDetail, 'supplier.supplier_address', '-')}
+                            {get(
+                                contractDetail,
+                                'supplier.supplier_address',
+                                '-'
+                            )}
                         </p>
                     </div>
                 </div>

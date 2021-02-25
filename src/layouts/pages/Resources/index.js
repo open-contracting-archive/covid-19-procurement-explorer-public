@@ -10,7 +10,8 @@ import useCountries from '../../../hooks/useCountries'
 import useTrans from '../../../hooks/useTrans'
 import TableLoader from '../../../components/Loader/TableLoader'
 import ReactPaginate from 'react-paginate'
-import useContentFilters from "../../../hooks/useContentFilters"
+import useContentFilters from '../../../hooks/useContentFilters'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const limit = 10
 
@@ -58,10 +59,12 @@ const Resources = () => {
     const appendFilter = (selected) => {
         setTableLoading(true)
         setSelectedFilters((previous) => {
-            return identity(pickBy({
-                ...previous,
-                ...selected
-            }))
+            return identity(
+                pickBy({
+                    ...previous,
+                    ...selected
+                })
+            )
         })
     }
 
@@ -71,6 +74,10 @@ const Resources = () => {
 
     return (
         <div className=" resources">
+            <MetaInformation
+                title="Resources"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             <section className="px-4 resources__cards pt-24 pb-12 -mt-8">
                 <div className="container mx-auto">
                     <Breadcrumb />
@@ -167,63 +174,63 @@ const Resources = () => {
                                 <div className="custom-scrollbar table-scroll">
                                     <table className="table table__resources">
                                         <thead>
-                                        <tr>
-                                            <th style={{ width: '35%' }}>
+                                            <tr>
+                                                <th style={{ width: '35%' }}>
                                                     <span className="flex items-center">
                                                         {trans('Title')}{' '}
                                                         <SortIcon className="ml-1 cursor-pointer" />
                                                     </span>
-                                            </th>
-                                            <th style={{ width: '15%' }}>
+                                                </th>
+                                                <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
                                                         {trans('Country')}{' '}
                                                         <SortIcon className="ml-1 cursor-pointer" />
                                                     </span>
-                                            </th>
-                                            <th style={{ width: '10%' }}>
+                                                </th>
+                                                <th style={{ width: '10%' }}>
                                                     <span className="flex items-center">
                                                         {trans('Type')}{' '}
                                                         <SortIcon className="ml-1 cursor-pointer" />
                                                     </span>
-                                            </th>
-                                        </tr>
+                                                </th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        {resourceList &&
-                                        resourceList.map(
-                                            (resource, index) => {
-                                                return (
-                                                    <tr
-                                                        className="table-row cursor-pointer"
-                                                        key={index}
-                                                        onClick={() =>
-                                                            showDetail(
-                                                                resource.id
-                                                            )
-                                                        }>
-                                                        <td>
-                                                            {
-                                                                resource.title
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            {countryNameById(
-                                                                get(
-                                                                    resource,
-                                                                    'country.id',
-                                                                    null
-                                                                )
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {
-                                                                resource.resource_type
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            }
-                                        )}
+                                            {resourceList &&
+                                                resourceList.map(
+                                                    (resource, index) => {
+                                                        return (
+                                                            <tr
+                                                                className="table-row cursor-pointer"
+                                                                key={index}
+                                                                onClick={() =>
+                                                                    showDetail(
+                                                                        resource.id
+                                                                    )
+                                                                }>
+                                                                <td>
+                                                                    {
+                                                                        resource.title
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    {countryNameById(
+                                                                        get(
+                                                                            resource,
+                                                                            'country.id',
+                                                                            null
+                                                                        )
+                                                                    )}
+                                                                </td>
+                                                                <td>
+                                                                    {
+                                                                        resource.resource_type
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                )}
                                         </tbody>
                                     </table>
                                     {!resourceList.length > 0 && (
@@ -253,7 +260,7 @@ const Resources = () => {
                                                 totalItems
                                                     ? totalItems
                                                     : limit +
-                                                    currentPage * limit}
+                                                      currentPage * limit}
                                             </span>{' '}
                                             {trans('of')}{' '}
                                             <span className="text-primary-dark text-opacity-75">

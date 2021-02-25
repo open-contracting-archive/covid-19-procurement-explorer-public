@@ -1,9 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import MetaInformation from '../MetaInformation/MetaInformation'
 
 function NotFound() {
     return (
         <section className="-mt-10 error-container flex items-center justify-center py-20 pb-10 lg:py-0">
+            <MetaInformation
+                title="404"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             <div className="container mx-auto">
                 <div className="flex items-center flex-wrap text-center lg:text-left justify-center">
                     <div className="error-text flex items-center justify-center leading-none lg:mr-16">

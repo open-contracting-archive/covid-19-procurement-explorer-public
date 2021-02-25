@@ -10,6 +10,8 @@ import TagList from '../../../components/website/Library/TagList'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
 import DefaultImage from '../../../assets/img/default_image.png'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { stripTags } from '../../../helpers/transformers'
 
 const NewsDetail = () => {
     const [newsDetail, setNewsDetail] = useState({})
@@ -37,6 +39,18 @@ const NewsDetail = () => {
 
     return (
         <section className="pt-8">
+            <MetaInformation
+                title={newsDetail.title}
+                imageURL={`${API_URL}${get(
+                    newsDetail,
+                    'content_image.meta.download_url'
+                )}`}
+                description={
+                    newsDetail.rendered_body &&
+                    stripTags(newsDetail.rendered_body)
+                }
+                canonicalLink={window.location.href}
+            />
             <div className="container mx-auto px-4 news-detail">
                 <Breadcrumb item={'news'} />
                 {loading ? (

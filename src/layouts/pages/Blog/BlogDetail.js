@@ -10,6 +10,8 @@ import TagList from '../../../components/website/Library/TagList'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
 import DefaultImage from '../../../assets/img/default_image.png'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { stripTags } from '../../../helpers/transformers'
 
 const BlogDetail = () => {
     const [blogDetail, setBlogDetail] = useState({})
@@ -35,10 +37,20 @@ const BlogDetail = () => {
         }
     }, [blogId])
 
-    console.log(blogDetail)
-
     return (
         <section className="pt-8 px-2">
+            <MetaInformation
+                title={blogDetail.title}
+                imageURL={`${API_URL}${get(
+                    blogDetail,
+                    'content_image.meta.download_url'
+                )}`}
+                description={
+                    blogDetail.rendered_body &&
+                    stripTags(blogDetail.rendered_body)
+                }
+                canonicalLink={window.location.href}
+            />
             <div className="container mx-auto news-detail">
                 <Breadcrumb item={'blog'} />
                 {loading ? (
