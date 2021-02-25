@@ -21,6 +21,7 @@ import {
 import VisualizationService from '../../../services/VisualizationService'
 import { ContractTable } from '../../../components/Tables'
 import Loader from '../../../components/Loader/Loader'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const BuyerProfile = () => {
     // ===========================================================================
@@ -63,6 +64,10 @@ const BuyerProfile = () => {
             ) : (
                 !isEmpty(originalData) && (
                     <>
+                        <MetaInformation
+                            title={get(originalData, 'name')}
+                            description="Welcome Covid-19 Contract Explorer"
+                        />
                         <div className="container mx-auto px-4 ">
                             <div className="text-sm mb-4 text-blue-5">
                                 <span className="cursor-pointer text-primary-blue">
@@ -115,9 +120,7 @@ const BuyerProfile = () => {
                             <div className="container mx-auto px-4 ">
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
-                                        <TotalSpending
-                                            params={{ buyer: id }}
-                                        />
+                                        <TotalSpending params={{ buyer: id }} />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <TotalContracts
@@ -138,7 +141,8 @@ const BuyerProfile = () => {
                                         <ContractStatus
                                             params={{
                                                 buyer: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -147,13 +151,15 @@ const BuyerProfile = () => {
                                             <EquityIndicators
                                                 params={{
                                                     buyer: id,
-                                                    country: originalData.country_code
+                                                    country:
+                                                        originalData.country_code
                                                 }}
                                             />
                                             <DirectOpen
                                                 params={{
                                                     buyer: id,
-                                                    country: originalData.country_code
+                                                    country:
+                                                        originalData.country_code
                                                 }}
                                             />
                                         </div>
@@ -162,7 +168,8 @@ const BuyerProfile = () => {
                                         <ProductsTimeline
                                             params={{
                                                 buyer: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -170,7 +177,8 @@ const BuyerProfile = () => {
                                         <ProductDistribution
                                             params={{
                                                 buyer: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -178,7 +186,8 @@ const BuyerProfile = () => {
                                         <TopSuppliers
                                             params={{
                                                 buyer: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -186,7 +195,8 @@ const BuyerProfile = () => {
                                         <ContractRedFlags
                                             params={{
                                                 buyer: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>

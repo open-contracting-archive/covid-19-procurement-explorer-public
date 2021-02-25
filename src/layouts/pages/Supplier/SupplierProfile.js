@@ -17,6 +17,7 @@ import {
 import VisualizationService from '../../../services/VisualizationService'
 import { ContractTable } from '../../../components/Tables'
 import Loader from '../../../components/Loader/Loader'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const SupplierProfile = () => {
     // ===========================================================================
@@ -60,6 +61,10 @@ const SupplierProfile = () => {
             ) : (
                 !isEmpty(originalData) && (
                     <>
+                        <MetaInformation
+                            title={get(originalData, 'name')}
+                            description="Welcome Covid-19 Contract Explorer"
+                        />
                         <div className="container mx-auto">
                             <div className="text-sm mb-4 text-blue-5">
                                 <span className="cursor-pointer text-primary-blue">
@@ -83,7 +88,7 @@ const SupplierProfile = () => {
                                     <CountryFlag
                                         className="rounded-sm mr-2"
                                         code={
-                                            originalData &&
+                                            originalData.country_code &&
                                             get(
                                                 originalData,
                                                 'country_code'
@@ -120,7 +125,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                originalData.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -129,7 +134,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                originalData.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -139,7 +144,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                originalData.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -148,7 +153,7 @@ const SupplierProfile = () => {
                                             params={{
                                                 supplier: id,
                                                 country:
-                                                originalData.country_code
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -156,7 +161,8 @@ const SupplierProfile = () => {
                                         <ProductDistribution
                                             params={{
                                                 supplier: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>
@@ -164,7 +170,8 @@ const SupplierProfile = () => {
                                         <TopBuyers
                                             params={{
                                                 supplier: id,
-                                                country: originalData.country_code
+                                                country:
+                                                    originalData.country_code
                                             }}
                                         />
                                     </div>

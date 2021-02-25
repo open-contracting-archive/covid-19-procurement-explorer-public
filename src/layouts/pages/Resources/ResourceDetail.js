@@ -3,12 +3,14 @@ import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
-import ShareButtons from "../../../components/Library/ShareButtons"
-import Breadcrumb from "../../../components/website/Library/Breadcrumb"
-import { formatDate } from "../../../helpers/date"
+import ShareButtons from '../../../components/Library/ShareButtons'
+import Breadcrumb from '../../../components/website/Library/Breadcrumb'
+import { formatDate } from '../../../helpers/date'
 import pdfImage from '../../../assets/img/ic_pdf.svg'
-import useCountries from "../../../hooks/useCountries"
+import useCountries from '../../../hooks/useCountries'
 import useTrans from '../../../hooks/useTrans'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { stripTags } from '../../../helpers/transformers'
 
 const ResourceDetail = () => {
     const [resourceDetail, setResourceDetail] = useState({})
@@ -16,7 +18,7 @@ const ResourceDetail = () => {
     const [loading, setLoading] = useState(true)
     const { countryNameById } = useCountries()
     let { id: resourcesId } = useParams()
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -37,14 +39,32 @@ const ResourceDetail = () => {
 
     return (
         <section className="pt-8">
+            <MetaInformation
+                title={resourceDetail.title}
+                description={
+                    resourceDetail.rendered_description &&
+                    stripTags(resourceDetail.rendered_description)
+                }
+                canonicalLink={window.location.href}
+            />
             <div className="container mx-auto px-4 news-detail">
                 <Breadcrumb item={'resources'} />
-                {loading ? (<Loader />) : (
+                {loading ? (
+                    <Loader />
+                ) : (
                     <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
-                        {get(resourceDetail, 'document.meta.download_url', null) && (
+                        {get(
+                            resourceDetail,
+                            'document.meta.download_url',
+                            null
+                        ) && (
                             <div className="mb-4 detail__metadata ">
                                 <div className="resource-download flex flex-wrap justify-center px-6 py-10 rounded mb-6">
-                                    <img src={pdfImage} alt="" className="mb-6" />
+                                    <img
+                                        src={pdfImage}
+                                        alt=""
+                                        className="mb-6"
+                                    />
                                     <div className="download flex justify-center">
                                         <svg
                                             width="24"
@@ -59,7 +79,10 @@ const ResourceDetail = () => {
                                         </svg>
                                         <a
                                             className="text-blue-20 test-sm ml-1"
-                                            href={get(resourceDetail, 'document.meta.download_url')}>
+                                            href={get(
+                                                resourceDetail,
+                                                'document.meta.download_url'
+                                            )}>
                                             {' '}
                                             {trans('Download')}{' '}
                                         </a>
@@ -71,29 +94,57 @@ const ResourceDetail = () => {
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-5 text-primary-dark">
                                 {resourceDetail.title}
                             </h2>
-                            <div className="mb-10 resources-detail__content"
-                                 dangerouslySetInnerHTML={{ __html: resourceDetail.rendered_description }}>
-                            </div>
+                            <div
+                                className="mb-10 resources-detail__content"
+                                dangerouslySetInnerHTML={{
+                                    __html: resourceDetail.rendered_description
+                                }}></div>
                             <hr className="mb-6 text-primary-gray" />
                             <table className="my-10 text-left">
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Published on')}</th>
-                                    <td className="px-6 py-6">{formatDate(resourceDetail.meta.first_published_at, 'MMMM DD, YYYY')}</td>
+                                    <th className="px-6 py-6 font-bold opacity-50">
+                                        {trans('Published on')}
+                                    </th>
+                                    <td className="px-6 py-6">
+                                        {formatDate(
+                                            resourceDetail.meta
+                                                .first_published_at,
+                                            'MMMM DD, YYYY'
+                                        )}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Country')}</th>
-                                    <td className="px-6 py-6">{countryNameById(get(resourceDetail, 'country.id', null))}</td>
+                                    <th className="px-6 py-6 font-bold opacity-50">
+                                        {trans('Country')}
+                                    </th>
+                                    <td className="px-6 py-6">
+                                        {countryNameById(
+                                            get(
+                                                resourceDetail,
+                                                'country.id',
+                                                null
+                                            )
+                                        )}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Type')}</th>
-                                    <td className="px-6 py-6">{resourceDetail.resource_type}</td>
+                                    <th className="px-6 py-6 font-bold opacity-50">
+                                        {trans('Type')}
+                                    </th>
+                                    <td className="px-6 py-6">
+                                        {resourceDetail.resource_type}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Topic')}</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">
+                                        {trans('Topic')}
+                                    </th>
                                     <td className="px-6 py-6" />
                                 </tr>
                                 <tr>
-                                    <th className="px-6 py-6 font-bold opacity-50">{trans('Language')}</th>
+                                    <th className="px-6 py-6 font-bold opacity-50">
+                                        {trans('Language')}
+                                    </th>
                                     <td className="px-6 py-6" />
                                 </tr>
                             </table>
@@ -106,21 +157,26 @@ const ResourceDetail = () => {
                                     {trans('Related Resources')}
                                 </p>
                                 {resourceList &&
-                                resourceList
-                                    .filter(
-                                        (resources) => resources.id !== resourcesId
-                                    )
-                                    .slice(0, 3)
-                                    .map((resources) => {
-                                        return (
-                                            <div className="related__list flex mb-4 pb-4" key={resources.id}>
-                                                <Link
-                                                    to={`/resources/${resources.id}`}>
-                                                    <h3 className="text-sm">{resources.title}</h3>
-                                                </Link>
-                                            </div>
+                                    resourceList
+                                        .filter(
+                                            (resources) =>
+                                                resources.id !== resourcesId
                                         )
-                                    })}
+                                        .slice(0, 3)
+                                        .map((resources) => {
+                                            return (
+                                                <div
+                                                    className="related__list flex mb-4 pb-4"
+                                                    key={resources.id}>
+                                                    <Link
+                                                        to={`/resources/${resources.id}`}>
+                                                        <h3 className="text-sm">
+                                                            {resources.title}
+                                                        </h3>
+                                                    </Link>
+                                                </div>
+                                            )
+                                        })}
                             </div>
                         </div>
                     </div>

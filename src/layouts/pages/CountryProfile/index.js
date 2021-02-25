@@ -24,7 +24,8 @@ import {
     PRODUCTS,
     METHODOLOGY
 } from '../../../constants/Tab'
-import CmsPageContent from "../StaticPage/CmsPageContent"
+import CmsPageContent from '../StaticPage/CmsPageContent'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -86,11 +87,7 @@ const CountryProfile = () => {
                     />
                 )
             case METHODOLOGY:
-                return (
-                    <CmsPageContent
-                        slug={'methodology'}
-                    />
-                )
+                return <CmsPageContent slug={'methodology'} />
             default:
                 return (
                     <CountryData
@@ -102,6 +99,10 @@ const CountryProfile = () => {
 
     return (
         <section className="pt-10 md:pt-20 -mt-8 bg-blue-0">
+            <MetaInformation
+                title="Country Profile"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             {!isEmpty(countryData) && (
                 <section className="px-4">
                     <div className="container mx-auto">

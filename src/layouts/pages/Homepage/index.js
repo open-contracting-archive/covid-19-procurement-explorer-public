@@ -4,12 +4,12 @@ import MainVisualization from './sections/MainVisualization'
 import NewsSection from './sections/NewsSection'
 import LibrarySection from './sections/LibrarySection'
 import LibraryUpcomingEvents from '../Library/sections/LibraryUpcomingEvents'
-import { Helmet } from 'react-helmet'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const Home = () => {
     return (
         <Fragment>
-            <Helmet>
+            {/* <Helmet>
                 <meta charSet="utf-8" />
                 <title>Covid-19 Contract Explorer</title>
                 <link
@@ -20,7 +20,8 @@ const Home = () => {
                     name="description"
                     content="Welcome Covid-19 Contract Explorer."
                 />
-            </Helmet>
+            </Helmet> */}
+            <MetaInformation title="Home" description="Welcome Covid-19 Contract Explorer" />
             <HomeBanner />
             <MainVisualization />
             <NewsSection />

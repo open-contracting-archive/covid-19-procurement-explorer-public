@@ -1,8 +1,9 @@
 import React from 'react'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
-import FeaturedNewsList from "./sections/FeaturedNewsList"
-import OtherNewsList from "./sections/OtherNewsList"
-import useTrans from "../../../hooks/useTrans"
+import FeaturedNewsList from './sections/FeaturedNewsList'
+import OtherNewsList from './sections/OtherNewsList'
+import useTrans from '../../../hooks/useTrans'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const News = () => {
     const { trans } = useTrans()
@@ -10,6 +11,10 @@ const News = () => {
 
     return (
         <div>
+            <MetaInformation
+                title="News"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             <section className=" news__list pt-24 px-4">
                 <div className="container mx-auto">
                     <Breadcrumb />

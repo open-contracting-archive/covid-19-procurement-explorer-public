@@ -20,7 +20,8 @@ import {
     SUPPLIERS
 } from '../../../constants/Tab'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
-import CmsPageContent from "../StaticPage/CmsPageContent"
+import CmsPageContent from '../StaticPage/CmsPageContent'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const GlobalOverview = () => {
     // ===========================================================================
@@ -45,11 +46,7 @@ const GlobalOverview = () => {
             case PRODUCTS:
                 return <GlobalProducts />
             case METHODOLOGY:
-                return (
-                    <CmsPageContent
-                        slug={'methodology'}
-                    />
-                )
+                return <CmsPageContent slug={'methodology'} />
             default:
                 return <GlobalData />
         }
@@ -57,6 +54,10 @@ const GlobalOverview = () => {
 
     return (
         <Fragment>
+            <MetaInformation
+                title="Global Overview"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             <section className="global-profile -mt-8">
                 <section className="bg-blue-0 pt-12 md:pt-20 px-4">
                     <div className="container mx-auto">

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import ProductInfo from './sections/ProductInfo'
 import MainChart from './sections/MainChart'
 import { ContractTable } from '../../../components/Tables'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const ProductProfile = () => {
     // ===========================================================================
@@ -29,6 +30,7 @@ const ProductProfile = () => {
 
     return (
         <section className="pt-8">
+            <MetaInformation title="Products" description="Welcome Covid-19 Contract Explorer" />
             <div className="container mx-auto">
                 <ProductInfo product={product} country={country} />
 

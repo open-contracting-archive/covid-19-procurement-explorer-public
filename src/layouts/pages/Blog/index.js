@@ -8,6 +8,7 @@ import { formatDate } from '../../../helpers/date'
 import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
 import DefaultImage from '../../../assets/img/default_image.png'
+import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const Blogs = () => {
     const [blogList, setBlogList] = useState([])
@@ -32,6 +33,10 @@ const Blogs = () => {
         <Loader />
     ) : (
         <section className="py-24 px-4 blogs-list -mt-8">
+            <MetaInformation
+                title="Blogs"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             <div className="container mx-auto">
                 <Breadcrumb />
 
