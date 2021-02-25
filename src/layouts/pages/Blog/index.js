@@ -27,8 +27,6 @@ const Blogs = () => {
         }
     }, [])
 
-    console.log(blogList)
-
     return loading ? (
         <Loader />
     ) : (

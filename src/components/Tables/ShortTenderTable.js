@@ -42,8 +42,8 @@ const ShortTenderTable = () => {
     const showDetail = (id) => {
         history.push(`/contracts/${id}`)
     }
-    const tableRowClass = (hasRedFlags) => {
-        return hasRedFlags
+    const tableRowClass = (redFlagCount) => {
+        return redFlagCount
             ? 'table-row has-red-flag cursor-pointer'
             : 'table-row cursor-pointer'
     }
@@ -108,23 +108,13 @@ const ShortTenderTable = () => {
                                             <tr
                                                 key={index}
                                                 onClick={() =>
-                                                    showDetail(
-                                                        tender.id
-                                                    )
+                                                    showDetail(tender.id)
                                                 }
                                                 className={tableRowClass(
-                                                    tender.red_flag
+                                                    tender.red_flag_count
                                                 )}>
-                                                <td>
-                                                    {
-                                                        tender.contract_title
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {
-                                                        tender.country_name
-                                                    }
-                                                </td>
+                                                <td>{tender.contract_title}</td>
+                                                <td>{tender.country_name}</td>
                                                 <td>
                                                     {get(
                                                         tender,
@@ -155,12 +145,12 @@ const ShortTenderTable = () => {
                                                 </td>
                                                 <td>
                                                     {tender.contract_value_usd &&
-                                                    tender.contract_value_usd.toLocaleString(
-                                                        'en'
-                                                    )}
+                                                        tender.contract_value_usd.toLocaleString(
+                                                            'en'
+                                                        )}
                                                 </td>
                                                 <td>
-                                                    {tender.red_flag && (
+                                                    {tender.red_flag_count && (
                                                         <span className="mr-4">
                                                             <FlagIcon />
                                                         </span>

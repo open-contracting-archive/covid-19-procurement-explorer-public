@@ -36,17 +36,18 @@ const ContractsCorrelation = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.QuantityCorrelation(params).then((result) => {
-            setLoading(false)
-            if (result) {
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.QuantityCorrelation(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData([])
@@ -67,7 +68,8 @@ const ContractsCorrelation = (props) => {
                             ? item.tender_count
                             : currency === Default.CURRENCY_LOCAL
                             ? item.amount_local
-                            : item.amount_usd
+                            : item.amount_usd,
+                    deathCase: item.death_cases
                 }
             })
         setChartData(dataSet)
@@ -76,6 +78,7 @@ const ContractsCorrelation = (props) => {
             setChartData([])
         }
     }, [originalData, viewType])
+
 
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
@@ -98,7 +101,7 @@ const ContractsCorrelation = (props) => {
                 ) : !error ? (
                     <div className="flex mt-4">
                         <div className="flex-1">
-                            <CombinedChart data={chartData} />
+                            <CombinedChart data={chartData} type={viewType} />
                         </div>
                     </div>
                 ) : (

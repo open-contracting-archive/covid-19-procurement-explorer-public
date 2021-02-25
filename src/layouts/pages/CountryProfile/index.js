@@ -111,7 +111,9 @@ const CountryProfile = () => {
                             <CountryMapElement
                                 countryCode={countryData.country_code_alpha_2}
                             />
-                            <CountryInfo country={countryData} />
+                            <CountryInfo
+                                country={countryData}
+                            />
                         </div>
                     </div>
                 </section>

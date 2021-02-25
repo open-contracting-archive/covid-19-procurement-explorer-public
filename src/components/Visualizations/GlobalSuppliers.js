@@ -89,17 +89,26 @@ const GlobalSuppliers = (props) => {
 
                     <ContractViewSwitcher
                         viewType={viewType}
-                        viewHandler={setViewType} />
+                        viewHandler={setViewType}
+                    />
                 </div>
 
                 <ul className="flex items-center my-4">
                     <li
-                        className={`inline-block mr-2 px-4 py-2 rounded-full cursor-pointer ${chartLevel === 'global' ? 'bg-blue-50 text-white' : 'bg-blue-0'}`}
+                        className={`inline-block mr-2 px-4 py-2 rounded-full cursor-pointer ${
+                            chartLevel === 'global'
+                                ? 'bg-blue-50 text-white'
+                                : 'bg-blue-0'
+                        }`}
                         onClick={() => setChartLevel('global')}>
                         {trans('Global suppliers chain')}
                     </li>
                     <li
-                        className={`inline-block mr-2 px-4 py-2 rounded-full cursor-pointer ${chartLevel === 'country' ? 'bg-blue-50 text-white' : 'bg-blue-0'}`}
+                        className={`inline-block mr-2 px-4 py-2 rounded-full cursor-pointer ${
+                            chartLevel === 'country'
+                                ? 'bg-blue-50 text-white'
+                                : 'bg-blue-0'
+                        }`}
                         onClick={() => setChartLevel('country')}>
                         {trans('Global distribution chain')}
                     </li>
@@ -118,7 +127,10 @@ const GlobalSuppliers = (props) => {
                 )}
             </FullScreen>
 
-            <ChartFooter fullScreenHandler={fullScreenHandler} />
+            <ChartFooter
+                fullScreenHandler={fullScreenHandler}
+                linkText="/global-overview/suppliers"
+            />
         </div>
     )
 }

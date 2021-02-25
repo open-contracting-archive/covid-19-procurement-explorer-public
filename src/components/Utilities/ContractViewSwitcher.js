@@ -12,21 +12,25 @@ const labels = {
 }
 
 const ContractViewSwitcher = (props) => {
-    const { viewType = ContractView.VALUE, viewHandler, style = 'short' } = props
+    const {
+        viewType = ContractView.VALUE,
+        viewHandler,
+        style = 'short'
+    } = props
     const { trans } = useTrans()
 
     return (
-        <div className="flex flex-1 justify-end">
+        <div className="flex flex-1 justify-start md:justify-end">
             <ul className="contract-switch flex">
                 <li
-                    className={`mr-4 cursor-pointer ${
+                    className={`mr-4 cursor-pointer text-xs md:text-base ${
                         viewType === ContractView.VALUE && activeClass
                     }`}
                     onClick={() => viewHandler(ContractView.VALUE)}>
                     {trans(labels[ContractView.VALUE][style])}
                 </li>
                 <li
-                    className={`cursor-pointer ${
+                    className={`cursor-pointer text-xs md:text-base ${
                         viewType === ContractView.NUMBER && activeClass
                     }`}
                     onClick={() => viewHandler(ContractView.NUMBER)}>

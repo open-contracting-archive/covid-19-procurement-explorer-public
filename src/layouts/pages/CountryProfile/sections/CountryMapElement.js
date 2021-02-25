@@ -18,19 +18,18 @@ const CountryMapElement = (props) => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        VisualizationService.CountryMap({ country: props.countryCode }).then(
-            (result) => {
+        VisualizationService.CountryMap({ country: props.countryCode })
+            .then((result) => {
                 setLoading(false)
-                    if(result){
-                        setOriginalData(result)
-                    } else{
-                        throw new Error()
-                    }
-                })
-                .catch(()=>{
-                    setError(true)
-                })
-
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -58,7 +57,7 @@ const CountryMapElement = (props) => {
 
     return (
         <div className="mt-10 md:mt-0 w-full md:w-1/2 lg:w-62 px-2">
-            <div className="p-4 pb-0 md:pb-4 bg-white rounded">
+            <div className="p-4 pb-0 md:pb-4 bg-white rounded md:h-full">
                 <FullScreen handle={fullScreenHandler}>
                     <div className="relative">
                         {/* <div className="flex justify-end">
