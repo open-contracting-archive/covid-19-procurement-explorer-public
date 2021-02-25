@@ -100,7 +100,7 @@ const WorldTimelineMap = () => {
                             />
                         </div>
                         {contractType === 'value' ? (
-                            <div className="my-4 w-full md:flex justify-center md:my-0 items-center text-center">
+                            <div className="hidden my-4 w-full justify-center md:my-0 items-center text-center">
                                 <span className="mr-2 text-sm">
                                     Spending USD
                                 </span>

@@ -35,17 +35,25 @@ const BlogDetail = () => {
         }
     }, [blogId])
 
+    console.log(blogDetail)
+
     return (
-        <section className="pt-8">
-            <div className="container mx-auto px-4 news-detail">
+        <section className="pt-8 px-2">
+            <div className="container mx-auto news-detail">
                 <Breadcrumb item={'blog'} />
                 {loading ? (
                     <Loader />
                 ) : (
                     <Fragment>
-                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
+                        <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 text-primary-dark">
                             {blogDetail.title}
                         </h2>
+                        <span className="block italic mb-6 md:mb-10 text-sm text-blue-5">
+                            {trans('By')}
+                            <span className="ml-1 text-primary-blue">
+                                {blogDetail.author}
+                            </span>{' '}
+                        </span>
                         {get(blogDetail, 'content_image.meta.download_url') && (
                             <div className="img-wrapper mb-6 md:mb-10">
                                 <img
@@ -58,7 +66,7 @@ const BlogDetail = () => {
                             </div>
                         )}
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
-                            <div className="mb-4 news-detail__metadata">
+                            <div className="w-full lg:w-2/12 mb-4 news-detail__metadata">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
                                     {trans('Published on')}
                                 </p>
@@ -69,7 +77,7 @@ const BlogDetail = () => {
                                     <TagList item={blogDetail} />
                                 </div>
                             </div>
-                            <div>
+                            <div className="px-2 lg:pr-16">
                                 <div
                                     className="mb-10 blogs-detail__content"
                                     dangerouslySetInnerHTML={{

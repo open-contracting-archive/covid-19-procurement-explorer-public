@@ -41,8 +41,8 @@ const ContractTrend = (props) => {
                     )
                     .map((country) => ({
                         country: country.country,
-                        value: country[dataColumn]
-                        // href: 'https://www.worldometers.info/img/flags/us-flag.gif'
+                        value: country[dataColumn],
+                        href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
                     }))
                 const sum = filtered.reduce(
                     (total, item) => (total += item.value),

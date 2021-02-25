@@ -318,7 +318,7 @@ const ContractFilter = (props) => {
                 ''
             )}
             <div className="hidden md:block filter-ui-content p-4 md:p-0">
-                <div className="mb-12 flex gap-8 flex-wrap">
+                <div className="mb-12 flex gap-8 flex-wrap -mx-2">
                     <div className="w-1/2 md:w-40 px-2 mb-5">
                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
                             {trans('Contract title')}

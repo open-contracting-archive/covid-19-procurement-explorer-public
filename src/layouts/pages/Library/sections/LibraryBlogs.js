@@ -47,7 +47,7 @@ const LibraryBlogs = () => {
                                             ) ? (
                                                 <div className="img-wrapper">
                                                     <img
-                                                        className="h-full object-cover"
+                                                        className="w-full h-full object-cover"
                                                         src={`${API_URL}${get(
                                                             blog,
                                                             'content_image.meta.download_url'

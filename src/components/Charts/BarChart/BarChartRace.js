@@ -56,12 +56,11 @@ const BarChartRace = ({ data }) => {
         valueAxis.rangeChangeDuration = stepDuration
         valueAxis.extraMax = 0.1
         valueAxis.cursorTooltipEnabled = true
-
-        // valueAxis.renderer.inside = true
-        // valueAxis.renderer.labels.template.fillOpacity = 0.3
-        // valueAxis.renderer.grid.template.strokeOpacity = 0
-        // valueAxis.renderer.baseGrid.strokeOpacity = 0
-        // valueAxis.renderer.labels.template.dy = 20
+        valueAxis.renderer.inside = true
+        valueAxis.renderer.labels.template.fillOpacity = 0.3
+        valueAxis.renderer.grid.template.strokeOpacity = 0
+        valueAxis.renderer.baseGrid.strokeOpacity = 0
+        valueAxis.renderer.labels.template.dy = 20
 
         let series = chart.series.push(new am4charts.ColumnSeries())
         series.dataFields.categoryY = 'country'
@@ -75,43 +74,26 @@ const BarChartRace = ({ data }) => {
         series.tooltip.pointerOrientation = 'vertical'
         series.tooltip.dy = -30
         series.columnsContainer.zIndex = 100
-
-        // let columnTemplate = series.columns.template
-        // columnTemplate.height = am4core.percent(50)
-        // columnTemplate.column.cornerRadius(60, 10, 60, 10)
-        // columnTemplate.strokeOpacity = 0
+        series.mainContainer.mask = undefined
 
         let labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.horizontalCenter = 'right'
         labelBullet.label.text = '{valueX.value}'
         labelBullet.label.truncate = false
         labelBullet.label.hideOversized = false
-        labelBullet.label.dx = 50
+        labelBullet.label.dx = 100
         labelBullet.label.textAlign = 'end'
 
-        // var bullet = columnTemplate.createChild(am4charts.CircleBullet)
-        // bullet.circle.radius = 20
-        // bullet.valign = 'middle'
-        // bullet.align = 'left'
-        // bullet.isMeasured = true
-        // bullet.interactionsEnabled = false
-        // bullet.horizontalCenter = 'right'
-        // bullet.interactionsEnabled = false
-        // bullet.dx = -20
-
-        // var image = bullet.createChild(am4core.Image)
-        // image.width = 40
-        // image.height = 40
-        // image.horizontalCenter = 'middle'
-        // image.verticalCenter = 'middle'
-        // image.propertyFields.href = 'href'
-
-        // image.adapter.add('mask', function (mask, target) {
-        //     var circleBullet = target.parent
-        //     return circleBullet.circle
-        // })
+        var image = labelBullet.createChild(am4core.Image)
+        image.width = 40
+        image.height = 40
+        image.horizontalCenter = 'right'
+        image.verticalCenter = 'middle'
+        image.propertyFields.href = 'href'
+        image.dx = 45
 
         chart.zoomOutButton.disabled = true
+        chart.maskBullets = false
 
         // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
         series.columns.template.adapter.add('fill', function (fill, target) {
@@ -132,7 +114,6 @@ const BarChartRace = ({ data }) => {
                     nextYear()
                 }
             }, stepDuration)
-            // nextYear()
         }
 
         function stop() {
@@ -146,6 +127,8 @@ const BarChartRace = ({ data }) => {
 
             if (currentYearIndex > lastYearIndex) {
                 currentYearIndex = 0
+                playButton.isActive = false
+                return
             }
 
             currentYear = years[currentYearIndex]
@@ -154,9 +137,7 @@ const BarChartRace = ({ data }) => {
             let itemsWithNonZero = 0
             for (let i = 0; i < chart.data.length; i++) {
                 chart.data[i].value = newData[i].value
-                // if (chart.data[i].value > 0) {
                 itemsWithNonZero++
-                // }
             }
 
             if (currentYearIndex === 0) {
@@ -200,7 +181,7 @@ const BarChartRace = ({ data }) => {
         series.events.on('inited', function () {
             setTimeout(function () {
                 playButton.isActive = true // this starts interval
-            }, 2000)
+            }, 1000)
         })
 
         return () => {
@@ -209,7 +190,7 @@ const BarChartRace = ({ data }) => {
         }
     }, [data])
 
-    return <div ref={raceBarChartDiv} className="race-map-section" />
+    return <div ref={raceBarChartDiv} className="race-bar-section" />
 }
 
 export default BarChartRace

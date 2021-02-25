@@ -39,7 +39,10 @@ import ProductProfile from './layouts/pages/Product/ProductProfile'
 import { ModalProvider } from 'react-simple-hook-modal'
 import {Helmet} from "react-helmet";
 
-if (process.env.NODE_ENV === 'production') {
+if (
+    process.env.NODE_ENV === 'production' &&
+    process.env.REACT_APP_GOOGLE_ANALYTICS_ID
+) {
     ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
     ReactGA.pageview(window.location.pathname + window.location.search)
 }
