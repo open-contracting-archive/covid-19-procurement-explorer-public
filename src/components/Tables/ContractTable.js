@@ -151,7 +151,7 @@ const ContractTable = (props) => {
                 <Loader />
             ) : (
                 <Fragment>
-                    <div className="relative">
+                    <div className="relative overflow-hidden">
                         <div className="custom-scrollbar table-scroll">
                             <table className="table">
                                 <thead>

@@ -3,16 +3,15 @@
         border: none;
         background: none;
         border-radius: 0;
-        border-bottom: 2px solid #1fbbec;
+        border-bottom: 2px solid #e8eff1;
         color: #293e45;
         box-shadow: none;
         min-height: 28px;
-        font-size: 16px;
+        font-size: 15px;
         line-height: 16px;
         padding-bottom: 3px;
 
-        @media only screen and (min-width: 768px) {
-            color: #293e45;
+        @media only screen and (min-width: 767px) {
             border-bottom-color: #1fbbec;
         }
     }

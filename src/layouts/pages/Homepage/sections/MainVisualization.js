@@ -50,7 +50,7 @@ const MainVisualization = () => {
                                             <Tab>
                                                 <ChartsIcon className="inline-block" />
                                                 <span className="text-xs md:text-sm mt-1 block md:inline-block">
-                                                    {trans('Charts')}
+                                                    {trans('Chart')}
                                                 </span>
                                             </Tab>
                                             <Tab>

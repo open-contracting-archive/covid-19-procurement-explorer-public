@@ -89,7 +89,7 @@ const BlogDetail = () => {
                                     <TagList item={blogDetail} />
                                 </div>
                             </div>
-                            <div className="px-2 lg:pr-16">
+                            <div className="md:px-2 lg:pr-16">
                                 <div
                                     className="mb-10 blogs-detail__content"
                                     dangerouslySetInnerHTML={{

@@ -34,7 +34,7 @@ const EventDetail = () => {
     }, [eventsId])
 
     return (
-        <section className="pt-8">
+        <section className="pt-8 px-4">
             <MetaInformation
                 title={eventDetail.title}
                 description={
@@ -43,7 +43,7 @@ const EventDetail = () => {
                 }
                 canonicalLink={window.location.href}
             />
-            <div className="container mx-auto px-4 news-detail">
+            <div className="container mx-auto news-detail">
                 <Breadcrumb item={'events'} />
                 {loading ? (
                     <Loader />
@@ -52,8 +52,8 @@ const EventDetail = () => {
                         <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 md:mb-10 text-primary-dark">
                             {eventDetail.title}
                         </h2>
-                        <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
-                            <div className="mb-4 events-detail__metadata">
+                        <div className="flex flex-wrap lg:flex-no-wrap mb-10">
+                            <div className="w-full md:w-2/12 mb-4 events-detail__metadata">
                                 <div className="time mb-8">
                                     <div className="card__day text-4xl mb-2 leading-normal">
                                         {formatDate(
@@ -64,7 +64,7 @@ const EventDetail = () => {
                                     <div className="card__month text-base uppercase">
                                         {formatDate(
                                             eventDetail.event_date,
-                                            'MMMM'
+                                            'MMMM, YYYY'
                                         )}
                                     </div>
                                     <p className="from mr-1 inline-block">
@@ -93,7 +93,7 @@ const EventDetail = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div>
+                            <div className="md:px-2 lg:pr-16">
                                 <div
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{

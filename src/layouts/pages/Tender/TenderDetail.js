@@ -112,7 +112,7 @@ const TenderDetail = () => {
                             }`}
                         />
                         <p className="mr-2 text-sm">
-                            {(contractDetail && contractDetail.status) || '-'}
+                            {get(contractDetail, 'status', '-')}
                         </p>
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
@@ -249,7 +249,7 @@ const TenderDetail = () => {
                             {trans('Procurement entity address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(contractDetail, 'buyer_address') || '-'}
+                            {get(contractDetail, 'buyer_address', '-')}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7 md:row-start-2">
