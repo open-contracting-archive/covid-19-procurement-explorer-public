@@ -5,6 +5,7 @@ import RaceMap from '../../components/Charts/RaceMap/RaceMap'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
+import Default from '../../constants/Default'
 
 const options = continentSelectList
 
@@ -47,8 +48,8 @@ const WorldTimelineMap = () => {
                         countryObject = {
                             ...countryObject,
                             [detail.country_code]: {
-                                value: detail.amount_usd,
-                                number: detail.tender_count,
+                                value: detail[Default.AMOUNT_USD],
+                                number: detail[Default.TENDER_COUNT],
                                 url: `/country/${detail.country
                                     .toLowerCase()
                                     .replace(' ', '-')}/data`

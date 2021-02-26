@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { isEmpty } from 'lodash'
-import { setCountryCurrency } from '../../../store/reducers/general/action'
+import { setCountryCurrency, setCurrency } from '../../../store/reducers/general/action'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
 import CountryMapElement from './sections/CountryMapElement'
 import CountryInfo from './sections/CountryInfo'
@@ -26,6 +26,7 @@ import {
 } from '../../../constants/Tab'
 import CmsPageContent from '../StaticPage/CmsPageContent'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import Default from '../../../constants/Default'
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -43,6 +44,10 @@ const CountryProfile = () => {
         if (country) {
             setCountryData(country)
             dispatch(setCountryCurrency(country.currency))
+        }
+
+        return()=>{
+            dispatch(setCurrency(Default.CURRENCY_USD))
         }
     }, [countries, countrySlug])
 

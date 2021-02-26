@@ -10,6 +10,7 @@ import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import Default from '../../constants/Default'
 
 const ProductTable = (props) => {
     const { params } = props
@@ -209,13 +210,16 @@ const ProductTable = (props) => {
                                                 {get(product, 'product_name')}
                                             </td>
                                             <td>
-                                                {get(product, 'tender_count')}
+                                                {get(
+                                                    product,
+                                                    Default.TENDER_COUNT
+                                                )}
                                             </td>
                                             <td>
-                                                {product.amount_usd &&
-                                                    product.amount_usd.toLocaleString(
-                                                        'en'
-                                                    )}
+                                                {product[Default.AMOUNT_USD] &&
+                                                    product[
+                                                        Default.AMOUNT_USD
+                                                    ].toLocaleString('en')}
                                             </td>
                                             <td>
                                                 {get(product, 'supplier_count')}

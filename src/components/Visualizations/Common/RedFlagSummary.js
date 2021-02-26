@@ -2,18 +2,18 @@ import React, { useEffect, useMemo, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { groupBy, identity, pickBy } from 'lodash'
-import VisualizationService from "../../../services/VisualizationService"
-import ContractView from "../../../constants/ContractView"
-import { formatDate } from "../../../helpers/date"
-import { toCamelCase } from "../../../helpers/general"
-import Default from "../../../constants/Default"
-import useTrans from "../../../hooks/useTrans"
-import Checkbox from "../../Checkbox/Checkbox"
-import CompareChart from "../../Charts/CompareChart/CompareChart"
-import Loader from "../../Loader/Loader"
-import ChartFooter from "../../Utilities/ChartFooter"
-import ContractViewSwitcher from "../../Utilities/ContractViewSwitcher"
-import { colors } from "../../../constants/Theme"
+import VisualizationService from '../../../services/VisualizationService'
+import ContractView from '../../../constants/ContractView'
+import { formatDate } from '../../../helpers/date'
+import { toCamelCase } from '../../../helpers/general'
+import Default from '../../../constants/Default'
+import useTrans from '../../../hooks/useTrans'
+import Checkbox from '../../Checkbox/Checkbox'
+import CompareChart from '../../Charts/CompareChart/CompareChart'
+import Loader from '../../Loader/Loader'
+import ChartFooter from '../../Utilities/ChartFooter'
+import ContractViewSwitcher from '../../Utilities/ContractViewSwitcher'
+import { colors } from '../../../constants/Theme'
 
 const RedFlagSummary = (props) => {
     // ===========================================================================
@@ -24,18 +24,24 @@ const RedFlagSummary = (props) => {
         params,
         helpText = 'The methodology of red flags calculation can be found here.'
     } = props
-    const redFlagList = useSelector((state) => state.general.redFlags.map((redFlag, index) => ({ ...redFlag, color: colors[index] })))
+    const redFlagList = useSelector((state) =>
+        state.general.redFlags.map((redFlag, index) => ({
+            ...redFlag,
+            color: colors[index]
+        }))
+    )
     const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState([])
-    const [
-        selectedRedFlags,
-        setSelectedRedFlags
-    ] = useState(() => redFlagList.map((redFlag) => redFlag.id))
+    const [selectedRedFlags, setSelectedRedFlags] = useState(() =>
+        redFlagList.map((redFlag) => redFlag.id)
+    )
     const [chartData, setChartData] = useState([])
     const indicators = useMemo(() => {
-        return redFlagList.filter((redFlag) => selectedRedFlags.includes(redFlag.id))
+        return redFlagList.filter((redFlag) =>
+            selectedRedFlags.includes(redFlag.id)
+        )
     }, [redFlagList, selectedRedFlags])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
@@ -71,9 +77,7 @@ const RedFlagSummary = (props) => {
             let sum = 0
 
             redFlagList
-                .filter((redFlag) =>
-                    selectedRedFlags.includes(redFlag.id)
-                )
+                .filter((redFlag) => selectedRedFlags.includes(redFlag.id))
                 .forEach((redFlag) => {
                     let redFlagData = grouped[key].find(
                         (redFlagItem) => redFlag.id === redFlagItem.red_flag_id
@@ -83,9 +87,9 @@ const RedFlagSummary = (props) => {
                         points[toCamelCase(redFlag.name)] =
                             viewType === ContractView.VALUE
                                 ? currency === Default.CURRENCY_LOCAL
-                                ? redFlagData.amount_local
-                                : redFlagData.amount_usd
-                                : redFlagData.tender_count
+                                    ? redFlagData[Default.AMOUNT_LOCAL]
+                                    : redFlagData[Default.AMOUNT_USD]
+                                : redFlagData[Default.TENDER_COUNT]
                         sum += points[toCamelCase(redFlag.name)]
                     } else {
                         points[toCamelCase(redFlag.name)] = 0
@@ -139,12 +143,13 @@ const RedFlagSummary = (props) => {
                                                         border-b border-blue-0 text-blue-50">
                                             <div className="flex items-center">
                                                 <div className="contract-line">
-                                            <span
-                                                className="line"
-                                                style={{
-                                                    background: item.color
-                                                }}
-                                            />
+                                                    <span
+                                                        className="line"
+                                                        style={{
+                                                            background:
+                                                                item.color
+                                                        }}
+                                                    />
                                                 </div>
                                                 <div className="contract-text">
                                                     <span>{item.name}</span>
@@ -156,7 +161,9 @@ const RedFlagSummary = (props) => {
                                                 checked={selectedRedFlags.includes(
                                                     item.id
                                                 )}
-                                                itemSelected={handleIndicatorSelection}
+                                                itemSelected={
+                                                    handleIndicatorSelection
+                                                }
                                             />
                                         </li>
                                     ))}
@@ -188,7 +195,8 @@ const RedFlagSummary = (props) => {
                     {shouldRenderChart() && (
                         <ContractViewSwitcher
                             viewType={viewType}
-                            viewHandler={setViewType} />
+                            viewHandler={setViewType}
+                        />
                     )}
                 </div>
 

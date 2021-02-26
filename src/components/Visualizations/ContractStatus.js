@@ -26,17 +26,18 @@ const ContractStatus = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ContractStatus(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.ContractStatus(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData([])
@@ -47,18 +48,18 @@ const ContractStatus = (props) => {
         if (!isEmpty(originalData)) {
             let total = sumBy(originalData, (item) => {
                 return viewType === ContractView.NUMBER
-                    ? item.tender_count
+                    ? item[Default.TENDER_COUNT]
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item[Default.AMOUNT_LOCAL]
+                    : item[Default.AMOUNT_USD]
             })
             let chartDataFormatted = originalData.map((item) => {
                 let actualValue =
                     viewType === ContractView.NUMBER
-                        ? item.tender_count
+                        ? item[Default.TENDER_COUNT]
                         : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                        ? item[Default.AMOUNT_LOCAL]
+                        : item[Default.AMOUNT_USD]
                 return {
                     name: item.status,
                     value: Math.ceil((actualValue / total) * 100),

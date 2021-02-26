@@ -9,6 +9,7 @@ import Loader from '../../components/Loader/Loader'
 import ContractView from '../../constants/ContractView'
 import ChartFooter from '../Utilities/ChartFooter'
 import ErrorHandler from '../ErrorHandler'
+import Default from '../../constants/Default'
 
 const options = continentSelectList
 
@@ -30,17 +31,18 @@ const WorldMap = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.GlobalMap(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.GlobalMap(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -57,8 +59,8 @@ const WorldMap = (props) => {
                     id: data.country_code,
                     value:
                         contractType === 'value'
-                            ? data.amount_usd
-                            : data.tender_count,
+                            ? data[Default.AMOUNT_USD]
+                            : data[Default.TENDER_COUNT],
                     url: `/country/${data.country
                         .toLowerCase()
                         .replace(' ', '-')}/data`

@@ -12,6 +12,7 @@ import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 import { formatNumber } from '../../helpers/number'
+import Default from '../../constants/Default'
 
 const BuyerTable = (props) => {
     // ===========================================================================
@@ -376,7 +377,10 @@ const BuyerTable = (props) => {
                                                 {get(buyer, 'country_name')}
                                             </td>
                                             <td>
-                                                {get(buyer, 'tender_count')}
+                                                {get(
+                                                    buyer,
+                                                    Default.TENDER_COUNT
+                                                )}
                                             </td>
                                             <td>
                                                 {get(buyer, 'supplier_count')}
@@ -388,10 +392,10 @@ const BuyerTable = (props) => {
                                                 )}
                                             </td>
                                             <td>
-                                                {buyer.amount_usd &&
-                                                    buyer.amount_usd.toLocaleString(
-                                                        'en'
-                                                    )}
+                                                {buyer[Default.AMOUNT_USD] &&
+                                                    buyer[
+                                                        Default.AMOUNT_USD
+                                                    ].toLocaleString('en')}
                                             </td>
                                             <td className="text-center">
                                                 {formatNumber(

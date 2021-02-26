@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
 import StackedChart from '../Charts/StackedChart/StackedChart'
 import useTrans from '../../hooks/useTrans'
@@ -9,6 +10,8 @@ import { dateDiff, formatDate } from '../../helpers/date'
 import { slugify } from '../../helpers/general'
 import ChartFooter from '../Utilities/ChartFooter'
 import ErrorHandler from '../ErrorHandler'
+import ContractView from '../../constants/ContractView'
+import Default from '../../constants/Default'
 
 const ProductsTimeline = (props) => {
     // ===========================================================================
@@ -22,6 +25,12 @@ const ProductsTimeline = (props) => {
     const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
+    const currency = useSelector((state) => state.general.currency)
+    const countryCurrency = useSelector(
+        (state) => state.general.countryCurrency
+    )
+    const selectedCurrency =
+        currency == Default.CURRENCY_LOCAL ? countryCurrency : currency
 
     // Function to sort by date
     const sortDate = (data) => {
@@ -40,16 +49,17 @@ const ProductsTimeline = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductTimeline(params).then((result) => {
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.ProductTimeline(params)
+            .then((result) => {
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData([])
@@ -64,7 +74,11 @@ const ProductsTimeline = (props) => {
             let products = {}
             groupedData[key].forEach((item) => {
                 products[slugify(item.product_name)] =
-                    chartType === 'value' ? item.amount_usd : item.tender_count
+                    chartType === ContractView.NUMBER
+                        ? item[Default.TENDER_COUNT]
+                        : currency === Default.CURRENCY_LOCAL
+                        ? item[Default.AMOUNT_LOCAL]
+                        : item[Default.AMOUNT_USD]
             })
 
             return {
@@ -77,7 +91,7 @@ const ProductsTimeline = (props) => {
 
         setChartData(finalChartData)
         setLoading(false)
-    }, [originalData, chartType])
+    }, [originalData, chartType, currency])
 
     return (
         <div className="bg-white rounded p-4 pb-0 md:pb-4 h-full simple-tab">
@@ -109,7 +123,10 @@ const ProductsTimeline = (props) => {
                     <Loader />
                 ) : !error ? (
                     <div>
-                        <StackedChart data={chartData} />
+                        <StackedChart
+                            data={chartData}
+                            currency={selectedCurrency}
+                        />
                     </div>
                 ) : (
                     <ErrorHandler />

@@ -4,7 +4,8 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const CombinedChart = ({ data, type }) => {
+const CombinedChart = (props) => {
+    const { data, type, currency } = props
     const combinedchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -64,7 +65,7 @@ const CombinedChart = ({ data, type }) => {
         series3.yAxis = valueAxis2
         series3.tooltipText =
             type == 'value'
-                ? '{name}\n[bold font-size: 20]${valueY}[/]'
+                ? `{name}\n[bold font-size: 20]${currency == 'usd' ? '$' : ''}{valueY} [bold font-size: 20 text-transform: uppercase]${currency}[/]`
                 : '{name}\n[bold font-size: 20]{valueY}[/]'
         series3.fontSize = 12
 

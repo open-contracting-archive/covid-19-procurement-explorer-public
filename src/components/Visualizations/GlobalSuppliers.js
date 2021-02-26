@@ -8,8 +8,9 @@ import VisualizationService from '../../services/VisualizationService'
 import ChartFooter from '../Utilities/ChartFooter'
 import ContractView from '../../constants/ContractView'
 import HelpText from '../../components/HelpText/HelpText'
-import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
+import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import ErrorHandler from '../ErrorHandler'
+import Default from '../../constants/Default'
 
 const GlobalSuppliers = (props) => {
     // ===========================================================================
@@ -31,17 +32,18 @@ const GlobalSuppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.GlobalSuppliers(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.GlobalSuppliers(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -50,24 +52,34 @@ const GlobalSuppliers = (props) => {
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
-            let productCountry = get(originalData, `by_${viewType}.product_country`, [])
-                .map((item) => {
-                    return {
-                        from: item.product_name,
-                        to: item.country_name,
-                        value:
-                            viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
-                    }
-                })
-            let supplierProduct = get(originalData, `by_${viewType}.supplier_product`, [])
-                .map((item) => {
-                    return {
-                        from: item.supplier_name,
-                        to: item.product_name,
-                        value:
-                            viewType === ContractView.VALUE ? item.amount_usd : item.tender_count
-                    }
-                })
+            let productCountry = get(
+                originalData,
+                `by_${viewType}.product_country`,
+                []
+            ).map((item) => {
+                return {
+                    from: item.product_name,
+                    to: item.country_name,
+                    value:
+                        viewType === ContractView.VALUE
+                            ? item[Default.AMOUNT_USD]
+                            : item[Default.TENDER_COUNT]
+                }
+            })
+            let supplierProduct = get(
+                originalData,
+                `by_${viewType}.supplier_product`,
+                []
+            ).map((item) => {
+                return {
+                    from: item.supplier_name,
+                    to: item.product_name,
+                    value:
+                        viewType === ContractView.VALUE
+                            ? item[Default.AMOUNT_USD]
+                            : item[Default.TENDER_COUNT]
+                }
+            })
             setChartData([...supplierProduct, ...productCountry])
         }
 
@@ -119,7 +131,10 @@ const GlobalSuppliers = (props) => {
                 ) : !error ? (
                     <div className="flex mt-4">
                         <div className="flex-1">
-                            <SankeyChart data={chartData} />
+                            <SankeyChart
+                                data={chartData}
+                                currency={Default.CURRENCY_USD}
+                            />
                         </div>
                     </div>
                 ) : (

@@ -8,6 +8,7 @@ import { isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import ChartFooter from '../../Utilities/ChartFooter'
 import ErrorHandler from '../../ErrorHandler'
+import Default from '../../../constants/Default'
 
 const ProductCategoryMap = (props) => {
     // ===========================================================================
@@ -26,17 +27,18 @@ const ProductCategoryMap = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductSummary(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.ProductSummary(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData([])
@@ -50,8 +52,8 @@ const ProductCategoryMap = (props) => {
                     name: item.product_name,
                     value:
                         viewType === ContractView.VALUE
-                            ? item.amount_usd
-                            : item.tender_count
+                            ? item[Default.AMOUNT_USD]
+                            : item[Default.TENDER_COUNT]
                 }
             })
 

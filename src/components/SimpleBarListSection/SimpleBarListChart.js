@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Default from '../../constants/Default'
 import { formatNumber } from '../../helpers/number'
 
-function SimpleBarListChart({ data, byValue, currency, viewType }) {
+function SimpleBarListChart({ data, currency, viewType }) {
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
@@ -27,25 +28,20 @@ function SimpleBarListChart({ data, byValue, currency, viewType }) {
                                 </div>
                                 <div className="ml-2 custom-horizontal-bar-amount">
                                     <p>
-                                        {/* {bar_value.amount
-                                            ? ` ${
-                                                  viewType === 'value'
-                                                      ? '$'
-                                                      : ''
-                                              }
-                                            ${formatNumber(bar_value.amount)}`
-                                            : '-'} */}
                                         {bar_value.amount ? (
                                             <>
-                                                {viewType === 'value'
+                                                {viewType === 'value' &&
+                                                currency !==
+                                                    Default.CURRENCY_LOCAL
                                                     ? '$'
                                                     : ''}
                                                 {formatNumber(bar_value.amount)}
                                                 {viewType === 'value' && (
                                                     <span className="uppercase text-xs ml-1">
-                                                        {currency === 'local'
+                                                        {currency ===
+                                                        Default.CURRENCY_LOCAL
                                                             ? countryCurrency
-                                                            : 'usd'}
+                                                            : Default.CURRENCY_USD}
                                                     </span>
                                                 )}
                                             </>

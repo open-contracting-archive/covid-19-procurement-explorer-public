@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Default from '../../constants/Default'
 import { formatNumber } from '../../helpers/number'
 
-function BarListChart({ data, byValue, text, currency, viewType }) {
+function BarListChart({ data, text, currency, viewType }) {
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
@@ -35,14 +36,18 @@ function BarListChart({ data, byValue, text, currency, viewType }) {
                                     </div>
                                     <div className="md:ml-2 custom-horizontal-bar-amount">
                                         <p>
-                                            {viewType === 'value' ? '$' : ''}
+                                            {viewType === 'value' &&
+                                            currency !== Default.CURRENCY_LOCAL
+                                                ? '$'
+                                                : ''}
                                             {formatNumber(bar_value.amount) ||
                                                 '-'}
                                             {viewType === 'value' && (
                                                 <span className="uppercase ml-1">
-                                                    {currency === 'local'
+                                                    {currency ===
+                                                    Default.CURRENCY_LOCAL
                                                         ? countryCurrency
-                                                        : 'usd'}
+                                                        : Default.CURRENCY_USD}
                                                 </span>
                                             )}
                                         </p>
