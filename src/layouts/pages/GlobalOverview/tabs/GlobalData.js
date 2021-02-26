@@ -81,8 +81,13 @@ const GlobalData = () => {
                     <div className="w-full lg:w-1/2 px-2 mb-4">
                         <ProductDistribution />
                     </div>
-                    <div className="w-full lg:w-1/2 px-2 mb-4">
+                    <div className="w-full lg:w-1/2 px-2 mb-4 relative">
                         <ContractRedFlags />
+                        <Link
+                            to="/global-overview/contracts"
+                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                            View in detail →
+                        </Link>
                     </div>
                     <div className="w-full px-2 mb-4">
                         <ContractsCorrelation />

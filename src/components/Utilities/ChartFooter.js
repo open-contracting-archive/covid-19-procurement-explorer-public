@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
@@ -13,6 +14,7 @@ import { twitterHandle } from '../../helpers/general'
 import socialIcons from '../../assets/img/icons/social'
 
 const ChartFooter = (props) => {
+    const { linkText } = props
     const { trans } = useTrans()
 
     function showFullScreenAction() {
@@ -34,7 +36,7 @@ const ChartFooter = (props) => {
 
     return (
         <div
-            className="chart-footer bg-white flex items-center justify-between border-t md:mt-4
+            className="chart-footer flex-wrap md:flex-no-wrap bg-white flex items-center justify-between border-t md:mt-4
              border-blue-0 text-sm text-primary-blue -mx-4 p-4 md:pb-0 rounded-b">
             <div className="flex items-center">
                 <div className="flex items-center mr-6">
@@ -92,6 +94,16 @@ const ChartFooter = (props) => {
                     </nav>
                 </div>
             </div>
+
+            {linkText && (
+                <div className="w-full md:w-auto my-4 md:my-0">
+                    <Link
+                        to={linkText}
+                        className="text-primary-blue inline-block text-sm">
+                        View in detail →
+                    </Link>
+                </div>
+            )}
 
             {showFullScreenAction()}
         </div>

@@ -400,3 +400,51 @@ svg tspan {
     right: -18px;
     z-index: 1;
 }
+
+.context-menu-dropdown {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #dedede;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 14px;
+    min-width: 300px;
+    padding: 10px;
+    transform: translateY(-5px);
+    z-index: 999;
+    max-height: 300px;
+    overflow-y: auto;
+
+    li {
+        margin-bottom: 8px;
+        border-bottom: 1px solid #f2f2f2;
+        padding-bottom: 8px;
+
+        &:last-child {
+            margin-bottom: 0;
+            border: none;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.context-menu {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #3d393d;
+    position: relative;
+    top: -2px;
+}
+
+.context-menu + .context-menu-dropdown:active,
+.context-menu:focus + .context-menu-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(20px);
+}

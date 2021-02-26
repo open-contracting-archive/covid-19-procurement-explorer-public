@@ -18,12 +18,12 @@ const CardContainer = (props) => {
     const { trans } = useTrans()
 
     return (
-        <div className={`bg-white rounded p-4 ${appendClass}`}>
+        <div className={`bg-white rounded p-4 h-full ${appendClass}`}>
             <Fragment>
                 <div className="flex flex-wrap items-center md:justify-between md:w-auto mb-4 md:mb-8 ">
-                    <div className="w-full flex items-center justify-between">
+                    <div className="w-full flex flex-wrap items-center justify-between">
                         <div className="flex">
-                            <h3 className="uppercase font-bold text-primary-dark inline-block">
+                            <h3 className="mb-4 md:mb-0 uppercase font-bold text-primary-dark inline-block">
                                 {trans(label)}
                             </h3>
 

@@ -15,19 +15,17 @@ const CombinedChart = ({ data, type }) => {
 
         // Create chart instance
         let chart = am4core.create(combinedchartDiv.current, am4charts.XYChart)
-    
+
         // Create axes
         let dateAxis = chart.xAxes.push(new am4charts.DateAxis())
-        //dateAxis.renderer.grid.template.location = 0;
-        //dateAxis.renderer.minGridDistance = 30;
 
         let valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis())
-        valueAxis1.title.text = 'Covid case/ deaths'
+        valueAxis1.title.text = 'Covid case / deaths'
         valueAxis1.fontSize = 12
 
         let valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis())
         valueAxis2.title.text =
-            type == 'by-value' ? 'Contract values' : 'Contract numbers'
+            type == 'value' ? 'Contract values' : 'Contract numbers'
         valueAxis2.fontSize = 12
         valueAxis2.renderer.opposite = true
         valueAxis2.renderer.grid.template.disabled = true
@@ -42,19 +40,30 @@ const CombinedChart = ({ data, type }) => {
         series1.fill = '#ABBABF'
         series1.strokeWidth = 0
         series1.clustered = false
-        series1.columns.template.width = am4core.percent(80)
+        series1.columns.template.width = am4core.percent(40)
         series1.fontSize = 12
+
+        let series2 = chart.series.push(new am4charts.ColumnSeries())
+        series2.dataFields.valueY = 'deathCase'
+        series2.dataFields.dateX = 'date'
+        series2.yAxis = valueAxis1
+        series2.name = 'Death By Covid-19'
+        series2.tooltipText = '{name}\n[bold font-size: 20]{valueY}[/]'
+        // series2.fill = '#d0d0d0'
+        series2.fill = '#abbabf80'
+        series2.strokeWidth = 0
+        series2.clustered = false
+        series2.toBack()
 
         let series3 = chart.series.push(new am4charts.LineSeries())
         series3.dataFields.valueY = 'value'
         series3.dataFields.dateX = 'date'
-        series3.name = type == 'by-value' ? 'Total spending' : 'Total contracts'
-        series3.fill = '#B174FE'
+        series3.name = type == 'value' ? 'Total spending' : 'Total contracts'
         series3.strokeWidth = 2
         series3.tensionX = 0.7
         series3.yAxis = valueAxis2
         series3.tooltipText =
-            type == 'by-value'
+            type == 'value'
                 ? '{name}\n[bold font-size: 20]${valueY}[/]'
                 : '{name}\n[bold font-size: 20]{valueY}[/]'
         series3.fontSize = 12
@@ -85,12 +94,7 @@ const CombinedChart = ({ data, type }) => {
         }
     }, [data])
 
-    return (
-        <div
-            ref={combinedchartDiv}
-            className="h-400"
-        />
-    )
+    return <div ref={combinedchartDiv} className="h-400" />
 }
 
 export default CombinedChart

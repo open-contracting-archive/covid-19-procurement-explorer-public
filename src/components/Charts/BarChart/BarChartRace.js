@@ -15,7 +15,7 @@ const BarChartRace = ({ data }) => {
         // Themes end
 
         let chart = am4core.create(raceBarChartDiv.current, am4charts.XYChart)
-        chart.padding(40, 40, 40, 40)
+        chart.padding(40, 40, 40, 0)
         chart.responsive.enabled = true
 
         let label = chart.plotContainer.createChild(am4core.Label)
@@ -65,7 +65,7 @@ const BarChartRace = ({ data }) => {
         let series = chart.series.push(new am4charts.ColumnSeries())
         series.dataFields.categoryY = 'country'
         series.dataFields.valueX = 'value'
-        series.tooltipText = '{valueX.value}'
+        series.tooltipText = '{valueX.value} USD'
         series.columns.template.strokeOpacity = 0
         series.columns.template.column.cornerRadiusBottomRight = 5
         series.columns.template.column.cornerRadiusTopRight = 5
@@ -78,10 +78,10 @@ const BarChartRace = ({ data }) => {
 
         let labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.horizontalCenter = 'right'
-        labelBullet.label.text = '{valueX.value}'
+        labelBullet.label.text = '{valueX.value} USD'
         labelBullet.label.truncate = false
         labelBullet.label.hideOversized = false
-        labelBullet.label.dx = 100
+        labelBullet.label.dx = 135
         labelBullet.label.textAlign = 'end'
 
         var image = labelBullet.createChild(am4core.Image)

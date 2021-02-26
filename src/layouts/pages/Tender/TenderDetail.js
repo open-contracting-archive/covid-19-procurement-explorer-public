@@ -61,12 +61,49 @@ const TenderDetail = () => {
                 <h2
                     className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark truncate-text"
                     title={contractDetail && contractDetail.contract_title}>
-                    {contractDetail && contractDetail.contract_title}
+                    {trans(contractDetail && contractDetail.contract_title)} #
+                    {contractDetail && contractDetail.contract_id}
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <RedIcon />
-                        <p className="mx-2 text-sm">0 Red flags identified</p>
+                        <div className="mx-2 text-sm">
+                            {trans(
+                                contractDetail && contractDetail.red_flag.length
+                            )}
+                            <span className="inline-block ml-1">
+                                {trans('Red flag identified')}
+                            </span>
+                            {contractDetail &&
+                            contractDetail.red_flag.length > 0 ? (
+                                <div className="inline-block relative ml-2">
+                                    <button className="focus:outline-none context-menu"></button>
+                                    <ul className="context-menu-dropdown custom-scrollbar">
+                                        {contractDetail &&
+                                            contractDetail.red_flag.map(
+                                                (value, index) => {
+                                                    return (
+                                                        <li key={index}>
+                                                            <h3 className="font-bold mb-1">
+                                                                {trans(
+                                                                    value.title
+                                                                )}
+                                                            </h3>
+                                                            <p>
+                                                                {trans(
+                                                                    value.description
+                                                                )}
+                                                            </p>
+                                                        </li>
+                                                    )
+                                                }
+                                            )}
+                                    </ul>
+                                </div>
+                            ) : (
+                                ''
+                            )}
+                        </div>
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <span
@@ -75,7 +112,7 @@ const TenderDetail = () => {
                             }`}
                         />
                         <p className="mr-2 text-sm">
-                            {contractDetail && contractDetail.status}
+                            {(contractDetail && contractDetail.status) || '-'}
                         </p>
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
@@ -90,7 +127,7 @@ const TenderDetail = () => {
                             }
                         />
                         <p className="mr-2 text-sm">
-                            {contractDetail && contractDetail.country_name}
+                            {get(contractDetail, 'country_name', '-')}
                         </p>
                     </div>
                 </div>
@@ -101,8 +138,11 @@ const TenderDetail = () => {
                         </p>
                         <p className="font-bold text-sm">
                             {formatDate(
-                                contractDetail && contractDetail.contract_date,
-                                'MMM D, YYYY'
+                                get(
+                                    contractDetail,
+                                    'contract_date',
+                                    'MMM D, YYYY'
+                                )
                             )}
                         </p>
                     </div>
@@ -111,9 +151,7 @@ const TenderDetail = () => {
                             {trans('Procurement procedure')}
                         </p>
                         <p className="font-bold text-sm capitalize">
-                            {(contractDetail &&
-                                contractDetail.procurement_procedure) ||
-                                '-'}
+                            {get(contractDetail, 'procurement_procedure', 0)}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -121,9 +159,10 @@ const TenderDetail = () => {
                             {trans('Number of bidders')}
                         </p>
                         <p className="font-bold text-xl">
-                            {(contractDetail &&
-                                formatNumber(contractDetail.bidders_no)) ||
-                                '-'}
+                            {contractDetail &&
+                                formatNumber(
+                                    get(contractDetail, 'bidders_no', 0)
+                                )}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
@@ -172,7 +211,7 @@ const TenderDetail = () => {
                                         contractDetail.contract_value_usd
                                     )}{' '}
                                     <span className="font-normal text-base uppercase">
-                                        USD
+                                        {trans('USD')}
                                     </span>
                                 </>
                             ) : (
@@ -186,7 +225,7 @@ const TenderDetail = () => {
                         <h5 className="text-sm font-normal uppercase mb-2">
                             {trans('Contract description')}
                         </h5>
-                        <p>{contractDetail && contractDetail.contract_desc}</p>
+                        <p>{get(contractDetail, 'contract_desc', '-')}</p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7">
                         <p className="text-sm uppercase mb-1">
@@ -196,10 +235,11 @@ const TenderDetail = () => {
                             <Link
                                 to={`/buyers/${get(
                                     contractDetail,
-                                    'buyer.buyer_id'
-                                )}`}>
+                                    'buyer_id'
+                                )}`}
+                                className="hover:text-primary-blue focus:text-primary-blue">
                                 <p className="font-bold text-sm uppercase">
-                                    {get(contractDetail, 'buyer.buyer_name')}
+                                    {get(contractDetail, 'buyer_name', '-')}
                                 </p>
                             </Link>
                         </p>
@@ -209,7 +249,7 @@ const TenderDetail = () => {
                             {trans('Procurement entity address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(contractDetail, 'buyer.buyer_address') || '-'}
+                            {get(contractDetail, 'buyer_address') || '-'}
                         </p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7 md:row-start-2">
@@ -219,10 +259,10 @@ const TenderDetail = () => {
                         <Link
                             to={`/suppliers/${get(
                                 contractDetail,
-                                'supplier.supplier_id'
+                                'supplier_id'
                             )}`}>
                             <p className="font-bold text-sm uppercase">
-                                {get(contractDetail, 'supplier.supplier_name')}
+                                {get(contractDetail, 'supplier_name', '-')}
                             </p>
                         </Link>
                     </div>
@@ -231,11 +271,7 @@ const TenderDetail = () => {
                             {trans('Supplier address')}
                         </p>
                         <p className="font-bold text-sm uppercase">
-                            {get(
-                                contractDetail,
-                                'supplier.supplier_address',
-                                '-'
-                            )}
+                            {get(contractDetail, 'supplier_address', '-')}
                         </p>
                     </div>
                 </div>

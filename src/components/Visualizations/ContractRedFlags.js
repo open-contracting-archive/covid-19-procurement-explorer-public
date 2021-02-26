@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
-import VisualizationService from "../../services/VisualizationService"
-import CardContainer from "../Utilities/CardContainer"
+import VisualizationService from '../../services/VisualizationService'
+import CardContainer from '../Utilities/CardContainer'
 import ErrorHandler from '../ErrorHandler'
 
 const ContractRedFlags = (props) => {
@@ -26,7 +26,7 @@ const ContractRedFlags = (props) => {
                 setLoading(false)
                 if (response.result) {
                     setOriginalData(response.result)
-                } else{
+                } else {
                     throw new Error()
                 }
             })
@@ -43,30 +43,32 @@ const ContractRedFlags = (props) => {
         <CardContainer
             loading={loading}
             label={label}
-            appendClass={'h-full'}
+            appendClass={'pb-12 h-full'}
             helpText={helpText}
             symbol={<FlagIcon className="ml-2 inline-block" />}>
             <div className="custom-horizontal-bar">
-                {!error ? (<ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
-                    {originalData.map((item, index) => (
-                        <li key={index}>
-                            <div className="flex items-center justify-between">
-                                <div className="flex-1">
-                                    <h3 className="pr-16">
-                                        {item.red_flag}
-                                    </h3>
+                {!error ? (
+                    <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
+                        {originalData.map((item, index) => (
+                            <li key={index}>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex-1">
+                                        <h3 className="pr-16">
+                                            {item.red_flag}
+                                        </h3>
+                                    </div>
+                                    <div>
+                                        <span className="font-bold">
+                                            {item.tender_count}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span className="font-bold">
-                                        {item.tender_count}
-                                    </span>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>) : (
-                <ErrorHandler />
-            )}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <ErrorHandler />
+                )}
             </div>
         </CardContainer>
     )

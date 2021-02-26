@@ -72,7 +72,7 @@ const VisualizationModal = (props) => {
     }
 
     return (
-        <div className="bar-chart-race-modal overflow-hidden -m-8 p-4">
+        <div className="bar-chart-race-modal overflow-y-auto -m-8 p-4">
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex justify-between">
                     <h3 className="uppercase font-bold text-primary-dark">

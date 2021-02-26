@@ -12,6 +12,7 @@ import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import { formatNumber } from '../../helpers/number'
 
 const SupplierTable = (props) => {
     // ===========================================================================
@@ -52,8 +53,8 @@ const SupplierTable = (props) => {
         return hasValidProperty(params, 'country')
     }
 
-    const tableRowClass = (hasRedFlags) => {
-        return hasRedFlags
+    const tableRowClass = (redFlagCount) => {
+        return redFlagCount
             ? 'table-row has-red-flag cursor-pointer'
             : 'table-row cursor-pointer'
     }
@@ -285,7 +286,7 @@ const SupplierTable = (props) => {
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
-                            <tr>
+                            <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         Supplier{' '}
@@ -361,7 +362,7 @@ const SupplierTable = (props) => {
                                                 showDetail(supplier.supplier_id)
                                             }
                                             className={tableRowClass(
-                                                supplier.red_flag
+                                                supplier.red_flag_tender_count
                                             )}>
                                             <td className="hover:text-primary-blue">
                                                 <p
@@ -397,10 +398,13 @@ const SupplierTable = (props) => {
                                                         'en'
                                                     )}
                                             </td>
-                                            <td>
-                                                {get(
-                                                    supplier,
-                                                    'average_red_flag'
+                                            <td className="text-center">
+                                                {formatNumber(
+                                                    get(
+                                                        supplier,
+                                                        'red_flag_tender_percentage',
+                                                        0
+                                                    )
                                                 )}
                                             </td>
                                         </tr>

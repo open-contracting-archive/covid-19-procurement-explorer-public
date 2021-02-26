@@ -141,7 +141,7 @@ const ProductTable = (props) => {
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
-                            <tr>
+                            <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
                                     <span className="flex items-center">
                                         {trans('Product Category')}{' '}
