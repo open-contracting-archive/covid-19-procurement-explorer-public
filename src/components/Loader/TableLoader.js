@@ -2,7 +2,9 @@ import React from 'react'
 
 const TableLoader = () => {
     return (
-        <div className="absolute bottom-0 left-0 w-full h-full rounded-md bg-opacity-50 bg-primary-dark text-lg font-bold flex items-center justify-center text-white">
+        <div
+            className="absolute bottom-0 left-0 w-full h-full rounded-md bg-opacity-50 bg-primary-dark text-lg font-bold flex items-center justify-center text-white"
+            style={{ top: '24px' }}>
             <svg className="spinner" viewBox="0 0 50 50">
                 <circle
                     className="path"

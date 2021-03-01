@@ -11,8 +11,9 @@ import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
-import { formatNumber } from '../../helpers/number'
 import Default from '../../constants/Default'
+import { formatDecimal } from '../../helpers/decimal'
+import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 
 const BuyerTable = (props) => {
     // ===========================================================================
@@ -23,6 +24,9 @@ const BuyerTable = (props) => {
     const [selectedFilters, setSelectedFilters] = useState(() =>
         identity(pickBy(params))
     )
+    const [sorting, setSorting] = useState(() => {
+        return { column: 'buyer_name', direction: '' }
+    })
     const [buyersNameParameter, setBuyersNameParameter] = useState('')
     const [loading, setLoading] = useState(true)
     const [limit, setLimit] = useState(20)
@@ -47,7 +51,7 @@ const BuyerTable = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [params?.country])
+    }, [params?.country, sorting])
 
     // ===========================================================================
     // Helpers and functions
@@ -64,9 +68,10 @@ const BuyerTable = (props) => {
 
     const LoadBuyersList = (page) => {
         setTableLoading(true)
-        setCurrentPage(get(page, 'selected') || 0)
+        setCurrentPage(get(page, 'selected', 0))
         VisualizationService.BuyerTableList({
             ...selectedFilters,
+            order: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
         }).then((response) => {
@@ -89,6 +94,41 @@ const BuyerTable = (props) => {
         })
     }
 
+    const appendSort = (columnName) => {
+        setSorting((previous) => {
+            if (previous.column === columnName) {
+                return {
+                    ...previous,
+                    direction: previous.direction === '-' ? '' : '-'
+                }
+            }
+            return {
+                column: columnName,
+                direction: ''
+            }
+        })
+    }
+    const columnSorting = (columnName) => {
+        return (
+            <span className="icon-sort">
+                <span
+                    className={`icon-sort-arrow-up ${
+                        sorting.column === columnName &&
+                        sorting.direction === '' &&
+                        'active'
+                    }`}
+                />
+                <span
+                    className={`icon-sort-arrow-down ${
+                        sorting.column === columnName &&
+                        sorting.direction === '-' &&
+                        'active'
+                    }`}
+                />
+            </span>
+        )
+    }
+
     const showDetail = (id) => {
         let path = `/buyers/${id}`
         history.push(path)
@@ -106,6 +146,8 @@ const BuyerTable = (props) => {
     const handleCloseFilter = () => {
         setShowFilter('hidden')
     }
+
+    console.log(originalData)
 
     return loading ? (
         <Loader />
@@ -212,141 +254,165 @@ const BuyerTable = (props) => {
                 ''
             )}
 
-            <div className="hidden mb-12 md:flex gap-8">
-                <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        {trans('Buyers')}
-                    </p>
-                    <form
-                        className="mt-2 select-filter--input"
-                        onSubmit={(event) =>
-                            handleInputSubmit(event, buyersNameParameter)
-                        }>
-                        <input
-                            type="text"
-                            className="select-filter"
-                            placeholder="Enter contract name"
-                            value={buyersNameParameter}
-                            onChange={(e) =>
-                                setBuyersNameParameter(e.target.value)
-                            }
-                        />
-                    </form>
-                </div>
-                {!hasCountry() && (
+            <div className="flex flex-wrap items-center justify-end md:justify-between mb-6 mt-12 md:mt-0 md:mb-12">
+                <div className="hidden md:flex gap-8">
                     <div className="w-40">
                         <p className="uppercase text-xs opacity-50 leading-none">
-                            {trans('Country')}
+                            {trans('Buyers')}
+                        </p>
+                        <form
+                            className="mt-2 select-filter--input"
+                            onSubmit={(event) =>
+                                handleInputSubmit(event, buyersNameParameter)
+                            }>
+                            <input
+                                type="text"
+                                className="select-filter"
+                                placeholder="Enter contract name"
+                                value={buyersNameParameter}
+                                onChange={(e) =>
+                                    setBuyersNameParameter(e.target.value)
+                                }
+                            />
+                        </form>
+                    </div>
+                    {!hasCountry() && (
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                {trans('Country')}
+                            </p>
+                            <Select
+                                className="mt-2 select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={countrySelectList}
+                                onChange={(selectedOption) =>
+                                    appendFilter({
+                                        country: selectedOption.value
+                                    })
+                                }
+                            />
+                        </div>
+                    )}
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            {trans('Product category')}
                         </p>
                         <Select
                             className="mt-2 select-filter text-sm"
                             classNamePrefix="select-filter"
-                            options={countrySelectList}
+                            options={productSelectList}
                             onChange={(selectedOption) =>
-                                appendFilter({ country: selectedOption.value })
+                                appendFilter({
+                                    product: selectedOption.value
+                                })
                             }
                         />
                     </div>
-                )}
-                <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        {trans('Product category')}
-                    </p>
-                    <Select
-                        className="mt-2 select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={productSelectList}
-                        onChange={(selectedOption) =>
-                            appendFilter({
-                                product: selectedOption.value
-                            })
-                        }
-                    />
+                    <div className="w-40">
+                        <p className="uppercase text-xs opacity-50 leading-none">
+                            {trans('Value range')}
+                        </p>
+                        <Select
+                            className="mt-2 select-filter text-sm"
+                            classNamePrefix="select-filter"
+                            options={valueRanges}
+                            onChange={(selectedOption) =>
+                                appendFilter({
+                                    contract_value_usd:
+                                        selectedOption.value.value,
+                                    value_comparison: selectedOption.value.sign
+                                })
+                            }
+                        />
+                    </div>
                 </div>
-                <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        {trans('Value range')}
-                    </p>
-                    <Select
-                        className="mt-2 select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={valueRanges}
-                        onChange={(selectedOption) =>
-                            appendFilter({
-                                contract_value_usd: selectedOption.value.value,
-                                value_comparison: selectedOption.value.sign
-                            })
-                        }
-                    />
+                <div>
+                    <div className="mt-4 text-primary-blue flex items-center text-sm">
+                        <DownloadIcon className="mr-2 inline-block" />
+                        <span>{trans('Download')}</span>
+                    </div>
                 </div>
             </div>
 
-            <div className="relative">
+            <div className="relative overflow-hidden">
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
                             <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
-                                    <span className="flex items-center">
-                                        Buyer{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('buyer_name')
+                                        }>
+                                        {trans('Buyer')}
+                                        {columnSorting('buyer_name')}
                                     </span>
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        Country{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('country_name')
+                                        }>
+                                        {trans('Country')}
+                                        {columnSorting('country_name')}
                                     </span>
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span className="flex items-center">
-                                        # of contracts{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('tender_count')
+                                        }>
+                                        {trans('# of contracts')}
+                                        {columnSorting('tender_count')}
                                     </span>
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span className="flex items-center">
-                                        # of suppliers{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('supplier_count')
+                                        }>
+                                        {trans('# of suppliers')}
+                                        {columnSorting('supplier_count')}
                                     </span>
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        product categories
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('product_category_count')
+                                        }>
+                                        {trans('product categories')}
+                                        {columnSorting(
+                                            'product_category_count'
+                                        )}
                                     </span>
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        value (usd)
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('amount_usd')
+                                        }>
+                                        {trans('value (usd)')}
+                                        {columnSorting('amount_usd')}
                                     </span>
                                 </th>
                                 <th style={{ width: '8%' }}>
-                                    <span className="flex items-center">
-                                        % red flags
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort(
+                                                'red_flag_tender_percentage'
+                                            )
+                                        }>
+                                        {trans('% red flags')}
+                                        {columnSorting(
+                                            'red_flag_tender_percentage'
+                                        )}
                                     </span>
                                 </th>
                             </tr>
@@ -398,7 +464,7 @@ const BuyerTable = (props) => {
                                                     ].toLocaleString('en')}
                                             </td>
                                             <td className="text-center">
-                                                {formatNumber(
+                                                {formatDecimal(
                                                     get(
                                                         buyer,
                                                         'red_flag_tender_percentage',
@@ -424,6 +490,7 @@ const BuyerTable = (props) => {
                 </div>
                 {tableLoading && <TableLoader />}
             </div>
+
             <div>
                 <div className="text-right mt-2 text-sm">
                     <p className="text-primary-dark text-opacity-50">

@@ -51,7 +51,7 @@ const LibraryUpcomingEvents = () => {
                                                 <div className="card__month text-base uppercase">
                                                     {formatDate(
                                                         event.event_date,
-                                                        'MMMM'
+                                                        'MMMM, YYYY'
                                                     )}
                                                 </div>
                                                 <div className="card__caption">
