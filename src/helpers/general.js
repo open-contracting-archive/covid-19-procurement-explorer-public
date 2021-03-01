@@ -1,4 +1,4 @@
-import { get, has } from 'lodash'
+import { has } from 'lodash'
 
 export const slugify = (text) => {
     return text.toString().toLowerCase()
@@ -28,5 +28,7 @@ export const toCamelCase = (string) => {
 export const hasValidProperty = (object, property) => {
     return (has(object, property) && object[property])
 }
+
+export const siteUrl = window.location.origin
 
 export const twitterHandle = "covid19"

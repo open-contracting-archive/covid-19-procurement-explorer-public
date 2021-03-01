@@ -5,5 +5,11 @@ export default {
     TOTAL_SUPPLIERS: 'total_suppliers',
     AVERAGE_BIDS: 'average_bids',
     DIRECT_OPEN: 'direct_open',
-    MONOPOLIZATION: 'monopolization'
+    MONOPOLIZATION: 'monopolization',
+
+    WORLD_MAP_RACE: 'world-map-race',
+    PRODUCTS_TIMELINE: 'products-timeline',
+    CONTRACTS_CORRELATION: 'contracts-correlation',
+    EQUITY_INDICATORS: 'equity-indicators',
+    RED_FLAG_SUMMARY: 'red-flag-summary'
 }

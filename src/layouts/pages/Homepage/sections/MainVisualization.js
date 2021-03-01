@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import useTrans from '../../../../hooks/useTrans'
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
 import { ShortTenderTable } from '../../../../components/Tables'
-import ChartFooter from '../../../../components/Utilities/ChartFooter'
 import CmsPageContent from '../../StaticPage/CmsPageContent'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
@@ -18,7 +15,22 @@ const MainVisualization = () => {
     // State and variables
     // ===========================================================================
     const { trans } = useTrans()
-    const fullScreenHandler = useFullScreenHandle()
+    const [tabView, setTabView] = useState('map')
+
+    const renderTabComponent = () => {
+        switch (tabView) {
+            case 'map' :
+                return (<WorldTimelineMap />)
+            case 'chart' :
+                return (<WorldTimelineRaceBarMap />)
+            case 'table' :
+                return (<ShortTenderTable />)
+            case 'sources' :
+                return (<CmsPageContent slug={'sources'} />)
+            default:
+                return (<WorldTimelineMap />)
+        }
+    }
 
     return (
         <section className="pt-16 bg-primary-gray pb-8 md:pb-24">
@@ -35,70 +47,69 @@ const MainVisualization = () => {
             </div>
             <div className="container mx-auto px-2 md:px-0">
                 <div className="md:bg-white md:rounded md:p-4 simple-tab md:flex md:flex-col md:justify-between world-map-section">
-                    <FullScreen handle={fullScreenHandler}>
-                        <Tabs>
-                            <div className="flex">
-                                <div className="flex flex-wrap md:flex-no-wrap w-full">
-                                    <div className="worldmap-tab w-full md:w-auto">
-                                        <TabList>
-                                            <Tab>
+                    <div className="flex">
+                        <div className="flex flex-wrap md:flex-no-wrap w-full">
+                            <div className="worldmap-tab w-full md:w-auto">
+                                <div>
+                                    <div className="product-worldmap-tab">
+                                        <div
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'map' && 'active'}`}
+                                            onClick={() => setTabView('map')}>
+                                            <div>
                                                 <MapIcon className="inline-block" />
                                                 <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Map')}
                                                 </span>
-                                            </Tab>
-                                            <Tab>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'chart' && 'active'}`}
+                                            onClick={() => setTabView('chart')}>
+                                            <div>
                                                 <ChartsIcon className="inline-block" />
                                                 <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Chart')}
                                                 </span>
-                                            </Tab>
-                                            <Tab>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'table' && 'active'}`}
+                                            onClick={() => setTabView('table')}>
+                                            <div>
                                                 <TableIcon className="inline-block" />
                                                 <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Statistics')}
                                                 </span>
-                                            </Tab>
-                                            <Tab>
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'sources' && 'active'}`}
+                                            onClick={() => setTabView('sources')}>
+                                            <div>
                                                 <SourcesIcon className="inline-block" />
                                                 <span className="text-xs md:text-sm mt-1 block md:inline-block">
                                                     {trans('Sources')}
                                                 </span>
-                                            </Tab>
-                                        </TabList>
-                                    </div>
-                                    <div className="bg-white world-map-chart-section py-8 px-3 md:py-0 md:px-0 flex-1 relative">
-                                        <TabPanel>
-                                            <WorldTimelineMap />
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <WorldTimelineRaceBarMap />
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <div className="pb-4">
-                                                <ShortTenderTable />
                                             </div>
-                                        </TabPanel>
-                                        <TabPanel>
-                                            <CmsPageContent slug={'sources'} />
-                                        </TabPanel>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </Tabs>
-                    </FullScreen>
-
-                    <ChartFooter fullScreenHandler={fullScreenHandler} />
+                            <div className="bg-white world-map-chart-section py-8 px-3 md:py-0 md:px-0 flex-1 relative">
+                                {renderTabComponent()}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p className="mt-6 text-center text-sm">
-                    {trans('Don’t see your country data?')}
-                    <Link
-                        to="/pages/add-my-country-data"
-                        className="inline-block ml-2 text-primary-blue">
-                        {trans('Here’s how you can add your country data')}
-                    </Link>
-                </p>
             </div>
+            <p className="mt-6 text-center text-sm">
+                {trans('Don’t see your country data?')}
+                <Link
+                    to="/pages/add-my-country-data"
+                    className="inline-block ml-2 text-primary-blue">
+                    {trans('Here’s how you can add your country data')}
+                </Link>
+            </p>
         </section>
     )
 }

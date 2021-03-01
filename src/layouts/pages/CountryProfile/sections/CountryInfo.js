@@ -4,11 +4,11 @@ import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
 import useTrans from '../../../../hooks/useTrans'
 import CurrencySwitcher from '../../../../components/CurrencySwitcher/CurrencySwitcher'
-import Tussell from '../../../../assets/img/tussell.png'
 import ErrorHandler from '../../../../components/ErrorHandler'
 import VisualizationService from '../../../../services/VisualizationService'
 import { get } from 'lodash'
 import Loader from '../../../../components/Loader/Loader'
+import Tussell from '../../../../assets/img/data-providers/tussell.png'
 
 const CountryInfo = (props) => {
     const { country } = props
@@ -132,7 +132,6 @@ const CountryInfo = (props) => {
                                     </h2>
                                 </div>
                             </div>
-
                             {country.country_code_alpha_2 === 'GB' && (
                                 <div className="w-full px-4 flex items-center justify-between mt-6 mb-5">
                                     <p className="text-xs font-normal underline w-3/5">
@@ -140,7 +139,7 @@ const CountryInfo = (props) => {
                                             'UK COVID Procurement data is kindly provided by Tussell'
                                         )}
                                     </p>
-                                    <img src={Tussell} alt="Tussel Logo" />
+                                    <img src={Tussell} alt="Tussel" />
                                 </div>
                             )}
                         </div>
@@ -154,9 +153,9 @@ const CountryInfo = (props) => {
                                     </span>
                                     <h2 className="text-xl">
                                         {country.covid_cases_total &&
-                                            country.covid_cases_total.toLocaleString(
-                                                'en'
-                                            )}
+                                        country.covid_cases_total.toLocaleString(
+                                            'en'
+                                        )}
                                     </h2>
                                 </div>
                             </div>
@@ -167,9 +166,9 @@ const CountryInfo = (props) => {
                                     </span>
                                     <h2 className="text-xl">
                                         {country.covid_deaths_total &&
-                                            country.covid_deaths_total.toLocaleString(
-                                                'en'
-                                            )}
+                                        country.covid_deaths_total.toLocaleString(
+                                            'en'
+                                        )}
                                     </h2>
                                 </div>
                             </div>

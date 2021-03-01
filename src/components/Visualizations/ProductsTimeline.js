@@ -12,6 +12,7 @@ import ChartFooter from '../Utilities/ChartFooter'
 import ErrorHandler from '../ErrorHandler'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
+import Visualization from '../../constants/Visualization'
 
 const ProductsTimeline = (props) => {
     // ===========================================================================
@@ -30,7 +31,7 @@ const ProductsTimeline = (props) => {
         (state) => state.general.countryCurrency
     )
     const selectedCurrency =
-        currency == Default.CURRENCY_LOCAL ? countryCurrency : currency
+        currency === Default.CURRENCY_LOCAL ? countryCurrency : currency
 
     // Function to sort by date
     const sortDate = (data) => {
@@ -133,7 +134,9 @@ const ProductsTimeline = (props) => {
                 )}
             </FullScreen>
 
-            <ChartFooter fullScreenHandler={fullScreenHandler} />
+            <ChartFooter
+                fullScreenHandler={fullScreenHandler}
+                embeddedVisualization={{ key: Visualization.PRODUCTS_TIMELINE, options: params }} />
         </div>
     )
 }

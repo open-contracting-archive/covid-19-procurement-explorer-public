@@ -5,5 +5,6 @@ export default {
     LOCALE: 'en',
     TENDER_COUNT: 'tender_count',
     AMOUNT_USD: 'amount_usd',
-    AMOUNT_LOCAL: 'amount_local'
+    AMOUNT_LOCAL: 'amount_local',
+    SITE_TITLE : 'Covid-19 Contract Explorer'
 }
