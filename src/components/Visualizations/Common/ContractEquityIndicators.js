@@ -12,25 +12,35 @@ import { formatDate } from '../../../helpers/date'
 import { toCamelCase } from '../../../helpers/general'
 import Default from '../../../constants/Default'
 import ContractView from '../../../constants/ContractView'
-import { colors } from "../../../constants/Theme"
-import ContractViewSwitcher from "../../Utilities/ContractViewSwitcher"
+import { colors } from '../../../constants/Theme'
+import ContractViewSwitcher from '../../Utilities/ContractViewSwitcher'
 
 const ContractEquityIndicators = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const { params } = props
-    const equities = useSelector((state) => state.general.equities.map((equity, index) => ({ ...equity, color: colors[index] })))
+    const equities = useSelector((state) =>
+        state.general.equities.map((equity, index) => ({
+            ...equity,
+            color: colors[index]
+        }))
+    )
     const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
-    const [selectedEquityIndicators, setSelectedEquityIndicators] = useState(() => equities.map((equity) => equity.id))
+    const [
+        selectedEquityIndicators,
+        setSelectedEquityIndicators
+    ] = useState(() => equities.map((equity) => equity.id))
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const indicators = useMemo(() => {
-        return equities.filter((equity) => selectedEquityIndicators.includes(equity.id))
+        return equities.filter((equity) =>
+            selectedEquityIndicators.includes(equity.id)
+        )
     }, [equities, selectedEquityIndicators])
 
     // ===========================================================================
@@ -68,16 +78,17 @@ const ContractEquityIndicators = (props) => {
                 )
                 .forEach((equity) => {
                     let equityValue = grouped[key].find(
-                        (equityItem) => equity.id === equityItem.equity_category_id
+                        (equityItem) =>
+                            equity.id === equityItem.equity_category_id
                     )
 
                     if (equityValue) {
                         points[toCamelCase(equity.name)] =
                             viewType === ContractView.VALUE
                                 ? currency === Default.CURRENCY_LOCAL
-                                ? equityValue.amount_local
-                                : equityValue.amount_usd
-                                : equityValue.tender_count
+                                    ? equityValue[Default.AMOUNT_LOCAL]
+                                    : equityValue[Default.AMOUNT_USD]
+                                : equityValue[Default.TENDER_COUNT]
                         sum += points[toCamelCase(equity.name)]
                     } else {
                         points[toCamelCase(equity.name)] = 0
@@ -131,12 +142,13 @@ const ContractEquityIndicators = (props) => {
                                                         border-b border-blue-0 text-blue-50">
                                             <div className="flex items-center">
                                                 <div className="contract-line">
-                                            <span
-                                                className="line"
-                                                style={{
-                                                    background: item.color
-                                                }}
-                                            />
+                                                    <span
+                                                        className="line"
+                                                        style={{
+                                                            background:
+                                                                item.color
+                                                        }}
+                                                    />
                                                 </div>
                                                 <div className="contract-text">
                                                     <span>{item.name}</span>
@@ -148,7 +160,9 @@ const ContractEquityIndicators = (props) => {
                                                 checked={selectedEquityIndicators.includes(
                                                     item.id
                                                 )}
-                                                itemSelected={handleEquitySelection}
+                                                itemSelected={
+                                                    handleEquitySelection
+                                                }
                                             />
                                         </li>
                                     ))}
@@ -180,7 +194,8 @@ const ContractEquityIndicators = (props) => {
                     {shouldRenderChart() && (
                         <ContractViewSwitcher
                             viewType={viewType}
-                            viewHandler={setViewType} />
+                            viewHandler={setViewType}
+                        />
                     )}
                 </div>
 

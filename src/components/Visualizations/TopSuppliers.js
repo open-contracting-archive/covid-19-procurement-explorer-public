@@ -26,17 +26,18 @@ const TopSuppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TopSuppliers(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.TopSuppliers(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -52,19 +53,19 @@ const TopSuppliers = (props) => {
 
             let total = sumBy(dataSet, (item) => {
                 return viewType === ContractView.NUMBER
-                    ? item.tender_count
+                    ? item[Default.TENDER_COUNT]
                     : currency === Default.CURRENCY_LOCAL
-                    ? item.amount_local
-                    : item.amount_usd
+                    ? item[Default.AMOUNT_LOCAL]
+                    : item[Default.AMOUNT_USD]
             })
 
             let chartDataFormatted = dataSet.map((item) => {
                 let actualValue =
                     viewType === ContractView.NUMBER
-                        ? item.tender_count
+                        ? item[Default.TENDER_COUNT]
                         : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                        ? item[Default.AMOUNT_LOCAL]
+                        : item[Default.AMOUNT_USD]
                 return {
                     name: item.supplier_name,
                     value: Math.ceil((actualValue / total) * 100),

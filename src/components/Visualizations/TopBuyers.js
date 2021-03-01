@@ -26,17 +26,18 @@ const TopBuyers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TopBuyers(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.TopBuyers(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -51,18 +52,18 @@ const TopBuyers = (props) => {
                     : originalData.by_number
             let total = sumBy(dataSet, (item) => {
                 return viewType === ContractView.NUMBER
-                    ? item.tender_count
+                    ? item[Default.TENDER_COUNT]
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item[Default.AMOUNT_LOCAL]
+                    : item[Default.AMOUNT_USD]
             })
             let chartDataFormatted = dataSet.map((item) => {
                 let actualValue =
                     viewType === ContractView.NUMBER
-                        ? item.tender_count
+                        ? item[Default.TENDER_COUNT]
                         : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                        ? item[Default.AMOUNT_LOCAL]
+                        : item[Default.AMOUNT_USD]
                 return {
                     name: item.buyer_name,
                     value: Math.ceil((actualValue / total) * 100),

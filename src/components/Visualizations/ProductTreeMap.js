@@ -4,6 +4,7 @@ import TreeMapChart from '../../components/Charts/TreeMapChart/TreeMapChart'
 import Loader from '../../components/Loader/Loader'
 import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
+import Default from '../../constants/Default'
 
 function ProductTreemap({ params }) {
     // ===========================================================================
@@ -38,8 +39,8 @@ function ProductTreemap({ params }) {
                 chartDataFormatted[item.product_name] = {
                     [item.product_name]:
                         chartType === 'value'
-                            ? item.amount_usd
-                            : item.tender_count
+                            ? item[Default.AMOUNT_USD]
+                            : item[Default.TENDER_COUNT]
                 }
             })
         }
@@ -76,38 +77,38 @@ function ProductTreemap({ params }) {
                     </div>
                     <table className="table">
                         <thead>
-                        <tr>
-                            <th>
+                            <tr>
+                                <th>
                                     <span className="flex items-center">
                                         Product Category
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th>
+                                </th>
+                                <th>
                                     <span className="flex items-center">
                                         # of contracts
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th>
+                                </th>
+                                <th>
                                     <span className="flex items-center">
                                         # of suppliers
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th>
+                                </th>
+                                <th>
                                     <span className="flex items-center">
                                         # of buyers
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                            <th>
+                                </th>
+                                <th>
                                     <span className="flex items-center">
                                         value (usd)
                                         <SortIcon className="ml-1 cursor-pointer" />
                                     </span>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>{tempTableData}</tbody>
                     </table>

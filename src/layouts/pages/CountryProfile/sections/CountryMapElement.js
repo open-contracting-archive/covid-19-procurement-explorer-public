@@ -7,6 +7,7 @@ import Loader from '../../../../components/Loader/Loader'
 import ContractView from '../../../../constants/ContractView'
 import ChartFooter from '../../../../components/Utilities/ChartFooter'
 import ErrorHandler from '../../../../components/ErrorHandler'
+import Default from '../../../../constants/Default'
 
 const CountryMapElement = (props) => {
     const [loading, setLoading] = useState(true)
@@ -43,8 +44,8 @@ const CountryMapElement = (props) => {
                     id: originalData.country_code,
                     value:
                         viewType === ContractView.VALUE
-                            ? originalData.amount_usd
-                            : originalData.tender_count
+                            ? originalData[Default.AMOUNT_USD]
+                            : originalData[Default.TENDER_COUNT]
                 }
             ]
             setMapData(mapDataFormatted)

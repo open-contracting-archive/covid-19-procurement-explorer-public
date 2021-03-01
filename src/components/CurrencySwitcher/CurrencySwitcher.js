@@ -19,7 +19,7 @@ const CurrencySwitcher = () => {
             <div className="flex items-center border border-blue-20 rounded-md">
                 <button
                     className={`text-xs p-2 md:text-base rounded-l-md cursor-pointer outline-none appearance-none font-bold uppercase md:px-4 md:py-2 ${
-                        selectedCurrency === 'usd'
+                        selectedCurrency === Default.CURRENCY_USD
                             ? 'text-white bg-primary-dark'
                             : 'opacity-50'
                     } `}
@@ -28,7 +28,7 @@ const CurrencySwitcher = () => {
                 </button>
                 <button
                     className={`text-xs p-2 md:text-base rounded-r-md cursor-pointer outline-none appearance-none font-bold uppercase md:px-4 md:py-2 ${
-                        selectedCurrency === 'local'
+                        selectedCurrency === Default.CURRENCY_LOCAL
                             ? 'text-white bg-primary-dark'
                             : 'opacity-50'
                     }`}

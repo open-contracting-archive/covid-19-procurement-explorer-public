@@ -4,6 +4,7 @@ import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
 import BarChartRace from '../Charts/BarChart/BarChartRace'
 import ContractView from '../../constants/ContractView'
+import Default from '../../constants/Default'
 
 const ContractTrend = (props) => {
     // ===========================================================================
@@ -14,7 +15,9 @@ const ContractTrend = (props) => {
     const [chartData, setChartData] = useState({})
     const [loading, setLoading] = useState(true)
     const dataColumn =
-        viewType === ContractView.VALUE ? 'amount_usd' : 'tender_count'
+        viewType === ContractView.VALUE
+            ? Default.AMOUNT_USD
+            : Default.TENDER_COUNT
 
     useEffect(() => {
         CountryService.GetGlobalMapData().then((response) => {

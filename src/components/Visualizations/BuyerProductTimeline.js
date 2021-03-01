@@ -4,8 +4,9 @@ import useTrans from '../../hooks/useTrans'
 import Loader from '../../components/Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from "../Utilities/ChartFooter"
+import ChartFooter from '../Utilities/ChartFooter'
 import ErrorHandler from '../ErrorHandler'
+import Default from '../../constants/Default'
 
 const BuyerProductTimeline = (props) => {
     // ===========================================================================
@@ -26,17 +27,18 @@ const BuyerProductTimeline = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductTimelineRace(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.ProductTimelineRace(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData([])
@@ -52,8 +54,8 @@ const BuyerProductTimeline = (props) => {
                     product: detail.product_name,
                     value:
                         buyerProductTimelineType === 'value'
-                            ? detail.amount_usd
-                            : detail.tender_count
+                            ? detail[Default.AMOUNT_USD]
+                            : detail[Default.TENDER_COUNT]
                 }
             })
             setChartData(formattedData)

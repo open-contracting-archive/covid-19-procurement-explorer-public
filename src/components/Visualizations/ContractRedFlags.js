@@ -3,6 +3,7 @@ import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import VisualizationService from '../../services/VisualizationService'
 import CardContainer from '../Utilities/CardContainer'
 import ErrorHandler from '../ErrorHandler'
+import Default from '../../constants/Default'
 
 const ContractRedFlags = (props) => {
     // ===========================================================================
@@ -59,7 +60,7 @@ const ContractRedFlags = (props) => {
                                     </div>
                                     <div>
                                         <span className="font-bold">
-                                            {item.tender_count}
+                                            {item[Default.TENDER_COUNT]}
                                         </span>
                                     </div>
                                 </div>

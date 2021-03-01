@@ -6,7 +6,7 @@ import VisualizationService from '../../services/VisualizationService'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
-import CardContainer from "../Utilities/CardContainer"
+import CardContainer from '../Utilities/CardContainer'
 import ErrorHandler from '../ErrorHandler'
 
 const ProductDistribution = (props) => {
@@ -30,17 +30,18 @@ const ProductDistribution = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.ProductDistribution(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.ProductDistribution(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData([])
@@ -51,26 +52,30 @@ const ProductDistribution = (props) => {
         if (!isEmpty(originalData)) {
             let total = sumBy(originalData, (item) => {
                 return viewType === ContractView.NUMBER
-                    ? item.tender_count
+                    ? item[Default.TENDER_COUNT]
                     : currency === Default.CURRENCY_LOCAL
-                        ? item.amount_local
-                        : item.amount_usd
+                    ? item[Default.AMOUNT_LOCAL]
+                    : item[Default.AMOUNT_USD]
             })
             let chartDataFormatted = originalData
                 .sort((a, b) => {
                     if (viewType === ContractView.NUMBER) {
-                        return a.tender_count > b.tender_count ? -1 : 0
+                        return a[Default.TENDER_COUNT] > b[Default.TENDER_COUNT]
+                            ? -1
+                            : 0
                     }
 
-                    return a.amount_usd > b.amount_usd ? -1 : 0
+                    return a[Default.AMOUNT_USD] > b[Default.AMOUNT_USD]
+                        ? -1
+                        : 0
                 })
                 .map((item) => {
                     let actualValue =
                         viewType === ContractView.NUMBER
-                            ? item.tender_count
+                            ? item[Default.TENDER_COUNT]
                             : currency === Default.CURRENCY_LOCAL
-                            ? item.amount_local
-                            : item.amount_usd
+                            ? item[Default.AMOUNT_LOCAL]
+                            : item[Default.AMOUNT_USD]
                     return {
                         name: item.product_name,
                         value: Math.ceil((actualValue / total) * 100),

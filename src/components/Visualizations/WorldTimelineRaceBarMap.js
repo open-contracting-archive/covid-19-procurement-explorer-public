@@ -7,6 +7,7 @@ import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
 import { continentSelectList } from '../../helpers/country'
 import ContractView from '../../constants/ContractView'
+import Default from '../../constants/Default'
 
 const WorldTimelineRaceBarMap = () => {
     // ===========================================================================
@@ -47,8 +48,8 @@ const WorldTimelineRaceBarMap = () => {
                         country: country.country,
                         value:
                             raceBarType === 'value'
-                                ? country.amount_usd
-                                : country.tender_count,
+                                ? country[Default.AMOUNT_USD]
+                                : country[Default.TENDER_COUNT],
                         href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
                     }))
                 const sum = filtered.reduce(

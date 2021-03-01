@@ -31,6 +31,8 @@ const ContractsCorrelation = (props) => {
     const fullScreenHandler = useFullScreenHandle()
     const helpText =
         'Correlation between number of active COVID cases and value of COVID contracts signed'
+    const selectedCurrency =
+        currency == Default.CURRENCY_LOCAL ? countryCurrency : currency
 
     // ===========================================================================
     // Hooks
@@ -65,10 +67,10 @@ const ContractsCorrelation = (props) => {
                     activeCase: item.active_cases,
                     value:
                         viewType === ContractView.NUMBER
-                            ? item.tender_count
+                            ? item[Default.TENDER_COUNT]
                             : currency === Default.CURRENCY_LOCAL
-                            ? item.amount_local
-                            : item.amount_usd,
+                            ? item[Default.AMOUNT_LOCAL]
+                            : item[Default.AMOUNT_USD],
                     deathCase: item.death_cases
                 }
             })
@@ -77,8 +79,7 @@ const ContractsCorrelation = (props) => {
         return () => {
             setChartData([])
         }
-    }, [originalData, viewType])
-
+    }, [originalData, viewType, currency])
 
     return (
         <div className="bg-white rounded p-4 simple-tab right-direction">
@@ -101,7 +102,11 @@ const ContractsCorrelation = (props) => {
                 ) : !error ? (
                     <div className="flex mt-4">
                         <div className="flex-1">
-                            <CombinedChart data={chartData} type={viewType} />
+                            <CombinedChart
+                                data={chartData}
+                                type={viewType}
+                                currency={selectedCurrency}
+                            />
                         </div>
                     </div>
                 ) : (

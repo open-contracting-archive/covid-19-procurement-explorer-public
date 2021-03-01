@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
 import BarChartRace from '../Charts/BarChart/BarChartRace'
+import Default from '../../constants/Default'
 
 const DirectOpenContractTrend = (props) => {
     // ===========================================================================
@@ -12,7 +13,7 @@ const DirectOpenContractTrend = (props) => {
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({})
     const [loading, setLoading] = useState(true)
-    const dataColumn = 'tender_count'
+    const dataColumn = Default.TENDER_COUNT
 
     useEffect(() => {
         CountryService.DirectOpenContractTrend().then((response) => {
