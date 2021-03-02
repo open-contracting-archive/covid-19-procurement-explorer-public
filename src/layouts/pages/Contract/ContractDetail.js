@@ -8,13 +8,13 @@ import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg
 import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import CountryService from '../../../services/CountryService'
-import AwardedItems from './tabs/AwardedItems'
+import AwardedItems from '../Contract/tabs/AwardedItems'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
 import Loader from '../../../components/Loader/Loader'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
-const TenderDetail = () => {
+const ContractDetail = () => {
     const { contractId } = useParams()
     const [loading, setLoading] = useState(true)
     const [contractDetail, setContractDetail] = useState({})
@@ -108,7 +108,7 @@ const TenderDetail = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <span
                             className={`status-indicator ${
-                                contractDetail && contractDetail.status
+                                contractDetail && contractDetail.status.toLowerCase()
                             }`}
                         />
                         <p className="mr-2 text-sm">
@@ -299,4 +299,4 @@ const TenderDetail = () => {
     )
 }
 
-export default TenderDetail
+export default ContractDetail

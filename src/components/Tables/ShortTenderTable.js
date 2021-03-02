@@ -115,18 +115,8 @@ const ShortTenderTable = () => {
                                                 )}>
                                                 <td>{tender.contract_title}</td>
                                                 <td>{tender.country_name}</td>
-                                                <td>
-                                                    {get(
-                                                        tender,
-                                                        'buyer.buyer_name'
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {get(
-                                                        tender,
-                                                        'supplier.supplier_name'
-                                                    )}
-                                                </td>
+                                                <td>{tender.buyer_name}</td>
+                                                <td>{tender.supplier_name}</td>
                                                 <td className="capitalize">
                                                     {
                                                         tender.procurement_procedure

@@ -5,7 +5,7 @@ import GlobalOverview from "../layouts/pages/GlobalOverview"
 import BuyerProfile from "../layouts/pages/Buyer/BuyerProfile"
 import SupplierProfile from "../layouts/pages/Supplier/SupplierProfile"
 import StaticPage from "../layouts/pages/StaticPage"
-import TenderDetail from "../layouts/pages/Tender/TenderDetail"
+import ContractDetail from "../layouts/pages/Contract/ContractDetail"
 import Tags from "../layouts/pages/Library/Tags"
 import Library from "../layouts/pages/Library"
 import ResourceDetail from "../layouts/pages/Resources/ResourceDetail"
@@ -98,7 +98,7 @@ export const webRoutes = [
     },
     {
         path: "/contracts/:contractId",
-        component: <TenderDetail />
+        component: <ContractDetail />
     },
     {
         path: "/buyers/:id",
