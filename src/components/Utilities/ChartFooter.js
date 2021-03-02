@@ -7,7 +7,7 @@ import {
     TwitterShareButton,
     EmailShareButton
 } from 'react-share'
-import EmbeddedModal from "../Modals/EmbeddedModal"
+import EmbeddedModal from '../Modals/EmbeddedModal'
 import useTrans from '../../hooks/useTrans'
 import { twitterHandle } from '../../helpers/general'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
@@ -45,9 +45,7 @@ const ChartFooter = (props) => {
     }
 
     return (
-        <div
-            className="chart-footer flex-wrap md:flex-no-wrap bg-white flex items-center justify-between border-t md:mt-4
-             border-blue-0 text-sm text-primary-blue -mx-4 p-4 md:pb-0 rounded-b">
+        <div className="chart-footer flex-wrap md:flex-no-wrap bg-white flex items-center justify-between border-t rounded rounded-t-none             border-blue-0 text-sm text-primary-blue p-4 rounded-b">
             <div className="flex items-center">
                 <div className="flex items-center mr-6">
                     <DownloadIcon className="mr-2 inline-block" />
@@ -95,12 +93,18 @@ const ChartFooter = (props) => {
 
                         {embeddedVisualization && (
                             <Fragment>
-                                <span className="block mt-1 pt-3 mb-2 -mx-3 px-3 text-primary-dark">
-                                    {trans('Share as')}
-                                </span>
-                                <div className="social-embed flex items-center cursor-pointer" onClick={() => modalHandler()}>
-                                    <socialIcons.codingIcon className="w-5" />
-                                    <span className="ml-4">{trans('Embedded')}</span>
+                                <div className="embedded-share">
+                                    <span className="block mb-2 -mx-3 px-3 text-primary-dark">
+                                        {trans('Share as')}
+                                    </span>
+                                    <div
+                                        className="social-embed flex items-center cursor-pointer"
+                                        onClick={() => modalHandler()}>
+                                        <socialIcons.codingIcon className="w-5" />
+                                        <span className="ml-4">
+                                            {trans('Embedded')}
+                                        </span>
+                                    </div>
                                 </div>
                             </Fragment>
                         )}

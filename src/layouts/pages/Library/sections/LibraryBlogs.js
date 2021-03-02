@@ -25,7 +25,7 @@ const LibraryBlogs = () => {
     }, [])
 
     return (
-        <section className="px-4 py-24 blog">
+        <section className="px-4 py-12 md:py-24 blog">
             <div className="container mx-auto">
                 <div className="text-center">
                     <p className="text-xl blue-50 pb-10">{trans('Blogs')}</p>
@@ -67,7 +67,7 @@ const LibraryBlogs = () => {
                                         </Link>
                                         <div>
                                             <Link to={`/blogs/${blog.id}`}>
-                                                <h3 className="blogs-caption__title">
+                                                <h3 className="blogs-caption__title hover:text-primary-blue focus:text-primary-blue">
                                                     {blog.title}
                                                 </h3>
                                             </Link>

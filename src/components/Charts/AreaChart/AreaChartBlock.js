@@ -13,9 +13,9 @@ const AreaChartBlock = (props) => {
     return (
         <div className="text-primary-dark pb-4 w-full">
             <AreaChart data={chartData} apiData colorValue={colorValue} />
-            <p className="mt-2">
+            <p className="mt-2 flex leading-tight items-baseline">
                 <strong
-                    className="text-xl inline-block mr-3"
+                    className="text-xl inline-block mr-1"
                     title={totalAmount}>
                     {currency && (
                         <span>

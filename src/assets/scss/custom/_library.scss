@@ -21,7 +21,7 @@
 }
 .news {
     .display__item .img-wrapper {
-        @apply h-full;
+        height: calc(100% - 68px);
     }
     .list__item .news-thumbnail {
         .img-wrapper {

@@ -16,6 +16,15 @@
     }
 }
 
+.world-map-chart-section {
+    .world-map-chart-container {
+        @media only screen and (min-width: 768px) {
+            padding-left: 110px;
+            min-height: 700px;
+        }
+    }
+}
+
 .h-500 {
     width: 100%;
     height: 700px;
@@ -99,6 +108,11 @@
     color: #797979 !important;
     margin-bottom: 14px;
 
+    &:hover,
+    &:focus {
+        color: #1fbbec !important;
+    }
+
     &:last-child {
         margin-bottom: 0;
     }
@@ -109,14 +123,23 @@
     }
 
     &.email {
-        border-bottom: 1px solid #e9e9e9 !important;
-        padding-bottom: 16px !important;
         margin-bottom: 0 !important;
     }
 }
 
+.embedded-share {
+    border-top: 1px solid #e9e9e9 !important;
+    padding-top: 16px !important;
+    margin-top: 16px;
+}
+
 .social-embed {
     color: #797979 !important;
+
+    &:hover,
+    &:focus {
+        color: #1fbbec !important;
+    }
 }
 
 #react-simple-modal-container {

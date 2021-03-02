@@ -33,8 +33,11 @@ const EmbeddedModal = (props) => {
     useEffect(() => {
         const iframeHTMLElement = document.createElement("IFRAME")
         iframeHTMLElement.src = getSiteUrl(params)
-        iframeHTMLElement.frameborder = '0'
+        iframeHTMLElement.frameBorder = '0'
         iframeHTMLElement.scrolling = 'no'
+        iframeHTMLElement.style.width = '100%'
+        iframeHTMLElement.style.margin = '0'
+        iframeHTMLElement.style.border = 'none'
         setSnippet(iframeHTMLElement.outerHTML)
     }, [params?.key, params?.country])
 

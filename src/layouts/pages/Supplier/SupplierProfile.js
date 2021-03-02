@@ -117,7 +117,7 @@ const SupplierProfile = () => {
                                 borderTop: '5px solid #1fbbec'
                             }}
                             className="pt-16 pb-24 bg-primary-gray">
-                            <div className="container mx-auto">
+                            <div className="container mx-auto px-2">
                                 <div className="flex flex-wrap -mx-2 mb-6">
                                     <div className="w-full lg:w-1/3 px-2 mb-4">
                                         <TotalSpending

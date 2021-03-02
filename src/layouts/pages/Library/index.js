@@ -16,9 +16,11 @@ const Library = () => {
                 title="Library"
                 description="Welcome Covid-19 Contract Explorer"
             />
-            <section className="news px-4 py-24 bg-blue-0 -mt-8">
+            <section className="news px-4 py-12 md:py-24 bg-blue-0 -mt-8">
                 <div className="container mx-auto">
-                    <p className="text-2xl mb-10">{trans('Library')}</p>
+                    <p className="text-xl md:text-2xl mb-6 md:mb-10">
+                        {trans('Library')}
+                    </p>
                     <LibraryNews />
                 </div>
             </section>

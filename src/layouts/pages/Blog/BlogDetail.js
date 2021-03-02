@@ -38,7 +38,7 @@ const BlogDetail = () => {
     }, [blogId])
 
     return (
-        <section className="pt-8 px-2">
+        <section className="p-4 md:pt-8">
             <MetaInformation
                 title={blogDetail.title}
                 imageURL={`${API_URL}${get(

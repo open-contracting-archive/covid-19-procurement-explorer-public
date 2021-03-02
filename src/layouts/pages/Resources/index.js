@@ -12,6 +12,8 @@ import TableLoader from '../../../components/Loader/TableLoader'
 import ReactPaginate from 'react-paginate'
 import useContentFilters from '../../../hooks/useContentFilters'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { ReactComponent as FilterIcon } from '../../../assets/img/icons/ic_filter.svg'
+import { ReactComponent as FilterCloseIcon } from '../../../assets/img/icons/ic_filter-close.svg'
 
 const limit = 10
 
@@ -19,11 +21,15 @@ const Resources = () => {
     const [resourceList, setResourceList] = useState([])
     const [selectedFilters, setSelectedFilters] = useState({})
     const [totalItems, setTotalItems] = useState(0)
+    const [sorting, setSorting] = useState(() => {
+        return { column: 'title', direction: '' }
+    })
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
     const [loading, setLoading] = useState(true)
     const [tableLoading, setTableLoading] = useState(false)
     const { countrySelectList, resourceTypeSelectList } = useContentFilters()
+    const [showFilter, setShowFilter] = useState('hidden')
     const history = useHistory()
     const { trans } = useTrans()
     window.scrollTo(0, 0)
@@ -35,13 +41,14 @@ const Resources = () => {
 
     useEffect(() => {
         LoadResourceList()
-    }, [selectedFilters])
+    }, [selectedFilters, sorting])
 
     const LoadResourceList = (page) => {
         setTableLoading(true)
         setCurrentPage(get(page, 'selected') || 0)
         CmsPageService.ResourceList({
             ...selectedFilters,
+            order: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
         }).then((response) => {
@@ -68,8 +75,51 @@ const Resources = () => {
         })
     }
 
+    const appendSort = (columnName) => {
+        setSorting((previous) => {
+            if (previous.column === columnName) {
+                return {
+                    ...previous,
+                    direction: previous.direction === '-' ? '' : '-'
+                }
+            }
+            return {
+                column: columnName,
+                direction: ''
+            }
+        })
+    }
+    const columnSorting = (columnName) => {
+        return (
+            <span className="icon-sort">
+                <span
+                    className={`icon-sort-arrow-up ${
+                        sorting.column === columnName &&
+                        sorting.direction === '' &&
+                        'active'
+                    }`}
+                />
+                <span
+                    className={`icon-sort-arrow-down ${
+                        sorting.column === columnName &&
+                        sorting.direction === '-' &&
+                        'active'
+                    }`}
+                />
+            </span>
+        )
+    }
+
     const handleCountryFilter = (country) => {
         appendFilter({ country })
+    }
+
+    const handleFilterToggle = () => {
+        setShowFilter(showFilter === 'hidden' ? 'block' : 'hidden')
+    }
+
+    const handleCloseFilter = () => {
+        setShowFilter('hidden')
     }
 
     return (
@@ -78,119 +128,153 @@ const Resources = () => {
                 title="Resources"
                 description="Welcome Covid-19 Contract Explorer"
             />
-            <section className="px-4 resources__cards pt-24 pb-12 -mt-8">
+            <section className="px-4 resources__cards pt-12 md:pt-24 pb-4 md:pb-12 -mt-8">
                 <div className="container mx-auto">
                     <Breadcrumb />
 
-                    <h2 className="text-2xl">{trans('Resources')}</h2>
+                    <h2 className="text-xl md:text-2xl">
+                        {trans('Resources')}
+                    </h2>
                 </div>
             </section>
-            <section className="resources__table py-12 bg-primary-gray">
+            <section className="resources__table p-4 md:py-12 bg-primary-gray">
                 <div className="container mx-auto">
                     <h2 className="font-normal text-lg mb-6">
                         {trans(
                             'Best practices and solutions from our database'
                         )}
                     </h2>
-                    <div className="mb-12 flex gap-8 ">
-                        {/* <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Title')}
-                            </p>
-                            <input
-                                type="text"
-                                name="title"
-                                className="text-field text-sm"
-                                placeholder="ALL"
-                            />
-                        </div> */}
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Country')}
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={countrySelectList}
-                                onChange={(selectedOption) =>
-                                    handleCountryFilter(selectedOption.value)
-                                }
-                            />
+
+                    <div className="relative">
+                        <div
+                            className="md:hidden cursor-pointer"
+                            onClick={handleFilterToggle}>
+                            <div className="filter-ui">
+                                <FilterIcon />
+                            </div>
                         </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Type')}
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={resourceTypeSelectList}
-                                onChange={(selectedOption) => {
-                                    appendFilter({
-                                        resource_type: selectedOption.value
-                                    })
-                                }}
-                            />
+                        {showFilter ? (
+                            <div
+                                className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
+                                <div className="flex justify-between text-white mb-4 md:mb-0">
+                                    <span className="text-sm uppercase font-bold">
+                                        Filter
+                                    </span>
+                                    <span
+                                        className="filter-close text-sm uppercase font-bold cursor-pointer"
+                                        onClick={handleCloseFilter}>
+                                        <FilterCloseIcon />
+                                    </span>
+                                </div>
+                                <div className="flex -mx-2 -mb-5 flex-wrap">
+                                    <div className="w-1/2 md:w-40 px-2 mb-5">
+                                        <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
+                                            {trans('Country')}
+                                        </p>
+                                        <Select
+                                            className="select-filter text-sm"
+                                            classNamePrefix="select-filter"
+                                            options={countrySelectList}
+                                            onChange={(selectedOption) =>
+                                                handleCountryFilter(
+                                                    selectedOption.value
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                    <div className="w-1/2 md:w-40 px-2 mb-5">
+                                        <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
+                                            {trans('Type')}
+                                        </p>
+                                        <Select
+                                            className="select-filter text-sm"
+                                            classNamePrefix="select-filter"
+                                            options={resourceTypeSelectList}
+                                            onChange={(selectedOption) => {
+                                                appendFilter({
+                                                    resource_type:
+                                                        selectedOption.value
+                                                })
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            ''
+                        )}
+                    </div>
+
+                    <div className="flex flex-wrap items-center justify-end md:justify-between md:mt-0 md:mb-12">
+                        <div className="hidden md:flex gap-8">
+                            <div className="w-40">
+                                <p className="uppercase text-xs opacity-50 leading-none">
+                                    {trans('Country')}
+                                </p>
+                                <Select
+                                    className="select-filter text-sm"
+                                    classNamePrefix="select-filter"
+                                    options={countrySelectList}
+                                    onChange={(selectedOption) =>
+                                        handleCountryFilter(
+                                            selectedOption.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="w-40">
+                                <p className="uppercase text-xs opacity-50 leading-none">
+                                    {trans('Type')}
+                                </p>
+                                <Select
+                                    className="select-filter text-sm"
+                                    classNamePrefix="select-filter"
+                                    options={resourceTypeSelectList}
+                                    onChange={(selectedOption) => {
+                                        appendFilter({
+                                            resource_type: selectedOption.value
+                                        })
+                                    }}
+                                />
+                            </div>
                         </div>
-                        {/* <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Topic')}
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Year')}
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div>
-                        <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
-                                {trans('Language')}
-                            </p>
-                            <Select
-                                className="select-filter text-sm"
-                                classNamePrefix="select-filter"
-                                options={options}
-                                defaultValue={options[0]}
-                            />
-                        </div> */}
                     </div>
                     {loading ? (
                         <Loader />
                     ) : (
                         <>
-                            <div className="relative">
+                            <div className="relative overflow-hidden">
                                 <div className="custom-scrollbar table-scroll">
                                     <table className="table table__resources">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: '35%' }}>
-                                                    <span className="flex items-center">
-                                                        {trans('Title')}{' '}
-                                                        <SortIcon className="ml-1 cursor-pointer" />
+                                                    <span
+                                                        className="flex items-center cursor-pointer"
+                                                        onClick={() =>
+                                                            appendSort('title')
+                                                        }>
+                                                        {trans('Title')}
+                                                        {columnSorting('title')}
                                                     </span>
                                                 </th>
                                                 <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
-                                                        {trans('Country')}{' '}
-                                                        <SortIcon className="ml-1 cursor-pointer" />
+                                                        {trans('Country')}
                                                     </span>
                                                 </th>
                                                 <th style={{ width: '10%' }}>
-                                                    <span className="flex items-center">
-                                                        {trans('Type')}{' '}
-                                                        <SortIcon className="ml-1 cursor-pointer" />
+                                                    <span
+                                                        className="flex items-center cursor-pointer"
+                                                        onClick={() =>
+                                                            appendSort(
+                                                                'resource_type'
+                                                            )
+                                                        }>
+                                                        {trans('Type')}
+                                                        {columnSorting(
+                                                            'resource_type'
+                                                        )}
                                                     </span>
                                                 </th>
                                             </tr>
@@ -209,9 +293,11 @@ const Resources = () => {
                                                                     )
                                                                 }>
                                                                 <td>
-                                                                    {
-                                                                        resource.title
-                                                                    }
+                                                                    <p className="hover:text-primary-blue focus:text-primary-blue">
+                                                                        {
+                                                                            resource.title
+                                                                        }
+                                                                    </p>
                                                                 </td>
                                                                 <td>
                                                                     {countryNameById(

@@ -2,10 +2,12 @@ import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
+import ReactPaginate from 'react-paginate'
 import ContractService from '../../services/ContractService'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import 'react-datepicker/dist/react-datepicker.css'
+import TableLoader from '../Loader/TableLoader'
 import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
@@ -16,6 +18,9 @@ const ProductTable = (props) => {
     const { params } = props
     const { countrySlug } = useParams()
     const [originalData, setOriginalData] = useState([])
+    const [sorting, setSorting] = useState(() => {
+        return { column: 'product_name', direction: '' }
+    })
     const [loading, setLoading] = useState(true)
     const [selectedFilters, setSelectedFilters] = useState(() =>
         identity(pickBy(params))
@@ -24,26 +29,41 @@ const ProductTable = (props) => {
     const { trans } = useTrans()
     const history = useHistory()
     const [showFilter, setShowFilter] = useState('hidden')
+    const [limit, setLimit] = useState(20)
+    const [totalItems, setTotalItems] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [tableLoading, setTableLoading] = useState(false)
 
     useEffect(() => {
-        setLoading(true)
+        LoadProductsList()
+
+        return () => {
+            setOriginalData([])
+        }
+    }, [params?.country, selectedFilters, sorting])
+
+    const LoadProductsList = (page) => {
+        setTableLoading(true)
+        setCurrentPage(get(page, 'selected', 0))
         ContractService.ProductList({
-            ...selectedFilters
+            ...selectedFilters,
+            order: sorting.direction + sorting.column,
+            limit: limit,
+            offset: page && page.selected * limit
         })
             .then((response) => {
                 if (response) {
                     setOriginalData(response)
+                    setTotalItems(response.count)
+                    setTableLoading(false)
                 }
                 setLoading(false)
             })
             .catch((error) => {
                 setLoading(false)
+                setTableLoading(false)
             })
-
-        return () => {
-            setOriginalData([])
-        }
-    }, [selectedFilters])
+    }
 
     const showDetail = (id) => {
         if (countrySlug) {
@@ -53,6 +73,7 @@ const ProductTable = (props) => {
         }
     }
     const appendFilter = (selected) => {
+        setTableLoading(true)
         setSelectedFilters((previous) => {
             return {
                 ...previous,
@@ -60,6 +81,43 @@ const ProductTable = (props) => {
             }
         })
     }
+
+    const appendSort = (columnName) => {
+        setSorting((previous) => {
+            if (previous.column === columnName) {
+                return {
+                    ...previous,
+                    direction: previous.direction === '-' ? '' : '-'
+                }
+            }
+            return {
+                column: columnName,
+                direction: ''
+            }
+        })
+    }
+
+    const columnSorting = (columnName) => {
+        return (
+            <span className="icon-sort">
+                <span
+                    className={`icon-sort-arrow-up ${
+                        sorting.column === columnName &&
+                        sorting.direction === '' &&
+                        'active'
+                    }`}
+                />
+                <span
+                    className={`icon-sort-arrow-down ${
+                        sorting.column === columnName &&
+                        sorting.direction === '-' &&
+                        'active'
+                    }`}
+                />
+            </span>
+        )
+    }
+
     const hasCountry = () => {
         return hasValidProperty(params, 'country')
     }
@@ -84,7 +142,7 @@ const ProductTable = (props) => {
 
             {showFilter ? (
                 <div
-                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
+                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
                     style={{ minWidth: '250px' }}>
                     <div className="flex justify-between text-white mb-4 md:mb-0">
                         <span className="text-sm uppercase font-bold">
@@ -138,66 +196,65 @@ const ProductTable = (props) => {
                 </div>
             )}
 
-            <div className="relative">
+            <div className="relative overflow-hidden">
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
                             <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
-                                    <span className="flex items-center">
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('product_name')
+                                        }>
                                         {trans('Product Category')}{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                        {columnSorting('product_name')}
                                     </span>
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span className="flex items-center">
-                                        # of contracts{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('tender_count')
+                                        }>
+                                        {trans('# of contracts')}
+                                        {columnSorting('tender_count')}
                                     </span>
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span className="flex items-center">
-                                        value (usd)
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('amount_usd')
+                                        }>
+                                        {trans('value (usd)')}
+                                        {columnSorting('amount_usd')}
                                     </span>
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span className="flex items-center">
-                                        # of suppliers{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('supplier_count')
+                                        }>
+                                        {trans('# of suppliers')}
+                                        {columnSorting('supplier_count')}
                                     </span>
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span className="flex items-center">
-                                        # of buyers{' '}
-                                        <span className="icon-sort">
-                                            <span className="icon-sort-arrow-up"></span>
-                                            <span className="icon-sort-arrow-down"></span>
-                                        </span>
+                                    <span
+                                        className="flex items-center cursor-pointer"
+                                        onClick={() =>
+                                            appendSort('buyer_count')
+                                        }>
+                                        {trans('# of buyers')}
+                                        {columnSorting('buyer_count')}
                                     </span>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {loading ? (
-                                <tr>
-                                    <td colSpan={5}>
-                                        <Loader sm />
-                                    </td>
-                                </tr>
-                            ) : originalData.length ? (
+                            {originalData &&
                                 originalData.map((product, index) => {
                                     return (
                                         <tr
@@ -229,16 +286,59 @@ const ProductTable = (props) => {
                                             </td>
                                         </tr>
                                     )
-                                })
-                            ) : (
-                                <tr>
-                                    <td colSpan={5} className="text-center">
-                                        <p>No data available</p>
-                                    </td>
-                                </tr>
-                            )}
+                                })}
                         </tbody>
                     </table>
+                    {!originalData.length && (
+                        <div
+                            className="flex items-center justify-center bg-white rounded-md"
+                            style={{
+                                height: '75%',
+                                minHeight: '250px'
+                            }}>
+                            <p>No data available</p>
+                        </div>
+                    )}
+                </div>
+                {tableLoading && <TableLoader />}
+            </div>
+            <div>
+                <div className="text-right mt-2 text-sm">
+                    <p className="text-primary-dark text-opacity-50">
+                        Showing{' '}
+                        <span className="text-primary-dark text-opacity-75">
+                            {1 + currentPage * limit}
+                        </span>{' '}
+                        -{' '}
+                        <span className="text-primary-dark text-opacity-75">
+                            {limit + currentPage * limit > totalItems
+                                ? totalItems
+                                : limit + currentPage * limit}
+                        </span>{' '}
+                        of{' '}
+                        <span className="text-primary-dark text-opacity-75">
+                            {totalItems}
+                        </span>{' '}
+                        rows
+                    </p>
+                </div>
+
+                <div className="pagination-container">
+                    <ReactPaginate
+                        previousLabel={'previous'}
+                        nextLabel={'next'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={totalItems / limit}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={10}
+                        onPageChange={LoadProductsList}
+                        containerClassName={'pagination-items'}
+                        pageClassName={'pagination-item'}
+                        previousClassName={'pagination-item prev'}
+                        nextClassName={'pagination-item next'}
+                        activeClassName={'active'}
+                    />
                 </div>
             </div>
         </div>

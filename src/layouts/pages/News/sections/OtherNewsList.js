@@ -100,7 +100,7 @@ const OtherNewsList = () => {
                     <Loader />
                 ) : otherNewsList.length ? (
                     <Fragment>
-                        <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10 mb-10">
+                        <div className="grid grid-cols-12 gap-x-0 gap-y-6 sm:gap-6 mb-10">
                             {otherNewsList.map((news) => (
                                 <Link
                                     className="news-thumbnail"
@@ -124,7 +124,7 @@ const OtherNewsList = () => {
                                         </div>
                                     )}
                                     <div>
-                                        <h3 className="news-caption__title">
+                                        <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
                                             {news.title}
                                         </h3>
                                         <p className="news-caption__date">

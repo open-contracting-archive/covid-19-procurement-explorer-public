@@ -96,7 +96,7 @@ const LibrarySection = () => {
                                                 {insightItem.type}
                                             </p>
                                         </div>
-                                        <h4 className="library__heading ">
+                                        <h4 className="library__heading hover:text-primary-blue focus:text-primary-blue ">
                                             {insightItem.title}
                                         </h4>
                                         <p className="library__date">

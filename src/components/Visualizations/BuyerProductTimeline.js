@@ -66,55 +66,57 @@ const BuyerProductTimeline = (props) => {
     const barColorValue = '#ABBABF'
 
     return (
-        <div className="bg-white rounded p-4 h-full">
+        <div>
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex justify-between">
-                    <h3 className="uppercase font-bold  text-primary-dark">
-                        {label}
-                    </h3>
+                <div className="p-4 bg-white rounded rounded-b-none h-full">
+                    <div className="flex justify-between">
+                        <h3 className="uppercase font-bold  text-primary-dark">
+                            {label}
+                        </h3>
 
-                    <div className="flex justify-end">
-                        <ul className="contract-switch flex">
-                            <li
-                                className={`mr-4 cursor-pointer ${
-                                    buyerProductTimelineType === 'value'
-                                        ? 'active'
-                                        : ''
-                                }`}
-                                onClick={() =>
-                                    setBuyerProductTimelineType('value')
-                                }>
-                                {trans('By value')}
-                            </li>
-                            <li
-                                className={`cursor-pointer ${
-                                    buyerProductTimelineType === 'number'
-                                        ? 'active'
-                                        : ''
-                                }`}
-                                onClick={() =>
-                                    setBuyerProductTimelineType('number')
-                                }>
-                                {trans('By number')}
-                            </li>
-                        </ul>
+                        <div className="flex justify-end">
+                            <ul className="contract-switch flex">
+                                <li
+                                    className={`mr-4 cursor-pointer ${
+                                        buyerProductTimelineType === 'value'
+                                            ? 'active'
+                                            : ''
+                                    }`}
+                                    onClick={() =>
+                                        setBuyerProductTimelineType('value')
+                                    }>
+                                    {trans('By value')}
+                                </li>
+                                <li
+                                    className={`cursor-pointer ${
+                                        buyerProductTimelineType === 'number'
+                                            ? 'active'
+                                            : ''
+                                    }`}
+                                    onClick={() =>
+                                        setBuyerProductTimelineType('number')
+                                    }>
+                                    {trans('By number')}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    {loading ? (
+                        <Loader />
+                    ) : !error ? (
+                        <SimpleBarChart
+                            data={chartData}
+                            height="600px"
+                            className="chart-full"
+                            barColorValue={barColorValue}
+                            chartKey="product"
+                            chartValue="value"
+                            axisRotation="270"
+                        />
+                    ) : (
+                        <ErrorHandler />
+                    )}
                 </div>
-                {loading ? (
-                    <Loader />
-                ) : !error ? (
-                    <SimpleBarChart
-                        data={chartData}
-                        height="600px"
-                        className="chart-full"
-                        barColorValue={barColorValue}
-                        chartKey="product"
-                        chartValue="value"
-                        axisRotation="270"
-                    />
-                ) : (
-                    <ErrorHandler />
-                )}
             </FullScreen>
 
             <ChartFooter fullScreenHandler={fullScreenHandler} />

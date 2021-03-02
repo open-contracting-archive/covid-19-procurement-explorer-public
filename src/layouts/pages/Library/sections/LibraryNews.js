@@ -26,14 +26,14 @@ const LibraryNews = () => {
 
     return (
         <Fragment>
-            <p className="text-xl mb-6 ">{trans('News')}</p>
             {loading ? (
                 <Loader />
             ) : (
                 <Fragment>
-                    <div className="grid md:grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-10">
+                    <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
                         <div className="display__item flex flex-col">
                             <div className="news__item flex-1">
+                                <p className="text-xl mb-6 ">{trans('News')}</p>
                                 {newsList.length && (
                                     <Link
                                         className="news-thumbnail"
