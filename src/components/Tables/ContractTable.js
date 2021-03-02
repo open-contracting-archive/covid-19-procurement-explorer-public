@@ -258,33 +258,33 @@ const ContractTable = (props) => {
 
                                 <tbody>
                                     {originalData &&
-                                        originalData.map((tender, index) => {
+                                        originalData.map((contract, index) => {
                                             return (
                                                 <tr
                                                     key={index}
                                                     onClick={() =>
-                                                        showDetail(tender.id)
+                                                        showDetail(contract.id)
                                                     }
                                                     className={tableRowClass(
-                                                        tender.red_flag &&
-                                                            tender.red_flag
+                                                        contract.red_flag &&
+                                                            contract.red_flag
                                                                 .length
                                                     )}>
                                                     <td className="hover:text-primary-blue">
                                                         <p
                                                             className="truncate-text"
                                                             title={
-                                                                tender.contract_title
+                                                                contract.contract_title
                                                             }>
                                                             {
-                                                                tender.contract_title
+                                                                contract.contract_title
                                                             }
                                                         </p>
                                                     </td>
                                                     {!hasCountry() && (
                                                         <td>
                                                             {
-                                                                tender.country_name
+                                                                contract.country_name
                                                             }
                                                         </td>
                                                     )}
@@ -292,14 +292,8 @@ const ContractTable = (props) => {
                                                         <td>
                                                             <p
                                                                 className="truncate-text"
-                                                                title={get(
-                                                                    tender,
-                                                                    'buyer.buyer_name'
-                                                                )}>
-                                                                {get(
-                                                                    tender,
-                                                                    'buyer.buyer_name'
-                                                                )}
+                                                                title={contract.buyer_name}>
+                                                                {contract.buyer_name}
                                                             </p>
                                                         </td>
                                                     )}
@@ -307,43 +301,37 @@ const ContractTable = (props) => {
                                                         <td>
                                                             <p
                                                                 className="truncate-text"
-                                                                title={get(
-                                                                    tender,
-                                                                    'supplier.supplier_name'
-                                                                )}>
-                                                                {get(
-                                                                    tender,
-                                                                    'supplier.supplier_name'
-                                                                )}
+                                                                title={contract.supplier_name}>
+                                                                {contract.supplier_name}
                                                             </p>
                                                         </td>
                                                     )}
                                                     <td className="capitalize">
                                                         {
-                                                            tender.procurement_procedure
+                                                            contract.procurement_procedure
                                                         }
                                                     </td>
                                                     {!hasProduct() && (
                                                         <td>
                                                             {get(
-                                                                tender,
+                                                                contract,
                                                                 'product_category'
                                                             )}
                                                         </td>
                                                     )}
                                                     <td>
                                                         {formatDate(
-                                                            tender.contract_date
+                                                            contract.contract_date
                                                         )}
                                                     </td>
                                                     <td>
-                                                        {tender.contract_value_usd &&
-                                                            tender.contract_value_usd.toLocaleString(
+                                                        {contract.contract_value_usd &&
+                                                            contract.contract_value_usd.toLocaleString(
                                                                 'en'
                                                             )}
                                                     </td>
                                                     <td>
-                                                        {tender.red_flag
+                                                        {contract.red_flag
                                                             .length > 0 && (
                                                             <span className="mr-4">
                                                                 <FlagIcon />

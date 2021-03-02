@@ -34,7 +34,7 @@ class CmsPageService {
                 getURI('pages'),
                 {
                     type: "content.InsightsPage",
-                    fields: "*",
+                    fields: '_,title,id,slug,content_image,news_date,country,contents_type',
                     contents_type: "Blog",
                     order: "-news_date",
                     ...queryParams
@@ -112,7 +112,7 @@ class CmsPageService {
                 getURI('pages'),
                 {
                     type: "content.ResourcesPage",
-                    fields: "*",
+                    fields: '_,title,id,slug,published_date,country,resource_type,lang,topics',
                     order: "-published_date",
                     ...queryParams
                 }

@@ -13,7 +13,7 @@ const NewsSection = () => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        CmsPageService.NewsList({ limit: 5, featured: true })
+        CmsPageService.NewsList({ limit: 5 })
             .then((response) => {
                 setNewsList(response.items)
                 setLoading(false)
