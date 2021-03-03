@@ -14,7 +14,7 @@ import {
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
-import RouterView from "./RouterView"
+import RouterView from './RouterView'
 
 if (
     process.env.NODE_ENV === 'production' &&
@@ -27,6 +27,7 @@ if (
 function App() {
     const dispatch = useDispatch()
     const currentLocale = useSelector((state) => state.general.currentLocale)
+    const countries = useSelector((state) => state.general.countries)
 
     useEffect(() => {
         dispatch(
@@ -49,23 +50,20 @@ function App() {
             }
         })
 
-        GeneralService.getStaticFilters(currentLocale)
-            .then((response) => {
-                if (response) {
-                    dispatch(setContractMethods(response.method))
-                    dispatch(setContractStates(response.status))
-                    dispatch(setProductCategories(response.products))
-                    dispatch(setEquityIndicators(response.equity))
-                    dispatch(setRedFlags(response.red_flag))
-                }
-            })
+        GeneralService.getStaticFilters(currentLocale).then((response) => {
+            if (response) {
+                dispatch(setContractMethods(response.method))
+                dispatch(setContractStates(response.status))
+                dispatch(setProductCategories(response.products))
+                dispatch(setEquityIndicators(response.equity))
+                dispatch(setRedFlags(response.red_flag))
+            }
+        })
     }, [dispatch])
 
     return (
         <Fragment>
-            <ModalProvider>
-                <RouterView />
-            </ModalProvider>
+            <ModalProvider>{countries.length > 0 && <RouterView />}</ModalProvider>
         </Fragment>
     )
 }

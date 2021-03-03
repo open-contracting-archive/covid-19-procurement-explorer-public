@@ -225,6 +225,12 @@
         font-size: 0.875rem;
         opacity: 0.5;
     }
+    .blog-caption__details {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }
 .blogs-list .blogs-thumbnail {
     .blogs-caption__title {

@@ -56,7 +56,7 @@ const LibraryNews = () => {
                                                 />
                                             )}
                                             <div className="news__caption px-6 py-6 text-white">
-                                                <h3 className="news-caption__title">
+                                                <h3 className="hover:text-primary-blue focus:text-primary-blue news-caption__title">
                                                     {newsList[0].title}
                                                 </h3>
                                                 <p className="news-caption__date mt-2">
@@ -107,7 +107,7 @@ const LibraryNews = () => {
                                                     </div>
                                                 )}
                                                 <div className="news__caption pl-6">
-                                                    <h3 className="news-caption__title">
+                                                    <h3 className="hover:text-primary-blue focus:text-primary-blue news-caption__title">
                                                         {news.title}
                                                     </h3>
                                                     <p className="news-caption__date mt-2">
