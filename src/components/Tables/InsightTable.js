@@ -11,6 +11,7 @@ import useCountries from '../../hooks/useCountries'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import useTrans from '../../hooks/useTrans'
 import useContentFilters from '../../hooks/useContentFilters'
+import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 
 const limit = 20
 
@@ -20,6 +21,9 @@ const InsightTable = (props) => {
     const [loading, setLoading] = useState(true)
     const [tableLoading, setTableLoading] = useState(false)
     const [selectedFilters, setSelectedFilters] = useState({})
+    const [sorting, setSorting] = useState(() => {
+        return { column: 'title', direction: '' }
+    })
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
@@ -32,6 +36,7 @@ const InsightTable = (props) => {
         let queryParams = {
             ...identity(pickBy(selectedFilters)),
             ...identity(pickBy(params)),
+            order: sorting.direction + sorting.column,
             limit: limit,
             offset: currentPage * limit
         }
@@ -55,7 +60,7 @@ const InsightTable = (props) => {
             setInsightList([])
             setTotalItems(0)
         }
-    }, [params?.country, selectedFilters, currentPage])
+    }, [params?.country, selectedFilters, currentPage, sorting])
 
     const handlePageChange = (page) => {
         setCurrentPage(get(page, 'selected') || 0)
@@ -80,12 +85,48 @@ const InsightTable = (props) => {
         })
     }
 
+    const appendSort = (columnName) => {
+        setSorting((previous) => {
+            if (previous.column === columnName) {
+                return {
+                    ...previous,
+                    direction: previous.direction === '-' ? '' : '-'
+                }
+            }
+            return {
+                column: columnName,
+                direction: ''
+            }
+        })
+    }
+
+    const columnSorting = (columnName) => {
+        return (
+            <span className="icon-sort">
+                <span
+                    className={`icon-sort-arrow-up ${
+                        sorting.column === columnName &&
+                        sorting.direction === '' &&
+                        'active'
+                    }`}
+                />
+                <span
+                    className={`icon-sort-arrow-down ${
+                        sorting.column === columnName &&
+                        sorting.direction === '-' &&
+                        'active'
+                    }`}
+                />
+            </span>
+        )
+    }
+
     const handleCountryFilter = (country) => {
         appendFilter({ country })
     }
 
     const handleFilterToggle = () => {
-        setShowFilter(showFilter === 'hidden' ? 'flex' : 'hidden')
+        setShowFilter(showFilter === 'hidden' ? 'block' : 'hidden')
     }
 
     const handleCloseFilter = () => {
@@ -102,9 +143,9 @@ const InsightTable = (props) => {
                 </div>
             </div>
 
-            {/* {showFilter ? (
+            {showFilter ? (
                 <div
-                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
+                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between text-white mb-4 md:mb-0">
                         <span className="text-sm uppercase font-bold">
                             Filter
@@ -116,21 +157,10 @@ const InsightTable = (props) => {
                         </span>
                     </div>
                     <div className="flex -mx-2 -mb-5 flex-wrap">
-                        <div className="w-1/2 md:w-40 px-2 mb-5">
-                            <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                Title
-                            </p>
-                            <input
-                                type="text"
-                                name="title"
-                                className="text-field text-sm"
-                                placeholder="ALL"
-                            />
-                        </div>
                         {!hasCountry() && (
                             <div className="w-1/2 md:w-40 px-2 mb-5">
-                                <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                    Country
+                                <p className="uppercase text-xs opacity-50 leading-none">
+                                    {trans('Country')}
                                 </p>
                                 <Select
                                     className="mt-2 select-filter text-sm"
@@ -145,96 +175,59 @@ const InsightTable = (props) => {
                             </div>
                         )}
                         <div className="w-1/2 md:w-40 px-2 mb-5">
-                            <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                Type
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                {trans('Type')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
                                 classNamePrefix="select-filter"
-                                options={typeSelectList}
+                                options={contentsTypeSelectList}
+                                onChange={(selectedFilter) => {
+                                    appendFilter({
+                                        contents_type: selectedFilter.value
+                                    })
+                                }}
                             />
                         </div>
                     </div>
                 </div>
             ) : (
                 ''
-            )} */}
+            )}
 
-            <div className={`${showFilter} mb-12 md:flex gap-8 `}>
-                {/* <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        Title
-                    </p>
-                    <input
-                        type="text"
-                        name="title"
-                        className="text-field text-sm"
-                        placeholder="ALL"
-                    />
-                </div> */}
-                {!hasCountry() && (
+            <div className="flex flex-wrap items-center justify-end md:justify-between mb-6 mt-12 md:mt-0 md:mb-12">
+                <div className="hidden md:flex gap-8">
+                    {!hasCountry() && (
+                        <div className="w-40">
+                            <p className="uppercase text-xs opacity-50 leading-none">
+                                {trans('Country')}
+                            </p>
+                            <Select
+                                className="mt-2 select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={countrySelectList}
+                                onChange={(selectedOption) =>
+                                    handleCountryFilter(selectedOption.value)
+                                }
+                            />
+                        </div>
+                    )}
                     <div className="w-40">
                         <p className="uppercase text-xs opacity-50 leading-none">
-                            {trans('Country')}
+                            {trans('Type')}
                         </p>
                         <Select
                             className="mt-2 select-filter text-sm"
                             classNamePrefix="select-filter"
-                            options={countrySelectList}
-                            onChange={(selectedOption) =>
-                                handleCountryFilter(selectedOption.value)
-                            }
+                            options={contentsTypeSelectList}
+                            onChange={(selectedFilter) => {
+                                appendFilter({
+                                    contents_type: selectedFilter.value
+                                })
+                            }}
                         />
                     </div>
-                )}
-                <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        {trans('Type')}
-                    </p>
-                    <Select
-                        className="mt-2 select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={contentsTypeSelectList}
-                        onChange={(selectedFilter) => {
-                            appendFilter({
-                                contents_type: selectedFilter.value
-                            })
-                        }}
-                    />
                 </div>
-                {/* <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        Topic
-                    </p>
-                    <Select
-                        className="mt-2 select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={options}
-                        defaultValue={options[0]}
-                    />
-                </div>
-                <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        Year
-                    </p>
-                    <Select
-                        className="mt-2 select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={options}
-                        defaultValue={options[0]}
-                    />
-                </div>
-                <div className="w-40">
-                    <p className="uppercase text-xs opacity-50 leading-none">
-                        Language
-                    </p>
-                    <Select
-                        className="mt-2 select-filter text-sm"
-                        classNamePrefix="select-filter"
-                        options={options}
-                        defaultValue={options[0]}
-                    />
-                </div> */}
             </div>
 
             {loading ? (
@@ -247,30 +240,28 @@ const InsightTable = (props) => {
                                 <thead>
                                     <tr>
                                         <th style={{ width: '35%' }}>
-                                            <span className="flex items-center">
-                                                Title{' '}
-                                                <span className="icon-sort">
-                                                    <span className="icon-sort-arrow-up" />
-                                                    <span className="icon-sort-arrow-down" />
-                                                </span>
+                                            <span
+                                                className="flex items-center cursor-pointer"
+                                                onClick={() =>
+                                                    appendSort('title')
+                                                }>
+                                                {trans('Title')}
+                                                {columnSorting('title')}
                                             </span>
                                         </th>
                                         <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
-                                                Country{' '}
-                                                <span className="icon-sort">
-                                                    <span className="icon-sort-arrow-up" />
-                                                    <span className="icon-sort-arrow-down" />
-                                                </span>
+                                                {trans('Country')}
                                             </span>
                                         </th>
                                         <th style={{ width: '10%' }}>
-                                            <span className="flex items-center">
-                                                Type{' '}
-                                                <span className="icon-sort">
-                                                    <span className="icon-sort-arrow-up" />
-                                                    <span className="icon-sort-arrow-down" />
-                                                </span>
+                                            <span
+                                                className="flex items-center cursor-pointer"
+                                                onClick={() =>
+                                                    appendSort('contents_type')
+                                                }>
+                                                {trans('Type')}
+                                                {columnSorting('contents_type')}
                                             </span>
                                         </th>
                                     </tr>
@@ -288,7 +279,11 @@ const InsightTable = (props) => {
                                                         )
                                                     }
                                                     className="cursor-pointer">
-                                                    <td>{insight.title}</td>
+                                                    <td>
+                                                        <p className="hover:text-primary-blue focus:text-primary-blue">
+                                                            {insight.title}
+                                                        </p>
+                                                    </td>
                                                     <td>
                                                         {countryNameById(
                                                             get(

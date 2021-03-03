@@ -54,7 +54,7 @@ const FeaturedNewsList = () => {
                                             />
                                         )}
                                         <div className="news__caption px-6 py-6 text-white">
-                                            <h3 className="news-caption__title">
+                                            <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
                                                 {mainNews.title}
                                             </h3>
                                             <p className="news-caption__date mt-2">
@@ -73,13 +73,9 @@ const FeaturedNewsList = () => {
                                     className="news-thumbnail"
                                     to={news.detailUrl}
                                     key={news.id}>
-                                    <div className="news__item flex">
+                                    <div className="news__item flex flex-wrap">
                                         {news.image != null ? (
                                             <div
-                                                style={{
-                                                    minWidth: '125px',
-                                                    maxWidth: '125px'
-                                                }}
                                                 className="img-wrapper w-full h-auto">
                                                 <img
                                                     className="w-full h-full object-cover"
@@ -89,10 +85,6 @@ const FeaturedNewsList = () => {
                                             </div>
                                         ) : (
                                             <div
-                                                style={{
-                                                    minWidth: '125px',
-                                                    maxWidth: '125px'
-                                                }}
                                                 className="img-wrapper w-full h-auto">
                                                 <img
                                                     className="w-full h-full object-cover"
@@ -101,8 +93,8 @@ const FeaturedNewsList = () => {
                                                 />
                                             </div>
                                         )}
-                                        <div className="news__caption ml-4">
-                                            <h3 className="news-caption__title">
+                                        <div className="news__caption mt-4">
+                                            <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
                                                 {news.title}
                                             </h3>
                                             <p className="news-caption__date mt-2">

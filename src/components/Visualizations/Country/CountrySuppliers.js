@@ -17,7 +17,7 @@ const CountrySuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Country Suppliers', params } = props
+    const { label = 'Country Suppliers', params, countrySlug } = props
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
@@ -98,39 +98,44 @@ const CountrySuppliers = (props) => {
     }, [originalData, viewType, currency])
 
     return (
-        <div className="bg-white rounded p-4 simple-tab right-direction">
+        <div>
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex items-center justify-between">
-                    <div className="flex">
-                        <h3 className="uppercase font-bold  text-primary-dark mb-2 md:mb-6">
-                            {trans(label)}
-                        </h3>
-                        <HelpText helpTextInfo={helpText} />
-                    </div>
-
-                    <ContractViewSwitcher
-                        viewType={viewType}
-                        viewHandler={setViewType}
-                    />
-                </div>
-
-                {loading ? (
-                    <Loader />
-                ) : !error ? (
-                    <div className="flex mt-4">
-                        <div className="flex-1">
-                            <SankeyChart
-                                data={chartData}
-                                currency={selectedCurrency}
-                            />
+                <div className="p-4 bg-white rounded rounded-b-none simple-tab h-full">
+                    <div className="flex flex-wrap items-center mb-4 md:mb-0 justify-start md:justify-between">
+                        <div className="flex mr-2 mb-2 md:mb-0">
+                            <h3 className="uppercase font-bold  text-primary-dark">
+                                {trans(label)}
+                            </h3>
+                            <HelpText helpTextInfo={helpText} />
                         </div>
+
+                        <ContractViewSwitcher
+                            viewType={viewType}
+                            viewHandler={setViewType}
+                        />
                     </div>
-                ) : (
-                    <ErrorHandler />
-                )}
+
+                    {loading ? (
+                        <Loader />
+                    ) : !error ? (
+                        <div className="flex mt-4">
+                            <div className="flex-1">
+                                <SankeyChart
+                                    data={chartData}
+                                    currency={selectedCurrency}
+                                />
+                            </div>
+                        </div>
+                    ) : (
+                        <ErrorHandler />
+                    )}
+                </div>
             </FullScreen>
 
-            <ChartFooter fullScreenHandler={fullScreenHandler} />
+            <ChartFooter
+                linkText={`/country/${countrySlug}/suppliers`}
+                fullScreenHandler={fullScreenHandler}
+            />
         </div>
     )
 }

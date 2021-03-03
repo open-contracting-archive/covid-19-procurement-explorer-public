@@ -19,21 +19,21 @@ const MainVisualization = () => {
 
     const renderTabComponent = () => {
         switch (tabView) {
-            case 'map' :
-                return (<WorldTimelineMap />)
-            case 'chart' :
-                return (<WorldTimelineRaceBarMap />)
-            case 'table' :
-                return (<ShortTenderTable />)
-            case 'sources' :
-                return (<CmsPageContent slug={'sources'} />)
+            case 'map':
+                return <WorldTimelineMap />
+            case 'chart':
+                return <WorldTimelineRaceBarMap />
+            case 'table':
+                return <ShortTenderTable />
+            case 'sources':
+                return <CmsPageContent slug={'sources'} />
             default:
-                return (<WorldTimelineMap />)
+                return <WorldTimelineMap />
         }
     }
 
     return (
-        <section className="pt-16 bg-primary-gray pb-8 md:pb-24">
+        <section className="px-4 md:px-0 pt-16 bg-primary-gray pb-8 md:pb-24">
             <div className="text-center mb-6 md:mb-10">
                 <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                     <span className="block text-base font-bold">
@@ -46,14 +46,16 @@ const MainVisualization = () => {
                 </p>
             </div>
             <div className="container mx-auto px-2 md:px-0">
-                <div className="md:bg-white md:rounded md:p-4 simple-tab md:flex md:flex-col md:justify-between world-map-section">
+                <div className="simple-tab md:flex md:flex-col md:justify-between world-map-section">
                     <div className="flex">
-                        <div className="flex flex-wrap md:flex-no-wrap w-full">
-                            <div className="worldmap-tab w-full md:w-auto">
+                        <div className="flex flex-wrap md:flex-no-wrap w-full relative">
+                            <div className="relative md:absolute left-0 top-0 z-20 worldmap-tab w-full md:w-auto md:m-5 md:ml-4">
                                 <div>
                                     <div className="product-worldmap-tab">
                                         <div
-                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'map' && 'active'}`}
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
+                                                tabView === 'map' && 'active'
+                                            }`}
                                             onClick={() => setTabView('map')}>
                                             <div>
                                                 <MapIcon className="inline-block" />
@@ -63,7 +65,9 @@ const MainVisualization = () => {
                                             </div>
                                         </div>
                                         <div
-                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'chart' && 'active'}`}
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
+                                                tabView === 'chart' && 'active'
+                                            }`}
                                             onClick={() => setTabView('chart')}>
                                             <div>
                                                 <ChartsIcon className="inline-block" />
@@ -73,7 +77,9 @@ const MainVisualization = () => {
                                             </div>
                                         </div>
                                         <div
-                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'table' && 'active'}`}
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
+                                                tabView === 'table' && 'active'
+                                            }`}
                                             onClick={() => setTabView('table')}>
                                             <div>
                                                 <TableIcon className="inline-block" />
@@ -83,8 +89,13 @@ const MainVisualization = () => {
                                             </div>
                                         </div>
                                         <div
-                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${tabView === 'sources' && 'active'}`}
-                                            onClick={() => setTabView('sources')}>
+                                            className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
+                                                tabView === 'sources' &&
+                                                'active'
+                                            }`}
+                                            onClick={() =>
+                                                setTabView('sources')
+                                            }>
                                             <div>
                                                 <SourcesIcon className="inline-block" />
                                                 <span className="text-xs md:text-sm mt-1 block md:inline-block">
@@ -95,7 +106,7 @@ const MainVisualization = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white world-map-chart-section py-8 px-3 md:py-0 md:px-0 flex-1 relative">
+                            <div className="world-map-chart-section flex-1 relative">
                                 {renderTabComponent()}
                             </div>
                         </div>

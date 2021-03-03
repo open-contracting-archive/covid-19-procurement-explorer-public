@@ -8,6 +8,7 @@ export default {
     MONOPOLIZATION: 'monopolization',
 
     WORLD_MAP_RACE: 'world-map-race',
+    WORLD_TIMELINE_RACE_BAR: 'world-timeline-race-bar',
     PRODUCTS_TIMELINE: 'products-timeline',
     CONTRACTS_CORRELATION: 'contracts-correlation',
     EQUITY_INDICATORS: 'equity-indicators',

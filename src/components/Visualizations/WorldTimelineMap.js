@@ -6,11 +6,11 @@ import useTrans from '../../hooks/useTrans'
 import CountryService from '../../services/CountryService'
 import RaceMap from '../../components/Charts/RaceMap/RaceMap'
 import Loader from '../../components/Loader/Loader'
-import ChartFooter from "../Utilities/ChartFooter"
+import ChartFooter from '../Utilities/ChartFooter'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
-import Visualization from "../../constants/Visualization"
-import ContractView from "../../constants/ContractView"
-import ContractViewSwitcher from "../Utilities/ContractViewSwitcher"
+import Visualization from '../../constants/Visualization'
+import ContractView from '../../constants/ContractView'
+import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import Default from '../../constants/Default'
 
 const options = continentSelectList
@@ -93,11 +93,13 @@ const WorldTimelineMap = () => {
 
     return (
         <FullScreen handle={fullScreenHandler}>
-            {!mapData ? (<Loader />) : (
+            {!mapData ? (
+                <Loader />
+            ) : (
                 <Fragment>
-                    <section>
+                    <section className="world-map-chart-container p-4 bg-white rounded rounded-b-none">
                         <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart mb-4">
-                            <div className="w-full md:w-1/5">
+                            <div className="w-full md:w-1/5 mb-4 md:mb-0">
                                 <Select
                                     className="select-filter text-sm"
                                     classNamePrefix="select-filter"
@@ -110,9 +112,9 @@ const WorldTimelineMap = () => {
                             </div>
                             {viewType === ContractView.VALUE && (
                                 <div className="hidden my-4 w-full justify-center md:my-0 items-center text-center">
-                                <span className="mr-2 text-sm">
-                                    {trans('Spending USD')}
-                                </span>
+                                    <span className="mr-2 text-sm">
+                                        {trans('Spending USD')}
+                                    </span>
                                     <div className="toggle-switch">
                                         <input
                                             type="checkbox"
@@ -136,7 +138,8 @@ const WorldTimelineMap = () => {
                             <ContractViewSwitcher
                                 style={'short'}
                                 viewType={viewType}
-                                viewHandler={setViewType} />
+                                viewHandler={setViewType}
+                            />
                         </div>
                         <RaceMap
                             contractData={mapData}
@@ -149,7 +152,10 @@ const WorldTimelineMap = () => {
 
                     <ChartFooter
                         fullScreenHandler={fullScreenHandler}
-                        embeddedVisualization={{ key: Visualization.WORLD_MAP_RACE }} />
+                        embeddedVisualization={{
+                            key: Visualization.WORLD_MAP_RACE
+                        }}
+                    />
                 </Fragment>
             )}
         </FullScreen>

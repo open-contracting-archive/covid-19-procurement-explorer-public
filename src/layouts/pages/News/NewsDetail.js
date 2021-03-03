@@ -38,7 +38,7 @@ const NewsDetail = () => {
     }, [newsId])
 
     return (
-        <section className="pt-8">
+        <section className="p-4 md:pt-8">
             <MetaInformation
                 title={newsDetail.title}
                 imageURL={`${API_URL}${get(

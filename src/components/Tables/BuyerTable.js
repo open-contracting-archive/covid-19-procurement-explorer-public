@@ -51,7 +51,7 @@ const BuyerTable = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [params?.country, sorting])
+    }, [params?.country, sorting, selectedFilters])
 
     // ===========================================================================
     // Helpers and functions
@@ -74,14 +74,19 @@ const BuyerTable = (props) => {
             order: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
-        }).then((response) => {
-            if (response) {
-                setOriginalData([...response.results])
-                setTotalItems(response.count)
-                setTableLoading(false)
-            }
-            setLoading(false)
         })
+            .then((response) => {
+                if (response) {
+                    setOriginalData([...response.results])
+                    setTotalItems(response.count)
+                    setTableLoading(false)
+                }
+                setLoading(false)
+            })
+            .catch((error) => {
+                setLoading(false)
+                setTableLoading(false)
+            })
     }
 
     const appendFilter = (selected) => {
@@ -147,8 +152,6 @@ const BuyerTable = (props) => {
         setShowFilter('hidden')
     }
 
-    console.log(originalData)
-
     return loading ? (
         <Loader />
     ) : (
@@ -163,7 +166,7 @@ const BuyerTable = (props) => {
 
             {showFilter ? (
                 <div
-                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
+                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between text-white mb-4 md:mb-0">
                         <span className="text-sm uppercase font-bold">
                             Filter

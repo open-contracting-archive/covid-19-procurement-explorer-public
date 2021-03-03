@@ -79,13 +79,27 @@ const WorldMap = (props) => {
     return (
         <div className="flex flex-wrap -mx-4 -mb-4">
             <div className="w-full px-4 mb-4">
-                <div className="bg-white rounded p-4 pb-0 md:pb-4">
+                <div className="">
                     <FullScreen handle={fullScreenHandler}>
-                        <div className="relative">
-                            <div className="flex flex-wrap md:flex-no-wrap md:justify-end world-map-chart mb-4">
+                        <div className="relative p-4 bg-white rounded rounded-b-none">
+                            <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart mb-4">
+                                <div className="w-full md:w-1/5 mb-4 md:mb-0">
+                                    <Select
+                                        className="select-filter text-sm"
+                                        classNamePrefix="select-filter"
+                                        options={options}
+                                        value={selectedContinent}
+                                        defaultValue={options[0]}
+                                        onChange={(selectedOption) =>
+                                            handleContinentSelection(
+                                                selectedOption
+                                            )
+                                        }
+                                    />
+                                </div>
                                 <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
                                     <li
-                                        className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 mr-2 md:mr-4 ${
+                                        className={`cursor-pointer w-1/2 md:w-auto text-base pb-1 mr-2 md:mr-4 ${
                                             contractType === 'value'
                                                 ? 'active'
                                                 : ''
@@ -96,7 +110,7 @@ const WorldMap = (props) => {
                                         {trans('By value')}
                                     </li>
                                     <li
-                                        className={`cursor-pointer w-full md:w-auto text-xs md:text-base pb-1 ${
+                                        className={`cursor-pointer w-1/2 md:w-auto text-base pb-1 ${
                                             contractType === 'number'
                                                 ? 'active'
                                                 : ''
@@ -107,19 +121,6 @@ const WorldMap = (props) => {
                                         {trans('By number')}
                                     </li>
                                 </ul>
-                            </div>
-
-                            <div className="w-full md:w-1/5 md:absolute top-0 left-0 z-10">
-                                <Select
-                                    className="select-filter text-sm"
-                                    classNamePrefix="select-filter"
-                                    options={options}
-                                    value={selectedContinent}
-                                    defaultValue={options[0]}
-                                    onChange={(selectedOption) =>
-                                        handleContinentSelection(selectedOption)
-                                    }
-                                />
                             </div>
                             <div>
                                 {loading ? (

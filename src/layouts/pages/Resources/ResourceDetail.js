@@ -58,7 +58,7 @@ const ResourceDetail = () => {
                             'document.meta.download_url',
                             null
                         ) && (
-                            <div className="mb-4 detail__metadata ">
+                            <div className="mb-4 mr-10 detail__metadata ">
                                 <div className="resource-download flex flex-wrap justify-center px-6 py-10 rounded mb-6">
                                     <img
                                         src={pdfImage}
@@ -90,8 +90,8 @@ const ResourceDetail = () => {
                                 </div>
                             </div>
                         )}
-                        <div className="details md:mx-10 mx-0 b-24">
-                            <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-5 text-primary-dark">
+                        <div className="details md:mr-10 mx-0 b-24">
+                            <h2 className="text-lg md:text-xl leading-tight mb-5 text-primary-dark">
                                 {resourceDetail.title}
                             </h2>
                             <div
@@ -169,7 +169,8 @@ const ResourceDetail = () => {
                                                     className="related__list flex mb-4 pb-4"
                                                     key={resources.id}>
                                                     <Link
-                                                        to={`/resources/${resources.id}`}>
+                                                        to={`/resources/${resources.id}`}
+                                                        className="hover:text-primary-blue focus:text-primary-blue">
                                                         <h3 className="text-sm">
                                                             {resources.title}
                                                         </h3>

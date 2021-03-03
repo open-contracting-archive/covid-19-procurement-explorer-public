@@ -66,9 +66,9 @@ const ProductCategoryMap = (props) => {
     }
 
     return (
-        <div className="w-full mb-6">
-            <div className="bg-white rounded p-4 pb-0 md:pb-4">
-                <FullScreen handle={fullScreenHandler}>
+        <div>
+            <FullScreen handle={fullScreenHandler}>
+                <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between md:mb-4">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
                             {trans('Product Category Map')}
@@ -100,16 +100,13 @@ const ProductCategoryMap = (props) => {
                     {loading ? (
                         <Loader />
                     ) : !error ? (
-                        <div className="pb-4">
-                            <TreeMapChart data={chartData} />
-                        </div>
+                        <TreeMapChart data={chartData} />
                     ) : (
                         <ErrorHandler />
                     )}
-                </FullScreen>
-
-                <ChartFooter fullScreenHandler={fullScreenHandler} />
-            </div>
+                </div>
+            </FullScreen>
+            <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
 }

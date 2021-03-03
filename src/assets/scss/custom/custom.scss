@@ -99,7 +99,7 @@ header {
 
 .arrow-nav {
     li.active {
-        @apply relative
+        @apply relative;
 
         &:before {
             content: '';
@@ -256,17 +256,23 @@ svg tspan {
 }
 
 .product-worldmap-tab {
-    position: relative;
     display: flex;
-    align-items: center;
-    font-size: 22px;
-    flex-direction: column;
-    width: 67px;
-    background: rgba(41, 62, 69, 0.1);
-    border-radius: 4px;
-    padding: 18px 14px;
-    margin-right: 24px;
-    margin-bottom: 24px;
+    justify-content: space-between;
+    padding: 18px 14px 0;
+    font-size: 18px;
+
+    @media only screen and (min-width: 768px) {
+        position: relative;
+        align-items: center;
+        font-size: 22px;
+        flex-direction: column;
+        width: 67px;
+        background: rgba(41, 62, 69, 0.1);
+        border-radius: 4px;
+        padding: 18px;
+        margin-right: 24px;
+        margin-bottom: 24px;
+    }
 }
 
 .product-worldmap-tablist.active {
@@ -280,13 +286,26 @@ svg tspan {
     &:before {
         content: '';
         position: absolute;
-        width: 76px;
-        left: -14px;
-        top: -5px;
-        right: 0px;
-        bottom: -5px;
+        width: 54px;
+        height: 75px;
         background: #1fbbec;
-        border-radius: 0 4px 4px 0;
+        border-radius: 0 0 4px 4px;
+        left: -14px;
+        top: -14px;
+    }
+
+    @media only screen and (min-width: 768px) {
+        &:before {
+            content: '';
+            position: absolute;
+            width: 76px;
+            left: -14px;
+            top: -5px;
+            right: 0px;
+            bottom: -5px;
+            background: #1fbbec;
+            border-radius: 0 4px 4px 0;
+        }
     }
 }
 

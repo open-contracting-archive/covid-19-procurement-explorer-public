@@ -25,12 +25,14 @@ const BarChartRace = ({ data }) => {
         label.verticalCenter = 'middle'
         label.dx = -15
         label.fontSize = 24
+        label.zIndex = 200
 
         let playButton = chart.plotContainer.createChild(am4core.PlayButton)
         playButton.x = am4core.percent(97)
         playButton.y = am4core.percent(90)
         playButton.dy = -2
         playButton.verticalCenter = 'middle'
+        playButton.zIndex = 200
         playButton.events.on('toggled', function (event) {
             if (event.target.isActive) {
                 play()

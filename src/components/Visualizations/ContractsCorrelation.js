@@ -11,7 +11,7 @@ import ContractView from '../../constants/ContractView'
 import { dateDiff } from '../../helpers/date'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import ErrorHandler from '../ErrorHandler'
-import Visualization from "../../constants/Visualization"
+import Visualization from '../../constants/Visualization'
 import Default from '../../constants/Default'
 
 const ContractsCorrelation = (props) => {
@@ -83,41 +83,47 @@ const ContractsCorrelation = (props) => {
     }, [originalData, viewType, currency])
 
     return (
-        <div className="bg-white rounded p-4 simple-tab right-direction">
+        <div>
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex items-center mb-4 md:mb-0">
-                    <div className="flex">
-                        <h3 className="uppercase font-bold text-primary-dark inline-block">
-                            {trans(label)}
-                        </h3>
-                        <HelpText helpTextInfo={helpText} />
-                    </div>
-
-                    <ContractViewSwitcher
-                        viewType={viewType}
-                        viewHandler={setViewType}
-                    />
-                </div>
-                {loading ? (
-                    <Loader />
-                ) : !error ? (
-                    <div className="flex mt-4">
-                        <div className="flex-1">
-                            <CombinedChart
-                                data={chartData}
-                                type={viewType}
-                                currency={selectedCurrency}
-                            />
+                <div className="p-4 bg-white rounded rounded-b-none simple-tab h-full">
+                    <div className="flex flex-wrap items-center mb-4 md:mb-0 justify-start md:justify-between">
+                        <div className="flex mr-2 mb-2 md:mb-0">
+                            <h3 className="uppercase font-bold text-primary-dark inline-block">
+                                {trans(label)}
+                            </h3>
+                            <HelpText helpTextInfo={helpText} />
                         </div>
+
+                        <ContractViewSwitcher
+                            viewType={viewType}
+                            viewHandler={setViewType}
+                        />
                     </div>
-                ) : (
-                    <ErrorHandler />
-                )}
+                    {loading ? (
+                        <Loader />
+                    ) : !error ? (
+                        <div className="flex mt-4">
+                            <div className="flex-1">
+                                <CombinedChart
+                                    data={chartData}
+                                    type={viewType}
+                                    currency={selectedCurrency}
+                                />
+                            </div>
+                        </div>
+                    ) : (
+                        <ErrorHandler />
+                    )}
+                </div>
             </FullScreen>
 
             <ChartFooter
                 fullScreenHandler={fullScreenHandler}
-                embeddedVisualization={{ key: Visualization.CONTRACTS_CORRELATION, options: params }} />
+                embeddedVisualization={{
+                    key: Visualization.CONTRACTS_CORRELATION,
+                    options: params
+                }}
+            />
         </div>
     )
 }

@@ -74,7 +74,7 @@ const NewsSection = () => {
                                                         ? 'news-caption--large'
                                                         : ''
                                                 }`}>
-                                                <h3 className="news-caption__title">
+                                                <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
                                                     {news.title}
                                                 </h3>
                                                 <p className="news-caption__date">
@@ -97,7 +97,7 @@ const NewsSection = () => {
                         </div>
                     </Fragment>
                 ) : (
-                    <p className="text-sm text-primary-dark text-opacity-40 text-center py-16">
+                    <p className="text-sm md:text-base text-primary-dark text-opacity-40 text-center py-16">
                         {trans('No news available')}
                     </p>
                 )}

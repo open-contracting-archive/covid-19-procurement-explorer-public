@@ -250,11 +250,7 @@ const RaceMap = ({
         }
     }, [data, coordinates, formatYearText])
 
-    return (
-        <div className="map-wrapper pb-6">
-            <div ref={mapchartDiv} className="race-map-section" />
-        </div>
-    )
+    return <div ref={mapchartDiv} className="race-map-section" />
 }
 
 export default RaceMap

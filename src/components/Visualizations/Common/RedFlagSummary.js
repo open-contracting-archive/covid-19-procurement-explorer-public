@@ -186,28 +186,34 @@ const RedFlagSummary = (props) => {
     }
 
     return (
-        <div className="bg-white rounded p-4 pb-0 md:pb-4">
+        <div>
             <FullScreen handle={fullScreenHandler}>
-                <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
-                    <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                        {trans(label)}
-                    </h3>
+                <div className="p-4 bg-white rounded rounded-b-none simple-tab h-full">
+                    <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
+                        <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
+                            {trans(label)}
+                        </h3>
 
-                    {shouldRenderChart() && (
-                        <ContractViewSwitcher
-                            viewType={viewType}
-                            viewHandler={setViewType}
-                        />
-                    )}
+                        {shouldRenderChart() && (
+                            <ContractViewSwitcher
+                                viewType={viewType}
+                                viewHandler={setViewType}
+                            />
+                        )}
+                    </div>
+
+                    {loading ? <Loader /> : <div>{renderChart()}</div>}
                 </div>
-
-                {loading ? <Loader /> : <div>{renderChart()}</div>}
             </FullScreen>
 
             {shouldRenderChart() && (
                 <ChartFooter
                     fullScreenHandler={fullScreenHandler}
-                    embeddedVisualization={{ key: Visualization.RED_FLAG_SUMMARY, options: params }} />
+                    embeddedVisualization={{
+                        key: Visualization.RED_FLAG_SUMMARY,
+                        options: params
+                    }}
+                />
             )}
         </div>
     )

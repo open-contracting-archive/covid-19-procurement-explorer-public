@@ -51,104 +51,129 @@ const ShortTenderTable = () => {
     return (
         <div>
             <Fragment>
-                {loading ? (<Loader />) : (
+                {loading ? (
+                    <Loader />
+                ) : (
                     <Fragment>
                         <div className="relative">
                             <div className="custom-scrollbar table-scroll">
                                 <table className="table">
                                     <thead>
-                                    <tr>
-                                        <th style={{ width: '25%' }}>
-                                            <span className="flex items-center cursor-pointer">
-                                                {trans('Contract Title')}{' '}
-                                            </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
+                                        <tr className="whitespace-no-wrap">
+                                            <th style={{ width: '25%' }}>
+                                                <span className="flex items-center cursor-pointer">
+                                                    {trans('Contract Title')}{' '}
+                                                </span>
+                                            </th>
+                                            <th style={{ width: '10%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Country')}{' '}
                                                 </span>
-                                        </th>
-                                        <th style={{ width: '15%' }}>
+                                            </th>
+                                            <th style={{ width: '15%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Buyer')}{' '}
                                                 </span>
-                                        </th>
-                                        <th style={{ width: '15%' }}>
+                                            </th>
+                                            <th style={{ width: '15%' }}>
                                                 <span className="flex items-center">
                                                     {trans('Supplier')}{' '}
                                                 </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
-                                            <span className="flex items-center cursor-pointer">
-                                                {trans('Method')}{' '}
-                                            </span>
-                                        </th>
-                                        <th style={{ width: '15%' }}>
-                                            <span className="flex items-center">
-                                                {trans('Product Category')}{' '}
-                                            </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
-                                            <span className="flex items-center">
-                                                {trans('Date')}{' '}
-                                            </span>
-                                        </th>
-                                        <th style={{ width: '10%' }}>
-                                            <span className="flex items-center">
-                                                {trans('Value (USD)')}{' '}
-                                            </span>
-                                        </th>
-                                        <th style={{ width: '3%' }} />
-                                    </tr>
+                                            </th>
+                                            <th style={{ width: '10%' }}>
+                                                <span className="flex items-center cursor-pointer">
+                                                    {trans('Method')}{' '}
+                                                </span>
+                                            </th>
+                                            <th style={{ width: '15%' }}>
+                                                <span className="flex items-center">
+                                                    {trans('Product Category')}{' '}
+                                                </span>
+                                            </th>
+                                            <th style={{ width: '10%' }}>
+                                                <span className="flex items-center">
+                                                    {trans('Date')}{' '}
+                                                </span>
+                                            </th>
+                                            <th style={{ width: '10%' }}>
+                                                <span className="flex items-center">
+                                                    {trans('Value (USD)')}{' '}
+                                                </span>
+                                            </th>
+                                            <th style={{ width: '3%' }} />
+                                        </tr>
                                     </thead>
 
                                     <tbody>
-                                    {originalData && originalData.map((tender, index) => {
-                                        return (
-                                            <tr
-                                                key={index}
-                                                onClick={() =>
-                                                    showDetail(tender.id)
+                                        {originalData &&
+                                            originalData.map(
+                                                (tender, index) => {
+                                                    return (
+                                                        <tr
+                                                            key={index}
+                                                            onClick={() =>
+                                                                showDetail(
+                                                                    tender.id
+                                                                )
+                                                            }
+                                                            className={tableRowClass(
+                                                                tender.red_flag_count
+                                                            )}>
+                                                            <td>
+                                                                <p className="truncate-text hover:text-primary-blue">
+                                                                    {
+                                                                        tender.contract_title
+                                                                    }
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    tender.country_name
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    tender.buyer_name
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {
+                                                                    tender.supplier_name
+                                                                }
+                                                            </td>
+                                                            <td className="capitalize">
+                                                                {
+                                                                    tender.procurement_procedure
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                {get(
+                                                                    tender,
+                                                                    'product_category'
+                                                                )}
+                                                            </td>
+                                                            <td>
+                                                                {formatDate(
+                                                                    tender.contract_date
+                                                                )}
+                                                            </td>
+                                                            <td>
+                                                                {tender.contract_value_usd &&
+                                                                    tender.contract_value_usd.toLocaleString(
+                                                                        'en'
+                                                                    )}
+                                                            </td>
+                                                            <td>
+                                                                {tender.red_flag_count && (
+                                                                    <span className="mr-4">
+                                                                        <FlagIcon />
+                                                                    </span>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    )
                                                 }
-                                                className={tableRowClass(
-                                                    tender.red_flag_count
-                                                )}>
-                                                <td>{tender.contract_title}</td>
-                                                <td>{tender.country_name}</td>
-                                                <td>{tender.buyer_name}</td>
-                                                <td>{tender.supplier_name}</td>
-                                                <td className="capitalize">
-                                                    {
-                                                        tender.procurement_procedure
-                                                    }
-                                                </td>
-                                                <td>
-                                                    {get(
-                                                        tender,
-                                                        'product_category'
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {formatDate(
-                                                        tender.contract_date
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {tender.contract_value_usd &&
-                                                        tender.contract_value_usd.toLocaleString(
-                                                            'en'
-                                                        )}
-                                                </td>
-                                                <td>
-                                                    {tender.red_flag_count && (
-                                                        <span className="mr-4">
-                                                            <FlagIcon />
-                                                        </span>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
+                                            )}
                                     </tbody>
                                 </table>
 
