@@ -48,7 +48,7 @@ const CombinedChart = (props) => {
         series2.dataFields.valueY = 'deathCase'
         series2.dataFields.dateX = 'date'
         series2.yAxis = valueAxis1
-        series2.name = 'Death By Covid-19'
+        series2.name = 'Death cases'
         series2.tooltipText = '{name}\n[bold font-size: 20]{valueY}[/]'
         // series2.fill = '#d0d0d0'
         series2.fill = '#abbabf80'

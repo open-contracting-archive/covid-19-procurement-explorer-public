@@ -58,10 +58,9 @@ const CountryMapElement = (props) => {
 
     return (
         <div className="mt-10 md:mt-0 w-full md:w-1/2 lg:w-62 px-2">
-            <div className="p-4 pb-0 md:pb-4 bg-white rounded md:h-full">
-                <FullScreen handle={fullScreenHandler}>
-                    <div className="relative">
-                        {/* <div className="flex justify-end">
+            <FullScreen handle={fullScreenHandler}>
+                <div className="p-4 bg-white rounded rounded-b-none h-full relative">
+                    {/* <div className="flex justify-end">
                         <ul className="contract-switch flex">
                             <li
                                 className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
@@ -76,23 +75,22 @@ const CountryMapElement = (props) => {
                         </ul>
                     </div> */}
 
-                        <div className="h-full">
-                            {loading ? (
-                                <Loader />
-                            ) : !error ? (
-                                <CountryDetailMap
-                                    data={mapData}
-                                    countryCode={props.countryCode}
-                                />
-                            ) : (
-                                <ErrorHandler />
-                            )}
-                        </div>
+                    <div className="h-full">
+                        {loading ? (
+                            <Loader />
+                        ) : !error ? (
+                            <CountryDetailMap
+                                data={mapData}
+                                countryCode={props.countryCode}
+                            />
+                        ) : (
+                            <ErrorHandler />
+                        )}
                     </div>
-                </FullScreen>
+                </div>
+            </FullScreen>
 
-                <ChartFooter fullScreenHandler={fullScreenHandler} />
-            </div>
+            <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
 }

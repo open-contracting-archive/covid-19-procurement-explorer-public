@@ -81,7 +81,7 @@ const Blogs = () => {
                                     <Link
                                         to={`/blogs/${blogs.id}`}
                                         key={blogs.id}>
-                                        <h3 className="blog-caption__title text-xl">
+                                        <h3 className="hover:text-primary-blue focus:text-primary-blue blog-caption__title leading-tight text-lg md:text-xl">
                                             {blogs.title}
                                         </h3>
                                     </Link>

@@ -4,17 +4,14 @@ import { getURI } from '../helpers/api'
 class CmsPageService {
     static async NewsList(queryParams) {
         try {
-            const res = await Api.get(
-                getURI('pages'),
-                {
-                    type: "content.InsightsPage",
-                    // fields: "*",
-                    fields: '_,title,id,slug,content_image,featured,news_date',
-                    contents_type: "News",
-                    order: "-news_date",
-                    ...queryParams
-                }
-            )
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.InsightsPage',
+                // fields: "*",
+                fields: '_,title,id,slug,content_image,featured,news_date',
+                contents_type: 'News',
+                order: '-news_date',
+                ...queryParams
+            })
 
             return res.body
         } catch (error) {
@@ -30,16 +27,14 @@ class CmsPageService {
 
     static async BlogList(queryParams) {
         try {
-            const res = await Api.get(
-                getURI('pages'),
-                {
-                    type: "content.InsightsPage",
-                    fields: '_,title,id,slug,content_image,news_date,country,contents_type',
-                    contents_type: "Blog",
-                    order: "-news_date",
-                    ...queryParams
-                }
-            )
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.InsightsPage',
+                fields:
+                    '_,title,id,slug,content_image,news_date,country,contents_type,author,rendered_body',
+                contents_type: 'Blog',
+                order: '-news_date',
+                ...queryParams
+            })
 
             return res.body
         } catch (error) {
@@ -55,15 +50,12 @@ class CmsPageService {
 
     static async EventList(queryParams) {
         try {
-            const res = await Api.get(
-                getURI('pages'),
-                {
-                    type: "content.EventsPage",
-                    fields: "*",
-                    order: "-event_date",
-                    ...queryParams
-                }
-            )
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.EventsPage',
+                fields: '*',
+                order: '-event_date',
+                ...queryParams
+            })
 
             return res.body
         } catch (error) {
@@ -79,15 +71,13 @@ class CmsPageService {
 
     static async InsightList(queryParams) {
         try {
-            const res = await Api.get(
-                getURI('pages'),
-                {
-                    type: "content.InsightsPage",
-                    fields: '_,title,id,slug,content_image,featured,news_date,country,contents_type',
-                    order: "-news_date",
-                    ...queryParams
-                }
-            )
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.InsightsPage',
+                fields:
+                    '_,title,id,slug,content_image,featured,news_date,country,contents_type',
+                order: '-news_date',
+                ...queryParams
+            })
 
             return res.body
         } catch (error) {
@@ -98,8 +88,14 @@ class CmsPageService {
     static async StaticPageDetailBySlug(slug) {
         const response = await Api.get(getURI('pages'), { slug })
 
-        if (response.body !== undefined && response.body.items !== undefined && response.body.items.length) {
-            const result = await Api.get(getURI('pages') + response.body.items[0].id)
+        if (
+            response.body !== undefined &&
+            response.body.items !== undefined &&
+            response.body.items.length
+        ) {
+            const result = await Api.get(
+                getURI('pages') + response.body.items[0].id
+            )
             return result.body
         }
 
@@ -108,15 +104,13 @@ class CmsPageService {
 
     static async ResourceList(queryParams) {
         try {
-            const res = await Api.get(
-                getURI('pages'),
-                {
-                    type: "content.ResourcesPage",
-                    fields: '_,title,id,slug,published_date,country,resource_type,lang,topics',
-                    order: "-published_date",
-                    ...queryParams
-                }
-            )
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.ResourcesPage',
+                fields:
+                    '_,title,id,slug,published_date,country,resource_type,lang,topics',
+                order: '-published_date',
+                ...queryParams
+            })
 
             return res.body
         } catch (error) {
@@ -132,15 +126,12 @@ class CmsPageService {
 
     static async InsightSearch(queryParams) {
         try {
-            const res = await Api.get(
-                getURI('pages'),
-                {
-                    type: "content.InsightsPage",
-                    fields: "*",
-                    // order: "-news_date",
-                    ...queryParams
-                }
-            )
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.InsightsPage',
+                fields: '*',
+                // order: "-news_date",
+                ...queryParams
+            })
 
             return res.body
         } catch (error) {

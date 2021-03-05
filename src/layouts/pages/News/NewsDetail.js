@@ -72,7 +72,7 @@ const NewsDetail = () => {
                             </div>
                         )}
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
-                            <div className="mb-4 news-detail__metadata">
+                            <div className="mb-4 news-detail__metadata md:pr-6">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
                                     {trans('Published on')}
                                 </p>
@@ -86,7 +86,7 @@ const NewsDetail = () => {
                                     <TagList item={newsDetail} />
                                 </div>
                             </div>
-                            <div>
+                            <div className="md:pr-6">
                                 <div
                                     className="mb-10 news-detail__content"
                                     dangerouslySetInnerHTML={{
@@ -150,7 +150,7 @@ const NewsDetail = () => {
                                                                 </div>
                                                             )}
                                                             <div>
-                                                                <h3 className="news-caption__title">
+                                                                <h3 className="hover:text-primary-blue focus:text-primary-blue news-caption__title">
                                                                     {news.title}
                                                                 </h3>
                                                                 <p className="news-caption__date">

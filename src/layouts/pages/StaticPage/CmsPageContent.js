@@ -19,20 +19,19 @@ const CmsPageContent = (props) => {
     }, [slug])
 
     return (
-        <section className="pt-4">
+        <section className="world-map-chart-container p-4 bg-white rounded rounded-b-none relative">
             <div className="container mx-auto px-4">
                 {loading ? (
                     <Loader />
                 ) : (
                     <Fragment>
-                        <h2 className="text-lg md:text-xl leading-tight mb-6 md:mb-10 uppercase text-primary-dark">
+                        <h2 className="text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">
                             {pageDetail.title}
                         </h2>
                         <div
                             style={{ minHeight: '40vh' }}
-                            className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
+                            className="flex flex-wrap lg:flex-no-wrap justify-between">
                             <div
-                                className="mb-10"
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body
                                 }}

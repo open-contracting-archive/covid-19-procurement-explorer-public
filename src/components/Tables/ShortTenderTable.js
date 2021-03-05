@@ -55,7 +55,7 @@ const ShortTenderTable = () => {
                     <Loader />
                 ) : (
                     <Fragment>
-                        <div className="relative">
+                        <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none relative">
                             <div className="custom-scrollbar table-scroll">
                                 <table className="table">
                                     <thead>

@@ -97,7 +97,7 @@ const ProductsTimeline = (props) => {
     return (
         <div>
             <FullScreen handle={fullScreenHandler}>
-                <div className="p-4 bg-white rounded rounded-b-none simple-tab h-full">
+                <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
                             {trans(label)}

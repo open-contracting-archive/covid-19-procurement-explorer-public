@@ -98,7 +98,7 @@ const WorldTimelineRaceBarMap = () => {
                                 raceBarType === 'value' ? 'active' : ''
                             }`}
                             onClick={() => setRaceBarType('value')}>
-                            {trans('By contract')}
+                            {trans('By value')}
                         </li>
                         <li
                             className={`cursor-pointer w-1/2 md:w-auto text-base pb-1 ${
