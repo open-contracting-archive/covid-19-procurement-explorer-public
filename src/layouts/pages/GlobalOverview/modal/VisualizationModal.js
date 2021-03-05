@@ -81,13 +81,14 @@ const VisualizationModal = (props) => {
                     <button
                         className="icon-close"
                         title="Close"
-                        onClick={closeModal} />
+                        onClick={closeModal}
+                    />
                 </div>
 
                 <div className="bg-white rounded mt-2">
                     <div className="flex">
                         <div className="flex-1">
-                            <div className="w-1/5">
+                            <div className="w-1/5 relative z-10">
                                 <Select
                                     className="select-filter text-sm"
                                     classNamePrefix="select-filter"

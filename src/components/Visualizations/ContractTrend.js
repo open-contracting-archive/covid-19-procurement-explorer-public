@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { isEmpty } from 'lodash'
+import { useSelector } from 'react-redux'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
 import BarChartRace from '../Charts/BarChart/BarChartRace'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
+import PerCapitaSwitcher from '../../components/Utilities/PerCapitaSwitcher'
 
 const ContractTrend = (props) => {
     // ===========================================================================
@@ -14,6 +16,18 @@ const ContractTrend = (props) => {
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({})
     const [loading, setLoading] = useState(true)
+    const countries = useSelector((state) => state.general.countries)
+    const [showPerCapita, setShowPerCapita] = useState(() => false)
+    const countriesPopulation = useMemo(() => {
+        return countries.reduce((acc, current) => {
+            return current.country_code_alpha_2 !== 'gl'
+                ? {
+                      ...acc,
+                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                  }
+                : acc
+        }, {})
+    }, [countries])
     const dataColumn =
         viewType === ContractView.VALUE
             ? Default.AMOUNT_USD
@@ -44,7 +58,10 @@ const ContractTrend = (props) => {
                     )
                     .map((country) => ({
                         country: country.country,
-                        value: country[dataColumn],
+                        value: showPerCapita
+                            ? country[dataColumn] /
+                              countriesPopulation[country.country_code]
+                            : country[dataColumn],
                         href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
                     }))
                 const sum = filtered.reduce(
@@ -62,7 +79,7 @@ const ContractTrend = (props) => {
         return () => {
             chartData = null
         }
-    }, [originalData, selectedContinent])
+    }, [originalData, selectedContinent, showPerCapita])
 
     return (
         <div>
@@ -71,7 +88,16 @@ const ContractTrend = (props) => {
             ) : isEmpty(chartData) ? (
                 <div className="mt-4">No data available</div>
             ) : (
-                !isEmpty(chartData) && <BarChartRace data={chartData} />
+                !isEmpty(chartData) && (
+                    <div className="-mt-10">
+                        <PerCapitaSwitcher
+                            show={showPerCapita}
+                            handleToggle={setShowPerCapita}
+                            id="contractTogglePerCapita"
+                        />
+                        <BarChartRace data={chartData} viewType={viewType} />
+                    </div>
+                )
             )}
         </div>
     )
