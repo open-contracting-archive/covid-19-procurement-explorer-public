@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import Select from 'react-select'
+import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
 import useTrans from '../../hooks/useTrans'
@@ -10,18 +11,33 @@ import { continentSelectList } from '../../helpers/country'
 import Default from '../../constants/Default'
 import ChartFooter from '../Utilities/ChartFooter'
 import Visualization from '../../constants/Visualization'
+import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
+import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
+import ContractView from '../../constants/ContractView'
 
 const WorldTimelineRaceBarMap = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
-    const [raceBarType, setRaceBarType] = useState('value')
+    const countries = useSelector((state) => state.general.countries)
     const [originalData, setOriginalData] = useState(null)
+    const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [showPerCapita, setShowPerCapita] = useState(() => false)
     const [chartData, setChartData] = useState({})
     const [selectedContinent, setSelectedContinent] = useState(null)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
+    const countriesPopulation = useMemo(() => {
+        return countries.reduce((acc, current) => {
+            return current.country_code_alpha_2 !== 'gl'
+                ? {
+                      ...acc,
+                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                  }
+                : acc
+        }, {})
+    }, [countries])
     const options = continentSelectList
 
     useEffect(() => {
@@ -50,8 +66,11 @@ const WorldTimelineRaceBarMap = () => {
                     .map((country) => ({
                         country: country.country,
                         value:
-                            raceBarType === 'value'
-                                ? country[Default.AMOUNT_USD]
+                            viewType === ContractView.VALUE
+                                ? showPerCapita
+                                    ? country[Default.AMOUNT_USD] /
+                                      countriesPopulation[country.country_code]
+                                    : country[Default.AMOUNT_USD]
                                 : country[Default.TENDER_COUNT],
                         href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
                     }))
@@ -70,7 +89,7 @@ const WorldTimelineRaceBarMap = () => {
         return () => {
             chartData = null
         }
-    }, [originalData, selectedContinent, raceBarType])
+    }, [originalData, selectedContinent, viewType, showPerCapita])
 
     const handleContinentSelection = (selectedOption) => {
         setSelectedContinent(selectedOption)
@@ -92,29 +111,31 @@ const WorldTimelineRaceBarMap = () => {
                             }
                         />
                     </div>
-                    <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
-                        <li
-                            className={`mr-4 cursor-pointer w-1/2 md:w-auto text-base pb-1 ${
-                                raceBarType === 'value' ? 'active' : ''
-                            }`}
-                            onClick={() => setRaceBarType('value')}>
-                            {trans('By value')}
-                        </li>
-                        <li
-                            className={`cursor-pointer w-1/2 md:w-auto text-base pb-1 ${
-                                raceBarType === 'number' ? 'active' : ''
-                            }`}
-                            onClick={() => setRaceBarType('number')}>
-                            {trans('By number')}
-                        </li>
-                    </ul>
+
+                    {viewType === ContractView.VALUE && (
+                        <PerCapitaSwitcher
+                            show={showPerCapita}
+                            handleToggle={setShowPerCapita}
+                        />
+                    )}
+
+                    <ContractViewSwitcher
+                        style={'short'}
+                        viewType={viewType}
+                        viewHandler={(value) => {
+                            setViewType(value)
+                            setShowPerCapita(false)
+                        }}
+                    />
                 </div>
                 {loading ? (
                     <Loader />
                 ) : isEmpty(chartData) ? (
                     'No data available'
                 ) : (
-                    !isEmpty(chartData) && <BarChartRace data={chartData} />
+                    !isEmpty(chartData) && (
+                        <BarChartRace data={chartData} viewType={viewType} />
+                    )
                 )}
             </div>
             <ChartFooter

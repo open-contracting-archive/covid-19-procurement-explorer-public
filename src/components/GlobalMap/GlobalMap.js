@@ -5,7 +5,7 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
+const GlobalMap = ({ data, innerMap, coordinates, viewType }) => {
     const globalMapchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -91,7 +91,7 @@ const GlobalMap = ({ data, innerMap, coordinates, contractType }) => {
 
         // Configure series
         polygonTemplate.tooltipHTML =
-            contractType === 'value'
+            viewType === 'value'
                 ? '<b class="opacity-75">{name}</b> <br> <b class="opacity-75">Total Spending: ${value}</b><br><a href="{url}" style="font-size: 14px">View Details --&gt;</a>'
                 : '<b class="opacity-75">{name}</b> <br> <b class="opacity-75">Total Contracts: {value}</b><br><a href="{url}" style="font-size: 14px">View Details --&gt;</a> '
 

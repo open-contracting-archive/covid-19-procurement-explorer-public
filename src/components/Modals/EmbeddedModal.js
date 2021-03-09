@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import useTrans from "../../hooks/useTrans"
-import { siteUrl } from "../../helpers/general"
+import useTrans from '../../hooks/useTrans'
+import { siteUrl } from '../../helpers/general'
 import { ReactComponent as CodingIcon } from '../../assets/img/icons/ic_coding.svg'
 import { ReactComponent as CopyIcon } from '../../assets/img/icons/ic_copy.svg'
 
@@ -8,7 +8,7 @@ const copyToClipboard = (elementId) => {
     const element = document.getElementById(elementId)
     element.select()
     element.setSelectionRange(0, 99999)
-    document.execCommand("copy")
+    document.execCommand('copy')
 }
 
 const getSiteUrl = (params) => {
@@ -31,11 +31,16 @@ const EmbeddedModal = (props) => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        const iframeHTMLElement = document.createElement("IFRAME")
+        const iframeHTMLElement = document.createElement('IFRAME')
         iframeHTMLElement.src = getSiteUrl(params)
+        iframeHTMLElement.className = 'embed-responsive-item'
         iframeHTMLElement.frameBorder = '0'
         iframeHTMLElement.scrolling = 'no'
+        iframeHTMLElement.setAttribute('allowFullScreen', 'true')
+        iframeHTMLElement.setAttribute('mozAllowFullScreen', 'true')
+        iframeHTMLElement.setAttribute('webkitAllowFullScreen', 'true')
         iframeHTMLElement.style.width = '100%'
+        iframeHTMLElement.style.height = '50vh'
         iframeHTMLElement.style.margin = '0'
         iframeHTMLElement.style.border = 'none'
         setSnippet(iframeHTMLElement.outerHTML)
@@ -50,7 +55,8 @@ const EmbeddedModal = (props) => {
                 <button
                     className="icon-close"
                     title="Close"
-                    onClick={closeModal} />
+                    onClick={closeModal}
+                />
             </div>
             <div>
                 <div className="flex items-center">
@@ -69,7 +75,12 @@ const EmbeddedModal = (props) => {
                             readOnly
                             value={snippet}
                         />
-                        <CopyIcon className="ml-4 w-4 h-4 cursor-pointer" onClick={() => copyToClipboard('embed-code-snippet')} />
+                        <CopyIcon
+                            className="ml-4 w-4 h-4 cursor-pointer"
+                            onClick={() =>
+                                copyToClipboard('embed-code-snippet')
+                            }
+                        />
                     </div>
                     {/*<div className="ml-6 mt-3">*/}
                     {/*    <label>*/}

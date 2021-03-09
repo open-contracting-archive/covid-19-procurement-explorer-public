@@ -5,7 +5,7 @@ import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { formatYearText } from '../../../helpers/date'
 
-const BarChartRace = ({ data }) => {
+const BarChartRace = ({ data, viewType }) => {
     const raceBarChartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -63,11 +63,14 @@ const BarChartRace = ({ data }) => {
         valueAxis.renderer.grid.template.strokeOpacity = 0
         valueAxis.renderer.baseGrid.strokeOpacity = 0
         valueAxis.renderer.labels.template.dy = 20
+        valueAxis.maxPrecision = 8
 
         let series = chart.series.push(new am4charts.ColumnSeries())
         series.dataFields.categoryY = 'country'
         series.dataFields.valueX = 'value'
-        series.tooltipText = '{valueX.value} USD'
+        series.tooltipText = `{valueX.value} ${
+            viewType === 'value' ? 'USD' : ''
+        }`
         series.columns.template.strokeOpacity = 0
         series.columns.template.column.cornerRadiusBottomRight = 5
         series.columns.template.column.cornerRadiusTopRight = 5
@@ -80,10 +83,12 @@ const BarChartRace = ({ data }) => {
 
         let labelBullet = series.bullets.push(new am4charts.LabelBullet())
         labelBullet.label.horizontalCenter = 'right'
-        labelBullet.label.text = '{valueX.value} USD'
+        labelBullet.label.text = `{valueX.value} ${
+            viewType === 'value' ? 'USD' : ''
+        }`
         labelBullet.label.truncate = false
         labelBullet.label.hideOversized = false
-        labelBullet.label.dx = 135
+        labelBullet.label.dx = viewType === 'value' ? 135 : 90
         labelBullet.label.textAlign = 'end'
 
         var image = labelBullet.createChild(am4core.Image)

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
+import { useSelector } from 'react-redux'
 import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 import GlobalMap from '../GlobalMap/GlobalMap'
@@ -10,6 +11,8 @@ import ContractView from '../../constants/ContractView'
 import ChartFooter from '../Utilities/ChartFooter'
 import ErrorHandler from '../ErrorHandler'
 import Default from '../../constants/Default'
+import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
+import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 
 const options = continentSelectList
 
@@ -19,13 +22,25 @@ const WorldMap = (props) => {
     // ===========================================================================
     const { params } = props
     const [originalData, setOriginalData] = useState({})
-    const [contractType, setContractType] = useState(ContractView.VALUE)
+    const countries = useSelector((state) => state.general.countries)
     const [mapData, setMapData] = useState({})
     const [selectedContinent, setSelectedContinent] = useState(options[0])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const { trans } = useTrans()
+    const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [showPerCapita, setShowPerCapita] = useState(() => false)
     const fullScreenHandler = useFullScreenHandle()
+    const countriesPopulation = useMemo(() => {
+        return countries.reduce((acc, current) => {
+            return current.country_code_alpha_2 !== 'gl'
+                ? {
+                      ...acc,
+                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                  }
+                : acc
+        }, {})
+    }, [countries])
 
     // ===========================================================================
     // Hooks
@@ -58,8 +73,11 @@ const WorldMap = (props) => {
                     ...mapData,
                     id: data.country_code,
                     value:
-                        contractType === 'value'
-                            ? data[Default.AMOUNT_USD]
+                        viewType === ContractView.VALUE
+                            ? showPerCapita
+                                ? data[Default.AMOUNT_USD] /
+                                  countriesPopulation[data.country_code]
+                                : data[Default.AMOUNT_USD]
                             : data[Default.TENDER_COUNT],
                     url: `/country/${data.country
                         .toLowerCase()
@@ -67,7 +85,7 @@ const WorldMap = (props) => {
                 })
             })
         setMapData(parsedMapData)
-    }, [originalData, contractType])
+    }, [originalData, viewType, showPerCapita])
 
     // ===========================================================================
     // Handler and functions
@@ -97,30 +115,20 @@ const WorldMap = (props) => {
                                         }
                                     />
                                 </div>
-                                <ul className="contract-switch flex flex-1 md:flex-none text-center md:text-left">
-                                    <li
-                                        className={`cursor-pointer w-1/2 md:w-auto text-base pb-1 mr-2 md:mr-4 ${
-                                            contractType === 'value'
-                                                ? 'active'
-                                                : ''
-                                        }`}
-                                        onClick={() =>
-                                            setContractType('value')
-                                        }>
-                                        {trans('By value')}
-                                    </li>
-                                    <li
-                                        className={`cursor-pointer w-1/2 md:w-auto text-base pb-1 ${
-                                            contractType === 'number'
-                                                ? 'active'
-                                                : ''
-                                        }`}
-                                        onClick={() =>
-                                            setContractType('number')
-                                        }>
-                                        {trans('By number')}
-                                    </li>
-                                </ul>
+                                {viewType === ContractView.VALUE && (
+                                    <PerCapitaSwitcher
+                                        show={showPerCapita}
+                                        handleToggle={setShowPerCapita}
+                                    />
+                                )}
+                                <ContractViewSwitcher
+                                    style={'short'}
+                                    viewType={viewType}
+                                    viewHandler={(value) => {
+                                        setViewType(value)
+                                        setShowPerCapita(false)
+                                    }}
+                                />
                             </div>
                             <div>
                                 {loading ? (
@@ -128,7 +136,7 @@ const WorldMap = (props) => {
                                 ) : !error ? (
                                     <GlobalMap
                                         data={mapData}
-                                        contractType={contractType}
+                                        viewType={viewType}
                                         coordinates={
                                             CONTINENTS[selectedContinent.value]
                                         }

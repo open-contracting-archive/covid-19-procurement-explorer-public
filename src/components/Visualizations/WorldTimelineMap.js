@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useMemo } from 'react'
 import Select from 'react-select'
+import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
 import useTrans from '../../hooks/useTrans'
@@ -12,6 +13,7 @@ import Visualization from '../../constants/Visualization'
 import ContractView from '../../constants/ContractView'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import Default from '../../constants/Default'
+import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
 
 const options = continentSelectList
 
@@ -20,7 +22,9 @@ const WorldTimelineMap = () => {
     // State and variables
     // ===========================================================================
     const [loading, setLoading] = useState(true)
+    const countries = useSelector((state) => state.general.countries)
     const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [showPerCapita, setShowPerCapita] = useState(() => false)
     const [originalData, setOriginalData] = useState([])
     const [mapData, setMapData] = useState({})
     const [sliderData, setSliderData] = useState([])
@@ -28,6 +32,16 @@ const WorldTimelineMap = () => {
     const [selectedContinent, setSelectedContinent] = useState(options[0])
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
+    const countriesPopulation = useMemo(() => {
+        return countries.reduce((acc, current) => {
+            return current.country_code_alpha_2 !== 'gl'
+                ? {
+                      ...acc,
+                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                  }
+                : acc
+        }, {})
+    }, [countries])
 
     // ===========================================================================
     // Hooks
@@ -56,7 +70,10 @@ const WorldTimelineMap = () => {
                         countryObject = {
                             ...countryObject,
                             [detail.country_code]: {
-                                value: detail[Default.AMOUNT_USD],
+                                value: showPerCapita
+                                    ? detail[Default.AMOUNT_USD] /
+                                      countriesPopulation[detail.country_code]
+                                    : detail[Default.AMOUNT_USD],
                                 number: detail[Default.TENDER_COUNT],
                                 url: `/country/${detail.country
                                     .toLowerCase()
@@ -82,7 +99,7 @@ const WorldTimelineMap = () => {
             setMapData({})
             setSliderData([])
         }
-    }, [originalData])
+    }, [originalData, showPerCapita])
 
     // ===========================================================================
     // Handlers and functions
@@ -111,34 +128,19 @@ const WorldTimelineMap = () => {
                                 />
                             </div>
                             {viewType === ContractView.VALUE && (
-                                <div className="hidden my-4 w-full justify-center md:my-0 items-center text-center">
-                                    <span className="mr-2 text-sm">
-                                        {trans('Spending USD')}
-                                    </span>
-                                    <div className="toggle-switch">
-                                        <input
-                                            type="checkbox"
-                                            className="toggle-switch-checkbox"
-                                            name="toggleSwitch"
-                                            id="toggleSwitch"
-                                        />
-                                        <label
-                                            className="toggle-switch-label"
-                                            htmlFor="toggleSwitch">
-                                            <span className="toggle-switch-inner" />
-                                            <span className="toggle-switch-switch" />
-                                        </label>
-                                    </div>
-                                    <span className="ml-2 text-sm">
-                                        {trans('Spending USD per capita')}
-                                    </span>
-                                </div>
+                                <PerCapitaSwitcher
+                                    show={showPerCapita}
+                                    handleToggle={setShowPerCapita}
+                                />
                             )}
 
                             <ContractViewSwitcher
                                 style={'short'}
                                 viewType={viewType}
-                                viewHandler={setViewType}
+                                viewHandler={(value) => {
+                                    setViewType(value)
+                                    setShowPerCapita(false)
+                                }}
                             />
                         </div>
                         <RaceMap
