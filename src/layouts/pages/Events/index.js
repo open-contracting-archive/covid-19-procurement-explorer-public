@@ -62,7 +62,10 @@ function Events() {
                                         {formatDate(events.event_date, 'DD')}
                                     </div>
                                     <div className="card__month text-base uppercase">
-                                        {formatDate(events.event_date, 'MMMM')}
+                                        {formatDate(
+                                            events.event_date,
+                                            'MMMM, YYYY'
+                                        )}
                                     </div>
                                     <div className="card__caption">
                                         <h3 className="card__title mt-8 mb-4 text-lg">

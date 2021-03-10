@@ -105,12 +105,12 @@ const BuyerProfile = () => {
                                 </div>
                             </div>
 
-                            <div className="border border-blue-0 rounded mb-10">
+                            {/* <div className="border border-blue-0 rounded mb-10">
                                 <BuyerProductTimeline
                                     label="Products Timeline"
                                     params={{ buyer: id }}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                         <div
                             style={{

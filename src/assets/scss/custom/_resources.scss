@@ -60,3 +60,19 @@
 .resource-download {
     border: 2px solid #dceaee;
 }
+
+.resources-detail__content {
+    h2 {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    p {
+        margin-bottom: 16px;
+    }
+
+    table {
+        margin: 16px 0;
+    }
+}

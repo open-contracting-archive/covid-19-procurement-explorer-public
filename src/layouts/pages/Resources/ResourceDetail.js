@@ -139,13 +139,17 @@ const ResourceDetail = () => {
                                     <th className="px-6 py-6 font-bold opacity-50">
                                         {trans('Topic')}
                                     </th>
-                                    <td className="px-6 py-6" />
+                                    <td className="px-6 py-6">
+                                        {resourceDetail.topic}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
                                         {trans('Language')}
                                     </th>
-                                    <td className="px-6 py-6" />
+                                    <td className="px-6 py-6">
+                                        {resourceDetail.language}
+                                    </td>
                                 </tr>
                             </table>
                         </div>

@@ -40,6 +40,8 @@ const ContractDetail = () => {
         }
     }, [contractId])
 
+    console.log(contractDetail)
+
     return loading ? (
         <Loader />
     ) : (
@@ -58,11 +60,16 @@ const ContractDetail = () => {
                     </span>{' '}
                     /
                 </div>
-                <h2
-                    className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark truncate-text"
-                    title={contractDetail && contractDetail.contract_title}>
-                    {trans(contractDetail && contractDetail.contract_title)} #
-                    {contractDetail && contractDetail.contract_id}
+                <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark truncate-text">
+                    <a
+                        className="hover:text-primary-blue focus:text-primary-blue"
+                        href={contractDetail.link_to_contract}
+                        title={contractDetail && contractDetail.contract_title}
+                        target="_blank"
+                        rel="noreferrer">
+                        {trans(contractDetail && contractDetail.contract_title)}{' '}
+                        #{contractDetail && contractDetail.contract_id}
+                    </a>
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
@@ -108,7 +115,8 @@ const ContractDetail = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <span
                             className={`status-indicator ${
-                                contractDetail && contractDetail.status.toLowerCase()
+                                contractDetail &&
+                                contractDetail.status.toLowerCase()
                             }`}
                         />
                         <p className="mr-2 text-sm">
@@ -238,9 +246,9 @@ const ContractDetail = () => {
                                     'buyer_id'
                                 )}`}
                                 className="hover:text-primary-blue focus:text-primary-blue">
-                                <p className="font-bold text-sm uppercase">
+                                <span className="font-bold text-sm uppercase block">
                                     {get(contractDetail, 'buyer_name', '-')}
-                                </p>
+                                </span>
                             </Link>
                         </p>
                     </div>
