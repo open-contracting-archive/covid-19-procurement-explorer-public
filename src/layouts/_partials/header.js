@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
+import CmsPageService from '../../services/CmsPageService'
 import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher'
 
 const Header = () => {
     const [isHome, setIsHome] = useState(true)
+    const [menuList, setMenuList] = useState([])
     const { trans } = useTrans()
     const location = useLocation()
 
@@ -15,6 +17,20 @@ const Header = () => {
             setIsHome(true)
         }
     }, [location])
+
+    useEffect(() => {
+        CmsPageService.StaticMenuList().then((response) => {
+            setMenuList(response.items)
+        })
+
+        return () => {
+            setMenuList([])
+        }
+    }, [])
+
+    const showHeaderMenu = menuList.filter(
+        (menu) => menu.show_in_header_menu === 'Yes'
+    )
 
     return (
         <div
@@ -37,13 +53,17 @@ const Header = () => {
                     </div>
                     <div className="flex items-center text-sm">
                         <ul className="flex">
-                            <li className="mr-2 md:mr-8">
-                                <NavLink
-                                    activeClassName="active"
-                                    to="/pages/about">
-                                    {trans('About')}
-                                </NavLink>
-                            </li>
+                            {showHeaderMenu.map((menu, index) => (
+                                <li key={index} className="mr-2 md:mr-8">
+                                    <NavLink
+                                        activeClassName="active"
+                                        to={`/pages/${menu.meta.slug}`}
+                                        className="capitalize">
+                                        {trans(menu.title)}
+                                    </NavLink>
+                                </li>
+                            ))}
+
                             <li className="mr-2 md:mr-8">
                                 <NavLink
                                     activeClassName="active"

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
 import FooterImage from '../../assets/img/icons/cc-img.png'
@@ -6,9 +6,26 @@ import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import OpenContractingPartner from '../../assets/img/open-contracting-partnership.png'
 import TransparencyInternational from '../../assets/img/transparency-international.png'
+import CmsPageService from '../../services/CmsPageService'
+import { LinkedinShareButton } from 'react-share'
 
 const Footer = () => {
     const { trans } = useTrans()
+    const [menuList, setMenuList] = useState([])
+
+    useEffect(() => {
+        CmsPageService.StaticMenuList().then((response) => {
+            setMenuList(response.items)
+        })
+
+        return () => {
+            setMenuList([])
+        }
+    }, [])
+
+    const showFooterMenu = menuList.filter(
+        (menu) => menu.show_in_footer_menu === 'Yes'
+    )
 
     return (
         <footer className="relative py-10 md:pt-16 md:pb-20 px-4 text-white text-sm bg-yellow-50 overflow-hidden">
@@ -69,7 +86,19 @@ const Footer = () => {
                     </div>
                     <div className="col-span-4 md:col-span-2">
                         <ul className="mt-6 pt-1">
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                            {showFooterMenu.map((menu, index) => (
+                                <li
+                                    key={index}
+                                    className="opacity-50 mb-1 hover:opacity-75 transition">
+                                    <Link
+                                        to={`/pages/${menu.meta.slug}`}
+                                        className="capitalize">
+                                        {trans(menu.title)}
+                                    </Link>
+                                </li>
+                            ))}
+
+                            {/* <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 <Link to="/pages/about">{trans('About')}</Link>
                             </li>
                             <li className="opacity-50 mb-1 hover:opacity-75 transition">
@@ -81,7 +110,7 @@ const Footer = () => {
                                 <Link to="/pages/privacy-policy">
                                     {trans('Privacy policy')}
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="col-span-12 md:col-span-4">
