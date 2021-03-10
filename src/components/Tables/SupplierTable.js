@@ -13,7 +13,7 @@ import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 import Default from '../../constants/Default'
-import { formatDecimal } from '../../helpers/decimal'
+import { formatDecimal } from '../../helpers/number'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 
 const SupplierTable = (props) => {

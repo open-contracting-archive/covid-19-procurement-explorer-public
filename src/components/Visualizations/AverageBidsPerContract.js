@@ -1,83 +1,63 @@
 import React, { useEffect, useState } from 'react'
+import { get } from 'lodash'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import { dateDiff, formatDate } from '../../helpers/date'
 import ErrorHandler from '../ErrorHandler'
+import useDataCalculations from "../../hooks/useDataCalculations"
 
 const AverageBidsPerContract = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Average bids per contract', params } = props
+    const {
+        label = 'Average bids per contract',
+        params
+    } = props
     const [loading, setLoading] = useState(true)
-    const [originalData, setOriginalData] = useState({})
     const [error, setError] = useState(false)
+    const [originalData, setOriginalData] = useState({})
+    const [chartData, setChartData] = useState({
+        average: 0,
+        percentage: 0,
+        areaChart: []
+    })
+    const { areaChartData, changePercentage, colorValue } = useDataCalculations()
     const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.AverageBids(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.AverageBids(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
         }
     }, [params?.country, params?.buyer])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Function to manage data for line chart
-    const lineChartData = (chartData) => {
-        return (
-            chartData &&
-            chartData.map((data) => {
-                return {
-                    date: formatDate(data.date, 'YYYY-MM-DD'),
-                    value: data.value
-                }
+    useEffect(() => {
+        if (originalData) {
+            const lineChartData = get(originalData, 'line_chart', [])
+            setChartData({
+                average: get(originalData, 'average', 0),
+                percentage: changePercentage(lineChartData),
+                areaChart: areaChartData(lineChartData)
             })
-        )
-    }
-
-    // Function to sort by date
-    const sortDate = (data) => {
-        return data.sort((date1, date2) => {
-            return dateDiff(date1.date, date2.date)
-        })
-    }
-
-    // Function to convert date format
-    const convertDate = (data) => {
-        return data.map((data) => {
-            return {
-                ...data,
-                date: formatDate(data.date, 'MMMM YYYY')
-            }
-        })
-    }
-
-    // Average bids
-    const averageBidsLineChartDataRaw =
-        originalData && lineChartData(originalData.line_chart)
-    const averageBidsLineChartData =
-        averageBidsLineChartDataRaw &&
-        convertDate(sortDate(averageBidsLineChartDataRaw))
-    const averageBidsAmount = originalData && originalData.average
-    const averageBidsPercentage = originalData && originalData.difference
+        }
+    }, [originalData])
 
     return (
         <div className="bg-white rounded p-4 h-full">
@@ -86,15 +66,13 @@ const AverageBidsPerContract = (props) => {
             </h3>
             {loading ? (
                 <Loader sm />
-            ) : !error ?  (
+            ) : !error ? (
                 <div className="flex items-end">
                     <AreaChartBlock
-                        chartData={averageBidsLineChartData}
-                        totalAmount={averageBidsAmount}
-                        percentage={averageBidsPercentage}
-                        colorValue={
-                            averageBidsPercentage < 0 ? '#FE5151' : '#3EEDA4'
-                        }
+                        chartData={chartData.areaChart}
+                        totalAmount={chartData.average}
+                        percentage={chartData.percentage}
+                        colorValue={colorValue(chartData.percentage)}
                     />
                 </div>
             ) : (

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { get } from 'lodash'
 import Loader from '../Loader/Loader'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import { dateDiff, formatDate } from '../../helpers/date'
 import Visualization from '../../constants/Visualization'
 import HelpText from '../../components/HelpText/HelpText'
 import ErrorHandler from '../ErrorHandler'
-
-const barColorValue = '#ABBABF'
+import useDataCalculations from "../../hooks/useDataCalculations"
 
 const TotalContracts = (props) => {
     // ===========================================================================
@@ -22,74 +21,50 @@ const TotalContracts = (props) => {
         helpText = 'Quantity of COVID related contracts'
     } = props
     const [loading, setLoading] = useState(true)
-    const [originalData, setOriginalData] = useState({})
     const [error, setError] = useState(false)
+    const [originalData, setOriginalData] = useState({})
+    const [chartData, setChartData] = useState({
+        tenderCount: 0,
+        percentage: 0,
+        areaChart: [],
+        barChart: []
+    })
     const { trans } = useTrans()
+    const { areaChartData, changePercentage, colorValue } = useDataCalculations()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
         VisualizationService.TotalContracts(params)
-        .then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
         }
     }, [params?.country, params?.buyer, params?.supplier])
 
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Function to manage data for line chart
-    const lineChartData = (chartData) => {
-        return (
-            chartData &&
-            chartData.map((data) => {
-                return {
-                    date: formatDate(data.date, 'YYYY-MM-DD'),
-                    value: data.value
-                }
+    useEffect(() => {
+        if (originalData) {
+            const lineChartData = get(originalData, 'line_chart', [])
+            setChartData({
+                tenderCount: get(originalData, 'total'),
+                percentage: changePercentage(lineChartData),
+                areaChart: areaChartData(lineChartData),
+                barChart: get(originalData, 'bar_chart')
             })
-        )
-    }
-
-    // Function to sort by date
-    const sortDate = (data) => {
-        return data.sort((date1, date2) => {
-            return dateDiff(date1.date, date2.date)
-        })
-    }
-
-    // Function to convert date format
-    const convertDate = (data) => {
-        return data.map((data) => {
-            return {
-                ...data,
-                date: formatDate(data.date, 'MMMM YYYY')
-            }
-        })
-    }
-
-    // Total contracts data
-    const totalContractLineChartDataRaw =
-        originalData && lineChartData(originalData.line_chart)
-    const totalContractLineChartData =
-        totalContractLineChartDataRaw &&
-        convertDate(sortDate(totalContractLineChartDataRaw))
-    const totalContractAmount = originalData && originalData.total
-    const totalContractPercentage = originalData && originalData.difference
-    const totalContractBarChartData = originalData && originalData.bar_chart
+        }
+    }, [originalData])
 
     return (
         <div className="bg-white rounded p-4 h-full">
@@ -106,21 +81,16 @@ const TotalContracts = (props) => {
                 <div className="flex flex-wrap items-end">
                     <div className="w-full md:w-2/5">
                         <AreaChartBlock
-                            chartData={totalContractLineChartData}
-                            totalAmount={totalContractAmount}
-                            percentage={Math.round(totalContractPercentage, 2)}
-                            colorValue={
-                                Math.round(totalContractPercentage, 2) < 0
-                                    ? '#FE5151'
-                                    : '#3EEDA4'
-                            }
+                            chartData={chartData.areaChart}
+                            totalAmount={chartData.tenderCount}
+                            percentage={chartData.percentage}
+                            colorValue={colorValue(chartData.percentage)}
                         />
                     </div>
 
                     <div className="md:flex-1">
                         <SimpleBarChart
-                            data={totalContractBarChartData}
-                            barColorValue={barColorValue}
+                            data={chartData.barChart}
                             chartKey="method"
                             chartValue="value"
                         />
@@ -133,7 +103,7 @@ const TotalContracts = (props) => {
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>
-                    View in detail →
+                    {trans('View in detail')} →
                 </span>
             )}
         </div>

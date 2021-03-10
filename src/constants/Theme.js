@@ -12,3 +12,7 @@ export const colors = [
     "#ABBABF",
     "#FFA69E"
 ]
+
+export const barColorValue = '#ABBABF'
+export const negativeValue = '#FE5151'
+export const positiveValue = '#3EEDA4'
