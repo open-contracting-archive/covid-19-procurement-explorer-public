@@ -79,9 +79,16 @@ const CountryPartnerSlider = ({ params }) => {
                                                                         )}
                                                                     </span>
                                                                     <a
-                                                                        href=""
+                                                                        href={
+                                                                            index.website ||
+                                                                            '-'
+                                                                        }
                                                                         className="text-blue-20"
-                                                                        target="_blank">
+                                                                        target="_blank"
+                                                                        rel="noreferrer"
+                                                                        title={
+                                                                            index.name
+                                                                        }>
                                                                         {
                                                                             index.website
                                                                         }

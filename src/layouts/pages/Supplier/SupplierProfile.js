@@ -176,7 +176,13 @@ const SupplierProfile = () => {
                                         />
                                     </div>
                                     <div className="w-full px-2 mb-4">
-                                        <ContractRedFlags />
+                                        <ContractRedFlags
+                                            params={{
+                                                supplier: id,
+                                                country:
+                                                    originalData.country_code
+                                            }}
+                                        />
                                     </div>
                                 </div>
 
