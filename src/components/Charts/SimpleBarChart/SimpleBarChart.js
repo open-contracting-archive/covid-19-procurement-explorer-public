@@ -1,19 +1,20 @@
 /* Imports */
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+import { barColorValue } from "../../../constants/Theme"
 
-const SimpleBarChart = ({
-    data,
-    barColorValue,
-    height,
-    chartKey,
-    chartValue,
-    axisRotation,
-    className
-}) => {
+const SimpleBarChart = (props) => {
     const barchartDiv = useRef(null)
+    const {
+        data,
+        height,
+        chartKey,
+        chartValue,
+        axisRotation,
+        className
+    } = props
 
     useLayoutEffect(() => {
         /* Chart code */

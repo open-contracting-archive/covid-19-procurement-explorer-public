@@ -1,4 +1,5 @@
 import { has } from 'lodash'
+import { dateDiff } from "./date"
 
 export const slugify = (text) => {
     return text.toString().toLowerCase()
@@ -32,3 +33,9 @@ export const hasValidProperty = (object, property) => {
 export const siteUrl = window.location.origin
 
 export const twitterHandle = "covid19"
+
+export const sortItems = (items, key) => {
+    return items.sort((item1, item2) => {
+        return dateDiff(item1[key], item2[key])
+    })
+}

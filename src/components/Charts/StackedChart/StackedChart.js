@@ -18,21 +18,17 @@ const StackedChart = ({ data, currency }) => {
 
         chart.colors.list = [
             am4core.color('#BEBADA'),
-            am4core.color('#FCCDE5'),
+            am4core.color('#6E44FF'),
             am4core.color('#B3DE69'),
             am4core.color('#BC80BD'),
             am4core.color('#FB8072'),
-            am4core.color('#8DD3C7'),
-            am4core.color('#D9D9D9'),
+            am4core.color('#FCCDE5'),
             am4core.color('#FDB462'),
-            am4core.color('#FFED6F'),
-            am4core.color('#60695C'),
             am4core.color('#99F7AB'),
-            am4core.color('#D6EFFF'),
             am4core.color('#FE654F'),
-            am4core.color('#6E44FF'),
             am4core.color('#CE96A6'),
-            am4core.color('#C5D6D8')
+            am4core.color('#D6EFFF'),
+            am4core.color('#60695C'),
         ]
 
         // Create axes
@@ -63,37 +59,22 @@ const StackedChart = ({ data, currency }) => {
             // Configure columns
             series.columns.template.width = am4core.percent(60)
             series.columns.template.tooltipText =
-                `[bold]{name}[/]\n[font-size:14px]{categoryX}: ${currency == 'usd' ? '$' : ''}{valueY} [text-transform: uppercase font-size:14px]${currency}`
+                `[bold]{name}[/]\n[font-size:14px]{categoryX}: ${currency === 'usd' ? '$' : ''}{valueY} [text-transform: uppercase font-size:14px]${currency}`
 
             return series
         }
 
-        createSeries(
-            'construction-works--materials',
-            'Construction Works & Materials'
-        )
+        createSeries('construction-works--materials', 'Construction Works & Materials')
         createSeries('covid-tests--testing', 'Covid Tests & Testing')
-        createSeries(
-            'medical-consumables-except-tests',
-            'Medical Consumables (except tests)'
-        )
+        createSeries('medical-consumables-except-tests', 'Medical Consumables (except tests)')
         createSeries('medicines', 'Medicines')
-        createSeries('ventilators', 'Ventilators')
-
-        createSeries('sanitizing-supplies', 'Sanitizing Supplies')
-        createSeries('goods-services', 'Goods/Services')
-        createSeries(
-            'personal-protective-equipment',
-            'Personal Protective Equipment'
-        )
         createSeries('other-medical-equipment', 'Other Medical Equipment')
-        createSeries('goodsservices', 'Goods/Services')
-        createSeries('not-classified', 'Not Classified')
-        createSeries('ventilator', 'Ventilator')
-        createSeries('medical-consumables', 'Medical Consumables')
-        createSeries('others', 'Others')
+        createSeries('personal-protective-equipment', 'Personal Protective Equipment')
+        createSeries('sanitizing-supplies', 'Sanitizing Supplies')
         createSeries('vaccine', 'Vaccine')
+        createSeries('ventilator', 'Ventilator')
         createSeries('other', 'Other')
+        createSeries('not-identified', 'Not Classified')
 
         // Legend
         chart.legend = new am4charts.Legend()

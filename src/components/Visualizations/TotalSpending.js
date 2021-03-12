@@ -5,13 +5,11 @@ import VisualizationService from '../../services/VisualizationService'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
-import { dateDiff, formatDate } from '../../helpers/date'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
 import Visualization from '../../constants/Visualization'
 import ErrorHandler from '../ErrorHandler'
-
-const barColorValue = '#ABBABF'
+import useDataCalculations from "../../hooks/useDataCalculations"
 
 const TotalSpending = (props) => {
     // ===========================================================================
@@ -23,34 +21,35 @@ const TotalSpending = (props) => {
         modalHandler,
         helpText = 'Total value of COVID related contracts'
     } = props
-    const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)
-    const [originalData, setOriginalData] = useState({})
     const [error, setError] = useState(false)
+    const currency = useSelector((state) => state.general.currency)
+    const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState({
-        amount: '',
-        percentage: '',
-        areaChartDataRaw: [],
-        areaChartData: [],
-        barChartData: []
+        amount: 0,
+        percentage: 0,
+        areaChart: [],
+        barChart: []
     })
     const { trans } = useTrans()
+    const { areaChartData, changePercentage, colorValue } = useDataCalculations()
 
     // ===========================================================================
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.TotalSpending(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.TotalSpending(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -58,56 +57,16 @@ const TotalSpending = (props) => {
     }, [params?.country, params?.buyer, params?.supplier])
 
     useEffect(() => {
-        const areaChartDataRaw =
-            originalData &&
-            lineChartData(get(originalData[currency], 'line_chart'))
-
-        setChartData({
-            amount: originalData && get(originalData[currency], 'total'),
-            percentage:
-                originalData && get(originalData[currency], 'increment'),
-            areaChartDataRaw:
-                originalData &&
-                lineChartData(get(originalData[currency], 'line_chart')),
-            areaChartData:
-                areaChartDataRaw && convertDate(sortDate(areaChartDataRaw)),
-            barChartData:
-                originalData && get(originalData[currency], 'bar_chart')
-        })
-    }, [originalData, currency])
-
-    // ===========================================================================
-    // Handlers and functions
-    // ===========================================================================
-    // Function to manage data for line chart
-    const lineChartData = (chartData) => {
-        return (
-            chartData &&
-            chartData.map((data) => {
-                return {
-                    date: formatDate(data.date, 'YYYY-MM-DD'),
-                    value: data.value
-                }
+        if (originalData) {
+            const lineChartData = get(originalData, `${currency}.line_chart`, [])
+            setChartData({
+                amount: get(originalData, `${currency}.total`),
+                percentage: changePercentage(lineChartData),
+                areaChart: areaChartData(lineChartData),
+                barChart: get(originalData, `${currency}.bar_chart`)
             })
-        )
-    }
-
-    // Function to sort by date
-    const sortDate = (data) => {
-        return data.sort((date1, date2) => {
-            return dateDiff(date1.date, date2.date)
-        })
-    }
-
-    // Function to convert date format
-    const convertDate = (data) => {
-        return data.map((data) => {
-            return {
-                ...data,
-                date: formatDate(data.date, 'MMMM YYYY')
-            }
-        })
-    }
+        }
+    }, [originalData, currency])
 
     return (
         <div className="bg-white rounded p-4 h-full">
@@ -123,19 +82,16 @@ const TotalSpending = (props) => {
                 <div className="flex flex-wrap items-end">
                     <div className="w-full md:w-2/5">
                         <AreaChartBlock
-                            chartData={chartData.areaChartData}
+                            chartData={chartData.areaChart}
                             totalAmount={chartData.amount}
                             percentage={chartData.percentage}
-                            colorValue={
-                                chartData.percentage < 0 ? '#FE5151' : '#3EEDA4'
-                            }
+                            colorValue={colorValue(chartData.percentage)}
                             currency={currency}
                         />
                     </div>
                     <div className="md:flex-1">
                         <SimpleBarChart
-                            data={chartData.barChartData}
-                            barColorValue={barColorValue}
+                            data={chartData.barChart}
                             chartKey="method"
                             chartValue="value"
                         />
@@ -148,7 +104,7 @@ const TotalSpending = (props) => {
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>
-                    View in detail →
+                    {trans('View in detail')} →
                 </span>
             )}
         </div>

@@ -5,17 +5,16 @@ import { setCurrentCountry } from '../../store/reducers/general/action'
 import CountryFlag from '../../components/CountryFlagIcon'
 
 const CountrySelector = () => {
+    let { countrySlug, tabSlug = 'data' } = useParams()
     const countries = useSelector((state) => state.general.countries)
-    let { countrySlug } = useParams()
-    let { tabSlug = 'data' } = useParams()
-    const history = useHistory()
-    const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState(() => {
         return countrySlug
             ? countries.find((item) => item.slug === countrySlug).slug
             : null
     })
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     const toggling = () => setIsOpen(!isOpen)
 
@@ -35,7 +34,7 @@ const CountrySelector = () => {
         setIsOpen(false)
     }
 
-    const sortedCountries = countries.sort(function (a, b) {
+    const sortedCountries = countries.sort((a, b) => {
         if (a.name < b.name) {
             return -1
         }

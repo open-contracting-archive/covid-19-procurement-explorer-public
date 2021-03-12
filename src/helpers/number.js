@@ -17,3 +17,7 @@ export const formatNumber = (number) => {
     // format number and add suffix
     return scaled.toFixed(1) + suffix
 }
+
+export const formatDecimal = (number) => {
+    return Math.round(number * 100) / 100
+}
