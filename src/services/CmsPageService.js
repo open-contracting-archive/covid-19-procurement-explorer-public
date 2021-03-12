@@ -118,6 +118,21 @@ class CmsPageService {
         }
     }
 
+    static async StaticMenuList(queryParams) {
+        try {
+            const res = await Api.get(getURI('pages'), {
+                type: 'content.StaticPage',
+                fields:
+                    '_,title,id,slug,show_in_header_menu,show_in_footer_menu',
+                ...queryParams
+            })
+
+            return res.body
+        } catch (error) {
+            return error
+        }
+    }
+
     static async ResourceDetail(id) {
         const res = await Api.get(getURI('pages') + `/${id}`)
 
