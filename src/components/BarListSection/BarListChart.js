@@ -3,8 +3,11 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Default from '../../constants/Default'
 import { formatNumber } from '../../helpers/number'
+import useTrans from "../../hooks/useTrans"
 
-function BarListChart({ data, text, currency, viewType }) {
+function BarListChart(props) {
+    const { data, text, currency, viewType } = props
+    const { trans } = useTrans()
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
@@ -40,14 +43,18 @@ function BarListChart({ data, text, currency, viewType }) {
                                             currency !== Default.CURRENCY_LOCAL
                                                 ? '$'
                                                 : ''}
-                                            {formatNumber(bar_value.amount) ||
-                                                '-'}
+                                            {formatNumber(bar_value.amount) || '-'}
                                             {viewType === 'value' && (
                                                 <span className="uppercase ml-1">
                                                     {currency ===
                                                     Default.CURRENCY_LOCAL
                                                         ? countryCurrency
                                                         : Default.CURRENCY_USD}
+                                                </span>
+                                            )}
+                                            {viewType === 'buyer' && (
+                                                <span className="uppercase ml-1">
+                                                    {trans('buyers')}
                                                 </span>
                                             )}
                                         </p>

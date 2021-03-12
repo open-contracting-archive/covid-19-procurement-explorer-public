@@ -20,3 +20,4 @@ export { default as ContractEquityIndicators } from './Common/ContractEquityIndi
 export { default as RedFlagSummary } from './Common/RedFlagSummary'
 export { default as WorldTimelineMap } from './WorldTimelineMap'
 export { default as WorldTimelineRaceBarMap } from './WorldTimelineRaceBarMap'
+export { default as Concentration } from './Concentration'

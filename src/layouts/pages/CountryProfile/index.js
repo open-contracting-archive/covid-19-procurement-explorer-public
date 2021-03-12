@@ -24,9 +24,9 @@ import {
     PRODUCTS,
     METHODOLOGY
 } from '../../../constants/Tab'
-import CmsPageContent from '../StaticPage/CmsPageContent'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import Default from '../../../constants/Default'
+import CountryMethodology from "./tabs/CountryMethodology"
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -46,7 +46,7 @@ const CountryProfile = () => {
             dispatch(setCountryCurrency(country.currency))
         }
 
-        return()=>{
+        return () => {
             dispatch(setCurrency(Default.CURRENCY_USD))
         }
     }, [countries, countrySlug])
@@ -92,7 +92,7 @@ const CountryProfile = () => {
                     />
                 )
             case METHODOLOGY:
-                return <CmsPageContent slug={'methodology'} />
+                return <CountryMethodology countryId={countryData.id} />
             default:
                 return (
                     <CountryData
@@ -112,6 +112,7 @@ const CountryProfile = () => {
                 <section className="px-4">
                     <div className="container mx-auto">
                         <CountrySelector />
+
                         <div className="relative flex flex-wrap -mx-2 -mb-4">
                             <CountryMapElement
                                 countryCode={countryData.country_code_alpha_2}

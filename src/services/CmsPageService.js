@@ -107,7 +107,7 @@ class CmsPageService {
             const res = await Api.get(getURI('pages'), {
                 type: 'content.ResourcesPage',
                 fields:
-                    '_,title,id,slug,published_date,country,resource_type,lang,topics',
+                    '_,title,id,slug,published_date,country,resource_type,lang,topics,document,link',
                 order: '-published_date',
                 ...queryParams
             })
@@ -152,6 +152,26 @@ class CmsPageService {
         } catch (error) {
             return error
         }
+    }
+
+    static async MethodologyContent(params) {
+        const response = await Api.get(getURI('pages'), {
+            type: 'content.StaticPage',
+            ...params
+        })
+
+        if (
+            response.body !== undefined &&
+            response.body.items !== undefined &&
+            response.body.meta.total_items > 0
+        ) {
+            const result = await Api.get(
+                getURI('pages') + response.body.items[0].id
+            )
+
+            return result.body
+        }
+        return {}
     }
 }
 

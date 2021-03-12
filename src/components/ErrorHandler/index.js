@@ -5,7 +5,7 @@ function ErrorHandler(props) {
     return (
         <div className="container mx-auto py-12">
             <p className="text-red-10">
-                Sorry for inconvenience. An issue has ocurred.{' '}
+                An error occurred while fetching data.
                 <span>{message ? message : ''}</span>
             </p>
         </div>

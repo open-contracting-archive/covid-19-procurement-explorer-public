@@ -55,9 +55,6 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li className="opacity-50 mb-1 hover:opacity-75 transition">
-                                {trans('Countries')}
-                            </li>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
                                 <Link to="/global-overview/contracts">
                                     {trans('Contracts')}
                                 </Link>

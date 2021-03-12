@@ -39,3 +39,7 @@ export const sortItems = (items, key) => {
         return dateDiff(item1[key], item2[key])
     })
 }
+
+export const mediaUrl = (path) => {
+    return process.env.REACT_APP_API_URL + `/media/${path}`
+}

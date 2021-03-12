@@ -12,7 +12,8 @@ const initialState = {
     contractMethods: [],
     contractStates: [],
     productCategories: [],
-    redFlags: []
+    redFlags: [],
+    languages: []
 }
 
 const GeneralReducer = (state = initialState, { type, payload }) => {
@@ -49,6 +50,9 @@ const GeneralReducer = (state = initialState, { type, payload }) => {
 
         case types.SET_RED_FLAGS:
             return { ...state, redFlags: payload }
+
+        case types.SET_LANGUAGES:
+            return { ...state, languages: payload }
 
         default:
             return state
