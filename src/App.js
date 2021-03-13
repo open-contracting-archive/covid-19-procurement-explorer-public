@@ -10,7 +10,8 @@ import {
     setEquityIndicators,
     setProductCategories,
     setRedFlags,
-    setTranslations
+    setTranslations,
+    setLanguages
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
@@ -31,7 +32,7 @@ function App() {
 
     useEffect(() => {
         dispatch(
-            setCurrentLocale(window.localStorage.getItem('locale') || 'es')
+            setCurrentLocale(window.localStorage.getItem('locale') || 'en')
         )
 
         CountryService.getTranslations(currentLocale)
@@ -50,7 +51,7 @@ function App() {
             }
         })
 
-        GeneralService.getStaticFilters(currentLocale).then((response) => {
+        GeneralService.getStaticFilters().then((response) => {
             if (response) {
                 dispatch(setContractMethods(response.method))
                 dispatch(setContractStates(response.status))
@@ -58,6 +59,10 @@ function App() {
                 dispatch(setEquityIndicators(response.equity))
                 dispatch(setRedFlags(response.red_flag))
             }
+        })
+
+        CountryService.getLanguages().then((response) => {
+            dispatch(setLanguages(response.results))
         })
     }, [dispatch])
 

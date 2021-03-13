@@ -4,6 +4,12 @@ import useTrans from '../../hooks/useTrans'
 import CmsPageService from '../../services/CmsPageService'
 import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher'
 
+const fixedMenuItems = [
+    { title: "Data", route: "/global-overview/data" },
+    { title: "Library", route: "/library" },
+    { title: "Resources", route: "/resources" }
+]
+
 const Header = () => {
     const [isHome, setIsHome] = useState(true)
     const [menuList, setMenuList] = useState([])
@@ -64,26 +70,17 @@ const Header = () => {
                                 </li>
                             ))}
 
-                            <li className="mr-2 md:mr-8">
-                                <NavLink
-                                    activeClassName="active"
-                                    to="/global-overview/data">
-                                    {trans('Data')}
-                                </NavLink>
-                            </li>
-                            <li className="mr-2 md:mr-8">
-                                <NavLink activeClassName="active" to="/library">
-                                    {trans('Library')}
-                                </NavLink>
-                            </li>
-                            <li className="mr-2 md:mr-8">
-                                <NavLink
-                                    activeClassName="active"
-                                    to="/resources">
-                                    {trans('Resources')}
-                                </NavLink>
-                            </li>
+                            {fixedMenuItems.map((item, index) => (
+                                <li className="mr-2 md:mr-8" key={index}>
+                                    <NavLink
+                                        activeClassName="active"
+                                        to={item.route}>
+                                        {trans(item.title)}
+                                    </NavLink>
+                                </li>
+                            ))}
                         </ul>
+
                         <LanguageSwitcher />
                     </div>
                 </div>

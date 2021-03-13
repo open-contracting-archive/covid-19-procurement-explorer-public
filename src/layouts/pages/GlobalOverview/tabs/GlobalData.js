@@ -15,7 +15,8 @@ import {
     GlobalSuppliers,
     ProductDistribution,
     ContractRedFlags,
-    ContractsCorrelation
+    ContractsCorrelation,
+    Concentration
 } from '../../../../components/Visualizations'
 import VisualizationModal from '../modal/VisualizationModal'
 import 'react-simple-hook-modal/dist/styles.css'
@@ -88,6 +89,9 @@ const GlobalData = () => {
                             className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
                             View in detail →
                         </Link>
+                    </div>
+                    <div className="w-full lg:w-1/2 px-2 mb-4 relative">
+                        <Concentration />
                     </div>
                     <div className="w-full px-2 mb-4">
                         <ContractsCorrelation />

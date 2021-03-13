@@ -76,6 +76,29 @@ class CountryService {
             console.log(error)
         }
     }
+
+    static async getLanguages() {
+        try {
+            const res = await Api.get(getURI('languages'))
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async DataProviders(params) {
+        try {
+            const res = await Api.get(getURI('country-data-providers'), params)
+
+            if (res.body.error) {
+                throw new Exception()
+            }
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default CountryService

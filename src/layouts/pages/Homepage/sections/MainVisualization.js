@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import useTrans from '../../../../hooks/useTrans'
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
 import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
-import { ShortTenderTable } from '../../../../components/Tables'
+import { OverallStatisticsTable } from '../../../../components/Tables'
 import CmsPageContent from '../../StaticPage/CmsPageContent'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
@@ -24,7 +24,7 @@ const MainVisualization = () => {
             case 'chart':
                 return <WorldTimelineRaceBarMap />
             case 'table':
-                return <ShortTenderTable />
+                return <OverallStatisticsTable />
             case 'sources':
                 return <CmsPageContent slug={'sources'} />
             default:

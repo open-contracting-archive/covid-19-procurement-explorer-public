@@ -416,7 +416,6 @@ class VisualizationService {
         try {
             const res = await Api.get(
                 getURI('visualization.equity-summary'),
-
                 params
             )
 
@@ -434,7 +433,6 @@ class VisualizationService {
         try {
             const res = await Api.get(
                 getURI('visualization.red-flag-summary'),
-
                 params
             )
 
@@ -452,9 +450,21 @@ class VisualizationService {
         try {
             const res = await Api.get(
                 getURI('visualization.contract-red-flags'),
-
                 params
             )
+
+            if(res.status !==  200){
+                throw new Exception()
+            }
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    static async OverallStatistics() {
+        try {
+            const res = await Api.get(getURI('overall-statistics'))
 
             if(res.status !==  200){
                 throw new Exception()

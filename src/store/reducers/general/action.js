@@ -68,3 +68,10 @@ export const setRedFlags = (redFlags) => {
         payload: redFlags
     }
 }
+
+export const setLanguages = (languages) => {
+    return {
+        type: types.SET_LANGUAGES,
+        payload: languages
+    }
+}

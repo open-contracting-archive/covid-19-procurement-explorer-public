@@ -15,7 +15,8 @@ import {
     CountrySuppliers,
     ProductDistribution,
     ContractsCorrelation,
-    ContractRedFlags
+    ContractRedFlags,
+    Concentration
 } from '../../../../components/Visualizations'
 import CountryPartnerSlider from '../../../../components/CountryPartnerSlider/CountryPartnerSlider'
 
@@ -101,6 +102,11 @@ function CountryData(props) {
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4">
                             <ContractRedFlags
+                                params={{ country: countryCode }}
+                            />
+                        </div>
+                        <div className="w-full lg:w-1/2 px-2 mb-4">
+                            <Concentration
                                 params={{ country: countryCode }}
                             />
                         </div>

@@ -11,12 +11,13 @@ const useDataCalculations = () => {
         },
 
         changePercentage: (itemList, key = 'date') => {
-            if (itemList.length) {
+            if (itemList.length > 2) {
                 const items = itemList.sort((a, b) => dateDiff(b[key], a[key]))
                 const latest = items[0]['value']
                 const previous = items[1]['value']
-                const percentage = Math.round((latest / previous) * 100)
-                const relativePercentage = latest > previous ? percentage : 100 - percentage
+                const sum = latest + previous
+                const percentage = sum > 0 ? Math.round((latest / previous) * 100) : 0
+                const relativePercentage = sum > 0 ? latest > previous ? percentage : 100 - percentage : 0
                 const sign = relativePercentage === 0 ? '' : latest > previous ? '+' : '-'
 
                 return sign + relativePercentage
