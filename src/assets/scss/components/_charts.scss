@@ -63,7 +63,10 @@
 
 .fullscreen-enabled {
     background: #fff;
-    padding: 50px;
+    padding: 8px;
+    @media only screen and (min-width: 992px) {
+        padding: 24px;
+    }
 
     .world-map-chart-container {
         padding: 0;
@@ -75,7 +78,7 @@
     .h-500,
     .chart-full {
         width: 100%;
-        height: calc(100vh - 170px) !important;
+        height: calc(100vh - 190px) !important;
     }
 }
 
@@ -171,5 +174,12 @@
             top: auto;
             // transform: translateY(20px);
         }
+    }
+}
+
+.product-main-chart {
+    width: 100%;
+    @media only screen and (min-width: 768px) {
+        width: calc(100% - 91px);
     }
 }

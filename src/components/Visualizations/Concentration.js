@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
-import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import Default from '../../constants/Default'
 import ErrorHandler from '../ErrorHandler'
+import CardContainer from '../Utilities/CardContainer'
 
 const Concentration = (props) => {
     // ===========================================================================
@@ -16,7 +16,6 @@ const Concentration = (props) => {
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -59,34 +58,19 @@ const Concentration = (props) => {
     }, [originalData])
 
     return (
-        <div className="bg-white rounded h-full">
-            <div className="bg-white rounded p-4 pb-12">
-                <div className="flex items-center justify-between flex-wrap mb-4">
-                    <h3 className="mb-2 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                        {trans(label)}
-                    </h3>
-                </div>
-                {loading ? (
-                    <Loader />
-                ) : !error ? (
-                    <div className="flex">
-                        <div className="flex-1">
-                            <div className="flex-1 simple-tab -mt-10">
-                                <div className="mt-10">
-                                    <BarListChart
-                                        data={chartData}
-                                        text="suppliers"
-                                        viewType={'buyer'}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <CardContainer label={label} loading={loading}>
+            <div className="-mt-4 md:mt-0 custom-horizontal-bar">
+                {!error ? (
+                    <BarListChart
+                        data={chartData}
+                        text="suppliers"
+                        viewType={'buyer'}
+                    />
                 ) : (
                     <ErrorHandler />
                 )}
             </div>
-        </div>
+        </CardContainer>
     )
 }
 

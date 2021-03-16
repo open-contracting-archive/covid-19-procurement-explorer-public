@@ -36,14 +36,13 @@
 
     .custom-horizontal-bar-progress {
         height: 14px;
-        width: 100%;
-        margin-bottom: 8px;
+        width: 68%;
+        margin-right: 8px;
         background: #dceaee;
         position: relative;
 
         @media only screen and (min-width: 768px) {
             width: calc(100% - 180px);
-            margin-bottom: 0;
         }
 
         span {

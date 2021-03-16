@@ -84,16 +84,7 @@ const PieChart = ({ data, colors, large }) => {
         }
     }, [data])
 
-    return (
-        <div
-            ref={piechartDiv}
-            style={
-                large
-                    ? { width: '100px', height: '100px', margin: '0 auto' }
-                    : { width: '50px', height: '50px' }
-            }
-        />
-    )
+    return <div ref={piechartDiv} className="w-full h-32" />
 }
 
 export default PieChart

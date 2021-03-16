@@ -17,7 +17,12 @@ const CountrySuppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Country Suppliers', params, countrySlug } = props
+    const {
+        label = 'Country Suppliers',
+        helpText = 'Top 10 suppliers in each product category according to contracts value or number of signed contracts',
+        params,
+        countrySlug
+    } = props
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
@@ -25,7 +30,6 @@ const CountrySuppliers = (props) => {
     const [error, setError] = useState(false)
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
-    const helpText = ''
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency

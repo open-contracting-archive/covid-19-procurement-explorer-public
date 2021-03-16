@@ -257,7 +257,6 @@ svg tspan {
 
 .product-worldmap-tab {
     display: flex;
-    justify-content: space-between;
     padding: 18px 14px 0;
     font-size: 18px;
 
@@ -286,12 +285,14 @@ svg tspan {
     &:before {
         content: '';
         position: absolute;
-        width: 54px;
+        width: 68px;
         height: 75px;
         background: #1fbbec;
         border-radius: 0 0 4px 4px;
-        left: -14px;
+        left: 50%;
         top: -14px;
+        right: 0;
+        transform: translateX(-50%);
     }
 
     @media only screen and (min-width: 768px) {
@@ -299,12 +300,13 @@ svg tspan {
             content: '';
             position: absolute;
             width: 76px;
-            left: -14px;
+            left: -18px;
             top: -10px;
             right: 0px;
             bottom: -5px;
             background: #1fbbec;
             border-radius: 0 4px 4px 0;
+            transform: none;
         }
     }
 }

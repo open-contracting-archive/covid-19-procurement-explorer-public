@@ -54,66 +54,56 @@ const MainChart = (props) => {
 
     return (
         <div className="mb-12">
-            <div className="py-6 simple-tab">
+            <div className="py-6 px-4 md:px-0 simple-tab">
                 <FullScreen handle={handle}>
-                    <div>
-                        <div className="flex">
-                            <div className="flex w-full">
-                                <div>
-                                    <div className="product-worldmap-tab">
-                                        {country ? (
-                                            <div
-                                                className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
-                                                    view === 'chart'
-                                                        ? 'active'
-                                                        : ''
-                                                }`}
-                                                onClick={() =>
-                                                    setView('chart')
-                                                }>
-                                                <div>
-                                                    <ChartsIcon className="inline-block" />
-                                                    <span className="text-sm inline-block">
-                                                        {trans('Charts')}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div
-                                                className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
-                                                    view === 'map' || view === 'chart'
-                                                        ? 'active'
-                                                        : ''
-                                                }`}
-                                                onClick={() => setView('map')}>
-                                                <div>
-                                                    <MapIcon className="inline-block" />
-                                                    <span className="text-sm inline-block">
-                                                        {trans('Map')}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        )}
-                                        <div
-                                            className={`product-worldmap-tablist text-center cursor-pointer ${
-                                                view === 'flow' ? 'active' : ''
-                                            }`}
-                                            onClick={() => setView('flow')}>
-                                            <div>
-                                                <FlowIcon className="inline-block" />
-                                                <span className="text-sm inline-block">
-                                                    {trans('Flow')}
-                                                </span>
-                                            </div>
+                    <div className="flex flex-wrap">
+                        <div className="w-full md:w-auto">
+                            <div className="product-worldmap-tab space-x-12 md:space-x-0">
+                                {country ? (
+                                    <div
+                                        className={`product-worldmap-tablist z-10 text-center cursor-pointer mb-2 ${
+                                            view === 'chart' ? 'active' : ''
+                                        }`}
+                                        onClick={() => setView('chart')}>
+                                        <div>
+                                            <ChartsIcon className="inline-block" />
+                                            <span className="mt-1 md:mt-0 block md:inline-block text-sm">
+                                                {trans('Charts')}
+                                            </span>
                                         </div>
                                     </div>
-                                </div>
+                                ) : (
+                                    <div
+                                        className={`product-worldmap-tablist z-10 text-center cursor-pointer mb-2 ${
+                                            view === 'map' || view === 'chart'
+                                                ? 'active'
+                                                : ''
+                                        }`}
+                                        onClick={() => setView('map')}>
+                                        <div>
+                                            <MapIcon className="inline-block" />
+                                            <span className="mt-1 md:mt-0 block md:inline-block text-sm">
+                                                {trans('Map')}
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
                                 <div
-                                    className="flex-1 relative"
-                                    style={{ width: 'calc(100% - 91px)' }}>
-                                    {renderMainChart()}
+                                    className={`product-worldmap-tablist z-10 text-center cursor-pointer ${
+                                        view === 'flow' ? 'active' : ''
+                                    }`}
+                                    onClick={() => setView('flow')}>
+                                    <div>
+                                        <FlowIcon className="inline-block" />
+                                        <span className="mt-1 md:mt-0 block md:inline-block text-sm">
+                                            {trans('Flow')}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="md:flex-1 relative product-main-chart">
+                            {renderMainChart()}
                         </div>
                     </div>
                 </FullScreen>

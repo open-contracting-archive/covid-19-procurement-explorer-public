@@ -4,12 +4,11 @@ import { get } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
 import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
-import HelpText from '../../components/HelpText/HelpText'
 import Visualization from '../../constants/Visualization'
 import ErrorHandler from '../ErrorHandler'
-import useDataCalculations from "../../hooks/useDataCalculations"
+import useDataCalculations from '../../hooks/useDataCalculations'
+import CardContainer from '../Utilities/CardContainer'
 
 const TotalSpending = (props) => {
     // ===========================================================================
@@ -32,7 +31,11 @@ const TotalSpending = (props) => {
         barChart: []
     })
     const { trans } = useTrans()
-    const { areaChartData, changePercentage, colorValue } = useDataCalculations()
+    const {
+        areaChartData,
+        changePercentage,
+        colorValue
+    } = useDataCalculations()
 
     // ===========================================================================
     // Hooks
@@ -58,7 +61,11 @@ const TotalSpending = (props) => {
 
     useEffect(() => {
         if (originalData) {
-            const lineChartData = get(originalData, `${currency}.line_chart`, [])
+            const lineChartData = get(
+                originalData,
+                `${currency}.line_chart`,
+                []
+            )
             setChartData({
                 amount: get(originalData, `${currency}.total`),
                 percentage: changePercentage(lineChartData),
@@ -69,18 +76,10 @@ const TotalSpending = (props) => {
     }, [originalData, currency])
 
     return (
-        <div className="bg-white rounded p-4 h-full">
-            <div className="flex items-center">
-                <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label)}
-                </h3>
-                <HelpText helpTextInfo={helpText} />
-            </div>
-            {loading ? (
-                <Loader sm />
-            ) : !error ? (
+        <CardContainer label={label} loading={loading} helpText={helpText}>
+            {!error ? (
                 <div className="flex flex-wrap items-end">
-                    <div className="w-full md:w-2/5">
+                    <div className="w-full">
                         <AreaChartBlock
                             chartData={chartData.areaChart}
                             totalAmount={chartData.amount}
@@ -89,17 +88,19 @@ const TotalSpending = (props) => {
                             currency={currency}
                         />
                     </div>
-                    <div className="md:flex-1">
+                    <div className="w-full">
                         <SimpleBarChart
                             data={chartData.barChart}
                             chartKey="method"
                             chartValue="value"
+                            height="200px"
                         />
                     </div>
                 </div>
             ) : (
                 <ErrorHandler />
             )}
+
             {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
@@ -107,7 +108,7 @@ const TotalSpending = (props) => {
                     {trans('View in detail')} →
                 </span>
             )}
-        </div>
+        </CardContainer>
     )
 }
 

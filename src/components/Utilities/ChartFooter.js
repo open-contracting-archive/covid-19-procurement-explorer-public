@@ -47,14 +47,18 @@ const ChartFooter = (props) => {
     return (
         <div className="chart-footer flex-wrap md:flex-no-wrap bg-white flex items-center justify-between border-t rounded rounded-t-none             border-blue-0 text-sm text-primary-blue p-4 rounded-b">
             <div className="flex items-center">
-                <div className="flex items-center mr-6">
+                <div className="flex items-center mr-4 md:mr-6">
                     <DownloadIcon className="mr-2 inline-block" />
-                    <span>{trans('Download')}</span>
+                    <span className="hidden md:inline-block">
+                        {trans('Download')}
+                    </span>
                 </div>
                 <div className="flex items-center relative">
                     <button>
                         <ShareIcon className="mr-2 inline-block" />{' '}
-                        <span className="cursor-pointer">{trans('Share')}</span>
+                        <span className="hidden md:inline-block cursor-pointer">
+                            {trans('Share')}
+                        </span>
                     </button>
                     <nav className="share-menu">
                         <span className="mb-3 inline-block text-primary-dark">
@@ -113,7 +117,7 @@ const ChartFooter = (props) => {
             </div>
 
             {linkText && (
-                <div className="w-full md:w-auto my-4 md:my-0">
+                <div className="absolute left-0 right-0 text-center m-0 w-full md:relative md:text-left md:w-auto md:my-0">
                     <Link
                         to={linkText}
                         className="text-primary-blue inline-block text-sm">

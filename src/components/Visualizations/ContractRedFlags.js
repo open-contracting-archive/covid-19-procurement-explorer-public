@@ -46,10 +46,10 @@ const ContractRedFlags = (props) => {
             label={label}
             appendClass={'pb-12 h-full'}
             helpText={helpText}
-            symbol={<FlagIcon className="ml-2 inline-block" />}>
-            <div className="custom-horizontal-bar">
+            symbol={<FlagIcon className="inline-block ml-2" />}>
+            <div className="-mt-4 md:mt-0 custom-horizontal-bar">
                 {!error ? (
-                    <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
+                    <ul className="pr-4 overflow-y-auto custom-scrollbar h-80">
                         {originalData.map((item, index) => (
                             <li key={index}>
                                 <div className="flex items-center justify-between">

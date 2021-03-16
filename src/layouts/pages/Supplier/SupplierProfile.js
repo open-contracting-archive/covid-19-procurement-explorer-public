@@ -65,7 +65,7 @@ const SupplierProfile = () => {
                             title={get(originalData, 'name')}
                             description="Welcome Covid-19 Contract Explorer"
                         />
-                        <div className="container mx-auto">
+                        <div className="container mx-auto px-4 md:px-0">
                             <div className="text-sm mb-4 text-blue-5">
                                 <span className="cursor-pointer text-primary-blue">
                                     {get(originalData, 'country_name')}
@@ -100,7 +100,7 @@ const SupplierProfile = () => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="w-full px-2 mb-10">
+                            <div className="w-full mb-10">
                                 <div className="rounded border border-blue-0 bg-white">
                                     <GlobalSuppliers
                                         label="Product flow"
@@ -116,8 +116,8 @@ const SupplierProfile = () => {
                             style={{
                                 borderTop: '5px solid #1fbbec'
                             }}
-                            className="pt-16 pb-24 bg-primary-gray">
-                            <div className="container mx-auto px-2">
+                            className="py-10 md:pt-16 md:pb-24 px-4 bg-primary-gray">
+                            <div className="container mx-auto">
                                 <div className="flex flex-wrap -mx-2 mb-6">
                                     <div className="w-full lg:w-1/3 px-2 mb-4">
                                         <TotalSpending

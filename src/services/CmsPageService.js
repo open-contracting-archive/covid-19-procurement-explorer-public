@@ -163,7 +163,7 @@ class CmsPageService {
         if (
             response.body !== undefined &&
             response.body.items !== undefined &&
-            response.body.meta.total_items > 0
+            response.body.meta.total_count > 0
         ) {
             const result = await Api.get(
                 getURI('pages') + response.body.items[0].id

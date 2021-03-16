@@ -20,35 +20,39 @@ import {
     SUPPLIERS
 } from '../../../constants/Tab'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
-import CmsPageContent from '../StaticPage/CmsPageContent'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import DataDisclaimerInfo from "../CountryProfile/partials/DataDisclaimerInfo"
+import useCountries from "../../../hooks/useCountries"
+import CountryMethodology from "../CountryProfile/tabs/CountryMethodology"
 
 const GlobalOverview = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     let { tabSlug } = useParams()
+    const { globalCountryItem } = useCountries()
+    const disclaimerInfo = (<DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />)
 
     const renderTab = () => {
         switch (tabSlug) {
             case DATA:
-                return <GlobalData />
+                return <GlobalData disclaimerInfo={disclaimerInfo} />
             case INSIGHTS:
                 return <GlobalInsights />
             case CONTRACTS:
-                return <GlobalContracts />
+                return <GlobalContracts disclaimerInfo={disclaimerInfo} />
             case EQUITY:
-                return <GlobalEquity />
+                return <GlobalEquity disclaimerInfo={disclaimerInfo} />
             case BUYERS:
-                return <GlobalBuyers />
+                return <GlobalBuyers disclaimerInfo={disclaimerInfo} />
             case SUPPLIERS:
-                return <GlobalSuppliers />
+                return <GlobalSuppliers disclaimerInfo={disclaimerInfo} />
             case PRODUCTS:
-                return <GlobalProducts />
+                return <GlobalProducts disclaimerInfo={disclaimerInfo} />
             case METHODOLOGY:
-                return <CmsPageContent slug={'methodology'} />
+                return <CountryMethodology countryId={globalCountryItem().id} />
             default:
-                return <GlobalData />
+                return <GlobalData disclaimerInfo={disclaimerInfo} />
         }
     }
 

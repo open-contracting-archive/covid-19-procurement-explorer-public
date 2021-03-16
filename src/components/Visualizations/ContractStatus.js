@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { isEmpty, sumBy } from 'lodash'
 import { useSelector } from 'react-redux'
-import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
-import Loader from '../Loader/Loader'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import SimpleBarListChart from '../SimpleBarListSection/SimpleBarListChart'
 import ErrorHandler from '../ErrorHandler'
+import CardContainer from '../Utilities/CardContainer'
 
 const ContractStatus = (props) => {
     // ===========================================================================
@@ -20,7 +19,6 @@ const ContractStatus = (props) => {
     const [chartData, setChartData] = useState([])
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -70,55 +68,24 @@ const ContractStatus = (props) => {
         }
     }, [originalData, viewType, currency])
 
-    const isActiveTab = (type) => {
-        return viewType === type ? 'active' : ''
-    }
-
     return (
-        <div className="bg-white rounded p-4 h-full">
-            <div className="flex flex-wrap items-center justify-between mb-4">
-                <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                    {trans(label)}
-                </h3>
-                <div className="w-full md:w-auto flex md:justify-end">
-                    <ul className="contract-switch flex">
-                        <li
-                            className={`mr-4 cursor-pointer ${isActiveTab(
-                                ContractView.VALUE
-                            )}`}
-                            onClick={() => setViewType(ContractView.VALUE)}>
-                            {trans('By value')}
-                        </li>
-                        <li
-                            className={`cursor-pointer ${isActiveTab(
-                                ContractView.NUMBER
-                            )}`}
-                            onClick={() => setViewType(ContractView.NUMBER)}>
-                            {trans('By number')}
-                        </li>
-                    </ul>
-                </div>
+        <CardContainer
+            label={label}
+            viewType={viewType}
+            loading={loading}
+            viewHandler={setViewType}>
+            <div>
+                {!error ? (
+                    <SimpleBarListChart
+                        data={chartData}
+                        currency={currency}
+                        viewType={viewType}
+                    />
+                ) : (
+                    <ErrorHandler />
+                )}
             </div>
-            {loading ? (
-                <Loader />
-            ) : !error ? (
-                <div className="flex">
-                    <div className="flex-1">
-                        <div className="flex-1 simple-tab -mt-10">
-                            <div className="mt-10">
-                                <SimpleBarListChart
-                                    data={chartData}
-                                    currency={currency}
-                                    viewType={viewType}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ) : (
-                <ErrorHandler />
-            )}
-        </div>
+        </CardContainer>
     )
 }
 

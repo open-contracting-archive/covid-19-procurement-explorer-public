@@ -18,8 +18,13 @@
     top: 30px;
     pointer-events: none;
     transition: all 0.23s linear;
-    right: -6px;
+    left: -150px;
     z-index: 999;
+
+    @media only screen and (min-width: 768px) {
+        right: -6px;
+        left: auto;
+    }
 
     &:before {
         content: '';
@@ -30,18 +35,11 @@
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         border-bottom: 8px solid #454545;
-        right: 8px;
-    }
+        right: 32px;
 
-    @media only screen and (min-width: 768px) {
-        left: -6px;
-        right: auto;
-
-        &:before {
-            content: '';
-            top: -6px;
-            right: auto;
-            left: 8px;
+        @media only screen and (min-width: 768px) {
+            right: 8px;
+            left: auto;
         }
     }
 }

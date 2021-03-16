@@ -72,10 +72,10 @@ const VisualizationModal = (props) => {
     }
 
     return (
-        <div className="bar-chart-race-modal overflow-y-auto -m-8 p-4">
+        <div className="p-4 -m-8 overflow-y-auto bar-chart-race-modal">
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex justify-between">
-                    <h3 className="uppercase font-bold text-primary-dark">
+                    <h3 className="font-bold uppercase text-primary-dark">
                         {trans(getVisualizationTitle())}
                     </h3>
                     <button
@@ -85,12 +85,12 @@ const VisualizationModal = (props) => {
                     />
                 </div>
 
-                <div className="bg-white rounded mt-2">
+                <div className="mt-2 bg-white rounded">
                     <div className="flex">
                         <div className="flex-1">
-                            <div className="w-1/5 relative z-10">
+                            <div className="relative z-10 w-2/3 md:w-1/5">
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="text-sm select-filter"
                                     classNamePrefix="select-filter"
                                     options={options}
                                     defaultValue={options[0]}

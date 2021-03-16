@@ -7,15 +7,15 @@ import {
 } from '../../../../components/Visualizations'
 
 const CountrySuppliers = (props) => {
-    const { countryCode } = props
+    const { countryCode, disclaimerInfo = null } = props
 
     return countryCode ? (
         <div>
-            <div className="flex flex-wrap -mx-2 mb-16">
+            {disclaimerInfo && disclaimerInfo}
+
+            <div className="flex flex-wrap -mx-2 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-4">
-                    <Suppliers
-                        params={{ country: countryCode }}
-                    />
+                    <Suppliers params={{ country: countryCode }} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-4">
                     <TotalContracts

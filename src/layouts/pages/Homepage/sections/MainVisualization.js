@@ -45,13 +45,13 @@ const MainVisualization = () => {
                     {trans('Government spending to fight COVID-19')}
                 </p>
             </div>
-            <div className="container mx-auto px-2 md:px-0">
+            <div className="container mx-auto">
                 <div className="simple-tab md:flex md:flex-col md:justify-between world-map-section">
                     <div className="flex">
                         <div className="flex flex-wrap md:flex-no-wrap w-full relative">
                             <div className="relative md:absolute left-0 top-0 z-20 worldmap-tab w-full md:w-auto md:m-5 md:ml-4">
                                 <div>
-                                    <div className="product-worldmap-tab">
+                                    <div className="product-worldmap-tab justify-between md:justify-start">
                                         <div
                                             className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
                                                 tabView === 'map' && 'active'
@@ -106,7 +106,7 @@ const MainVisualization = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="world-map-chart-section flex-1 relative">
+                            <div className="w-full md:w-auto world-map-chart-section flex-1 relative">
                                 {renderTabComponent()}
                             </div>
                         </div>

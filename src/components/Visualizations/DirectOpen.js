@@ -6,13 +6,13 @@ import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import { formatNumber } from '../../helpers/number'
-import HelpText from '../../components/HelpText/HelpText'
 import Visualization from '../../constants/Visualization'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import ContractView from '../../constants/ContractView'
 import useContractTransformers from '../../hooks/useContractTransformers'
 import ErrorHandler from '../ErrorHandler'
 import Default from '../../constants/Default'
+import CardContainer from '../Utilities/CardContainer'
 
 const colors = ['#ABBABF', '#DCEAEE']
 
@@ -24,7 +24,6 @@ const DirectOpen = (props) => {
         label = 'Direct/Open',
         params,
         modalHandler,
-        heightFull = false,
         helpText = 'Total value of COVID contracts signed using direct or open procurement methods'
     } = props
     const [loading, setLoading] = useState(true)
@@ -63,10 +62,11 @@ const DirectOpen = (props) => {
         if (originalData.length) {
             const formattedData = originalData.map((item) => {
                 return {
-                    value: item.type,
+                    value: item.procedure,
                     number: item[valueField(viewType)]
                 }
             })
+
             const openValue = get(
                 originalData.find((item) => item.procedure === 'open'),
                 valueField(viewType),
@@ -84,66 +84,46 @@ const DirectOpen = (props) => {
     }, [originalData, viewType, currency])
 
     return (
-        <div
-            className={`bg-white rounded p-4 simple-tab ${
-                heightFull ? 'h-full' : ''
-            }`}>
-            <div className="flex flex-wrap items-center md:justify-between">
-                <div className="w-full md:w-auto mb-4 md:mb-0 flex items-center">
-                    <h3 className="uppercase font-bold text-primary-dark inline-block">
-                        {trans(label)}
-                    </h3>
-                    <HelpText helpTextInfo={helpText} />
-                </div>
-
-                <ContractViewSwitcher
-                    style={'short'}
-                    viewType={viewType}
-                    viewHandler={setViewType}
-                />
-            </div>
-            {loading ? (
-                <Loader sm />
-            ) : !error ? (
-                <div className={`${heightFull ? 'mt-10' : 'mt-2'}`}>
-                    <div className="flex items-end">
-                        <div>
-                            <h3 className="mr-3">
-                                <span className="text-sm block">
-                                    {trans('Open')}
-                                </span>
-                                <span className="text-xl font-bold mr-2">
-                                    {currency &&
-                                    currency !== Default.CURRENCY_LOCAL
-                                        ? '$'
-                                        : ''}
-                                    {formatNumber(openValue)}
-                                </span>
-                                <span className="inline-block uppercase">
-                                    {currencyCode(viewType)}
-                                </span>
-                            </h3>
-                        </div>
-                        <div className="flex-1">
-                            <PieChart
-                                data={chartData}
-                                colors={colors}
-                                large={heightFull}
-                            />
-                        </div>
+        <CardContainer
+            label={label}
+            viewType={viewType}
+            loading={loading}
+            helpText={helpText}
+            viewHandler={setViewType}>
+            {!error ? (
+                <div className="flex items-end">
+                    <div>
+                        <h3 className="mr-3">
+                            <span className="text-sm block">
+                                {trans('Open')}
+                            </span>
+                            <span className="text-xl font-bold mr-2">
+                                {currency && currency !== Default.CURRENCY_LOCAL
+                                    ? '$'
+                                    : ''}
+                                {formatNumber(openValue)}
+                            </span>
+                            <span className="inline-block uppercase">
+                                {currencyCode(viewType)}
+                            </span>
+                        </h3>
+                    </div>
+                    <div className="flex-1">
+                        <PieChart data={chartData} colors={colors} />
                     </div>
                 </div>
             ) : (
                 <ErrorHandler />
             )}
+
             {!error && modalHandler && (
                 <span
-                    className="cursor-pointer text-sm text-primary-blue block text-right"
+                    className="mt-6 cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.DIRECT_OPEN)}>
                     View in detail →
                 </span>
             )}
-        </div>
+        </CardContainer>
     )
 }
 

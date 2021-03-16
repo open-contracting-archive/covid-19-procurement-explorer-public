@@ -23,7 +23,7 @@ const ContractViewSwitcher = (props) => {
         <div className="w-full md:w-auto flex justify-start md:justify-end">
             <ul className="contract-switch flex flex-1 text-center md:text-left">
                 <li
-                    className={`w-1/2 md:w-auto mr-4 cursor-pointer text-base ${
+                    className={`w-1/2 md:w-auto md:mr-4 cursor-pointer text-base ${
                         viewType === ContractView.VALUE && activeClass
                     }`}
                     onClick={() => viewHandler(ContractView.VALUE)}>

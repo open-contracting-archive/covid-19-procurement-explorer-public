@@ -101,7 +101,7 @@ const WorldMap = (props) => {
                     <FullScreen handle={fullScreenHandler}>
                         <div className="relative p-4 bg-white rounded rounded-b-none">
                             <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart mb-4">
-                                <div className="w-full md:w-1/5 mb-4 md:mb-0">
+                                <div className="w-full md:w-1/5">
                                     <Select
                                         className="select-filter text-sm"
                                         classNamePrefix="select-filter"

@@ -2,7 +2,9 @@ import React from 'react'
 import ProductCategoryMap from "../../../../components/Visualizations/Common/ProductCategoryMap"
 import { ProductTable } from "../../../../components/Tables"
 
-const GlobalProducts = () => {
+const GlobalProducts = (props) => {
+    const { disclaimerInfo = null } = props
+
     function renderMainVisualization() {
         return (<ProductCategoryMap />)
     }
@@ -13,6 +15,8 @@ const GlobalProducts = () => {
 
     return (
         <div>
+            {disclaimerInfo && disclaimerInfo}
+
             <div className="w-full mb-12 global-profile">
                 {renderMainVisualization()}
             </div>

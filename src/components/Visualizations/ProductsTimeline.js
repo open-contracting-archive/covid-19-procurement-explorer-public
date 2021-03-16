@@ -13,6 +13,8 @@ import ErrorHandler from '../ErrorHandler'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import Visualization from '../../constants/Visualization'
+import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
+import CardContainer from '../Utilities/CardContainer'
 
 const ProductsTimeline = (props) => {
     // ===========================================================================
@@ -21,7 +23,6 @@ const ProductsTimeline = (props) => {
     const { label = 'Products Timeline', params } = props
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
-    const [chartType, setChartType] = useState('value')
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const { trans } = useTrans()
@@ -32,7 +33,7 @@ const ProductsTimeline = (props) => {
     )
     const selectedCurrency =
         currency === Default.CURRENCY_LOCAL ? countryCurrency : currency
-
+    const [viewType, setViewType] = useState(ContractView.VALUE)
     // Function to sort by date
     const sortDate = (data) => {
         return data.sort((date1, date2) => {
@@ -75,7 +76,7 @@ const ProductsTimeline = (props) => {
             let products = {}
             groupedData[key].forEach((item) => {
                 products[slugify(item.product_name)] =
-                    chartType === ContractView.NUMBER
+                    viewType === ContractView.NUMBER
                         ? item[Default.TENDER_COUNT]
                         : currency === Default.CURRENCY_LOCAL
                         ? item[Default.AMOUNT_LOCAL]
@@ -92,50 +93,28 @@ const ProductsTimeline = (props) => {
 
         setChartData(finalChartData)
         setLoading(false)
-    }, [originalData, chartType, currency])
+    }, [originalData, viewType, currency])
 
     return (
         <div>
             <FullScreen handle={fullScreenHandler}>
-                <div className="p-4 bg-white rounded rounded-b-none h-full">
-                    <div className="flex flex-wrap items-center justify-between">
-                        <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            {trans(label)}
-                        </h3>
-                        <div className="w-full md:w-auto flex">
-                            <ul className="contract-switch flex">
-                                <li
-                                    className={`mr-4 cursor-pointer text-xs md:text-base ${
-                                        chartType === 'value' ? 'active' : ''
-                                    }`}
-                                    onClick={() => setChartType('value')}>
-                                    {trans('By value')}
-                                </li>
-                                <li
-                                    className={`cursor-pointer text-xs md:text-base ${
-                                        chartType === 'number' ? 'active' : ''
-                                    }`}
-                                    onClick={() => setChartType('number')}>
-                                    {trans('By number')}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    {!chartData ? (
-                        <Loader />
-                    ) : !error ? (
-                        <div>
+                <CardContainer
+                    label={label}
+                    viewType={viewType}
+                    loading={loading}
+                    viewHandler={setViewType}>
+                    <div>
+                        {!error ? (
                             <StackedChart
                                 data={chartData}
                                 currency={selectedCurrency}
                             />
-                        </div>
-                    ) : (
-                        <ErrorHandler />
-                    )}
-                </div>
+                        ) : (
+                            <ErrorHandler />
+                        )}
+                    </div>
+                </CardContainer>
             </FullScreen>
-
             <ChartFooter
                 fullScreenHandler={fullScreenHandler}
                 embeddedVisualization={{

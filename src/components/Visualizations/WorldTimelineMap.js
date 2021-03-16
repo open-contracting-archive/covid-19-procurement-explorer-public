@@ -109,49 +109,54 @@ const WorldTimelineMap = () => {
     }
 
     return (
-        <FullScreen handle={fullScreenHandler}>
+        <Fragment>
             {!mapData ? (
                 <Loader />
             ) : (
                 <Fragment>
-                    <section className="world-map-chart-container p-4 bg-white rounded rounded-b-none">
-                        <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart mb-4">
-                            <div className="w-full md:w-1/5 mb-4 md:mb-0">
-                                <Select
-                                    className="select-filter text-sm"
-                                    classNamePrefix="select-filter"
-                                    options={options}
-                                    defaultValue={options[0]}
-                                    onChange={(selectedOption) =>
-                                        handleContinentSelection(selectedOption)
-                                    }
+                    <FullScreen handle={fullScreenHandler}>
+                        <section className="p-4 bg-white rounded rounded-b-none world-map-chart-container">
+                            <div className="flex flex-wrap mb-4 md:flex-no-wrap md:justify-between world-map-chart">
+                                <div className="w-full md:w-1/5">
+                                    <Select
+                                        className="text-sm select-filter"
+                                        classNamePrefix="select-filter"
+                                        options={options}
+                                        defaultValue={options[0]}
+                                        onChange={(selectedOption) =>
+                                            handleContinentSelection(
+                                                selectedOption
+                                            )
+                                        }
+                                    />
+                                </div>
+                                {viewType === ContractView.VALUE && (
+                                    <PerCapitaSwitcher
+                                        show={showPerCapita}
+                                        handleToggle={setShowPerCapita}
+                                    />
+                                )}
+
+                                <ContractViewSwitcher
+                                    style={'short'}
+                                    viewType={viewType}
+                                    viewHandler={(value) => {
+                                        setViewType(value)
+                                        setShowPerCapita(false)
+                                    }}
                                 />
                             </div>
-                            {viewType === ContractView.VALUE && (
-                                <PerCapitaSwitcher
-                                    show={showPerCapita}
-                                    handleToggle={setShowPerCapita}
-                                />
-                            )}
-
-                            <ContractViewSwitcher
-                                style={'short'}
-                                viewType={viewType}
-                                viewHandler={(value) => {
-                                    setViewType(value)
-                                    setShowPerCapita(false)
-                                }}
+                            <RaceMap
+                                contractData={mapData}
+                                contractType={viewType}
+                                yearMonth={yearMonth}
+                                sliderData={sliderData || []}
+                                coordinates={
+                                    CONTINENTS[selectedContinent.value]
+                                }
                             />
-                        </div>
-                        <RaceMap
-                            contractData={mapData}
-                            contractType={viewType}
-                            yearMonth={yearMonth}
-                            sliderData={sliderData || []}
-                            coordinates={CONTINENTS[selectedContinent.value]}
-                        />
-                    </section>
-
+                        </section>
+                    </FullScreen>
                     <ChartFooter
                         fullScreenHandler={fullScreenHandler}
                         embeddedVisualization={{
@@ -160,7 +165,7 @@ const WorldTimelineMap = () => {
                     />
                 </Fragment>
             )}
-        </FullScreen>
+        </Fragment>
     )
 }
 

@@ -21,7 +21,7 @@ import {
 import CountryPartnerSlider from '../../../../components/CountryPartnerSlider/CountryPartnerSlider'
 
 function CountryData(props) {
-    const { countryCode } = props
+    const { countryCode, disclaimerInfo = null } = props
     const { countrySlug } = useParams()
     const [loading, setLoading] = useState(true)
 
@@ -36,6 +36,8 @@ function CountryData(props) {
     ) : (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
+                {disclaimerInfo && disclaimerInfo}
+
                 {countryCode && (
                     <div className="flex flex-wrap -mx-2 -mb-4">
                         <div className="w-full lg:w-1/3 px-2 mb-4">
@@ -48,25 +50,26 @@ function CountryData(props) {
                             <TotalContracts params={{ country: countryCode }} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-4">
-                            <AverageBidsPerContract
-                                params={{ country: countryCode }}
-                            />
-                        </div>
-                        <div className="w-full lg:w-1/3 px-2 mb-4">
-                            <Monopolization params={{ country: countryCode }} />
+                            <div className="flex flex-col justify-between h-full space-y-4">
+                                <AverageBidsPerContract
+                                    params={{ country: countryCode }}
+                                />
+                                <Monopolization
+                                    params={{ country: countryCode }}
+                                />
+                            </div>
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-4">
                             <ContractStatus params={{ country: countryCode }} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-4">
-                            <div className="flex flex-col justify-between h-full">
-                                <EquityIndicators
-                                    params={{ country: countryCode }}
-                                />
-                                <DirectOpen params={{ country: countryCode }} />
-                            </div>
+                            <EquityIndicators
+                                params={{ country: countryCode }}
+                            />
                         </div>
-
+                        <div className="w-full lg:w-1/3 px-2 mb-4">
+                            <DirectOpen params={{ country: countryCode }} />
+                        </div>
                         <div className="w-full px-2 mb-4">
                             <ProductsTimeline
                                 params={{ country: countryCode }}
@@ -106,9 +109,7 @@ function CountryData(props) {
                             />
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4">
-                            <Concentration
-                                params={{ country: countryCode }}
-                            />
+                            <Concentration params={{ country: countryCode }} />
                         </div>
                         <div className="w-full px-2 mb-4">
                             <ContractsCorrelation

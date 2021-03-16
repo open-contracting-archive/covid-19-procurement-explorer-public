@@ -20,10 +20,6 @@ const CountryInsights = (props) => {
 
     return (
         <div>
-            <h2 className="font-normal text-lg mb-6">
-                {trans('Library')}
-            </h2>
-
             {renderFeaturedItems()}
 
             <h2 className="font-normal text-lg mb-6">

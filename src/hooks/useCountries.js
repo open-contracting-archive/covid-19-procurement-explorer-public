@@ -33,6 +33,7 @@ const useCountries = () => {
             return language ? language.name : languageId
         },
 
+        globalCountryItem: () => countries.find((country) => country.slug === 'global')
     }
 }
 

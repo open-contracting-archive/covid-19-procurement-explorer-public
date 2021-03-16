@@ -8,7 +8,8 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Visualization from '../../constants/Visualization'
 import HelpText from '../../components/HelpText/HelpText'
 import ErrorHandler from '../ErrorHandler'
-import useDataCalculations from "../../hooks/useDataCalculations"
+import useDataCalculations from '../../hooks/useDataCalculations'
+import CardContainer from '../Utilities/CardContainer'
 
 const TotalContracts = (props) => {
     // ===========================================================================
@@ -30,7 +31,11 @@ const TotalContracts = (props) => {
         barChart: []
     })
     const { trans } = useTrans()
-    const { areaChartData, changePercentage, colorValue } = useDataCalculations()
+    const {
+        areaChartData,
+        changePercentage,
+        colorValue
+    } = useDataCalculations()
 
     // ===========================================================================
     // Hooks
@@ -67,19 +72,10 @@ const TotalContracts = (props) => {
     }, [originalData])
 
     return (
-        <div className="bg-white rounded p-4 h-full">
-            <div className="flex items-center">
-                <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label)}
-                </h3>
-                <HelpText helpTextInfo={helpText} />
-            </div>
-
-            {loading ? (
-                <Loader sm />
-            ) : !error ? (
+        <CardContainer label={label} loading={loading} helpText={helpText}>
+            {!error ? (
                 <div className="flex flex-wrap items-end">
-                    <div className="w-full md:w-2/5">
+                    <div className="w-full">
                         <AreaChartBlock
                             chartData={chartData.areaChart}
                             totalAmount={chartData.tenderCount}
@@ -88,17 +84,19 @@ const TotalContracts = (props) => {
                         />
                     </div>
 
-                    <div className="md:flex-1">
+                    <div className="w-full">
                         <SimpleBarChart
                             data={chartData.barChart}
                             chartKey="method"
                             chartValue="value"
+                            height="200px"
                         />
                     </div>
                 </div>
             ) : (
                 <ErrorHandler />
             )}
+
             {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
@@ -106,7 +104,7 @@ const TotalContracts = (props) => {
                     {trans('View in detail')} →
                 </span>
             )}
-        </div>
+        </CardContainer>
     )
 }
 
