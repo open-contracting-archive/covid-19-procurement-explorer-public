@@ -41,6 +41,7 @@ module.exports = {
             black: '#000',
             white: '#fff',
             gray: '#f7f7f7',
+            'gray-e2e': '#e2e8f0',
 
             // 'black-3d3': '#3D393D',
             // 'black-3d3-50': 'rgba(50,57,72,0.5)',

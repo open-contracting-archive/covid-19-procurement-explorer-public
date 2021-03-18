@@ -40,8 +40,6 @@ const ContractDetail = () => {
         }
     }, [contractId])
 
-    console.log(contractDetail)
-
     return loading ? (
         <Loader />
     ) : (
