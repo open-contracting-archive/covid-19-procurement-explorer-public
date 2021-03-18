@@ -7,22 +7,22 @@ import {
 } from '../../../../components/Visualizations'
 
 const CountryBuyers = (props) => {
-    const { countryCode } = props
+    const { countryCode, disclaimerInfo = null } = props
 
     return countryCode ? (
         <div>
-            <div className="flex flex-wrap -mx-3 mb-16">
-                <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <Buyers
-                        params={{ country: countryCode }}
-                    />
+            {disclaimerInfo && disclaimerInfo}
+
+            <div className="flex flex-wrap -mx-2 md:mb-16">
+                <div className="w-full lg:w-1/3 px-2 mb-4">
+                    <Buyers params={{ country: countryCode }} />
                 </div>
-                <div className="w-full lg:w-1/3 px-2 mb-6">
+                <div className="w-full lg:w-1/3 px-2 mb-4">
                     <TotalContracts
                         params={{ country: countryCode, buyer: 'notnull' }}
                     />
                 </div>
-                <div className="w-full lg:w-1/3 px-2 mb-6">
+                <div className="w-full lg:w-1/3 px-2 mb-4">
                     <TotalSpending
                         params={{ country: countryCode, buyer: 'notnull' }}
                     />

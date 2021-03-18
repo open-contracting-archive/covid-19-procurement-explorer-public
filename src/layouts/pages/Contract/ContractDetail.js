@@ -51,7 +51,7 @@ const ContractDetail = () => {
                 description={contractDetail && contractDetail.contract_desc}
                 canonicalLink={window.location.href}
             />
-            <div className="container mx-auto px-4 ">
+            <div className="container mx-auto px-4">
                 <div className="text-sm mb-4 text-blue-5">
                     <span
                         className="cursor-pointer text-primary-blue"
@@ -139,7 +139,7 @@ const ContractDetail = () => {
                         </p>
                     </div>
                 </div>
-                <div className="p-8 rounded-md grid grid-cols-12 gap-y-6 md:gap-y-10 mb-8 bg-primary-gray">
+                <div className="p-4 md:p-8 rounded-md grid grid-cols-12 gap-y-6 md:gap-y-10 mb-8 bg-primary-gray">
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
                             {trans('Contract signed')}

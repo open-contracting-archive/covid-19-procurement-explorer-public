@@ -30,14 +30,17 @@ const ProductProfile = () => {
 
     return (
         <section className="pt-8">
-            <MetaInformation title="Products" description="Welcome Covid-19 Contract Explorer" />
+            <MetaInformation
+                title="Products"
+                description="Welcome Covid-19 Contract Explorer"
+            />
             <div className="container mx-auto">
                 <ProductInfo product={product} country={country} />
 
                 {product && <MainChart product={product} country={country} />}
             </div>
 
-            <div className="py-12 bg-primary-gray">
+            <div className="py-12 bg-primary-gray px-4">
                 <div className="container mx-auto">
                     <div>
                         <ContractTable params={{ product: productId }} />

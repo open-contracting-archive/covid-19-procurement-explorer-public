@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
-import useTrans from '../../hooks/useTrans'
 import BarListChart from '../BarListSection/BarListChart'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import ErrorHandler from '../ErrorHandler'
+import CardContainer from '../Utilities/CardContainer'
 
 const TopBuyers = (props) => {
     // ===========================================================================
@@ -20,7 +19,6 @@ const TopBuyers = (props) => {
     const [chartData, setChartData] = useState([])
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -75,60 +73,26 @@ const TopBuyers = (props) => {
         }
     }, [originalData, viewType, currency])
 
-    const isActiveTab = (type) => {
-        return viewType === type ? 'active' : ''
-    }
-
     return (
-        <div className="bg-white rounded h-full">
-            <div className="bg-white rounded p-4 pb-12">
-                <div className="flex items-center justify-between flex-wrap mb-4">
-                    <h3 className="mb-2 md:mb-0 w-full md:w-auto uppercase font-bold text-primary-dark">
-                        {trans(label)}
-                    </h3>
-                    <div className="w-full md:w-auto flex">
-                        <ul className="contract-switch flex">
-                            <li
-                                className={`mr-4 cursor-pointer text-xs md:text-base ${isActiveTab(
-                                    ContractView.VALUE
-                                )}`}
-                                onClick={() => setViewType(ContractView.VALUE)}>
-                                {trans('By value')}
-                            </li>
-                            <li
-                                className={`cursor-pointer text-xs md:text-base ${isActiveTab(
-                                    ContractView.NUMBER
-                                )}`}
-                                onClick={() =>
-                                    setViewType(ContractView.NUMBER)
-                                }>
-                                {trans('By number')}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                {loading ? (
-                    <Loader />
-                ) : !error ? (
-                    <div className="flex">
-                        <div className="flex-1">
-                            <div className="flex-1 simple-tab -mt-10">
-                                <div className="mt-10">
-                                    <BarListChart
-                                        data={chartData}
-                                        text="buyers"
-                                        currency={currency}
-                                        viewType={viewType}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <CardContainer
+            label={label}
+            appendClass="pb-12"
+            loading={loading}
+            viewType={viewType}
+            viewHandler={setViewType}>
+            <div className="custom-horizontal-bar">
+                {!error ? (
+                    <BarListChart
+                        data={chartData}
+                        text="buyers"
+                        currency={currency}
+                        viewType={viewType}
+                    />
                 ) : (
                     <ErrorHandler />
                 )}
             </div>
-        </div>
+        </CardContainer>
     )
 }
 

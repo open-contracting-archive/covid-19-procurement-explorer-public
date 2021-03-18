@@ -24,10 +24,12 @@ const SankeyChart = ({ data, currency }) => {
         chart.dataFields.fromName = 'from'
         chart.dataFields.toName = 'to'
         chart.dataFields.value = 'value'
-        chart.links.template.tooltipText = `{from} -> {to} : ${currency == 'usd' ? '$' : ''}{value} [text-transform: uppercase]${currency}`
+        chart.links.template.tooltipText = `{from} -> {to} : ${
+            currency == 'usd' ? '$' : ''
+        }{value} [text-transform: uppercase]${currency}`
 
         // for right-most label to fit
-        chart.paddingRight = 120
+        // chart.paddingRight = 10
 
         // make nodes draggable
         let nodeTemplate = chart.nodes.template

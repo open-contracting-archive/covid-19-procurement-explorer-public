@@ -86,9 +86,9 @@ const ContractsCorrelation = (props) => {
         <div>
             <FullScreen handle={fullScreenHandler}>
                 <div className="p-4 bg-white rounded rounded-b-none simple-tab h-full">
-                    <div className="flex flex-wrap items-center mb-4 md:mb-0 justify-start md:justify-between">
-                        <div className="flex mr-2 mb-2 md:mb-0">
-                            <h3 className="uppercase font-bold text-primary-dark inline-block">
+                    <div className="flex flex-wrap items-center mb-6 md:mb-0 justify-start md:justify-between">
+                        <div className="flex mr-2 mb-4 md:mb-0">
+                            <h3 className="text-base uppercase font-bold text-primary-dark inline-block">
                                 {trans(label)}
                             </h3>
                             <HelpText helpTextInfo={helpText} />

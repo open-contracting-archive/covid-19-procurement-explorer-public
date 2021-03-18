@@ -98,7 +98,7 @@ const WorldTimelineRaceBarMap = () => {
     return (
         <div>
             <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none">
-                <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart mb-4">
+                <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart md:mb-4">
                     <div className="w-full md:w-1/5 mb-4 md:mb-0">
                         <Select
                             className="select-filter text-sm"

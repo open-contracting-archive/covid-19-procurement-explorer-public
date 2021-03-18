@@ -3,20 +3,24 @@ import ProductCategoryMap from "../../../../components/Visualizations/Common/Pro
 import { ProductTable } from "../../../../components/Tables"
 
 const CountryProducts = (props) => {
+    const { countryCode, disclaimerInfo = null } = props
+
     function renderMainVisualization() {
-        if (props.countryCode) {
-            return (<ProductCategoryMap params={{ country: props.countryCode }} />)
+        if (countryCode) {
+            return (<ProductCategoryMap params={{ country: countryCode }} />)
         }
     }
 
     function renderTable() {
-        if (props.countryCode) {
-            return (<ProductTable params={{ country: props.countryCode }} />)
+        if (countryCode) {
+            return (<ProductTable params={{ country: countryCode }} />)
         }
     }
 
     return (
         <div>
+            {disclaimerInfo && disclaimerInfo}
+
             <div className="w-full mb-12 global-profile">
                 {renderMainVisualization()}
             </div>

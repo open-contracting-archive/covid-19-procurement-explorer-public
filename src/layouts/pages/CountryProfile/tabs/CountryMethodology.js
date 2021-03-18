@@ -11,8 +11,7 @@ const CountryMethodology = (props) => {
     useEffect(() => {
         const params = {
             country: countryId,
-            slug: 'methodology'
-            //    content_type:'Methodology
+            static_content_type: 'methodology'
         }
         CmsPageService.MethodologyContent(params)
             .then((result) => {

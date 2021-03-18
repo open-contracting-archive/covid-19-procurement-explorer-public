@@ -20,26 +20,23 @@ const CardContainer = (props) => {
     return (
         <div className={`bg-white rounded p-4 h-full ${appendClass}`}>
             <Fragment>
-                <div className="flex flex-wrap items-center md:justify-between md:w-auto mb-4 md:mb-8 ">
-                    <div className="w-full flex flex-wrap items-center justify-between">
-                        <div className="flex">
-                            <h3 className="mb-4 md:mb-0 uppercase font-bold text-primary-dark inline-block">
-                                {trans(label)}
-                            </h3>
+                <div className="w-full flex flex-wrap items-center justify-between mb-4">
+                    <div className="flex items-center mb-4 md:mb-0">
+                        <h3 className="uppercase font-bold text-primary-dark inline-block">
+                            {trans(label)}
+                        </h3>
 
-                            {symbol}
+                        {symbol}
 
-                            {helpText && <HelpText helpTextInfo={helpText} />}
-                        </div>
-
-                        {viewHandler && (
-                            <ContractViewSwitcher
-                                style={'short'}
-                                viewType={viewType}
-                                viewHandler={viewHandler}
-                            />
-                        )}
+                        {helpText && <HelpText helpTextInfo={helpText} />}
                     </div>
+                    {viewHandler && (
+                        <ContractViewSwitcher
+                            style={'short'}
+                            viewType={viewType}
+                            viewHandler={viewHandler}
+                        />
+                    )}
                 </div>
                 {loading ? <Loader /> : <div>{children}</div>}
             </Fragment>

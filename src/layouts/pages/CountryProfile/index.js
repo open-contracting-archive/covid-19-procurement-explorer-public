@@ -27,6 +27,7 @@ import {
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import Default from '../../../constants/Default'
 import CountryMethodology from "./tabs/CountryMethodology"
+import DataDisclaimerInfo from "./partials/DataDisclaimerInfo"
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -50,6 +51,7 @@ const CountryProfile = () => {
             dispatch(setCurrency(Default.CURRENCY_USD))
         }
     }, [countries, countrySlug])
+    const disclaimerInfo = (<DataDisclaimerInfo forwardUrl={`/country/${countrySlug}/methodology`} />)
 
     const renderTab = () => {
         switch (tabSlug) {
@@ -57,6 +59,7 @@ const CountryProfile = () => {
                 return (
                     <CountryData
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
             case INSIGHTS:
@@ -65,38 +68,46 @@ const CountryProfile = () => {
                 return (
                     <CountryContracts
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
             case EQUITY:
                 return (
                     <CountryEquity
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
             case BUYERS:
                 return (
                     <CountryBuyers
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
             case SUPPLIERS:
                 return (
                     <CountrySuppliers
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
             case PRODUCTS:
                 return (
                     <CountryProducts
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
             case METHODOLOGY:
-                return <CountryMethodology countryId={countryData.id} />
+                return <CountryMethodology
+                    countryId={countryData.id}
+                />
             default:
                 return (
                     <CountryData
                         countryCode={countryData.country_code_alpha_2}
+                        disclaimerInfo={disclaimerInfo}
                     />
                 )
         }

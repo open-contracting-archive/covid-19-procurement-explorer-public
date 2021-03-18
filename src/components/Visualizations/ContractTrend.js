@@ -89,7 +89,7 @@ const ContractTrend = (props) => {
                 <div className="mt-4">No data available</div>
             ) : (
                 !isEmpty(chartData) && (
-                    <div className="-mt-10">
+                    <div className="md:-mt-10">
                         <PerCapitaSwitcher
                             show={showPerCapita}
                             handleToggle={setShowPerCapita}

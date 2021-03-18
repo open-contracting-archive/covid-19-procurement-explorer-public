@@ -255,7 +255,7 @@ const SupplierTable = (props) => {
                 ''
             )}
 
-            <div className="flex flex-wrap items-center justify-end md:justify-between mb-6 mt-12 md:mt-0 md:mb-12">
+            <div className="flex flex-wrap items-center justify-end md:justify-between mb-6 md:mb-12">
                 <div className="hidden md:flex gap-8">
                     <div className="w-40">
                         <p className="uppercase text-xs opacity-50 leading-none">

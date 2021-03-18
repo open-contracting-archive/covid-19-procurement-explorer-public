@@ -9,6 +9,7 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import ChartFooter from '../../Utilities/ChartFooter'
 import ErrorHandler from '../../ErrorHandler'
 import Default from '../../../constants/Default'
+import ContractViewSwitcher from '../../Utilities/ContractViewSwitcher'
 
 const ProductCategoryMap = (props) => {
     // ===========================================================================
@@ -73,28 +74,13 @@ const ProductCategoryMap = (props) => {
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
                             {trans('Product Category Map')}
                         </h3>
-                        <div className="w-full md:w-auto flex">
-                            <ul className="contract-switch flex">
-                                <li
-                                    className={`mr-4 cursor-pointer text-xs md:text-base ${isActiveTab(
-                                        ContractView.VALUE
-                                    )}`}
-                                    onClick={() =>
-                                        setViewType(ContractView.VALUE)
-                                    }>
-                                    {trans('By value')}
-                                </li>
-                                <li
-                                    className={`cursor-pointer text-xs md:text-base ${isActiveTab(
-                                        ContractView.NUMBER
-                                    )}`}
-                                    onClick={() =>
-                                        setViewType(ContractView.NUMBER)
-                                    }>
-                                    {trans('By number')}
-                                </li>
-                            </ul>
-                        </div>
+                        <ContractViewSwitcher
+                            style={'short'}
+                            viewType={viewType}
+                            viewHandler={(value) => {
+                                setViewType(value)
+                            }}
+                        />
                     </div>
 
                     {loading ? (
