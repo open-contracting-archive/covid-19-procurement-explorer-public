@@ -1,11 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { get } from 'lodash'
-import ContractService from '../../services/ContractService'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
-import { formatDate } from '../../helpers/date'
-import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import VisualizationService from "../../services/VisualizationService"
 
 const OverallStatisticsTable = () => {
@@ -43,11 +40,6 @@ const OverallStatisticsTable = () => {
     const showDetail = (countrySlug) => {
         history.push(`/country/${countrySlug}/data`)
     }
-    const tableRowClass = (redFlagCount) => {
-        return redFlagCount
-            ? 'table-row has-red-flag cursor-pointer'
-            : 'table-row cursor-pointer'
-    }
 
     return (
         <div>
@@ -60,36 +52,36 @@ const OverallStatisticsTable = () => {
                             <div className="custom-scrollbar table-scroll overflow-x-scroll">
                                 <table className="table">
                                     <thead>
-                                    <tr className="whitespace-no-wrap border">
-                                        <th rowSpan={2} className='align-middle border-r'>{trans('Country')}</th>
-                                        <th rowSpan={2} className='align-middle border-r'>{trans('Total Contracts')}</th>
-                                        <th colSpan={2} className={'text-center border-r'}>{trans('Total Amount')}</th>
-                                        <th colSpan={5} className={'text-center border-r'}>{trans('Procurement Procedure wise Number of Contracts')}</th>
-                                        <th colSpan={5} className={'text-center border-r'}>{trans('Procurement Procedure wise Amount (USD)')}</th>
-                                        <th colSpan={4} className={'text-center border-r'}>{trans('Status wise Number of Contracts')}</th>
+                                    <tr className="whitespace-no-wrap border border-gray-e2e">
+                                        <th rowSpan={2} className='align-middle border-r border-gray-e2e'>{trans('Country')}</th>
+                                        <th rowSpan={2} className='align-middle border-r border-gray-e2e'>{trans('Total Contracts')}</th>
+                                        <th colSpan={2} className={'text-center border-r border-gray-e2e'}>{trans('Total Amount')}</th>
+                                        <th colSpan={5} className={'text-center border-r border-gray-e2e'}>{trans('Procurement Procedure wise Number of Contracts')}</th>
+                                        <th colSpan={5} className={'text-center border-r border-gray-e2e'}>{trans('Procurement Procedure wise Amount (USD)')}</th>
+                                        <th colSpan={4} className={'text-center border-r border-gray-e2e'}>{trans('Status wise Number of Contracts')}</th>
                                         <th colSpan={4} className={'text-center'}>{trans('Status wise Amount (USD)')}</th>
                                     </tr>
 
                                     <tr className="whitespace-no-wrap border">
                                         <th>{trans('USD')}</th>
-                                        <th className={'border-r'}>{trans('Local')}</th>
+                                        <th className={'border-r border-gray-e2e'}>{trans('Local')}</th>
 
                                         <th>{trans('Open')}</th>
                                         <th>{trans('Direct')}</th>
                                         <th>{trans('Limited')}</th>
                                         <th>{trans('Selective')}</th>
-                                        <th className={'border-r'}>{trans('Not Identified')}</th>
+                                        <th className={'border-r border-gray-e2e'}>{trans('Not Identified')}</th>
 
                                         <th>{trans('Open')}</th>
                                         <th>{trans('Direct')}</th>
                                         <th>{trans('Limited')}</th>
                                         <th>{trans('Selective')}</th>
-                                        <th className={'border-r'}>{trans('Not Identified')}</th>
+                                        <th className={'border-r border-gray-e2e'}>{trans('Not Identified')}</th>
 
                                         <th>{trans('Active')}</th>
                                         <th>{trans('Completed')}</th>
                                         <th>{trans('Cancelled')}</th>
-                                        <th className={'border-r'}>{trans('Not Identified')}</th>
+                                        <th className={'border-r border-gray-e2e'}>{trans('Not Identified')}</th>
 
                                         <th>{trans('Active')}</th>
                                         <th>{trans('Completed')}</th>
@@ -111,32 +103,32 @@ const OverallStatisticsTable = () => {
                                                             get(item, 'country.slug')
                                                         )
                                                     }>
-                                                    <td className={'border-r'}>{get(item, 'statistic.country')}</td>
-                                                    <td className={'border-r'}>{get(item, 'statistic.total_contracts')}</td>
+                                                    <td className={'border-r border-l border-gray-e2e'}>{get(item, 'statistic.country')}</td>
+                                                    <td className={'border-r border-gray-e2e'}>{get(item, 'statistic.total_contracts')}</td>
                                                     <td>{get(item, 'statistic.total_amount_usd')}</td>
-                                                    <td className={'border-r'}>{get(item, 'statistic.total_amount_local')}</td>
+                                                    <td className={'border-r border-gray-e2e'}>{get(item, 'statistic.total_amount_local')}</td>
 
                                                     <td>{get(item, 'statistic.open_contracts')}</td>
                                                     <td>{get(item, 'statistic.direct_contracts')}</td>
                                                     <td>{get(item, 'statistic.limited_contracts')}</td>
                                                     <td>{get(item, 'statistic.selective_contracts')}</td>
-                                                    <td className={'border-r'}>{get(item, 'statistic.other_method_contracts')}</td>
+                                                    <td className={'border-r border-gray-e2e'}>{get(item, 'statistic.other_method_contracts')}</td>
 
                                                     <td>{get(item, 'statistic.open_contracts_amount')}</td>
                                                     <td>{get(item, 'statistic.direct_contracts_amount')}</td>
                                                     <td>{get(item, 'statistic.limited_contracts_amount')}</td>
                                                     <td>{get(item, 'statistic.selective_contracts_amount')}</td>
-                                                    <td className={'border-r'}>{get(item, 'statistic.not_identified_contracts_amount')}</td>
+                                                    <td className={'border-r border-gray-e2e'}>{get(item, 'statistic.not_identified_contracts_amount')}</td>
 
                                                     <td>{get(item, 'statistic.active_contracts')}</td>
                                                     <td>{get(item, 'statistic.completed_contracts')}</td>
                                                     <td>{get(item, 'statistic.cancelled_contracts')}</td>
-                                                    <td className={'border-r'}>{get(item, 'statistic.not_indentifed_contracts')}</td>
+                                                    <td className={'border-r border-gray-e2e'}>{get(item, 'statistic.not_indentifed_contracts')}</td>
 
                                                     <td>{get(item, 'statistic.active_contracts_sum')}</td>
                                                     <td>{get(item, 'statistic.completed_contracts_sum')}</td>
                                                     <td>{get(item, 'statistic.cancelled_contracts_sum')}</td>
-                                                    <td>{get(item, 'statistic.not_indentifed_contracts_sum')}</td>
+                                                    <td className="border-r border-gray-e2e">{get(item, 'statistic.not_indentifed_contracts_sum')}</td>
                                                 </tr>
                                             )
                                         }
