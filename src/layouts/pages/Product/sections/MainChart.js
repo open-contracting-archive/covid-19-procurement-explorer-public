@@ -67,7 +67,7 @@ const MainChart = (props) => {
                                         onClick={() => setView('chart')}>
                                         <div>
                                             <ChartsIcon className="inline-block" />
-                                            <span className="mt-1 md:mt-0 block md:inline-block text-sm">
+                                            <span className="mt-1 md:mt-0 block text-sm">
                                                 {trans('Charts')}
                                             </span>
                                         </div>
@@ -81,8 +81,8 @@ const MainChart = (props) => {
                                         }`}
                                         onClick={() => setView('map')}>
                                         <div>
-                                            <MapIcon className="inline-block" />
-                                            <span className="mt-1 md:mt-0 block md:inline-block text-sm">
+                                            <MapIcon className="inline-block w-4 h-4" />
+                                            <span className="mt-1 md:mt-0 block text-sm">
                                                 {trans('Map')}
                                             </span>
                                         </div>
@@ -95,7 +95,7 @@ const MainChart = (props) => {
                                     onClick={() => setView('flow')}>
                                     <div>
                                         <FlowIcon className="inline-block" />
-                                        <span className="mt-1 md:mt-0 block md:inline-block text-sm">
+                                        <span className="mt-1 md:mt-0 block text-sm">
                                             {trans('Flow')}
                                         </span>
                                     </div>

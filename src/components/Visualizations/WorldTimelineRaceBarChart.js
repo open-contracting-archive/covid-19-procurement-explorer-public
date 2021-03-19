@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, Fragment } from 'react'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
@@ -14,8 +14,9 @@ import Visualization from '../../constants/Visualization'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
 import ContractView from '../../constants/ContractView'
+import { mediaUrl } from "../../helpers/general"
 
-const WorldTimelineRaceBarMap = () => {
+const WorldTimelineRaceBarChart = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
@@ -32,9 +33,9 @@ const WorldTimelineRaceBarMap = () => {
         return countries.reduce((acc, current) => {
             return current.country_code_alpha_2 !== 'gl'
                 ? {
-                      ...acc,
-                      [current.country_code_alpha_2.toUpperCase()]: current.population
-                  }
+                    ...acc,
+                    [current.country_code_alpha_2.toUpperCase()]: current.population
+                }
                 : acc
         }, {})
     }, [countries])
@@ -61,16 +62,16 @@ const WorldTimelineRaceBarMap = () => {
                         !selectedContinent || selectedContinent.value === 'all'
                             ? true
                             : country.country_continent ===
-                              selectedContinent.value
+                            selectedContinent.value
                     )
                     .map((country) => ({
                         country: country.country,
                         value:
                             viewType === ContractView.VALUE
                                 ? showPerCapita
-                                    ? country[Default.AMOUNT_USD] /
-                                      countriesPopulation[country.country_code]
-                                    : country[Default.AMOUNT_USD]
+                                ? country[Default.AMOUNT_USD] /
+                                countriesPopulation[country.country_code]
+                                : country[Default.AMOUNT_USD]
                                 : country[Default.TENDER_COUNT],
                         href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
                     }))
@@ -96,56 +97,59 @@ const WorldTimelineRaceBarMap = () => {
     }
 
     return (
-        <div>
-            <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none">
-                <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart md:mb-4">
-                    <div className="w-full md:w-1/5 mb-4 md:mb-0">
-                        <Select
-                            className="select-filter text-sm"
-                            classNamePrefix="select-filter"
-                            options={options}
-                            defaultValue={options[0]}
-                            isSearchable={false}
-                            onChange={(selectedOption) =>
-                                handleContinentSelection(selectedOption)
-                            }
+        <Fragment>
+            <FullScreen handle={fullScreenHandler}>
+                <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none">
+                    <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart md:mb-4">
+                        <div className="w-full md:w-1/5 mb-4 md:mb-0">
+                            <Select
+                                className="select-filter text-sm"
+                                classNamePrefix="select-filter"
+                                options={options}
+                                defaultValue={options[0]}
+                                isSearchable={false}
+                                onChange={(selectedOption) =>
+                                    handleContinentSelection(selectedOption)
+                                }
+                            />
+                        </div>
+
+                        {viewType === ContractView.VALUE && (
+                            <PerCapitaSwitcher
+                                show={showPerCapita}
+                                handleToggle={setShowPerCapita}
+                            />
+                        )}
+
+                        <ContractViewSwitcher
+                            style={'short'}
+                            viewType={viewType}
+                            viewHandler={(value) => {
+                                setViewType(value)
+                                setShowPerCapita(false)
+                            }}
                         />
                     </div>
-
-                    {viewType === ContractView.VALUE && (
-                        <PerCapitaSwitcher
-                            show={showPerCapita}
-                            handleToggle={setShowPerCapita}
-                        />
+                    {loading ? (
+                        <Loader />
+                    ) : isEmpty(chartData) ? (
+                        'No data available'
+                    ) : (
+                        !isEmpty(chartData) && (
+                            <BarChartRace data={chartData} viewType={viewType} />
+                        )
                     )}
-
-                    <ContractViewSwitcher
-                        style={'short'}
-                        viewType={viewType}
-                        viewHandler={(value) => {
-                            setViewType(value)
-                            setShowPerCapita(false)
-                        }}
-                    />
                 </div>
-                {loading ? (
-                    <Loader />
-                ) : isEmpty(chartData) ? (
-                    'No data available'
-                ) : (
-                    !isEmpty(chartData) && (
-                        <BarChartRace data={chartData} viewType={viewType} />
-                    )
-                )}
-            </div>
+            </FullScreen>
             <ChartFooter
                 fullScreenHandler={fullScreenHandler}
                 embeddedVisualization={{
                     key: Visualization.WORLD_TIMELINE_RACE_BAR
                 }}
+                downloadUrl={mediaUrl('export/overall_summary.xlsx')}
             />
-        </div>
+        </Fragment>
     )
 }
 
-export default WorldTimelineRaceBarMap
+export default WorldTimelineRaceBarChart

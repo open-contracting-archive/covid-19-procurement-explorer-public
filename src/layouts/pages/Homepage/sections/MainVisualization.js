@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useTrans from '../../../../hooks/useTrans'
 import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
-import WorldTimelineRaceBarMap from '../../../../components/Visualizations/WorldTimelineRaceBarMap'
+import WorldTimelineRaceBarChart from '../../../../components/Visualizations/WorldTimelineRaceBarChart'
 import { OverallStatisticsTable } from '../../../../components/Tables'
 import CmsPageContent from '../../StaticPage/CmsPageContent'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
@@ -22,7 +22,7 @@ const MainVisualization = () => {
             case 'map':
                 return <WorldTimelineMap />
             case 'chart':
-                return <WorldTimelineRaceBarMap />
+                return <WorldTimelineRaceBarChart />
             case 'table':
                 return <OverallStatisticsTable />
             case 'sources':
@@ -58,8 +58,8 @@ const MainVisualization = () => {
                                             }`}
                                             onClick={() => setTabView('map')}>
                                             <div>
-                                                <MapIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
+                                                <MapIcon className="w-4 h-4 inline-block" />
+                                                <span className="text-xs md:text-sm mt-1 block">
                                                     {trans('Map')}
                                                 </span>
                                             </div>
@@ -71,7 +71,7 @@ const MainVisualization = () => {
                                             onClick={() => setTabView('chart')}>
                                             <div>
                                                 <ChartsIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block">
                                                     {trans('Chart')}
                                                 </span>
                                             </div>
@@ -83,7 +83,7 @@ const MainVisualization = () => {
                                             onClick={() => setTabView('table')}>
                                             <div>
                                                 <TableIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block">
                                                     {trans('Statistics')}
                                                 </span>
                                             </div>
@@ -98,7 +98,7 @@ const MainVisualization = () => {
                                             }>
                                             <div>
                                                 <SourcesIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block md:inline-block">
+                                                <span className="text-xs md:text-sm mt-1 block">
                                                     {trans('Sources')}
                                                 </span>
                                             </div>

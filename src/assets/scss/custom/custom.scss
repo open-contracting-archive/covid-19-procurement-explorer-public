@@ -274,39 +274,42 @@ svg tspan {
     }
 }
 
-.product-worldmap-tablist.active {
-    position: relative;
-
-    > div {
+.product-worldmap-tablist {
+    width: 68px;
+    &.active {
         position: relative;
-        color: #fff;
-    }
 
-    &:before {
-        content: '';
-        position: absolute;
-        width: 68px;
-        height: 75px;
-        background: #1fbbec;
-        border-radius: 0 0 4px 4px;
-        left: 50%;
-        top: -14px;
-        right: 0;
-        transform: translateX(-50%);
-    }
+        > div {
+            position: relative;
+            color: #fff;
+        }
 
-    @media only screen and (min-width: 768px) {
         &:before {
             content: '';
             position: absolute;
-            width: 76px;
-            left: -18px;
-            top: -10px;
-            right: 0px;
-            bottom: -5px;
+            width: 68px;
+            height: 75px;
             background: #1fbbec;
-            border-radius: 0 4px 4px 0;
-            transform: none;
+            border-radius: 0 0 4px 4px;
+            left: 50%;
+            top: -14px;
+            right: 0;
+            transform: translateX(-50%);
+        }
+
+        @media only screen and (min-width: 768px) {
+            &:before {
+                content: '';
+                position: absolute;
+                width: 76px;
+                left: 1px;
+                top: -4px;
+                right: 0;
+                background: #1fbbec;
+                border-radius: 0 4px 4px 0;
+                transform: none;
+                height: 64px;
+            }
         }
     }
 }

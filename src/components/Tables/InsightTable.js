@@ -333,7 +333,7 @@ const InsightTable = (props) => {
                                     <span className="text-primary-dark text-opacity-75">
                                         {totalItems}
                                     </span>{' '}
-                                    rows
+                                    items.
                                 </p>
                             </div>
 
