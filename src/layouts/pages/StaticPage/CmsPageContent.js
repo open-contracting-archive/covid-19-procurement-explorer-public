@@ -30,7 +30,7 @@ const CmsPageContent = (props) => {
                         </h2>
                         <div
                             style={{ minHeight: '40vh' }}
-                            className="flex flex-wrap lg:flex-no-wrap justify-between">
+                            className="flex flex-wrap lg:flex-no-wrap justify-between news-detail__content">
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body

@@ -95,7 +95,7 @@ const EventDetail = () => {
                             </div>
                             <div className="md:px-2 lg:pr-16">
                                 <div
-                                    className="mb-10 news-detail__content"
+                                    className="mb-10 events-detail__content"
                                     dangerouslySetInnerHTML={{
                                         __html: eventDetail.rendered_description
                                     }}

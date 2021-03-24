@@ -66,7 +66,7 @@ const OverallStatisticsTable = () => {
                                         <th colSpan={4} className={'text-center'}>{trans('Status wise Amount (USD)')}</th>
                                     </tr>
 
-                                    <tr className="whitespace-no-wrap border">
+                                    <tr className="whitespace-no-wrap border border-gray-e2e">
                                         <th>{trans('USD')}</th>
                                         <th className={'border-r border-gray-e2e'}>{trans('Local')}</th>
 
