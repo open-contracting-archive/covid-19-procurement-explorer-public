@@ -43,7 +43,7 @@ const StaticPage = () => {
                             style={{ minHeight: '40vh' }}
                             className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div
-                                className="mb-10"
+                                className="mb-10 news-detail__content"
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body
                                 }} />

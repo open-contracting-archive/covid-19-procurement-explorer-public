@@ -74,12 +74,12 @@ const ContractDetail = () => {
                         <RedIcon />
                         <div className="mx-2 text-sm">
                             {trans(
-                                contractDetail && contractDetail.red_flag.length
+                                contractDetail && contractDetail.red_flag && contractDetail.red_flag.length
                             )}
                             <span className="inline-block ml-1">
                                 {trans('Red flag identified')}
                             </span>
-                            {contractDetail &&
+                            {contractDetail && contractDetail.red_flag &&
                             contractDetail.red_flag.length > 0 ? (
                                 <div className="inline-block relative ml-2">
                                     <button className="focus:outline-none context-menu"></button>

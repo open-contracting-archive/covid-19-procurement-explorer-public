@@ -100,9 +100,9 @@ const CountryProfile = () => {
                     />
                 )
             case METHODOLOGY:
-                return <CountryMethodology
+                return countryData.id && (<CountryMethodology
                     countryId={countryData.id}
-                />
+                />)
             default:
                 return (
                     <CountryData
