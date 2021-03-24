@@ -66,7 +66,7 @@ const ProductsTimeline = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [])
+    }, [params?.country, params?.buyer, params?.supplier])
 
     useEffect(() => {
         const groupedData = groupBy(originalData, (item) =>

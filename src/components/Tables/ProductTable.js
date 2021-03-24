@@ -1,10 +1,8 @@
-import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
-import ReactPaginate from 'react-paginate'
 import ContractService from '../../services/ContractService'
-import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import 'react-datepicker/dist/react-datepicker.css'
 import TableLoader from '../Loader/TableLoader'
@@ -17,53 +15,35 @@ import Default from '../../constants/Default'
 const ProductTable = (props) => {
     const { params } = props
     const { countrySlug } = useParams()
+    const [loading, setLoading] = useState(false)
     const [originalData, setOriginalData] = useState([])
-    const [sorting, setSorting] = useState(() => {
-        return { column: 'product_name', direction: '' }
-    })
-    const [loading, setLoading] = useState(true)
-    const [selectedFilters, setSelectedFilters] = useState(() =>
-        identity(pickBy(params))
-    )
-    const { countrySelectList } = useContractFilters()
-    const { trans } = useTrans()
+    const [sorting, setSorting] = useState(() => ({ column: 'product_name', direction: '' }))
+    const [selectedFilters, setSelectedFilters] = useState({})
     const history = useHistory()
     const [showFilter, setShowFilter] = useState('hidden')
-    const [limit, setLimit] = useState(20)
     const [totalItems, setTotalItems] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
-    const [tableLoading, setTableLoading] = useState(false)
+    const { countrySelectList } = useContractFilters()
+    const { trans } = useTrans()
 
     useEffect(() => {
-        LoadProductsList()
+        const filterParams = { ...identity(pickBy(params)), ...selectedFilters, order: sorting.direction + sorting.column }
+        setLoading(true)
+        ContractService.ProductList(filterParams)
+            .then((result) => {
+                if (result) {
+                    setOriginalData(result)
+                    setTotalItems(result.length)
+                    setLoading(false)
+                }
+            })
+            .catch((error) => {
+                setLoading(false)
+            })
 
         return () => {
             setOriginalData([])
         }
     }, [params?.country, selectedFilters, sorting])
-
-    const LoadProductsList = (page) => {
-        setTableLoading(true)
-        setCurrentPage(get(page, 'selected', 0))
-        ContractService.ProductList({
-            ...selectedFilters,
-            order: sorting.direction + sorting.column,
-            limit: limit,
-            offset: page && page.selected * limit
-        })
-            .then((response) => {
-                if (response) {
-                    setOriginalData(response)
-                    setTotalItems(response.count)
-                    setTableLoading(false)
-                }
-                setLoading(false)
-            })
-            .catch((error) => {
-                setLoading(false)
-                setTableLoading(false)
-            })
-    }
 
     const showDetail = (id) => {
         if (countrySlug) {
@@ -72,8 +52,9 @@ const ProductTable = (props) => {
             history.push(`/global-overview/products/${id}`)
         }
     }
+
     const appendFilter = (selected) => {
-        setTableLoading(true)
+        setLoading(true)
         setSelectedFilters((previous) => {
             return {
                 ...previous,
@@ -200,8 +181,8 @@ const ProductTable = (props) => {
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
-                            <tr className="whitespace-no-wrap">
-                                <th style={{ width: '20%' }}>
+                        <tr className="whitespace-no-wrap">
+                            <th style={{ width: '20%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -210,8 +191,8 @@ const ProductTable = (props) => {
                                         {trans('Product Category')}{' '}
                                         {columnSorting('product_name')}
                                     </span>
-                                </th>
-                                <th style={{ width: '6%' }}>
+                            </th>
+                            <th style={{ width: '6%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -220,8 +201,8 @@ const ProductTable = (props) => {
                                         {trans('# of contracts')}
                                         {columnSorting('tender_count')}
                                     </span>
-                                </th>
-                                <th style={{ width: '10%' }}>
+                            </th>
+                            <th style={{ width: '10%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -230,8 +211,8 @@ const ProductTable = (props) => {
                                         {trans('value (usd)')}
                                         {columnSorting('amount_usd')}
                                     </span>
-                                </th>
-                                <th style={{ width: '6%' }}>
+                            </th>
+                            <th style={{ width: '6%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -240,8 +221,8 @@ const ProductTable = (props) => {
                                         {trans('# of suppliers')}
                                         {columnSorting('supplier_count')}
                                     </span>
-                                </th>
-                                <th style={{ width: '6%' }}>
+                            </th>
+                            <th style={{ width: '6%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -250,43 +231,43 @@ const ProductTable = (props) => {
                                         {trans('# of buyers')}
                                         {columnSorting('buyer_count')}
                                     </span>
-                                </th>
-                            </tr>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {originalData &&
-                                originalData.map((product, index) => {
-                                    return (
-                                        <tr
-                                            key={index}
-                                            className="cursor-pointer"
-                                            onClick={() =>
-                                                showDetail(product.product_id)
-                                            }>
-                                            <td className="hover:text-primary-blue">
-                                                {get(product, 'product_name')}
-                                            </td>
-                                            <td>
-                                                {get(
-                                                    product,
-                                                    Default.TENDER_COUNT
-                                                )}
-                                            </td>
-                                            <td>
-                                                {product[Default.AMOUNT_USD] &&
-                                                    product[
-                                                        Default.AMOUNT_USD
-                                                    ].toLocaleString('en')}
-                                            </td>
-                                            <td>
-                                                {get(product, 'supplier_count')}
-                                            </td>
-                                            <td>
-                                                {get(product, 'buyer_count')}
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
+                        {originalData &&
+                        originalData.map((product, index) => {
+                            return (
+                                <tr
+                                    key={index}
+                                    className="cursor-pointer"
+                                    onClick={() =>
+                                        showDetail(product.product_id)
+                                    }>
+                                    <td className="hover:text-primary-blue">
+                                        {get(product, 'product_name')}
+                                    </td>
+                                    <td>
+                                        {get(
+                                            product,
+                                            Default.TENDER_COUNT
+                                        )}
+                                    </td>
+                                    <td>
+                                        {product[Default.AMOUNT_USD] &&
+                                        product[
+                                            Default.AMOUNT_USD
+                                            ].toLocaleString('en')}
+                                    </td>
+                                    <td>
+                                        {get(product, 'supplier_count')}
+                                    </td>
+                                    <td>
+                                        {get(product, 'buyer_count')}
+                                    </td>
+                                </tr>
+                            )
+                        })}
                         </tbody>
                     </table>
                     {!originalData.length && (
@@ -300,45 +281,17 @@ const ProductTable = (props) => {
                         </div>
                     )}
                 </div>
-                {tableLoading && <TableLoader />}
+                {loading && <TableLoader />}
             </div>
             <div>
                 <div className="text-right mt-2 text-sm">
                     <p className="text-primary-dark text-opacity-50">
                         Showing{' '}
                         <span className="text-primary-dark text-opacity-75">
-                            {1 + currentPage * limit}
-                        </span>{' '}
-                        -{' '}
-                        <span className="text-primary-dark text-opacity-75">
-                            {limit + currentPage * limit > totalItems
-                                ? totalItems
-                                : limit + currentPage * limit}
-                        </span>{' '}
-                        of{' '}
-                        <span className="text-primary-dark text-opacity-75">
                             {totalItems}
                         </span>{' '}
-                        rows
+                        items.
                     </p>
-                </div>
-
-                <div className="pagination-container">
-                    <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={totalItems / limit}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={10}
-                        onPageChange={LoadProductsList}
-                        containerClassName={'pagination-items'}
-                        pageClassName={'pagination-item'}
-                        previousClassName={'pagination-item prev'}
-                        nextClassName={'pagination-item next'}
-                        activeClassName={'active'}
-                    />
                 </div>
             </div>
         </div>

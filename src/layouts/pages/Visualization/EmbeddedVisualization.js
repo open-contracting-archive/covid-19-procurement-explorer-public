@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import {
     WorldTimelineMap,
-    WorldTimelineRaceBarMap,
+    WorldTimelineRaceBarChart,
     ProductsTimeline,
     ContractsCorrelation,
     ContractEquityIndicators,
@@ -21,7 +21,7 @@ const EmbeddedVisualization = () => {
         case Visualization.WORLD_MAP_RACE:
             return <WorldTimelineMap />
         case Visualization.WORLD_TIMELINE_RACE_BAR:
-            return <WorldTimelineRaceBarMap />
+            return <WorldTimelineRaceBarChart />
         case Visualization.PRODUCTS_TIMELINE:
             return (
                 <ProductsTimeline

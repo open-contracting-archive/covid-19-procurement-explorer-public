@@ -91,26 +91,30 @@ const ContractFilter = (props) => {
     }
 
     const getBuyersFilterParameter = (params) => {
-        ContractService.FilterBuyersParameter(params).then((response) => {
-            const options = response.map((buyer) => {
-                return {
-                    label: buyer.name,
-                    value: buyer.id
-                }
-            })
-            setBuyersFilterOption([{ label: 'All', value: '' }, ...options])
+        ContractService.FilterBuyersParameter(params).then((result) => {
+            if (result.length) {
+                const options = result.map((buyer) => {
+                    return {
+                        label: buyer.name,
+                        value: buyer.id
+                    }
+                })
+                setBuyersFilterOption([{ label: 'All', value: '' }, ...options])
+            }
         })
     }
 
     const getSuppliersFilterParameter = (params) => {
-        ContractService.FilterSuppliersParameter(params).then((response) => {
-            const options = response.map((supplier) => {
-                return {
-                    label: supplier.name,
-                    value: supplier.id
-                }
-            })
-            setSuppliersFilterOption([{ label: 'All', value: '' }, ...options])
+        ContractService.FilterSuppliersParameter(params).then((result) => {
+            if (result.length) {
+                const options = result.map((supplier) => {
+                    return {
+                        label: supplier.name,
+                        value: supplier.id
+                    }
+                })
+                setSuppliersFilterOption([{ label: 'All', value: '' }, ...options])
+            }
         })
     }
 

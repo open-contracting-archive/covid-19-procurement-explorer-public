@@ -523,7 +523,7 @@ const SupplierTable = (props) => {
                         <span className="text-primary-dark text-opacity-75">
                             {totalItems}
                         </span>{' '}
-                        rows
+                        suppliers.
                     </p>
                 </div>
 

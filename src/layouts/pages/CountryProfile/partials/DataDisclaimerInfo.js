@@ -7,18 +7,17 @@ const DataDisclaimerInfo = (props) => {
     return (
         <div className="md:-mt-10 mb-6">
             <p>
-                Data displayed on the COVID Contract Explorer can be incomplete.
-            </p>
-            {forwardUrl && (
-                <p>
-                    Please, check the Caveats and Limitations section of the {' '}
+                While we’ve done our best to identify, include, and verify as much information as possible, it will be incomplete. <br />
+                Please check our {' '}
+                {forwardUrl ? (
                     <Link
                         to={forwardUrl}
                         className="text-primary-blue">
-                        data harvesting methodology
+                        methodology
                     </Link>
-                </p>
-            )}
+                ) : ('methodology')}{' '}
+                for general limitations and country-specific caveats.
+            </p>
         </div>
     )
 }

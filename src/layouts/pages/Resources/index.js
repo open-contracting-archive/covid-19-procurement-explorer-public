@@ -351,7 +351,7 @@ const Resources = () => {
                                             <span className="text-primary-dark text-opacity-75">
                                                 {totalItems}
                                             </span>{' '}
-                                            {trans('rows')}
+                                            {trans('items')}
                                         </p>
                                     </div>
 

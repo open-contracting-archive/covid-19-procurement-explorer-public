@@ -1,9 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { get } from 'lodash'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
 import VisualizationService from "../../services/VisualizationService"
+import ChartFooter from "../Utilities/ChartFooter"
+import { mediaUrl } from "../../helpers/general"
 
 const OverallStatisticsTable = () => {
     // ===========================================================================
@@ -13,6 +16,7 @@ const OverallStatisticsTable = () => {
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     const history = useHistory()
+    const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
     // Hooks
@@ -42,13 +46,13 @@ const OverallStatisticsTable = () => {
     }
 
     return (
-        <div>
-            <Fragment>
-                {loading ? (
-                    <Loader />
-                ) : (
-                    <Fragment>
-                        <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none relative">
+        <Fragment>
+            <FullScreen handle={fullScreenHandler}>
+                <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none relative">
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <Fragment>
                             <div className="custom-scrollbar table-scroll overflow-x-scroll">
                                 <table className="table">
                                     <thead>
@@ -154,11 +158,15 @@ const OverallStatisticsTable = () => {
                                     View More
                                 </Link>
                             </div>
-                        </div>
-                    </Fragment>
-                )}
-            </Fragment>
-        </div>
+                        </Fragment>
+                    )}
+                </div>
+            </FullScreen>
+            <ChartFooter
+                fullScreenHandler={fullScreenHandler}
+                downloadUrl={mediaUrl('export/overall_summary.xlsx')}
+            />
+        </Fragment>
     )
 }
 
