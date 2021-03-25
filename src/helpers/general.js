@@ -43,3 +43,7 @@ export const sortItems = (items, key) => {
 export const mediaUrl = (path) => {
     return process.env.REACT_APP_API_URL + `/media/${path}`
 }
+
+export const countryContractsUrl = (countryName) => {
+    return process.env.REACT_APP_API_URL + `/media/export/${countryName}_summary.xlsx`
+}

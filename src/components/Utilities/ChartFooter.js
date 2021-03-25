@@ -1,5 +1,5 @@
 import React, { Fragment, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     FacebookShareButton,
@@ -9,12 +9,13 @@ import {
 } from 'react-share'
 import EmbeddedModal from '../Modals/EmbeddedModal'
 import useTrans from '../../hooks/useTrans'
-import { twitterHandle } from '../../helpers/general'
+import { countryContractsUrl, twitterHandle } from '../../helpers/general'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import socialIcons from '../../assets/img/icons/social'
-import { useDetectOutsideClick } from '../Utilities/useDetectOutsideClick'
+import { useDetectOutsideClick } from './useDetectOutsideClick'
+import useCountries from "../../hooks/useCountries"
 
 const currentLocation = window.location.href
 
@@ -30,6 +31,8 @@ const ChartFooter = (props) => {
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
     const onClick = () => setIsActive(!isActive)
     const { trans } = useTrans()
+    const { countrySlug } = useParams()
+    const { currentCountry } = useCountries()
 
     function showFullScreenAction() {
         if (fullScreenHandler) {
@@ -48,10 +51,15 @@ const ChartFooter = (props) => {
         }
     }
 
+    function downloadCountryContracts() {
+        const country = currentCountry(countrySlug)
+        return countryContractsUrl(country.name)
+    }
+
     return (
         <div className="flex flex-wrap items-center justify-between p-4 text-sm bg-white border-t rounded rounded-t-none rounded-b chart-footer md:flex-no-wrap border-blue-0 text-primary-blue">
             <div className="flex items-center">
-                {downloadUrl && (
+                {downloadUrl ? (
                     <div className="flex items-center mr-4 md:mr-6">
                         <a href={downloadUrl} target="_blank" rel="noreferrer">
                             <DownloadIcon className=" mr-2 inline-block" />
@@ -60,7 +68,16 @@ const ChartFooter = (props) => {
                             </span>
                         </a>
                     </div>
-                )}
+                ) : (countrySlug && (
+                    <div className="flex items-center mr-4 md:mr-6">
+                        <a href={downloadCountryContracts()} target="_blank" rel="noreferrer">
+                            <DownloadIcon className=" mr-2 inline-block" />
+                            <span className=" hidden md:inline-block">
+                                {trans('Download')}
+                            </span>
+                        </a>
+                    </div>
+                ))}
                 <div className="relative flex items-center">
                     <button onClick={onClick} className="dropdown-menu-trigger">
                         <ShareIcon className="inline-block mr-2" />{' '}

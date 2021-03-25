@@ -33,7 +33,9 @@ const useCountries = () => {
             return language ? language.name : languageId
         },
 
-        globalCountryItem: () => countries.find((country) => country.slug === 'global')
+        globalCountryItem: () => countries.find((country) => country.slug === 'global'),
+
+        currentCountry: (slug) => countries.find((country) => country.slug === slug)
     }
 }
 
