@@ -14,7 +14,7 @@ import Visualization from '../../constants/Visualization'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
 import ContractView from '../../constants/ContractView'
-import { mediaUrl } from "../../helpers/general"
+import { mediaUrl } from '../../helpers/general'
 
 const WorldTimelineRaceBarChart = () => {
     // ===========================================================================
@@ -33,9 +33,9 @@ const WorldTimelineRaceBarChart = () => {
         return countries.reduce((acc, current) => {
             return current.country_code_alpha_2 !== 'gl'
                 ? {
-                    ...acc,
-                    [current.country_code_alpha_2.toUpperCase()]: current.population
-                }
+                      ...acc,
+                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                  }
                 : acc
         }, {})
     }, [countries])
@@ -62,16 +62,16 @@ const WorldTimelineRaceBarChart = () => {
                         !selectedContinent || selectedContinent.value === 'all'
                             ? true
                             : country.country_continent ===
-                            selectedContinent.value
+                              selectedContinent.value
                     )
                     .map((country) => ({
                         country: country.country,
                         value:
                             viewType === ContractView.VALUE
                                 ? showPerCapita
-                                ? country[Default.AMOUNT_USD] /
-                                countriesPopulation[country.country_code]
-                                : country[Default.AMOUNT_USD]
+                                    ? country[Default.AMOUNT_USD] /
+                                      countriesPopulation[country.country_code]
+                                    : country[Default.AMOUNT_USD]
                                 : country[Default.TENDER_COUNT],
                         href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
                     }))
@@ -99,11 +99,11 @@ const WorldTimelineRaceBarChart = () => {
     return (
         <Fragment>
             <FullScreen handle={fullScreenHandler}>
-                <div className="world-map-chart-container p-4 bg-white rounded rounded-b-none">
+                <div className="p-4 bg-white rounded rounded-b-none world-map-chart-container">
                     <div className="flex flex-wrap md:flex-no-wrap md:justify-between world-map-chart md:mb-4">
-                        <div className="w-full md:w-1/5 mb-4 md:mb-0">
+                        <div className="w-full mb-4 md:w-1/5 md:mb-0">
                             <Select
-                                className="select-filter text-sm"
+                                className="text-sm select-filter"
                                 classNamePrefix="select-filter"
                                 options={options}
                                 defaultValue={options[0]}
@@ -136,7 +136,10 @@ const WorldTimelineRaceBarChart = () => {
                         'No data available'
                     ) : (
                         !isEmpty(chartData) && (
-                            <BarChartRace data={chartData} viewType={viewType} />
+                            <BarChartRace
+                                data={chartData}
+                                viewType={viewType}
+                            />
                         )
                     )}
                 </div>
