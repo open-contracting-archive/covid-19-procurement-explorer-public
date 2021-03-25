@@ -329,12 +329,12 @@ const SupplierTable = (props) => {
                     </div>
                 </div>
 
-                <div>
-                    <div className=" mt-4 text-primary-blue flex items-center text-sm">
-                        <DownloadIcon className="mr-2 inline-block" />
-                        <span>{trans('Download')}</span>
-                    </div>
-                </div>
+                {/*<div>*/}
+                {/*    <div className=" mt-4 text-primary-blue flex items-center text-sm">*/}
+                {/*        <DownloadIcon className="mr-2 inline-block" />*/}
+                {/*        <span>{trans('Download')}</span>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
 
             <div className="relative overflow-hidden">
