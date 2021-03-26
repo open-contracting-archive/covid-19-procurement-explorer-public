@@ -84,7 +84,9 @@ const WorldTimelineMap = () => {
                 dateObject = { ...dateObject, [data.month]: countryObject }
             })
             setMapData(dateObject)
-            setYearMonth(originalData && originalData[0].month)
+            setYearMonth(
+                originalData && originalData[originalData.length - 1].month
+            )
 
             const keys =
                 originalData &&
