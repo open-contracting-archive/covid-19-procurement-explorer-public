@@ -15,6 +15,10 @@ import {
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
 import RouterView from './RouterView'
+import { init } from 'cookie-though'
+import cookieConfig from './components/Utilities/CookieConfig'
+
+init(cookieConfig)
 
 function App() {
     const dispatch = useDispatch()
@@ -59,7 +63,9 @@ function App() {
 
     return (
         <Fragment>
-            <ModalProvider>{countries.length > 0 && <RouterView />}</ModalProvider>
+            <ModalProvider>
+                {countries.length > 0 && <RouterView />}
+            </ModalProvider>
         </Fragment>
     )
 }
