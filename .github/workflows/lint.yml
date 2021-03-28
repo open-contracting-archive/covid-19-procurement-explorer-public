@@ -11,6 +11,6 @@ jobs:
       - run: sudo apt-get install shellcheck
       - run: shellcheck --exclude=SC2029 *.sh
       - run: npm install yarn
-      - run: yarn install
+      - run: yarn
       - run: npx eslint .
       - run: npx prettier --check .
