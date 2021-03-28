@@ -4,5 +4,37 @@
     "semi": false,
     "trailingComma": "none",
     "singleQuote": true,
-    "jsxBracketSameLine": true
+    "jsxBracketSameLine": true,
+    "overrides": [
+        {
+            "files": "*.css",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "printWidth": 100
+            }
+        },
+        {
+            "files": "*.md",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.json",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.yml",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }
