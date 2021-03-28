@@ -1,6 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 .error-container {
-  background: #dceaee url("../../assets/img/icons/ic_covid-bg-patterns.svg") no-repeat center/cover;
+  background: #dceaee url('../../assets/img/icons/ic_covid-bg-patterns.svg')
+    no-repeat center/cover;
 }
 
 @media only screen and (min-width: 768px) {
@@ -12,7 +13,7 @@
 .error-text {
   width: 260px;
   height: 280px;
-  background: url("../../assets/img/icons/ic_covid-icon.svg") no-repeat;
+  background: url('../../assets/img/icons/ic_covid-icon.svg') no-repeat;
   background-size: 100%;
 }
 
@@ -26,21 +27,21 @@
 
 @font-face {
   font-family: 'GTEestiPro';
-  src: url("../font/GTEestiProDisplay-Regular.otf") format("opentype");
+  src: url('../font/GTEestiProDisplay-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'GTEestiPro';
-  src: url("../font/GTEestiProDisplay-Bold.otf") format("opentype");
+  src: url('../font/GTEestiProDisplay-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'GTEestiPro';
-  src: url("../font/GTEestiProDisplay-Medium.otf") format("opentype");
+  src: url('../font/GTEestiProDisplay-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
@@ -55,17 +56,19 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 22px;
   padding-bottom: 0;
 }
 
-.react-tabs__tab-list:hover, .react-tabs__tab-list:focus {
+.react-tabs__tab-list:hover,
+.react-tabs__tab-list:focus {
   color: #1fbbec;
 }
 
-.react-tabs__tab-list::before, .react-tabs__tab-list::after {
+.react-tabs__tab-list::before,
+.react-tabs__tab-list::after {
   content: '';
 }
 
@@ -86,16 +89,16 @@
 
 .simple-tab .react-tabs .worldmap-tab .react-tabs__tab-list {
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 @media only screen and (min-width: 768px) {
   .simple-tab .react-tabs .worldmap-tab .react-tabs__tab-list {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     width: 67px;
     background: rgba(41, 62, 69, 0.1);
     border-radius: 4px;
@@ -103,8 +106,8 @@
     margin-right: 24px;
     margin-bottom: 24px;
     -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: start;
+    -ms-flex-pack: start;
+    justify-content: start;
   }
 }
 
@@ -126,21 +129,29 @@
   }
 }
 
-.simple-tab .react-tabs .worldmap-tab .react-tabs__tab:hover, .simple-tab .react-tabs .worldmap-tab .react-tabs__tab:focus {
+.simple-tab .react-tabs .worldmap-tab .react-tabs__tab:hover,
+.simple-tab .react-tabs .worldmap-tab .react-tabs__tab:focus {
   opacity: 1;
 }
 
-.simple-tab .react-tabs .worldmap-tab .react-tabs__tab:hover > *, .simple-tab .react-tabs .worldmap-tab .react-tabs__tab:focus > * {
+.simple-tab .react-tabs .worldmap-tab .react-tabs__tab:hover > *,
+.simple-tab .react-tabs .worldmap-tab .react-tabs__tab:focus > * {
   color: #1fbbec;
   fill: #1fbbec;
 }
 
-.simple-tab .react-tabs .worldmap-tab .react-tabs__tab.react-tabs__tab--selected {
+.simple-tab
+  .react-tabs
+  .worldmap-tab
+  .react-tabs__tab.react-tabs__tab--selected {
   opacity: 1;
   position: relative;
 }
 
-.simple-tab .react-tabs .worldmap-tab .react-tabs__tab.react-tabs__tab--selected:before {
+.simple-tab
+  .react-tabs
+  .worldmap-tab
+  .react-tabs__tab.react-tabs__tab--selected:before {
   content: '';
   position: absolute;
   left: 0;
@@ -151,14 +162,21 @@
   border-radius: 0 0 4px 4px;
 }
 
-.simple-tab .react-tabs .worldmap-tab .react-tabs__tab.react-tabs__tab--selected > * {
+.simple-tab
+  .react-tabs
+  .worldmap-tab
+  .react-tabs__tab.react-tabs__tab--selected
+  > * {
   position: relative;
   color: #fff;
   fill: #fff;
 }
 
 @media only screen and (min-width: 768px) {
-  .simple-tab .react-tabs .worldmap-tab .react-tabs__tab.react-tabs__tab--selected:before {
+  .simple-tab
+    .react-tabs
+    .worldmap-tab
+    .react-tabs__tab.react-tabs__tab--selected:before {
     width: 76px;
     left: -14px;
     top: -10px;
@@ -321,11 +339,11 @@ table tbody tr:hover td {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .tooltip {
@@ -375,7 +393,7 @@ table tbody tr:hover td {
   border-bottom: 2px solid #1fbbec;
   color: #293e45;
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   min-height: 28px;
 }
 
@@ -507,8 +525,10 @@ table tbody tr:hover td {
   background: white;
   width: 2px;
   height: 2px;
-  -webkit-box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
-          box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+  -webkit-box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white,
+    4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+  box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white,
+    4px -6px 0 white, 4px -8px 0 white;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
@@ -520,7 +540,8 @@ table tbody tr:hover td {
   position: relative;
 }
 
-.loader:before, .loader:after {
+.loader:before,
+.loader:after {
   content: '';
   width: 48px;
   height: 48px;
@@ -530,12 +551,12 @@ table tbody tr:hover td {
   left: 0;
   top: 0;
   -webkit-animation: animloader 2s linear infinite;
-          animation: animloader 2s linear infinite;
+  animation: animloader 2s linear infinite;
 }
 
 .loader:after {
   -webkit-animation-delay: 1s;
-          animation-delay: 1s;
+  animation-delay: 1s;
 }
 
 @-webkit-keyframes animloader {
@@ -614,7 +635,8 @@ table tbody tr:hover td {
   }
 }
 
-.tooltip-wrap:hover .tooltip-content, .tooltip-wrap:focus .tooltip-content {
+.tooltip-wrap:hover .tooltip-content,
+.tooltip-wrap:focus .tooltip-content {
   opacity: 1;
   pointer-events: auto;
   -webkit-transition: all 0.23s linear;
@@ -626,8 +648,8 @@ table tbody tr:hover td {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-top: 20px;
 }
 
@@ -636,10 +658,10 @@ table tbody tr:hover td {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .pagination-container .pagination-item {
@@ -667,12 +689,14 @@ table tbody tr:hover td {
   cursor: pointer;
 }
 
-.pagination-container .pagination-item.next, .pagination-container .pagination-item.prev {
+.pagination-container .pagination-item.next,
+.pagination-container .pagination-item.prev {
   text-indent: -9999px;
   position: relative;
 }
 
-.pagination-container .pagination-item.next a::after, .pagination-container .pagination-item.prev a::after {
+.pagination-container .pagination-item.next a::after,
+.pagination-container .pagination-item.prev a::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -680,7 +704,7 @@ table tbody tr:hover td {
   cursor: pointer;
   border-radius: 4px;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .pagination-container .pagination-item.next {
@@ -708,11 +732,11 @@ table tbody tr:hover td {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 .pagination .page-item {
@@ -735,17 +759,17 @@ table tbody tr:hover td {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   border-radius: 50%;
 }
 
 .spinner {
   -webkit-animation: rotate 2s linear infinite;
-          animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
   z-index: 2;
   position: absolute;
   top: 50%;
@@ -759,20 +783,20 @@ table tbody tr:hover td {
   stroke: white;
   stroke-linecap: round;
   -webkit-animation: dash 1.5s ease-in-out infinite;
-          animation: dash 1.5s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite;
 }
 
 @-webkit-keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -953,7 +977,7 @@ table tbody tr:hover td {
   min-width: 150px;
   padding: 10px;
   -webkit-transform: translateY(-5px);
-          transform: translateY(-5px);
+  transform: translateY(-5px);
   z-index: 999;
 }
 
@@ -962,7 +986,7 @@ table tbody tr:hover td {
   opacity: 1;
   pointer-events: auto;
   -webkit-transform: translateY(20px);
-          transform: translateY(20px);
+  transform: translateY(20px);
 }
 
 .social-icon {
@@ -971,8 +995,8 @@ table tbody tr:hover td {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   color: #797979 !important;
   margin-bottom: 14px;
 }
@@ -1013,7 +1037,7 @@ table tbody tr:hover td {
   bottom: 50px;
   top: auto;
   -webkit-transform: translateY(325px);
-          transform: translateY(325px);
+  transform: translateY(325px);
 }
 
 .custom-horizontal-bar ul li {
@@ -1030,7 +1054,7 @@ table tbody tr:hover td {
 .custom-horizontal-bar .custom-horizontal-bar-text {
   width: 236px;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   margin-bottom: 8px;
 }
 
@@ -1052,7 +1076,7 @@ table tbody tr:hover td {
 .custom-horizontal-bar .custom-horizontal-bar-amount {
   width: 90px;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .custom-horizontal-bar .custom-horizontal-bar-progress {
@@ -1108,7 +1132,7 @@ table tbody tr:hover td {
 
 .custom-scrollbar::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px #dceaee;
-          box-shadow: inset 0 0 6px #dceaee;
+  box-shadow: inset 0 0 6px #dceaee;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
@@ -1149,7 +1173,8 @@ table tbody tr:hover td {
   transition: margin 0.3s ease-in 0s;
 }
 
-.toggle-switch-inner:before, .toggle-switch-inner:after {
+.toggle-switch-inner:before,
+.toggle-switch-inner:after {
   display: block;
   float: left;
   width: 50%;
@@ -1160,7 +1185,7 @@ table tbody tr:hover td {
   color: white;
   font-weight: bold;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .toggle-switch-inner:before {
@@ -1222,7 +1247,12 @@ table tbody tr:hover td {
   content: '';
   width: 100%;
   height: 100%;
-  background: linear-gradient(89.93deg, rgba(61, 57, 61, 0.9) 32.6%, rgba(61, 57, 61, 0.3) 93.07%), url("../img/hero-image.jpg") no-repeat;
+  background: linear-gradient(
+      89.93deg,
+      rgba(61, 57, 61, 0.9) 32.6%,
+      rgba(61, 57, 61, 0.3) 93.07%
+    ),
+    url('../img/hero-image.jpg') no-repeat;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -1429,8 +1459,8 @@ Tab:focus {
 
 .main-news__item:first-child .main-news__caption {
   -webkit-box-ordinal-group: 3;
-      -ms-flex-order: 2;
-          order: 2;
+  -ms-flex-order: 2;
+  order: 2;
   z-index: 10;
   color: #fff;
   bottom: 20px;
@@ -1452,7 +1482,7 @@ Tab:focus {
 
 .main-news__item .img-wrapper img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: 100%;
   height: 100%;
 }
@@ -1473,7 +1503,7 @@ Tab:focus {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .blogs-detail__content,
@@ -1635,7 +1665,13 @@ Tab:focus {
   bottom: 0;
   height: 100%;
   width: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(42.19%, rgba(41, 62, 69, 0)), to(#293e45));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(42.19%, rgba(41, 62, 69, 0)),
+    to(#293e45)
+  );
   background: linear-gradient(180deg, rgba(41, 62, 69, 0) 42.19%, #293e45 100%);
 }
 
@@ -1647,7 +1683,7 @@ Tab:focus {
   @apply h-auto;
   @apply m-0;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   @apply w-1/3;
 }
 
@@ -1689,14 +1725,15 @@ Tab:focus {
 }
 
 .resources .card__item {
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02), 4px 4px 20px rgba(0, 0, 0, 0.1);
-          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02), 4px 4px 20px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02),
+    4px 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.02), 4px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .resources__cards .list__item .img-wrapper {
   @apply w-1/3;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .blogs-list .img-wrapper {
@@ -1781,7 +1818,7 @@ header.header-inner::after {
   bottom: -25px;
   left: 50%;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   margin: auto;
   height: 35px;
   width: 110%;
@@ -1828,7 +1865,13 @@ header a.active {
   bottom: 0;
   width: 100%;
   height: 60%;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(41, 62, 69, 0)), color-stop(78.65%, #293e45));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(41, 62, 69, 0)),
+    color-stop(78.65%, #293e45)
+  );
   background: linear-gradient(180deg, rgba(41, 62, 69, 0) 0%, #293e45 78.65%);
 }
 
@@ -1836,7 +1879,7 @@ header a.active {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .tag {
@@ -1874,8 +1917,8 @@ header a.active {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .contract-line .line {
@@ -1921,8 +1964,8 @@ header a.active {
 .global-profile .react-tabs {
   margin-top: -40px;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .global-profile .simple-tab .react-tabs {
@@ -1946,8 +1989,8 @@ header a.active {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 14px;
   padding-bottom: 0;
 }
@@ -1980,7 +2023,9 @@ header a.active {
   display: inline-block;
 }
 
-.secondary-nav ul li a:hover, .secondary-nav ul li a:focus, .secondary-nav ul li a.active {
+.secondary-nav ul li a:hover,
+.secondary-nav ul li a:focus,
+.secondary-nav ul li a.active {
   color: #fff;
   background-color: #1fbbec;
   border-top-left-radius: 6px;
@@ -2014,7 +2059,7 @@ svg tspan {
 
 .react-datepicker {
   -webkit-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .product-worldmap-tab {
@@ -2023,13 +2068,13 @@ svg tspan {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   font-size: 22px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   width: 67px;
   background: rgba(41, 62, 69, 0.1);
   border-radius: 4px;
@@ -2068,8 +2113,8 @@ svg tspan {
 @media only screen and (min-width: 768px) {
   .right-direction .react-tabs__tab-list {
     -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
   }
 }
 
@@ -2093,13 +2138,15 @@ svg tspan {
   transition: all 0.3s linear;
 }
 
-.icon-close:hover, .icon-close:focus {
+.icon-close:hover,
+.icon-close:focus {
   background-color: #de5c52;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 
-.icon-close:before, .icon-close:after {
+.icon-close:before,
+.icon-close:after {
   content: '';
   width: 4px;
   height: 22px;
@@ -2113,12 +2160,12 @@ svg tspan {
 
 .icon-close:before {
   -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .icon-close:after {
   -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 @media only screen and (min-height: 768px) {
@@ -2141,8 +2188,8 @@ svg tspan {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-left: 4px;
 }
 

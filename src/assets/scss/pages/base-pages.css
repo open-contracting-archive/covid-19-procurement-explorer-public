@@ -6,7 +6,12 @@
   content: '';
   width: 100%;
   height: 100%;
-  background: linear-gradient(89.93deg, rgba(61, 57, 61, 0.9) 32.6%, rgba(61, 57, 61, 0.3) 93.07%), url("../img/hero-image.jpg") no-repeat;
+  background: linear-gradient(
+      89.93deg,
+      rgba(61, 57, 61, 0.9) 32.6%,
+      rgba(61, 57, 61, 0.3) 93.07%
+    ),
+    url('../img/hero-image.jpg') no-repeat;
   background-size: cover;
   position: absolute;
   top: 0;
