@@ -11,7 +11,9 @@ const useCountries = () => {
                 return ''
             }
 
-            const country = countries.find((country) => country.id === countryId)
+            const country = countries.find(
+                (country) => country.id === countryId
+            )
             return country ? country.name : countryId
         },
 
@@ -20,7 +22,9 @@ const useCountries = () => {
                 return ''
             }
 
-            const country = countries.find((country) => country.country_code_alpha_2 === countryCode)
+            const country = countries.find(
+                (country) => country.country_code_alpha_2 === countryCode
+            )
             return country ? country.name : countryCode
         },
 
@@ -29,13 +33,17 @@ const useCountries = () => {
                 return ''
             }
 
-            const language = languages.find((language) => language.id === languageId)
+            const language = languages.find(
+                (language) => language.id === languageId
+            )
             return language ? language.name : languageId
         },
 
-        globalCountryItem: () => countries.find((country) => country.slug === 'global'),
+        globalCountryItem: () =>
+            countries.find((country) => country.slug === 'global'),
 
-        currentCountry: (slug) => countries.find((country) => country.slug === slug)
+        currentCountry: (slug) =>
+            countries.find((country) => country.slug === slug)
     }
 }
 

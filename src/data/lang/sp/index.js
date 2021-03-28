@@ -1,1 +1,1 @@
-export { default as general } from "./general.lang";
+export { default as general } from './general.lang'

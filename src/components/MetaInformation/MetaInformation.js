@@ -1,20 +1,18 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Default from "../../constants/Default"
+import Default from '../../constants/Default'
 
 const MetaInformation = (props) => {
     const { title = null, canonicalLink, description, imageURL } = props
     return (
         <Helmet>
             {/* <!-- Primary Meta Tags --> */}
-            <title>{`${
-                title ? `${title} |` : ''
-            } ${Default.SITE_TITLE}`}</title>
+            <title>{`${title ? `${title} |` : ''} ${
+                Default.SITE_TITLE
+            }`}</title>
             <meta
                 name="title"
-                content={`${
-                    title ? `${title} |` : ''
-                } ${Default.SITE_TITLE}`}
+                content={`${title ? `${title} |` : ''} ${Default.SITE_TITLE}`}
             />
             <meta name="description" content={description} />
 

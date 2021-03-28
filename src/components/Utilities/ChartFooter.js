@@ -15,12 +15,17 @@ import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
 import socialIcons from '../../assets/img/icons/social'
 import { useDetectOutsideClick } from './useDetectOutsideClick'
-import useCountries from "../../hooks/useCountries"
+import useCountries from '../../hooks/useCountries'
 
 const currentLocation = window.location.href
 
 const ChartFooter = (props) => {
-    const { fullScreenHandler, embeddedVisualization = null, linkText, downloadUrl = null } = props
+    const {
+        fullScreenHandler,
+        embeddedVisualization = null,
+        linkText,
+        downloadUrl = null
+    } = props
     const { isModalOpen, openModal, closeModal } = useModal()
     const modalHandler = () => {
         if (!isModalOpen) {
@@ -68,16 +73,21 @@ const ChartFooter = (props) => {
                             </span>
                         </a>
                     </div>
-                ) : (countrySlug && (
-                    <div className="flex items-center mr-4 md:mr-6">
-                        <a href={downloadCountryContracts()} target="_blank" rel="noreferrer">
-                            <DownloadIcon className=" mr-2 inline-block" />
-                            <span className=" hidden md:inline-block">
-                                {trans('Download')}
-                            </span>
-                        </a>
-                    </div>
-                ))}
+                ) : (
+                    countrySlug && (
+                        <div className="flex items-center mr-4 md:mr-6">
+                            <a
+                                href={downloadCountryContracts()}
+                                target="_blank"
+                                rel="noreferrer">
+                                <DownloadIcon className=" mr-2 inline-block" />
+                                <span className=" hidden md:inline-block">
+                                    {trans('Download')}
+                                </span>
+                            </a>
+                        </div>
+                    )
+                )}
                 <div className="relative flex items-center">
                     <button onClick={onClick} className="dropdown-menu-trigger">
                         <ShareIcon className="inline-block mr-2" />{' '}

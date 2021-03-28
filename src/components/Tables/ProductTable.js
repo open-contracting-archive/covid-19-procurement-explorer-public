@@ -17,7 +17,10 @@ const ProductTable = (props) => {
     const { countrySlug } = useParams()
     const [loading, setLoading] = useState(false)
     const [originalData, setOriginalData] = useState([])
-    const [sorting, setSorting] = useState(() => ({ column: 'product_name', direction: '' }))
+    const [sorting, setSorting] = useState(() => ({
+        column: 'product_name',
+        direction: ''
+    }))
     const [selectedFilters, setSelectedFilters] = useState({})
     const history = useHistory()
     const [showFilter, setShowFilter] = useState('hidden')
@@ -26,7 +29,11 @@ const ProductTable = (props) => {
     const { trans } = useTrans()
 
     useEffect(() => {
-        const filterParams = { ...identity(pickBy(params)), ...selectedFilters, order: sorting.direction + sorting.column }
+        const filterParams = {
+            ...identity(pickBy(params)),
+            ...selectedFilters,
+            order: sorting.direction + sorting.column
+        }
         setLoading(true)
         ContractService.ProductList(filterParams)
             .then((result) => {
@@ -181,8 +188,8 @@ const ProductTable = (props) => {
                 <div className="custom-scrollbar table-scroll">
                     <table className="table">
                         <thead>
-                        <tr className="whitespace-no-wrap">
-                            <th style={{ width: '20%' }}>
+                            <tr className="whitespace-no-wrap">
+                                <th style={{ width: '20%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -191,8 +198,8 @@ const ProductTable = (props) => {
                                         {trans('Product Category')}{' '}
                                         {columnSorting('product_name')}
                                     </span>
-                            </th>
-                            <th style={{ width: '6%' }}>
+                                </th>
+                                <th style={{ width: '6%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -201,8 +208,8 @@ const ProductTable = (props) => {
                                         {trans('# of contracts')}
                                         {columnSorting('tender_count')}
                                     </span>
-                            </th>
-                            <th style={{ width: '10%' }}>
+                                </th>
+                                <th style={{ width: '10%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -211,8 +218,8 @@ const ProductTable = (props) => {
                                         {trans('value (usd)')}
                                         {columnSorting('amount_usd')}
                                     </span>
-                            </th>
-                            <th style={{ width: '6%' }}>
+                                </th>
+                                <th style={{ width: '6%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -221,8 +228,8 @@ const ProductTable = (props) => {
                                         {trans('# of suppliers')}
                                         {columnSorting('supplier_count')}
                                     </span>
-                            </th>
-                            <th style={{ width: '6%' }}>
+                                </th>
+                                <th style={{ width: '6%' }}>
                                     <span
                                         className="flex items-center cursor-pointer"
                                         onClick={() =>
@@ -231,43 +238,43 @@ const ProductTable = (props) => {
                                         {trans('# of buyers')}
                                         {columnSorting('buyer_count')}
                                     </span>
-                            </th>
-                        </tr>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {originalData &&
-                        originalData.map((product, index) => {
-                            return (
-                                <tr
-                                    key={index}
-                                    className="cursor-pointer"
-                                    onClick={() =>
-                                        showDetail(product.product_id)
-                                    }>
-                                    <td className="hover:text-primary-blue">
-                                        {get(product, 'product_name')}
-                                    </td>
-                                    <td>
-                                        {get(
-                                            product,
-                                            Default.TENDER_COUNT
-                                        )}
-                                    </td>
-                                    <td>
-                                        {product[Default.AMOUNT_USD] &&
-                                        product[
-                                            Default.AMOUNT_USD
-                                            ].toLocaleString('en')}
-                                    </td>
-                                    <td>
-                                        {get(product, 'supplier_count')}
-                                    </td>
-                                    <td>
-                                        {get(product, 'buyer_count')}
-                                    </td>
-                                </tr>
-                            )
-                        })}
+                            {originalData &&
+                                originalData.map((product, index) => {
+                                    return (
+                                        <tr
+                                            key={index}
+                                            className="cursor-pointer"
+                                            onClick={() =>
+                                                showDetail(product.product_id)
+                                            }>
+                                            <td className="hover:text-primary-blue">
+                                                {get(product, 'product_name')}
+                                            </td>
+                                            <td>
+                                                {get(
+                                                    product,
+                                                    Default.TENDER_COUNT
+                                                )}
+                                            </td>
+                                            <td>
+                                                {product[Default.AMOUNT_USD] &&
+                                                    product[
+                                                        Default.AMOUNT_USD
+                                                    ].toLocaleString('en')}
+                                            </td>
+                                            <td>
+                                                {get(product, 'supplier_count')}
+                                            </td>
+                                            <td>
+                                                {get(product, 'buyer_count')}
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
                         </tbody>
                     </table>
                     {!originalData.length && (

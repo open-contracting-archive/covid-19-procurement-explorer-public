@@ -85,10 +85,7 @@ const CountryDetailMap = ({ data, countryCode }) => {
 
     return (
         <div className="map-wrapper bg-white rounded-md h-full">
-            <div
-                ref={countryMapChartDiv}
-                className="country-map-section"
-            />
+            <div ref={countryMapChartDiv} className="country-map-section" />
         </div>
     )
 }

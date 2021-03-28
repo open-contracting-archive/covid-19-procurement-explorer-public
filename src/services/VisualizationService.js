@@ -6,7 +6,7 @@ class VisualizationService {
         try {
             const res = await Api.get(getURI('visualization.world-map'), params)
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -23,7 +23,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -40,7 +40,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -57,7 +57,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -74,7 +74,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -91,7 +91,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -108,7 +108,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -125,7 +125,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -142,7 +142,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -159,7 +159,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -176,7 +176,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -193,7 +193,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -210,7 +210,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -227,7 +227,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -244,7 +244,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -261,7 +261,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -278,7 +278,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -292,7 +292,7 @@ class VisualizationService {
         try {
             const res = await Api.get(getURI('buyers'), params)
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -306,7 +306,7 @@ class VisualizationService {
         try {
             const res = await Api.get(getURI('suppliers'), params)
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -320,7 +320,7 @@ class VisualizationService {
         try {
             const res = await Api.get(`${getURI('buyer-detail')}/${id}`)
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -334,7 +334,7 @@ class VisualizationService {
         try {
             const res = await Api.get(`${getURI('supplier-detail')}/${id}`)
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -351,7 +351,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -368,7 +368,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -385,7 +385,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -402,7 +402,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -419,7 +419,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -436,7 +436,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -453,7 +453,7 @@ class VisualizationService {
                 params
             )
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 
@@ -466,7 +466,7 @@ class VisualizationService {
         try {
             const res = await Api.get(getURI('overall-statistics'))
 
-            if(res.status !==  200){
+            if (res.status !== 200) {
                 throw new Exception()
             }
 

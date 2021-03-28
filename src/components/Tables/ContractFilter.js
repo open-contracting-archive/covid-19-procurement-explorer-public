@@ -113,7 +113,10 @@ const ContractFilter = (props) => {
                         value: supplier.id
                     }
                 })
-                setSuppliersFilterOption([{ label: 'All', value: '' }, ...options])
+                setSuppliersFilterOption([
+                    { label: 'All', value: '' },
+                    ...options
+                ])
             }
         })
     }
@@ -237,7 +240,7 @@ const ContractFilter = (props) => {
                                 onChange={(selectedOption) =>
                                     appendFilter({
                                         procurement_procedure:
-                                        selectedOption.value
+                                            selectedOption.value
                                     })
                                 }
                             />
@@ -309,9 +312,9 @@ const ContractFilter = (props) => {
                                 onChange={(selectedOption) =>
                                     appendFilter({
                                         contract_value_usd:
-                                        selectedOption.value.value,
+                                            selectedOption.value.value,
                                         value_comparison:
-                                        selectedOption.value.sign
+                                            selectedOption.value.sign
                                     })
                                 }
                             />
@@ -477,7 +480,7 @@ const ContractFilter = (props) => {
                             onChange={(selectedOption) =>
                                 appendFilter({
                                     contract_value_usd:
-                                    selectedOption.value.value,
+                                        selectedOption.value.value,
                                     value_comparison: selectedOption.value.sign
                                 })
                             }

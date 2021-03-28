@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
-import { Suppliers, TotalContracts, TotalSpending } from "../../../../components/Visualizations"
-import SupplierTable from "../../../../components/Tables/SupplierTable"
-import VisualizationModal from "../modal/VisualizationModal"
+import {
+    Suppliers,
+    TotalContracts,
+    TotalSpending
+} from '../../../../components/Visualizations'
+import SupplierTable from '../../../../components/Tables/SupplierTable'
+import VisualizationModal from '../modal/VisualizationModal'
 
 const GlobalSuppliers = (props) => {
     const { disclaimerInfo = null } = props
@@ -22,19 +26,13 @@ const GlobalSuppliers = (props) => {
 
             <div className="flex flex-wrap -mx-3 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <Suppliers
-                        modalHandler={modalHandler}
-                    />
+                    <Suppliers modalHandler={modalHandler} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalContracts
-                        params={{ supplier: 'notnull' }}
-                    />
+                    <TotalContracts params={{ supplier: 'notnull' }} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalSpending
-                        params={{ supplier: 'notnull' }}
-                    />
+                    <TotalSpending params={{ supplier: 'notnull' }} />
                 </div>
             </div>
             <SupplierTable />

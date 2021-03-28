@@ -28,7 +28,7 @@ const StackedChart = ({ data, currency }) => {
             am4core.color('#FE654F'),
             am4core.color('#CE96A6'),
             am4core.color('#D6EFFF'),
-            am4core.color('#60695C'),
+            am4core.color('#60695C')
         ]
 
         // Create axes
@@ -58,18 +58,28 @@ const StackedChart = ({ data, currency }) => {
 
             // Configure columns
             series.columns.template.width = am4core.percent(60)
-            series.columns.template.tooltipText =
-                `[bold]{name}[/]\n[font-size:14px]{categoryX}: ${currency === 'usd' ? '$' : ''}{valueY} [text-transform: uppercase font-size:14px]${currency}`
+            series.columns.template.tooltipText = `[bold]{name}[/]\n[font-size:14px]{categoryX}: ${
+                currency === 'usd' ? '$' : ''
+            }{valueY} [text-transform: uppercase font-size:14px]${currency}`
 
             return series
         }
 
-        createSeries('construction-works--materials', 'Construction Works & Materials')
+        createSeries(
+            'construction-works--materials',
+            'Construction Works & Materials'
+        )
         createSeries('covid-tests--testing', 'Covid Tests & Testing')
-        createSeries('medical-consumables-except-tests', 'Medical Consumables (except tests)')
+        createSeries(
+            'medical-consumables-except-tests',
+            'Medical Consumables (except tests)'
+        )
         createSeries('medicines', 'Medicines')
         createSeries('other-medical-equipment', 'Other Medical Equipment')
-        createSeries('personal-protective-equipment', 'Personal Protective Equipment')
+        createSeries(
+            'personal-protective-equipment',
+            'Personal Protective Equipment'
+        )
         createSeries('sanitizing-supplies', 'Sanitizing Supplies')
         createSeries('vaccine', 'Vaccine')
         createSeries('ventilator', 'Ventilator')

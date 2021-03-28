@@ -10,11 +10,10 @@ const StaticPage = () => {
     window.scrollTo(0, 0)
 
     useEffect(() => {
-        CmsPageService.StaticPageDetailBySlug(slug)
-            .then((response) => {
-                setPageDetail(response)
-                setLoading(false)
-            })
+        CmsPageService.StaticPageDetailBySlug(slug).then((response) => {
+            setPageDetail(response)
+            setLoading(false)
+        })
 
         return () => {
             setPageDetail({})
@@ -46,7 +45,8 @@ const StaticPage = () => {
                                 className="mb-10 news-detail__content"
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body
-                                }} />
+                                }}
+                            />
                         </div>
                     </Fragment>
                 )}

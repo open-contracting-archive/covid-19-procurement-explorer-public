@@ -1,19 +1,19 @@
 import React from 'react'
-import ProductCategoryMap from "../../../../components/Visualizations/Common/ProductCategoryMap"
-import { ProductTable } from "../../../../components/Tables"
+import ProductCategoryMap from '../../../../components/Visualizations/Common/ProductCategoryMap'
+import { ProductTable } from '../../../../components/Tables'
 
 const CountryProducts = (props) => {
     const { countryCode, disclaimerInfo = null } = props
 
     function renderMainVisualization() {
         if (countryCode) {
-            return (<ProductCategoryMap params={{ country: countryCode }} />)
+            return <ProductCategoryMap params={{ country: countryCode }} />
         }
     }
 
     function renderTable() {
         if (countryCode) {
-            return (<ProductTable params={{ country: countryCode }} />)
+            return <ProductTable params={{ country: countryCode }} />
         }
     }
 

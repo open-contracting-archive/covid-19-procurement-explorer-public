@@ -36,46 +36,49 @@ const FeaturedInsights = ({ params }) => {
 
     return loading ? (
         <Loader />
-    ) : insightList.length > 0 && (
-        <Fragment>
-            <h2 className="font-normal text-lg mb-6">
-                {trans('Library')}
-            </h2>
-            <div className="grid grid-cols-12 md:grid-rows-3 md:gap-x-10 gap-y-6 main-news mb-12">
-                {insightList.map((item) => {
-                    return (
-                        <Link
-                            className="main-news__item relative"
-                            to={
-                                item.type === 'News'
-                                    ? `/news/${item.id}`
-                                    : `/blogs/${item.id}`
-                            }
-                            key={item.id}>
-                            {get(item, 'content_image.meta.download_url') && (
-                                <div className="img-wrapper img-gradient">
-                                    <img
-                                        src={`${API_URL}${get(
-                                            item,
-                                            'content_image.meta.download_url'
-                                        )}`}
-                                        alt=""
-                                    />
+    ) : (
+        insightList.length > 0 && (
+            <Fragment>
+                <h2 className="font-normal text-lg mb-6">{trans('Library')}</h2>
+                <div className="grid grid-cols-12 md:grid-rows-3 md:gap-x-10 gap-y-6 main-news mb-12">
+                    {insightList.map((item) => {
+                        return (
+                            <Link
+                                className="main-news__item relative"
+                                to={
+                                    item.type === 'News'
+                                        ? `/news/${item.id}`
+                                        : `/blogs/${item.id}`
+                                }
+                                key={item.id}>
+                                {get(
+                                    item,
+                                    'content_image.meta.download_url'
+                                ) && (
+                                    <div className="img-wrapper img-gradient">
+                                        <img
+                                            src={`${API_URL}${get(
+                                                item,
+                                                'content_image.meta.download_url'
+                                            )}`}
+                                            alt=""
+                                        />
+                                    </div>
+                                )}
+                                <div className="main-news__caption">
+                                    <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
+                                        {item.title}
+                                    </h3>
+                                    <p className="news-caption__date">
+                                        {formatDate(item.news_date)}
+                                    </p>
                                 </div>
-                            )}
-                            <div className="main-news__caption">
-                                <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
-                                    {item.title}
-                                </h3>
-                                <p className="news-caption__date">
-                                    {formatDate(item.news_date)}
-                                </p>
-                            </div>
-                        </Link>
-                    )
-                })}
-            </div>
-        </Fragment>
+                            </Link>
+                        )
+                    })}
+                </div>
+            </Fragment>
+        )
     )
 }
 

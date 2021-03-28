@@ -8,9 +8,7 @@ const CountryEquity = (props) => {
     function renderMainVisualization() {
         if (countryCode) {
             return (
-                <ContractEquityIndicators
-                    params={{ country: countryCode }}
-                />
+                <ContractEquityIndicators params={{ country: countryCode }} />
             )
         }
     }

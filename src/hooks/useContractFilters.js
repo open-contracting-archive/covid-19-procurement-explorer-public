@@ -3,8 +3,12 @@ import { useSelector } from 'react-redux'
 
 const useContractFilters = () => {
     const countries = useSelector((state) => state.general.countries)
-    const contractMethods = useSelector((state) => state.general.contractMethods)
-    const productCategories = useSelector((state) => state.general.productCategories)
+    const contractMethods = useSelector(
+        (state) => state.general.contractMethods
+    )
+    const productCategories = useSelector(
+        (state) => state.general.productCategories
+    )
     return {
         countrySelectList: useMemo(() => {
             return [

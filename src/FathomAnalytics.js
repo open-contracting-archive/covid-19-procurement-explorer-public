@@ -7,10 +7,11 @@ const FathomAnalytics = () => {
 
     console.log('ere')
     return (
-        <script src={src}
-                data-site={siteKey}
-                data-excluded-domains={excludedDomains}
-                defer
+        <script
+            src={src}
+            data-site={siteKey}
+            data-excluded-domains={excludedDomains}
+            defer
         />
     )
 }

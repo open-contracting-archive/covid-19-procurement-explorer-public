@@ -39,10 +39,14 @@ const ResourceDetail = () => {
 
     const getDocumentUrl = () => {
         if (resourceDetail) {
-            const documentUrl = get(resourceDetail, 'document.meta.download_url', null)
+            const documentUrl = get(
+                resourceDetail,
+                'document.meta.download_url',
+                null
+            )
             const link = get(resourceDetail, 'link', null)
 
-            return documentUrl ? documentUrl : (link ? link : null)
+            return documentUrl ? documentUrl : link ? link : null
         }
         return null
     }
@@ -154,11 +158,7 @@ const ResourceDetail = () => {
                                     </th>
                                     <td className="px-6 py-6">
                                         {languageById(
-                                            get(
-                                                resourceDetail,
-                                                'lang.id',
-                                                null
-                                            )
+                                            get(resourceDetail, 'lang.id', null)
                                         )}
                                     </td>
                                 </tr>
@@ -172,27 +172,27 @@ const ResourceDetail = () => {
                                     {trans('Related Resources')}
                                 </p>
                                 {resourceList &&
-                                resourceList
-                                    .filter(
-                                        (resources) =>
-                                            resources.id !== resourcesId
-                                    )
-                                    .slice(0, 3)
-                                    .map((resources) => {
-                                        return (
-                                            <div
-                                                className="related__list flex mb-4 pb-4"
-                                                key={resources.id}>
-                                                <Link
-                                                    to={`/resources/${resources.id}`}
-                                                    className="hover:text-primary-blue focus:text-primary-blue">
-                                                    <h3 className="text-sm">
-                                                        {resources.title}
-                                                    </h3>
-                                                </Link>
-                                            </div>
+                                    resourceList
+                                        .filter(
+                                            (resources) =>
+                                                resources.id !== resourcesId
                                         )
-                                    })}
+                                        .slice(0, 3)
+                                        .map((resources) => {
+                                            return (
+                                                <div
+                                                    className="related__list flex mb-4 pb-4"
+                                                    key={resources.id}>
+                                                    <Link
+                                                        to={`/resources/${resources.id}`}
+                                                        className="hover:text-primary-blue focus:text-primary-blue">
+                                                        <h3 className="text-sm">
+                                                            {resources.title}
+                                                        </h3>
+                                                    </Link>
+                                                </div>
+                                            )
+                                        })}
                             </div>
                         </div>
                     </div>

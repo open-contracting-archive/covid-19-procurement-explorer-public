@@ -5,7 +5,7 @@ import { formatDate, dateDiff } from '../../helpers/date'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import HelpText from '../../components/HelpText/HelpText'
-import Visualization from "../../constants/Visualization"
+import Visualization from '../../constants/Visualization'
 import ErrorHandler from '../ErrorHandler'
 
 const Suppliers = (props) => {
@@ -23,17 +23,18 @@ const Suppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.SupplierSummary(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.SupplierSummary(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})
@@ -70,8 +71,7 @@ const Suppliers = (props) => {
         supplierSummaryLineChartDataRaw &&
         sortDate(supplierSummaryLineChartDataRaw)
     const supplierSummaryAmount = originalData && originalData.total
-    const supplierSummaryPercentage =
-        originalData && originalData.percentage
+    const supplierSummaryPercentage = originalData && originalData.percentage
 
     return (
         <div className="bg-white rounded p-4 h-full">

@@ -1,5 +1,5 @@
-import Api from "./api"
-import { getURI } from "../helpers/api"
+import Api from './api'
+import { getURI } from '../helpers/api'
 
 class GeneralService {
     static async getStaticFilters() {

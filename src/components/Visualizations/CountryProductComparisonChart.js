@@ -2,7 +2,7 @@ import React from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import useTrans from '../../hooks/useTrans'
 import CountryCombinedChart from '../Charts/CountryCombinedChart/CountryCombinedChart'
-import ChartFooter from "../Utilities/ChartFooter"
+import ChartFooter from '../Utilities/ChartFooter'
 
 const CountryProductChart = (props) => {
     // ===========================================================================

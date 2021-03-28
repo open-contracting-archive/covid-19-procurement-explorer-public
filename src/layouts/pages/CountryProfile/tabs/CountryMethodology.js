@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { isEmpty } from 'lodash'
-import CmsPageService from "../../../../services/CmsPageService"
-import Loader from "../../../../components/Loader/Loader"
+import CmsPageService from '../../../../services/CmsPageService'
+import Loader from '../../../../components/Loader/Loader'
 
 const CountryMethodology = (props) => {
     const { countryId } = props
@@ -17,7 +17,8 @@ const CountryMethodology = (props) => {
             .then((result) => {
                 setPageDetail(result)
                 setLoading(false)
-            }).catch((error) => console.log(error))
+            })
+            .catch((error) => console.log(error))
 
         return () => {
             setPageDetail({})

@@ -10,9 +10,7 @@ const Countries = () => {
             <div className="container mx-auto">
                 <span className="text-2xl mb-10">{trans('Countries')}</span>
                 <div>
-                    <div>
-                        
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </section>

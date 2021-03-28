@@ -16,9 +16,7 @@ const PerCapitaSwitcher = (props) => {
                     id={id}
                     onChange={() => handleToggle(!show)}
                 />
-                <label
-                    className="toggle-switch-label"
-                    htmlFor={id}>
+                <label className="toggle-switch-label" htmlFor={id}>
                     <span className="toggle-switch-inner" />
                     <span className="toggle-switch-switch" />
                 </label>
