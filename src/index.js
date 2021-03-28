@@ -8,17 +8,15 @@ import App from './App'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import reportWebVitals from './reportWebVitals'
 import { ModalProvider } from 'react-simple-hook-modal'
-import * as Sentry from "@sentry/react"
-import { Integrations } from "@sentry/tracing"
+import * as Sentry from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
 
 const sentryDNS = process.env.REACT_APP_SENTRY_DNS
 
 if (process.env.NODE_ENV === 'production' && sentryDNS) {
     Sentry.init({
         dsn: sentryDNS,
-        integrations: [
-            new Integrations.BrowserTracing()
-        ],
+        integrations: [new Integrations.BrowserTracing()],
         tracesSampleRate: 0
     })
 }

@@ -1,5 +1,5 @@
 import * as types from './type'
-import Default from "../../../constants/Default"
+import Default from '../../../constants/Default'
 
 const initialState = {
     currentCountry: null,

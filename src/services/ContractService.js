@@ -13,7 +13,10 @@ class ContractService {
 
     static async FilterBuyersParameter(params) {
         try {
-            const res = await Api.get(getURI('filter-parameters-buyers'), params)
+            const res = await Api.get(
+                getURI('filter-parameters-buyers'),
+                params
+            )
             return res.body
         } catch (error) {
             console.log(error)
@@ -22,7 +25,10 @@ class ContractService {
 
     static async FilterSuppliersParameter(params) {
         try {
-            const res = await Api.get(getURI('filter-parameters-suppliers'), params)
+            const res = await Api.get(
+                getURI('filter-parameters-suppliers'),
+                params
+            )
             return res.body
         } catch (error) {
             console.log(error)

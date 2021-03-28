@@ -15,7 +15,7 @@ const BarChart = ({ data, barColorValue, axisRotation }) => {
 
         // Create chart instance
         let chart = am4core.create(barchartDiv.current, am4charts.XYChart)
-        
+
         // Create axes
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.dataFields.category = 'method'

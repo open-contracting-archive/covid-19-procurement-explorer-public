@@ -49,7 +49,7 @@ function PaginationSection() {
                 dispatch({ type: 'OnFailure' })
             })
     }, [currentPage])
-    
+
     const { loading, user, error } = state
 
     return (

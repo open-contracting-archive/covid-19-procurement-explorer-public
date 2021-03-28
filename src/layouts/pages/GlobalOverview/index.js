@@ -21,9 +21,9 @@ import {
 } from '../../../constants/Tab'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
-import DataDisclaimerInfo from "../CountryProfile/partials/DataDisclaimerInfo"
-import useCountries from "../../../hooks/useCountries"
-import CountryMethodology from "../CountryProfile/tabs/CountryMethodology"
+import DataDisclaimerInfo from '../CountryProfile/partials/DataDisclaimerInfo'
+import useCountries from '../../../hooks/useCountries'
+import CountryMethodology from '../CountryProfile/tabs/CountryMethodology'
 
 const GlobalOverview = () => {
     // ===========================================================================
@@ -31,7 +31,9 @@ const GlobalOverview = () => {
     // ===========================================================================
     let { tabSlug } = useParams()
     const { globalCountryItem } = useCountries()
-    const disclaimerInfo = (<DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />)
+    const disclaimerInfo = (
+        <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
+    )
 
     const renderTab = () => {
         switch (tabSlug) {

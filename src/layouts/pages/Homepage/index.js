@@ -11,7 +11,8 @@ const Home = () => {
         <Fragment>
             <MetaInformation
                 title="Home"
-                description="Welcome Covid-19 Contract Explorer" />
+                description="Welcome Covid-19 Contract Explorer"
+            />
 
             <HomeBanner />
 

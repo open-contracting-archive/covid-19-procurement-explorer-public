@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
-import { Buyers, TotalContracts, TotalSpending } from '../../../../components/Visualizations'
+import {
+    Buyers,
+    TotalContracts,
+    TotalSpending
+} from '../../../../components/Visualizations'
 import BuyerTable from '../../../../components/Tables/BuyerTable'
-import VisualizationModal from "../modal/VisualizationModal"
+import VisualizationModal from '../modal/VisualizationModal'
 
 const GlobalBuyers = (props) => {
     const { disclaimerInfo = null } = props
@@ -22,19 +26,13 @@ const GlobalBuyers = (props) => {
 
             <div className="flex flex-wrap -mx-3 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <Buyers
-                        modalHandler={modalHandler}
-                    />
+                    <Buyers modalHandler={modalHandler} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalContracts
-                        params={{ buyer: "notnull" }}
-                    />
+                    <TotalContracts params={{ buyer: 'notnull' }} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalSpending
-                        params={{ buyer: "notnull" }}
-                    />
+                    <TotalSpending params={{ buyer: 'notnull' }} />
                 </div>
             </div>
             <BuyerTable />

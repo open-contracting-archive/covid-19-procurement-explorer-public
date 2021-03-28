@@ -5,16 +5,13 @@ import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import ErrorHandler from '../ErrorHandler'
-import useDataCalculations from "../../hooks/useDataCalculations"
+import useDataCalculations from '../../hooks/useDataCalculations'
 
 const AverageBidsPerContract = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const {
-        label = 'Average bids per contract',
-        params
-    } = props
+    const { label = 'Average bids per contract', params } = props
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [originalData, setOriginalData] = useState({})
@@ -23,7 +20,11 @@ const AverageBidsPerContract = (props) => {
         percentage: 0,
         areaChart: []
     })
-    const { areaChartData, changePercentage, colorValue } = useDataCalculations()
+    const {
+        areaChartData,
+        changePercentage,
+        colorValue
+    } = useDataCalculations()
     const { trans } = useTrans()
 
     // ===========================================================================

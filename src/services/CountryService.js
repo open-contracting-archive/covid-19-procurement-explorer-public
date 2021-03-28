@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 import Api from './api'
 import { API_URL, getURI } from '../helpers/api'
 
@@ -23,7 +23,9 @@ class CountryService {
 
     static async ContractDetail(contractsId) {
         try {
-            const response = await Api.get(`${getURI('contracts')}/${contractsId}`)
+            const response = await Api.get(
+                `${getURI('contracts')}/${contractsId}`
+            )
             return response.body
         } catch (error) {
             console.log(error)
@@ -49,7 +51,9 @@ class CountryService {
 
     static async DirectOpenContractTrend() {
         try {
-            const res = await Api.get(getURI('visualization.direct-open-contract-trend'))
+            const res = await Api.get(
+                getURI('visualization.direct-open-contract-trend')
+            )
 
             return res.body
         } catch (error) {

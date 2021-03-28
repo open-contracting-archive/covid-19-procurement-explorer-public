@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { isEmpty } from 'lodash'
-import { setCountryCurrency, setCurrency } from '../../../store/reducers/general/action'
+import {
+    setCountryCurrency,
+    setCurrency
+} from '../../../store/reducers/general/action'
 import CountrySelector from '../../../components/CountrySelector/CountrySelector'
 import CountryMapElement from './sections/CountryMapElement'
 import CountryInfo from './sections/CountryInfo'
@@ -26,8 +29,8 @@ import {
 } from '../../../constants/Tab'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import Default from '../../../constants/Default'
-import CountryMethodology from "./tabs/CountryMethodology"
-import DataDisclaimerInfo from "./partials/DataDisclaimerInfo"
+import CountryMethodology from './tabs/CountryMethodology'
+import DataDisclaimerInfo from './partials/DataDisclaimerInfo'
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -51,7 +54,11 @@ const CountryProfile = () => {
             dispatch(setCurrency(Default.CURRENCY_USD))
         }
     }, [countries, countrySlug])
-    const disclaimerInfo = (<DataDisclaimerInfo forwardUrl={`/country/${countrySlug}/methodology`} />)
+    const disclaimerInfo = (
+        <DataDisclaimerInfo
+            forwardUrl={`/country/${countrySlug}/methodology`}
+        />
+    )
 
     const renderTab = () => {
         switch (tabSlug) {
@@ -100,9 +107,11 @@ const CountryProfile = () => {
                     />
                 )
             case METHODOLOGY:
-                return countryData.id && (<CountryMethodology
-                    countryId={countryData.id}
-                />)
+                return (
+                    countryData.id && (
+                        <CountryMethodology countryId={countryData.id} />
+                    )
+                )
             default:
                 return (
                     <CountryData
@@ -128,9 +137,7 @@ const CountryProfile = () => {
                             <CountryMapElement
                                 countryCode={countryData.country_code_alpha_2}
                             />
-                            <CountryInfo
-                                country={countryData}
-                            />
+                            <CountryInfo country={countryData} />
                         </div>
                     </div>
                 </section>

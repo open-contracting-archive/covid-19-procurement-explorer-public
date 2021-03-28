@@ -1,5 +1,5 @@
 import React from 'react'
-import { RedFlagSummary } from "../../../../components/Visualizations"
+import { RedFlagSummary } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
 
 const CountryContracts = (props) => {
@@ -7,13 +7,13 @@ const CountryContracts = (props) => {
 
     function renderMainVisualization() {
         if (countryCode) {
-            return (<RedFlagSummary params={{ country: countryCode }} />)
+            return <RedFlagSummary params={{ country: countryCode }} />
         }
     }
 
     function renderTable() {
         if (countryCode) {
-            return (<ContractTable params={{ country: countryCode }} />)
+            return <ContractTable params={{ country: countryCode }} />
         }
     }
 

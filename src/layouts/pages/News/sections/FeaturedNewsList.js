@@ -75,8 +75,7 @@ const FeaturedNewsList = () => {
                                     key={news.id}>
                                     <div className="news__item flex flex-wrap">
                                         {news.image != null ? (
-                                            <div
-                                                className="img-wrapper w-full h-auto">
+                                            <div className="img-wrapper w-full h-auto">
                                                 <img
                                                     className="w-full h-full object-cover"
                                                     src={news.image}
@@ -84,8 +83,7 @@ const FeaturedNewsList = () => {
                                                 />
                                             </div>
                                         ) : (
-                                            <div
-                                                className="img-wrapper w-full h-auto">
+                                            <div className="img-wrapper w-full h-auto">
                                                 <img
                                                     className="w-full h-full object-cover"
                                                     src={DefaultImage}

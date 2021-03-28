@@ -5,9 +5,9 @@ import CmsPageService from '../../services/CmsPageService'
 import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher'
 
 const fixedMenuItems = [
-    { title: "Data", route: "/global-overview/data" },
-    { title: "Library", route: "/library" },
-    { title: "Resources", route: "/resources" }
+    { title: 'Data', route: '/global-overview/data' },
+    { title: 'Library', route: '/library' },
+    { title: 'Resources', route: '/resources' }
 ]
 
 const Header = () => {

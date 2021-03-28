@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
-import WebLayout from "./layouts/WebLayout"
-import EmbeddedVisualization from "./layouts/pages/Visualization/EmbeddedVisualization"
-import NotFound from "./components/NotFound/NotFound"
-import { webRoutes } from "./routes/webRoutes"
+import WebLayout from './layouts/WebLayout'
+import EmbeddedVisualization from './layouts/pages/Visualization/EmbeddedVisualization'
+import NotFound from './components/NotFound/NotFound'
+import { webRoutes } from './routes/webRoutes'
 
 const RouterView = () => {
     const renderWebRoutes = () => {

@@ -9,7 +9,10 @@ const showItems = 6
 
 const LibrarySection = () => {
     const [loading, setLoading] = useState(true)
-    const [itemsLoading, setItemsLoading] = useState({ blog: true, resource: true })
+    const [itemsLoading, setItemsLoading] = useState({
+        blog: true,
+        resource: true
+    })
     const [insightList, setInsightList] = useState([])
     const [itemList, setItemList] = useState([])
     const { trans } = useTrans()
@@ -26,7 +29,7 @@ const LibrarySection = () => {
                     type: item.contents_type,
                     detail_url: `/blogs/${item.id}`
                 }))
-                setItemList((previous) => ([...previous, ...mappedItems]))
+                setItemList((previous) => [...previous, ...mappedItems])
             }
             setItemsLoading((previous) => ({ ...previous, blog: false }))
         })
@@ -42,7 +45,7 @@ const LibrarySection = () => {
                     language: item.lang,
                     detail_url: `/resources/${item.id}`
                 }))
-                setItemList((previous) => ([...previous, ...mappedItems]))
+                setItemList((previous) => [...previous, ...mappedItems])
             }
             setItemsLoading((previous) => ({ ...previous, resource: false }))
         })

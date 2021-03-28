@@ -1,7 +1,6 @@
 import React from 'react'
 
 function Checkbox(props) {
-
     return (
         <div className="styled-checkbox">
             <input

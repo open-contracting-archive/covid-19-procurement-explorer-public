@@ -6,9 +6,7 @@ import {
 } from '../../store/reducers/general/action'
 import CountryService from '../../services/CountryService'
 
-const languages = [
-    { code: 'en', name: 'English' },
-]
+const languages = [{ code: 'en', name: 'English' }]
 
 const LanguageSwitcher = () => {
     // const languages = useSelector((state) => state.general.languages)
@@ -17,11 +15,9 @@ const LanguageSwitcher = () => {
 
     const onChange = (e) => {
         dispatch(setCurrentLocale(e.target.value))
-        CountryService.getTranslations(e.target.value).then(
-            (response) => {
-                dispatch(setTranslations(response))
-            }
-        )
+        CountryService.getTranslations(e.target.value).then((response) => {
+            dispatch(setTranslations(response))
+        })
     }
     return (
         <div className="lang relative">

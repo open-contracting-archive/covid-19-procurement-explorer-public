@@ -3,7 +3,7 @@ import WorldMap from '../../components/Visualizations/WorldMap'
 import useTrans from '../../hooks/useTrans'
 
 const CountryProductMap = (props) => {
-    const {trans} = useTrans()
+    const { trans } = useTrans()
     const { params } = props
 
     return (

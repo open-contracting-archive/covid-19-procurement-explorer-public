@@ -1,16 +1,16 @@
 import React from 'react'
-import ProductCategoryMap from "../../../../components/Visualizations/Common/ProductCategoryMap"
-import { ProductTable } from "../../../../components/Tables"
+import ProductCategoryMap from '../../../../components/Visualizations/Common/ProductCategoryMap'
+import { ProductTable } from '../../../../components/Tables'
 
 const GlobalProducts = (props) => {
     const { disclaimerInfo = null } = props
 
     function renderMainVisualization() {
-        return (<ProductCategoryMap />)
+        return <ProductCategoryMap />
     }
 
     function renderTable() {
-        return (<ProductTable />)
+        return <ProductTable />
     }
 
     return (

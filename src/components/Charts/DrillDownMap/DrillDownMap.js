@@ -199,7 +199,10 @@ const DrillDownMap = () => {
 
     return (
         <div className="px-4 mb-16 map-wrapper pt-20">
-            <div ref={drillDownMap} style={{ width: '100%', height: '500px' }} />
+            <div
+                ref={drillDownMap}
+                style={{ width: '100%', height: '500px' }}
+            />
         </div>
     )
 }

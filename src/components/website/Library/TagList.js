@@ -1,6 +1,6 @@
-import React, { Fragment } from "react"
+import React, { Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
-import useTrans from "../../../hooks/useTrans"
+import useTrans from '../../../hooks/useTrans'
 
 const TagList = ({ item }) => {
     let history = useHistory()
@@ -16,11 +16,17 @@ const TagList = ({ item }) => {
             </p>
             {item.tags.length ? (
                 <div className="tags flex flex-wrap">
-                    {item.tags && item.tags.map((tagItem, index) => (
-                        <div className="tag cursor-pointer" key={index} onClick={() => {
-                            handleClick(tagItem, item.contents_type)
-                        }}>{tagItem}</div>
-                    ))}
+                    {item.tags &&
+                        item.tags.map((tagItem, index) => (
+                            <div
+                                className="tag cursor-pointer"
+                                key={index}
+                                onClick={() => {
+                                    handleClick(tagItem, item.contents_type)
+                                }}>
+                                {tagItem}
+                            </div>
+                        ))}
                 </div>
             ) : (
                 <span>-</span>

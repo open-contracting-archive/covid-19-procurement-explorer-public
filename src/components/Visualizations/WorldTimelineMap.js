@@ -14,7 +14,7 @@ import ContractView from '../../constants/ContractView'
 import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import Default from '../../constants/Default'
 import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
-import { mediaUrl } from "../../helpers/general"
+import { mediaUrl } from '../../helpers/general'
 
 const options = continentSelectList
 

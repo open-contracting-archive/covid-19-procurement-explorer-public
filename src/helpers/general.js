@@ -1,13 +1,15 @@
 import { has } from 'lodash'
-import { dateDiff } from "./date"
+import { dateDiff } from './date'
 
 export const slugify = (text) => {
-    return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w-]+/g, '')       // Remove all non-word chars
-        .replace(/\\+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start of text
-        .replace(/-+$/, '')            // Trim - from end of text
+    return text
+        .toString()
+        .toLowerCase()
+        .replace(/\s+/g, '-') // Replace spaces with -
+        .replace(/[^\w-]+/g, '') // Remove all non-word chars
+        .replace(/\\+/g, '-') // Replace multiple - with single -
+        .replace(/^-+/, '') // Trim - from start of text
+        .replace(/-+$/, '') // Trim - from end of text
 }
 
 export const useQuery = () => {
@@ -20,19 +22,20 @@ export const toCamelCase = (string) => {
     return arr.map((m, i) => {
         let low = m.toLowerCase()
         if (i !== 0) {
-            low = low.split('').map((s, k) => k === 0 ? s.toUpperCase() : s).join``
+            low = low.split('').map((s, k) => (k === 0 ? s.toUpperCase() : s))
+                .join``
         }
         return low
     }).join``
 }
 
 export const hasValidProperty = (object, property) => {
-    return (has(object, property) && object[property])
+    return has(object, property) && object[property]
 }
 
 export const siteUrl = window.location.origin
 
-export const twitterHandle = "covid19"
+export const twitterHandle = 'covid19'
 
 export const sortItems = (items, key) => {
     return items.sort((item1, item2) => {
@@ -45,5 +48,8 @@ export const mediaUrl = (path) => {
 }
 
 export const countryContractsUrl = (countryName) => {
-    return process.env.REACT_APP_API_URL + `/media/export/${countryName}_summary.xlsx`
+    return (
+        process.env.REACT_APP_API_URL +
+        `/media/export/${countryName}_summary.xlsx`
+    )
 }

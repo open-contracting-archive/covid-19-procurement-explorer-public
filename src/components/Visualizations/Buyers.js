@@ -5,7 +5,7 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import useTrans from '../../hooks/useTrans'
 import HelpText from '../../components/HelpText/HelpText'
-import Visualization from "../../constants/Visualization"
+import Visualization from '../../constants/Visualization'
 import ErrorHandler from '../ErrorHandler'
 
 const Buyers = (props) => {
@@ -23,17 +23,18 @@ const Buyers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.BuyerSummary(params).then((result) => {
-            setLoading(false)
-            if(result){
-                setOriginalData(result)
-            } else{
-                throw new Error()
-            }
-        })
-        .catch(()=>{
-            setError(true)
-        })
+        VisualizationService.BuyerSummary(params)
+            .then((result) => {
+                setLoading(false)
+                if (result) {
+                    setOriginalData(result)
+                } else {
+                    throw new Error()
+                }
+            })
+            .catch(() => {
+                setError(true)
+            })
 
         return () => {
             setOriginalData({})

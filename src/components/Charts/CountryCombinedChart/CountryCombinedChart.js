@@ -78,12 +78,7 @@ const CountryCombinedChart = ({ data, type }) => {
         }
     }, [data])
 
-    return (
-        <div
-            ref={combinedchartDiv}
-            className="h-400"
-        />
-    )
+    return <div ref={combinedchartDiv} className="h-400" />
 }
 
 export default CountryCombinedChart

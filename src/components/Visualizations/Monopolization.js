@@ -6,8 +6,8 @@ import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Loader from '../Loader/Loader'
 import HelpText from '../../components/HelpText/HelpText'
 import ErrorHandler from '../ErrorHandler'
-import { negativeValue, positiveValue } from "../../constants/Theme"
-import useDataCalculations from "../../hooks/useDataCalculations"
+import { negativeValue, positiveValue } from '../../constants/Theme'
+import useDataCalculations from '../../hooks/useDataCalculations'
 
 const Monopolization = (props) => {
     // ===========================================================================

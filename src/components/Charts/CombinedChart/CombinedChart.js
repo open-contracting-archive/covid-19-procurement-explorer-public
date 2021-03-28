@@ -65,7 +65,9 @@ const CombinedChart = (props) => {
         series3.yAxis = valueAxis2
         series3.tooltipText =
             type == 'value'
-                ? `{name}\n[bold font-size: 20]${currency == 'usd' ? '$' : ''}{valueY} [bold font-size: 20 text-transform: uppercase]${currency}[/]`
+                ? `{name}\n[bold font-size: 20]${
+                      currency == 'usd' ? '$' : ''
+                  }{valueY} [bold font-size: 20 text-transform: uppercase]${currency}[/]`
                 : '{name}\n[bold font-size: 20]{valueY}[/]'
         series3.fontSize = 12
 

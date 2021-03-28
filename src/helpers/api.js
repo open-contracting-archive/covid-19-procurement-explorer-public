@@ -20,7 +20,8 @@ const apiRoutes = {
         'api/v1/visualization/quantity-correlation/',
     'visualization.monopolization': 'api/v1/visualization/monopolization/',
     'visualization.global-suppliers': 'api/v1/visualization/global-suppliers/',
-    'visualization.country-suppliers': 'api/v1/visualization/country-suppliers/',
+    'visualization.country-suppliers':
+        'api/v1/visualization/country-suppliers/',
     'visualization.equity-indicators':
         'api/v1/visualization/equity-indicators/',
     'visualization.world-map': 'api/v1/visualization/world-map/',
@@ -31,10 +32,12 @@ const apiRoutes = {
     'visualization.supplier-summary': 'api/v1/visualization/supplier-summary/',
     'visualization.product-summary': 'api/v1/visualization/product-summary/',
     'visualization.equity-summary': 'api/v1/visualization/equity-summary/',
-    'visualization.direct-open-contract-trend': 'api/v1/visualization/direct-open-contract-trend/',
+    'visualization.direct-open-contract-trend':
+        'api/v1/visualization/direct-open-contract-trend/',
     'visualization.buyer-trend': 'api/v1/visualization/buyer-trend/',
     'visualization.supplier-trend': 'api/v1/visualization/supplier-trend/',
-    'visualization.contract-red-flags': 'api/v1/visualization/contract-red-flags/',
+    'visualization.contract-red-flags':
+        'api/v1/visualization/contract-red-flags/',
     'visualization.red-flag-summary': 'api/v1/visualization/red-flag-summary/',
 
     // Detail api
@@ -42,18 +45,18 @@ const apiRoutes = {
     'supplier-detail': 'api/v1/visualization/suppliers',
 
     // table api
-    'contracts': 'api/v1/contracts/',
-    'buyers': 'api/v1/buyers/',
-    'suppliers': 'api/v1/suppliers/',
-    'products': 'api/v1/visualization/products/',
+    contracts: 'api/v1/contracts/',
+    buyers: 'api/v1/buyers/',
+    suppliers: 'api/v1/suppliers/',
+    products: 'api/v1/visualization/products/',
     'overall-statistics': 'api/v1/overall-stat-summary/',
 
     // country api
-    'countries': 'api/v1/country/',
+    countries: 'api/v1/country/',
     'country-data-providers': 'api/v1/visualization/data-providers/',
 
     // cms api
-    'pages': 'api/v2/pages/',
+    pages: 'api/v2/pages/',
 
     // filter parameters
     'filter-parameter': 'api/v1/visualization/filter-parameters/',
@@ -64,7 +67,7 @@ const apiRoutes = {
         'api/v1/visualization/filters-parameters/buyers/',
     'filter-parameters-suppliers':
         'api/v1/visualization/filters-parameters/suppliers/',
-    'languages': 'api/v1/language/'
+    languages: 'api/v1/language/'
 }
 
 export const getURI = (routeName) => {

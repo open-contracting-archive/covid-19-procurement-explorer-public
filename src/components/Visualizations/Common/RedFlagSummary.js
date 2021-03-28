@@ -14,7 +14,7 @@ import Loader from '../../Loader/Loader'
 import ChartFooter from '../../Utilities/ChartFooter'
 import ContractViewSwitcher from '../../Utilities/ContractViewSwitcher'
 import { colors } from '../../../constants/Theme'
-import Visualization from "../../../constants/Visualization"
+import Visualization from '../../../constants/Visualization'
 
 const RedFlagSummary = (props) => {
     // ===========================================================================
@@ -88,8 +88,8 @@ const RedFlagSummary = (props) => {
                         points[toCamelCase(redFlag.name)] =
                             viewType === ContractView.VALUE
                                 ? currency === Default.CURRENCY_LOCAL
-                                ? redFlagData[Default.AMOUNT_LOCAL]
-                                : redFlagData[Default.AMOUNT_USD]
+                                    ? redFlagData[Default.AMOUNT_LOCAL]
+                                    : redFlagData[Default.AMOUNT_USD]
                                 : redFlagData[Default.TENDER_COUNT]
                         sum += points[toCamelCase(redFlag.name)]
                     } else {
@@ -148,7 +148,7 @@ const RedFlagSummary = (props) => {
                                                         className="line"
                                                         style={{
                                                             background:
-                                                            item.color
+                                                                item.color
                                                         }}
                                                     />
                                                 </div>
