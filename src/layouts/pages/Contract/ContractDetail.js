@@ -1,6 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
