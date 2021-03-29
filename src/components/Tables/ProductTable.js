@@ -43,7 +43,7 @@ const ProductTable = (props) => {
                     setLoading(false)
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 setLoading(false)
             })
 

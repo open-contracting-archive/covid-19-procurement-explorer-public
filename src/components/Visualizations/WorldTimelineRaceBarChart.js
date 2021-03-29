@@ -3,7 +3,6 @@ import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
-import useTrans from '../../hooks/useTrans'
 import BarChartRace from '../../components/Charts/BarChart/BarChartRace'
 import CountryService from '../../services/CountryService'
 import Loader from '../../components/Loader/Loader'
@@ -27,7 +26,6 @@ const WorldTimelineRaceBarChart = () => {
     const [showPerCapita, setShowPerCapita] = useState(() => false)
     const [chartData, setChartData] = useState({})
     const [selectedContinent, setSelectedContinent] = useState(null)
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const countriesPopulation = useMemo(() => {
         return countries.reduce((acc, current) => {

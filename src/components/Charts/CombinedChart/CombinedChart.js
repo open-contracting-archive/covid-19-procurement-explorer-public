@@ -1,5 +1,5 @@
 /* Imports */
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -18,7 +18,7 @@ const CombinedChart = (props) => {
         let chart = am4core.create(combinedchartDiv.current, am4charts.XYChart)
 
         // Create axes
-        let dateAxis = chart.xAxes.push(new am4charts.DateAxis())
+        chart.xAxes.push(new am4charts.DateAxis())
 
         let valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis())
         valueAxis1.title.text = 'Covid case / deaths'

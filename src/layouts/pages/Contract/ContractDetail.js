@@ -2,13 +2,11 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
 import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import CountryService from '../../../services/CountryService'
-import AwardedItems from '../Contract/tabs/AwardedItems'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
 import Loader from '../../../components/Loader/Loader'
@@ -285,25 +283,6 @@ const ContractDetail = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className="container mx-auto px-4" /> */}
-            {/* <Tabs>
-                <div className="container mx-auto px-4 ">
-                    <TabList>
-                        <Tab>{trans('Awarded items')}</Tab>
-                    </TabList>
-                </div>
-                <div
-                    style={{
-                        borderTop: '5px solid #1fbbec'
-                    }}
-                    className="pt-16 pb-24 bg-primary-gray">
-                    <div className="container mx-auto px-4 ">
-                        <TabPanel>
-                            <AwardedItems />
-                        </TabPanel>
-                    </div>
-                </div>
-            </Tabs> */}
         </section>
     )
 }

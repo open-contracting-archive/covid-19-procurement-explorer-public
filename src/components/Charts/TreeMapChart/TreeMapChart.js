@@ -49,7 +49,7 @@ const TreeMapChart = ({ data }) => {
         let hoverState = columnTemplate.states.create('hover')
 
         // darken
-        hoverState.adapter.add('fill', function (fill, target) {
+        hoverState.adapter.add('fill', function (fill) {
             if (fill instanceof am4core.Color) {
                 return am4core.color(am4core.colors.brighten(fill.rgb, -0.2))
             }

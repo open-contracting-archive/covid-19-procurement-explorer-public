@@ -20,11 +20,7 @@ const RedFlagSummary = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const {
-        label = 'Contracts with red flags',
-        params,
-        helpText = 'The methodology of red flags calculation can be found here.'
-    } = props
+    const { label = 'Contracts with red flags', params } = props
     const redFlagList = useSelector((state) =>
         state.general.redFlags.map((redFlag, index) => ({
             ...redFlag,

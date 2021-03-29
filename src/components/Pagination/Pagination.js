@@ -30,8 +30,7 @@ const Reducer = (state, action) => {
 
 function PaginationSection() {
     const [state, dispatch] = useReducer(Reducer, initialState)
-    const [offset, setOffset] = useState(0)
-    const [totalRecords, setTotalRecords] = useState(50)
+    const [totalRecords] = useState(50)
     const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
@@ -45,7 +44,7 @@ function PaginationSection() {
             .then((response) => {
                 dispatch({ type: 'OnSuccess', payload: response.data })
             })
-            .catch((error) => {
+            .catch(() => {
                 dispatch({ type: 'OnFailure' })
             })
     }, [currentPage])

@@ -9,7 +9,7 @@ import CountryService from '../../../services/CountryService'
 
 const DrillDownMap = () => {
     const drillDownMap = useRef(null)
-    const [countryData, setCountryData] = useState([])
+    const [, setCountryData] = useState([])
 
     useEffect(() => {
         CountryService.Countries().then((response) => {

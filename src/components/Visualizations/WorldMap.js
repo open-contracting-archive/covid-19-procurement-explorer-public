@@ -3,7 +3,6 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import VisualizationService from '../../services/VisualizationService'
-import useTrans from '../../hooks/useTrans'
 import GlobalMap from '../GlobalMap/GlobalMap'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
 import Loader from '../../components/Loader/Loader'
@@ -27,7 +26,6 @@ const WorldMap = (props) => {
     const [selectedContinent, setSelectedContinent] = useState(options[0])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [showPerCapita, setShowPerCapita] = useState(() => false)
     const fullScreenHandler = useFullScreenHandle()

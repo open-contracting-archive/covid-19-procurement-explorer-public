@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Loader from '../Loader/Loader'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
 import BarListChart from '../BarListSection/BarListChart'

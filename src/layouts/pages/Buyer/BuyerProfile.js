@@ -6,6 +6,7 @@ import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import {
     AverageBidsPerContract,
+    // BuyerProductTimeline,
     ContractRedFlags,
     ContractStatus,
     DirectOpen,
@@ -15,8 +16,7 @@ import {
     ProductsTimeline,
     TopSuppliers,
     TotalContracts,
-    TotalSpending,
-    BuyerProductTimeline
+    TotalSpending
 } from '../../../components/Visualizations'
 import VisualizationService from '../../../services/VisualizationService'
 import { ContractTable } from '../../../components/Tables'

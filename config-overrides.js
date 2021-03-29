@@ -2,7 +2,7 @@ const tailwindCss = require('tailwindcss')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const { join } = require('path')
 
-module.exports = function override(config, env) {
+module.exports = function override(config) {
     const overridePlugins = [
         ...config.plugins,
         new WebpackNotifierPlugin({

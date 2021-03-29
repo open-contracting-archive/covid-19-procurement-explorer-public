@@ -3,7 +3,6 @@ import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
-import useTrans from '../../hooks/useTrans'
 import CountryService from '../../services/CountryService'
 import RaceMap from '../../components/Charts/RaceMap/RaceMap'
 import Loader from '../../components/Loader/Loader'
@@ -22,7 +21,7 @@ const WorldTimelineMap = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const [loading, setLoading] = useState(true)
+    const [, setLoading] = useState(true)
     const countries = useSelector((state) => state.general.countries)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [showPerCapita, setShowPerCapita] = useState(() => false)
@@ -31,7 +30,6 @@ const WorldTimelineMap = () => {
     const [sliderData, setSliderData] = useState([])
     const [yearMonth, setYearMonth] = useState('2020-01')
     const [selectedContinent, setSelectedContinent] = useState(options[0])
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const countriesPopulation = useMemo(() => {
         return countries.reduce((acc, current) => {

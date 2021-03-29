@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { ReactComponent as SortIcon } from '../../../../assets/img/icons/ic_sort.svg'
 import useTrans from '../../../../hooks/useTrans'
 

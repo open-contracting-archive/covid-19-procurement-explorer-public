@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { identity, pickBy, get, has } from 'lodash'
+import { identity, pickBy, get } from 'lodash'
 import Select from 'react-select'
 import CmsPageService from '../../services/CmsPageService'
 import Loader from '../Loader/Loader'
