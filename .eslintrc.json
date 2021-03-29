@@ -6,8 +6,15 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "plugin:jest/recommended",
-    "plugin:react/recommended"
+    "plugin:jest/style",
+    // "plugin:jsx-a11y/recommended",
+    // "plugin:node/recommended",
+    "plugin:react/recommended",
+    // "plugin:react-hooks/recommended",
+    "plugin:testing-library/react"
   ],
   "globals": {
     "Atomics": "readonly",
