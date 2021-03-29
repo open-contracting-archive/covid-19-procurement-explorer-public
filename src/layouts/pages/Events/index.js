@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, Link, useParams } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import Loader from '../../../components/Loader/Loader'
 import { formatDate, formatTime } from '../../../helpers/date'

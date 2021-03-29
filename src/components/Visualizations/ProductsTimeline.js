@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
 import StackedChart from '../Charts/StackedChart/StackedChart'
-import useTrans from '../../hooks/useTrans'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
 import { groupBy } from 'lodash'
@@ -25,7 +24,6 @@ const ProductsTimeline = (props) => {
     const [chartData, setChartData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector(

@@ -68,7 +68,7 @@ const ContractTable = (props) => {
                 setLoading(false)
                 setTableLoading(false)
             })
-            .catch((error) => {
+            .catch(() => {
                 setLoading(false)
                 setTableLoading(false)
             })

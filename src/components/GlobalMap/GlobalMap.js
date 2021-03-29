@@ -79,7 +79,7 @@ const GlobalMap = ({ data, innerMap, coordinates, viewType }) => {
         }
 
         polygonSeries.mapPolygons.template.strokeOpacity = 0.4
-        polygonSeries.mapPolygons.template.events.on('out', (event) => {
+        polygonSeries.mapPolygons.template.events.on('out', () => {
             heatLegend.valueAxis.hideTooltip()
         })
 

@@ -45,7 +45,7 @@ function PaginationSection() {
             .then((response) => {
                 dispatch({ type: 'OnSuccess', payload: response.data })
             })
-            .catch((error) => {
+            .catch(() => {
                 dispatch({ type: 'OnFailure' })
             })
     }, [currentPage])

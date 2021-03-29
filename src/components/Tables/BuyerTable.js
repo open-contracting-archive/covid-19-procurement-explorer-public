@@ -83,7 +83,7 @@ const BuyerTable = (props) => {
                 }
                 setLoading(false)
             })
-            .catch((error) => {
+            .catch(() => {
                 setLoading(false)
                 setTableLoading(false)
             })

@@ -3,7 +3,6 @@ import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
-import useTrans from '../../hooks/useTrans'
 import CountryService from '../../services/CountryService'
 import RaceMap from '../../components/Charts/RaceMap/RaceMap'
 import Loader from '../../components/Loader/Loader'
@@ -31,7 +30,6 @@ const WorldTimelineMap = () => {
     const [sliderData, setSliderData] = useState([])
     const [yearMonth, setYearMonth] = useState('2020-01')
     const [selectedContinent, setSelectedContinent] = useState(options[0])
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const countriesPopulation = useMemo(() => {
         return countries.reduce((acc, current) => {

@@ -94,7 +94,7 @@ const RaceMap = ({
         }
 
         polygonSeries.mapPolygons.template.strokeOpacity = 0.4
-        polygonSeries.mapPolygons.template.events.on('out', (event) => {
+        polygonSeries.mapPolygons.template.events.on('out', () => {
             heatLegend.valueAxis.hideTooltip()
         })
 
@@ -173,7 +173,7 @@ const RaceMap = ({
             slider.height = 15
 
             // what to do when slider is dragged
-            slider.events.on('rangechanged', function (event) {
+            slider.events.on('rangechanged', function () {
                 let index = Math.round((sliderData.length - 1) * slider.start)
                 const updatedData = extractData(sliderData[index])
 
