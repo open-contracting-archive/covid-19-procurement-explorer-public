@@ -95,7 +95,7 @@ class CountryService {
             const res = await Api.get(getURI('country-data-providers'), params)
 
             if (res.body.error) {
-                throw new Exception()
+                throw new Error()
             }
 
             return res.body
