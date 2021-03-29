@@ -2,6 +2,7 @@
   "name": "covid19-contract-explorer",
   "version": "0.1.0",
   "private": true,
+  "files": [],
   "engines": {
     "node": ">=14.0.0"
   },
