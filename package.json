@@ -2,6 +2,11 @@
   "name": "covid19-contract-explorer",
   "version": "0.1.0",
   "private": true,
+  "files": [],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "type": "module",
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.13",
     "@amcharts/amcharts4-geodata": "^4.1.19",
@@ -85,5 +90,6 @@
     "react-app-rewired": "^2.1.8",
     "redux-devtools-extension": "^2.13.8",
     "tailwindcss": "^1.9.6"
-  }
+  },
+  "config-overrides-path": "config-overrides.cjs"
 }
