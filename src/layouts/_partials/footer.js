@@ -7,7 +7,6 @@ import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-viru
 import OpenContractingPartner from '../../assets/img/open-contracting-partnership.png'
 import TransparencyInternational from '../../assets/img/transparency-international.png'
 import CmsPageService from '../../services/CmsPageService'
-import { LinkedinShareButton } from 'react-share'
 
 const Footer = () => {
     const { trans } = useTrans()

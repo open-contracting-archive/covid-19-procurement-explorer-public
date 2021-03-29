@@ -13,7 +13,7 @@ const getImageUrl = (data) => {
     return null
 }
 
-const getThumbnailUrl = (data) => {
+const getThumbnailUrl = () => {
     return ''
 }
 

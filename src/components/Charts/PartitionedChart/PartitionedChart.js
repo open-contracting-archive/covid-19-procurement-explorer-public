@@ -24,7 +24,7 @@ const PartitionedChart = ({ data }) => {
         yAxis.renderer.labels.template.fontSize = 10
         yAxis.renderer.minGridDistance = 10
 
-        let xAxis = chart.xAxes.push(new am4charts.ValueAxis())
+        chart.xAxes.push(new am4charts.ValueAxis())
 
         // Create series
         let series = chart.series.push(new am4charts.ColumnSeries())

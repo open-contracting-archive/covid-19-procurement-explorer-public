@@ -25,7 +25,7 @@ const SupplierProfile = () => {
     // ===========================================================================
     const countries = useSelector((state) => state.general.countries)
     const [originalData, setOriginalData] = useState({})
-    const [country, setCountry] = useState({})
+    const [, setCountry] = useState({})
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     let history = useHistory()

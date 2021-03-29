@@ -21,7 +21,7 @@ const WorldTimelineMap = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const [loading, setLoading] = useState(true)
+    const [, setLoading] = useState(true)
     const countries = useSelector((state) => state.general.countries)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [showPerCapita, setShowPerCapita] = useState(() => false)

@@ -62,10 +62,6 @@ const ProductCategoryMap = (props) => {
         }
     }, [originalData, viewType])
 
-    const isActiveTab = (type) => {
-        return viewType === type ? 'active' : ''
-    }
-
     return (
         <div>
             <FullScreen handle={fullScreenHandler}>

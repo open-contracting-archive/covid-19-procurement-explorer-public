@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Loader from '../Loader/Loader'
 import StackedChart from '../Charts/StackedChart/StackedChart'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
@@ -12,7 +11,6 @@ import ErrorHandler from '../ErrorHandler'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import Visualization from '../../constants/Visualization'
-import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import CardContainer from '../Utilities/CardContainer'
 
 const ProductsTimeline = (props) => {

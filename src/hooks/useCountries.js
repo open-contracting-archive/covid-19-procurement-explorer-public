@@ -1,4 +1,3 @@
-import { get, isEmpty } from 'lodash'
 import { useSelector } from 'react-redux'
 
 const useCountries = () => {

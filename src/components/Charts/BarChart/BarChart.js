@@ -25,7 +25,7 @@ const BarChart = ({ data, barColorValue, axisRotation }) => {
         categoryAxis.renderer.minGridDistance = 30
         categoryAxis.renderer.labels.template.verticalCenter = 'middle'
         categoryAxis.renderer.labels.template.rotation = axisRotation
-        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
+        chart.yAxes.push(new am4charts.ValueAxis())
 
         // Create series
         let series = chart.series.push(new am4charts.ColumnSeries())

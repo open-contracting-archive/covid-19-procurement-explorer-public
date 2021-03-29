@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../../../services/VisualizationService'
 import CountryDetailMap from '../../../../components/Charts/CountryDetailMap/CountryDetailMap'
-import useTrans from '../../../../hooks/useTrans'
 import Loader from '../../../../components/Loader/Loader'
 import ContractView from '../../../../constants/ContractView'
 import ChartFooter from '../../../../components/Utilities/ChartFooter'
@@ -11,12 +10,11 @@ import Default from '../../../../constants/Default'
 
 const CountryMapElement = (props) => {
     const [loading, setLoading] = useState(true)
-    const [viewType, setViewType] = useState(ContractView.VALUE)
+    const [viewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
     const [mapData, setMapData] = useState([])
     const [error, setError] = useState(false)
     const fullScreenHandler = useFullScreenHandle()
-    const { trans } = useTrans()
 
     useEffect(() => {
         VisualizationService.CountryMap({ country: props.countryCode })
@@ -52,29 +50,10 @@ const CountryMapElement = (props) => {
         }
     }, [originalData, viewType])
 
-    const isActiveTab = (type) => {
-        return viewType === type ? 'active' : ''
-    }
-
     return (
         <div className="mt-10 md:mt-0 w-full md:w-1/2 lg:w-62 px-2">
             <FullScreen handle={fullScreenHandler}>
                 <div className="p-4 bg-white rounded rounded-b-none h-full relative">
-                    {/* <div className="flex justify-end">
-                        <ul className="contract-switch flex">
-                            <li
-                                className={`mr-4 cursor-pointer ${isActiveTab(ContractView.VALUE)}`}
-                                onClick={() => setViewType(ContractView.VALUE)}>
-                                {trans('By contract value')}
-                            </li>
-                            <li
-                                className={`mr-4 cursor-pointer ${isActiveTab(ContractView.NUMBER)}`}
-                                onClick={() => setViewType(ContractView.NUMBER)}>
-                                {trans('By number of contracts')}
-                            </li>
-                        </ul>
-                    </div> */}
-
                     <div className="h-full">
                         {loading ? (
                             <Loader />

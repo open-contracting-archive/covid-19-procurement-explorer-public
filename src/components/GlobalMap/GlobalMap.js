@@ -5,7 +5,7 @@ import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const GlobalMap = ({ data, innerMap, coordinates, viewType }) => {
+const GlobalMap = ({ data, coordinates, viewType }) => {
     const globalMapchartDiv = useRef(null)
 
     useLayoutEffect(() => {
@@ -113,7 +113,7 @@ const GlobalMap = ({ data, innerMap, coordinates, viewType }) => {
         }
 
         // Create hover state and set alternative fill color
-        let hs = polygonTemplate.states.create('hover')
+        polygonTemplate.states.create('hover')
 
         chart.data = data
         chart.logo.disabled = true

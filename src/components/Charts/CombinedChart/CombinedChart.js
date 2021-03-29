@@ -18,7 +18,7 @@ const CombinedChart = (props) => {
         let chart = am4core.create(combinedchartDiv.current, am4charts.XYChart)
 
         // Create axes
-        let dateAxis = chart.xAxes.push(new am4charts.DateAxis())
+        chart.xAxes.push(new am4charts.DateAxis())
 
         let valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis())
         valueAxis1.title.text = 'Covid case / deaths'

@@ -6,7 +6,6 @@ import ReactPaginate from 'react-paginate'
 import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
 import Loader from '../Loader/Loader'
-import { ReactComponent as SortIcon } from '../../assets/img/icons/ic_sort.svg'
 import TableLoader from '../Loader/TableLoader'
 import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
@@ -14,7 +13,7 @@ import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.s
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 import Default from '../../constants/Default'
 import { formatDecimal } from '../../helpers/number'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
+// import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 
 const SupplierTable = (props) => {
     // ===========================================================================
@@ -31,7 +30,7 @@ const SupplierTable = (props) => {
 
     const [suppliersNameParameter, setSuppliersNameParameter] = useState('')
     const [loading, setLoading] = useState(true)
-    const [limit, setLimit] = useState(20)
+    const [limit] = useState(20)
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)

@@ -8,7 +8,7 @@ const CountryProductChart = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { productName, country } = props
+    const { productName } = props
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
