@@ -21,7 +21,7 @@ module.exports = function override(config) {
                     loader: 'postcss-loader',
                     options: {
                         postcssOptions: {
-                            plugins: [tailwindCss('./tailwind.config.js')]
+                            plugins: [tailwindCss('./tailwind.config.cjs')]
                         }
                     }
                 },

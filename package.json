@@ -90,5 +90,6 @@
     "react-app-rewired": "^2.1.8",
     "redux-devtools-extension": "^2.13.8",
     "tailwindcss": "^1.9.6"
-  }
+  },
+  "config-overrides-path": "config-overrides.cjs"
 }
