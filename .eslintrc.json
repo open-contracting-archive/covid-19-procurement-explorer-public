@@ -12,6 +12,7 @@
     "plugin:jest/style",
     // "plugin:jsx-a11y/recommended",
     "plugin:node/recommended",
+    "plugin:promise/recommended",
     "plugin:react/recommended",
     // "plugin:react-hooks/recommended",
     "plugin:testing-library/react"
