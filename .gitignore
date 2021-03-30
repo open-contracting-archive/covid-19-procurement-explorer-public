@@ -307,3 +307,7 @@ $RECYCLE.BIN/
 config/deploy/parameters/*
 
 build/
+
+# Deployment scripts used by Young Innovations
+/script.sh
+/deploy.sh

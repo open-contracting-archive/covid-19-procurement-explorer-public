@@ -64,17 +64,3 @@ curl https://open-contracting.health/ver.txt
 ```
 
 or, open <https://open-contracting.health/ver.txt> in a browser.
-
-Deploy to staging (replace `BRANCH_NAME`):
-
-```bash
-./deploy.sh BRANCH_NAME covid19-dev
-```
-
-Deploy to production (replace `BRANCH_NAME`):
-
-```bash
-./deploy.sh BRANCH_NAME covid19
-```
-
-If no arguments are provided, by default, the `master` branch will be deployed to the staging server.
