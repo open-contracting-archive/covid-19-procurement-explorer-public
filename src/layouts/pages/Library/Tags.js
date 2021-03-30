@@ -27,7 +27,7 @@ const Tags = () => {
         return () => {
             setInsightList([])
         }
-    }, [tag])
+    }, [tag, type])
 
     return (
         <div className="">

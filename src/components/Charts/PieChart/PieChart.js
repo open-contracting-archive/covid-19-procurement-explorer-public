@@ -82,7 +82,7 @@ const PieChart = ({ data, colors }) => {
 
             chart = null
         }
-    }, [data])
+    }, [data, colors])
 
     return <div ref={piechartDiv} className="w-full h-32" />
 }

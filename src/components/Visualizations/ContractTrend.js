@@ -79,7 +79,13 @@ const ContractTrend = (props) => {
         return () => {
             chartData = null
         }
-    }, [originalData, selectedContinent, showPerCapita])
+    }, [
+        originalData,
+        selectedContinent,
+        showPerCapita,
+        countriesPopulation,
+        dataColumn
+    ])
 
     return (
         <div>

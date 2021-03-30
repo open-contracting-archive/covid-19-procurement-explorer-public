@@ -98,7 +98,7 @@ const WorldTimelineMap = () => {
             setMapData({})
             setSliderData([])
         }
-    }, [originalData, showPerCapita])
+    }, [originalData, showPerCapita, countriesPopulation])
 
     // ===========================================================================
     // Handlers and functions

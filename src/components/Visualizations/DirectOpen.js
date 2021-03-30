@@ -79,7 +79,7 @@ const DirectOpen = (props) => {
             setChartData([])
             setOpenValue(0)
         }
-    }, [originalData, viewType, currency])
+    }, [originalData, viewType, currency, valueField])
 
     return (
         <CardContainer

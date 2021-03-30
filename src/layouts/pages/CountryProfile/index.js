@@ -53,7 +53,7 @@ const CountryProfile = () => {
         return () => {
             dispatch(setCurrency(Default.CURRENCY_USD))
         }
-    }, [countries, countrySlug])
+    }, [countries, countrySlug, dispatch])
     const disclaimerInfo = (
         <DataDisclaimerInfo
             forwardUrl={`/country/${countrySlug}/methodology`}

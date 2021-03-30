@@ -67,7 +67,7 @@ const TotalContracts = (props) => {
                 barChart: get(originalData, 'bar_chart')
             })
         }
-    }, [originalData])
+    }, [originalData, areaChartData, changePercentage])
 
     return (
         <CardContainer label={label} loading={loading} helpText={helpText}>

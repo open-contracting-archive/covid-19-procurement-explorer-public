@@ -58,7 +58,7 @@ const AverageBidsPerContract = (props) => {
                 areaChart: areaChartData(lineChartData)
             })
         }
-    }, [originalData])
+    }, [originalData, areaChartData, changePercentage])
 
     return (
         <div className="bg-white rounded p-4 h-full">

@@ -95,7 +95,7 @@ const CombinedChart = (props) => {
             chart.dispose()
             chart = null
         }
-    }, [data])
+    }, [data, currency, type])
 
     return <div ref={combinedchartDiv} className="h-400" />
 }
