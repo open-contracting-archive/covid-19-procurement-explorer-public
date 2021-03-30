@@ -1,66 +1,80 @@
-# Covid-19 Contract Explorer
+# COVID-19 Contract Explorer: Public frontend
 
-Public website for Covid-19 Contract Explorer
+## Prerequisites
 
-## Installation
-
-### clone branch
+Install Node.js on Ubuntu:
 
 ```bash
-git clone https://github.com/open-contracting/covid-19-procurement-explorer-public.git
-cd covid-19-procurement-explorer-public
-```
-
-### install node
-
-```bash
-# Using Ubuntu
 curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
+```
 
-# Using Debian, as root
+Or on Debian (as root):
+
+```bash
 curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 apt-get install -y nodejs
 ```
 
-### install yarn
+Install Yarn on Linux:
 
 ```bash
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 ```
 
-## Usage
+## Getting started
+
+Install the pre-commit Python package:
 
 ```bash
-#install node modules
+pip install pre-commit
+```
+
+Set up the git pre-commit hook:
+
+```shell
+pre-commit install
+```
+
+Install dependencies:
+
+```bash
 yarn
+```
 
-#start dev server
+Start a development server:
+
+```bash
 yarn start
+```
 
-#prepare for a production build
+Prepare a production build:
+
+```bash
 yarn build
 ```
 
-## deploy
+## Deployment
 
-```bash
-# deploy to staging
-./deploy.sh branch_name covid19-dev
-
-# deploy to production
-./deploy.sh branch_name covid19
-```
-
-- note: By default master branch will be deployed to a staging server
-
-## current deploy status
+Get the deployed branch and commit:
 
 ```bash
 curl https://open-contracting.health/ver.txt
 ```
 
-or simply view in browser
+or, open <https://open-contracting.health/ver.txt> in a browser.
 
-https://open-contracting.health/ver.txt
+Deploy to staging (replace `BRANCH_NAME`):
+
+```bash
+./deploy.sh BRANCH_NAME covid19-dev
+```
+
+Deploy to production (replace `BRANCH_NAME`):
+
+```bash
+./deploy.sh BRANCH_NAME covid19
+```
+
+If no arguments are provided, by default, the `master` branch will be deployed to the staging server.
