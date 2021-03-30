@@ -84,7 +84,7 @@ const StackedChart = ({ data, currency }) => {
         createSeries('vaccine', 'Vaccine')
         createSeries('ventilator', 'Ventilator')
         createSeries('other', 'Other')
-        createSeries('not-identified', 'Not Classified')
+        createSeries('not-identified', 'Not Identified')
 
         // Legend
         chart.legend = new am4charts.Legend()

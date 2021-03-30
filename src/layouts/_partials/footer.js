@@ -27,10 +27,10 @@ const Footer = () => {
     )
 
     return (
-        <footer className="relative py-10 md:pt-16 md:pb-20 px-4 text-white text-sm bg-yellow-50 overflow-hidden">
-            <div className="container mx-auto relative z-10">
-                <div className="grid-cols-12 grid">
-                    <div className="col-span-12 md:col-span-4 mb-8">
+        <footer className="relative px-4 py-10 overflow-hidden text-sm text-white md:pt-16 md:pb-20 bg-yellow-50">
+            <div className="container relative z-10 mx-auto">
+                <div className="grid grid-cols-12">
+                    <div className="col-span-12 mb-8 md:col-span-4">
                         <div className="flex justify-between md:block">
                             <p className="font-bold leading-tight">
                                 Covid-19 <br /> Contract <br /> Explorer
@@ -45,35 +45,35 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-4 md:col-span-2 mb-8">
+                    <div className="col-span-4 mb-8 md:col-span-2">
                         <h4 className="mb-2">{trans('Explore')}</h4>
                         <ul>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                            <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/data">
                                     {trans('Data')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                            <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/contracts">
                                     {trans('Contracts')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                            <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/suppliers">
                                     {trans('List of Suppliers')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                            <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/buyers">
                                     {trans('List of Buyers')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
+                            <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/products">
                                     {trans('Products')}
                                 </Link>
                             </li>
-                            <li className="opacity-50 hover:opacity-75 transition">
+                            <li className="transition opacity-50 hover:opacity-75">
                                 <Link to="/resources">
                                     {trans('Resources')}
                                 </Link>
@@ -81,11 +81,11 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-span-4 md:col-span-2">
-                        <ul className="mt-6 pt-1">
+                        <ul className="pt-1 mt-6">
                             {showFooterMenu.map((menu, index) => (
                                 <li
                                     key={index}
-                                    className="opacity-50 mb-1 hover:opacity-75 transition">
+                                    className="mb-1 transition opacity-50 hover:opacity-75">
                                     <Link
                                         to={`/pages/${menu.meta.slug}`}
                                         className="capitalize">
@@ -93,20 +93,6 @@ const Footer = () => {
                                     </Link>
                                 </li>
                             ))}
-
-                            {/* <li className="opacity-50 mb-1 hover:opacity-75 transition">
-                                <Link to="/pages/about">{trans('About')}</Link>
-                            </li>
-                            <li className="opacity-50 mb-1 hover:opacity-75 transition">
-                                <Link to="/pages/terms-of-use">
-                                    {trans('Terms of use')}
-                                </Link>
-                            </li>
-                            <li className="opacity-50 hover:opacity-75 transition">
-                                <Link to="/pages/privacy-policy">
-                                    {trans('Privacy policy')}
-                                </Link>
-                            </li> */}
                         </ul>
                     </div>
                     <div className="col-span-12 md:col-span-4">
@@ -115,31 +101,57 @@ const Footer = () => {
                         </p>
                         <form>
                             <div className="relative flex items-center">
-                                <input
+                                {/* <input
                                     type="text"
                                     placeholder="Type your email address"
-                                    className="px-3 py-4 w-full rounded-sm  text-primary-dark"
+                                    className="w-full px-3 py-4 rounded-sm text-primary-dark"
                                 />
-                                <button className=" subscribe absolute right-0 bg-blue-20 h-full p-4 rounded-sm rounded-l-none">
+                                <button className="absolute right-0 h-full p-4 rounded-sm rounded-l-none subscribe bg-blue-20">
                                     {trans('Subscribe')}
-                                </button>
+                                </button> */}
+
+                                <iframe
+                                    src="https://opencontracting.substack.com/embed"
+                                    width="480"
+                                    height="320"
+                                    style={{
+                                        border: '1px solid #EEE',
+                                        background: 'white'
+                                    }}
+                                    frameBorder="0"
+                                    scrolling="no"></iframe>
                             </div>
                         </form>
                         <div className="mt-8">
                             <p className="mb-3">
                                 {trans('Portal developed by')}
                             </p>
-                            <div className="flex items-center flex-wrap">
-                                <img
-                                    src={OpenContractingPartner}
-                                    alt="Open contracting partner logo"
-                                    className="mr-6 mb-4 inline-block"
-                                />
-                                <img
-                                    src={TransparencyInternational}
-                                    alt="Transparency international logo"
-                                    className="mb-4 inline-block"
-                                />
+                            <div className="flex flex-wrap items-center">
+                                <Link
+                                    to={{
+                                        pathname:
+                                            'https://www.open-contracting.org/'
+                                    }}
+                                    target="_blank">
+                                    <img
+                                        src={OpenContractingPartner}
+                                        alt="Open contracting partner logo"
+                                        className="inline-block mb-4 mr-6"
+                                    />
+                                </Link>
+
+                                <Link
+                                    to={{
+                                        pathname:
+                                            'https://www.transparency.org/en/'
+                                    }}
+                                    target="_blank">
+                                    <img
+                                        src={TransparencyInternational}
+                                        alt="Transparency international logo"
+                                        className="inline-block mb-4"
+                                    />
+                                </Link>
                             </div>
                         </div>
                     </div>

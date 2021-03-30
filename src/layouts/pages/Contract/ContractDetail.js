@@ -67,6 +67,9 @@ const ContractDetail = () => {
                 </h2>
                 <div className="flex flex-wrap mb-5 text-primary-dark">
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
+                        #{contractDetail && contractDetail.contract_id}
+                    </div>
+                    <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <RedIcon />
                         <div className="mx-2 text-sm">
                             {trans(

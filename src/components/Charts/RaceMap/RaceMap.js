@@ -148,10 +148,10 @@ const RaceMap = ({
 
         let sliderAnimation
 
-        const years = Object.keys(data)
-        let currentYearIndex = 0
-        let currentYear = years[currentYearIndex] || ''
-        label.text = formatYearText(currentYear)
+        // const years = Object.keys(data)
+        // let currentYearIndex = 0
+        // let currentYear = years[currentYearIndex] || ''
+        label.text = formatYearText(yearMonthMapData)
 
         function createSlider() {
             let sliderContainer = chart.createChild(am4core.Container)
@@ -172,9 +172,13 @@ const RaceMap = ({
             slider.marginRight = 10
             slider.height = 15
 
+            slider.start = null
+
             // what to do when slider is dragged
             slider.events.on('rangechanged', function () {
-                let index = Math.round((sliderData.length - 1) * slider.start)
+                let index = Math.round(
+                    (sliderData.length - 1) * (slider.start || 1)
+                )
                 const updatedData = extractData(sliderData[index])
 
                 label.text = formatYearText(sliderData[index])

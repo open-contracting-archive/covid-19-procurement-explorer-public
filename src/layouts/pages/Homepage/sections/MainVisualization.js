@@ -33,33 +33,33 @@ const MainVisualization = () => {
     }
 
     return (
-        <section className="px-4 md:px-0 pt-16 bg-primary-gray pb-8 md:pb-24">
-            <div className="text-center mb-6 md:mb-10">
-                <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
+        <section className="px-4 pt-16 pb-8 md:px-0 bg-primary-gray md:pb-24">
+            <div className="mb-6 text-center md:mb-10">
+                <h3 className="text-2xl font-bold leading-none uppercase md:text-3xl">
                     <span className="block text-base font-bold">
                         {trans('Explore')}
                     </span>
                     {trans('Countries')}
                 </h3>
-                <p className="text-xs md:text-base text-opacity-50 text-primary-dark">
+                <p className="text-xs text-opacity-50 md:text-base text-primary-dark">
                     {trans('Government spending to fight COVID-19')}
                 </p>
             </div>
             <div className="container mx-auto">
                 <div className="simple-tab md:flex md:flex-col md:justify-between world-map-section">
                     <div className="flex">
-                        <div className="flex flex-wrap md:flex-no-wrap w-full relative">
-                            <div className="relative md:absolute left-0 top-0 z-20 worldmap-tab w-full md:w-auto md:m-5 md:ml-4">
+                        <div className="relative flex flex-wrap w-full md:flex-no-wrap">
+                            <div className="relative top-0 left-0 z-20 w-full md:absolute worldmap-tab md:w-auto md:m-5 md:ml-4">
                                 <div>
-                                    <div className="product-worldmap-tab justify-between md:justify-start">
+                                    <div className="justify-between product-worldmap-tab md:justify-start">
                                         <div
                                             className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
                                                 tabView === 'map' && 'active'
                                             }`}
                                             onClick={() => setTabView('map')}>
                                             <div>
-                                                <MapIcon className="w-4 h-4 inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block">
+                                                <MapIcon className="inline-block w-4 h-4" />
+                                                <span className="block mt-1 text-xs md:text-sm">
                                                     {trans('Map')}
                                                 </span>
                                             </div>
@@ -71,7 +71,7 @@ const MainVisualization = () => {
                                             onClick={() => setTabView('chart')}>
                                             <div>
                                                 <ChartsIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block">
+                                                <span className="block mt-1 text-xs md:text-sm">
                                                     {trans('Chart')}
                                                 </span>
                                             </div>
@@ -83,7 +83,7 @@ const MainVisualization = () => {
                                             onClick={() => setTabView('table')}>
                                             <div>
                                                 <TableIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block">
+                                                <span className="block mt-1 text-xs md:text-sm">
                                                     {trans('Statistics')}
                                                 </span>
                                             </div>
@@ -98,7 +98,7 @@ const MainVisualization = () => {
                                             }>
                                             <div>
                                                 <SourcesIcon className="inline-block" />
-                                                <span className="text-xs md:text-sm mt-1 block">
+                                                <span className="block mt-1 text-xs md:text-sm">
                                                     {trans('Sources')}
                                                 </span>
                                             </div>
@@ -106,14 +106,14 @@ const MainVisualization = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full md:w-auto world-map-chart-section flex-1 relative">
+                            <div className="relative flex-1 w-full world-map-chart-section">
                                 {renderTabComponent()}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <p className="mt-6 text-center text-sm">
+            <p className="mt-6 text-sm text-center">
                 {trans('Don’t see your country data?')}
                 <Link
                     to="/pages/add-my-country-data"

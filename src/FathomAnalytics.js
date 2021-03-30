@@ -5,7 +5,6 @@ const FathomAnalytics = () => {
     const siteKey = process.env.REACT_APP_FATHOM_SITE_KEY
     const excludedDomains = 'localhost,127.0.0.1,0.0.0.0'
 
-    console.log('ere')
     return (
         <script
             src={src}
