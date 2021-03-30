@@ -8,8 +8,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: sudo apt-get install shellcheck
-      - run: shellcheck --exclude=SC2029 *.sh
       - run: npm install yarn
       - run: yarn
       - run: npx eslint .
