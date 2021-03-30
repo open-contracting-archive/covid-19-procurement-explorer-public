@@ -75,7 +75,7 @@ const BuyerTrend = (props) => {
         return () => {
             chartData = null
         }
-    }, [originalData, selectedContinent, showPerCapita])
+    }, [originalData, selectedContinent, showPerCapita, countriesPopulation])
 
     return (
         <div>

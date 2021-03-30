@@ -60,7 +60,7 @@ const Monopolization = (props) => {
                 areaChart: areaChartData(lineChartData)
             })
         }
-    }, [originalData])
+    }, [originalData, areaChartData, changePercentage])
 
     const colorValue = (value) => {
         return value < 0 ? positiveValue : negativeValue

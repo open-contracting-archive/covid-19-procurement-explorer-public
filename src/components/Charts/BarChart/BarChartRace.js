@@ -195,7 +195,7 @@ const BarChartRace = ({ data, viewType }) => {
             chart.dispose()
             chart = null
         }
-    }, [data])
+    }, [data, viewType])
 
     return <div ref={raceBarChartDiv} className="race-bar-section" />
 }

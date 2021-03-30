@@ -68,7 +68,7 @@ const LibrarySection = () => {
         return () => {
             setInsightList([])
         }
-    }, [itemsLoading])
+    }, [itemsLoading, itemList])
 
     return (
         <section className="py-8 md:py-24 px-4">

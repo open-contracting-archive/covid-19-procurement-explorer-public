@@ -129,7 +129,7 @@ const GlobalMap = ({ data, coordinates, viewType }) => {
 
             chart = null
         }
-    }, [data, coordinates])
+    }, [data, coordinates, viewType])
 
     return (
         <div className="map-wrapper bg-white rounded-md h-full mt-5">

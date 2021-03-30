@@ -58,7 +58,7 @@ const ContractFilter = (props) => {
                 date_to: formatDate(endDate, 'YYYY-MM-DD')
             })
         }
-    }, [startDate, endDate])
+    }, [startDate, endDate, appendFilter])
 
     const handleCountrySelection = (country) => {
         getBuyersFilterParameter({ country })

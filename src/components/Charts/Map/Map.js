@@ -241,7 +241,7 @@ const Map = ({
 
             chart = null
         }
-    }, [data, coordinates])
+    }, [data, sliderData, coordinates])
 
     return (
         <div className="map-wrapper pb-6">

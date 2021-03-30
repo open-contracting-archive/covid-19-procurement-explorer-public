@@ -65,7 +65,7 @@ const CountryInfo = (props) => {
                     ? Math.round(spending / country.covid_cases_total)
                     : 0
         })
-    }, [originalData, currency])
+    }, [originalData, currency, country.covid_cases_total])
 
     return (
         <div className="w-full md:w-1/2 lg:w-38 px-2 my-4 mb-8 md:my-0 md:mb-0">

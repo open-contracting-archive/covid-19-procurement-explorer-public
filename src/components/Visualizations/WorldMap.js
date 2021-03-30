@@ -83,7 +83,7 @@ const WorldMap = (props) => {
                 })
             })
         setMapData(parsedMapData)
-    }, [originalData, viewType, showPerCapita])
+    }, [originalData, viewType, showPerCapita, countriesPopulation])
 
     // ===========================================================================
     // Handler and functions
