@@ -49,7 +49,7 @@ const BarChart = ({ data, barColorValue, axisRotation }) => {
 
             chart = null
         }
-    }, [data, axisRotation, barColorValue])
+    }, [data])
 
     return <div ref={barchartDiv} style={{ width: '100%', height: '250px' }} />
 }

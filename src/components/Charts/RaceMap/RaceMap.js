@@ -252,7 +252,7 @@ const RaceMap = ({
 
             chart = null
         }
-    }, [data, sliderData, contractType, coordinates])
+    }, [data, coordinates, formatYearText])
 
     return <div ref={mapchartDiv} className="race-map-section" />
 }

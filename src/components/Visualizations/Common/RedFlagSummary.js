@@ -106,7 +106,7 @@ const RedFlagSummary = (props) => {
 
         setChartData(chartData)
         setLoading(false)
-    }, [originalData, viewType, selectedRedFlags, currency, redFlagList])
+    }, [originalData, viewType, selectedRedFlags, currency])
 
     function handleIndicatorSelection(redFlagId) {
         setSelectedRedFlags((previous) => {
