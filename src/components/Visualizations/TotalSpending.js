@@ -73,7 +73,7 @@ const TotalSpending = (props) => {
                 barChart: get(originalData, `${currency}.bar_chart`)
             })
         }
-    }, [originalData, currency, areaChartData, changePercentage])
+    }, [originalData, currency])
 
     return (
         <CardContainer label={label} loading={loading} helpText={helpText}>

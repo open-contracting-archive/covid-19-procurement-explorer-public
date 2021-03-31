@@ -59,7 +59,7 @@ const SankeyChart = ({ data, currency }) => {
             chart.dispose()
             chart = null
         }
-    }, [data, currency])
+    }, [data])
 
     return <div ref={sankeyChart} className="h-400" />
 }

@@ -109,7 +109,7 @@ const StackedChart = ({ data, currency }) => {
             chart.dispose()
             chart = null
         }
-    }, [data, currency])
+    }, [data])
 
     return <div ref={stackedChart} className="h-500" />
 }

@@ -76,13 +76,7 @@ const DirectOpenContractTrend = (props) => {
         return () => {
             chartData = null
         }
-    }, [
-        originalData,
-        selectedContinent,
-        showPerCapita,
-        countriesPopulation,
-        dataColumn
-    ])
+    }, [originalData, selectedContinent, showPerCapita])
 
     return (
         <div>

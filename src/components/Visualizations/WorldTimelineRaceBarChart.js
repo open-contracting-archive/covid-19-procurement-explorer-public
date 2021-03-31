@@ -88,13 +88,7 @@ const WorldTimelineRaceBarChart = () => {
         return () => {
             chartData = null
         }
-    }, [
-        originalData,
-        selectedContinent,
-        viewType,
-        showPerCapita,
-        countriesPopulation
-    ])
+    }, [originalData, selectedContinent, viewType, showPerCapita])
 
     const handleContinentSelection = (selectedOption) => {
         setSelectedContinent(selectedOption)

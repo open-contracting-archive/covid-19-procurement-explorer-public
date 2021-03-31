@@ -75,7 +75,7 @@ const SupplierTrend = (props) => {
         return () => {
             chartData = null
         }
-    }, [originalData, selectedContinent, showPerCapita, countriesPopulation])
+    }, [originalData, selectedContinent, showPerCapita])
 
     return (
         <div>

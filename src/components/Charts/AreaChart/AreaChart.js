@@ -71,7 +71,7 @@ const AreaChart = ({ data, apiData, colorValue }) => {
 
             chart = null
         }
-    }, [data, apiData, colorValue])
+    }, [data])
 
     return (
         <div

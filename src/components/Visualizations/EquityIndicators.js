@@ -76,7 +76,7 @@ const EquityIndicators = (props) => {
             setChartData([])
             setAssignedValue(0)
         }
-    }, [originalData, viewType, currency, valueField])
+    }, [originalData, viewType, currency])
 
     return (
         <CardContainer

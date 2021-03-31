@@ -69,7 +69,7 @@ const SimpleBarChart = (props) => {
 
             chart = null
         }
-    }, [data, chartKey, chartValue, axisRotation])
+    }, [data])
 
     return (
         <div

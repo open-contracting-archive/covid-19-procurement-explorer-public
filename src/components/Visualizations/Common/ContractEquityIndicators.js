@@ -109,7 +109,7 @@ const ContractEquityIndicators = (props) => {
 
         setChartData(chartData)
         setLoading(false)
-    }, [originalData, viewType, selectedEquityIndicators, currency, equities])
+    }, [originalData, viewType, selectedEquityIndicators, currency])
 
     function handleEquitySelection(equityId) {
         setSelectedEquityIndicators((previous) => {
