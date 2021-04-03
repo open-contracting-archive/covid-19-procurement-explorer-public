@@ -9,6 +9,7 @@ import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
 import Loader from '../../../components/Loader/Loader'
 import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import AwardedItemTable from './AwardedItemsTable'
 
 const ContractDetail = () => {
     const { contractId } = useParams()
@@ -281,6 +282,24 @@ const ContractDetail = () => {
                         <p className="font-bold text-sm uppercase">
                             {get(contractDetail, 'supplier_address', '-')}
                         </p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div className="border-b-4 border-primary-blue">
+                    <ul className="flex container mt-16 mx-auto px-4">
+                        <li className="bg-primary-blue p-2 px-3 rounded-t text-lg text-white">
+                            <span>Awarded items</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="pt-16 bg-primary-gray pb-6 xl:pb-24">
+                    <div className="container mx-auto px-4">
+                        <AwardedItemTable
+                            items={contractDetail.goods_services}
+                        />
                     </div>
                 </div>
             </div>

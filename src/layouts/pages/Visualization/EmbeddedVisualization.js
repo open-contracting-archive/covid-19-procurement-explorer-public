@@ -12,10 +12,9 @@ import NotFound from '../../../components/NotFound/NotFound'
 import { useQuery } from '../../../helpers/general'
 import Visualization from '../../../constants/Visualization'
 
-const queryString = useQuery()
-
 const EmbeddedVisualization = () => {
     const { visualizationId } = useParams()
+    const queryString = useQuery()
 
     switch (visualizationId) {
         case Visualization.WORLD_MAP_RACE:
