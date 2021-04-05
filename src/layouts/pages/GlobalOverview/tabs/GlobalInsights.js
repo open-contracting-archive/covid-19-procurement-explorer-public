@@ -16,11 +16,9 @@ const GlobalInsights = () => {
 
     return (
         <div>
-            <h2 className="font-normal text-lg mb-6">{trans('Library')}</h2>
-
             {renderFeaturedItems()}
 
-            <h2 className="font-normal text-lg md:mb-6">
+            <h2 className="text-lg font-normal md:mb-6">
                 {trans('Best practices and solutions from our database')}
             </h2>
 

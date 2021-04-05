@@ -12,6 +12,7 @@ import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.s
 import useTrans from '../../hooks/useTrans'
 import useContentFilters from '../../hooks/useContentFilters'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import useTableSorting from '../../hooks/useTableSorting'
 
 const limit = 20
 
@@ -21,9 +22,6 @@ const InsightTable = (props) => {
     const [loading, setLoading] = useState(true)
     const [tableLoading, setTableLoading] = useState(false)
     const [selectedFilters, setSelectedFilters] = useState({})
-    const [sorting, setSorting] = useState(() => {
-        return { column: 'title', direction: '' }
-    })
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
@@ -31,6 +29,14 @@ const InsightTable = (props) => {
     const { contentsTypeSelectList, countrySelectList } = useContentFilters()
     const history = useHistory()
     const { trans } = useTrans()
+    const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
+        items: insightList,
+        defaultSorting: {
+            column: 'title',
+            direction: ''
+        },
+        sortTableData: false
+    })
 
     useEffect(() => {
         let queryParams = {
@@ -85,42 +91,6 @@ const InsightTable = (props) => {
         })
     }
 
-    const appendSort = (columnName) => {
-        setSorting((previous) => {
-            if (previous.column === columnName) {
-                return {
-                    ...previous,
-                    direction: previous.direction === '-' ? '' : '-'
-                }
-            }
-            return {
-                column: columnName,
-                direction: ''
-            }
-        })
-    }
-
-    const columnSorting = (columnName) => {
-        return (
-            <span className="icon-sort">
-                <span
-                    className={`icon-sort-arrow-up ${
-                        sorting.column === columnName &&
-                        sorting.direction === '' &&
-                        'active'
-                    }`}
-                />
-                <span
-                    className={`icon-sort-arrow-down ${
-                        sorting.column === columnName &&
-                        sorting.direction === '-' &&
-                        'active'
-                    }`}
-                />
-            </span>
-        )
-    }
-
     const handleCountryFilter = (country) => {
         appendFilter({ country })
     }
@@ -136,7 +106,7 @@ const InsightTable = (props) => {
     return (
         <div className="relative">
             <div
-                className="md:hidden cursor-pointer"
+                className="cursor-pointer md:hidden"
                 onClick={handleFilterToggle}>
                 <div className="filter-ui">
                     <FilterIcon />
@@ -146,24 +116,24 @@ const InsightTable = (props) => {
             {showFilter ? (
                 <div
                     className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
-                    <div className="flex justify-between text-white mb-4 md:mb-0">
-                        <span className="text-sm uppercase font-bold">
+                    <div className="flex justify-between mb-4 text-white md:mb-0">
+                        <span className="text-sm font-bold uppercase">
                             Filter
                         </span>
                         <span
-                            className="filter-close text-sm uppercase font-bold cursor-pointer"
+                            className="text-sm font-bold uppercase cursor-pointer filter-close"
                             onClick={handleCloseFilter}>
                             <FilterCloseIcon />
                         </span>
                     </div>
-                    <div className="flex -mx-2 -mb-5 flex-wrap">
+                    <div className="flex flex-wrap -mx-2 -mb-5">
                         {!hasCountry() && (
-                            <div className="w-1/2 md:w-40 px-2 mb-5">
-                                <p className="uppercase text-xs opacity-50 leading-none">
+                            <div className="w-1/2 px-2 mb-5 md:w-40">
+                                <p className="text-xs leading-none uppercase opacity-50">
                                     {trans('Country')}
                                 </p>
                                 <Select
-                                    className="mt-2 select-filter text-sm"
+                                    className="mt-2 text-sm select-filter"
                                     classNamePrefix="select-filter"
                                     options={countrySelectList}
                                     onChange={(selectedOption) =>
@@ -174,12 +144,12 @@ const InsightTable = (props) => {
                                 />
                             </div>
                         )}
-                        <div className="w-1/2 md:w-40 px-2 mb-5">
-                            <p className="uppercase text-xs opacity-50 leading-none">
+                        <div className="w-1/2 px-2 mb-5 md:w-40">
+                            <p className="text-xs leading-none uppercase opacity-50">
                                 {trans('Type')}
                             </p>
                             <Select
-                                className="mt-2 select-filter text-sm"
+                                className="mt-2 text-sm select-filter"
                                 classNamePrefix="select-filter"
                                 options={contentsTypeSelectList}
                                 onChange={(selectedFilter) => {
@@ -195,15 +165,15 @@ const InsightTable = (props) => {
                 ''
             )}
 
-            <div className="flex flex-wrap items-center justify-end md:justify-between mb-6 mt-12 md:mt-0 md:mb-12">
-                <div className="hidden md:flex gap-8">
+            <div className="flex flex-wrap items-center justify-end mt-12 mb-6 md:justify-between md:mt-0 md:mb-12">
+                <div className="hidden gap-8 md:flex">
                     {!hasCountry() && (
                         <div className="w-40">
-                            <p className="uppercase text-xs opacity-50 leading-none">
+                            <p className="text-xs leading-none uppercase opacity-50">
                                 {trans('Country')}
                             </p>
                             <Select
-                                className="mt-2 select-filter text-sm"
+                                className="mt-2 text-sm select-filter"
                                 classNamePrefix="select-filter"
                                 options={countrySelectList}
                                 onChange={(selectedOption) =>
@@ -213,11 +183,11 @@ const InsightTable = (props) => {
                         </div>
                     )}
                     <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
+                        <p className="text-xs leading-none uppercase opacity-50">
                             {trans('Type')}
                         </p>
                         <Select
-                            className="mt-2 select-filter text-sm"
+                            className="mt-2 text-sm select-filter"
                             classNamePrefix="select-filter"
                             options={contentsTypeSelectList}
                             onChange={(selectedFilter) => {
@@ -240,14 +210,10 @@ const InsightTable = (props) => {
                                 <thead>
                                     <tr>
                                         <th style={{ width: '35%' }}>
-                                            <span
-                                                className="flex items-center cursor-pointer"
-                                                onClick={() =>
-                                                    appendSort('title')
-                                                }>
-                                                {trans('Title')}
-                                                {columnSorting('title')}
-                                            </span>
+                                            {tableHeaderSpan(
+                                                'title',
+                                                `${trans('Title')}`
+                                            )}
                                         </th>
                                         <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
@@ -255,50 +221,43 @@ const InsightTable = (props) => {
                                             </span>
                                         </th>
                                         <th style={{ width: '10%' }}>
-                                            <span
-                                                className="flex items-center cursor-pointer"
-                                                onClick={() =>
-                                                    appendSort('contents_type')
-                                                }>
-                                                {trans('Type')}
-                                                {columnSorting('contents_type')}
-                                            </span>
+                                            {tableHeaderSpan(
+                                                'contents_type',
+                                                `${trans('Type')}`
+                                            )}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {insightList &&
-                                        insightList.map((insight, index) => {
-                                            return (
-                                                <tr
-                                                    key={index}
-                                                    onClick={() =>
-                                                        showDetail(
-                                                            insight.contents_type,
-                                                            insight.id
+                                    {sortedItems.map((insight, index) => {
+                                        return (
+                                            <tr
+                                                key={index}
+                                                onClick={() =>
+                                                    showDetail(
+                                                        insight.contents_type,
+                                                        insight.id
+                                                    )
+                                                }
+                                                className="cursor-pointer">
+                                                <td>
+                                                    <p className="hover:text-primary-blue focus:text-primary-blue">
+                                                        {insight.title}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    {countryNameById(
+                                                        get(
+                                                            insight,
+                                                            'country.id',
+                                                            null
                                                         )
-                                                    }
-                                                    className="cursor-pointer">
-                                                    <td>
-                                                        <p className="hover:text-primary-blue focus:text-primary-blue">
-                                                            {insight.title}
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        {countryNameById(
-                                                            get(
-                                                                insight,
-                                                                'country.id',
-                                                                null
-                                                            )
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {insight.contents_type}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })}
+                                                    )}
+                                                </td>
+                                                <td>{insight.contents_type}</td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                             {!insightList.length && (
@@ -316,21 +275,21 @@ const InsightTable = (props) => {
                     </div>
                     {insightList.length > 0 && (
                         <div>
-                            <div className="text-right mt-2 text-sm">
-                                <p className="text-primary-dark text-opacity-50">
+                            <div className="mt-2 text-sm text-right">
+                                <p className="text-opacity-50 text-primary-dark">
                                     Showing{' '}
-                                    <span className="text-primary-dark text-opacity-75">
+                                    <span className="text-opacity-75 text-primary-dark">
                                         {1 + currentPage * limit}
                                     </span>{' '}
                                     -{' '}
-                                    <span className="text-primary-dark text-opacity-75">
+                                    <span className="text-opacity-75 text-primary-dark">
                                         {limit + currentPage * limit >
                                         totalItems
                                             ? totalItems
                                             : limit + currentPage * limit}
                                     </span>{' '}
                                     of{' '}
-                                    <span className="text-primary-dark text-opacity-75">
+                                    <span className="text-opacity-75 text-primary-dark">
                                         {totalItems}
                                     </span>{' '}
                                     items.
