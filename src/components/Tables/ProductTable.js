@@ -7,6 +7,7 @@ import useTrans from '../../hooks/useTrans'
 import 'react-datepicker/dist/react-datepicker.css'
 import TableLoader from '../Loader/TableLoader'
 import useContractFilters from '../../hooks/useContractFilters'
+import useTableSorting from '../../hooks/useTableSorting'
 import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
@@ -17,16 +18,27 @@ const ProductTable = (props) => {
     const { countrySlug } = useParams()
     const [loading, setLoading] = useState(false)
     const [originalData, setOriginalData] = useState([])
-    const [sorting, setSorting] = useState(() => ({
-        column: 'product_name',
-        direction: ''
-    }))
     const [selectedFilters, setSelectedFilters] = useState({})
     const history = useHistory()
     const [showFilter, setShowFilter] = useState('hidden')
     const [totalItems, setTotalItems] = useState(0)
     const { countrySelectList } = useContractFilters()
     const { trans } = useTrans()
+
+    const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
+        items: originalData,
+        defaultSorting: {
+            column: 'product_name',
+            direction: ''
+        },
+        columnTypeMapping: {
+            tender_count: 'number',
+            amount_usd: 'number',
+            buyer_count: 'number',
+            supplier_count: 'number'
+        },
+        sortTableData: true
+    })
 
     useEffect(() => {
         const filterParams = {
@@ -70,42 +82,6 @@ const ProductTable = (props) => {
         })
     }
 
-    const appendSort = (columnName) => {
-        setSorting((previous) => {
-            if (previous.column === columnName) {
-                return {
-                    ...previous,
-                    direction: previous.direction === '-' ? '' : '-'
-                }
-            }
-            return {
-                column: columnName,
-                direction: ''
-            }
-        })
-    }
-
-    const columnSorting = (columnName) => {
-        return (
-            <span className="icon-sort">
-                <span
-                    className={`icon-sort-arrow-up ${
-                        sorting.column === columnName &&
-                        sorting.direction === '' &&
-                        'active'
-                    }`}
-                />
-                <span
-                    className={`icon-sort-arrow-down ${
-                        sorting.column === columnName &&
-                        sorting.direction === '-' &&
-                        'active'
-                    }`}
-                />
-            </span>
-        )
-    }
-
     const hasCountry = () => {
         return hasValidProperty(params, 'country')
     }
@@ -121,7 +97,7 @@ const ProductTable = (props) => {
     return (
         <div className="relative">
             <div
-                className="md:hidden cursor-pointer"
+                className="cursor-pointer md:hidden"
                 onClick={handleFilterToggle}>
                 <div className="filter-ui">
                     <FilterIcon />
@@ -132,24 +108,24 @@ const ProductTable = (props) => {
                 <div
                     className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
                     style={{ minWidth: '250px' }}>
-                    <div className="flex justify-between text-white mb-4 md:mb-0">
-                        <span className="text-sm uppercase font-bold">
+                    <div className="flex justify-between mb-4 text-white md:mb-0">
+                        <span className="text-sm font-bold uppercase">
                             Filter
                         </span>
                         <span
-                            className="filter-close text-sm uppercase font-bold cursor-pointer"
+                            className="text-sm font-bold uppercase cursor-pointer filter-close"
                             onClick={handleCloseFilter}>
                             <FilterCloseIcon />
                         </span>
                     </div>
-                    <div className="flex -mx-2 flex-wrap">
+                    <div className="flex flex-wrap -mx-2">
                         {!hasCountry() && (
                             <div className="w-full px-2">
-                                <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
+                                <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
                                     {trans('Country')}
                                 </p>
                                 <Select
-                                    className="select-filter text-sm"
+                                    className="text-sm select-filter"
                                     classNamePrefix="select-filter"
                                     options={countrySelectList}
                                     onChange={(selectedOption) =>
@@ -167,13 +143,13 @@ const ProductTable = (props) => {
             )}
 
             {!hasCountry() && (
-                <div className="hidden mb-8 md:flex gap-8">
+                <div className="hidden gap-8 mb-8 md:flex">
                     <div className="w-40">
-                        <p className="uppercase text-xs opacity-50 leading-none">
+                        <p className="text-xs leading-none uppercase opacity-50">
                             {trans('Country')}
                         </p>
                         <Select
-                            className="select-filter text-sm"
+                            className="text-sm select-filter"
                             classNamePrefix="select-filter"
                             options={countrySelectList}
                             onChange={(selectedOption) =>
@@ -190,91 +166,65 @@ const ProductTable = (props) => {
                         <thead>
                             <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('product_name')
-                                        }>
-                                        {trans('Product Category')}{' '}
-                                        {columnSorting('product_name')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'product_name',
+                                        `${trans('Product Category')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('tender_count')
-                                        }>
-                                        {trans('# of contracts')}
-                                        {columnSorting('tender_count')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'tender_count',
+                                        `${trans('# of contracts')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('amount_usd')
-                                        }>
-                                        {trans('value (usd)')}
-                                        {columnSorting('amount_usd')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'amount_usd',
+                                        `${trans('value (usd)')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('supplier_count')
-                                        }>
-                                        {trans('# of suppliers')}
-                                        {columnSorting('supplier_count')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'supplier_count',
+                                        `${trans('# of suppliers')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('buyer_count')
-                                        }>
-                                        {trans('# of buyers')}
-                                        {columnSorting('buyer_count')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'buyer_count',
+                                        `${trans('# of buyers')}`
+                                    )}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {originalData &&
-                                originalData.map((product, index) => {
-                                    return (
-                                        <tr
-                                            key={index}
-                                            className="cursor-pointer"
-                                            onClick={() =>
-                                                showDetail(product.product_id)
-                                            }>
-                                            <td className="hover:text-primary-blue">
-                                                {get(product, 'product_name')}
-                                            </td>
-                                            <td>
-                                                {get(
-                                                    product,
-                                                    Default.TENDER_COUNT
-                                                )}
-                                            </td>
-                                            <td>
-                                                {product[Default.AMOUNT_USD] &&
-                                                    product[
-                                                        Default.AMOUNT_USD
-                                                    ].toLocaleString('en')}
-                                            </td>
-                                            <td>
-                                                {get(product, 'supplier_count')}
-                                            </td>
-                                            <td>
-                                                {get(product, 'buyer_count')}
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
+                            {sortedItems.map((product, index) => {
+                                return (
+                                    <tr
+                                        key={index}
+                                        className="cursor-pointer"
+                                        onClick={() =>
+                                            showDetail(product.product_id)
+                                        }>
+                                        <td className="hover:text-primary-blue">
+                                            {get(product, 'product_name')}
+                                        </td>
+                                        <td>
+                                            {get(product, Default.TENDER_COUNT)}
+                                        </td>
+                                        <td>
+                                            {product[Default.AMOUNT_USD] &&
+                                                product[
+                                                    Default.AMOUNT_USD
+                                                ].toLocaleString('en')}
+                                        </td>
+                                        <td>
+                                            {get(product, 'supplier_count')}
+                                        </td>
+                                        <td>{get(product, 'buyer_count')}</td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                     {!originalData.length && (
@@ -291,10 +241,10 @@ const ProductTable = (props) => {
                 {loading && <TableLoader />}
             </div>
             <div>
-                <div className="text-right mt-2 text-sm">
-                    <p className="text-primary-dark text-opacity-50">
+                <div className="mt-2 text-sm text-right">
+                    <p className="text-opacity-50 text-primary-dark">
                         Showing{' '}
-                        <span className="text-primary-dark text-opacity-75">
+                        <span className="text-opacity-75 text-primary-dark">
                             {totalItems}
                         </span>{' '}
                         items.

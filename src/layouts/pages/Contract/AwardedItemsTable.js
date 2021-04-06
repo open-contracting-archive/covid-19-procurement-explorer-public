@@ -1,84 +1,25 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 import useTrans from '../../../hooks/useTrans'
 import { get } from 'lodash'
+import useTableSorting from '../../../hooks/useTableSorting'
 
 const AwardedItemTable = (props) => {
+    // ===========================================================================
+    // State and variables
+    // ===========================================================================
     const { items = [] } = props
-    const [listItem, setListItem] = useState([])
     const { trans } = useTrans()
-    const [sorting, setSorting] = useState(() => {
-        return {
+    const { sortedItems: listItem, tableHeaderSpan } = useTableSorting({
+        items,
+        defaultSorting: {
             column: 'goods_services_category__category_name',
             direction: ''
-        }
+        },
+        columnTypeMapping: {
+            ppu_including_vat: 'number'
+        },
+        sortTableData: true
     })
-
-    console.log(items)
-
-    useEffect(() => {
-        console.log(items)
-        const sortedItems = items.sort((a, b) => {
-            if (sorting.column === 'ppu_including_vat') {
-                return sorting.direction === '-'
-                    ? a[sorting.column] - b[sorting.column]
-                    : b[sorting.column] - a[sorting.column]
-            } else {
-                if (sorting.direction === '-') {
-                    return (
-                        (a[sorting.column] > b[sorting.column]) -
-                        (a[sorting.column] < b[sorting.column])
-                    )
-                } else {
-                    return (
-                        (a[sorting.column] < b[sorting.column]) -
-                        (a[sorting.column] > b[sorting.column])
-                    )
-                }
-            }
-        })
-
-        setListItem(sortedItems)
-
-        return () => {
-            setListItem([])
-        }
-    }, [sorting])
-
-    const appendSort = (columnName) => {
-        setSorting((previous) => {
-            if (previous.column === columnName) {
-                return {
-                    ...previous,
-                    direction: previous.direction === '-' ? '' : '-'
-                }
-            }
-            return {
-                column: columnName,
-                direction: ''
-            }
-        })
-    }
-
-    const columnSorting = (columnName) => {
-        return (
-            <span className="icon-sort">
-                <span
-                    className={`icon-sort-arrow-up ${
-                        sorting.column === columnName &&
-                        sorting.direction === '' &&
-                        'active'
-                    }`}
-                />
-                <span
-                    className={`icon-sort-arrow-down ${
-                        sorting.column === columnName &&
-                        sorting.direction === '-' &&
-                        'active'
-                    }`}
-                />
-            </span>
-        )
-    }
 
     return (
         <Fragment>
@@ -88,62 +29,38 @@ const AwardedItemTable = (props) => {
                         <thead>
                             <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort(
-                                                'goods_services_category__category_name'
-                                            )
-                                        }>
-                                        {trans('Item description')}
-                                        {columnSorting(
-                                            'goods_services_category__category_name'
-                                        )}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'goods_services_category__category_name',
+                                        `${trans('Item description')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('classification_code')
-                                        }>
-                                        {trans('cpv code')}
-                                        {columnSorting('classification_code')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'classification_code',
+                                        `${trans('cpv code')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '6%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('quantity_units')
-                                        }>
-                                        {trans('Quantity')}
-                                        {columnSorting('quantity_units')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'quantity_units',
+                                        `${trans('Quantity')}`
+                                    )}
                                 </th>
                                 <th style={{ width: '10%' }}>
-                                    <span
-                                        className="flex items-center cursor-pointer"
-                                        onClick={() =>
-                                            appendSort('ppu_including_vat')
-                                        }>
-                                        {trans('Unit price (usd)')}
-                                        {columnSorting('ppu_including_vat')}
-                                    </span>
+                                    {tableHeaderSpan(
+                                        'ppu_including_vat',
+                                        `${trans('Unit price (usd)')}`
+                                    )}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             {listItem.map((service, index) => {
                                 return (
-                                    <tr key={index}>
+                                    <tr
+                                        key={`${service.classification_code} - ${index}`}>
                                         <td className="hover:text-primary-blue">
-                                            <p
-                                                className="truncate-text"
-                                                title={get(
-                                                    service,
-                                                    'goods_services_category__category_name'
-                                                )}>
+                                            <p className="truncate-text">
                                                 {get(
                                                     service,
                                                     'goods_services_category__category_name'
@@ -180,7 +97,7 @@ const AwardedItemTable = (props) => {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-end">
+            <div className="flex items-center justify-end mt-6">
                 <span>
                     Total Awarded items: <strong>{items.length}</strong>
                 </span>
