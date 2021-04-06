@@ -21,8 +21,8 @@ const MainChart = (props) => {
         if (country) {
             return view === 'chart' ? (
                 <CountryProductComparisonChart
-                    productName={product.name}
-                    country={country.country_code_alpha_2}
+                    product={product}
+                    country={country}
                 />
             ) : (
                 <div className="rounded border border-blue-0">

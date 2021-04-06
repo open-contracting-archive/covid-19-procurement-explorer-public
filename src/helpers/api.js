@@ -42,6 +42,8 @@ const apiRoutes = {
     'visualization.product-flow': 'api/v1/visualization/product-flow/',
     'visualization.supplier-product-flow':
         'api/v1/visualization/supplier-flow/',
+    'visualization.product-spending-comparison':
+        'api/v1/visualization/product-spending-comparison/',
 
     // Detail api
     'buyer-detail': 'api/v1/visualization/buyers',

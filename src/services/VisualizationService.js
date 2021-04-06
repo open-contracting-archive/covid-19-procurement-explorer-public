@@ -152,6 +152,23 @@ class VisualizationService {
         }
     }
 
+    static async ProductSpendingComparison(params) {
+        try {
+            const res = await Api.get(
+                getURI('visualization.product-spending-comparison'),
+                params
+            )
+
+            if (res.status !== 200) {
+                throw new Error()
+            }
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     static async ContractStatus(params) {
         try {
             const res = await Api.get(

@@ -100,7 +100,7 @@ const ChartFooter = (props) => {
                         <span className="inline-block mb-3 text-primary-dark">
                             <T _str="Share on" />
                         </span>
-                        <div className=" flex flex-col">
+                        <div className="flex flex-col">
                             <FacebookShareButton
                                 url={currentLocation}
                                 className=" social-icon">
