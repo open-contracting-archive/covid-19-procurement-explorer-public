@@ -104,6 +104,7 @@ const ProductsTimeline = (props) => {
                             <StackedChart
                                 data={chartData}
                                 currency={selectedCurrency}
+                                viewType={viewType}
                             />
                         ) : (
                             <ErrorHandler />

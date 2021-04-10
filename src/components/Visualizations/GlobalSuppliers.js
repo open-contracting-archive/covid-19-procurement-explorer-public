@@ -124,6 +124,7 @@ const GlobalSuppliers = (props) => {
                                     <SankeyChart
                                         data={chartData}
                                         currency={Default.CURRENCY_USD}
+                                        viewType={viewType}
                                     />
                                 </div>
                             </div>
