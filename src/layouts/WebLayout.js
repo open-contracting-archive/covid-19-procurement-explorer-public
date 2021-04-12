@@ -9,8 +9,10 @@ const WebLayout = (props) => {
     return (
         <Fragment>
             {process.env.NODE_ENV === 'production' &&
-                process.env.REACT_APP_FATHOM_SRC &&
-                process.env.REACT_APP_FATHOM_SITE_KEY && <FathomAnalytics />}
+                process.env.REACT_APP_FATHOM_ANALYTICS_DOMAIN &&
+                process.env.REACT_APP_FATHOM_ANALYTICS_ID && (
+                    <FathomAnalytics />
+                )}
             <Header />
             {children}
             <Footer />
