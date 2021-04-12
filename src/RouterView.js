@@ -1,16 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Suspense } from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import WebLayout from './layouts/WebLayout'
 import EmbeddedVisualization from './layouts/pages/Visualization/EmbeddedVisualization'
 import NotFound from './components/NotFound/NotFound'
 import { webRoutes } from './routes/webRoutes'
+import Loader from './components/Loader/Loader'
 
 const RouterView = () => {
     const renderWebRoutes = () => {
         return webRoutes.map((item, key) => {
             return (
                 <Route key={key} path={item.path} exact={item.exact}>
-                    <WebLayout>{item.component}</WebLayout>
+                    <Suspense fallback={<Loader />}>
+                        <WebLayout>{item.component}</WebLayout>
+                    </Suspense>
                 </Route>
             )
         })

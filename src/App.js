@@ -7,18 +7,31 @@ import {
     setCountries,
     setCurrentLocale,
     setEquityIndicators,
+    setLanguages,
     setProductCategories,
     setRedFlags,
-    setTranslations,
-    setLanguages
+    setTranslations
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
 import RouterView from './RouterView'
 import { init } from 'cookie-though'
 import cookieConfig from './components/Utilities/CookieConfig'
+import { load } from 'fathom-client'
 
 init(cookieConfig)
+
+const domain =
+    process.env.REACT_APP_FATHOM_ANALYTICS_DOMAIN || 'cdn.usefathom.com'
+const siteKey = process.env.REACT_APP_FATHOM_ANALYTICS_ID
+
+if (process.env.NODE_ENV === 'production' && domain && siteKey) {
+    load(siteKey, {
+        url: `https://${domain}/script.js`,
+        excludedDomains: ['localhost', '127.0.0.1', '0.0.0.0'],
+        spa: 'auto'
+    })
+}
 
 function App() {
     const dispatch = useDispatch()

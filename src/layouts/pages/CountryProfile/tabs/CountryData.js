@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import Loader from '../../../../components/Loader/Loader'
 import {
     AverageBidsPerContract,
-    ContractStatus,
     DirectOpen,
     EquityIndicators,
     Monopolization,
@@ -58,9 +57,6 @@ function CountryData(props) {
                                     params={{ country: countryCode }}
                                 />
                             </div>
-                        </div>
-                        <div className="w-full lg:w-1/3 px-2 mb-4">
-                            <ContractStatus params={{ country: countryCode }} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-4">
                             <EquityIndicators

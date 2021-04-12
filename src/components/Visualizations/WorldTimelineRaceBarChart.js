@@ -71,7 +71,7 @@ const WorldTimelineRaceBarChart = () => {
                                       countriesPopulation[country.country_code]
                                     : country[Default.AMOUNT_USD]
                                 : country[Default.TENDER_COUNT],
-                        href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
+                        href: `https://www.countryflags.io/${country.country_code.toLowerCase()}/flat/64.png`
                     }))
                 const sum = filtered.reduce(
                     (total, item) => (total += item.value),
