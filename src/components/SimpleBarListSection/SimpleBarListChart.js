@@ -17,7 +17,7 @@ function SimpleBarListChart({ data, currency, viewType }) {
                             <div className="flex items-center">
                                 <div className="custom-horizontal-bar-text">
                                     <h3 className="capitalize">
-                                        {bar_value.name}
+                                        {bar_value.name.replace(/_/g, ' ')}
                                     </h3>
                                 </div>
                                 <div className="custom-horizontal-bar-progress">

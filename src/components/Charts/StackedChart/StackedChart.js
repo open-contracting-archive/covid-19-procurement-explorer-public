@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const StackedChart = ({ data, currency }) => {
+const StackedChart = ({ data, currency, viewType }) => {
     const stackedChart = useRef(null)
     useLayoutEffect(() => {
         /* Chart code */
@@ -59,8 +59,10 @@ const StackedChart = ({ data, currency }) => {
             // Configure columns
             series.columns.template.width = am4core.percent(60)
             series.columns.template.tooltipText = `[bold]{name}[/]\n[font-size:14px]{categoryX}: ${
-                currency === 'usd' ? '$' : ''
-            }{valueY} [text-transform: uppercase font-size:14px]${currency}`
+                viewType === 'value' ? (currency === 'usd' ? '$' : '') : ''
+            }{valueY} [text-transform: uppercase font-size:14px] ${
+                viewType === 'value' ? currency : ''
+            }`
 
             return series
         }

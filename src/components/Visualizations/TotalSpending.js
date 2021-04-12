@@ -66,11 +66,23 @@ const TotalSpending = (props) => {
                 `${currency}.line_chart`,
                 []
             )
+
+            const barChartData = get(originalData, `${currency}.bar_chart`)
+
+            const formattedBarChartData =
+                barChartData &&
+                barChartData.map((data) => {
+                    return {
+                        method: data.method.replace(/_/g, ' '),
+                        value: data.value
+                    }
+                })
+
             setChartData({
                 amount: get(originalData, `${currency}.total`),
                 percentage: changePercentage(lineChartData),
                 areaChart: areaChartData(lineChartData),
-                barChart: get(originalData, `${currency}.bar_chart`)
+                barChart: formattedBarChartData
             })
         }
     }, [originalData, currency])
@@ -103,7 +115,7 @@ const TotalSpending = (props) => {
 
             {!error && modalHandler && (
                 <span
-                    className="cursor-pointer text-sm text-primary-blue block text-right"
+                    className="block text-sm text-right cursor-pointer text-primary-blue"
                     onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>
                     {trans('View in detail')} →
                 </span>

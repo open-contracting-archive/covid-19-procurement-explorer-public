@@ -60,11 +60,22 @@ const TotalContracts = (props) => {
     useEffect(() => {
         if (originalData) {
             const lineChartData = get(originalData, 'line_chart', [])
+            const barChartData = get(originalData, 'bar_chart')
+
+            const formattedBarChartData =
+                barChartData &&
+                barChartData.map((data) => {
+                    return {
+                        method: data.method.replace(/_/g, ' '),
+                        value: data.value
+                    }
+                })
+
             setChartData({
                 tenderCount: get(originalData, 'total'),
                 percentage: changePercentage(lineChartData),
                 areaChart: areaChartData(lineChartData),
-                barChart: get(originalData, 'bar_chart')
+                barChart: formattedBarChartData
             })
         }
     }, [originalData])

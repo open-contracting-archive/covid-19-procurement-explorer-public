@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
-const SankeyChart = ({ data, currency }) => {
+const SankeyChart = ({ data, currency, viewType }) => {
     const sankeyChart = useRef(null)
 
     useLayoutEffect(() => {
@@ -25,8 +25,10 @@ const SankeyChart = ({ data, currency }) => {
         chart.dataFields.toName = 'to'
         chart.dataFields.value = 'value'
         chart.links.template.tooltipText = `{from} -> {to} : ${
-            currency == 'usd' ? '$' : ''
-        }{value} [text-transform: uppercase]${currency}`
+            viewType === 'value' ? (currency == 'usd' ? '$' : '') : ''
+        }{value} [text-transform: uppercase]${
+            viewType === 'value' ? currency : ''
+        }`
 
         // for right-most label to fit
         // chart.paddingRight = 10
