@@ -7,7 +7,6 @@ import {
     TotalContracts,
     TotalSpending,
     Monopolization,
-    ContractStatus,
     EquityIndicators,
     ProductsTimeline,
     TopSuppliers,
@@ -64,9 +63,6 @@ const GlobalData = (props) => {
                             <AverageBidsPerContract />
                             <Monopolization />
                         </div>
-                    </div>
-                    <div className="w-full lg:w-1/3 px-2 mb-4">
-                        <ContractStatus />
                     </div>
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <EquityIndicators />
