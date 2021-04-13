@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { get, isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import SankeyChart from '../Charts/SankeyChart/SankeyChart'
-import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import ChartFooter from '../Utilities/ChartFooter'
 import ContractView from '../../constants/ContractView'
@@ -23,9 +22,7 @@ const GlobalSuppliers = (props) => {
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
-    const [chartLevel, setChartLevel] = useState('global')
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
@@ -98,26 +95,6 @@ const GlobalSuppliers = (props) => {
                     viewType={viewType}
                     viewHandler={setViewType}>
                     <div>
-                        <ul className="flex items-center mb-6">
-                            <li
-                                className={`inline-block mr-2 px-2 md:px-4 py-2 rounded-full cursor-pointer text-xs md:text-base ${
-                                    chartLevel === 'global'
-                                        ? 'bg-blue-50 text-white'
-                                        : 'bg-blue-0'
-                                }`}
-                                onClick={() => setChartLevel('global')}>
-                                {trans('Global suppliers chain')}
-                            </li>
-                            <li
-                                className={`inline-block mr-2 px-2 md:px-4 py-2 rounded-full cursor-pointer text-xs md:text-base ${
-                                    chartLevel === 'country'
-                                        ? 'bg-blue-50 text-white'
-                                        : 'bg-blue-0'
-                                }`}
-                                onClick={() => setChartLevel('country')}>
-                                {trans('Global distribution chain')}
-                            </li>
-                        </ul>
                         {!error ? (
                             <div className="flex mt-4">
                                 <div className="flex-1">

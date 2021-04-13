@@ -3,5 +3,5 @@ import * as es_lang from './es'
 
 export default {
     en: { ...en_lang },
-    sp: { ...es_lang }
+    es: { ...es_lang }
 }

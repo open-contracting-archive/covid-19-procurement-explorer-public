@@ -12,7 +12,7 @@ const AwardedItemTable = (props) => {
     const { sortedItems: listItem, tableHeaderSpan } = useTableSorting({
         items,
         defaultSorting: {
-            column: 'goods_services_category__category_name',
+            column: 'contract_desc',
             direction: ''
         },
         columnTypeMapping: {
@@ -30,7 +30,7 @@ const AwardedItemTable = (props) => {
                             <tr className="whitespace-no-wrap">
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
-                                        'goods_services_category__category_name',
+                                        'contract_desc',
                                         `${trans('Item description')}`
                                     )}
                                 </th>
@@ -63,7 +63,8 @@ const AwardedItemTable = (props) => {
                                             <p className="truncate-text">
                                                 {get(
                                                     service,
-                                                    'goods_services_category__category_name'
+                                                    'contract_desc',
+                                                    '-'
                                                 )}
                                             </p>
                                         </td>
