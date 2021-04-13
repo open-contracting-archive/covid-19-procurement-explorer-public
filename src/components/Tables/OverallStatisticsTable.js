@@ -243,59 +243,6 @@ const OverallStatisticsTable = () => {
                                                                 'statistic.not_identified_contracts_amount'
                                                             )}
                                                         </td>
-
-                                                        <td>
-                                                            {get(
-                                                                item,
-                                                                'statistic.active_contracts'
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {get(
-                                                                item,
-                                                                'statistic.completed_contracts'
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {get(
-                                                                item,
-                                                                'statistic.cancelled_contracts'
-                                                            )}
-                                                        </td>
-                                                        <td
-                                                            className={
-                                                                'border-r border-gray-e2e'
-                                                            }>
-                                                            {get(
-                                                                item,
-                                                                'statistic.not_indentifed_contracts'
-                                                            )}
-                                                        </td>
-
-                                                        <td>
-                                                            {get(
-                                                                item,
-                                                                'statistic.active_contracts_sum'
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {get(
-                                                                item,
-                                                                'statistic.completed_contracts_sum'
-                                                            )}
-                                                        </td>
-                                                        <td>
-                                                            {get(
-                                                                item,
-                                                                'statistic.cancelled_contracts_sum'
-                                                            )}
-                                                        </td>
-                                                        <td className="border-r border-gray-e2e">
-                                                            {get(
-                                                                item,
-                                                                'statistic.not_indentifed_contracts_sum'
-                                                            )}
-                                                        </td>
                                                     </tr>
                                                 )
                                             })}
