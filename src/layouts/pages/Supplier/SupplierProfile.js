@@ -31,7 +31,6 @@ const SupplierProfile = () => {
     let history = useHistory()
     const { id } = useParams()
     window.scrollTo(0, 0)
-
     const previousPage = () => {
         history.goBack()
     }

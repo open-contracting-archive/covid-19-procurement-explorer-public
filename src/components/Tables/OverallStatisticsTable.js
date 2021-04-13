@@ -92,22 +92,6 @@ const OverallStatisticsTable = () => {
                                                     'Procurement Procedure wise Amount (USD)'
                                                 )}
                                             </th>
-                                            <th
-                                                colSpan={4}
-                                                className={
-                                                    'text-center border-r border-gray-e2e'
-                                                }>
-                                                {trans(
-                                                    'Status wise Number of Contracts'
-                                                )}
-                                            </th>
-                                            <th
-                                                colSpan={4}
-                                                className={'text-center'}>
-                                                {trans(
-                                                    'Status wise Amount (USD)'
-                                                )}
-                                            </th>
                                         </tr>
 
                                         <tr className="whitespace-no-wrap border border-gray-e2e">
@@ -140,21 +124,6 @@ const OverallStatisticsTable = () => {
                                                 }>
                                                 {trans('Not Identified')}
                                             </th>
-
-                                            <th>{trans('Active')}</th>
-                                            <th>{trans('Completed')}</th>
-                                            <th>{trans('Cancelled')}</th>
-                                            <th
-                                                className={
-                                                    'border-r border-gray-e2e'
-                                                }>
-                                                {trans('Not Identified')}
-                                            </th>
-
-                                            <th>{trans('Active')}</th>
-                                            <th>{trans('Completed')}</th>
-                                            <th>{trans('Cancelled')}</th>
-                                            <th>{trans('Not Identified')}</th>
                                         </tr>
                                     </thead>
 
