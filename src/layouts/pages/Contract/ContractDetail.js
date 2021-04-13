@@ -113,17 +113,7 @@ const ContractDetail = () => {
                             )}
                         </div>
                     </div>
-                    <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
-                        <span
-                            className={`status-indicator ${
-                                contractDetail &&
-                                contractDetail.status.toLowerCase()
-                            }`}
-                        />
-                        <p className="mr-2 text-sm">
-                            {get(contractDetail, 'status', '-')}
-                        </p>
-                    </div>
+
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <CountryFlag
                             className="rounded-sm mr-2"

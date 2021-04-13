@@ -6,9 +6,7 @@ import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import {
     AverageBidsPerContract,
-    // BuyerProductTimeline,
     ContractRedFlags,
-    ContractStatus,
     DirectOpen,
     EquityIndicators,
     Monopolization,
@@ -135,15 +133,6 @@ const BuyerProfile = () => {
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
                                         <Monopolization
                                             params={{ buyer: id }}
-                                        />
-                                    </div>
-                                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                                        <ContractStatus
-                                            params={{
-                                                buyer: id,
-                                                country:
-                                                    originalData.country_code
-                                            }}
                                         />
                                     </div>
                                     <div className="w-full lg:w-1/3 px-2 mb-6">
