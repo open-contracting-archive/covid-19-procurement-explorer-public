@@ -6,6 +6,7 @@ import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import OpenContractingPartner from '../../assets/img/open-contracting-partnership.png'
 import TransparencyInternational from '../../assets/img/transparency-international.png'
+import EuropeanBank from '../../assets/img/ebrd-logo.svg'
 import CmsPageService from '../../services/CmsPageService'
 
 const Footer = () => {
@@ -30,7 +31,7 @@ const Footer = () => {
         <footer className="relative px-4 py-10 overflow-hidden text-sm text-white md:pt-16 md:pb-20 bg-yellow-50">
             <div className="container relative z-10 mx-auto">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-12 mb-8 md:col-span-4">
+                    <div className="col-span-12 mb-8 md:col-span-3">
                         <div className="flex justify-between md:block">
                             <p className="font-bold leading-tight">
                                 Covid-19 <br /> Contract <br /> Explorer
@@ -95,21 +96,12 @@ const Footer = () => {
                             ))}
                         </ul>
                     </div>
-                    <div className="col-span-12 md:col-span-4">
+                    <div className="col-span-12 md:col-span-5">
                         <p className="mb-3">
                             {trans('Subscribe and get weekly updates')}
                         </p>
                         <form>
                             <div className="relative flex items-center">
-                                {/* <input
-                                    type="text"
-                                    placeholder="Type your email address"
-                                    className="w-full px-3 py-4 rounded-sm text-primary-dark"
-                                />
-                                <button className="absolute right-0 h-full p-4 rounded-sm rounded-l-none subscribe bg-blue-20">
-                                    {trans('Subscribe')}
-                                </button> */}
-
                                 <iframe
                                     src="https://opencontracting.substack.com/embed"
                                     width="480"
@@ -122,36 +114,48 @@ const Footer = () => {
                                     scrolling="no"></iframe>
                             </div>
                         </form>
-                        <div className="mt-8">
-                            <p className="mb-3">
-                                {trans('Portal developed by')}
-                            </p>
-                            <div className="flex flex-wrap items-center">
-                                <Link
-                                    to={{
-                                        pathname:
-                                            'https://www.open-contracting.org/'
-                                    }}
-                                    target="_blank">
-                                    <img
-                                        src={OpenContractingPartner}
-                                        alt="Open contracting partner logo"
-                                        className="inline-block mb-4 mr-6"
-                                    />
-                                </Link>
+                        <div className="flex flex-wrap mt-8">
+                            <div className="mr-8">
+                                <p className="mb-3">
+                                    {trans('The portal developed by')}
+                                </p>
+                                <div className="flex flex-wrap items-center">
+                                    <Link
+                                        to={{
+                                            pathname:
+                                                'https://www.open-contracting.org/'
+                                        }}
+                                        target="_blank">
+                                        <img
+                                            src={OpenContractingPartner}
+                                            alt="Open contracting partner logo"
+                                            className="inline-block mb-4 mr-6"
+                                        />
+                                    </Link>
 
-                                <Link
-                                    to={{
-                                        pathname:
-                                            'https://www.transparency.org/en/'
-                                    }}
-                                    target="_blank">
+                                    <Link
+                                        to={{
+                                            pathname:
+                                                'https://www.transparency.org/en/'
+                                        }}
+                                        target="_blank">
+                                        <img
+                                            src={TransparencyInternational}
+                                            alt="Transparency international logo"
+                                            className="inline-block mb-4"
+                                        />
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="">
+                                <p className="mb-3">{trans('Supported by')}</p>
+                                <div className="flex flex-wrap items-center">
                                     <img
-                                        src={TransparencyInternational}
-                                        alt="Transparency international logo"
-                                        className="inline-block mb-4"
+                                        src={EuropeanBank}
+                                        alt="European Bank logo"
+                                        className="inline-block"
                                     />
-                                </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
