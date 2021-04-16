@@ -7,17 +7,14 @@ import {
     EmailShareButton
 } from 'react-share'
 import { twitterHandle } from '../../helpers/general'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 
 const ShareButtons = (props) => {
     const { url = window.location.href } = props
-    const { trans } = useTrans()
 
     return (
         <div className="flex flex-wrap">
-            <p className="w-full font-bold opacity-40 mb-2">
-                {trans('Share on')}
-            </p>
+            <p className="w-full font-bold opacity-40 mb-2">{t('Share on')}</p>
             <div className="flex">
                 <FacebookShareButton url={url} className="social-icon">
                     <socialIcons.fbIcon />

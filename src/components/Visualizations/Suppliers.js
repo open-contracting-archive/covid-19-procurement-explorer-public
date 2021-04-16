@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import { AreaChartBlock } from './Charts'
@@ -19,7 +19,6 @@ const Suppliers = (props) => {
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -79,7 +78,7 @@ const Suppliers = (props) => {
         <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label)}
+                    {t(label)}
                 </h3>
                 <HelpText helpTextInfo={helpText} />
             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { MetaInformation } from '../../../components/Utilities'
 
 const LibraryResources = React.lazy(() =>
@@ -18,7 +18,6 @@ const LibraryNews = React.lazy(() =>
 )
 
 const Library = () => {
-    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     return (
@@ -30,7 +29,7 @@ const Library = () => {
             <section className="news px-4 py-12 md:py-24 bg-blue-0 -mt-8">
                 <div className="container mx-auto">
                     <p className="text-xl md:text-2xl mb-6 md:mb-10">
-                        {trans('Library')}
+                        {t('Library')}
                     </p>
                     <LibraryNews />
                 </div>

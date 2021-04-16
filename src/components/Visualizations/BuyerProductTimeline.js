@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { Loader, ChartFooter, ErrorHandler } from '../Utilities'
 import { SimpleBarChart } from './Charts'
 import VisualizationService from '../../services/VisualizationService'
@@ -18,7 +18,6 @@ const BuyerProductTimeline = (props) => {
     const [buyerProductTimelineType, setBuyerProductTimelineType] = useState(
         'value'
     )
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
@@ -83,7 +82,7 @@ const BuyerProductTimeline = (props) => {
                                     onClick={() =>
                                         setBuyerProductTimelineType('value')
                                     }>
-                                    {trans('By value')}
+                                    {t('By value')}
                                 </li>
                                 <li
                                     className={`cursor-pointer ${
@@ -94,7 +93,7 @@ const BuyerProductTimeline = (props) => {
                                     onClick={() =>
                                         setBuyerProductTimelineType('number')
                                     }>
-                                    {trans('By number')}
+                                    {t('By number')}
                                 </li>
                             </ul>
                         </div>

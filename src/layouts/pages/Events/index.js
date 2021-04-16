@@ -3,13 +3,12 @@ import { useHistory, Link } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
 import { Loader, MetaInformation } from '../../../components/Utilities'
 import { formatDate, formatTime } from '../../../helpers/date'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 
 function Events() {
     const [eventList, setEventList] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
-    const { trans } = useTrans()
     window.scrollTo(0, 0)
     const previousPage = () => {
         history.goBack()
@@ -40,14 +39,14 @@ function Events() {
                         <span
                             className="cursor-pointer text-primary-blue"
                             onClick={previousPage}>
-                            {trans('Library')}
+                            {t('Library')}
                         </span>{' '}
                         /
                     </div>
                     <h2 className="text-2xl mb-10">Events</h2>
                     <div className="text-left">
                         <p className="text-xl blue-50 pb-10">
-                            {trans('Upcoming Events')}
+                            {t('Upcoming Events')}
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4 card">
@@ -97,7 +96,7 @@ function Events() {
                 <div className="container mx-auto">
                     <div className="text-left">
                         <p className="text-xl blue-50 pb-6">
-                            {trans('Past Events')}
+                            {t('Past Events')}
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
@@ -150,7 +149,7 @@ function Events() {
                             })}
                     </div>
                     {eventList.length === 0 ? (
-                        <p>{trans('There are no Past Events Records')}</p>
+                        <p>{t('There are no Past Events Records')}</p>
                     ) : (
                         ''
                     )}

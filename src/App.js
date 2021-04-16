@@ -5,21 +5,22 @@ import {
     setContractMethods,
     setContractStates,
     setCountries,
-    setCurrentLocale,
     setEquityIndicators,
-    setLanguages,
     setProductCategories,
-    setRedFlags,
-    setTranslations
+    setRedFlags
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
 import RouterView from './layouts/RouterView'
 import { init } from 'cookie-though'
 import cookieConfig from './components/Utilities/CookieConfig'
+import { tx } from '@transifex/native'
 import { load } from 'fathom-client'
 
 init(cookieConfig)
+tx.init({
+    token: process.env.REACT_APP_TRANSIFEX_TOKEN
+})
 
 const domain =
     process.env.REACT_APP_FATHOM_ANALYTICS_DOMAIN || 'cdn.usefathom.com'
@@ -35,22 +36,7 @@ if (process.env.NODE_ENV === 'production' && domain && siteKey) {
 
 function App() {
     const dispatch = useDispatch()
-    const currentLocale = useSelector((state) => state.general.currentLocale)
     const countries = useSelector((state) => state.general.countries)
-
-    useEffect(() => {
-        dispatch(
-            setCurrentLocale(window.localStorage.getItem('locale') || 'en')
-        )
-
-        CountryService.getTranslations(currentLocale)
-            .then((response) => {
-                if (response) {
-                    dispatch(setTranslations(response))
-                }
-            })
-            .catch((error) => console.log(error))
-    }, [dispatch, currentLocale])
 
     useEffect(() => {
         CountryService.Countries().then((response) => {
@@ -67,10 +53,6 @@ function App() {
                 dispatch(setEquityIndicators(response.equity))
                 dispatch(setRedFlags(response.red_flag))
             }
-        })
-
-        CountryService.getLanguages().then((response) => {
-            dispatch(setLanguages(response.results))
         })
     }, [dispatch])
 

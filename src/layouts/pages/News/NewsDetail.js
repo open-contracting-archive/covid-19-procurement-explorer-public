@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import DefaultImage from '../../../assets/img/default_image.png'
 import { stripTags } from '../../../helpers/transformers'
 import {
@@ -20,7 +20,6 @@ const NewsDetail = () => {
     const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
     let { id: newsId } = useParams()
-    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -76,7 +75,7 @@ const NewsDetail = () => {
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 news-detail__metadata md:pr-6">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                    {trans('Published on')}
+                                    {t('Published on')}
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
                                     {formatDate(
@@ -113,7 +112,7 @@ const NewsDetail = () => {
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
-                                        {trans('Other News')}
+                                        {t('Other News')}
                                     </h2>
                                     <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {newsList &&
@@ -171,7 +170,7 @@ const NewsDetail = () => {
                                         <Link
                                             to="/news"
                                             className="text-blue-20 px-4">
-                                            {trans('View all news')} --&gt;{' '}
+                                            {t('View all news')} --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>

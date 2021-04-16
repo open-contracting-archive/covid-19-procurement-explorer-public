@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import { PieChart } from './Charts'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import { formatNumber } from '../../helpers/number'
 import ContractView from '../../constants/ContractView'
@@ -28,7 +28,6 @@ const DirectOpen = (props) => {
     const [openValue, setOpenValue] = useState(0)
     const currency = useSelector((state) => state.general.currency)
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
     const { valueField, currencyCode } = useContractTransformers()
 
     // ===========================================================================
@@ -89,9 +88,7 @@ const DirectOpen = (props) => {
                 <div className="flex items-end">
                     <div>
                         <h3 className="mr-3">
-                            <span className="text-sm block">
-                                {trans('Open')}
-                            </span>
+                            <span className="text-sm block">{t('Open')}</span>
                             <span className="text-xl font-bold mr-2">
                                 {viewType === ContractView.VALUE &&
                                 currency &&

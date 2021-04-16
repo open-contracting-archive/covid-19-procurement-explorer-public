@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import {
     WorldTimelineMap,
     WorldTimelineRaceBarChart
@@ -21,7 +21,6 @@ const MainVisualization = () => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { trans } = useTrans()
     const [tabView, setTabView] = useState('map')
 
     const renderTabComponent = () => {
@@ -44,12 +43,12 @@ const MainVisualization = () => {
             <div className="mb-6 text-center md:mb-10">
                 <h3 className="text-2xl font-bold leading-none uppercase md:text-3xl">
                     <span className="block text-base font-bold">
-                        {trans('Explore')}
+                        {t('Explore')}
                     </span>
-                    {trans('Countries')}
+                    {t('Countries')}
                 </h3>
                 <p className="text-xs text-opacity-50 md:text-base text-primary-dark">
-                    {trans('Government spending to fight COVID-19')}
+                    {t('Government spending to fight COVID-19')}
                 </p>
             </div>
             <div className="container mx-auto">
@@ -67,7 +66,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <MapIcon className="inline-block w-4 h-4" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {trans('Map')}
+                                                    {t('Map')}
                                                 </span>
                                             </div>
                                         </div>
@@ -79,7 +78,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <ChartsIcon className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {trans('Chart')}
+                                                    {t('Chart')}
                                                 </span>
                                             </div>
                                         </div>
@@ -91,7 +90,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <TableIcon className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {trans('Statistics')}
+                                                    {t('Statistics')}
                                                 </span>
                                             </div>
                                         </div>
@@ -106,7 +105,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <SourcesIcon className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {trans('Sources')}
+                                                    {t('Sources')}
                                                 </span>
                                             </div>
                                         </div>
@@ -121,11 +120,11 @@ const MainVisualization = () => {
                 </div>
             </div>
             <p className="mt-6 text-sm text-center">
-                {trans('Don’t see your country data?')}
+                {t('Don’t see your country data?')}
                 <Link
                     to="/pages/add-my-country-data"
                     className="inline-block ml-2 text-primary-blue">
-                    {trans('Here’s how you can add your country data')}
+                    {t('Here’s how you can add your country data')}
                 </Link>
             </p>
         </section>

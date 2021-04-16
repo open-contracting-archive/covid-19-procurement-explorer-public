@@ -1,10 +1,9 @@
 import React from 'react'
 import { ReactComponent as HelpIcon } from '../../assets/img/icons/information.svg'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 
 const HelpText = (props) => {
     const { helpTextInfo } = props
-    const { trans } = useTrans()
 
     return (
         <div className="tooltip-wrap inline-block relative ml-2">
@@ -12,7 +11,7 @@ const HelpText = (props) => {
                 <HelpIcon />
             </div>
             <div className="tooltip-content absolute">
-                <p>{trans(helpTextInfo)}</p>
+                <p>{t(helpTextInfo)}</p>
             </div>
         </div>
     )

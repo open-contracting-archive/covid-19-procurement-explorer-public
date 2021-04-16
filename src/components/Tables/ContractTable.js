@@ -4,7 +4,7 @@ import { get, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
 import ContractService from '../../services/ContractService'
 import { Loader, TableLoader } from '../Utilities'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { formatDate } from '../../helpers/date'
 import { hasValidProperty } from '../../helpers/general'
 import useTableSorting from '../../hooks/useTableSorting'
@@ -26,7 +26,6 @@ const ContractTable = (props) => {
     const [totalItems, setTotalItems] = useState()
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
-    const { trans } = useTrans()
     const history = useHistory()
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
         items: originalData,
@@ -132,14 +131,14 @@ const ContractTable = (props) => {
                                         <th style={{ width: '25%' }}>
                                             {tableHeaderSpan(
                                                 'contract_title',
-                                                `${trans('Contract Title')}`
+                                                `${t('Contract Title')}`
                                             )}
                                         </th>
                                         {!hasCountry() && (
                                             <th style={{ width: '10%' }}>
                                                 {tableHeaderSpan(
                                                     'country',
-                                                    `${trans('Country')}`
+                                                    `${t('Country')}`
                                                 )}
                                             </th>
                                         )}
@@ -147,7 +146,7 @@ const ContractTable = (props) => {
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
                                                     'buyer',
-                                                    `${trans('Buyer')}`
+                                                    `${t('Buyer')}`
                                                 )}
                                             </th>
                                         )}
@@ -155,36 +154,34 @@ const ContractTable = (props) => {
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
                                                     'supplier',
-                                                    `${trans('Supplier')}`
+                                                    `${t('Supplier')}`
                                                 )}
                                             </th>
                                         )}
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'procurement_procedure',
-                                                `${trans('Method')}`
+                                                `${t('Method')}`
                                             )}
                                         </th>
                                         {!hasProduct() && (
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
                                                     'product_category',
-                                                    `${trans(
-                                                        'Product Category'
-                                                    )}`
+                                                    `${t('Product Category')}`
                                                 )}
                                             </th>
                                         )}
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'contract_date',
-                                                `${trans('Date')}`
+                                                `${t('Date')}`
                                             )}
                                         </th>
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'contract_value_usd',
-                                                `${trans('Value (USD)')}`
+                                                `${t('Value (USD)')}`
                                             )}
                                         </th>
                                         <th style={{ width: '3%' }} />

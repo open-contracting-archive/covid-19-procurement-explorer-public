@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
 import { transformNews } from '../../../../helpers/transformers'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import DefaultImage from '../../../../assets/img/default_image.png'
 
 const OtherNewsList = () => {
@@ -15,7 +15,6 @@ const OtherNewsList = () => {
         return { limit: 6, total: 0, offset: 0 }
     })
     const [search] = useState(null)
-    const { trans } = useTrans()
 
     useEffect(() => {
         loadNews()
@@ -67,7 +66,7 @@ const OtherNewsList = () => {
         <section className="px-4 py-24">
             <div className="container mx-auto">
                 <div className="flex md: flex-nowrap flex-wrap justify-between pb-10">
-                    <p className="text-xl blue-50">{trans('Other News')}</p>
+                    <p className="text-xl blue-50">{t('Other News')}</p>
                 </div>
 
                 {loading ? (
@@ -118,13 +117,13 @@ const OtherNewsList = () => {
                                         onClick={() => {
                                             loadMoreNews()
                                         }}>
-                                        {trans('Load more')}
+                                        {t('Load more')}
                                     </span>
                                 </div>
                             ))}
                     </Fragment>
                 ) : (
-                    <p>{trans('No other news found')}</p>
+                    <p>{t('No other news found')}</p>
                 )}
             </div>
         </section>

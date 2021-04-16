@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
 import { Loader, ErrorHandler } from '../Utilities'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import { AreaChartBlock } from './Charts'
 import useDataCalculations from '../../hooks/useDataCalculations'
@@ -24,7 +24,6 @@ const AverageBidsPerContract = (props) => {
         changePercentage,
         colorValue
     } = useDataCalculations()
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -62,7 +61,7 @@ const AverageBidsPerContract = (props) => {
     return (
         <div className="bg-white rounded p-4 h-full">
             <h3 className="uppercase font-bold  text-primary-dark">
-                {label || trans('Average bids per contract')}
+                {label || t('Average bids per contract')}
             </h3>
             {loading ? (
                 <Loader sm />

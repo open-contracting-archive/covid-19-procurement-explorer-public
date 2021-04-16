@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
 import { SimpleBarChart, AreaChartBlock } from './Charts'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import Visualization from '../../constants/Visualization'
 import useDataCalculations from '../../hooks/useDataCalculations'
@@ -26,7 +26,6 @@ const TotalContracts = (props) => {
         areaChart: [],
         barChart: []
     })
-    const { trans } = useTrans()
     const {
         areaChartData,
         changePercentage,
@@ -108,7 +107,7 @@ const TotalContracts = (props) => {
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>
-                    {trans('View in detail')} →
+                    {t('View in detail')} →
                 </span>
             )}
         </CardContainer>

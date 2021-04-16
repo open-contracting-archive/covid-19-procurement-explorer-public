@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty, get } from 'lodash'
 import { SankeyChart } from './Charts'
-import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import {
     Loader,
@@ -14,6 +13,7 @@ import {
 } from '../Utilities'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
+import { t } from '@transifex/native'
 
 const CountrySuppliers = (props) => {
     // ===========================================================================
@@ -30,7 +30,6 @@ const CountrySuppliers = (props) => {
     const [originalData, setOriginalData] = useState({})
     const [chartData, setChartData] = useState([])
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const currency = useSelector((state) => state.general.currency)
     const countryCurrency = useSelector(
@@ -110,7 +109,7 @@ const CountrySuppliers = (props) => {
                     <div className="flex flex-wrap items-center mb-4 md:mb-0 justify-start md:justify-between">
                         <div className="flex mr-2 mb-2 md:mb-0">
                             <h3 className="uppercase font-bold  text-primary-dark">
-                                {trans(label)}
+                                {t(label)}
                             </h3>
                             <HelpText helpTextInfo={helpText} />
                         </div>

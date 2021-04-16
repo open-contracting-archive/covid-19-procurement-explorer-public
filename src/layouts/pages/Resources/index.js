@@ -5,7 +5,7 @@ import { get, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
 import CmsPageService from '../../../services/CmsPageService'
 import useCountries from '../../../hooks/useCountries'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import useContentFilters from '../../../hooks/useContentFilters'
 import {
     Loader,
@@ -32,7 +32,6 @@ const Resources = () => {
     const { countrySelectList, resourceTypeSelectList } = useContentFilters()
     const [showFilter, setShowFilter] = useState('hidden')
     const history = useHistory()
-    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     function showDetail(id) {
@@ -133,17 +132,13 @@ const Resources = () => {
                 <div className="container mx-auto">
                     <Breadcrumb />
 
-                    <h2 className="text-xl md:text-2xl">
-                        {trans('Resources')}
-                    </h2>
+                    <h2 className="text-xl md:text-2xl">{t('Resources')}</h2>
                 </div>
             </section>
             <section className="resources__table p-4 md:py-12 bg-primary-gray">
                 <div className="container mx-auto">
                     <h2 className="font-normal text-lg mb-6">
-                        {trans(
-                            'Best practices and solutions from our database'
-                        )}
+                        {t('Best practices and solutions from our database')}
                     </h2>
 
                     <div className="relative">
@@ -170,7 +165,7 @@ const Resources = () => {
                                 <div className="flex -mx-2 -mb-5 flex-wrap">
                                     <div className="w-1/2 md:w-40 px-2 mb-5">
                                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                            {trans('Country')}
+                                            {t('Country')}
                                         </p>
                                         <Select
                                             className="select-filter text-sm"
@@ -185,7 +180,7 @@ const Resources = () => {
                                     </div>
                                     <div className="w-1/2 md:w-40 px-2 mb-5">
                                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                            {trans('Type')}
+                                            {t('Type')}
                                         </p>
                                         <Select
                                             className="select-filter text-sm"
@@ -210,7 +205,7 @@ const Resources = () => {
                         <div className="hidden md:flex gap-8">
                             <div className="w-40">
                                 <p className="uppercase text-xs opacity-50 leading-none">
-                                    {trans('Country')}
+                                    {t('Country')}
                                 </p>
                                 <Select
                                     className="select-filter text-sm"
@@ -225,7 +220,7 @@ const Resources = () => {
                             </div>
                             <div className="w-40">
                                 <p className="uppercase text-xs opacity-50 leading-none">
-                                    {trans('Type')}
+                                    {t('Type')}
                                 </p>
                                 <Select
                                     className="select-filter text-sm"
@@ -255,13 +250,13 @@ const Resources = () => {
                                                         onClick={() =>
                                                             appendSort('title')
                                                         }>
-                                                        {trans('Title')}
+                                                        {t('Title')}
                                                         {columnSorting('title')}
                                                     </span>
                                                 </th>
                                                 <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
-                                                        {trans('Country')}
+                                                        {t('Country')}
                                                     </span>
                                                 </th>
                                                 <th style={{ width: '10%' }}>
@@ -272,7 +267,7 @@ const Resources = () => {
                                                                 'resource_type'
                                                             )
                                                         }>
-                                                        {trans('Type')}
+                                                        {t('Type')}
                                                         {columnSorting(
                                                             'resource_type'
                                                         )}
@@ -327,7 +322,7 @@ const Resources = () => {
                                                 height: '75%',
                                                 minHeight: '250px'
                                             }}>
-                                            <p>{trans('No data available')}</p>
+                                            <p>{t('No data available')}</p>
                                         </div>
                                     )}
                                 </div>
@@ -337,7 +332,7 @@ const Resources = () => {
                                 <div>
                                     <div className="text-right mt-2 text-sm">
                                         <p className="text-primary-dark text-opacity-50">
-                                            {trans('Showing')}{' '}
+                                            {t('Showing')}{' '}
                                             <span className="text-primary-dark text-opacity-75">
                                                 {1 + currentPage * limit}
                                             </span>{' '}
@@ -349,11 +344,11 @@ const Resources = () => {
                                                     : limit +
                                                       currentPage * limit}
                                             </span>{' '}
-                                            {trans('of')}{' '}
+                                            {t('of')}{' '}
                                             <span className="text-primary-dark text-opacity-75">
                                                 {totalItems}
                                             </span>{' '}
-                                            {trans('items')}
+                                            {t('items')}
                                         </p>
                                     </div>
 

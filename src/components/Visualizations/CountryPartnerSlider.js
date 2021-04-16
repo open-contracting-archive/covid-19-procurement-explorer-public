@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { API_URL } from '../../helpers/api'
 import { Loader } from '../Utilities'
 import VisualizationService from '../../services/VisualizationService'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
@@ -19,7 +19,6 @@ const CountryPartnerSlider = ({ params }) => {
     // ===========================================================================
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState([])
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -43,7 +42,7 @@ const CountryPartnerSlider = ({ params }) => {
     return (
         <div className="bg-white rounded p-4 md:pb-8 simple-tab text-primary-dark">
             <h3 className="uppercase font-bold mb-6">
-                {trans('Country partner organization')}
+                {t('Country partner organization')}
             </h3>
             {loading ? (
                 <Loader />
@@ -74,7 +73,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                             <div className="w-full md:w-auto md:pr-4">
                                                                 <div className="mb-6">
                                                                     <span className="block mb-2">
-                                                                        {trans(
+                                                                        {t(
                                                                             'Website'
                                                                         )}
                                                                     </span>
@@ -96,7 +95,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                                 </div>
                                                                 <div>
                                                                     <span className="block mb-2">
-                                                                        {trans(
+                                                                        {t(
                                                                             'Email'
                                                                         )}
                                                                     </span>

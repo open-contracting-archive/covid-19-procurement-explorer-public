@@ -9,7 +9,6 @@ import CountryService from '../../services/CountryService'
 const languages = [{ code: 'en', name: 'English' }]
 
 const LanguageSwitcher = () => {
-    // const languages = useSelector((state) => state.general.languages)
     const currentLocale = useSelector((state) => state.general.currentLocale)
     const dispatch = useDispatch()
 

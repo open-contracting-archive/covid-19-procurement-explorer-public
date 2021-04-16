@@ -6,9 +6,9 @@ import {
     ErrorHandler
 } from '../Utilities'
 import { TreeMapChart } from './Charts'
-import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import ContractView from '../../constants/ContractView'
+import { t } from '@transifex/native'
 import { isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Default from '../../constants/Default'
@@ -23,7 +23,6 @@ const ProductCategoryMap = (props) => {
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
@@ -70,7 +69,7 @@ const ProductCategoryMap = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between md:mb-4">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            {trans('Product Category Map')}
+                            {t('Product Category Map')}
                         </h3>
                         <ContractViewSwitcher
                             style={'short'}

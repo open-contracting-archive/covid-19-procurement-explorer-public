@@ -2,13 +2,12 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { Loader } from '../../../../components/Utilities'
 
 const LibraryResources = () => {
     const [resourceList, setResourceList] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.ResourceList().then((response) => {
@@ -39,9 +38,7 @@ const LibraryResources = () => {
         <section className="px-4 resources py-8 md:py-24">
             <div className="container mx-auto">
                 <div className="text-center">
-                    <p className="text-xl blue-50 pb-10">
-                        {trans('Resources')}
-                    </p>
+                    <p className="text-xl blue-50 pb-10">{t('Resources')}</p>
                 </div>
                 {loading ? (
                     <Loader />
@@ -81,9 +78,7 @@ const LibraryResources = () => {
                                                                 />
                                                             </svg>
                                                             <span className="text-blue-20 test-sm ml-2">
-                                                                {trans(
-                                                                    'Download'
-                                                                )}
+                                                                {t('Download')}
                                                             </span>
                                                         </div>
                                                     </a>
@@ -96,12 +91,12 @@ const LibraryResources = () => {
                         {resourceList.length !== 0 ? (
                             <div className="flex justify-center pt-10">
                                 <Link to="/resources" className="text-blue-20">
-                                    {trans('View all resources')} --&gt;{' '}
+                                    {t('View all resources')} --&gt;{' '}
                                 </Link>
                             </div>
                         ) : (
                             <p className="text-center">
-                                {trans('There are no resources')}
+                                {t('There are no resources')}
                             </p>
                         )}
                     </Fragment>

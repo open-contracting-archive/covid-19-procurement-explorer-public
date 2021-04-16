@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import useTrans from '../../hooks/useTrans'
 import { Loader, HelpText, ContractViewSwitcher } from './index'
+import { t } from '@transifex/native'
 
 const CardContainer = (props) => {
     const {
@@ -13,7 +13,6 @@ const CardContainer = (props) => {
         viewType,
         viewHandler
     } = props
-    const { trans } = useTrans()
 
     return (
         <div className={`bg-white rounded p-4 h-full ${appendClass}`}>
@@ -21,7 +20,7 @@ const CardContainer = (props) => {
                 <div className="w-full flex flex-wrap items-center justify-between mb-4">
                     <div className="flex items-center mb-4 md:mb-0">
                         <h3 className="uppercase font-bold text-primary-dark inline-block">
-                            {trans(label)}
+                            {t(label)}
                         </h3>
 
                         {symbol}

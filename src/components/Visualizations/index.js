@@ -102,3 +102,6 @@ export const CountryDetailMap = React.lazy(() =>
 export const CountryPartnerSlider = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './CountryPartnerSlider')
 )
+export const GlobalMap = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './GlobalMap')
+)

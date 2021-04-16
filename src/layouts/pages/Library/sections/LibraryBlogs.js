@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { formatDate } from '../../../../helpers/date'
 import { Loader } from '../../../../components/Utilities'
 import { API_URL } from '../../../../helpers/api'
@@ -11,7 +11,6 @@ import DefaultImage from '../../../../assets/img/default_image.png'
 const LibraryBlogs = () => {
     const [blogList, setBlogsData] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.BlogList({ limit: 6 }).then((response) => {
@@ -28,7 +27,7 @@ const LibraryBlogs = () => {
         <section className="px-4 py-12 md:py-24 blog">
             <div className="container mx-auto">
                 <div className="text-center">
-                    <p className="text-xl blue-50 pb-10">{trans('Blogs')}</p>
+                    <p className="text-xl blue-50 pb-10">{t('Blogs')}</p>
                 </div>
                 {loading ? (
                     <Loader />
@@ -84,12 +83,12 @@ const LibraryBlogs = () => {
                         </div>
                         <div className="flex justify-center pt-10">
                             <Link to="/blogs" className="text-blue-20">
-                                {trans('View all blogs')} --&gt;{' '}
+                                {t('View all blogs')} --&gt;{' '}
                             </Link>
                         </div>
                     </Fragment>
                 ) : (
-                    <p>{trans('There are no blogs')}</p>
+                    <p>{t('There are no blogs')}</p>
                 )}
             </div>
         </section>

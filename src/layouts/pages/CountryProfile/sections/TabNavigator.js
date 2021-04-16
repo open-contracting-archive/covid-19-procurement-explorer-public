@@ -1,11 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { tabItems } from '../../../../constants/Tab'
 
 const TabNavigator = (props) => {
     const { endpoint, countrySlug } = props
-    const { trans } = useTrans()
     const pathTo = (tabItem) => {
         return countrySlug !== undefined
             ? `/${endpoint}/${countrySlug}/${tabItem}`
@@ -23,7 +22,7 @@ const TabNavigator = (props) => {
                                     activeClassName="active"
                                     className={'capitalize'}
                                     to={pathTo(item)}>
-                                    {trans(item)}
+                                    {t(item)}
                                 </NavLink>
                             </li>
                         )

@@ -3,7 +3,7 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import VisualizationService from '../../services/VisualizationService'
-import GlobalMap from './GlobalMap'
+import { GlobalMap } from './index'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
 import ContractView from '../../constants/ContractView'
 import {

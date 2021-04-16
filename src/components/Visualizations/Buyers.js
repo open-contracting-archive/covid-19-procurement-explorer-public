@@ -3,7 +3,7 @@ import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import { AreaChartBlock } from './Charts'
 import { Loader, HelpText, ErrorHandler } from '../Utilities'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import Visualization from '../../constants/Visualization'
 
 const Buyers = (props) => {
@@ -19,7 +19,6 @@ const Buyers = (props) => {
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const [error, setError] = useState(false)
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -78,7 +77,7 @@ const Buyers = (props) => {
         <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {trans(label)}
+                    {t(label)}
                 </h3>
                 <HelpText helpTextInfo={helpText} />
             </div>
