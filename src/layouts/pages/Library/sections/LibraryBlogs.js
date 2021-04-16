@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
 import useTrans from '../../../../hooks/useTrans'
 import { formatDate } from '../../../../helpers/date'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 import { API_URL } from '../../../../helpers/api'
 import DefaultImage from '../../../../assets/img/default_image.png'
 

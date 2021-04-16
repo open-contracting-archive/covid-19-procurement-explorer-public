@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import VisualizationService from '../../services/VisualizationService'
-import CardContainer from '../Utilities/CardContainer'
-import ErrorHandler from '../ErrorHandler'
+import { CardContainer, ErrorHandler } from '../Utilities'
 import Default from '../../constants/Default'
 
 const ContractRedFlags = (props) => {

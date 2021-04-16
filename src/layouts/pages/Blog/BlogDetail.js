@@ -3,15 +3,17 @@ import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
 import { formatDate } from '../../../helpers/date'
-import ShareButtons from '../../../components/Library/ShareButtons'
-import TagList from '../../../components/website/Library/TagList'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
 import DefaultImage from '../../../assets/img/default_image.png'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import { stripTags } from '../../../helpers/transformers'
+import {
+    Loader,
+    MetaInformation,
+    ShareButtons,
+    Breadcrumb,
+    TagList
+} from '../../../components/Utilities'
 
 const BlogDetail = () => {
     const [blogDetail, setBlogDetail] = useState({})

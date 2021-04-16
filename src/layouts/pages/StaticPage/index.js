@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
+import { Loader } from '../../../components/Utilities'
 
 const StaticPage = () => {
     let { slug } = useParams()

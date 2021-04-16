@@ -3,9 +3,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { get } from 'lodash'
 import useTrans from '../../hooks/useTrans'
-import Loader from '../Loader/Loader'
+import { Loader } from '../Utilities'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from '../Utilities/ChartFooter'
+import { ChartFooter } from '../Utilities'
 import { mediaUrl } from '../../helpers/general'
 
 const OverallStatisticsTable = () => {

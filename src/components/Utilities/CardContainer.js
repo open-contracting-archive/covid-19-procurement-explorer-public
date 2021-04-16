@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
-import Loader from '../Loader/Loader'
-import HelpText from '../HelpText/HelpText'
-import ContractViewSwitcher from './ContractViewSwitcher'
 import useTrans from '../../hooks/useTrans'
+import { Loader, HelpText, ContractViewSwitcher } from './index'
 
 const CardContainer = (props) => {
     const {

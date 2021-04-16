@@ -5,7 +5,7 @@ import {
     TotalContracts,
     TotalSpending
 } from '../../../../components/Visualizations'
-import BuyerTable from '../../../../components/Tables/BuyerTable'
+import { BuyerTable } from '../../../../components/Tables'
 import VisualizationModal from '../modal/VisualizationModal'
 
 const GlobalBuyers = (props) => {

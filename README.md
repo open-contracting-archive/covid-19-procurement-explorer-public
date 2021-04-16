@@ -57,7 +57,7 @@ yarn build
 
 ## Deployment
 
-Get the deployed branch and commit:
+Get the deployed branch, commit hash and datetime:
 
 ```bash
 curl https://open-contracting.health/ver.txt

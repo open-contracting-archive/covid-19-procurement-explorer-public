@@ -1,6 +1,6 @@
 import React from 'react'
-import FeaturedInsights from '../../../../components/Library/FeaturedInsights'
-import InsightTable from '../../../../components/Tables/InsightTable'
+import { FeaturedInsights } from '../../../../components/Utilities'
+import { InsightTable } from '../../../../components/Tables'
 import useTrans from '../../../../hooks/useTrans'
 
 const CountryInsights = (props) => {

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../../../services/VisualizationService'
-import CountryDetailMap from '../../../../components/Charts/CountryDetailMap/CountryDetailMap'
-import Loader from '../../../../components/Loader/Loader'
+import { CountryDetailMap } from '../../../../components/Visualizations'
+import {
+    Loader,
+    ChartFooter,
+    ErrorHandler
+} from '../../../../components/Utilities'
 import ContractView from '../../../../constants/ContractView'
-import ChartFooter from '../../../../components/Utilities/ChartFooter'
-import ErrorHandler from '../../../../components/ErrorHandler'
 import Default from '../../../../constants/Default'
 
 const CountryMapElement = (props) => {

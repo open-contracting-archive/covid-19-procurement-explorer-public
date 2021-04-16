@@ -3,11 +3,10 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
-import BarListChart from '../BarListSection/BarListChart'
+import { BarListChart } from './Charts'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
-import CardContainer from '../Utilities/CardContainer'
-import ErrorHandler from '../ErrorHandler'
+import { CardContainer, ErrorHandler } from '../Utilities'
 
 const ProductDistribution = (props) => {
     // ===========================================================================

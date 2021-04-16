@@ -4,15 +4,17 @@ import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
 import CountryService from '../../services/CountryService'
-import RaceMap from '../../components/Charts/RaceMap/RaceMap'
-import Loader from '../../components/Loader/Loader'
-import ChartFooter from '../Utilities/ChartFooter'
+import { RaceMap } from './Charts'
+import {
+    Loader,
+    ChartFooter,
+    ContractViewSwitcher,
+    PerCapitaSwitcher
+} from '../Utilities'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
 import Visualization from '../../constants/Visualization'
 import ContractView from '../../constants/ContractView'
-import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 import Default from '../../constants/Default'
-import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
 import { mediaUrl } from '../../helpers/general'
 
 const options = continentSelectList

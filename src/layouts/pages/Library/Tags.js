@@ -4,8 +4,7 @@ import { get } from 'lodash'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
 import { useQuery } from '../../../helpers/general'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
-import Loader from '../../../components/Loader/Loader'
+import { Loader, Breadcrumb } from '../../../components/Utilities'
 import { API_URL } from '../../../helpers/api'
 
 const Tags = () => {

@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
+import ReactPaginate from 'react-paginate'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useCountries from '../../../hooks/useCountries'
 import useTrans from '../../../hooks/useTrans'
-import TableLoader from '../../../components/Loader/TableLoader'
-import ReactPaginate from 'react-paginate'
 import useContentFilters from '../../../hooks/useContentFilters'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import {
+    Loader,
+    MetaInformation,
+    Breadcrumb,
+    TableLoader
+} from '../../../components/Utilities'
 import { ReactComponent as FilterIcon } from '../../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../../assets/img/icons/ic_filter-close.svg'
 

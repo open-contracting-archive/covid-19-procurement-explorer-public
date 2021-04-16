@@ -3,15 +3,17 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import VisualizationService from '../../services/VisualizationService'
-import GlobalMap from '../GlobalMap/GlobalMap'
+import GlobalMap from './GlobalMap'
 import { CONTINENTS, continentSelectList } from '../../helpers/country'
-import Loader from '../../components/Loader/Loader'
 import ContractView from '../../constants/ContractView'
-import ChartFooter from '../Utilities/ChartFooter'
-import ErrorHandler from '../ErrorHandler'
+import {
+    Loader,
+    ChartFooter,
+    ContractViewSwitcher,
+    PerCapitaSwitcher,
+    ErrorHandler
+} from '../Utilities'
 import Default from '../../constants/Default'
-import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
-import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
 
 const options = continentSelectList
 

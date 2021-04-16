@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux'
 import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
 import useTrans from '../../../../hooks/useTrans'
-import CurrencySwitcher from '../../../../components/CurrencySwitcher/CurrencySwitcher'
-import ErrorHandler from '../../../../components/ErrorHandler'
+import {
+    Loader,
+    CurrencySwitcher,
+    ErrorHandler
+} from '../../../../components/Utilities'
 import VisualizationService from '../../../../services/VisualizationService'
 import { get } from 'lodash'
-import Loader from '../../../../components/Loader/Loader'
 import CountryService from '../../../../services/CountryService'
 import { mediaUrl } from '../../../../helpers/general'
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
 import useTrans from '../../../../hooks/useTrans'
 import { formatDate, formatTime } from '../../../../helpers/date'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 
 const LibraryUpcomingEvents = () => {
     const [eventList, setEventList] = useState([])

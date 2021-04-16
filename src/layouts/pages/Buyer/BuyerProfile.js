@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { get, isEmpty } from 'lodash'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import CountryFlag from '../../../components/CountryFlagIcon'
+import {
+    Loader,
+    CountryFlagIcon,
+    MetaInformation
+} from '../../../components/Utilities'
 import useTrans from '../../../hooks/useTrans'
 import {
     AverageBidsPerContract,
@@ -18,8 +22,6 @@ import {
 } from '../../../components/Visualizations'
 import VisualizationService from '../../../services/VisualizationService'
 import { ContractTable } from '../../../components/Tables'
-import Loader from '../../../components/Loader/Loader'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const BuyerProfile = () => {
     // ===========================================================================
@@ -86,7 +88,7 @@ const BuyerProfile = () => {
                             </h2>
                             <div className="flex flex-wrap mb-5 text-primary-dark">
                                 <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
-                                    <CountryFlag
+                                    <CountryFlagIcon
                                         className="rounded-sm mr-2"
                                         code={
                                             originalData &&

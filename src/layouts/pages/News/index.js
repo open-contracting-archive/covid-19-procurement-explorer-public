@@ -1,9 +1,13 @@
 import React from 'react'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
-import FeaturedNewsList from './sections/FeaturedNewsList'
-import OtherNewsList from './sections/OtherNewsList'
 import useTrans from '../../../hooks/useTrans'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { MetaInformation, Breadcrumb } from '../../../components/Utilities'
+
+const OtherNewsList = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './sections/OtherNewsList')
+)
+const FeaturedNewsList = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './sections/FeaturedNewsList')
+)
 
 const News = () => {
     const { trans } = useTrans()

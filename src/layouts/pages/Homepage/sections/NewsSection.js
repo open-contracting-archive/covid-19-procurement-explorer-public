@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../../helpers/api'
 import CmsPageService from '../../../../services/CmsPageService'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 import { formatDate } from '../../../../helpers/date'
 import useTrans from '../../../../hooks/useTrans'
 

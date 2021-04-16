@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductCategoryMap from '../../../../components/Visualizations/Common/ProductCategoryMap'
+import { ProductCategoryMap } from '../../../../components/Visualizations'
 import { ProductTable } from '../../../../components/Tables'
 
 const CountryProducts = (props) => {

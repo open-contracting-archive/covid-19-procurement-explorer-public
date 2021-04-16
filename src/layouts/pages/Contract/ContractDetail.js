@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
-import CountryFlag from '../../../components/CountryFlagIcon'
 import useTrans from '../../../hooks/useTrans'
 import CountryService from '../../../services/CountryService'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
-import Loader from '../../../components/Loader/Loader'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
-import AwardedItemTable from './AwardedItemsTable'
+import {
+    Loader,
+    CountryFlagIcon,
+    MetaInformation
+} from '../../../components/Utilities'
+
+const AwardedItemTable = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './AwardedItemsTable')
+)
 
 const ContractDetail = () => {
     const { contractId } = useParams()
@@ -115,7 +120,7 @@ const ContractDetail = () => {
                     </div>
 
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
-                        <CountryFlag
+                        <CountryFlagIcon
                             className="rounded-sm mr-2"
                             code={
                                 contractDetail &&

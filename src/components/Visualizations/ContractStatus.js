@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux'
 import VisualizationService from '../../services/VisualizationService'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
-import SimpleBarListChart from '../SimpleBarListSection/SimpleBarListChart'
-import ErrorHandler from '../ErrorHandler'
-import CardContainer from '../Utilities/CardContainer'
+import { SimpleBarListChart } from './Charts'
+import { CardContainer, ErrorHandler } from '../Utilities'
 
 const ContractStatus = (props) => {
     // ===========================================================================

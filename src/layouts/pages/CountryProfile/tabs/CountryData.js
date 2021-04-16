@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 import {
     AverageBidsPerContract,
     DirectOpen,
@@ -15,9 +15,9 @@ import {
     ProductDistribution,
     ContractsCorrelation,
     ContractRedFlags,
-    Concentration
+    Concentration,
+    CountryPartnerSlider
 } from '../../../../components/Visualizations'
-import CountryPartnerSlider from '../../../../components/CountryPartnerSlider/CountryPartnerSlider'
 
 function CountryData(props) {
     const { countryCode, disclaimerInfo = null } = props

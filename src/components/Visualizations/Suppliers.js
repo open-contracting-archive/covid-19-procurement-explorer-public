@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
-import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import Loader from '../Loader/Loader'
-import HelpText from '../../components/HelpText/HelpText'
+import { AreaChartBlock } from './Charts'
+import { Loader, HelpText, ErrorHandler } from '../Utilities'
 import Visualization from '../../constants/Visualization'
-import ErrorHandler from '../ErrorHandler'
 
 const Suppliers = (props) => {
     // ===========================================================================

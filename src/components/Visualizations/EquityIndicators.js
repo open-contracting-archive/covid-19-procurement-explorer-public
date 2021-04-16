@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
-import PieChart from '../Charts/PieChart/PieChart'
+import { PieChart } from './Charts'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
 import { formatNumber } from '../../helpers/number'
 import ContractView from '../../constants/ContractView'
 import useContractTransformers from '../../hooks/useContractTransformers'
-import ErrorHandler from '../ErrorHandler'
 import Default from '../../constants/Default'
-import CardContainer from '../Utilities/CardContainer'
+import { CardContainer, ErrorHandler } from '../Utilities'
 
 const colors = ['#ABBABF', '#DCEAEE']
 

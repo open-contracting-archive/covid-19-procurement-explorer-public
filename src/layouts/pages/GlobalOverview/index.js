@@ -1,14 +1,7 @@
 import React, { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
-import TabNavigator from '../CountryProfile/sections/TabNavigator'
-import WorldMap from '../../../components/Visualizations/WorldMap'
-import GlobalData from './tabs/GlobalData'
-import GlobalInsights from './tabs/GlobalInsights'
-import GlobalContracts from './tabs/GlobalContracts'
-import GlobalEquity from './tabs/GlobalEquity'
-import GlobalBuyers from './tabs/GlobalBuyers'
-import GlobalSuppliers from './tabs/GlobalSuppliers'
-import GlobalProducts from './tabs/GlobalProducts'
+import useCountries from '../../../hooks/useCountries'
+import { WorldMap } from '../../../components/Visualizations'
 import {
     BUYERS,
     CONTRACTS,
@@ -19,11 +12,44 @@ import {
     PRODUCTS,
     SUPPLIERS
 } from '../../../constants/Tab'
-import CountrySelector from '../../../components/CountrySelector/CountrySelector'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
-import DataDisclaimerInfo from '../CountryProfile/partials/DataDisclaimerInfo'
-import useCountries from '../../../hooks/useCountries'
-import CountryMethodology from '../CountryProfile/tabs/CountryMethodology'
+import { CountrySelector, MetaInformation } from '../../../components/Utilities'
+
+const TabNavigator = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ '../CountryProfile/sections/TabNavigator'
+    )
+)
+const GlobalData = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalData')
+)
+const GlobalInsights = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalInsights')
+)
+const GlobalContracts = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalContracts')
+)
+const GlobalEquity = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalEquity')
+)
+const GlobalBuyers = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalBuyers')
+)
+const GlobalSuppliers = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalSuppliers')
+)
+const GlobalProducts = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalProducts')
+)
+const DataDisclaimerInfo = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ '../CountryProfile/partials/DataDisclaimerInfo'
+    )
+)
+const CountryMethodology = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ '../CountryProfile/tabs/CountryMethodology'
+    )
+)
 
 const GlobalOverview = () => {
     // ===========================================================================

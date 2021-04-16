@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import useTrans from '../../hooks/useTrans'
-import Loader from '../../components/Loader/Loader'
-import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
+import { Loader, ChartFooter, ErrorHandler } from '../Utilities'
+import { SimpleBarChart } from './Charts'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from '../Utilities/ChartFooter'
-import ErrorHandler from '../ErrorHandler'
 import Default from '../../constants/Default'
 
 const BuyerProductTimeline = (props) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
+import { Loader } from '../../../components/Utilities'
 
 const CmsPageContent = (props) => {
     const { slug } = props

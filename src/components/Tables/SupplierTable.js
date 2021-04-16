@@ -5,8 +5,7 @@ import { identity, get, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
 import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
-import Loader from '../Loader/Loader'
-import TableLoader from '../Loader/TableLoader'
+import { Loader, TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
@@ -14,7 +13,6 @@ import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_fil
 import Default from '../../constants/Default'
 import { formatDecimal } from '../../helpers/number'
 import useTableSorting from '../../hooks/useTableSorting'
-// import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 
 const SupplierTable = (props) => {
     // ===========================================================================

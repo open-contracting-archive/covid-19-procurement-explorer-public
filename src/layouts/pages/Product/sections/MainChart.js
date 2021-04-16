@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import ProductMap from '../../../../components/Visualizations/ProductMap'
-import CountryProductComparisonChart from '../../../../components/Visualizations/CountryProductComparisonChart'
-import GlobalSuppliers from '../../../../components/Visualizations/GlobalSuppliers'
-import CountrySuppliers from '../../../../components/Visualizations/Country/CountrySuppliers'
+import {
+    ProductMap,
+    CountryProductComparisonChart,
+    GlobalSuppliers,
+    CountrySuppliers
+} from '../../../../components/Visualizations'
 import useTrans from '../../../../hooks/useTrans'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as FlowIcon } from '../../../../assets/img/icons/ic_flow.svg'

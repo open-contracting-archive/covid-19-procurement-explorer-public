@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
-import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
-import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
+import { SimpleBarChart, AreaChartBlock } from './Charts'
 import useTrans from '../../hooks/useTrans'
 import Visualization from '../../constants/Visualization'
-import ErrorHandler from '../ErrorHandler'
 import useDataCalculations from '../../hooks/useDataCalculations'
-import CardContainer from '../Utilities/CardContainer'
+import { CardContainer, ErrorHandler } from '../Utilities'
 
 const TotalSpending = (props) => {
     // ===========================================================================

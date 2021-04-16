@@ -1,10 +1,21 @@
 import React from 'react'
 import useTrans from '../../../hooks/useTrans'
-import LibraryNews from './sections/LibraryNews'
-import LibraryBlogs from './sections/LibraryBlogs'
-import LibraryUpcomingEvents from './sections/LibraryUpcomingEvents'
-import LibraryResources from './sections/LibraryResources'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { MetaInformation } from '../../../components/Utilities'
+
+const LibraryResources = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './sections/LibraryResources')
+)
+const LibraryUpcomingEvents = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-common" */ './sections/LibraryUpcomingEvents'
+    )
+)
+const LibraryBlogs = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './sections/LibraryBlogs')
+)
+const LibraryNews = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './sections/LibraryNews')
+)
 
 const Library = () => {
     const { trans } = useTrans()

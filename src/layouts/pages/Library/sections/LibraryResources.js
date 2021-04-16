@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { get } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
 import useTrans from '../../../../hooks/useTrans'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 
 const LibraryResources = () => {
     const [resourceList, setResourceList] = useState([])

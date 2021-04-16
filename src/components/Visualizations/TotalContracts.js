@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
-import SimpleBarChart from '../Charts/SimpleBarChart/SimpleBarChart'
+import { SimpleBarChart, AreaChartBlock } from './Charts'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
-import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
 import Visualization from '../../constants/Visualization'
-import ErrorHandler from '../ErrorHandler'
 import useDataCalculations from '../../hooks/useDataCalculations'
-import CardContainer from '../Utilities/CardContainer'
+import { CardContainer, ErrorHandler } from '../Utilities'
 
 const TotalContracts = (props) => {
     // ===========================================================================

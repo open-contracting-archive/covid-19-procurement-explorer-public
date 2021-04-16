@@ -14,7 +14,7 @@ import {
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
-import RouterView from './RouterView'
+import RouterView from './layouts/RouterView'
 import { init } from 'cookie-though'
 import cookieConfig from './components/Utilities/CookieConfig'
 import { load } from 'fathom-client'
