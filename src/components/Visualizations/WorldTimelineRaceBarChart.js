@@ -3,15 +3,17 @@ import Select from 'react-select'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
-import BarChartRace from '../../components/Charts/BarChart/BarChartRace'
+import { BarChartRace } from './Charts'
 import CountryService from '../../services/CountryService'
-import Loader from '../../components/Loader/Loader'
 import { continentSelectList } from '../../helpers/country'
 import Default from '../../constants/Default'
-import ChartFooter from '../Utilities/ChartFooter'
+import {
+    Loader,
+    ChartFooter,
+    ContractViewSwitcher,
+    PerCapitaSwitcher
+} from '../Utilities'
 import Visualization from '../../constants/Visualization'
-import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
-import PerCapitaSwitcher from '../Utilities/PerCapitaSwitcher'
 import ContractView from '../../constants/ContractView'
 import { mediaUrl } from '../../helpers/general'
 

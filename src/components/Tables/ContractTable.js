@@ -3,16 +3,16 @@ import { useHistory } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
 import ContractService from '../../services/ContractService'
-import Loader from '../Loader/Loader'
+import { Loader, TableLoader } from '../Utilities'
 import useTrans from '../../hooks/useTrans'
 import { formatDate } from '../../helpers/date'
-import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
-import TableLoader from '../Loader/TableLoader'
-import 'react-datepicker/dist/react-datepicker.css'
 import { hasValidProperty } from '../../helpers/general'
-import ContractFilter from './ContractFilter'
 import useTableSorting from '../../hooks/useTableSorting'
+import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 
+const ContractFilter = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './ContractFilter')
+)
 const limit = 20
 
 const ContractTable = (props) => {
@@ -33,6 +33,9 @@ const ContractTable = (props) => {
         defaultSorting: {
             column: 'contract_title',
             direction: ''
+        },
+        columnTypeMapping: {
+            contract_value_usd: 'number'
         },
         sortTableData: false
     })

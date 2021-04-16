@@ -1,5 +1,5 @@
 import React from 'react'
-import WorldMap from '../../components/Visualizations/WorldMap'
+import { WorldMap } from './index'
 import useTrans from '../../hooks/useTrans'
 
 const CountryProductMap = (props) => {

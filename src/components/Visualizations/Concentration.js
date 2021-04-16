@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
-import BarListChart from '../BarListSection/BarListChart'
+import { BarListChart } from './Charts'
 import Default from '../../constants/Default'
-import ErrorHandler from '../ErrorHandler'
-import CardContainer from '../Utilities/CardContainer'
+import { CardContainer, ErrorHandler } from '../Utilities'
 
 const Concentration = (props) => {
     // ===========================================================================

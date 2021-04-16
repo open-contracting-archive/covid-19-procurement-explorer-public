@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { get, isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import SankeyChart from '../Charts/SankeyChart/SankeyChart'
+import { SankeyChart } from './Charts'
 import VisualizationService from '../../services/VisualizationService'
-import ChartFooter from '../Utilities/ChartFooter'
+import { CardContainer, ChartFooter, ErrorHandler } from '../Utilities'
 import ContractView from '../../constants/ContractView'
-import ErrorHandler from '../ErrorHandler'
 import Default from '../../constants/Default'
-import CardContainer from '../Utilities/CardContainer'
 
 const GlobalSuppliers = (props) => {
     // ===========================================================================

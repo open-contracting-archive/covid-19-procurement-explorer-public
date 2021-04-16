@@ -1,6 +1,11 @@
 import React, { Fragment } from 'react'
-import Header from './_partials/header'
-import Footer from './_partials/footer'
+
+const Header = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './_partials/header')
+)
+const Footer = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './_partials/footer')
+)
 
 const WebLayout = (props) => {
     const { children } = props

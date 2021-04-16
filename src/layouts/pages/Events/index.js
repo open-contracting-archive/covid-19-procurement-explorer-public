@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
+import { Loader, MetaInformation } from '../../../components/Utilities'
 import { formatDate, formatTime } from '../../../helpers/date'
 import useTrans from '../../../hooks/useTrans'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 function Events() {
     const [eventList, setEventList] = useState([])

@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
-import ShareButtons from '../../../components/Library/ShareButtons'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import { formatDate } from '../../../helpers/date'
 import pdfImage from '../../../assets/img/ic_pdf.svg'
 import useCountries from '../../../hooks/useCountries'
 import useTrans from '../../../hooks/useTrans'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import { stripTags } from '../../../helpers/transformers'
+import {
+    Loader,
+    MetaInformation,
+    ShareButtons,
+    Breadcrumb
+} from '../../../components/Utilities'
 
 const ResourceDetail = () => {
     const [resourceDetail, setResourceDetail] = useState({})

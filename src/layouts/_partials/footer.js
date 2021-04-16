@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
+import CmsPageService from '../../services/CmsPageService'
 import FooterImage from '../../assets/img/icons/cc-img.png'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
 import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import OpenContractingPartner from '../../assets/img/open-contracting-partnership.png'
 import TransparencyInternational from '../../assets/img/transparency-international.png'
 import EuropeanBank from '../../assets/img/ebrd-logo.svg'
-import CmsPageService from '../../services/CmsPageService'
 
 const Footer = () => {
     const { trans } = useTrans()

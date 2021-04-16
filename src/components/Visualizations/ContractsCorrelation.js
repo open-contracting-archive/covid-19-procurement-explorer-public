@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
 import useTrans from '../../hooks/useTrans'
-import CombinedChart from '../Charts/CombinedChart/CombinedChart'
-import Loader from '../Loader/Loader'
-import ChartFooter from '../Utilities/ChartFooter'
-import HelpText from '../../components/HelpText/HelpText'
+import { CombinedChart } from './Charts'
+import {
+    Loader,
+    ChartFooter,
+    ContractViewSwitcher,
+    HelpText,
+    ErrorHandler
+} from '../Utilities'
 import ContractView from '../../constants/ContractView'
 import { dateDiff } from '../../helpers/date'
-import ContractViewSwitcher from '../Utilities/ContractViewSwitcher'
-import ErrorHandler from '../ErrorHandler'
 import Visualization from '../../constants/Visualization'
 import Default from '../../constants/Default'
 

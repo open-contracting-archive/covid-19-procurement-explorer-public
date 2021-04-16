@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
-import Loader from '../Loader/Loader'
+import { Loader, ErrorHandler } from '../Utilities'
 import useTrans from '../../hooks/useTrans'
 import VisualizationService from '../../services/VisualizationService'
-import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import ErrorHandler from '../ErrorHandler'
+import { AreaChartBlock } from './Charts'
 import useDataCalculations from '../../hooks/useDataCalculations'
 
 const AverageBidsPerContract = (props) => {

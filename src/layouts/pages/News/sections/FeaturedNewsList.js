@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
 import useTrans from '../../../../hooks/useTrans'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 import { transformNews } from '../../../../helpers/transformers'
 import DefaultImage from '../../../../assets/img/default_image.png'
 

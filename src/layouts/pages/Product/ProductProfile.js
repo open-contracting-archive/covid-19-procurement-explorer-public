@@ -1,10 +1,15 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import ProductInfo from './sections/ProductInfo'
-import MainChart from './sections/MainChart'
 import { ContractTable } from '../../../components/Tables'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
+import { MetaInformation } from '../../../components/Utilities'
+
+const MainChart = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './sections/MainChart')
+)
+const ProductInfo = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './sections/ProductInfo')
+)
 
 const ProductProfile = () => {
     // ===========================================================================

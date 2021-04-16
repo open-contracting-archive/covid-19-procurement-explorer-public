@@ -5,8 +5,13 @@ import {
     TotalContracts,
     TotalSpending
 } from '../../../../components/Visualizations'
-import SupplierTable from '../../../../components/Tables/SupplierTable'
-import VisualizationModal from '../modal/VisualizationModal'
+import { SupplierTable } from '../../../../components/Tables'
+
+const VisualizationModal = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ '../modal/VisualizationModal'
+    )
+)
 
 const GlobalSuppliers = (props) => {
     const { disclaimerInfo = null } = props

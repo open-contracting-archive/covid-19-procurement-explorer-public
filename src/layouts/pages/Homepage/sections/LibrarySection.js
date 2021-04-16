@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
 import { dateDiff, formatDate } from '../../../../helpers/date'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 import useTrans from '../../../../hooks/useTrans'
 
 const showItems = 6

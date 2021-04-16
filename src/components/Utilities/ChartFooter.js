@@ -7,15 +7,15 @@ import {
     TwitterShareButton,
     EmailShareButton
 } from 'react-share'
-import EmbeddedModal from '../Modals/EmbeddedModal'
+import { EmbeddedModal } from './index'
 import useTrans from '../../hooks/useTrans'
 import { countryContractsUrl, twitterHandle } from '../../helpers/general'
+import socialIcons from '../../assets/img/icons/social'
+import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
+import useCountries from '../../hooks/useCountries'
 import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
 import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
 import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
-import socialIcons from '../../assets/img/icons/social'
-import { useDetectOutsideClick } from './useDetectOutsideClick'
-import useCountries from '../../hooks/useCountries'
 
 const currentLocation = window.location.href
 

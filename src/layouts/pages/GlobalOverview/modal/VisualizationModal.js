@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import useTrans from '../../../../hooks/useTrans'
-import ChartFooter from '../../../../components/Utilities/ChartFooter'
-import ContractTrend from '../../../../components/Visualizations/ContractTrend'
+import { ChartFooter } from '../../../../components/Utilities'
+import {
+    ContractTrend,
+    DirectOpenContractTrend,
+    BuyerTrend,
+    SupplierTrend
+} from '../../../../components/Visualizations'
 import Visualization from '../../../../constants/Visualization'
 import ContractView from '../../../../constants/ContractView'
 import { continentSelectList } from '../../../../helpers/country'
-import DirectOpenContractTrend from '../../../../components/Visualizations/DirectOpenContractTrend'
-import BuyerTrend from '../../../../components/Visualizations/BuyerTrend'
-import SupplierTrend from '../../../../components/Visualizations/SupplierTrend'
 
 const options = continentSelectList
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import { isEmpty } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
-import Loader from '../../../../components/Loader/Loader'
+import { Loader } from '../../../../components/Utilities'
 
 const CountryMethodology = (props) => {
     const { countryId } = props

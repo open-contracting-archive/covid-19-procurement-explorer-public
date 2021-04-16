@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import useTrans from '../../hooks/useTrans'
 import CmsPageService from '../../services/CmsPageService'
-import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher'
+import { LanguageSwitcher } from '../../components/Utilities'
 
 const fixedMenuItems = [
     { title: 'Data', route: '/global-overview/data' },

@@ -6,17 +6,6 @@ import {
     setCountryCurrency,
     setCurrency
 } from '../../../store/reducers/general/action'
-import CountrySelector from '../../../components/CountrySelector/CountrySelector'
-import CountryMapElement from './sections/CountryMapElement'
-import CountryInfo from './sections/CountryInfo'
-import CountryData from './tabs/CountryData'
-import CountryInsights from './tabs/CountryInsights'
-import CountryContracts from './tabs/CountryContracts'
-import TabNavigator from './sections/TabNavigator'
-import CountryEquity from './tabs/CountryEquity'
-import CountryBuyers from './tabs/CountryBuyers'
-import CountrySuppliers from './tabs/CountrySuppliers'
-import CountryProducts from './tabs/CountryProducts'
 import {
     DATA,
     INSIGHTS,
@@ -27,10 +16,35 @@ import {
     PRODUCTS,
     METHODOLOGY
 } from '../../../constants/Tab'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import Default from '../../../constants/Default'
-import CountryMethodology from './tabs/CountryMethodology'
-import DataDisclaimerInfo from './partials/DataDisclaimerInfo'
+import {
+    CountryBuyers,
+    CountryContracts,
+    CountryData,
+    CountryEquity,
+    CountryInsights,
+    CountryMethodology,
+    CountryProducts,
+    CountrySuppliers
+} from './tabs'
+import { CountrySelector, MetaInformation } from '../../../components/Utilities'
+
+const TabNavigator = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './sections/TabNavigator')
+)
+const CountryMapElement = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ './sections/CountryMapElement'
+    )
+)
+const CountryInfo = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './sections/CountryInfo')
+)
+const DataDisclaimerInfo = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ './partials/DataDisclaimerInfo'
+    )
+)
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)

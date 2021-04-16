@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
-import AreaChartBlock from '../Charts/AreaChart/AreaChartBlock'
-import Loader from '../Loader/Loader'
+import { AreaChartBlock } from './Charts'
+import { Loader, HelpText, ErrorHandler } from '../Utilities'
 import useTrans from '../../hooks/useTrans'
-import HelpText from '../../components/HelpText/HelpText'
 import Visualization from '../../constants/Visualization'
-import ErrorHandler from '../ErrorHandler'
 
 const Buyers = (props) => {
     // ===========================================================================

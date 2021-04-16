@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import useTrans from '../../../../hooks/useTrans'
-import WorldTimelineMap from '../../../../components/Visualizations/WorldTimelineMap'
-import WorldTimelineRaceBarChart from '../../../../components/Visualizations/WorldTimelineRaceBarChart'
+import {
+    WorldTimelineMap,
+    WorldTimelineRaceBarChart
+} from '../../../../components/Visualizations'
 import { OverallStatisticsTable } from '../../../../components/Tables'
-import CmsPageContent from '../../StaticPage/CmsPageContent'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
 import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
 import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
+
+const CmsPageContent = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-common" */ '../../StaticPage/CmsPageContent'
+    )
+)
 
 const MainVisualization = () => {
     // ===========================================================================

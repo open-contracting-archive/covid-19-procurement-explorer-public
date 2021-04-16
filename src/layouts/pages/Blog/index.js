@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
 import { formatDate } from '../../../helpers/date'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
+import {
+    Loader,
+    MetaInformation,
+    Breadcrumb
+} from '../../../components/Utilities'
 import DefaultImage from '../../../assets/img/default_image.png'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 
 const Blogs = () => {
     const [blogList, setBlogList] = useState([])

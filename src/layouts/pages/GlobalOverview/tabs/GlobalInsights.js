@@ -1,7 +1,7 @@
 import React from 'react'
-import FeaturedInsights from '../../../../components/Library/FeaturedInsights'
-import InsightTable from '../../../../components/Tables/InsightTable'
 import useTrans from '../../../../hooks/useTrans'
+import { FeaturedInsights } from '../../../../components/Utilities'
+import { InsightTable } from '../../../../components/Tables'
 
 const GlobalInsights = () => {
     const { trans } = useTrans()

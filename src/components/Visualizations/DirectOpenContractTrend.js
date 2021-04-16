@@ -2,11 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { isEmpty } from 'lodash'
 import { useSelector } from 'react-redux'
 import CountryService from '../../services/CountryService'
-import Loader from '../../components/Loader/Loader'
-import BarChartRace from '../Charts/BarChart/BarChartRace'
+import { Loader, PerCapitaSwitcher } from '../Utilities'
+import { BarChartRace } from './Charts'
 import Default from '../../constants/Default'
 import ContractView from '../../constants/ContractView'
-import PerCapitaSwitcher from '../../components/Utilities/PerCapitaSwitcher'
 
 const DirectOpenContractTrend = (props) => {
     // ===========================================================================
@@ -59,7 +58,7 @@ const DirectOpenContractTrend = (props) => {
                             ? country[dataColumn] /
                               countriesPopulation[country.country_code]
                             : country[dataColumn],
-                        href: `https://res.cloudinary.com/dyquku6bs/image/upload/v1614148469/country-flags/${country.country_code.toLowerCase()}-flag.gif`
+                        href: `https://www.countryflags.io/${country.country_code.toLowerCase()}/flat/64.png`
                     }))
                 const sum = filtered.reduce(
                     (total, item) => (total += item.value),

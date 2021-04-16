@@ -8,9 +8,9 @@ import {
     ContractEquityIndicators,
     RedFlagSummary
 } from '../../../components/Visualizations'
-import NotFound from '../../../components/NotFound/NotFound'
 import { useQuery } from '../../../helpers/general'
 import Visualization from '../../../constants/Visualization'
+import { NotFound } from '../../../components/Utilities'
 
 const EmbeddedVisualization = () => {
     const { visualizationId } = useParams()

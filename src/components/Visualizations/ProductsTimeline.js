@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import StackedChart from '../Charts/StackedChart/StackedChart'
+import { StackedChart } from './Charts'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
 import { groupBy } from 'lodash'
 import { dateDiff, formatDate } from '../../helpers/date'
 import { slugify } from '../../helpers/general'
-import ChartFooter from '../Utilities/ChartFooter'
-import ErrorHandler from '../ErrorHandler'
+import { ChartFooter, CardContainer, ErrorHandler } from '../Utilities'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 import Visualization from '../../constants/Visualization'
-import CardContainer from '../Utilities/CardContainer'
 
 const ProductsTimeline = (props) => {
     // ===========================================================================

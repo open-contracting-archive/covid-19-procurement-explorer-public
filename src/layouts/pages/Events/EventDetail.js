@@ -1,13 +1,15 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CmsPageService from '../../../services/CmsPageService'
-import Loader from '../../../components/Loader/Loader'
 import { formatDate, formatTime } from '../../../helpers/date'
-import ShareButtons from '../../../components/Library/ShareButtons'
-import Breadcrumb from '../../../components/website/Library/Breadcrumb'
 import useTrans from '../../../hooks/useTrans'
-import MetaInformation from '../../../components/MetaInformation/MetaInformation'
 import { stripTags } from '../../../helpers/transformers'
+import {
+    Loader,
+    MetaInformation,
+    Breadcrumb,
+    ShareButtons
+} from '../../../components/Utilities'
 
 const EventDetail = () => {
     const [eventDetail, setEventDetail] = useState({})
