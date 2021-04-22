@@ -1,6 +1,6 @@
 import React from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { CountryCombinedChart } from './Charts'
 import { ChartFooter } from '../Utilities'
 
@@ -9,7 +9,6 @@ const CountryProductChart = (props) => {
     // State and variables
     // ===========================================================================
     const { productName } = props
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
     let data = [
@@ -125,8 +124,8 @@ const CountryProductChart = (props) => {
             <div className="w-full px-4 mb-4 border border-blue-0 rounded pb-4">
                 <FullScreen handle={fullScreenHandler}>
                     <h2 className="uppercase font-bold text-primary-dark inline-block px-4 pt-4">
-                        {trans(productName)}{' '}
-                        {trans('spending comparison with the world')}
+                        {t(productName)}{' '}
+                        {t('spending comparison with the world')}
                     </h2>
 
                     <CountryCombinedChart data={data} />

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { get } from 'lodash'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { Loader, ChartFooter } from '../Utilities'
 import VisualizationService from '../../services/VisualizationService'
 import { mediaUrl } from '../../helpers/general'
@@ -13,7 +13,6 @@ const OverallStatisticsTable = () => {
     // ===========================================================================
     const [originalData, setOriginalData] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
     const history = useHistory()
     const fullScreenHandler = useFullScreenHandle()
 
@@ -59,26 +58,26 @@ const OverallStatisticsTable = () => {
                                             <th
                                                 rowSpan={2}
                                                 className="align-middle border-r border-gray-e2e">
-                                                {trans('Country')}
+                                                {t('Country')}
                                             </th>
                                             <th
                                                 rowSpan={2}
                                                 className="align-middle border-r border-gray-e2e">
-                                                {trans('Total Contracts')}
+                                                {t('Total Contracts')}
                                             </th>
                                             <th
                                                 colSpan={2}
                                                 className={
                                                     'text-center border-r border-gray-e2e'
                                                 }>
-                                                {trans('Total Amount')}
+                                                {t('Total Amount')}
                                             </th>
                                             <th
                                                 colSpan={5}
                                                 className={
                                                     'text-center border-r border-gray-e2e'
                                                 }>
-                                                {trans(
+                                                {t(
                                                     'Procurement Procedure wise Number of Contracts'
                                                 )}
                                             </th>
@@ -87,41 +86,41 @@ const OverallStatisticsTable = () => {
                                                 className={
                                                     'text-center border-r border-gray-e2e'
                                                 }>
-                                                {trans(
+                                                {t(
                                                     'Procurement Procedure wise Amount (USD)'
                                                 )}
                                             </th>
                                         </tr>
 
                                         <tr className="whitespace-no-wrap border border-gray-e2e">
-                                            <th>{trans('USD')}</th>
+                                            <th>{t('USD')}</th>
                                             <th
                                                 className={
                                                     'border-r border-gray-e2e'
                                                 }>
-                                                {trans('Local')}
+                                                {t('Local')}
                                             </th>
 
-                                            <th>{trans('Open')}</th>
-                                            <th>{trans('Direct')}</th>
-                                            <th>{trans('Limited')}</th>
-                                            <th>{trans('Selective')}</th>
+                                            <th>{t('Open')}</th>
+                                            <th>{t('Direct')}</th>
+                                            <th>{t('Limited')}</th>
+                                            <th>{t('Selective')}</th>
                                             <th
                                                 className={
                                                     'border-r border-gray-e2e'
                                                 }>
-                                                {trans('Not Identified')}
+                                                {t('Not Identified')}
                                             </th>
 
-                                            <th>{trans('Open')}</th>
-                                            <th>{trans('Direct')}</th>
-                                            <th>{trans('Limited')}</th>
-                                            <th>{trans('Selective')}</th>
+                                            <th>{t('Open')}</th>
+                                            <th>{t('Direct')}</th>
+                                            <th>{t('Limited')}</th>
+                                            <th>{t('Selective')}</th>
                                             <th
                                                 className={
                                                     'border-r border-gray-e2e'
                                                 }>
-                                                {trans('Not Identified')}
+                                                {t('Not Identified')}
                                             </th>
                                         </tr>
                                     </thead>

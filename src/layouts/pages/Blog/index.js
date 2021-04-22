@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import {
     Loader,
     MetaInformation,
@@ -15,7 +15,6 @@ import DefaultImage from '../../../assets/img/default_image.png'
 const Blogs = () => {
     const [blogList, setBlogList] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -40,7 +39,7 @@ const Blogs = () => {
             <div className="container mx-auto">
                 <Breadcrumb />
 
-                <p className="text-2xl mb-10">{trans('Blogs')}</p>
+                <p className="text-2xl mb-10">{t('Blogs')}</p>
                 {blogList &&
                     blogList.length !== 0 &&
                     blogList.map((blogs) => {
@@ -107,7 +106,7 @@ const Blogs = () => {
                         )
                     })}
                 {blogList.length === 0 ? (
-                    <p>{trans('There are no Blogs Records')}</p>
+                    <p>{t('There are no Blogs Records')}</p>
                 ) : (
                     ''
                 )}

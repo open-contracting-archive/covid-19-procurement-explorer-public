@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
 import ContractService from '../../services/ContractService'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import useTableSorting from '../../hooks/useTableSorting'
@@ -22,7 +22,6 @@ const ProductTable = (props) => {
     const [showFilter, setShowFilter] = useState('hidden')
     const [totalItems, setTotalItems] = useState(0)
     const { countrySelectList } = useContractFilters()
-    const { trans } = useTrans()
 
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
         items: originalData,
@@ -121,7 +120,7 @@ const ProductTable = (props) => {
                         {!hasCountry() && (
                             <div className="w-full px-2">
                                 <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                    {trans('Country')}
+                                    {t('Country')}
                                 </p>
                                 <Select
                                     className="text-sm select-filter"
@@ -145,7 +144,7 @@ const ProductTable = (props) => {
                 <div className="hidden gap-8 mb-8 md:flex">
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {trans('Country')}
+                            {t('Country')}
                         </p>
                         <Select
                             className="text-sm select-filter"
@@ -167,31 +166,31 @@ const ProductTable = (props) => {
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
                                         'product_name',
-                                        `${trans('Product Category')}`
+                                        `${t('Product Category')}`
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'tender_count',
-                                        `${trans('# of contracts')}`
+                                        `${t('# of contracts')}`
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'amount_usd',
-                                        `${trans('value (usd)')}`
+                                        `${t('value (usd)')}`
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'supplier_count',
-                                        `${trans('# of suppliers')}`
+                                        `${t('# of suppliers')}`
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'buyer_count',
-                                        `${trans('# of buyers')}`
+                                        `${t('# of buyers')}`
                                     )}
                                 </th>
                             </tr>

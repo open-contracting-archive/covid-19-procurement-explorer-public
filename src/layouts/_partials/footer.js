@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import CmsPageService from '../../services/CmsPageService'
 import FooterImage from '../../assets/img/icons/cc-img.png'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
@@ -10,7 +10,6 @@ import TransparencyInternational from '../../assets/img/transparency-internation
 import EuropeanBank from '../../assets/img/ebrd-logo.svg'
 
 const Footer = () => {
-    const { trans } = useTrans()
     const [menuList, setMenuList] = useState([])
 
     useEffect(() => {
@@ -47,37 +46,35 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col-span-4 mb-8 md:col-span-2">
-                        <h4 className="mb-2">{trans('Explore')}</h4>
+                        <h4 className="mb-2">{t('Explore')}</h4>
                         <ul>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/data">
-                                    {trans('Data')}
+                                    {t('Data')}
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/contracts">
-                                    {trans('Contracts')}
+                                    {t('Contracts')}
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/suppliers">
-                                    {trans('List of Suppliers')}
+                                    {t('List of Suppliers')}
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/buyers">
-                                    {trans('List of Buyers')}
+                                    {t('List of Buyers')}
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/products">
-                                    {trans('Products')}
+                                    {t('Products')}
                                 </Link>
                             </li>
                             <li className="transition opacity-50 hover:opacity-75">
-                                <Link to="/resources">
-                                    {trans('Resources')}
-                                </Link>
+                                <Link to="/resources">{t('Resources')}</Link>
                             </li>
                         </ul>
                     </div>
@@ -90,7 +87,7 @@ const Footer = () => {
                                     <Link
                                         to={`/pages/${menu.meta.slug}`}
                                         className="capitalize">
-                                        {trans(menu.title)}
+                                        {t(menu.title)}
                                     </Link>
                                 </li>
                             ))}
@@ -98,7 +95,7 @@ const Footer = () => {
                     </div>
                     <div className="col-span-12 md:col-span-5">
                         <p className="mb-3">
-                            {trans('Subscribe and get weekly updates')}
+                            {t('Subscribe and get weekly updates')}
                         </p>
                         <form>
                             <div className="relative flex items-center">
@@ -117,7 +114,7 @@ const Footer = () => {
                         <div className="flex flex-wrap mt-8">
                             <div className="mr-8">
                                 <p className="mb-3">
-                                    {trans('The portal developed by')}
+                                    {t('The portal developed by')}
                                 </p>
                                 <div className="flex flex-wrap items-center">
                                     <Link
@@ -148,7 +145,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="">
-                                <p className="mb-3">{trans('Supported by')}</p>
+                                <p className="mb-3">{t('Supported by')}</p>
                                 <div className="flex flex-wrap items-center">
                                     <img
                                         src={EuropeanBank}

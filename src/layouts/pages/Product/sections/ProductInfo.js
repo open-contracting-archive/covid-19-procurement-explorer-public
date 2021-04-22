@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { useHistory, useParams } from 'react-router-dom'
 
 const ProductInfo = (props) => {
@@ -7,10 +7,8 @@ const ProductInfo = (props) => {
     // State and variables
     // ===========================================================================
     const { product, country } = props
-    const { trans } = useTrans()
     const { countrySlug } = useParams()
     const history = useHistory()
-
     const showCountryPage = () => {
         if (countrySlug) {
             history.push(`/country/${countrySlug}/data`)
@@ -34,13 +32,13 @@ const ProductInfo = (props) => {
                     <span
                         className="text-primary-blue cursor-pointer"
                         onClick={() => showCountryPage()}>
-                        {country ? country.name : trans('Global')}
+                        {country ? country.name : t('Global')}
                     </span>{' '}
                     /{' '}
                     <span
                         className="cursor-pointer text-primary-blue"
                         onClick={() => showProductTab()}>
-                        {trans('Products')}
+                        {t('Products')}
                     </span>
                 </div>
 

@@ -1,16 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { t } from '@transifex/native'
 import Default from '../../../../constants/Default'
 import { formatNumber } from '../../../../helpers/number'
-import useTrans from '../../../../hooks/useTrans'
 
 function BarListChart(props) {
     const { data, text, currency, viewType } = props
-    const { trans } = useTrans()
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
+
     return (
         <div className="custom-horizontal-bar">
             <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
@@ -55,7 +55,7 @@ function BarListChart(props) {
                                             )}
                                             {viewType === 'buyer' && (
                                                 <span className="uppercase ml-1">
-                                                    {trans('buyers')}
+                                                    {t('buyers')}
                                                 </span>
                                             )}
                                         </p>

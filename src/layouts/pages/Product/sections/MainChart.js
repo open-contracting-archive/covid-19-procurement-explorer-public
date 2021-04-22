@@ -6,7 +6,7 @@ import {
     GlobalSuppliers,
     CountrySuppliers
 } from '../../../../components/Visualizations'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as FlowIcon } from '../../../../assets/img/icons/ic_flow.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
@@ -17,7 +17,6 @@ const MainChart = (props) => {
     // ===========================================================================
     const { country, product } = props
     const [view, setView] = useState('chart')
-    const { trans } = useTrans()
     const handle = useFullScreenHandle()
 
     function renderMainChart() {
@@ -70,7 +69,7 @@ const MainChart = (props) => {
                                         <div>
                                             <ChartsIcon className="inline-block" />
                                             <span className="mt-1 md:mt-0 block text-sm">
-                                                {trans('Charts')}
+                                                {t('Charts')}
                                             </span>
                                         </div>
                                     </div>
@@ -85,7 +84,7 @@ const MainChart = (props) => {
                                         <div>
                                             <MapIcon className="inline-block w-4 h-4" />
                                             <span className="mt-1 md:mt-0 block text-sm">
-                                                {trans('Map')}
+                                                {t('Map')}
                                             </span>
                                         </div>
                                     </div>
@@ -98,7 +97,7 @@ const MainChart = (props) => {
                                     <div>
                                         <FlowIcon className="inline-block" />
                                         <span className="mt-1 md:mt-0 block text-sm">
-                                            {trans('Flow')}
+                                            {t('Flow')}
                                         </span>
                                     </div>
                                 </div>

@@ -7,7 +7,7 @@ import {
     CountryFlagIcon,
     MetaInformation
 } from '../../../components/Utilities'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import {
     AverageBidsPerContract,
     ContractRedFlags,
@@ -30,7 +30,6 @@ const BuyerProfile = () => {
     const countries = useSelector((state) => state.general.countries)
     const [originalData, setOriginalData] = useState({})
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
     let history = useHistory()
     const { id } = useParams()
 
@@ -77,7 +76,7 @@ const BuyerProfile = () => {
                                 <span
                                     className="cursor-pointer text-primary-blue"
                                     onClick={previousPage}>
-                                    {trans('Buyers')}
+                                    {t('Buyers')}
                                 </span>
                             </div>
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">

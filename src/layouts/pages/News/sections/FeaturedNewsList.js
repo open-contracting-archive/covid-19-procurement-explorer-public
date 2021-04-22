@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { Loader } from '../../../../components/Utilities'
 import { transformNews } from '../../../../helpers/transformers'
 import DefaultImage from '../../../../assets/img/default_image.png'
@@ -10,7 +10,6 @@ const FeaturedNewsList = () => {
     const otherFeaturedNewsLimit = 4
     const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
     const mainNews = newsList.length ? newsList[0] : {}
     const otherFeaturedNews = newsList.length
         ? newsList.slice(1, otherFeaturedNewsLimit)
@@ -36,7 +35,7 @@ const FeaturedNewsList = () => {
     ) : (
         <section className=" news__list px-4">
             <div className="container mx-auto">
-                <p className="text-xl mb-6">{trans('Featured News')}</p>
+                <p className="text-xl mb-6">{t('Featured News')}</p>
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                     <div className="display__item md:col-span-8">
                         {mainNews && (

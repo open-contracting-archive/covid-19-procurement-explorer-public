@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { siteUrl } from '../../helpers/general'
 import { ReactComponent as CodingIcon } from '../../assets/img/icons/ic_coding.svg'
 import { ReactComponent as CopyIcon } from '../../assets/img/icons/ic_copy.svg'
@@ -28,7 +28,6 @@ const getSiteUrl = (params) => {
 const EmbeddedModal = (props) => {
     const { params, closeModal } = props
     const [snippet, setSnippet] = useState('')
-    const { trans } = useTrans()
 
     useEffect(() => {
         const iframeHTMLElement = document.createElement('IFRAME')
@@ -50,7 +49,7 @@ const EmbeddedModal = (props) => {
         <div className="container mx-auto p-6">
             <div>
                 <h3 className="text-lg mb-4">
-                    {trans('Share this chart on your website')}
+                    {t('Share this chart on your website')}
                 </h3>
                 <button
                     className="icon-close"
@@ -63,7 +62,7 @@ const EmbeddedModal = (props) => {
                     <span className="inline-block mr-2">
                         <CodingIcon className="w-4 h-4" />
                     </span>
-                    <span>{trans('Copy/paste this code snippet')}</span>
+                    <span>{t('Copy/paste this code snippet')}</span>
                 </div>
                 <div>
                     <div className="flex items-center">

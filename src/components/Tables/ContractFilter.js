@@ -3,7 +3,7 @@ import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 import { identity, pickBy } from 'lodash'
 import ContractService from '../../services/ContractService'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import useContractFilters from '../../hooks/useContractFilters'
 import { formatDate } from '../../helpers/date'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -31,7 +31,6 @@ const ContractFilter = (props) => {
     const [showDatePicker, setShowDatePicker] = useState(false)
     const [buyersFilterOption, setBuyersFilterOption] = useState([])
     const [suppliersFilterOption, setSuppliersFilterOption] = useState([])
-    const { trans } = useTrans()
     const ref = useRef()
     const [showFilter, setShowFilter] = useState('hidden')
 
@@ -154,7 +153,7 @@ const ContractFilter = (props) => {
                     <div className="flex -mx-2 -mb-5 flex-wrap">
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Contract title')}
+                                {t('Contract title')}
                             </p>
                             <form
                                 className="mt-2 select-filter--input"
@@ -181,7 +180,7 @@ const ContractFilter = (props) => {
                         {!hasCountry() && (
                             <div className="w-1/2 md:w-40 px-2 mb-5">
                                 <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                    {trans('Country')}
+                                    {t('Country')}
                                 </p>
                                 <Select
                                     className="mt-2 select-filter text-sm"
@@ -198,7 +197,7 @@ const ContractFilter = (props) => {
                         {!hasBuyer() && (
                             <div className="w-1/2 md:w-40 px-2 mb-5">
                                 <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                    {trans('Buyer')}
+                                    {t('Buyer')}
                                 </p>
                                 <Select
                                     className="mt-2 select-filter text-sm"
@@ -215,7 +214,7 @@ const ContractFilter = (props) => {
                         {!hasSupplier() && (
                             <div className="w-1/2 md:w-40 px-2 mb-5">
                                 <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                    {trans('Supplier')}
+                                    {t('Supplier')}
                                 </p>
                                 <Select
                                     className="mt-2 select-filter text-sm"
@@ -231,7 +230,7 @@ const ContractFilter = (props) => {
                         )}
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Method')}
+                                {t('Method')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
@@ -249,7 +248,7 @@ const ContractFilter = (props) => {
                         {!hasProduct() && (
                             <div className="w-1/2 md:w-40 px-2 mb-5">
                                 <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none whitespace-no-wrap">
-                                    {trans('Product category')}
+                                    {t('Product category')}
                                 </p>
                                 <Select
                                     className="mt-2 select-filter text-sm"
@@ -265,7 +264,7 @@ const ContractFilter = (props) => {
                         )}
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Date range')}
+                                {t('Date range')}
                             </p>
                             <div ref={ref}>
                                 <div
@@ -303,7 +302,7 @@ const ContractFilter = (props) => {
                         </div>
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Value range')}
+                                {t('Value range')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
@@ -328,7 +327,7 @@ const ContractFilter = (props) => {
                 <div className="mb-12 flex gap-8 flex-wrap -mx-2">
                     <div className="w-1/2 md:w-40 px-2 mb-5">
                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                            {trans('Contract title')}
+                            {t('Contract title')}
                         </p>
                         <form
                             className="mt-2 select-filter--input"
@@ -352,7 +351,7 @@ const ContractFilter = (props) => {
                     {!hasCountry() && (
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Country')}
+                                {t('Country')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
@@ -367,7 +366,7 @@ const ContractFilter = (props) => {
                     {!hasBuyer() && (
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Buyer')}
+                                {t('Buyer')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
@@ -384,7 +383,7 @@ const ContractFilter = (props) => {
                     {!hasSupplier() && (
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                {trans('Supplier')}
+                                {t('Supplier')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
@@ -400,7 +399,7 @@ const ContractFilter = (props) => {
                     )}
                     <div className="w-1/2 md:w-40 px-2 mb-5">
                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                            {trans('Method')}
+                            {t('Method')}
                         </p>
                         <Select
                             className="mt-2 select-filter text-sm"
@@ -417,7 +416,7 @@ const ContractFilter = (props) => {
                     {!hasProduct() && (
                         <div className="w-1/2 md:w-40 px-2 mb-5">
                             <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none whitespace-no-wrap">
-                                {trans('Product category')}
+                                {t('Product category')}
                             </p>
                             <Select
                                 className="mt-2 select-filter text-sm"
@@ -433,7 +432,7 @@ const ContractFilter = (props) => {
                     )}
                     <div className="w-1/2 md:w-40 px-2 mb-5">
                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                            {trans('Date range')}
+                            {t('Date range')}
                         </p>
                         <div ref={ref}>
                             <div
@@ -471,7 +470,7 @@ const ContractFilter = (props) => {
                     </div>
                     <div className="w-1/2 md:w-40 px-2 mb-5">
                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                            {trans('Value range')}
+                            {t('Value range')}
                         </p>
                         <Select
                             className="mt-2 select-filter text-sm"

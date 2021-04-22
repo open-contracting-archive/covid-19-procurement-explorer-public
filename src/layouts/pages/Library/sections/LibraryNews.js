@@ -5,13 +5,12 @@ import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
 import { formatDate } from '../../../../helpers/date'
 import { API_URL } from '../../../../helpers/api'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import DefaultImage from '../../../../assets/img/default_image.png'
 
 const LibraryNews = () => {
     const [newsList, setNewsList] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.NewsList().then((response) => {
@@ -33,7 +32,7 @@ const LibraryNews = () => {
                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
                         <div className="display__item flex flex-col">
                             <div className="news__item flex-1">
-                                <p className="text-xl mb-6 ">{trans('News')}</p>
+                                <p className="text-xl mb-6 ">{t('News')}</p>
                                 {newsList.length && (
                                     <Link
                                         className="news-thumbnail"
@@ -73,7 +72,7 @@ const LibraryNews = () => {
                         </div>
                         <div className="list__item">
                             <p className="text-lg mb-6 mt-4 uppercase">
-                                {trans('Recent Posts')}
+                                {t('Recent Posts')}
                             </p>
                             {newsList &&
                                 newsList.slice(1, 4).map((news) => {
@@ -126,11 +125,11 @@ const LibraryNews = () => {
                     {newsList.length !== 0 ? (
                         <div className="flex justify-end pt-10">
                             <Link to="/news" className="text-blue-20">
-                                {trans('View all news')} --&gt;{' '}
+                                {t('View all news')} --&gt;{' '}
                             </Link>
                         </div>
                     ) : (
-                        <p>{trans('There are no news')}</p>
+                        <p>{t('There are no news')}</p>
                     )}
                 </Fragment>
             )}

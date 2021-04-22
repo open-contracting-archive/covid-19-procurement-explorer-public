@@ -1,11 +1,9 @@
 import React from 'react'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { FeaturedInsights } from '../../../../components/Utilities'
 import { InsightTable } from '../../../../components/Tables'
 
 const GlobalInsights = () => {
-    const { trans } = useTrans()
-
     function renderFeaturedItems() {
         return <FeaturedInsights />
     }
@@ -19,7 +17,7 @@ const GlobalInsights = () => {
             {renderFeaturedItems()}
 
             <h2 className="text-lg font-normal md:mb-6">
-                {trans('Best practices and solutions from our database')}
+                {t('Best practices and solutions from our database')}
             </h2>
 
             {renderTable()}

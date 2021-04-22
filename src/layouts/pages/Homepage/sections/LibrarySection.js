@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
 import { dateDiff, formatDate } from '../../../../helpers/date'
 import { Loader } from '../../../../components/Utilities'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 
 const showItems = 6
 
@@ -15,7 +15,6 @@ const LibrarySection = () => {
     })
     const [insightList, setInsightList] = useState([])
     const [itemList, setItemList] = useState([])
-    const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.BlogList({
@@ -76,12 +75,12 @@ const LibrarySection = () => {
                 <div className="text-center mb-6 md:mb-20">
                     <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
-                            {trans('Explore')}
+                            {t('Explore')}
                         </span>
-                        {trans('Library')}
+                        {t('Library')}
                     </h3>
                     <p className="text-xs md:text-base text-opacity-50  text-primary-dark">
-                        {trans('Find insights, analysis and best practices')}
+                        {t('Find insights, analysis and best practices')}
                     </p>
                 </div>
                 {loading ? (
@@ -109,14 +108,14 @@ const LibrarySection = () => {
                                 </Link>
                             ))
                         ) : (
-                            <p className="text-center">{trans('No records')}</p>
+                            <p className="text-center">{t('No records')}</p>
                         )}
                     </div>
                 )}
             </div>
             <div className="text-right md:text-center mt-6 md:mt-12">
                 <Link to="/library" className="text-blue-20">
-                    {trans('View library')} --&gt;{' '}
+                    {t('View library')} --&gt;{' '}
                 </Link>
             </div>
         </section>

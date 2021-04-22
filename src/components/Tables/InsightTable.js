@@ -7,7 +7,7 @@ import CmsPageService from '../../services/CmsPageService'
 import { Loader, TableLoader } from '../Utilities'
 import { hasValidProperty } from '../../helpers/general'
 import useCountries from '../../hooks/useCountries'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import useContentFilters from '../../hooks/useContentFilters'
 import useTableSorting from '../../hooks/useTableSorting'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
@@ -27,7 +27,6 @@ const InsightTable = (props) => {
     const [showFilter, setShowFilter] = useState('hidden')
     const { contentsTypeSelectList, countrySelectList } = useContentFilters()
     const history = useHistory()
-    const { trans } = useTrans()
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
         items: insightList,
         defaultSorting: {
@@ -129,7 +128,7 @@ const InsightTable = (props) => {
                         {!hasCountry() && (
                             <div className="w-1/2 px-2 mb-5 md:w-40">
                                 <p className="text-xs leading-none uppercase opacity-50">
-                                    {trans('Country')}
+                                    {t('Country')}
                                 </p>
                                 <Select
                                     className="mt-2 text-sm select-filter"
@@ -145,7 +144,7 @@ const InsightTable = (props) => {
                         )}
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {trans('Type')}
+                                {t('Type')}
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -169,7 +168,7 @@ const InsightTable = (props) => {
                     {!hasCountry() && (
                         <div className="w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {trans('Country')}
+                                {t('Country')}
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -183,7 +182,7 @@ const InsightTable = (props) => {
                     )}
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {trans('Type')}
+                            {t('Type')}
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -211,18 +210,18 @@ const InsightTable = (props) => {
                                         <th style={{ width: '35%' }}>
                                             {tableHeaderSpan(
                                                 'title',
-                                                `${trans('Title')}`
+                                                `${t('Title')}`
                                             )}
                                         </th>
                                         <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
-                                                {trans('Country')}
+                                                {t('Country')}
                                             </span>
                                         </th>
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'contents_type',
-                                                `${trans('Type')}`
+                                                `${t('Type')}`
                                             )}
                                         </th>
                                     </tr>

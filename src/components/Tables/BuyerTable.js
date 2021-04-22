@@ -4,15 +4,15 @@ import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
 import ReactPaginate from 'react-paginate'
 import VisualizationService from '../../services/VisualizationService'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { Loader, TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
-import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 import Default from '../../constants/Default'
 import { formatDecimal } from '../../helpers/number'
 import useTableSorting from '../../hooks/useTableSorting'
+import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
+import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 
 const BuyerTable = (props) => {
     // ===========================================================================
@@ -35,9 +35,7 @@ const BuyerTable = (props) => {
         valueRanges
     } = useContractFilters()
     const history = useHistory()
-    const { trans } = useTrans()
     const [showFilter, setShowFilter] = useState('hidden')
-
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
         items: originalData,
         defaultSorting: {
@@ -150,7 +148,7 @@ const BuyerTable = (props) => {
                     <div className="flex flex-wrap -mx-2 -mb-5">
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                {trans('Buyers')}
+                                {t('Buyers')}
                             </p>
                             <form
                                 className="mt-2 select-filter--input"
@@ -174,7 +172,7 @@ const BuyerTable = (props) => {
                         {!hasCountry() && (
                             <div className="w-1/2 px-2 mb-5 md:w-40">
                                 <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                    {trans('Country')}
+                                    {t('Country')}
                                 </p>
                                 <Select
                                     className="mt-2 text-sm select-filter"
@@ -190,7 +188,7 @@ const BuyerTable = (props) => {
                         )}
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                {trans('Product category')}
+                                {t('Product category')}
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -205,7 +203,7 @@ const BuyerTable = (props) => {
                         </div>
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                {trans('Value range')}
+                                {t('Value range')}
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -231,7 +229,7 @@ const BuyerTable = (props) => {
                 <div className="hidden gap-8 md:flex">
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {trans('Buyers')}
+                            {t('Buyers')}
                         </p>
                         <form
                             className="mt-2 select-filter--input"
@@ -252,7 +250,7 @@ const BuyerTable = (props) => {
                     {!hasCountry() && (
                         <div className="w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {trans('Country')}
+                                {t('Country')}
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -268,7 +266,7 @@ const BuyerTable = (props) => {
                     )}
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {trans('Product category')}
+                            {t('Product category')}
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -283,7 +281,7 @@ const BuyerTable = (props) => {
                     </div>
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {trans('Value range')}
+                            {t('Value range')}
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -299,12 +297,6 @@ const BuyerTable = (props) => {
                         />
                     </div>
                 </div>
-                {/*<div>*/}
-                {/*    <div className="flex items-center mt-4 text-sm text-primary-blue">*/}
-                {/*        <DownloadIcon className="inline-block mr-2" />*/}
-                {/*        <span>{trans('Download')}</span>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
 
             <div className="relative overflow-hidden">
@@ -315,43 +307,43 @@ const BuyerTable = (props) => {
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
                                         'buyer_name',
-                                        `${trans('Buyer')}`
+                                        `${t('Buyer')}`
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'country_name',
-                                        `${trans('Country')}`
+                                        `${t('Country')}`
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'tender_count',
-                                        `${trans('# of contracts')}`
+                                        `${t('# of contracts')}`
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'supplier_count',
-                                        `${trans('# of suppliers')}`
+                                        `${t('# of suppliers')}`
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'product_category_count',
-                                        `${trans('product categories')}`
+                                        `${t('product categories')}`
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'amount_usd',
-                                        `${trans('value (usd)')}`
+                                        `${t('value (usd)')}`
                                     )}
                                 </th>
                                 <th style={{ width: '8%' }}>
                                     {tableHeaderSpan(
                                         'red_flag_tender_percentage',
-                                        `${trans('% red flags')}`
+                                        `${t('% red flags')}`
                                     )}
                                 </th>
                             </tr>

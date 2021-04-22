@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import { AreaChartBlock } from './Charts'
 import { Loader, HelpText, ErrorHandler } from '../Utilities'
@@ -25,7 +25,6 @@ const Monopolization = (props) => {
         areaChart: []
     })
     const { areaChartData, changePercentage } = useDataCalculations()
-    const { trans } = useTrans()
 
     // ===========================================================================
     // Hooks
@@ -69,7 +68,7 @@ const Monopolization = (props) => {
             <div>
                 <div className="flex items-center">
                     <h3 className="uppercase font-bold text-primary-dark inline-block">
-                        {trans(label)}
+                        {t(label)}
                     </h3>
                     <HelpText helpTextInfo={helpText} />
                 </div>

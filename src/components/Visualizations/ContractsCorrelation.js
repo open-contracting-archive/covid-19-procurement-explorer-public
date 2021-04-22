@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { CombinedChart } from './Charts'
 import {
     Loader,
@@ -34,7 +34,6 @@ const ContractsCorrelation = (props) => {
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
     const selectedCurrency =
         currency === Default.CURRENCY_LOCAL ? countryCurrency : currency
@@ -93,7 +92,7 @@ const ContractsCorrelation = (props) => {
                     <div className="flex flex-wrap items-center mb-6 md:mb-0 justify-start md:justify-between">
                         <div className="flex mr-2 mb-4 md:mb-0">
                             <h3 className="text-base uppercase font-bold text-primary-dark inline-block">
-                                {trans(label)}
+                                {t(label)}
                             </h3>
                             <HelpText helpTextInfo={helpText} />
                         </div>

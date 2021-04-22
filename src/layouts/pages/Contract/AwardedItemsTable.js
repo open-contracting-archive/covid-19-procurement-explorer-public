@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { get } from 'lodash'
 import useTableSorting from '../../../hooks/useTableSorting'
 
@@ -8,7 +8,6 @@ const AwardedItemTable = (props) => {
     // State and variables
     // ===========================================================================
     const { items = [] } = props
-    const { trans } = useTrans()
     const { sortedItems: listItem, tableHeaderSpan } = useTableSorting({
         items,
         defaultSorting: {
@@ -31,25 +30,25 @@ const AwardedItemTable = (props) => {
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
                                         'contract_desc',
-                                        `${trans('Item description')}`
+                                        `${t('Item description')}`
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'classification_code',
-                                        `${trans('cpv code')}`
+                                        `${t('cpv code')}`
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'quantity_units',
-                                        `${trans('Quantity')}`
+                                        `${t('Quantity')}`
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'ppu_including_vat',
-                                        `${trans('Unit price (usd)')}`
+                                        `${t('Unit price (usd)')}`
                                     )}
                                 </th>
                             </tr>

@@ -7,12 +7,12 @@ import ContractView from '../../constants/ContractView'
 import { formatDate } from '../../helpers/date'
 import { toCamelCase } from '../../helpers/general'
 import Default from '../../constants/Default'
-import useTrans from '../../hooks/useTrans'
 import Checkbox from '../Elements/Checkbox'
 import { CompareChart } from './Charts'
 import { Loader, ChartFooter, ContractViewSwitcher } from '../Utilities'
 import { colors } from '../../constants/Theme'
 import Visualization from '../../constants/Visualization'
+import { t } from '@transifex/native'
 
 const RedFlagSummary = (props) => {
     // ===========================================================================
@@ -38,7 +38,6 @@ const RedFlagSummary = (props) => {
             selectedRedFlags.includes(redFlag.id)
         )
     }, [redFlagList, selectedRedFlags])
-    const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
@@ -173,7 +172,7 @@ const RedFlagSummary = (props) => {
                         </div>
                     </Fragment>
                 ) : (
-                    <p>{trans('Not enough data')}</p>
+                    <p>{t('Not enough data')}</p>
                 )}
             </div>
         )
@@ -185,7 +184,7 @@ const RedFlagSummary = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none simple-tab h-full">
                     <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            {trans(label)}
+                            {t(label)}
                         </h3>
 
                         {shouldRenderChart() && (

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
 import { SimpleBarChart, AreaChartBlock } from './Charts'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import Visualization from '../../constants/Visualization'
 import useDataCalculations from '../../hooks/useDataCalculations'
 import { CardContainer, ErrorHandler } from '../Utilities'
@@ -28,7 +28,6 @@ const TotalSpending = (props) => {
         areaChart: [],
         barChart: []
     })
-    const { trans } = useTrans()
     const {
         areaChartData,
         changePercentage,
@@ -115,7 +114,7 @@ const TotalSpending = (props) => {
                 <span
                     className="block text-sm text-right cursor-pointer text-primary-blue"
                     onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>
-                    {trans('View in detail')} →
+                    {t('View in detail')} →
                 </span>
             )}
         </CardContainer>

@@ -5,7 +5,7 @@ import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
 import pdfImage from '../../../assets/img/ic_pdf.svg'
 import useCountries from '../../../hooks/useCountries'
-import useTrans from '../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { stripTags } from '../../../helpers/transformers'
 import {
     Loader,
@@ -20,7 +20,6 @@ const ResourceDetail = () => {
     const [loading, setLoading] = useState(true)
     const { countryNameById, languageById } = useCountries()
     let { id: resourcesId } = useParams()
-    const { trans } = useTrans()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -95,7 +94,7 @@ const ResourceDetail = () => {
                                             target="_blank"
                                             rel="noreferrer">
                                             {' '}
-                                            {trans('Download')}{' '}
+                                            {t('Download')}{' '}
                                         </a>
                                     </div>
                                 </div>
@@ -114,7 +113,7 @@ const ResourceDetail = () => {
                             <table className="my-10 text-left">
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {trans('Published on')}
+                                        {t('Published on')}
                                     </th>
                                     <td className="px-6 py-6">
                                         {formatDate(
@@ -126,7 +125,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {trans('Country')}
+                                        {t('Country')}
                                     </th>
                                     <td className="px-6 py-6">
                                         {countryNameById(
@@ -140,7 +139,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {trans('Type')}
+                                        {t('Type')}
                                     </th>
                                     <td className="px-6 py-6">
                                         {resourceDetail.resource_type}
@@ -148,7 +147,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {trans('Topic')}
+                                        {t('Topic')}
                                     </th>
                                     <td className="px-6 py-6">
                                         {resourceDetail.topic}
@@ -156,7 +155,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {trans('Language')}
+                                        {t('Language')}
                                     </th>
                                     <td className="px-6 py-6">
                                         {languageById(
@@ -171,7 +170,7 @@ const ResourceDetail = () => {
 
                             <div className="related mb-4 mt-10">
                                 <p className="font-bold opacity-40 mb-4">
-                                    {trans('Related Resources')}
+                                    {t('Related Resources')}
                                 </p>
                                 {resourceList &&
                                     resourceList

@@ -8,7 +8,7 @@ import {
     EmailShareButton
 } from 'react-share'
 import { EmbeddedModal } from './index'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { countryContractsUrl, twitterHandle } from '../../helpers/general'
 import socialIcons from '../../assets/img/icons/social'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
@@ -35,7 +35,6 @@ const ChartFooter = (props) => {
     const dropdownRef = useRef(null)
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
     const onClick = () => setIsActive(!isActive)
-    const { trans } = useTrans()
     const { countrySlug } = useParams()
     const { currentCountry } = useCountries()
 
@@ -46,7 +45,7 @@ const ChartFooter = (props) => {
                     <span className="flex items-center">
                         <button onClick={fullScreenHandler.enter}>
                             <span className="hidden cursor-pointer md:inline-block">
-                                {trans('View full screen')}
+                                {t('View full screen')}
                             </span>
                             <FullViewIcon className="inline-block ml-2" />
                         </button>
@@ -69,7 +68,7 @@ const ChartFooter = (props) => {
                         <a href={downloadUrl} target="_blank" rel="noreferrer">
                             <DownloadIcon className=" mr-2 inline-block" />
                             <span className=" hidden md:inline-block">
-                                {trans('Download')}
+                                {t('Download')}
                             </span>
                         </a>
                     </div>
@@ -82,7 +81,7 @@ const ChartFooter = (props) => {
                                 rel="noreferrer">
                                 <DownloadIcon className=" mr-2 inline-block" />
                                 <span className=" hidden md:inline-block">
-                                    {trans('Download')}
+                                    {t('Download')}
                                 </span>
                             </a>
                         </div>
@@ -92,7 +91,7 @@ const ChartFooter = (props) => {
                     <button onClick={onClick} className="dropdown-menu-trigger">
                         <ShareIcon className="inline-block mr-2" />{' '}
                         <span className="hidden cursor-pointer md:inline-block">
-                            {trans('Share')}
+                            {t('Share')}
                         </span>
                     </button>
                     <nav
@@ -101,14 +100,14 @@ const ChartFooter = (props) => {
                             isActive ? 'active' : 'inactive'
                         }`}>
                         <span className="inline-block mb-3 text-primary-dark">
-                            {trans('Share on')}
+                            {t('Share on')}
                         </span>
                         <div className=" flex flex-col">
                             <FacebookShareButton
                                 url={currentLocation}
                                 className=" social-icon">
                                 <socialIcons.fbIcon />
-                                <span>{trans('Facebook')}</span>
+                                <span>{t('Facebook')}</span>
                             </FacebookShareButton>
 
                             <TwitterShareButton
@@ -116,21 +115,21 @@ const ChartFooter = (props) => {
                                 via={twitterHandle}
                                 className=" social-icon">
                                 <socialIcons.twitterIcon />
-                                <span>{trans('Twitter')}</span>
+                                <span>{t('Twitter')}</span>
                             </TwitterShareButton>
 
                             <LinkedinShareButton
                                 url={currentLocation}
                                 className=" social-icon">
                                 <socialIcons.linkedIcon />
-                                <span>{trans('LinkedIn')}</span>
+                                <span>{t('LinkedIn')}</span>
                             </LinkedinShareButton>
 
                             <EmailShareButton
                                 url={currentLocation}
                                 className=" social-icon email">
                                 <socialIcons.mailIcon />
-                                <span>{trans('Email')}</span>
+                                <span>{t('Email')}</span>
                             </EmailShareButton>
                         </div>
 
@@ -138,14 +137,14 @@ const ChartFooter = (props) => {
                             <Fragment>
                                 <div className="embedded-share">
                                     <span className="block px-3 mb-2 -mx-3 text-primary-dark">
-                                        {trans('Share as')}
+                                        {t('Share as')}
                                     </span>
                                     <div
                                         className="flex items-center cursor-pointer social-embed"
                                         onClick={() => modalHandler()}>
                                         <socialIcons.codingIcon className=" w-5" />
                                         <span className=" ml-4">
-                                            {trans('Embedded')}
+                                            {t('Embedded')}
                                         </span>
                                     </div>
                                 </div>

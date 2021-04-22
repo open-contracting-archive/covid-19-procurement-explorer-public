@@ -1,14 +1,13 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import CmsPageService from '../../../../services/CmsPageService'
-import useTrans from '../../../../hooks/useTrans'
+import { t } from '@transifex/native'
 import { formatDate, formatTime } from '../../../../helpers/date'
 import { Loader } from '../../../../components/Utilities'
 
 const LibraryUpcomingEvents = () => {
     const [eventList, setEventList] = useState([])
     const [loading, setLoading] = useState(true)
-    const { trans } = useTrans()
 
     useEffect(() => {
         CmsPageService.EventList({ limit: 3 }).then((response) => {
@@ -26,7 +25,7 @@ const LibraryUpcomingEvents = () => {
             <div className="container mx-auto">
                 <div className="text-center">
                     <p className="text-xl blue-50 pb-6 md:pb-10">
-                        {trans('Upcoming Events')}
+                        {t('Upcoming Events')}
                     </p>
                 </div>
                 {loading ? (
@@ -85,12 +84,12 @@ const LibraryUpcomingEvents = () => {
                         </div>
                         <div className="text-right md:text-center mt-6 md:mt-12">
                             <Link to="/events" className="text-blue-20">
-                                {trans('View all events')} --&gt;{' '}
+                                {t('View all events')} --&gt;{' '}
                             </Link>
                         </div>
                     </Fragment>
                 ) : (
-                    <p>{trans('There are no events')}</p>
+                    <p>{t('There are no events')}</p>
                 )}
             </div>
         </section>

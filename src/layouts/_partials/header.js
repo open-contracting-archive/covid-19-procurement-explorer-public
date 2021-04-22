@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import useTrans from '../../hooks/useTrans'
+import { t } from '@transifex/native'
 import CmsPageService from '../../services/CmsPageService'
 import { LanguageSwitcher } from '../../components/Utilities'
 
@@ -13,7 +13,6 @@ const fixedMenuItems = [
 const Header = () => {
     const [isHome, setIsHome] = useState(true)
     const [menuList, setMenuList] = useState([])
-    const { trans } = useTrans()
     const location = useLocation()
 
     useEffect(() => {
@@ -65,7 +64,7 @@ const Header = () => {
                                         activeClassName="active"
                                         to={`/pages/${menu.meta.slug}`}
                                         className="capitalize">
-                                        {trans(menu.title)}
+                                        {t(menu.title)}
                                     </NavLink>
                                 </li>
                             ))}
@@ -75,7 +74,7 @@ const Header = () => {
                                     <NavLink
                                         activeClassName="active"
                                         to={item.route}>
-                                        {trans(item.title)}
+                                        {t(item.title)}
                                     </NavLink>
                                 </li>
                             ))}
