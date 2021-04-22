@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 import { useHistory, useParams } from 'react-router-dom'
@@ -61,7 +61,7 @@ const SupplierProfile = () => {
                 <Loader />
             ) : (
                 !isEmpty(originalData) && (
-                    <>
+                    <Fragment>
                         <MetaInformation
                             title={get(originalData, 'name')}
                             description="Welcome Covid-19 Contract Explorer"
@@ -195,7 +195,7 @@ const SupplierProfile = () => {
                                 />
                             </div>
                         </div>
-                    </>
+                    </Fragment>
                 )
             )}
         </section>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
@@ -243,7 +243,7 @@ const Resources = () => {
                     {loading ? (
                         <Loader />
                     ) : (
-                        <>
+                        <Fragment>
                             <div className="relative overflow-hidden">
                                 <div className="custom-scrollbar table-scroll">
                                     <table className="table table__resources">
@@ -382,7 +382,7 @@ const Resources = () => {
                                     </div>
                                 </div>
                             )}
-                        </>
+                        </Fragment>
                     )}
                 </div>
             </section>

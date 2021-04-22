@@ -112,7 +112,7 @@ const BlogDetail = () => {
                             </div>
                         </div>
                         {blogList.length !== 1 ? (
-                            <>
+                            <Fragment>
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
@@ -126,54 +126,52 @@ const BlogDetail = () => {
                                                         blogs.id !== blogId
                                                 )
                                                 .slice(0, 3)
-                                                .map((blogs) => {
+                                                .map((blog) => {
                                                     return (
-                                                        <>
-                                                            <div
-                                                                className="blogs-thumbnail"
-                                                                key={blogs.id}>
-                                                                <Link
-                                                                    to={`/blogs/${blogs.id}`}>
-                                                                    <div className="img-wrapper">
-                                                                        {get(
-                                                                            blogs,
-                                                                            'content_image.meta.download_url'
-                                                                        ) !=
-                                                                        null ? (
-                                                                            <img
-                                                                                src={`${API_URL}${get(
-                                                                                    blogs,
-                                                                                    'content_image.meta.download_url'
-                                                                                )}`}
-                                                                                alt=""
-                                                                            />
-                                                                        ) : (
-                                                                            <img
-                                                                                src={
-                                                                                    DefaultImage
-                                                                                }
-                                                                                alt=""
-                                                                            />
-                                                                        )}
-                                                                    </div>
-                                                                </Link>
-                                                                <div>
-                                                                    <Link
-                                                                        to={`/blogs/${blogs.id}`}>
-                                                                        <h3 className="blogs-caption__title">
-                                                                            {
-                                                                                blogs.title
+                                                        <div
+                                                            className="blogs-thumbnail"
+                                                            key={blog.id}>
+                                                            <Link
+                                                                to={`/blogs/${blog.id}`}>
+                                                                <div className="img-wrapper">
+                                                                    {get(
+                                                                        blog,
+                                                                        'content_image.meta.download_url'
+                                                                    ) !=
+                                                                    null ? (
+                                                                        <img
+                                                                            src={`${API_URL}${get(
+                                                                                blog,
+                                                                                'content_image.meta.download_url'
+                                                                            )}`}
+                                                                            alt=""
+                                                                        />
+                                                                    ) : (
+                                                                        <img
+                                                                            src={
+                                                                                DefaultImage
                                                                             }
-                                                                        </h3>
-                                                                    </Link>
-                                                                    <p className="blogs-caption__date">
-                                                                        {formatDate(
-                                                                            blogs.news_date
-                                                                        )}
-                                                                    </p>
+                                                                            alt=""
+                                                                        />
+                                                                    )}
                                                                 </div>
+                                                            </Link>
+                                                            <div>
+                                                                <Link
+                                                                    to={`/blogs/${blog.id}`}>
+                                                                    <h3 className="blogs-caption__title">
+                                                                        {
+                                                                            blog.title
+                                                                        }
+                                                                    </h3>
+                                                                </Link>
+                                                                <p className="blogs-caption__date">
+                                                                    {formatDate(
+                                                                        blog.news_date
+                                                                    )}
+                                                                </p>
                                                             </div>
-                                                        </>
+                                                        </div>
                                                     )
                                                 })}
                                     </div>
@@ -187,7 +185,7 @@ const BlogDetail = () => {
                                         <hr className="text-primary-gray flex-1" />
                                     </div>
                                 </div>
-                            </>
+                            </Fragment>
                         ) : (
                             ''
                         )}

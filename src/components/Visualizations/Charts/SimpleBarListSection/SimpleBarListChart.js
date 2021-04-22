@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import Default from '../../../../constants/Default'
 import { formatNumber } from '../../../../helpers/number'
@@ -29,7 +29,7 @@ function SimpleBarListChart({ data, currency, viewType }) {
                                 <div className="ml-2 custom-horizontal-bar-amount">
                                     <p>
                                         {bar_value.amount ? (
-                                            <>
+                                            <Fragment>
                                                 {viewType === 'value' &&
                                                 currency !==
                                                     Default.CURRENCY_LOCAL
@@ -44,7 +44,7 @@ function SimpleBarListChart({ data, currency, viewType }) {
                                                             : Default.CURRENCY_USD}
                                                     </span>
                                                 )}
-                                            </>
+                                            </Fragment>
                                         ) : (
                                             '-'
                                         )}

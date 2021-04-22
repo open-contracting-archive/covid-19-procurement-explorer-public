@@ -92,7 +92,9 @@ const EquityIndicators = (props) => {
                                 {trans('Assigned')}
                             </span>
                             <span className="text-xl font-bold mr-2">
-                                {currency && currency !== Default.CURRENCY_LOCAL
+                                {viewType === ContractView.VALUE &&
+                                currency &&
+                                currency !== Default.CURRENCY_LOCAL
                                     ? '$'
                                     : ''}
                                 {formatNumber(assignedValue)}

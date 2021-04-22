@@ -111,7 +111,7 @@ const EventDetail = () => {
                             </div>
                         </div>
                         {eventList.length !== 1 ? (
-                            <>
+                            <Fragment>
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
@@ -188,7 +188,7 @@ const EventDetail = () => {
                                         <hr className="text-primary-gray flex-1" />
                                     </div>
                                 </div>
-                            </>
+                            </Fragment>
                         ) : (
                             ''
                         )}

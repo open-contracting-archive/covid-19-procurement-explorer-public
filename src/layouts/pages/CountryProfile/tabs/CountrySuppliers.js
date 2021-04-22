@@ -24,7 +24,7 @@ const CountrySuppliers = (props) => {
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-4">
                     <TotalSpending
-                        helpText="Total value of COVID related contracts "
+                        label="Total Income"
                         params={{ country: countryCode, supplier: 'notnull' }}
                     />
                 </div>

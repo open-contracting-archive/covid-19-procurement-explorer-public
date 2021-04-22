@@ -20,7 +20,11 @@ const ContractsCorrelation = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'COVID/contracts quantity correlation', params } = props
+    const {
+        label = 'COVID/contracts quantity correlation',
+        params,
+        helpText = 'Correlation between number of active COVID cases and value of COVID contracts signed'
+    } = props
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState([])
@@ -32,8 +36,6 @@ const ContractsCorrelation = (props) => {
     )
     const { trans } = useTrans()
     const fullScreenHandler = useFullScreenHandle()
-    const helpText =
-        'Correlation between number of active COVID cases and value of COVID contracts signed'
     const selectedCurrency =
         currency === Default.CURRENCY_LOCAL ? countryCurrency : currency
 
