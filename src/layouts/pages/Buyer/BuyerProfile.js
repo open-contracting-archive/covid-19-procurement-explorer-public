@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { get, isEmpty } from 'lodash'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
@@ -63,7 +63,7 @@ const BuyerProfile = () => {
                 <Loader />
             ) : (
                 !isEmpty(originalData) && (
-                    <>
+                    <Fragment>
                         <MetaInformation
                             title={get(originalData, 'name')}
                             description="Welcome Covid-19 Contract Explorer"
@@ -127,33 +127,33 @@ const BuyerProfile = () => {
                                             params={{ buyer: id }}
                                         />
                                     </div>
-                                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                                        <AverageBidsPerContract
-                                            params={{ buyer: id }}
-                                        />
-                                    </div>
-                                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                                        <Monopolization
-                                            params={{ buyer: id }}
-                                        />
-                                    </div>
-                                    <div className="w-full lg:w-1/3 px-2 mb-6">
-                                        <div className="flex flex-col justify-between h-full">
-                                            <EquityIndicators
-                                                params={{
-                                                    buyer: id,
-                                                    country:
-                                                        originalData.country_code
-                                                }}
+                                    <div className="w-full lg:w-1/3 px-2 mb-4">
+                                        <div className="flex flex-col justify-between h-full space-y-4">
+                                            <AverageBidsPerContract
+                                                params={{ buyer: id }}
                                             />
-                                            <DirectOpen
-                                                params={{
-                                                    buyer: id,
-                                                    country:
-                                                        originalData.country_code
-                                                }}
+                                            <Monopolization
+                                                params={{ buyer: id }}
                                             />
                                         </div>
+                                    </div>
+                                    <div className="w-full lg:w-1/3 px-2 mb-6">
+                                        <EquityIndicators
+                                            params={{
+                                                buyer: id,
+                                                country:
+                                                    originalData.country_code
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="w-full lg:w-1/3 px-2 mb-6">
+                                        <DirectOpen
+                                            params={{
+                                                buyer: id,
+                                                country:
+                                                    originalData.country_code
+                                            }}
+                                        />
                                     </div>
                                     <div className="w-full px-2 mb-6">
                                         <ProductsTimeline
@@ -201,7 +201,7 @@ const BuyerProfile = () => {
                                 />
                             </div>
                         </div>
-                    </>
+                    </Fragment>
                 )
             )}
         </section>

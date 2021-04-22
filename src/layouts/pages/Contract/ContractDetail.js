@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
@@ -175,12 +175,12 @@ const ContractDetail = () => {
                         </p>
                         <p className="font-bold text-xl">
                             {contractDetail && contractDetail.tender_usd ? (
-                                <>
+                                <Fragment>
                                     {formatNumber(contractDetail.tender_usd)}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
                                     </span>
-                                </>
+                                </Fragment>
                             ) : (
                                 '-'
                             )}
@@ -192,12 +192,12 @@ const ContractDetail = () => {
                         </p>
                         <p className="font-bold text-xl">
                             {contractDetail && contractDetail.award_usd ? (
-                                <>
+                                <Fragment>
                                     {formatNumber(contractDetail.award_usd)}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
                                     </span>
-                                </>
+                                </Fragment>
                             ) : (
                                 '-'
                             )}
@@ -210,14 +210,14 @@ const ContractDetail = () => {
                         <p className="font-bold text-xl">
                             {contractDetail &&
                             contractDetail.contract_value_usd ? (
-                                <>
+                                <Fragment>
                                     {formatNumber(
                                         contractDetail.contract_value_usd
                                     )}{' '}
                                     <span className="font-normal text-base uppercase">
                                         {trans('USD')}
                                     </span>
-                                </>
+                                </Fragment>
                             ) : (
                                 '-'
                             )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
@@ -8,7 +8,6 @@ import {
     CurrencySwitcher,
     ErrorHandler
 } from '../../../../components/Utilities'
-import VisualizationService from '../../../../services/VisualizationService'
 import { get } from 'lodash'
 import CountryService from '../../../../services/CountryService'
 import { mediaUrl } from '../../../../helpers/general'
@@ -18,7 +17,6 @@ const CountryInfo = (props) => {
     const [loading, setLoading] = useState(true)
     const { trans } = useTrans()
     const [error, setError] = useState(false)
-    const [originalData, setOriginalData] = useState({})
     const [countryStats, setCountryStats] = useState({})
     const [dataProviders, setDataProviders] = useState([])
     const currency = useSelector((state) => state.general.currency)
@@ -29,16 +27,6 @@ const CountryInfo = (props) => {
     useEffect(() => {
         if (country.country_code_alpha_2) {
             const params = { country: country.country_code_alpha_2 }
-            VisualizationService.TotalSpending(params)
-                .then((result) => {
-                    if (result) {
-                        setOriginalData(result)
-                    }
-                })
-                .catch(() => {
-                    setError(true)
-                })
-
             CountryService.DataProviders(params)
                 .then((result) => {
                     if (result) {
@@ -52,14 +40,13 @@ const CountryInfo = (props) => {
             setLoading(false)
 
             return () => {
-                setOriginalData({})
                 setDataProviders([])
             }
         }
     }, [country?.country_code_alpha_2])
 
     useEffect(() => {
-        const spending = get(originalData[currency], 'total', 0)
+        const spending = get(country, `amount_${currency}`, 0)
         setCountryStats({
             spending: spending,
             spending_per_covid_case:
@@ -67,7 +54,7 @@ const CountryInfo = (props) => {
                     ? Math.round(spending / country.covid_cases_total)
                     : 0
         })
-    }, [originalData, currency])
+    }, [country, currency])
 
     return (
         <div className="w-full md:w-1/2 lg:w-38 px-2 my-4 mb-8 md:my-0 md:mb-0">
@@ -77,7 +64,7 @@ const CountryInfo = (props) => {
                     <span className="opacity-75">Last updated on </span>
                     <span>
                         {formatDate(
-                            country.covid_data_last_updated,
+                            country.last_contract_date,
                             'h:mm a MMM D, YYYY'
                         )}
                     </span>
@@ -90,7 +77,7 @@ const CountryInfo = (props) => {
                         <Loader />
                     </div>
                 ) : !error ? (
-                    <>
+                    <Fragment>
                         <div className="p-4 md:p-8 md:py-6 bg-yellow-20 rounded-t-md h-full">
                             <div className="flex flex-wrap -mx-4 -mb-4">
                                 <div className="w-1/2 px-4 mb-4 lg:mb-6">
@@ -208,7 +195,7 @@ const CountryInfo = (props) => {
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </Fragment>
                 ) : (
                     <ErrorHandler />
                 )}

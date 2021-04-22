@@ -10,12 +10,16 @@ const Suppliers = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { label = 'Suppliers', params, modalHandler } = props
+    const {
+        label = 'Suppliers',
+        params,
+        modalHandler,
+        helpText = 'Number of suppliers who signed at least 1 COVID contract'
+    } = props
     const [loading, setLoading] = useState(true)
     const [originalData, setOriginalData] = useState({})
     const [error, setError] = useState(false)
     const { trans } = useTrans()
-    const helpText = 'Number of suppliers who signed at least 1 COVID contract'
 
     // ===========================================================================
     // Hooks

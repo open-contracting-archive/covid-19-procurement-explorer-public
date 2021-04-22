@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
 import Select from 'react-select'
 import ReactPaginate from 'react-paginate'
 import CmsPageService from '../../services/CmsPageService'
-import { Loader } from '../Utilities'
-import { TableLoader } from '../Utilities'
+import { Loader, TableLoader } from '../Utilities'
 import { hasValidProperty } from '../../helpers/general'
 import useCountries from '../../hooks/useCountries'
 import useTrans from '../../hooks/useTrans'
@@ -203,7 +202,7 @@ const InsightTable = (props) => {
             {loading ? (
                 <Loader />
             ) : (
-                <>
+                <Fragment>
                     <div className="relative">
                         <div className="custom-scrollbar table-scroll">
                             <table className="table">
@@ -315,7 +314,7 @@ const InsightTable = (props) => {
                             </div>
                         </div>
                     )}
-                </>
+                </Fragment>
             )}
         </div>
     )

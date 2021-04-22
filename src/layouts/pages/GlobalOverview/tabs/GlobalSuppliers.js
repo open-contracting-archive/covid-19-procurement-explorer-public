@@ -37,7 +37,10 @@ const GlobalSuppliers = (props) => {
                     <TotalContracts params={{ supplier: 'notnull' }} />
                 </div>
                 <div className="w-full lg:w-1/3 px-2 mb-6">
-                    <TotalSpending params={{ supplier: 'notnull' }} />
+                    <TotalSpending
+                        label="Total Income"
+                        params={{ supplier: 'notnull' }}
+                    />
                 </div>
             </div>
             <SupplierTable />
