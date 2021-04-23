@@ -12,6 +12,7 @@ import useContentFilters from '../../hooks/useContentFilters'
 import useTableSorting from '../../hooks/useTableSorting'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import { formatDate } from '../../helpers/date'
 
 const limit = 20
 
@@ -25,7 +26,11 @@ const InsightTable = (props) => {
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
     const [showFilter, setShowFilter] = useState('hidden')
-    const { contentsTypeSelectList, countrySelectList } = useContentFilters()
+    const {
+        contentsTypeSelectList,
+        countrySelectList,
+        yearSelectList
+    } = useContentFilters()
     const history = useHistory()
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
         items: insightList,
@@ -157,6 +162,22 @@ const InsightTable = (props) => {
                                 }}
                             />
                         </div>
+                        <div className="w-1/2 px-2 mb-5 md:w-40">
+                            <p className="text-xs leading-none uppercase opacity-50">
+                                {t('Year')}
+                            </p>
+                            <Select
+                                className="mt-2 text-sm select-filter"
+                                classNamePrefix="select-filter"
+                                options={yearSelectList}
+                                // onChange={(selectedFilter) => {
+                                //     appendFilter({
+                                //         news_date__gte: `${selectedFilter.value}-1-1`,
+                                //         news_date__lt: `${selectedFilter.value}-12-31`
+                                //     })
+                                // }}
+                            />
+                        </div>
                     </div>
                 </div>
             ) : (
@@ -195,6 +216,22 @@ const InsightTable = (props) => {
                             }}
                         />
                     </div>
+                    <div className="w-40">
+                        <p className="text-xs leading-none uppercase opacity-50">
+                            {t('Year')}
+                        </p>
+                        <Select
+                            className="mt-2 text-sm select-filter"
+                            classNamePrefix="select-filter"
+                            options={yearSelectList}
+                            // onChange={(selectedFilter) => {
+                            //     appendFilter({
+                            //         news_date__gte: `${selectedFilter.value}-1-1`,
+                            //         news_date__lt: `${selectedFilter.value}-12-31`
+                            //     })
+                            // }}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -222,6 +259,12 @@ const InsightTable = (props) => {
                                             {tableHeaderSpan(
                                                 'contents_type',
                                                 `${t('Type')}`
+                                            )}
+                                        </th>
+                                        <th style={{ width: '10%' }}>
+                                            {tableHeaderSpan(
+                                                'news_date',
+                                                `${t('Year')}`
                                             )}
                                         </th>
                                     </tr>
@@ -253,6 +296,12 @@ const InsightTable = (props) => {
                                                     )}
                                                 </td>
                                                 <td>{insight.contents_type}</td>
+                                                <td>
+                                                    {formatDate(
+                                                        insight.news_date,
+                                                        'YYYY'
+                                                    )}
+                                                </td>
                                             </tr>
                                         )
                                     })}

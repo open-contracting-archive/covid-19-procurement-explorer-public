@@ -7,5 +7,6 @@ export default {
     AMOUNT_USD: 'amount_usd',
     AMOUNT_LOCAL: 'amount_local',
     SITE_TITLE: 'Covid-19 Contract Explorer',
-    BUYER_COUNT: 'buyer_count'
+    BUYER_COUNT: 'buyer_count',
+    PAGE_SIZE: 20
 }

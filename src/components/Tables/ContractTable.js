@@ -9,11 +9,12 @@ import { formatDate } from '../../helpers/date'
 import { hasValidProperty } from '../../helpers/general'
 import useTableSorting from '../../hooks/useTableSorting'
 import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
+import Default from '../../constants/Default'
 
 const ContractFilter = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './ContractFilter')
 )
-const limit = 20
+const limit = Default.PAGE_SIZE
 
 const ContractTable = (props) => {
     // ===========================================================================
@@ -167,7 +168,7 @@ const ContractTable = (props) => {
                                         {!hasProduct() && (
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
-                                                    'product_category',
+                                                    'product',
                                                     `${t('Product Category')}`
                                                 )}
                                             </th>

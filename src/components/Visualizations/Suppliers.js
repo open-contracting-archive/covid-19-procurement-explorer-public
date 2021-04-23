@@ -40,7 +40,7 @@ const Suppliers = (props) => {
         return () => {
             setOriginalData({})
         }
-    }, [params])
+    }, [params?.country])
 
     // ===========================================================================
     // Handlers and functions

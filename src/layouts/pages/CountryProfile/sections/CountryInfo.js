@@ -136,7 +136,7 @@ const CountryInfo = (props) => {
                                         </h2>
                                     </div>
                                 </div>
-                                {dataProviders &&
+                                {dataProviders.length > 0 &&
                                     dataProviders
                                         .slice(0, 1)
                                         .map((dataProvider, index) => (

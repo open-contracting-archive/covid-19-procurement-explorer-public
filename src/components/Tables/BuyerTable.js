@@ -14,18 +14,17 @@ import useTableSorting from '../../hooks/useTableSorting'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 
+const limit = Default.PAGE_SIZE
+
 const BuyerTable = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const { params } = props
     const [originalData, setOriginalData] = useState([])
-    const [selectedFilters, setSelectedFilters] = useState(() =>
-        identity(pickBy(params))
-    )
+    const [selectedFilters, setSelectedFilters] = useState({})
     const [buyersNameParameter, setBuyersNameParameter] = useState('')
     const [loading, setLoading] = useState(true)
-    const [limit] = useState(20)
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
@@ -70,14 +69,16 @@ const BuyerTable = (props) => {
     }
 
     const LoadBuyersList = (page) => {
-        setTableLoading(true)
-        setCurrentPage(get(page, 'selected', 0))
-        VisualizationService.BuyerTableList({
+        const filterParams = {
+            ...identity(pickBy(params)),
             ...selectedFilters,
             order: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
-        })
+        }
+        setTableLoading(true)
+        setCurrentPage(get(page, 'selected', 0))
+        VisualizationService.BuyerTableList(filterParams)
             .then((response) => {
                 if (response) {
                     setOriginalData([...response.results])
@@ -310,12 +311,14 @@ const BuyerTable = (props) => {
                                         `${t('Buyer')}`
                                     )}
                                 </th>
-                                <th style={{ width: '10%' }}>
-                                    {tableHeaderSpan(
-                                        'country_name',
-                                        `${t('Country')}`
-                                    )}
-                                </th>
+                                {!hasCountry() && (
+                                    <th style={{ width: '10%' }}>
+                                        {tableHeaderSpan(
+                                            'country',
+                                            `${t('Country')}`
+                                        )}
+                                    </th>
+                                )}
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'tender_count',
@@ -369,7 +372,15 @@ const BuyerTable = (props) => {
                                                 {get(buyer, 'buyer_name')}{' '}
                                             </p>{' '}
                                         </td>
-                                        <td>{get(buyer, 'country_name')}</td>
+                                        {!hasCountry() && (
+                                            <td>
+                                                {get(
+                                                    buyer,
+                                                    'country_name',
+                                                    '-'
+                                                )}
+                                            </td>
+                                        )}
                                         <td>
                                             {get(buyer, Default.TENDER_COUNT)}
                                         </td>
