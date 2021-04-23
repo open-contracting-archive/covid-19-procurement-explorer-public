@@ -14,18 +14,17 @@ import Default from '../../constants/Default'
 import { formatDecimal } from '../../helpers/number'
 import useTableSorting from '../../hooks/useTableSorting'
 
+const limit = Default.PAGE_SIZE
+
 const SupplierTable = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const { params } = props
     const [originalData, setOriginalData] = useState([])
-    const [selectedFilters, setSelectedFilters] = useState(() =>
-        identity(pickBy(params))
-    )
+    const [selectedFilters, setSelectedFilters] = useState({})
     const [suppliersNameParameter, setSuppliersNameParameter] = useState('')
     const [loading, setLoading] = useState(true)
-    const [limit] = useState(20)
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
@@ -51,7 +50,7 @@ const SupplierTable = (props) => {
         return () => {
             setOriginalData([])
         }
-    }, [selectedFilters, sorting])
+    }, [params?.country, selectedFilters, sorting])
 
     // ===========================================================================
     // Helpers and functions
@@ -67,21 +66,25 @@ const SupplierTable = (props) => {
     }
 
     const LoadSuppliersList = (page) => {
-        setTableLoading(true)
-        setCurrentPage(get(page, 'selected', 0))
-        VisualizationService.SupplierTableList({
+        const filterParams = {
+            ...identity(pickBy(params)),
             ...selectedFilters,
             order: sorting.direction + sorting.column,
             limit: limit,
             offset: page && page.selected * limit
-        }).then((response) => {
-            if (response) {
-                setOriginalData([...response.results])
-                setTotalItems(response.count)
-                setTableLoading(false)
+        }
+        setTableLoading(true)
+        setCurrentPage(get(page, 'selected', 0))
+        VisualizationService.SupplierTableList(filterParams).then(
+            (response) => {
+                if (response) {
+                    setOriginalData([...response.results])
+                    setTotalItems(response.count)
+                    setTableLoading(false)
+                }
+                setLoading(false)
             }
-            setLoading(false)
-        })
+        )
     }
 
     const appendFilter = (selected) => {
@@ -365,9 +368,15 @@ const SupplierTable = (props) => {
                                                 {get(supplier, 'supplier_name')}
                                             </p>
                                         </td>
-                                        <td>
-                                            {get(supplier, 'country_name', '-')}
-                                        </td>
+                                        {!hasCountry() && (
+                                            <td>
+                                                {get(
+                                                    supplier,
+                                                    'country_name',
+                                                    '-'
+                                                )}
+                                            </td>
+                                        )}
                                         <td>
                                             {get(
                                                 supplier,

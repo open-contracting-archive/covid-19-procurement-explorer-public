@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { range } from '../helpers/general'
 
 const useContentFilters = () => {
     const countries = useSelector((state) => state.general.countries)
@@ -27,7 +28,6 @@ const useContentFilters = () => {
                 { label: 'Blog', value: 'Blog' }
             ]
         }, []),
-
         resourceTypeSelectList: useMemo(() => {
             return [
                 { value: '', label: 'All' },
@@ -37,6 +37,12 @@ const useContentFilters = () => {
                 { value: 'Tools', label: 'Tools' },
                 { value: 'Training Material', label: 'Training Material' }
             ]
+        }, []),
+        yearSelectList: useMemo(() => {
+            return range(2019, new Date().getFullYear()).reduce(
+                (acc, current) => [...acc, { value: current, label: current }],
+                []
+            )
         }, [])
     }
 }
