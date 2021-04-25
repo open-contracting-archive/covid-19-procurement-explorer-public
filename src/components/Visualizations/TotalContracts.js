@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { SimpleBarChart, AreaChartBlock } from './Charts'
-import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import Visualization from '../../constants/Visualization'
 import useDataCalculations from '../../hooks/useDataCalculations'
@@ -107,7 +107,7 @@ const TotalContracts = (props) => {
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_CONTRACTS)}>
-                    {t('View in detail')} →
+                    <T _str="View in detail" /> →
                 </span>
             )}
         </CardContainer>

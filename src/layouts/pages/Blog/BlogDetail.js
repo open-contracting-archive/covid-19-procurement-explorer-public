@@ -1,11 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
-import { API_URL } from '../../../helpers/api'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../services/CmsPageService'
+import { API_URL } from '../../../helpers/api'
 import { formatDate } from '../../../helpers/date'
-import { t } from '@transifex/native'
-import DefaultImage from '../../../assets/img/default_image.png'
 import { stripTags } from '../../../helpers/transformers'
 import {
     Loader,
@@ -14,6 +13,7 @@ import {
     Breadcrumb,
     TagList
 } from '../../../components/Utilities'
+import DefaultImage from '../../../assets/img/default_image.png'
 
 const BlogDetail = () => {
     const [blogDetail, setBlogDetail] = useState({})
@@ -62,7 +62,7 @@ const BlogDetail = () => {
                             {blogDetail.title}
                         </h2>
                         <span className="block italic mb-6 md:mb-10 text-sm text-blue-5">
-                            {t('By')}
+                            <T _str="By" />
                             <span className="ml-1 text-primary-blue">
                                 {blogDetail.author}
                             </span>{' '}
@@ -81,7 +81,7 @@ const BlogDetail = () => {
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="w-full lg:w-2/12 mb-4 news-detail__metadata">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                    {t('Published on')}
+                                    <T _str="Published on" />
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
                                     {formatDate(blogDetail.news_date)}
@@ -115,7 +115,7 @@ const BlogDetail = () => {
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
-                                        {t('Related Blogs')}
+                                        <T _str="Related Blogs" />
                                     </h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {blogList &&
@@ -179,7 +179,7 @@ const BlogDetail = () => {
                                         <Link
                                             to="/blogs"
                                             className="text-blue-20 px-4">
-                                            {t('View all blogs')} --&gt;{' '}
+                                            <T _str="View all blogs" /> --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>

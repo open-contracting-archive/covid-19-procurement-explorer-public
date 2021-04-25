@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { Loader, ChartFooter, ErrorHandler } from '../Utilities'
 import { SimpleBarChart } from './Charts'
 import VisualizationService from '../../services/VisualizationService'
@@ -82,7 +82,7 @@ const BuyerProductTimeline = (props) => {
                                     onClick={() =>
                                         setBuyerProductTimelineType('value')
                                     }>
-                                    {t('By value')}
+                                    <T _str="By value" />
                                 </li>
                                 <li
                                     className={`cursor-pointer ${
@@ -93,7 +93,7 @@ const BuyerProductTimeline = (props) => {
                                     onClick={() =>
                                         setBuyerProductTimelineType('number')
                                     }>
-                                    {t('By number')}
+                                    <T _str="By number" />
                                 </li>
                             </ul>
                         </div>

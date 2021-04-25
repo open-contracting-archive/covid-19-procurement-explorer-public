@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import CmsPageService from '../../services/CmsPageService'
 import FooterImage from '../../assets/img/icons/cc-img.png'
 import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
@@ -46,35 +46,39 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="col-span-4 mb-8 md:col-span-2">
-                        <h4 className="mb-2">{t('Explore')}</h4>
+                        <h4 className="mb-2">
+                            <T _str="Explore" />
+                        </h4>
                         <ul>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/data">
-                                    {t('Data')}
+                                    <T _str="Data" />
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/contracts">
-                                    {t('Contracts')}
+                                    <T _str="Contracts" />
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/suppliers">
-                                    {t('List of Suppliers')}
+                                    <T _str="List of Suppliers" />
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/buyers">
-                                    {t('List of Buyers')}
+                                    <T _str="List of Buyers" />
                                 </Link>
                             </li>
                             <li className="mb-1 transition opacity-50 hover:opacity-75">
                                 <Link to="/global-overview/products">
-                                    {t('Products')}
+                                    <T _str="Products" />
                                 </Link>
                             </li>
                             <li className="transition opacity-50 hover:opacity-75">
-                                <Link to="/resources">{t('Resources')}</Link>
+                                <Link to="/resources">
+                                    <T _str="Resources" />
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -87,7 +91,7 @@ const Footer = () => {
                                     <Link
                                         to={`/pages/${menu.meta.slug}`}
                                         className="capitalize">
-                                        {t(menu.title)}
+                                        <T _str={menu.title} />
                                     </Link>
                                 </li>
                             ))}
@@ -95,7 +99,7 @@ const Footer = () => {
                     </div>
                     <div className="col-span-12 md:col-span-5">
                         <p className="mb-3">
-                            {t('Subscribe and get weekly updates')}
+                            <T _str="Subscribe and get weekly updates" />
                         </p>
                         <form>
                             <div className="relative flex items-center">
@@ -114,7 +118,7 @@ const Footer = () => {
                         <div className="flex flex-wrap mt-8">
                             <div className="mr-8">
                                 <p className="mb-3">
-                                    {t('The portal developed by')}
+                                    <T _str="The portal developed by" />
                                 </p>
                                 <div className="flex flex-wrap items-center">
                                     <Link
@@ -145,7 +149,9 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="">
-                                <p className="mb-3">{t('Supported by')}</p>
+                                <p className="mb-3">
+                                    <T _str="Supported by" />
+                                </p>
                                 <div className="flex flex-wrap items-center">
                                     <img
                                         src={EuropeanBank}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { siteUrl } from '../../helpers/general'
 import { ReactComponent as CodingIcon } from '../../assets/img/icons/ic_coding.svg'
 import { ReactComponent as CopyIcon } from '../../assets/img/icons/ic_copy.svg'
@@ -49,7 +49,7 @@ const EmbeddedModal = (props) => {
         <div className="container mx-auto p-6">
             <div>
                 <h3 className="text-lg mb-4">
-                    {t('Share this chart on your website')}
+                    <T _str="Share this chart on your website" />
                 </h3>
                 <button
                     className="icon-close"
@@ -62,7 +62,9 @@ const EmbeddedModal = (props) => {
                     <span className="inline-block mr-2">
                         <CodingIcon className="w-4 h-4" />
                     </span>
-                    <span>{t('Copy/paste this code snippet')}</span>
+                    <span>
+                        <T _str="Copy/paste this code snippet" />
+                    </span>
                 </div>
                 <div>
                     <div className="flex items-center">

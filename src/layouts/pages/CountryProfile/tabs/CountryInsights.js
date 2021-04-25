@@ -1,7 +1,7 @@
 import React from 'react'
+import { T } from '@transifex/react'
 import { FeaturedInsights } from '../../../../components/Utilities'
 import { InsightTable } from '../../../../components/Tables'
-import { t } from '@transifex/native'
 
 const CountryInsights = (props) => {
     function renderFeaturedItems() {
@@ -21,7 +21,7 @@ const CountryInsights = (props) => {
             {renderFeaturedItems()}
 
             <h2 className="font-normal text-lg mb-6">
-                {t('Best practices and solutions from our database')}
+                <T _str="Best practices and solutions from our database" />
             </h2>
 
             {renderTable()}

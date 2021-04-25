@@ -52,3 +52,7 @@ export const CONTINENTS = {
 export const continentSelectList = Object.keys(CONTINENTS).map((key) => {
     return { value: key, label: CONTINENTS[key].title }
 })
+
+export function countryFlag(countryCode = '') {
+    return `https://flagcdn.com/h20/${countryCode.toLowerCase()}.png`
+}

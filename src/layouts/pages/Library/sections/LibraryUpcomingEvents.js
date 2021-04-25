@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
-import { t } from '@transifex/native'
 import { formatDate, formatTime } from '../../../../helpers/date'
 import { Loader } from '../../../../components/Utilities'
 
@@ -25,7 +25,7 @@ const LibraryUpcomingEvents = () => {
             <div className="container mx-auto">
                 <div className="text-center">
                     <p className="text-xl blue-50 pb-6 md:pb-10">
-                        {t('Upcoming Events')}
+                        <T _str="Upcoming Events" />
                     </p>
                 </div>
                 {loading ? (
@@ -84,12 +84,14 @@ const LibraryUpcomingEvents = () => {
                         </div>
                         <div className="text-right md:text-center mt-6 md:mt-12">
                             <Link to="/events" className="text-blue-20">
-                                {t('View all events')} --&gt;{' '}
+                                <T _str="View all events" /> --&gt;{' '}
                             </Link>
                         </div>
                     </Fragment>
                 ) : (
-                    <p>{t('There are no events')}</p>
+                    <p>
+                        <T _str="There are no events" />
+                    </p>
                 )}
             </div>
         </section>

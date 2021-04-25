@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
 import { transformNews } from '../../../../helpers/transformers'
-import { t } from '@transifex/native'
 import DefaultImage from '../../../../assets/img/default_image.png'
 
 const OtherNewsList = () => {
@@ -66,7 +66,9 @@ const OtherNewsList = () => {
         <section className="px-4 py-24">
             <div className="container mx-auto">
                 <div className="flex md: flex-nowrap flex-wrap justify-between pb-10">
-                    <p className="text-xl blue-50">{t('Other News')}</p>
+                    <p className="text-xl blue-50">
+                        <T _str="Other News" />
+                    </p>
                 </div>
 
                 {loading ? (
@@ -117,13 +119,15 @@ const OtherNewsList = () => {
                                         onClick={() => {
                                             loadMoreNews()
                                         }}>
-                                        {t('Load more')}
+                                        <T _str="Load more" />
                                     </span>
                                 </div>
                             ))}
                     </Fragment>
                 ) : (
-                    <p>{t('No other news found')}</p>
+                    <p>
+                        <T _str="No other news found" />
+                    </p>
                 )}
             </div>
         </section>

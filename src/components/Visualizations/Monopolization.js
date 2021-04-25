@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { get } from 'lodash'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import VisualizationService from '../../services/VisualizationService'
 import { AreaChartBlock } from './Charts'
 import { Loader, HelpText, ErrorHandler } from '../Utilities'
@@ -68,7 +68,7 @@ const Monopolization = (props) => {
             <div>
                 <div className="flex items-center">
                     <h3 className="uppercase font-bold text-primary-dark inline-block">
-                        {t(label)}
+                        <T _str={label} />
                     </h3>
                     <HelpText helpTextInfo={helpText} />
                 </div>

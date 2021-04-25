@@ -8,7 +8,7 @@ import {
     EmailShareButton
 } from 'react-share'
 import { EmbeddedModal } from './index'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { countryContractsUrl, twitterHandle } from '../../helpers/general'
 import socialIcons from '../../assets/img/icons/social'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
@@ -45,7 +45,7 @@ const ChartFooter = (props) => {
                     <span className="flex items-center">
                         <button onClick={fullScreenHandler.enter}>
                             <span className="hidden cursor-pointer md:inline-block">
-                                {t('View full screen')}
+                                <T _str="View full screen" />
                             </span>
                             <FullViewIcon className="inline-block ml-2" />
                         </button>
@@ -68,7 +68,7 @@ const ChartFooter = (props) => {
                         <a href={downloadUrl} target="_blank" rel="noreferrer">
                             <DownloadIcon className=" mr-2 inline-block" />
                             <span className=" hidden md:inline-block">
-                                {t('Download')}
+                                <T _str="Download" />
                             </span>
                         </a>
                     </div>
@@ -81,7 +81,7 @@ const ChartFooter = (props) => {
                                 rel="noreferrer">
                                 <DownloadIcon className=" mr-2 inline-block" />
                                 <span className=" hidden md:inline-block">
-                                    {t('Download')}
+                                    <T _str="Download" />
                                 </span>
                             </a>
                         </div>
@@ -91,7 +91,7 @@ const ChartFooter = (props) => {
                     <button onClick={onClick} className="dropdown-menu-trigger">
                         <ShareIcon className="inline-block mr-2" />{' '}
                         <span className="hidden cursor-pointer md:inline-block">
-                            {t('Share')}
+                            <T _str="Share" />
                         </span>
                     </button>
                     <nav
@@ -100,14 +100,16 @@ const ChartFooter = (props) => {
                             isActive ? 'active' : 'inactive'
                         }`}>
                         <span className="inline-block mb-3 text-primary-dark">
-                            {t('Share on')}
+                            <T _str="Share on" />
                         </span>
                         <div className=" flex flex-col">
                             <FacebookShareButton
                                 url={currentLocation}
                                 className=" social-icon">
                                 <socialIcons.fbIcon />
-                                <span>{t('Facebook')}</span>
+                                <span>
+                                    <T _str="Facebook" />
+                                </span>
                             </FacebookShareButton>
 
                             <TwitterShareButton
@@ -115,21 +117,27 @@ const ChartFooter = (props) => {
                                 via={twitterHandle}
                                 className=" social-icon">
                                 <socialIcons.twitterIcon />
-                                <span>{t('Twitter')}</span>
+                                <span>
+                                    <T _str="Twitter" />
+                                </span>
                             </TwitterShareButton>
 
                             <LinkedinShareButton
                                 url={currentLocation}
                                 className=" social-icon">
                                 <socialIcons.linkedIcon />
-                                <span>{t('LinkedIn')}</span>
+                                <span>
+                                    <T _str="LinkedIn" />
+                                </span>
                             </LinkedinShareButton>
 
                             <EmailShareButton
                                 url={currentLocation}
                                 className=" social-icon email">
                                 <socialIcons.mailIcon />
-                                <span>{t('Email')}</span>
+                                <span>
+                                    <T _str="Email" />
+                                </span>
                             </EmailShareButton>
                         </div>
 
@@ -137,14 +145,14 @@ const ChartFooter = (props) => {
                             <Fragment>
                                 <div className="embedded-share">
                                     <span className="block px-3 mb-2 -mx-3 text-primary-dark">
-                                        {t('Share as')}
+                                        <T _str="Share as" />
                                     </span>
                                     <div
                                         className="flex items-center cursor-pointer social-embed"
                                         onClick={() => modalHandler()}>
                                         <socialIcons.codingIcon className=" w-5" />
                                         <span className=" ml-4">
-                                            {t('Embedded')}
+                                            <T _str="Embedded" />
                                         </span>
                                     </div>
                                 </div>

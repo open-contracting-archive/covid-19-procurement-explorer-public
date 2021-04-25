@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import VisualizationService from '../../services/VisualizationService'
 import { SimpleBarChart, AreaChartBlock } from './Charts'
-import { t } from '@transifex/native'
 import Visualization from '../../constants/Visualization'
 import useDataCalculations from '../../hooks/useDataCalculations'
 import { CardContainer, ErrorHandler } from '../Utilities'
@@ -114,7 +114,7 @@ const TotalSpending = (props) => {
                 <span
                     className="block text-sm text-right cursor-pointer text-primary-blue"
                     onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>
-                    {t('View in detail')} →
+                    <T _str="View in detail" /> →
                 </span>
             )}
         </CardContainer>

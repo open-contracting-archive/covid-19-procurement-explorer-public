@@ -1,5 +1,5 @@
 import React from 'react'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { MetaInformation, Breadcrumb } from '../../../components/Utilities'
 
 const OtherNewsList = React.lazy(() =>
@@ -21,7 +21,9 @@ const News = () => {
             <section className=" news__list pt-24 px-4">
                 <div className="container mx-auto">
                     <Breadcrumb />
-                    <p className="text-2xl mb-10">{t('News')}</p>
+                    <p className="text-2xl mb-10">
+                        <T _str="News" />
+                    </p>
                 </div>
             </section>
 

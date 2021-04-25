@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
+import { T } from '@transifex/react'
 import { Loader, HelpText, ContractViewSwitcher } from './index'
-import { t } from '@transifex/native'
 
 const CardContainer = (props) => {
     const {
@@ -20,7 +20,7 @@ const CardContainer = (props) => {
                 <div className="w-full flex flex-wrap items-center justify-between mb-4">
                     <div className="flex items-center mb-4 md:mb-0">
                         <h3 className="uppercase font-bold text-primary-dark inline-block">
-                            {t(label)}
+                            <T _str={label} />
                         </h3>
 
                         {symbol}

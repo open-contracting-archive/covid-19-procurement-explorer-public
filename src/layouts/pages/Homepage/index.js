@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import { t } from '@transifex/native'
 import { MetaInformation } from '../../../components/Utilities'
 
 const HomeBanner = React.lazy(() =>
@@ -26,8 +25,8 @@ const Home = () => {
     return (
         <Fragment>
             <MetaInformation
-                title={t('Home')}
-                description={t('Welcome Covid-19 Contract Explorer')}
+                title="Home"
+                description="Welcome Covid-19 Contract Explorer"
             />
 
             <HomeBanner />

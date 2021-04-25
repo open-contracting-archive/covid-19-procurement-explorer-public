@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { tabItems } from '../../../../constants/Tab'
 
 const TabNavigator = (props) => {
@@ -22,7 +22,7 @@ const TabNavigator = (props) => {
                                     activeClassName="active"
                                     className={'capitalize'}
                                     to={pathTo(item)}>
-                                    {t(item)}
+                                    <T _str={item} />
                                 </NavLink>
                             </li>
                         )

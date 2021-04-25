@@ -2,10 +2,10 @@ import React, { useEffect, useState, Fragment } from 'react'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
+import { T } from '@transifex/react'
 import ReactPaginate from 'react-paginate'
 import CmsPageService from '../../../services/CmsPageService'
 import useCountries from '../../../hooks/useCountries'
-import { t } from '@transifex/native'
 import useContentFilters from '../../../hooks/useContentFilters'
 import {
     Loader,
@@ -15,8 +15,9 @@ import {
 } from '../../../components/Utilities'
 import { ReactComponent as FilterIcon } from '../../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../../assets/img/icons/ic_filter-close.svg'
+import Default from '../../../constants/Default'
 
-const limit = 10
+const limit = Default.PAGE_SIZE
 
 const Resources = () => {
     const [resourceList, setResourceList] = useState([])
@@ -132,13 +133,15 @@ const Resources = () => {
                 <div className="container mx-auto">
                     <Breadcrumb />
 
-                    <h2 className="text-xl md:text-2xl">{t('Resources')}</h2>
+                    <h2 className="text-xl md:text-2xl">
+                        <T _str="Resources" />
+                    </h2>
                 </div>
             </section>
             <section className="resources__table p-4 md:py-12 bg-primary-gray">
                 <div className="container mx-auto">
                     <h2 className="font-normal text-lg mb-6">
-                        {t('Best practices and solutions from our database')}
+                        <T _str="Best practices and solutions from our database" />
                     </h2>
 
                     <div className="relative">
@@ -154,7 +157,7 @@ const Resources = () => {
                                 className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                                 <div className="flex justify-between text-white mb-4 md:mb-0">
                                     <span className="text-sm uppercase font-bold">
-                                        Filter
+                                        <T _str="Filter" />
                                     </span>
                                     <span
                                         className="filter-close text-sm uppercase font-bold cursor-pointer"
@@ -165,7 +168,7 @@ const Resources = () => {
                                 <div className="flex -mx-2 -mb-5 flex-wrap">
                                     <div className="w-1/2 md:w-40 px-2 mb-5">
                                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                            {t('Country')}
+                                            <T _str="Country" />
                                         </p>
                                         <Select
                                             className="select-filter text-sm"
@@ -180,7 +183,7 @@ const Resources = () => {
                                     </div>
                                     <div className="w-1/2 md:w-40 px-2 mb-5">
                                         <p className="text-white md:text-primary-dark uppercase text-xs opacity-50 leading-none">
-                                            {t('Type')}
+                                            <T _str="Type" />
                                         </p>
                                         <Select
                                             className="select-filter text-sm"
@@ -205,7 +208,7 @@ const Resources = () => {
                         <div className="hidden md:flex gap-8">
                             <div className="w-40">
                                 <p className="uppercase text-xs opacity-50 leading-none">
-                                    {t('Country')}
+                                    <T _str="Country" />
                                 </p>
                                 <Select
                                     className="select-filter text-sm"
@@ -220,7 +223,7 @@ const Resources = () => {
                             </div>
                             <div className="w-40">
                                 <p className="uppercase text-xs opacity-50 leading-none">
-                                    {t('Type')}
+                                    <T _str="Type" />
                                 </p>
                                 <Select
                                     className="select-filter text-sm"
@@ -250,13 +253,13 @@ const Resources = () => {
                                                         onClick={() =>
                                                             appendSort('title')
                                                         }>
-                                                        {t('Title')}
+                                                        <T _str="Title" />
                                                         {columnSorting('title')}
                                                     </span>
                                                 </th>
                                                 <th style={{ width: '15%' }}>
                                                     <span className="flex items-center">
-                                                        {t('Country')}
+                                                        <T _str="Country" />
                                                     </span>
                                                 </th>
                                                 <th style={{ width: '10%' }}>
@@ -267,7 +270,7 @@ const Resources = () => {
                                                                 'resource_type'
                                                             )
                                                         }>
-                                                        {t('Type')}
+                                                        <T _str="Type" />
                                                         {columnSorting(
                                                             'resource_type'
                                                         )}
@@ -322,7 +325,9 @@ const Resources = () => {
                                                 height: '75%',
                                                 minHeight: '250px'
                                             }}>
-                                            <p>{t('No data available')}</p>
+                                            <p>
+                                                <T _str="No data available" />
+                                            </p>
                                         </div>
                                     )}
                                 </div>
@@ -332,7 +337,7 @@ const Resources = () => {
                                 <div>
                                     <div className="text-right mt-2 text-sm">
                                         <p className="text-primary-dark text-opacity-50">
-                                            {t('Showing')}{' '}
+                                            <T _str="Showing" />{' '}
                                             <span className="text-primary-dark text-opacity-75">
                                                 {1 + currentPage * limit}
                                             </span>{' '}
@@ -344,11 +349,11 @@ const Resources = () => {
                                                     : limit +
                                                       currentPage * limit}
                                             </span>{' '}
-                                            {t('of')}{' '}
+                                            <T _str="of" />{' '}
                                             <span className="text-primary-dark text-opacity-75">
                                                 {totalItems}
                                             </span>{' '}
-                                            {t('items')}
+                                            <T _str="items" />
                                         </p>
                                     </div>
 

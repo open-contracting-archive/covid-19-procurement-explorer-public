@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { isEmpty } from 'lodash'
+import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import { T } from '@transifex/react'
 import {
     Loader,
     ChartFooter,
@@ -8,9 +11,6 @@ import {
 import { TreeMapChart } from './Charts'
 import VisualizationService from '../../services/VisualizationService'
 import ContractView from '../../constants/ContractView'
-import { t } from '@transifex/native'
-import { isEmpty } from 'lodash'
-import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Default from '../../constants/Default'
 
 const ProductCategoryMap = (props) => {
@@ -69,7 +69,7 @@ const ProductCategoryMap = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between md:mb-4">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            {t('Product Category Map')}
+                            <T _str="Product Category Map" />
                         </h3>
                         <ContractViewSwitcher
                             style={'short'}

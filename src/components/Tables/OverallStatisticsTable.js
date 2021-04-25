@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { get } from 'lodash'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { Loader, ChartFooter } from '../Utilities'
 import VisualizationService from '../../services/VisualizationService'
 import { mediaUrl } from '../../helpers/general'
@@ -58,69 +58,81 @@ const OverallStatisticsTable = () => {
                                             <th
                                                 rowSpan={2}
                                                 className="align-middle border-r border-gray-e2e">
-                                                {t('Country')}
+                                                <T _str="Country" />
                                             </th>
                                             <th
                                                 rowSpan={2}
                                                 className="align-middle border-r border-gray-e2e">
-                                                {t('Total Contracts')}
+                                                <T _str="Total Contracts" />
                                             </th>
                                             <th
                                                 colSpan={2}
                                                 className={
                                                     'text-center border-r border-gray-e2e'
                                                 }>
-                                                {t('Total Amount')}
+                                                <T _str="Total Amount" />
                                             </th>
                                             <th
                                                 colSpan={5}
                                                 className={
                                                     'text-center border-r border-gray-e2e'
                                                 }>
-                                                {t(
-                                                    'Procurement Procedure wise Number of Contracts'
-                                                )}
+                                                <T _str="Procurement Procedure wise Number of Contracts" />
                                             </th>
                                             <th
                                                 colSpan={5}
                                                 className={
                                                     'text-center border-r border-gray-e2e'
                                                 }>
-                                                {t(
-                                                    'Procurement Procedure wise Amount (USD)'
-                                                )}
+                                                <T _str="Procurement Procedure wise Amount (USD)" />
                                             </th>
                                         </tr>
 
                                         <tr className="whitespace-no-wrap border border-gray-e2e">
-                                            <th>{t('USD')}</th>
+                                            <th>USD</th>
                                             <th
                                                 className={
                                                     'border-r border-gray-e2e'
                                                 }>
-                                                {t('Local')}
+                                                <T _str="Local" />
                                             </th>
 
-                                            <th>{t('Open')}</th>
-                                            <th>{t('Direct')}</th>
-                                            <th>{t('Limited')}</th>
-                                            <th>{t('Selective')}</th>
+                                            <th>
+                                                <T _str="Open" />
+                                            </th>
+                                            <th>
+                                                <T _str="Direct" />
+                                            </th>
+                                            <th>
+                                                <T _str="Limited" />
+                                            </th>
+                                            <th>
+                                                <T _str="Selective" />
+                                            </th>
                                             <th
                                                 className={
                                                     'border-r border-gray-e2e'
                                                 }>
-                                                {t('Not Identified')}
+                                                <T _str="Not Identified" />
                                             </th>
 
-                                            <th>{t('Open')}</th>
-                                            <th>{t('Direct')}</th>
-                                            <th>{t('Limited')}</th>
-                                            <th>{t('Selective')}</th>
+                                            <th>
+                                                <T _str="Open" />
+                                            </th>
+                                            <th>
+                                                <T _str="Direct" />
+                                            </th>
+                                            <th>
+                                                <T _str="Limited" />
+                                            </th>
+                                            <th>
+                                                <T _str="Selective" />
+                                            </th>
                                             <th
                                                 className={
                                                     'border-r border-gray-e2e'
                                                 }>
-                                                {t('Not Identified')}
+                                                <T _str="Not Identified" />
                                             </th>
                                         </tr>
                                     </thead>

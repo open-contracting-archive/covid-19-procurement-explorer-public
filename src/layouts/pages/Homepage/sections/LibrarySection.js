@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
 import { dateDiff, formatDate } from '../../../../helpers/date'
 import { Loader } from '../../../../components/Utilities'
-import { t } from '@transifex/native'
 
 const showItems = 6
 
@@ -75,12 +75,12 @@ const LibrarySection = () => {
                 <div className="text-center mb-6 md:mb-20">
                     <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
-                            {t('Explore')}
+                            <T _str="Explore" />
                         </span>
-                        {t('Library')}
+                        <T _str="Library" />
                     </h3>
                     <p className="text-xs md:text-base text-opacity-50  text-primary-dark">
-                        {t('Find insights, analysis and best practices')}
+                        <T _str="Find insights, analysis and best practices" />
                     </p>
                 </div>
                 {loading ? (
@@ -108,14 +108,16 @@ const LibrarySection = () => {
                                 </Link>
                             ))
                         ) : (
-                            <p className="text-center">{t('No records')}</p>
+                            <p className="text-center">
+                                <T _str="No records" />
+                            </p>
                         )}
                     </div>
                 )}
             </div>
             <div className="text-right md:text-center mt-6 md:mt-12">
                 <Link to="/library" className="text-blue-20">
-                    {t('View library')} --&gt;{' '}
+                    <T _str="View library" /> --&gt;{' '}
                 </Link>
             </div>
         </section>

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { identity, pickBy, groupBy } from 'lodash'
+import { T } from '@transifex/react'
 import VisualizationService from '../../services/VisualizationService'
 import { Loader, ChartFooter, ContractViewSwitcher } from '../Utilities'
 import { CompareChart } from './Charts'
@@ -12,7 +13,6 @@ import Visualization from '../../constants/Visualization'
 import { colors } from '../../constants/Theme'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
-import { t } from '@transifex/native'
 
 const ContractEquityIndicators = (props) => {
     // ===========================================================================
@@ -175,7 +175,9 @@ const ContractEquityIndicators = (props) => {
                         </div>
                     </Fragment>
                 ) : (
-                    <p>{t('Not enough data')}</p>
+                    <p>
+                        <T _str="Not enough data" />
+                    </p>
                 )}
             </div>
         )
@@ -187,7 +189,7 @@ const ContractEquityIndicators = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            {t('Contracts and equity indicators')}
+                            <T _str="Contracts and equity indicators" />
                         </h3>
 
                         {shouldRenderChart() && (

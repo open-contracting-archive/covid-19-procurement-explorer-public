@@ -1,11 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
 import { formatDate } from '../../../../helpers/date'
 import { API_URL } from '../../../../helpers/api'
-import { t } from '@transifex/native'
 import DefaultImage from '../../../../assets/img/default_image.png'
 
 const LibraryNews = () => {
@@ -32,7 +32,9 @@ const LibraryNews = () => {
                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
                         <div className="display__item flex flex-col">
                             <div className="news__item flex-1">
-                                <p className="text-xl mb-6 ">{t('News')}</p>
+                                <p className="text-xl mb-6 ">
+                                    <T _str="News" />
+                                </p>
                                 {newsList.length && (
                                     <Link
                                         className="news-thumbnail"
@@ -72,7 +74,7 @@ const LibraryNews = () => {
                         </div>
                         <div className="list__item">
                             <p className="text-lg mb-6 mt-4 uppercase">
-                                {t('Recent Posts')}
+                                <T _str="Recent Posts" />
                             </p>
                             {newsList &&
                                 newsList.slice(1, 4).map((news) => {
@@ -125,11 +127,13 @@ const LibraryNews = () => {
                     {newsList.length !== 0 ? (
                         <div className="flex justify-end pt-10">
                             <Link to="/news" className="text-blue-20">
-                                {t('View all news')} --&gt;{' '}
+                                <T _str="View all news" /> --&gt;{' '}
                             </Link>
                         </div>
                     ) : (
-                        <p>{t('There are no news')}</p>
+                        <p>
+                            <T _str="There are no news" />
+                        </p>
                     )}
                 </Fragment>
             )}

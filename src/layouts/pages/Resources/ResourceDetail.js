@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
 import pdfImage from '../../../assets/img/ic_pdf.svg'
 import useCountries from '../../../hooks/useCountries'
-import { t } from '@transifex/native'
 import { stripTags } from '../../../helpers/transformers'
 import {
     Loader,
@@ -94,7 +94,7 @@ const ResourceDetail = () => {
                                             target="_blank"
                                             rel="noreferrer">
                                             {' '}
-                                            {t('Download')}{' '}
+                                            <T _str="Download" />{' '}
                                         </a>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@ const ResourceDetail = () => {
                             <table className="my-10 text-left">
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {t('Published on')}
+                                        <T _str="Published on" />
                                     </th>
                                     <td className="px-6 py-6">
                                         {formatDate(
@@ -125,7 +125,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {t('Country')}
+                                        <T _str="Country" />
                                     </th>
                                     <td className="px-6 py-6">
                                         {countryNameById(
@@ -139,7 +139,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {t('Type')}
+                                        <T _str="Type" />
                                     </th>
                                     <td className="px-6 py-6">
                                         {resourceDetail.resource_type}
@@ -147,7 +147,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {t('Topic')}
+                                        <T _str="Topic" />
                                     </th>
                                     <td className="px-6 py-6">
                                         {resourceDetail.topic}
@@ -155,7 +155,7 @@ const ResourceDetail = () => {
                                 </tr>
                                 <tr>
                                     <th className="px-6 py-6 font-bold opacity-50">
-                                        {t('Language')}
+                                        <T _str="Language" />
                                     </th>
                                     <td className="px-6 py-6">
                                         {languageById(
@@ -170,7 +170,7 @@ const ResourceDetail = () => {
 
                             <div className="related mb-4 mt-10">
                                 <p className="font-bold opacity-40 mb-4">
-                                    {t('Related Resources')}
+                                    <T _str="Related Resources" />
                                 </p>
                                 {resourceList &&
                                     resourceList

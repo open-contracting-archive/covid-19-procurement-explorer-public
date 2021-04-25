@@ -5,6 +5,7 @@ import CountryService from '../../services/CountryService'
 import { Loader, PerCapitaSwitcher } from '../Utilities'
 import { BarChartRace } from './Charts'
 import ContractView from '../../constants/ContractView'
+import { countryFlag } from '../../helpers/country'
 
 const SupplierTrend = (props) => {
     // ===========================================================================
@@ -57,7 +58,7 @@ const SupplierTrend = (props) => {
                             ? country[dataColumn] /
                               countriesPopulation[country.country_code]
                             : country[dataColumn],
-                        href: `https://www.countryflags.io/${country.country_code.toLowerCase()}/flat/64.png`
+                        href: countryFlag(country.country_code)
                     }))
                 const sum = filtered.reduce(
                     (total, item) => (total += item.value),

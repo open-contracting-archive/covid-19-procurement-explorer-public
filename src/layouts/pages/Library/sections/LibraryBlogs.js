@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
-import { t } from '@transifex/native'
 import { formatDate } from '../../../../helpers/date'
 import { Loader } from '../../../../components/Utilities'
 import { API_URL } from '../../../../helpers/api'
@@ -27,7 +27,9 @@ const LibraryBlogs = () => {
         <section className="px-4 py-12 md:py-24 blog">
             <div className="container mx-auto">
                 <div className="text-center">
-                    <p className="text-xl blue-50 pb-10">{t('Blogs')}</p>
+                    <p className="text-xl blue-50 pb-10">
+                        <T _str="Blogs" />
+                    </p>
                 </div>
                 {loading ? (
                     <Loader />
@@ -83,12 +85,14 @@ const LibraryBlogs = () => {
                         </div>
                         <div className="flex justify-center pt-10">
                             <Link to="/blogs" className="text-blue-20">
-                                {t('View all blogs')} --&gt;{' '}
+                                <T _str="View all blogs" /> --&gt;{' '}
                             </Link>
                         </div>
                     </Fragment>
                 ) : (
-                    <p>{t('There are no blogs')}</p>
+                    <p>
+                        <T _str="There are no blogs" />
+                    </p>
                 )}
             </div>
         </section>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import Default from '../../../../constants/Default'
 import { formatNumber } from '../../../../helpers/number'
 
@@ -55,7 +55,7 @@ function BarListChart(props) {
                                             )}
                                             {viewType === 'buyer' && (
                                                 <span className="uppercase ml-1">
-                                                    {t('buyers')}
+                                                    <T _str="buyers" />
                                                 </span>
                                             )}
                                         </p>

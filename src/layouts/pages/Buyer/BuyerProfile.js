@@ -2,12 +2,12 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { get, isEmpty } from 'lodash'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
+import { T } from '@transifex/react'
 import {
     Loader,
     CountryFlagIcon,
     MetaInformation
 } from '../../../components/Utilities'
-import { t } from '@transifex/native'
 import {
     AverageBidsPerContract,
     ContractRedFlags,
@@ -76,7 +76,7 @@ const BuyerProfile = () => {
                                 <span
                                     className="cursor-pointer text-primary-blue"
                                     onClick={previousPage}>
-                                    {t('Buyers')}
+                                    <T _str="Buyers" />
                                 </span>
                             </div>
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">

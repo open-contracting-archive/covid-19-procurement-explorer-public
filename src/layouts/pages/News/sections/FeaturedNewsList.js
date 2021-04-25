@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
-import { t } from '@transifex/native'
 import { Loader } from '../../../../components/Utilities'
 import { transformNews } from '../../../../helpers/transformers'
 import DefaultImage from '../../../../assets/img/default_image.png'
@@ -35,7 +35,9 @@ const FeaturedNewsList = () => {
     ) : (
         <section className=" news__list px-4">
             <div className="container mx-auto">
-                <p className="text-xl mb-6">{t('Featured News')}</p>
+                <p className="text-xl mb-6">
+                    <T _str="Featured News" />
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                     <div className="display__item md:col-span-8">
                         {mainNews && (
