@@ -54,13 +54,3 @@ Prepare a production build:
 ```bash
 yarn build
 ```
-
-## Deployment
-
-Get the deployed branch, commit hash and datetime:
-
-```bash
-curl https://open-contracting.health/ver.txt
-```
-
-or, open <https://open-contracting.health/ver.txt> in a browser.
