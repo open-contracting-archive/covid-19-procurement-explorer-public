@@ -1,6 +1,6 @@
 import React from 'react'
+import { T } from '@transifex/react'
 import ContractView from '../../constants/ContractView'
-import { t } from '@transifex/native'
 
 const activeClass = 'active'
 const labels = {
@@ -26,14 +26,14 @@ const ContractViewSwitcher = (props) => {
                         viewType === ContractView.VALUE && activeClass
                     }`}
                     onClick={() => viewHandler(ContractView.VALUE)}>
-                    {t(labels[ContractView.VALUE][style])}
+                    <T _str={labels[ContractView.VALUE][style]} />
                 </li>
                 <li
                     className={`w-1/2 md:w-auto cursor-pointer text-base ${
                         viewType === ContractView.NUMBER && activeClass
                     }`}
                     onClick={() => viewHandler(ContractView.NUMBER)}>
-                    {t(labels[ContractView.NUMBER][style])}
+                    <T _str={labels[ContractView.NUMBER][style]} />
                 </li>
             </ul>
         </div>

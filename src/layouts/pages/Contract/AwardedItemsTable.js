@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { get } from 'lodash'
 import useTableSorting from '../../../hooks/useTableSorting'
 
@@ -30,25 +30,25 @@ const AwardedItemTable = (props) => {
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
                                         'contract_desc',
-                                        `${t('Item description')}`
+                                        <T _str="Item description" />
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'classification_code',
-                                        `${t('cpv code')}`
+                                        <T _str="cpv code" />
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'quantity_units',
-                                        `${t('Quantity')}`
+                                        <T _str="Quantity" />
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'ppu_including_vat',
-                                        `${t('Unit price (usd)')}`
+                                        <T _str="Unit price (usd)" />
                                     )}
                                 </th>
                             </tr>
@@ -91,7 +91,9 @@ const AwardedItemTable = (props) => {
                                 height: '75%',
                                 minHeight: '250px'
                             }}>
-                            <p>No data available</p>
+                            <p>
+                                <T _str="No data available" />
+                            </p>
                         </div>
                     )}
                 </div>
@@ -99,7 +101,8 @@ const AwardedItemTable = (props) => {
 
             <div className="flex items-center justify-end mt-6">
                 <span>
-                    Total Awarded items: <strong>{items.length}</strong>
+                    <T _str="Total Awarded items" />:{' '}
+                    <strong>{items.length}</strong>
                 </span>
             </div>
         </Fragment>

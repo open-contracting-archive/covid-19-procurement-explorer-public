@@ -1,21 +1,22 @@
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModalProvider } from 'react-simple-hook-modal'
+import { tx } from '@transifex/native'
+import { load } from 'fathom-client'
+import { init } from 'cookie-though'
 import {
     setContractMethods,
     setContractStates,
     setCountries,
     setEquityIndicators,
+    setLanguages,
     setProductCategories,
     setRedFlags
 } from './store/reducers/general/action'
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
 import RouterView from './layouts/RouterView'
-import { init } from 'cookie-though'
 import cookieConfig from './components/Utilities/CookieConfig'
-import { tx } from '@transifex/native'
-import { load } from 'fathom-client'
 
 init(cookieConfig)
 tx.init({
@@ -37,6 +38,11 @@ if (process.env.NODE_ENV === 'production' && domain && siteKey) {
 function App() {
     const dispatch = useDispatch()
     const countries = useSelector((state) => state.general.countries)
+    const currentLocale = useSelector((state) => state.general.currentLocale)
+
+    useEffect(() => {
+        tx.setCurrentLocale(currentLocale)
+    }, [currentLocale])
 
     useEffect(() => {
         CountryService.Countries().then((response) => {
@@ -52,6 +58,11 @@ function App() {
                 dispatch(setProductCategories(response.products))
                 dispatch(setEquityIndicators(response.equity))
                 dispatch(setRedFlags(response.red_flag))
+            }
+        })
+        CountryService.getLanguages().then((response) => {
+            if (response) {
+                dispatch(setLanguages(response.results))
             }
         })
     }, [dispatch])

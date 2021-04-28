@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 
 const Breadcrumb = ({ item }) => {
     const linkSlug = () => {
@@ -10,7 +10,7 @@ const Breadcrumb = ({ item }) => {
     return (
         <div className="text-sm mb-4 text-blue-5">
             <Link to="/library" className="cursor-pointer text-primary-blue">
-                {t('Library')}
+                <T _str="Library" />
             </Link>
 
             <span className="breadcrumb-separator" />

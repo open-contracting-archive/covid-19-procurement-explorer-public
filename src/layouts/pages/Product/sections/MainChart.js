@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
+import { T } from '@transifex/react'
 import {
     ProductMap,
     CountryProductComparisonChart,
     GlobalSuppliers,
     CountrySuppliers
 } from '../../../../components/Visualizations'
-import { t } from '@transifex/native'
 import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
 import { ReactComponent as FlowIcon } from '../../../../assets/img/icons/ic_flow.svg'
 import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
@@ -69,7 +69,7 @@ const MainChart = (props) => {
                                         <div>
                                             <ChartsIcon className="inline-block" />
                                             <span className="mt-1 md:mt-0 block text-sm">
-                                                {t('Charts')}
+                                                <T _str="Charts" />
                                             </span>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@ const MainChart = (props) => {
                                         <div>
                                             <MapIcon className="inline-block w-4 h-4" />
                                             <span className="mt-1 md:mt-0 block text-sm">
-                                                {t('Map')}
+                                                <T _str="Map" />
                                             </span>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@ const MainChart = (props) => {
                                     <div>
                                         <FlowIcon className="inline-block" />
                                         <span className="mt-1 md:mt-0 block text-sm">
-                                            {t('Flow')}
+                                            <T _str="Flow" />
                                         </span>
                                     </div>
                                 </div>

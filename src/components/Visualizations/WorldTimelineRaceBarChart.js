@@ -5,7 +5,7 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty } from 'lodash'
 import { BarChartRace } from './Charts'
 import CountryService from '../../services/CountryService'
-import { continentSelectList } from '../../helpers/country'
+import { continentSelectList, countryFlag } from '../../helpers/country'
 import Default from '../../constants/Default'
 import {
     Loader,
@@ -73,7 +73,7 @@ const WorldTimelineRaceBarChart = () => {
                                       countriesPopulation[country.country_code]
                                     : country[Default.AMOUNT_USD]
                                 : country[Default.TENDER_COUNT],
-                        href: `https://www.countryflags.io/${country.country_code.toLowerCase()}/flat/64.png`
+                        href: countryFlag(country.country_code)
                     }))
                 const sum = filtered.reduce(
                     (total, item) => (total += item.value),

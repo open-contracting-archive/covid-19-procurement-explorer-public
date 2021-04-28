@@ -1,12 +1,14 @@
 import React from 'react'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 
 const PerCapitaSwitcher = (props) => {
     const { show = false, handleToggle, id = 'togglePerCapita' } = props
 
     return (
         <div className="my-4 w-full md:w-auto justify-center md:my-0 items-center text-center">
-            <span className="mr-2 text-sm">{t('Spending USD')}</span>
+            <span className="mr-2 text-sm">
+                <T _str="Spending USD" />
+            </span>
             <div className="toggle-switch">
                 <input
                     type="checkbox"
@@ -20,7 +22,9 @@ const PerCapitaSwitcher = (props) => {
                     <span className="toggle-switch-switch" />
                 </label>
             </div>
-            <span className="ml-2 text-sm">{t('Spending USD per capita')}</span>
+            <span className="ml-2 text-sm">
+                <T _str="Spending USD per capita" />
+            </span>
         </div>
     )
 }

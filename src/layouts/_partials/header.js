@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import CmsPageService from '../../services/CmsPageService'
 import { LanguageSwitcher } from '../../components/Utilities'
 
@@ -64,7 +64,7 @@ const Header = () => {
                                         activeClassName="active"
                                         to={`/pages/${menu.meta.slug}`}
                                         className="capitalize">
-                                        {t(menu.title)}
+                                        <T _str={menu.title} />
                                     </NavLink>
                                 </li>
                             ))}
@@ -74,7 +74,7 @@ const Header = () => {
                                     <NavLink
                                         activeClassName="active"
                                         to={item.route}>
-                                        {t(item.title)}
+                                        <T _str={item.title} />
                                     </NavLink>
                                 </li>
                             ))}

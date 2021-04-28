@@ -1,10 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import { T } from '@transifex/react'
 import { API_URL } from '../../helpers/api'
 import { Loader } from '../Utilities'
 import VisualizationService from '../../services/VisualizationService'
-import { t } from '@transifex/native'
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss'
 import 'swiper/components/navigation/navigation.scss'
 import 'swiper/components/pagination/pagination.scss'
@@ -42,7 +42,7 @@ const CountryPartnerSlider = ({ params }) => {
     return (
         <div className="bg-white rounded p-4 md:pb-8 simple-tab text-primary-dark">
             <h3 className="uppercase font-bold mb-6">
-                {t('Country partner organization')}
+                <T _str="Country partner organization" />
             </h3>
             {loading ? (
                 <Loader />
@@ -73,9 +73,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                             <div className="w-full md:w-auto md:pr-4">
                                                                 <div className="mb-6">
                                                                     <span className="block mb-2">
-                                                                        {t(
-                                                                            'Website'
-                                                                        )}
+                                                                        <T _str="Website" />
                                                                     </span>
                                                                     <a
                                                                         href={
@@ -95,9 +93,7 @@ const CountryPartnerSlider = ({ params }) => {
                                                                 </div>
                                                                 <div>
                                                                     <span className="block mb-2">
-                                                                        {t(
-                                                                            'Email'
-                                                                        )}
+                                                                        <T _str="Email" />
                                                                     </span>
                                                                     <a
                                                                         href={`maitlo:${index.email}`}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { PieChart } from './Charts'
-import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import { formatNumber } from '../../helpers/number'
 import ContractView from '../../constants/ContractView'
@@ -88,7 +88,7 @@ const EquityIndicators = (props) => {
                     <div>
                         <h3 className="mr-3">
                             <span className="text-sm block">
-                                {t('Assigned')}
+                                <T _str="Assigned" />
                             </span>
                             <span className="text-xl font-bold mr-2">
                                 {viewType === ContractView.VALUE &&

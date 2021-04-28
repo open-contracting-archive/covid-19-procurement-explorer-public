@@ -3,8 +3,8 @@ import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { identity, get, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
+import { T } from '@transifex/react'
 import VisualizationService from '../../services/VisualizationService'
-import { t } from '@transifex/native'
 import { Loader, TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
@@ -143,7 +143,7 @@ const SupplierTable = (props) => {
                     <div className="flex flex-wrap -mx-2 -mb-5">
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                {t('Suppliers')}
+                                <T _str="Suppliers" />
                             </p>
                             <form
                                 className="mt-2 select-filter--input"
@@ -169,7 +169,7 @@ const SupplierTable = (props) => {
                         {!hasCountry() && (
                             <div className="w-1/2 px-2 mb-5 md:w-40">
                                 <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                    {t('Country')}
+                                    <T _str="Country" />
                                 </p>
                                 <Select
                                     className="mt-2 text-sm select-filter"
@@ -185,7 +185,7 @@ const SupplierTable = (props) => {
                         )}
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                {t('Product category')}
+                                <T _str="Product category" />
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -201,7 +201,7 @@ const SupplierTable = (props) => {
 
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                {t('Value range')}
+                                <T _str="Value range" />
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -227,7 +227,7 @@ const SupplierTable = (props) => {
                 <div className="hidden gap-8 md:flex">
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {t('Suppliers')}
+                            <T _str="Suppliers" />
                         </p>
                         <form
                             className="mt-2 select-filter--input"
@@ -248,7 +248,7 @@ const SupplierTable = (props) => {
                     {!hasCountry() && (
                         <div className="w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {t('Country')}
+                                <T _str="Country" />
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -264,7 +264,7 @@ const SupplierTable = (props) => {
                     )}
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {t('Product category')}
+                            <T _str="Product category" />
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -280,7 +280,7 @@ const SupplierTable = (props) => {
 
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {t('Value range')}
+                            <T _str="Value range" />
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -306,43 +306,43 @@ const SupplierTable = (props) => {
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
                                         'supplier_name',
-                                        `${t('Supplier')}`
+                                        <T _str="Supplier" />
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'country_name',
-                                        `${t('Country')}`
+                                        <T _str="Country" />
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'tender_count',
-                                        `${t('# of contracts')}`
+                                        <T _str="# of contracts" />
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'buyer_count',
-                                        `${t('# of buyers')}`
+                                        <T _str="# of buyers" />
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'product_category_count',
-                                        `${t('product categories')}`
+                                        <T _str="product categories" />
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'amount_usd',
-                                        `${t('value (usd)')}`
+                                        <T _str="value (usd)" />
                                     )}
                                 </th>
                                 <th style={{ width: '8%' }}>
                                     {tableHeaderSpan(
                                         'red_flag_tender_percentage',
-                                        `${t('% red flags')}`
+                                        <T _str="% red flags" />
                                     )}
                                 </th>
                             </tr>

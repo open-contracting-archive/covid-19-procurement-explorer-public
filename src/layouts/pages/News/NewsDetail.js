@@ -1,10 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
-import { t } from '@transifex/native'
 import DefaultImage from '../../../assets/img/default_image.png'
 import { stripTags } from '../../../helpers/transformers'
 import {
@@ -75,7 +75,7 @@ const NewsDetail = () => {
                         <div className="flex flex-wrap lg:flex-no-wrap justify-between mb-10">
                             <div className="mb-4 news-detail__metadata md:pr-6">
                                 <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                                    {t('Published on')}
+                                    <T _str="Published on" />
                                 </p>
                                 <p className="inline-block lg:block ml-3 lg:ml-0">
                                     {formatDate(
@@ -112,7 +112,7 @@ const NewsDetail = () => {
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
-                                        {t('Other News')}
+                                        <T _str="Other News" />
                                     </h2>
                                     <div className="grid grid-cols-12  gap-x-0 gap-y-10 sm:gap-10  mb-10">
                                         {newsList &&
@@ -170,7 +170,7 @@ const NewsDetail = () => {
                                         <Link
                                             to="/news"
                                             className="text-blue-20 px-4">
-                                            {t('View all news')} --&gt;{' '}
+                                            <T _str="View all news" /> --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>

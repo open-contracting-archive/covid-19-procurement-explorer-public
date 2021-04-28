@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
-import { t } from '@transifex/native'
 import {
     Loader,
     MetaInformation,
@@ -39,7 +39,9 @@ const Blogs = () => {
             <div className="container mx-auto">
                 <Breadcrumb />
 
-                <p className="text-2xl mb-10">{t('Blogs')}</p>
+                <p className="text-2xl mb-10">
+                    <T _str="Blogs" />
+                </p>
                 {blogList &&
                     blogList.length !== 0 &&
                     blogList.map((blogs) => {
@@ -88,7 +90,7 @@ const Blogs = () => {
                                     </Link>
                                     <div className="blog-caption__date mt-2 text-sm opacity-50 flex">
                                         <p className="mr-4">
-                                            By{' '}
+                                            <T _str="By" />{' '}
                                             <span className="text-blue-20 italic">
                                                 {blogs.author}
                                             </span>
@@ -106,7 +108,9 @@ const Blogs = () => {
                         )
                     })}
                 {blogList.length === 0 ? (
-                    <p>{t('There are no Blogs Records')}</p>
+                    <p>
+                        <T _str="There are no Blogs Records" />
+                    </p>
                 ) : (
                     ''
                 )}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
-import { t } from '@transifex/native'
 import CountryService from '../../../services/CountryService'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
@@ -55,7 +55,7 @@ const ContractDetail = () => {
                     <span
                         className="cursor-pointer text-primary-blue"
                         onClick={previousPage}>
-                        {t('Contracts')}{' '}
+                        <T _str="Contracts" />{' '}
                     </span>{' '}
                     /
                 </div>
@@ -66,7 +66,7 @@ const ContractDetail = () => {
                         title={contractDetail && contractDetail.contract_title}
                         target="_blank"
                         rel="noreferrer">
-                        {t(contractDetail && contractDetail.contract_title)} #
+                        {contractDetail && contractDetail.contract_title} #
                         {contractDetail && contractDetail.contract_id}
                     </a>
                 </h2>
@@ -77,13 +77,11 @@ const ContractDetail = () => {
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
                         <RedIcon />
                         <div className="mx-2 text-sm">
-                            {t(
-                                contractDetail &&
-                                    contractDetail.red_flag &&
-                                    contractDetail.red_flag.length
-                            )}
+                            {contractDetail &&
+                                contractDetail.red_flag &&
+                                contractDetail.red_flag.length}
                             <span className="inline-block ml-1">
-                                {t('Red flag identified')}
+                                <T _str="Red flag identified" />
                             </span>
                             {contractDetail &&
                             contractDetail.red_flag &&
@@ -97,12 +95,12 @@ const ContractDetail = () => {
                                                     return (
                                                         <li key={index}>
                                                             <h3 className="font-bold mb-1">
-                                                                {t(value.title)}
+                                                                {value.title}
                                                             </h3>
                                                             <p>
-                                                                {t(
+                                                                {
                                                                     value.description
-                                                                )}
+                                                                }
                                                             </p>
                                                         </li>
                                                     )
@@ -135,7 +133,7 @@ const ContractDetail = () => {
                 <div className="p-4 md:p-8 rounded-md grid grid-cols-12 gap-y-6 md:gap-y-10 mb-8 bg-primary-gray">
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
-                            {t('Contract signed')}
+                            <T _str="Contract signed" />
                         </p>
                         <p className="font-bold text-sm">
                             {formatDate(
@@ -149,7 +147,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
-                            {t('Procurement procedure')}
+                            <T _str="Procurement procedure" />
                         </p>
                         <p className="font-bold text-sm capitalize">
                             {get(contractDetail, 'procurement_procedure', 0)}
@@ -157,7 +155,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
-                            {t('Number of bidders')}
+                            <T _str="Number of bidders" />
                         </p>
                         <p className="font-bold text-xl">
                             {contractDetail &&
@@ -168,7 +166,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
-                            {t('Tender value')}
+                            <T _str="Tender value" />
                         </p>
                         <p className="font-bold text-xl">
                             {contractDetail && contractDetail.tender_usd ? (
@@ -185,7 +183,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
-                            {t('Award value')}
+                            <T _str="Award value" />
                         </p>
                         <p className="font-bold text-xl">
                             {contractDetail && contractDetail.award_usd ? (
@@ -202,7 +200,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
-                            {t('Contract value')}
+                            <T _str="Contract value" />
                         </p>
                         <p className="font-bold text-xl">
                             {contractDetail &&
@@ -212,7 +210,7 @@ const ContractDetail = () => {
                                         contractDetail.contract_value_usd
                                     )}{' '}
                                     <span className="font-normal text-base uppercase">
-                                        {t('USD')}
+                                        USD
                                     </span>
                                 </Fragment>
                             ) : (
@@ -224,13 +222,13 @@ const ContractDetail = () => {
                 <div className="mb-16 grid grid-cols-12 gap-x-6 gap-y-6 md:gap-y-8">
                     <div className="col-span-12 md:col-span-5 md:row-span-2">
                         <h5 className="text-sm font-normal uppercase mb-2">
-                            {t('Contract description')}
+                            <T _str="Contract description" />
                         </h5>
                         <p>{get(contractDetail, 'contract_desc', '-')}</p>
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7">
                         <p className="text-sm uppercase mb-1">
-                            {t('Procuring entity')}
+                            <T _str="Procuring entity" />
                         </p>
                         <p className="font-bold text-sm uppercase">
                             <Link
@@ -247,7 +245,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3">
                         <p className="text-sm uppercase mb-1">
-                            {t('Procurement entity address')}
+                            <T _str="Procurement entity address" />
                         </p>
                         <p className="font-bold text-sm uppercase">
                             {get(contractDetail, 'buyer_address', '-')}
@@ -255,7 +253,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-7 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
-                            {t('Supplier')}
+                            <T _str="Supplier" />
                         </p>
                         <Link
                             to={`/suppliers/${get(
@@ -269,7 +267,7 @@ const ContractDetail = () => {
                     </div>
                     <div className="col-span-12 xs:col-span-6 md:col-span-3 md:col-start-10 md:row-start-2">
                         <p className="text-sm uppercase mb-1">
-                            {t('Supplier address')}
+                            <T _str="Supplier address" />
                         </p>
                         <p className="font-bold text-sm uppercase">
                             {get(contractDetail, 'supplier_address', '-')}

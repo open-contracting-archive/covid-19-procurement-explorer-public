@@ -3,7 +3,7 @@ import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import { AreaChartBlock } from './Charts'
 import { Loader, HelpText, ErrorHandler } from '../Utilities'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import Visualization from '../../constants/Visualization'
 
 const Buyers = (props) => {
@@ -77,7 +77,7 @@ const Buyers = (props) => {
         <div className="bg-white rounded p-4 h-full">
             <div className="flex items-center">
                 <h3 className="uppercase font-bold text-primary-dark inline-block">
-                    {t(label)}
+                    <T _str={label} />
                 </h3>
                 <HelpText helpTextInfo={helpText} />
             </div>

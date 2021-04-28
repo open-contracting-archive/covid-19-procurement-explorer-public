@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../services/CmsPageService'
 import { Loader, MetaInformation } from '../../../components/Utilities'
 import { formatDate, formatTime } from '../../../helpers/date'
-import { t } from '@transifex/native'
 
 function Events() {
     const [eventList, setEventList] = useState([])
@@ -39,14 +39,14 @@ function Events() {
                         <span
                             className="cursor-pointer text-primary-blue"
                             onClick={previousPage}>
-                            {t('Library')}
+                            <T _str="Library" />
                         </span>{' '}
                         /
                     </div>
                     <h2 className="text-2xl mb-10">Events</h2>
                     <div className="text-left">
                         <p className="text-xl blue-50 pb-10">
-                            {t('Upcoming Events')}
+                            <T _str="Upcoming Events" />
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4 card">
@@ -96,7 +96,7 @@ function Events() {
                 <div className="container mx-auto">
                     <div className="text-left">
                         <p className="text-xl blue-50 pb-6">
-                            {t('Past Events')}
+                            <T _str="Past Events" />
                         </p>
                     </div>
                     <div className="grid grid-cols-12 grid-rows-1 gap-x-0 gap-y-4 sm:gap-4  card">
@@ -149,7 +149,9 @@ function Events() {
                             })}
                     </div>
                     {eventList.length === 0 ? (
-                        <p>{t('There are no Past Events Records')}</p>
+                        <p>
+                            <T _str="There are no Past Events Records" />
+                        </p>
                     ) : (
                         ''
                     )}

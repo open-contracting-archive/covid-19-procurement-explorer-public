@@ -1,5 +1,5 @@
 import React from 'react'
-import socialIcons from '../../assets/img/icons/social'
+import { T } from '@transifex/react'
 import {
     FacebookShareButton,
     LinkedinShareButton,
@@ -7,14 +7,16 @@ import {
     EmailShareButton
 } from 'react-share'
 import { twitterHandle } from '../../helpers/general'
-import { t } from '@transifex/native'
+import socialIcons from '../../assets/img/icons/social'
 
 const ShareButtons = (props) => {
     const { url = window.location.href } = props
 
     return (
         <div className="flex flex-wrap">
-            <p className="w-full font-bold opacity-40 mb-2">{t('Share on')}</p>
+            <p className="w-full font-bold opacity-40 mb-2">
+                <T _str="Share on" />
+            </p>
             <div className="flex">
                 <FacebookShareButton url={url} className="social-icon">
                     <socialIcons.fbIcon />

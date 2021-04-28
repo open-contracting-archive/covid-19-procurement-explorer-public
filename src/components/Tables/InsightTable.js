@@ -3,18 +3,19 @@ import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
 import Select from 'react-select'
 import ReactPaginate from 'react-paginate'
+import { T } from '@transifex/react'
 import CmsPageService from '../../services/CmsPageService'
-import { Loader, TableLoader } from '../Utilities'
-import { hasValidProperty } from '../../helpers/general'
 import useCountries from '../../hooks/useCountries'
-import { t } from '@transifex/native'
 import useContentFilters from '../../hooks/useContentFilters'
 import useTableSorting from '../../hooks/useTableSorting'
+import { hasValidProperty } from '../../helpers/general'
+import { formatDate } from '../../helpers/date'
+import { Loader, TableLoader } from '../Utilities'
 import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
 import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
-import { formatDate } from '../../helpers/date'
+import Default from '../../constants/Default'
 
-const limit = 20
+const limit = Default.PAGE_SIZE
 
 const InsightTable = (props) => {
     const { params } = props
@@ -133,7 +134,7 @@ const InsightTable = (props) => {
                         {!hasCountry() && (
                             <div className="w-1/2 px-2 mb-5 md:w-40">
                                 <p className="text-xs leading-none uppercase opacity-50">
-                                    {t('Country')}
+                                    <T _str="Country" />
                                 </p>
                                 <Select
                                     className="mt-2 text-sm select-filter"
@@ -149,7 +150,7 @@ const InsightTable = (props) => {
                         )}
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {t('Type')}
+                                <T _str="Type" />
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -164,7 +165,7 @@ const InsightTable = (props) => {
                         </div>
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {t('Year')}
+                                <T _str="Year" />
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -189,7 +190,7 @@ const InsightTable = (props) => {
                     {!hasCountry() && (
                         <div className="w-40">
                             <p className="text-xs leading-none uppercase opacity-50">
-                                {t('Country')}
+                                <T _str="Country" />
                             </p>
                             <Select
                                 className="mt-2 text-sm select-filter"
@@ -203,7 +204,7 @@ const InsightTable = (props) => {
                     )}
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {t('Type')}
+                            <T _str="Type" />
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -218,7 +219,7 @@ const InsightTable = (props) => {
                     </div>
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {t('Year')}
+                            <T _str="Year" />
                         </p>
                         <Select
                             className="mt-2 text-sm select-filter"
@@ -247,24 +248,24 @@ const InsightTable = (props) => {
                                         <th style={{ width: '35%' }}>
                                             {tableHeaderSpan(
                                                 'title',
-                                                `${t('Title')}`
+                                                <T _str="Title" />
                                             )}
                                         </th>
                                         <th style={{ width: '15%' }}>
                                             <span className="flex items-center">
-                                                {t('Country')}
+                                                <T _str="Country" />
                                             </span>
                                         </th>
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'contents_type',
-                                                `${t('Type')}`
+                                                <T _str="Type" />
                                             )}
                                         </th>
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'news_date',
-                                                `${t('Year')}`
+                                                <T _str="Year" />
                                             )}
                                         </th>
                                     </tr>

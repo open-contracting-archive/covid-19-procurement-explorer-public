@@ -2,13 +2,13 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 import { useHistory, useParams } from 'react-router-dom'
+import { T } from '@transifex/react'
 import VisualizationService from '../../../services/VisualizationService'
 import {
     Loader,
     CountryFlagIcon,
     MetaInformation
 } from '../../../components/Utilities'
-import { t } from '@transifex/native'
 import {
     TotalSpending,
     TotalContracts,
@@ -74,7 +74,7 @@ const SupplierProfile = () => {
                                 <span
                                     className="cursor-pointer text-primary-blue"
                                     onClick={previousPage}>
-                                    {t('Supplier')}
+                                    <T _str="Supplier" />
                                 </span>
                             </div>
                             <h2 className="md:w-3/4 text-lg md:text-xl leading-tight mb-6 uppercase text-primary-dark">

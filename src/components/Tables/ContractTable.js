@@ -2,9 +2,9 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
+import { T } from '@transifex/react'
 import ContractService from '../../services/ContractService'
 import { Loader, TableLoader } from '../Utilities'
-import { t } from '@transifex/native'
 import { formatDate } from '../../helpers/date'
 import { hasValidProperty } from '../../helpers/general'
 import useTableSorting from '../../hooks/useTableSorting'
@@ -132,14 +132,14 @@ const ContractTable = (props) => {
                                         <th style={{ width: '25%' }}>
                                             {tableHeaderSpan(
                                                 'contract_title',
-                                                `${t('Contract Title')}`
+                                                <T _str="Contract Title" />
                                             )}
                                         </th>
                                         {!hasCountry() && (
                                             <th style={{ width: '10%' }}>
                                                 {tableHeaderSpan(
                                                     'country',
-                                                    `${t('Country')}`
+                                                    <T _str="Country" />
                                                 )}
                                             </th>
                                         )}
@@ -147,7 +147,7 @@ const ContractTable = (props) => {
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
                                                     'buyer',
-                                                    `${t('Buyer')}`
+                                                    <T _str="Buyer" />
                                                 )}
                                             </th>
                                         )}
@@ -155,34 +155,34 @@ const ContractTable = (props) => {
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
                                                     'supplier',
-                                                    `${t('Supplier')}`
+                                                    <T _str="Supplier" />
                                                 )}
                                             </th>
                                         )}
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'procurement_procedure',
-                                                `${t('Method')}`
+                                                <T _str="Method" />
                                             )}
                                         </th>
                                         {!hasProduct() && (
                                             <th style={{ width: '15%' }}>
                                                 {tableHeaderSpan(
                                                     'product',
-                                                    `${t('Product Category')}`
+                                                    <T _str="Product Category" />
                                                 )}
                                             </th>
                                         )}
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'contract_date',
-                                                `${t('Date')}`
+                                                <T _str="Date" />
                                             )}
                                         </th>
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
                                                 'contract_value_usd',
-                                                `${t('Value (USD)')}`
+                                                <T _str="Value (USD)" />
                                             )}
                                         </th>
                                         <th style={{ width: '3%' }} />

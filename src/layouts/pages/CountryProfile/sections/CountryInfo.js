@@ -1,14 +1,14 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
+import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { formatNumber } from '../../../../helpers/number'
 import { formatDate } from '../../../../helpers/date'
-import { t } from '@transifex/native'
 import {
     Loader,
     CurrencySwitcher,
     ErrorHandler
 } from '../../../../components/Utilities'
-import { get } from 'lodash'
 import CountryService from '../../../../services/CountryService'
 import { mediaUrl } from '../../../../helpers/general'
 
@@ -82,7 +82,7 @@ const CountryInfo = (props) => {
                                 <div className="w-1/2 px-4 mb-4 lg:mb-6">
                                     <div>
                                         <span className="font-normal inline-block">
-                                            {t('$, spending per covid case')}{' '}
+                                            <T _str="$, spending per covid case" />{' '}
                                         </span>
                                         <h2 className="text-xl">
                                             {countryStats.spending
@@ -95,7 +95,7 @@ const CountryInfo = (props) => {
                                 <div className="w-1/2 px-4 mb-4 lg:mb-6">
                                     <div>
                                         <span className="font-normal inline-block">
-                                            {t('GDP per capita indicator')}
+                                            <T _str="GDP per capita indicator" />
                                         </span>
                                         <h2 className="text-xl">
                                             {country.gdp
@@ -108,7 +108,7 @@ const CountryInfo = (props) => {
                                 <div className="w-1/2 px-4 mb-4 lg:mb-6">
                                     <div>
                                         <span className="font-normal inline-block">
-                                            {t('Healthcare budget')}
+                                            <T _str="Healthcare budget" />
                                         </span>
                                         <h2 className="text-xl">
                                             {country.healthcare_budget
@@ -119,14 +119,14 @@ const CountryInfo = (props) => {
                                                 : '-'}
                                         </h2>
                                         <span className="block font-normal">
-                                            {t('per capita')}
+                                            <T _str="per capita" />
                                         </span>
                                     </div>
                                 </div>
                                 <div className="w-1/2 px-4 mb-4 lg:mb-6">
                                     <div>
                                         <span className="font-normal inline-block">
-                                            {t('% of GDP to healthcare')}
+                                            <T _str="% of GDP to healthcare" />
                                         </span>
                                         <h2 className="text-xl">
                                             {country.healthcare_gdp_pc}
@@ -167,7 +167,7 @@ const CountryInfo = (props) => {
                                 <div className="w-full xs:w-1/2 px-4 mb-6 md:mb-12">
                                     <div>
                                         <span className="text-sm md:text-base font-normal inline-block md:mb-4">
-                                            {t('Total Covid-19 cases')}
+                                            <T _str="Total Covid-19 cases" />
                                         </span>
                                         <h2 className="text-xl">
                                             {country.covid_cases_total &&
@@ -180,7 +180,7 @@ const CountryInfo = (props) => {
                                 <div className="w-full xs:w-1/2 px-4 mb-6 md:mb-12">
                                     <div>
                                         <span className="text-sm md:text-base font-normal inline-block md:mb-4">
-                                            {t('Deaths by Covid-19')}
+                                            <T _str="Deaths by Covid-19" />
                                         </span>
                                         <h2 className="text-xl">
                                             {country.covid_deaths_total &&

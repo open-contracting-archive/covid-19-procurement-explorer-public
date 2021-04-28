@@ -1,11 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import { API_URL } from '../../../../helpers/api'
 import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
 import { formatDate } from '../../../../helpers/date'
-import { t } from '@transifex/native'
 
 const NewsSection = () => {
     const [newsList, setNewsList] = useState([])
@@ -30,12 +30,12 @@ const NewsSection = () => {
                 <div className="text-center mb-6 md:mb-10">
                     <h3 className="uppercase text-2xl md:text-3xl font-bold leading-none">
                         <span className="block text-base font-bold">
-                            {t('Explore')}
+                            <T _str="Explore" />
                         </span>
-                        {t('News')}
+                        <T _str="News" />
                     </h3>
                     <p className="text-xs md:text-base text-opacity-50 text-primary-dark">
-                        {t('Updates from all around the world on Covid-19')}
+                        <T _str="Updates from all around the world on Covid-19" />
                     </p>
                 </div>
                 {loading ? (
@@ -91,13 +91,13 @@ const NewsSection = () => {
 
                         <div className="text-right md:text-center mt-6 md:mt-12">
                             <Link to="/news" className="text-blue-20">
-                                {t('View all news')} --&gt;{' '}
+                                <T _str="View all news" /> --&gt;{' '}
                             </Link>
                         </div>
                     </Fragment>
                 ) : (
                     <p className="text-sm md:text-base text-primary-dark text-opacity-40 text-center py-16">
-                        {t('No news available')}
+                        <T _str="No news available" />
                     </p>
                 )}
             </div>

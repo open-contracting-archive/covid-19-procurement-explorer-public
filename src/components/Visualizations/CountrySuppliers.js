@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty, get } from 'lodash'
+import { T } from '@transifex/react'
 import { SankeyChart } from './Charts'
 import VisualizationService from '../../services/VisualizationService'
 import {
@@ -13,7 +14,6 @@ import {
 } from '../Utilities'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
-import { t } from '@transifex/native'
 
 const CountrySuppliers = (props) => {
     // ===========================================================================
@@ -109,7 +109,7 @@ const CountrySuppliers = (props) => {
                     <div className="flex flex-wrap items-center mb-4 md:mb-0 justify-start md:justify-between">
                         <div className="flex mr-2 mb-2 md:mb-0">
                             <h3 className="uppercase font-bold  text-primary-dark">
-                                {t(label)}
+                                <T _str={label} />
                             </h3>
                             <HelpText helpTextInfo={helpText} />
                         </div>

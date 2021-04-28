@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { ChartFooter } from '../../../../components/Utilities'
 import {
     ContractTrend,
@@ -75,7 +75,7 @@ const VisualizationModal = (props) => {
             <FullScreen handle={fullScreenHandler}>
                 <div className="flex justify-between">
                     <h3 className="font-bold uppercase text-primary-dark">
-                        {t(getVisualizationTitle())}
+                        <T _str={getVisualizationTitle()} />
                     </h3>
                     <button
                         className="icon-close"

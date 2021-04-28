@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import {
     WorldTimelineMap,
     WorldTimelineRaceBarChart
@@ -43,12 +43,12 @@ const MainVisualization = () => {
             <div className="mb-6 text-center md:mb-10">
                 <h3 className="text-2xl font-bold leading-none uppercase md:text-3xl">
                     <span className="block text-base font-bold">
-                        {t('Explore')}
+                        <T _str="Explore" />
                     </span>
-                    {t('Countries')}
+                    <T _str="Countries" />
                 </h3>
                 <p className="text-xs text-opacity-50 md:text-base text-primary-dark">
-                    {t('Government spending to fight COVID-19')}
+                    <T _str="Government spending to fight COVID-19" />
                 </p>
             </div>
             <div className="container mx-auto">
@@ -66,7 +66,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <MapIcon className="inline-block w-4 h-4" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {t('Map')}
+                                                    <T _str="Map" />
                                                 </span>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <ChartsIcon className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {t('Chart')}
+                                                    <T _str="Chart" />
                                                 </span>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <TableIcon className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {t('Statistics')}
+                                                    <T _str="Statistics" />
                                                 </span>
                                             </div>
                                         </div>
@@ -105,7 +105,7 @@ const MainVisualization = () => {
                                             <div>
                                                 <SourcesIcon className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
-                                                    {t('Sources')}
+                                                    <T _str="Sources" />
                                                 </span>
                                             </div>
                                         </div>
@@ -120,11 +120,11 @@ const MainVisualization = () => {
                 </div>
             </div>
             <p className="mt-6 text-sm text-center">
-                {t('Don’t see your country data?')}
+                <T _str="Don’t see your country data?" />
                 <Link
                     to="/pages/add-my-country-data"
                     className="inline-block ml-2 text-primary-blue">
-                    {t('Here’s how you can add your country data')}
+                    <T _str="Here’s how you can add your country data" />
                 </Link>
             </p>
         </section>

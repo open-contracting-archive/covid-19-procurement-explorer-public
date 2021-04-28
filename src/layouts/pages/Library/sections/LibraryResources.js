@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
-import { t } from '@transifex/native'
 import { Loader } from '../../../../components/Utilities'
 
 const LibraryResources = () => {
@@ -38,7 +38,9 @@ const LibraryResources = () => {
         <section className="px-4 resources py-8 md:py-24">
             <div className="container mx-auto">
                 <div className="text-center">
-                    <p className="text-xl blue-50 pb-10">{t('Resources')}</p>
+                    <p className="text-xl blue-50 pb-10">
+                        <T _str="Resources" />
+                    </p>
                 </div>
                 {loading ? (
                     <Loader />
@@ -78,7 +80,7 @@ const LibraryResources = () => {
                                                                 />
                                                             </svg>
                                                             <span className="text-blue-20 test-sm ml-2">
-                                                                {t('Download')}
+                                                                <T _str="Download" />
                                                             </span>
                                                         </div>
                                                     </a>
@@ -91,12 +93,12 @@ const LibraryResources = () => {
                         {resourceList.length !== 0 ? (
                             <div className="flex justify-center pt-10">
                                 <Link to="/resources" className="text-blue-20">
-                                    {t('View all resources')} --&gt;{' '}
+                                    <T _str="View all resources" /> --&gt;{' '}
                                 </Link>
                             </div>
                         ) : (
                             <p className="text-center">
-                                {t('There are no resources')}
+                                <T _str="There are no resources" />
                             </p>
                         )}
                     </Fragment>

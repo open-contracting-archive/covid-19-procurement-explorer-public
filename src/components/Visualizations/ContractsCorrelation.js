@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { CombinedChart } from './Charts'
 import {
     Loader,
@@ -92,7 +92,7 @@ const ContractsCorrelation = (props) => {
                     <div className="flex flex-wrap items-center mb-6 md:mb-0 justify-start md:justify-between">
                         <div className="flex mr-2 mb-4 md:mb-0">
                             <h3 className="text-base uppercase font-bold text-primary-dark inline-block">
-                                {t(label)}
+                                <T _str={label} />
                             </h3>
                             <HelpText helpTextInfo={helpText} />
                         </div>

@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
 import ContractService from '../../services/ContractService'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 import { TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import useTableSorting from '../../hooks/useTableSorting'
@@ -120,7 +120,7 @@ const ProductTable = (props) => {
                         {!hasCountry() && (
                             <div className="w-full px-2">
                                 <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                    {t('Country')}
+                                    <T _str="Country" />
                                 </p>
                                 <Select
                                     className="text-sm select-filter"
@@ -144,7 +144,7 @@ const ProductTable = (props) => {
                 <div className="hidden gap-8 mb-8 md:flex">
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            {t('Country')}
+                            <T _str="Country" />
                         </p>
                         <Select
                             className="text-sm select-filter"
@@ -166,31 +166,31 @@ const ProductTable = (props) => {
                                 <th style={{ width: '20%' }}>
                                     {tableHeaderSpan(
                                         'product_name',
-                                        `${t('Product Category')}`
+                                        <T _str="Product Category" />
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'tender_count',
-                                        `${t('# of contracts')}`
+                                        <T _str="# of contracts" />
                                     )}
                                 </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
                                         'amount_usd',
-                                        `${t('value (usd)')}`
+                                        <T _str="value (usd)" />
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'supplier_count',
-                                        `${t('# of suppliers')}`
+                                        <T _str="# of suppliers" />
                                     )}
                                 </th>
                                 <th style={{ width: '6%' }}>
                                     {tableHeaderSpan(
                                         'buyer_count',
-                                        `${t('# of buyers')}`
+                                        <T _str="# of buyers" />
                                     )}
                                 </th>
                             </tr>

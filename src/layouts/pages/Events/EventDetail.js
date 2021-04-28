@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate, formatTime } from '../../../helpers/date'
-import { t } from '@transifex/native'
 import { stripTags } from '../../../helpers/transformers'
 import {
     Loader,
@@ -79,7 +79,7 @@ const EventDetail = () => {
                                 </div>
                                 <div className="organization mb-8">
                                     <p className="block font-bold opacity-40 mb-2">
-                                        {t('Organization')}
+                                        <T _str="Organization" />
                                     </p>
                                     <p className="block ml-3 lg:ml-0">
                                         {eventDetail.organization || '-'}
@@ -87,7 +87,7 @@ const EventDetail = () => {
                                 </div>
                                 <div className="location mb-8">
                                     <p className="block font-bold opacity-40 mb-2">
-                                        {t('Location')}
+                                        <T _str="Location" />
                                     </p>
                                     <p className="block ml-3 lg:ml-0">
                                         {eventDetail.location || '-'}
@@ -114,7 +114,7 @@ const EventDetail = () => {
                                 <hr className="mb-10 text-primary-gray" />
                                 <div className="mb-20">
                                     <h2 className="text-xl mb-6">
-                                        {t('Other Events')}
+                                        <T _str="Other Events" />
                                     </h2>
                                     <div className="grid grid-cols-12 gap-x-0 gap-y-4 sm:gap-4 mb-10">
                                         {eventList &&
@@ -182,7 +182,7 @@ const EventDetail = () => {
                                         <Link
                                             to="/events"
                                             className="text-blue-20 px-4">
-                                            {t('View all events')} --&gt;{' '}
+                                            <T _str="View all events" /> --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />
                                     </div>

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
-import { t } from '@transifex/native'
+import { T } from '@transifex/react'
 
 const TagList = ({ item }) => {
     let history = useHistory()
@@ -12,7 +12,7 @@ const TagList = ({ item }) => {
     return (
         <Fragment>
             <p className="inline-block lg:block font-bold opacity-40 mb-2">
-                {t('Tags')}
+                <T _str="Tags" />
             </p>
             {item.tags.length ? (
                 <div className="tags flex flex-wrap">
