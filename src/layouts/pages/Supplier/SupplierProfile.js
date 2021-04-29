@@ -17,7 +17,7 @@ import {
     ProductsTimeline,
     ProductDistribution,
     ContractRedFlags,
-    GlobalSuppliers
+    SupplierProductFlow
 } from '../../../components/Visualizations'
 import { ContractTable } from '../../../components/Tables'
 
@@ -102,11 +102,10 @@ const SupplierProfile = () => {
                             </div>
                             <div className="w-full mb-10">
                                 <div className="rounded border border-blue-0 bg-white">
-                                    <GlobalSuppliers
+                                    <SupplierProductFlow
                                         label="Product flow"
                                         params={{
-                                            supplier: id,
-                                            country: originalData.country_code
+                                            supplierId: id
                                         }}
                                     />
                                 </div>

@@ -48,7 +48,12 @@ const ProductProfile = () => {
             <div className="py-12 bg-primary-gray px-4">
                 <div className="container mx-auto">
                     <div>
-                        <ContractTable params={{ product: productId }} />
+                        <ContractTable
+                            params={{
+                                product: productId,
+                                country: country.country_code_alpha_2
+                            }}
+                        />
                     </div>
                 </div>
             </div>

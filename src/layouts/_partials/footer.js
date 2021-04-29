@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
 import CmsPageService from '../../services/CmsPageService'
 import FooterImage from '../../assets/img/icons/cc-img.png'
-import { ReactComponent as FooterBlob } from '../../assets/img/icons/footer-blob.svg'
-import { ReactComponent as FooterIcon } from '../../assets/img/icons/footer-virus-icon.svg'
 import OpenContractingPartner from '../../assets/img/open-contracting-partnership.png'
 import TransparencyInternational from '../../assets/img/transparency-international.png'
 import EuropeanBank from '../../assets/img/ebrd-logo.svg'
+import Icon from '../../assets/img/icons'
 
 const Footer = () => {
     const [menuList, setMenuList] = useState([])
@@ -163,12 +162,12 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <FooterIcon
+                <Icon.FooterVirusIcon
                     className="absolute z-negative"
                     style={{ bottom: '-70px', right: '-30px' }}
                 />
             </div>
-            <FooterBlob className="absolute bottom-0 left-0" />
+            <Icon.FooterBlob className="absolute bottom-0 left-0" />
         </footer>
     )
 }

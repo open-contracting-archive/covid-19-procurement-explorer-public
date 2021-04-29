@@ -11,9 +11,8 @@ import useTableSorting from '../../hooks/useTableSorting'
 import { hasValidProperty } from '../../helpers/general'
 import { formatDate } from '../../helpers/date'
 import { Loader, TableLoader } from '../Utilities'
-import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 import Default from '../../constants/Default'
+import Icon from '../../assets/img/icons'
 
 const limit = Default.PAGE_SIZE
 
@@ -113,7 +112,7 @@ const InsightTable = (props) => {
                 className="cursor-pointer md:hidden"
                 onClick={handleFilterToggle}>
                 <div className="filter-ui">
-                    <FilterIcon />
+                    <Icon.Filter />
                 </div>
             </div>
 
@@ -127,7 +126,7 @@ const InsightTable = (props) => {
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
                             onClick={handleCloseFilter}>
-                            <FilterCloseIcon />
+                            <Icon.FilterClose />
                         </span>
                     </div>
                     <div className="flex flex-wrap -mx-2 -mb-5">

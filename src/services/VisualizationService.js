@@ -475,6 +475,38 @@ class VisualizationService {
             console.log(error)
         }
     }
+
+    static async ProductFlow(productId) {
+        try {
+            const res = await Api.get(
+                `${getURI('visualization.product-flow')}/${productId}`
+            )
+
+            if (res.status !== 200) {
+                throw new Error()
+            }
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    static async SupplierProductFlow(supplierId) {
+        try {
+            const res = await Api.get(
+                `${getURI('visualization.supplier-product-flow')}/${supplierId}`
+            )
+
+            if (res.status !== 200) {
+                throw new Error()
+            }
+
+            return res.body
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default VisualizationService

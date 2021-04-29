@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import VisualizationService from '../../services/VisualizationService'
 import { CardContainer, ErrorHandler } from '../Utilities'
 import Default from '../../constants/Default'
+import Icon from '../../assets/img/icons'
 
 const ContractRedFlags = (props) => {
     // ===========================================================================
@@ -45,7 +45,7 @@ const ContractRedFlags = (props) => {
             label={label}
             appendClass={'pb-12 h-full'}
             helpText={helpText}
-            symbol={<FlagIcon className="inline-block ml-2" />}>
+            symbol={<Icon.RedFlag className="inline-block ml-2" />}>
             <div className="-mt-4 md:mt-0 custom-horizontal-bar">
                 {!error ? (
                     <ul className="pr-4 overflow-y-auto custom-scrollbar h-80">

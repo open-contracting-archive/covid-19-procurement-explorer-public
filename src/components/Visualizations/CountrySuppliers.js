@@ -14,6 +14,7 @@ import {
 } from '../Utilities'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
+import Visualization from '../../constants/Visualization'
 
 const CountrySuppliers = (props) => {
     // ===========================================================================
@@ -138,8 +139,12 @@ const CountrySuppliers = (props) => {
             </FullScreen>
 
             <ChartFooter
-                linkText={`/country/${countrySlug}/suppliers`}
+                detailViewURL={`/country/${countrySlug}/suppliers`}
                 fullScreenHandler={fullScreenHandler}
+                embeddedVisualization={{
+                    key: Visualization.COUNTRY_SUPPLIERS,
+                    options: params
+                }}
             />
         </div>
     )

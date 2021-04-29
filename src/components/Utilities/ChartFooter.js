@@ -7,15 +7,13 @@ import {
     TwitterShareButton,
     EmailShareButton
 } from 'react-share'
-import { EmbeddedModal } from './index'
 import { T } from '@transifex/react'
-import { countryContractsUrl, twitterHandle } from '../../helpers/general'
-import socialIcons from '../../assets/img/icons/social'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
+import { EmbeddedModal } from './index'
+import { countryContractsUrl, twitterHandle } from '../../helpers/general'
 import useCountries from '../../hooks/useCountries'
-import { ReactComponent as DownloadIcon } from '../../assets/img/icons/ic_download.svg'
-import { ReactComponent as ShareIcon } from '../../assets/img/icons/ic_share.svg'
-import { ReactComponent as FullViewIcon } from '../../assets/img/icons/ic_fullscreen.svg'
+import SocialIcon from '../../assets/img/icons/social'
+import Icon from '../../assets/img/icons'
 
 const currentLocation = window.location.href
 
@@ -23,7 +21,7 @@ const ChartFooter = (props) => {
     const {
         fullScreenHandler,
         embeddedVisualization = null,
-        linkText,
+        detailViewURL,
         downloadUrl = null
     } = props
     const { isModalOpen, openModal, closeModal } = useModal()
@@ -47,7 +45,7 @@ const ChartFooter = (props) => {
                             <span className="hidden cursor-pointer md:inline-block">
                                 <T _str="View full screen" />
                             </span>
-                            <FullViewIcon className="inline-block ml-2" />
+                            <Icon.Fullscreen className="inline-block ml-2" />
                         </button>
                     </span>
                 </div>
@@ -66,7 +64,7 @@ const ChartFooter = (props) => {
                 {downloadUrl ? (
                     <div className="flex items-center mr-4 md:mr-6">
                         <a href={downloadUrl} target="_blank" rel="noreferrer">
-                            <DownloadIcon className=" mr-2 inline-block" />
+                            <Icon.Download className=" mr-2 inline-block" />
                             <span className=" hidden md:inline-block">
                                 <T _str="Download" />
                             </span>
@@ -79,7 +77,7 @@ const ChartFooter = (props) => {
                                 href={downloadCountryContracts()}
                                 target="_blank"
                                 rel="noreferrer">
-                                <DownloadIcon className=" mr-2 inline-block" />
+                                <Icon.Download className=" mr-2 inline-block" />
                                 <span className=" hidden md:inline-block">
                                     <T _str="Download" />
                                 </span>
@@ -89,7 +87,7 @@ const ChartFooter = (props) => {
                 )}
                 <div className="relative flex items-center">
                     <button onClick={onClick} className="dropdown-menu-trigger">
-                        <ShareIcon className="inline-block mr-2" />{' '}
+                        <Icon.Share className="inline-block mr-2" />{' '}
                         <span className="hidden cursor-pointer md:inline-block">
                             <T _str="Share" />
                         </span>
@@ -106,7 +104,7 @@ const ChartFooter = (props) => {
                             <FacebookShareButton
                                 url={currentLocation}
                                 className=" social-icon">
-                                <socialIcons.fbIcon />
+                                <SocialIcon.Facebook />
                                 <span>
                                     <T _str="Facebook" />
                                 </span>
@@ -116,7 +114,7 @@ const ChartFooter = (props) => {
                                 url={currentLocation}
                                 via={twitterHandle}
                                 className=" social-icon">
-                                <socialIcons.twitterIcon />
+                                <SocialIcon.Twitter />
                                 <span>
                                     <T _str="Twitter" />
                                 </span>
@@ -125,7 +123,7 @@ const ChartFooter = (props) => {
                             <LinkedinShareButton
                                 url={currentLocation}
                                 className=" social-icon">
-                                <socialIcons.linkedIcon />
+                                <SocialIcon.Linked />
                                 <span>
                                     <T _str="LinkedIn" />
                                 </span>
@@ -134,7 +132,7 @@ const ChartFooter = (props) => {
                             <EmailShareButton
                                 url={currentLocation}
                                 className=" social-icon email">
-                                <socialIcons.mailIcon />
+                                <SocialIcon.Mail />
                                 <span>
                                     <T _str="Email" />
                                 </span>
@@ -150,7 +148,7 @@ const ChartFooter = (props) => {
                                     <div
                                         className="flex items-center cursor-pointer social-embed"
                                         onClick={() => modalHandler()}>
-                                        <socialIcons.codingIcon className=" w-5" />
+                                        <SocialIcon.Embedded className=" w-5" />
                                         <span className=" ml-4">
                                             <T _str="Embedded" />
                                         </span>
@@ -162,10 +160,10 @@ const ChartFooter = (props) => {
                 </div>
             </div>
 
-            {linkText && (
+            {detailViewURL && (
                 <div className="absolute left-0 right-0 w-full m-0 text-center md:relative md:text-left md:w-auto md:my-0">
                     <Link
-                        to={linkText}
+                        to={detailViewURL}
                         className="inline-block text-sm text-primary-blue">
                         View in detail →
                     </Link>

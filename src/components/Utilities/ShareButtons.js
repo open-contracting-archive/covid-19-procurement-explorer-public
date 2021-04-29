@@ -7,7 +7,7 @@ import {
     EmailShareButton
 } from 'react-share'
 import { twitterHandle } from '../../helpers/general'
-import socialIcons from '../../assets/img/icons/social'
+import SocialIcon from '../../assets/img/icons/social'
 
 const ShareButtons = (props) => {
     const { url = window.location.href } = props
@@ -19,22 +19,22 @@ const ShareButtons = (props) => {
             </p>
             <div className="flex">
                 <FacebookShareButton url={url} className="social-icon">
-                    <socialIcons.fbIcon />
+                    <SocialIcon.Facebook />
                 </FacebookShareButton>
 
                 <TwitterShareButton
                     url={url}
                     via={twitterHandle}
                     className="social-icon">
-                    <socialIcons.twitterIcon />
+                    <SocialIcon.Twitter />
                 </TwitterShareButton>
 
                 <LinkedinShareButton url={url} className="social-icon">
-                    <socialIcons.linkedIcon />
+                    <SocialIcon.Linked />
                 </LinkedinShareButton>
 
                 <EmailShareButton url={url} className="social-icon">
-                    <socialIcons.mailIcon />
+                    <SocialIcon.Mail />
                 </EmailShareButton>
             </div>
         </div>

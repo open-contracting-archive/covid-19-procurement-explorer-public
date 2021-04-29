@@ -1,6 +1,6 @@
 import React from 'react'
 import { T } from '@transifex/react'
-import { ReactComponent as HelpIcon } from '../../assets/img/icons/information.svg'
+import Icon from '../../assets/img/icons'
 
 const HelpText = (props) => {
     const { helpTextInfo } = props
@@ -8,7 +8,7 @@ const HelpText = (props) => {
     return (
         <div className="tooltip-wrap inline-block relative ml-2">
             <div className="tooltip-icon">
-                <HelpIcon />
+                <Icon.Information />
             </div>
             <div className="tooltip-content absolute">
                 <p>

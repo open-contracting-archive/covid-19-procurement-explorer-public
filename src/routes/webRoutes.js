@@ -86,22 +86,27 @@ export const webRoutes = [
         component: <ProductProfile />
     },
     {
+        exact: true,
         path: '/global-overview/:tabSlug',
         component: <GlobalOverview />
     },
     {
+        exact: true,
         path: '/global-overview/',
         component: <GlobalOverview />
     },
     {
+        exact: true,
         path: '/country/:countrySlug/products/:productId',
         component: <ProductProfile />
     },
     {
+        exact: true,
         path: '/country/:countrySlug/:tabSlug',
         component: <CountryProfile />
     },
     {
+        exact: true,
         path: '/country/:countrySlug/',
         component: <CountryProfile />
     },

@@ -18,21 +18,25 @@ import GeneralService from './services/GeneralService'
 import RouterView from './layouts/RouterView'
 import cookieConfig from './components/Utilities/CookieConfig'
 
-init(cookieConfig)
-tx.init({
-    token: process.env.REACT_APP_TRANSIFEX_TOKEN
-})
+if (process.env.NODE_ENV === 'production') {
+    init(cookieConfig)
+    const domain =
+        process.env.REACT_APP_FATHOM_ANALYTICS_DOMAIN || 'cdn.usefathom.com'
+    const siteKey = process.env.REACT_APP_FATHOM_ANALYTICS_ID
 
-const domain =
-    process.env.REACT_APP_FATHOM_ANALYTICS_DOMAIN || 'cdn.usefathom.com'
-const siteKey = process.env.REACT_APP_FATHOM_ANALYTICS_ID
+    if (domain && siteKey) {
+        load(siteKey, {
+            url: `https://${domain}/script.js`,
+            excludedDomains: ['localhost', '127.0.0.1', '0.0.0.0'],
+            spa: 'auto'
+        })
+    }
 
-if (process.env.NODE_ENV === 'production' && domain && siteKey) {
-    load(siteKey, {
-        url: `https://${domain}/script.js`,
-        excludedDomains: ['localhost', '127.0.0.1', '0.0.0.0'],
-        spa: 'auto'
-    })
+    if (process.env.REACT_APP_TRANSIFEX_TOKEN) {
+        tx.init({
+            token: process.env.REACT_APP_TRANSIFEX_TOKEN
+        })
+    }
 }
 
 function App() {
@@ -41,8 +45,17 @@ function App() {
     const currentLocale = useSelector((state) => state.general.currentLocale)
 
     useEffect(() => {
-        tx.setCurrentLocale(currentLocale)
-    }, [currentLocale])
+        if (
+            process.env.NODE_ENV === 'production' &&
+            process.env.REACT_APP_TRANSIFEX_TOKEN
+        ) {
+            tx.setCurrentLocale(currentLocale)
+        }
+    }, [
+        currentLocale,
+        process.env.NODE_ENV,
+        process.env.REACT_APP_TRANSIFEX_TOKEN
+    ])
 
     useEffect(() => {
         CountryService.Countries().then((response) => {

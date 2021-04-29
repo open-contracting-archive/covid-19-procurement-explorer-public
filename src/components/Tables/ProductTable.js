@@ -8,9 +8,8 @@ import { TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import useTableSorting from '../../hooks/useTableSorting'
 import { hasValidProperty } from '../../helpers/general'
-import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
 import Default from '../../constants/Default'
+import Icon from '../../assets/img/icons'
 
 const ProductTable = (props) => {
     const { params } = props
@@ -98,7 +97,7 @@ const ProductTable = (props) => {
                 className="cursor-pointer md:hidden"
                 onClick={handleFilterToggle}>
                 <div className="filter-ui">
-                    <FilterIcon />
+                    <Icon.Filter />
                 </div>
             </div>
 
@@ -113,7 +112,7 @@ const ProductTable = (props) => {
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
                             onClick={handleCloseFilter}>
-                            <FilterCloseIcon />
+                            <Icon.FilterClose />
                         </span>
                     </div>
                     <div className="flex flex-wrap -mx-2">

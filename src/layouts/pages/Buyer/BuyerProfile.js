@@ -41,7 +41,6 @@ const BuyerProfile = () => {
     // ===========================================================================
     useEffect(() => {
         VisualizationService.BuyerDetail(id).then((response) => {
-            // const country = countries.find((country) => country.response)
             setOriginalData(response)
             setLoading(false)
         })

@@ -8,8 +8,8 @@ import { Loader, TableLoader } from '../Utilities'
 import { formatDate } from '../../helpers/date'
 import { hasValidProperty } from '../../helpers/general'
 import useTableSorting from '../../hooks/useTableSorting'
-import { ReactComponent as FlagIcon } from '../../assets/img/icons/ic_flag.svg'
 import Default from '../../constants/Default'
+import Icon from '../../assets/img/icons'
 
 const ContractFilter = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './ContractFilter')
@@ -271,7 +271,7 @@ const ContractTable = (props) => {
                                                     {contract.red_flag.length >
                                                         0 && (
                                                         <span className="mr-4">
-                                                            <FlagIcon />
+                                                            <Icon.RedFlag />
                                                         </span>
                                                     )}
                                                 </td>
