@@ -13,9 +13,8 @@ import {
     Breadcrumb,
     TableLoader
 } from '../../../components/Utilities'
-import { ReactComponent as FilterIcon } from '../../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../../assets/img/icons/ic_filter-close.svg'
 import Default from '../../../constants/Default'
+import Icon from '../../../assets/img/icons'
 
 const limit = Default.PAGE_SIZE
 
@@ -149,7 +148,7 @@ const Resources = () => {
                             className="md:hidden cursor-pointer"
                             onClick={handleFilterToggle}>
                             <div className="filter-ui">
-                                <FilterIcon />
+                                <Icon.Filter />
                             </div>
                         </div>
                         {showFilter ? (
@@ -162,7 +161,7 @@ const Resources = () => {
                                     <span
                                         className="filter-close text-sm uppercase font-bold cursor-pointer"
                                         onClick={handleCloseFilter}>
-                                        <FilterCloseIcon />
+                                        <Icon.FilterClose />
                                     </span>
                                 </div>
                                 <div className="flex -mx-2 -mb-5 flex-wrap">

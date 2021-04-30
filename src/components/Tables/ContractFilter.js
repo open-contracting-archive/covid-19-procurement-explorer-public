@@ -7,8 +7,7 @@ import { T } from '@transifex/react'
 import useContractFilters from '../../hooks/useContractFilters'
 import { formatDate } from '../../helpers/date'
 import 'react-datepicker/dist/react-datepicker.css'
-import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import Icon from '../../assets/img/icons'
 
 const ContractFilter = (props) => {
     const {
@@ -134,7 +133,7 @@ const ContractFilter = (props) => {
                 className="md:hidden cursor-pointer"
                 onClick={handleFilterToggle}>
                 <div className="filter-ui">
-                    <FilterIcon />
+                    <Icon.Filter />
                 </div>
             </div>
             {showFilter ? (
@@ -147,7 +146,7 @@ const ContractFilter = (props) => {
                         <span
                             className="filter-close text-sm uppercase font-bold cursor-pointer"
                             onClick={handleCloseFilter}>
-                            <FilterCloseIcon />
+                            <Icon.FilterClose />
                         </span>
                     </div>
                     <div className="flex -mx-2 -mb-5 flex-wrap">

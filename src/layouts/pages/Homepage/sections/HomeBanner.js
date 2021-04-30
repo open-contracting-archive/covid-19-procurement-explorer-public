@@ -1,17 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
-import { ReactComponent as CircleIcon } from '../../../../assets/img/icons/circle-ring.svg'
-import { ReactComponent as HeroIcon } from '../../../../assets/img/icons/covid.svg'
-import { ReactComponent as MouseScroll } from '../../../../assets/img/icons/mouse-scroll.svg'
-import { ReactComponent as BottomCurve } from '../../../../assets/img/icons/circle_bottom.svg'
+import Icon from '../../../../assets/img/icons'
 
 const HomeBanner = () => {
     return (
         <section className="hero-section relative mx-auto px-4 flex flex-col justify-center">
             <div className="outer-circle mt-40 mx-auto relative flex justify-center items-center">
-                <CircleIcon className="hidden md:block circle-ring absolute h-full w-full z-negative" />
-                <HeroIcon className="covid-icon hidden md:block" />
+                <Icon.CircleRing className="hidden md:block circle-ring absolute h-full w-full z-negative" />
+                <Icon.Covid className="covid-icon hidden md:block" />
                 <div className="inner-circle rounded md:rounded-full bg-yellow-20 overflow-hidden flex flex-col justify-center items-center">
                     <div className="flex-1 text-center pt-16 md:pt-0 pb-6 md:pb-8 px-2 md:flex md:flex-col md:justify-end">
                         <h1 className="text-xl md:text-4xl font-bold uppercase leading-none text-center">
@@ -50,12 +47,12 @@ const HomeBanner = () => {
                 </div>
             </div>
             <div className="text-white text-center mt-12 mb-20 md:mb-40">
-                <MouseScroll className="m-auto" />
+                <Icon.MouseScroll className="m-auto" />
                 <p className="text-sm mt-3">
                     <T _str="Scroll down for more" />
                 </p>
             </div>
-            <BottomCurve className="absolute bottom-0 left-0 h-auto w-full" />
+            <Icon.CircleBottom className="absolute bottom-0 left-0 h-auto w-full" />
         </section>
     )
 }

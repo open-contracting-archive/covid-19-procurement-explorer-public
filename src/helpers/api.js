@@ -39,6 +39,9 @@ const apiRoutes = {
     'visualization.contract-red-flags':
         'api/v1/visualization/contract-red-flags/',
     'visualization.red-flag-summary': 'api/v1/visualization/red-flag-summary/',
+    'visualization.product-flow': 'api/v1/visualization/product-flow/',
+    'visualization.supplier-product-flow':
+        'api/v1/visualization/supplier-flow/',
 
     // Detail api
     'buyer-detail': 'api/v1/visualization/buyers',

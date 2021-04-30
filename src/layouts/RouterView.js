@@ -16,9 +16,7 @@ const RouterView = () => {
         return webRoutes.map((item, key) => {
             return (
                 <Route key={key} path={item.path} exact={item.exact}>
-                    <Suspense fallback={<Loader />}>
-                        <WebLayout>{item.component}</WebLayout>
-                    </Suspense>
+                    <WebLayout>{item.component}</WebLayout>
                 </Route>
             )
         })
@@ -27,21 +25,23 @@ const RouterView = () => {
     return (
         <BrowserRouter>
             <Fragment>
-                <Switch>
-                    {renderWebRoutes()}
+                <Suspense fallback={<Loader />}>
+                    <Switch>
+                        {renderWebRoutes()}
 
-                    <Route
-                        exact
-                        path="/visualization/embedded/:visualizationId"
-                        component={EmbeddedVisualization}
-                    />
+                        <Route
+                            exact
+                            path="/visualization/embedded/:visualizationId"
+                            component={EmbeddedVisualization}
+                        />
 
-                    <Route>
-                        <WebLayout>
-                            <NotFound />
-                        </WebLayout>
-                    </Route>
-                </Switch>
+                        <Route>
+                            <WebLayout>
+                                <NotFound />
+                            </WebLayout>
+                        </Route>
+                    </Switch>
+                </Suspense>
             </Fragment>
         </BrowserRouter>
     )

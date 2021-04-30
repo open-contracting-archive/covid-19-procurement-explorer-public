@@ -2,7 +2,6 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
-import { ReactComponent as RedIcon } from '../../../assets/img/icons/ic_flag.svg'
 import CountryService from '../../../services/CountryService'
 import { formatNumber } from '../../../helpers/number'
 import { formatDate } from '../../../helpers/date'
@@ -11,6 +10,7 @@ import {
     CountryFlagIcon,
     MetaInformation
 } from '../../../components/Utilities'
+import Icon from '../../../assets/img/icons'
 
 const AwardedItemTable = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './AwardedItemsTable')
@@ -75,7 +75,7 @@ const ContractDetail = () => {
                         #{contractDetail && contractDetail.contract_id}
                     </div>
                     <div className="flex items-center py-1 px-3 mr-2 mb-2 rounded-full bg-primary-gray">
-                        <RedIcon />
+                        <Icon.RedFlag />
                         <div className="mx-2 text-sm">
                             {contractDetail &&
                                 contractDetail.red_flag &&

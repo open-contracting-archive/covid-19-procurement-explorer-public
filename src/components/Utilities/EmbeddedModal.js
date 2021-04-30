@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { T } from '@transifex/react'
 import { siteUrl } from '../../helpers/general'
-import { ReactComponent as CodingIcon } from '../../assets/img/icons/ic_coding.svg'
-import { ReactComponent as CopyIcon } from '../../assets/img/icons/ic_copy.svg'
+import Icon from '../../assets/img/icons'
 
 const copyToClipboard = (elementId) => {
     const element = document.getElementById(elementId)
@@ -60,7 +59,7 @@ const EmbeddedModal = (props) => {
             <div>
                 <div className="flex items-center">
                     <span className="inline-block mr-2">
-                        <CodingIcon className="w-4 h-4" />
+                        <Icon.Coding className="w-4 h-4" />
                     </span>
                     <span>
                         <T _str="Copy/paste this code snippet" />
@@ -76,7 +75,7 @@ const EmbeddedModal = (props) => {
                             readOnly
                             value={snippet}
                         />
-                        <CopyIcon
+                        <Icon.Copy
                             className="ml-4 w-4 h-4 cursor-pointer"
                             onClick={() =>
                                 copyToClipboard('embed-code-snippet')

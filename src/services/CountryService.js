@@ -1,6 +1,5 @@
-import axios from 'axios'
 import Api from './api'
-import { API_URL, getURI } from '../helpers/api'
+import { getURI } from '../helpers/api'
 
 class CountryService {
     static async Countries() {
@@ -30,13 +29,6 @@ class CountryService {
         } catch (error) {
             console.log(error)
         }
-    }
-
-    static async getTranslations(currentLocale) {
-        const { data: translationData } = await axios.get(
-            `${API_URL}/static/translations/${currentLocale}/words.json`
-        )
-        return { [currentLocale]: translationData }
     }
 
     static async GetGlobalMapData() {

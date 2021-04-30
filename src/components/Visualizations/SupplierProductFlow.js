@@ -7,13 +7,13 @@ import { CardContainer, ChartFooter, ErrorHandler } from '../Utilities'
 import ContractView from '../../constants/ContractView'
 import Default from '../../constants/Default'
 
-const GlobalSuppliers = (props) => {
+const SupplierProductFlow = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
     const {
-        label = 'Global Suppliers',
-        helpText = 'Top 1 supplier in each product category according to contracts value or number of signed contracts',
+        label = 'Product Flow',
+        helpText = 'All product categories for this supplier according to contracts value or number of signed contracts',
         params
     } = props
     const [loading, setLoading] = useState(true)
@@ -27,7 +27,7 @@ const GlobalSuppliers = (props) => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        VisualizationService.GlobalSuppliers(params)
+        VisualizationService.SupplierProductFlow(params.supplierId)
             .then((result) => {
                 setLoading(false)
                 if (result) {
@@ -43,7 +43,7 @@ const GlobalSuppliers = (props) => {
         return () => {
             setOriginalData({})
         }
-    }, [params])
+    }, [params?.supplierId])
 
     useEffect(() => {
         if (!isEmpty(originalData)) {
@@ -109,12 +109,9 @@ const GlobalSuppliers = (props) => {
                     </div>
                 </CardContainer>
             </FullScreen>
-            <ChartFooter
-                fullScreenHandler={fullScreenHandler}
-                detailViewURL="/global-overview/suppliers"
-            />
+            <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
 }
 
-export default GlobalSuppliers
+export default SupplierProductFlow

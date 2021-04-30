@@ -6,10 +6,7 @@ import {
     WorldTimelineRaceBarChart
 } from '../../../../components/Visualizations'
 import { OverallStatisticsTable } from '../../../../components/Tables'
-import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
-import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
-import { ReactComponent as TableIcon } from '../../../../assets/img/icons/ic_table.svg'
-import { ReactComponent as SourcesIcon } from '../../../../assets/img/icons/ic_sources.svg'
+import Icon from '../../../../assets/img/icons'
 
 const CmsPageContent = React.lazy(() =>
     import(
@@ -64,7 +61,7 @@ const MainVisualization = () => {
                                             }`}
                                             onClick={() => setTabView('map')}>
                                             <div>
-                                                <MapIcon className="inline-block w-4 h-4" />
+                                                <Icon.Map className="inline-block w-4 h-4" />
                                                 <span className="block mt-1 text-xs md:text-sm">
                                                     <T _str="Map" />
                                                 </span>
@@ -76,7 +73,7 @@ const MainVisualization = () => {
                                             }`}
                                             onClick={() => setTabView('chart')}>
                                             <div>
-                                                <ChartsIcon className="inline-block" />
+                                                <Icon.Charts className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
                                                     <T _str="Chart" />
                                                 </span>
@@ -88,7 +85,7 @@ const MainVisualization = () => {
                                             }`}
                                             onClick={() => setTabView('table')}>
                                             <div>
-                                                <TableIcon className="inline-block" />
+                                                <Icon.Table className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
                                                     <T _str="Statistics" />
                                                 </span>
@@ -103,7 +100,7 @@ const MainVisualization = () => {
                                                 setTabView('sources')
                                             }>
                                             <div>
-                                                <SourcesIcon className="inline-block" />
+                                                <Icon.Sources className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
                                                     <T _str="Sources" />
                                                 </span>

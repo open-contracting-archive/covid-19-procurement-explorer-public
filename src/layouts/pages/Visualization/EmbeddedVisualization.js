@@ -6,7 +6,8 @@ import {
     ProductsTimeline,
     ContractsCorrelation,
     ContractEquityIndicators,
-    RedFlagSummary
+    RedFlagSummary,
+    CountrySuppliers
 } from '../../../components/Visualizations'
 import { useQuery } from '../../../helpers/general'
 import Visualization from '../../../constants/Visualization'
@@ -42,6 +43,12 @@ const EmbeddedVisualization = () => {
         case Visualization.RED_FLAG_SUMMARY:
             return (
                 <RedFlagSummary
+                    params={{ country: queryString.get('country') }}
+                />
+            )
+        case Visualization.COUNTRY_SUPPLIERS:
+            return (
+                <CountrySuppliers
                     params={{ country: queryString.get('country') }}
                 />
             )

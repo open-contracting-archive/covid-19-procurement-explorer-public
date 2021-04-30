@@ -105,3 +105,9 @@ export const CountryPartnerSlider = React.lazy(() =>
 export const GlobalMap = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './GlobalMap')
 )
+export const ProductFlow = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './ProductFlow')
+)
+export const SupplierProductFlow = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './SupplierProductFlow')
+)

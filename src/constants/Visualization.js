@@ -12,5 +12,6 @@ export default {
     PRODUCTS_TIMELINE: 'products-timeline',
     CONTRACTS_CORRELATION: 'contracts-correlation',
     EQUITY_INDICATORS: 'equity-indicators',
-    RED_FLAG_SUMMARY: 'red-flag-summary'
+    RED_FLAG_SUMMARY: 'red-flag-summary',
+    COUNTRY_SUPPLIERS: 'country-suppliers'
 }

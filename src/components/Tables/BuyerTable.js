@@ -11,8 +11,7 @@ import { hasValidProperty } from '../../helpers/general'
 import Default from '../../constants/Default'
 import { formatDecimal } from '../../helpers/number'
 import useTableSorting from '../../hooks/useTableSorting'
-import { ReactComponent as FilterIcon } from '../../assets/img/icons/ic_filter.svg'
-import { ReactComponent as FilterCloseIcon } from '../../assets/img/icons/ic_filter-close.svg'
+import Icon from '../../assets/img/icons'
 
 const limit = Default.PAGE_SIZE
 
@@ -129,7 +128,7 @@ const BuyerTable = (props) => {
                 className="cursor-pointer md:hidden"
                 onClick={handleFilterToggle}>
                 <div className="filter-ui">
-                    <FilterIcon />
+                    <Icon.Filter />
                 </div>
             </div>
 
@@ -143,7 +142,7 @@ const BuyerTable = (props) => {
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
                             onClick={handleCloseFilter}>
-                            <FilterCloseIcon />
+                            <Icon.FilterClose />
                         </span>
                     </div>
                     <div className="flex flex-wrap -mx-2 -mb-5">

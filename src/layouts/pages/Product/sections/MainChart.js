@@ -4,12 +4,10 @@ import { T } from '@transifex/react'
 import {
     ProductMap,
     CountryProductComparisonChart,
-    GlobalSuppliers,
-    CountrySuppliers
+    CountrySuppliers,
+    ProductFlow
 } from '../../../../components/Visualizations'
-import { ReactComponent as ChartsIcon } from '../../../../assets/img/icons/ic_charts.svg'
-import { ReactComponent as FlowIcon } from '../../../../assets/img/icons/ic_flow.svg'
-import { ReactComponent as MapIcon } from '../../../../assets/img/icons/ic_map.svg'
+import Icon from '../../../../assets/img/icons'
 
 const MainChart = (props) => {
     // ===========================================================================
@@ -40,10 +38,10 @@ const MainChart = (props) => {
         } else {
             return view === 'flow' ? (
                 <div className="rounded border border-blue-0">
-                    <GlobalSuppliers
+                    <ProductFlow
                         label="Product Flow"
                         params={{
-                            product: product.id
+                            productId: product.id
                         }}
                     />
                 </div>
@@ -67,7 +65,7 @@ const MainChart = (props) => {
                                         }`}
                                         onClick={() => setView('chart')}>
                                         <div>
-                                            <ChartsIcon className="inline-block" />
+                                            <Icon.Charts className="inline-block" />
                                             <span className="mt-1 md:mt-0 block text-sm">
                                                 <T _str="Charts" />
                                             </span>
@@ -82,7 +80,7 @@ const MainChart = (props) => {
                                         }`}
                                         onClick={() => setView('map')}>
                                         <div>
-                                            <MapIcon className="inline-block w-4 h-4" />
+                                            <Icon.Map className="inline-block w-4 h-4" />
                                             <span className="mt-1 md:mt-0 block text-sm">
                                                 <T _str="Map" />
                                             </span>
@@ -95,7 +93,7 @@ const MainChart = (props) => {
                                     }`}
                                     onClick={() => setView('flow')}>
                                     <div>
-                                        <FlowIcon className="inline-block" />
+                                        <Icon.Flow className="inline-block" />
                                         <span className="mt-1 md:mt-0 block text-sm">
                                             <T _str="Flow" />
                                         </span>
