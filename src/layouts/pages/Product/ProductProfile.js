@@ -35,10 +35,7 @@ const ProductProfile = () => {
 
     return (
         <section className="pt-8">
-            <MetaInformation
-                title="Products"
-                description="Welcome Covid-19 Contract Explorer"
-            />
+            <MetaInformation title={product.name} description="" />
             <div className="container mx-auto">
                 <ProductInfo product={product} country={country} />
 

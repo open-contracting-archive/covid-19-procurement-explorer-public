@@ -1,6 +1,5 @@
-export const SET_CURRENT_COUNTRY = 'general/setCurrentCounry'
+export const SET_CURRENT_COUNTRY = 'general/setCurrentCountry'
 export const SET_CURRENT_LOCALE = 'general/setCurrentLocale'
-export const SET_TRANSLATIONS = 'general/setTranslation'
 export const SET_CURRENCY = 'general/setCurrency'
 export const SET_COUNTRIES = 'general/setCountries'
 export const SET_COUNTRY_CURRENCY = 'general/setCountryCurrency'

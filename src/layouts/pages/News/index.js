@@ -1,5 +1,6 @@
-import React from 'react'
-import { T } from '@transifex/react'
+import React, { useState, useEffect } from 'react'
+import { t } from '@transifex/native'
+import { T, useLocale } from '@transifex/react'
 import { MetaInformation, Breadcrumb } from '../../../components/Utilities'
 
 const OtherNewsList = React.lazy(() =>
@@ -10,13 +11,22 @@ const FeaturedNewsList = React.lazy(() =>
 )
 
 const News = () => {
+    const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
+    const locale = useLocale()
+
+    useEffect(() => {
+        setMetaInfo({
+            title: t('News'),
+            description: t('Welcome Covid-19 Contract Explorer')
+        })
+    }, [locale])
     window.scrollTo(0, 0)
 
     return (
         <div>
             <MetaInformation
-                title="News"
-                description="Welcome Covid-19 Contract Explorer"
+                title={metaInfo.title}
+                description={metaInfo.description}
             />
             <section className=" news__list pt-24 px-4">
                 <div className="container mx-auto">

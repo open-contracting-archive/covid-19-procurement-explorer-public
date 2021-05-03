@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
+import { t } from '@transifex/native'
+import { useLocale } from '@transifex/react'
 import { MetaInformation } from '../../../components/Utilities'
 
 const HomeBanner = React.lazy(() =>
@@ -22,11 +24,20 @@ const LibraryUpcomingEvents = React.lazy(() =>
 )
 
 const Home = () => {
+    const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
+    const locale = useLocale()
+
+    useEffect(() => {
+        setMetaInfo({
+            title: t('Home'),
+            description: t('Welcome Covid-19 Contract Explorer')
+        })
+    }, [locale])
     return (
         <Fragment>
             <MetaInformation
-                title="Home"
-                description="Welcome Covid-19 Contract Explorer"
+                title={metaInfo.title}
+                description={metaInfo.description}
             />
 
             <HomeBanner />

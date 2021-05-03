@@ -16,3 +16,9 @@ export const formatTime = (timeString, format = 'h:mm A') => {
 export const formatYearText = (yearMonth) => {
     return yearMonth ? dayjs(yearMonth + '-01T').format('MMM, YYYY') : yearMonth
 }
+
+export const sortItemsByDate = (items, key) => {
+    return items.sort((item1, item2) => {
+        return dateDiff(item1[key], item2[key])
+    })
+}

@@ -42,20 +42,6 @@ if (process.env.NODE_ENV === 'production') {
 function App() {
     const dispatch = useDispatch()
     const countries = useSelector((state) => state.general.countries)
-    const currentLocale = useSelector((state) => state.general.currentLocale)
-
-    useEffect(() => {
-        if (
-            process.env.NODE_ENV === 'production' &&
-            process.env.REACT_APP_TRANSIFEX_TOKEN
-        ) {
-            tx.setCurrentLocale(currentLocale)
-        }
-    }, [
-        currentLocale,
-        process.env.NODE_ENV,
-        process.env.REACT_APP_TRANSIFEX_TOKEN
-    ])
 
     useEffect(() => {
         CountryService.Countries().then((response) => {

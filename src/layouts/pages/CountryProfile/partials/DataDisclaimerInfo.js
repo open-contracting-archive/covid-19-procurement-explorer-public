@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { T } from '@transifex/react'
 
 const DataDisclaimerInfo = (props) => {
     const { forwardUrl = null } = props
@@ -7,17 +8,17 @@ const DataDisclaimerInfo = (props) => {
     return (
         <div className="md:-mt-10 mb-6">
             <p>
-                While we’ve done our best to identify, include, and verify as
-                much information as possible, it will be incomplete. <br />
-                Please check our{' '}
+                <T _str="While we’ve done our best to identify, include, and verify as much information as possible, it will be incomplete." />
+                <br />
+                <T _str="Please check our" />{' '}
                 {forwardUrl ? (
                     <Link to={forwardUrl} className="text-primary-blue">
-                        methodology
+                        <T _str="methodology" />
                     </Link>
                 ) : (
-                    'methodology'
+                    <T _str="methodology" />
                 )}{' '}
-                for general limitations and country-specific caveats.
+                <T _str="for general limitations and country-specific caveats." />
             </p>
         </div>
     )

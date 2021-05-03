@@ -3,7 +3,7 @@ import Default from '../../../constants/Default'
 
 const initialState = {
     currentCountry: null,
-    currentLocale: Default.LOCALE,
+    currentLocale: window.localStorage.getItem('locale') || Default.LOCALE,
     translations: { en: {}, es: {} },
     currency: Default.CURRENCY_USD,
     countryCurrency: '',
@@ -23,9 +23,6 @@ const GeneralReducer = (state = initialState, { type, payload }) => {
 
         case types.SET_CURRENT_LOCALE:
             return { ...state, currentLocale: payload }
-
-        case types.SET_TRANSLATIONS:
-            return { ...state, translations: payload }
 
         case types.SET_CURRENCY:
             return { ...state, currency: payload }

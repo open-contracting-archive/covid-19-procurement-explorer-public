@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { T } from '@transifex/react'
 import { setCurrentCountry } from '../../store/reducers/general/action'
 import { CountryFlagIcon } from './index'
 
@@ -64,7 +65,9 @@ const CountrySelector = () => {
                             className="cursor-pointer global hover:text-primary-blue"
                             onClick={countrySelected('global')}>
                             <div className="flex items-center">
-                                <span>Global Overview</span>
+                                <span>
+                                    <T _str="Global Overview" />
+                                </span>
                             </div>
                         </div>
 
@@ -83,9 +86,11 @@ const CountrySelector = () => {
                                         ''
                                     )}
                                     <span>
-                                        {country.slug === 'global'
-                                            ? 'Global Overview'
-                                            : country.name}
+                                        {country.slug === 'global' ? (
+                                            <T _str="Global Overview" />
+                                        ) : (
+                                            country.name
+                                        )}
                                     </span>
                                 </div>
                             </div>

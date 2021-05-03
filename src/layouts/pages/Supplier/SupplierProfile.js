@@ -63,7 +63,7 @@ const SupplierProfile = () => {
                     <Fragment>
                         <MetaInformation
                             title={get(originalData, 'name')}
-                            description="Welcome Covid-19 Contract Explorer"
+                            description=""
                         />
                         <div className="container mx-auto px-4 md:px-0">
                             <div className="text-sm mb-4 text-blue-5">
