@@ -165,7 +165,7 @@ const ChartFooter = (props) => {
                     <Link
                         to={detailViewURL}
                         className="inline-block text-sm text-primary-blue">
-                        View in detail →
+                        <T _str="View in detail" /> →
                     </Link>
                 </div>
             )}

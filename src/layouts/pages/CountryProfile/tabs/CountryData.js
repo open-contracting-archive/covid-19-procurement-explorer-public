@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { T } from '@transifex/react'
 import { Loader } from '../../../../components/Utilities'
 import {
     AverageBidsPerContract,
@@ -40,10 +41,7 @@ function CountryData(props) {
                 {countryCode && (
                     <div className="flex flex-wrap -mx-2 -mb-4">
                         <div className="w-full lg:w-1/3 px-2 mb-4">
-                            <TotalSpending
-                                helpText="This is a help text for the total spending visualization"
-                                params={{ country: countryCode }}
-                            />
+                            <TotalSpending params={{ country: countryCode }} />
                         </div>
                         <div className="w-full lg:w-1/3 px-2 mb-4">
                             <TotalContracts params={{ country: countryCode }} />
@@ -77,7 +75,7 @@ function CountryData(props) {
                             <Link
                                 to={`/country/${countrySlug}/suppliers`}
                                 className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
-                                View in detail →
+                                <T _str="View in detail" /> →
                             </Link>
                         </div>
                         <div className="w-full lg:w-1/2 px-2 mb-4 relative">
@@ -85,7 +83,7 @@ function CountryData(props) {
                             <Link
                                 to={`/country/${countrySlug}/buyers`}
                                 className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
-                                View in detail →
+                                <T _str="View in detail" /> →
                             </Link>
                         </div>
                         <div className="w-full px-2 mb-4">

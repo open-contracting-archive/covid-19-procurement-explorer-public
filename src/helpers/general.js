@@ -1,5 +1,4 @@
 import { has } from 'lodash'
-import { dateDiff } from './date'
 
 export const slugify = (text) => {
     return text
@@ -37,12 +36,6 @@ export const siteUrl = window.location.origin
 
 export const twitterHandle = 'covid19'
 
-export const sortItems = (items, key) => {
-    return items.sort((item1, item2) => {
-        return dateDiff(item1[key], item2[key])
-    })
-}
-
 export const mediaUrl = (path) => {
     return process.env.REACT_APP_API_URL + `/media/${path}`
 }
@@ -57,4 +50,16 @@ export const countryContractsUrl = (countryName) => {
 export const range = (start, end) => {
     if (start === end) return [start]
     return [start, ...range(start + 1, end)]
+}
+
+export const sortedItemsByKey = (list, key) => {
+    return list.sort((a, b) => {
+        if (a[key] < b[key]) {
+            return -1
+        }
+        if (a[key] > b[key]) {
+            return 1
+        }
+        return 0
+    })
 }

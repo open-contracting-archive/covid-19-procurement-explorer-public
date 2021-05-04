@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { get } from 'lodash'
-import { T } from '@transifex/react'
+import { t } from '@transifex/native'
+import { T, useLocale } from '@transifex/react'
 import { API_URL } from '../../../helpers/api'
 import CmsPageService from '../../../services/CmsPageService'
 import { formatDate } from '../../../helpers/date'
@@ -15,6 +16,8 @@ import DefaultImage from '../../../assets/img/default_image.png'
 const Blogs = () => {
     const [blogList, setBlogList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
+    const locale = useLocale()
     window.scrollTo(0, 0)
 
     useEffect(() => {
@@ -28,14 +31,22 @@ const Blogs = () => {
         }
     }, [])
 
+    useEffect(() => {
+        setMetaInfo({
+            title: t('Blogs'),
+            description: t('Welcome Covid-19 Contract Explorer')
+        })
+    }, [locale])
+
     return loading ? (
         <Loader />
     ) : (
         <section className="py-24 px-4 blogs-list -mt-8">
             <MetaInformation
-                title="Blogs"
-                description="Welcome Covid-19 Contract Explorer"
+                title={metaInfo.title}
+                description={metaInfo.description}
             />
+
             <div className="container mx-auto">
                 <Breadcrumb />
 

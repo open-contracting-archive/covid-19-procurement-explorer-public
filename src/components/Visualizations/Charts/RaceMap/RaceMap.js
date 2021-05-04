@@ -13,7 +13,7 @@ const RaceMap = ({
     yearMonth,
     coordinates
 }) => {
-    const mapchartDiv = useRef(null)
+    const mapDiv = useRef(null)
     const [data, setData] = useState({})
     let yearMonthMapData = yearMonth
 
@@ -40,7 +40,7 @@ const RaceMap = ({
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(mapchartDiv.current, am4maps.MapChart)
+        let chart = am4core.create(mapDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
         chart.responsive.enabled = true
 
@@ -61,7 +61,7 @@ const RaceMap = ({
         // Create map polygon series
         let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries())
 
-        // Exclude Antartica
+        // Exclude Antarctica
         polygonSeries.exclude = ['AQ']
 
         // Make map load polygon (like country names) data from GeoJSON
@@ -99,7 +99,7 @@ const RaceMap = ({
         })
 
         // Configure series
-        var polygonTemplate = polygonSeries.mapPolygons.template
+        let polygonTemplate = polygonSeries.mapPolygons.template
         polygonTemplate.tooltipHTML =
             contractType === 'value'
                 ? '<b>{name}</b> <br> <b>Total Spending: ${value}</b><br><a href="{url}" style="font-size: 14px">View Details --&gt;</a>'
@@ -254,7 +254,7 @@ const RaceMap = ({
         }
     }, [data, coordinates, formatYearText])
 
-    return <div ref={mapchartDiv} className="race-map-section" />
+    return <div ref={mapDiv} className="race-map-section" />
 }
 
 export default RaceMap

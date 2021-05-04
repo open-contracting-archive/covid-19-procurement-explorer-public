@@ -68,7 +68,7 @@ const BuyerProductTimeline = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex justify-between">
                         <h3 className="uppercase font-bold  text-primary-dark">
-                            {label}
+                            <T _str={label} />
                         </h3>
 
                         <div className="flex justify-end">

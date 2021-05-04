@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
-import { T } from '@transifex/react'
+import { t } from '@transifex/native'
+import { T, useLocale } from '@transifex/react'
 import CmsPageService from '../../../services/CmsPageService'
 import { Loader, MetaInformation } from '../../../components/Utilities'
 import { formatDate, formatTime } from '../../../helpers/date'
@@ -9,6 +10,8 @@ function Events() {
     const [eventList, setEventList] = useState([])
     const [loading, setLoading] = useState(true)
     let history = useHistory()
+    const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
+    const locale = useLocale()
     window.scrollTo(0, 0)
     const previousPage = () => {
         history.goBack()
@@ -25,13 +28,20 @@ function Events() {
         }
     }, [])
 
+    useEffect(() => {
+        setMetaInfo({
+            title: t('Events'),
+            description: t('Welcome Covid-19 Contract Explorer')
+        })
+    }, [locale])
+
     return loading ? (
         <Loader />
     ) : (
         <div className="">
             <MetaInformation
-                title="Events"
-                description="Welcome Covid-19 Contract Explorer"
+                title={metaInfo.title}
+                description={metaInfo.description}
             />
             <section className="px-4 events events__upcoming pt-24 pb-16 -mt-8">
                 <div className="container mx-auto">

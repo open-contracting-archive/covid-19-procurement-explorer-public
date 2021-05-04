@@ -25,8 +25,6 @@ export const setCurrentLocale = (locale) => {
     }
 }
 
-export const setTranslations = createAction(types.SET_TRANSLATIONS)
-
 export const setCountries = (countries) => {
     return {
         type: types.SET_COUNTRIES,

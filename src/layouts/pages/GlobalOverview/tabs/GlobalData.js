@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { T } from '@transifex/react'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     DirectOpen,
@@ -34,23 +35,9 @@ const GlobalData = (props) => {
 
     return (
         <section className="bg-primary-gray">
-            {disclaimerInfo && disclaimerInfo}
-
             <div className="container mx-auto">
-                <div className="hidden md:-mt-10 mb-6">
-                    <p>
-                        Data displayed on the COVID Contract Explorer can be
-                        incomplete.
-                    </p>
-                    <p>
-                        Please, check the Caveats and Limitations section of the{' '}
-                        <Link
-                            to="/global-overview/methodology"
-                            className="text-primary-blue">
-                            data harvesting methodology
-                        </Link>
-                    </p>
-                </div>
+                {disclaimerInfo && disclaimerInfo}
+
                 <div className="flex flex-wrap -mx-2 -mb-4">
                     <div className="w-full lg:w-1/3 px-2 mb-4">
                         <TotalSpending modalHandler={modalHandler} />
@@ -78,7 +65,7 @@ const GlobalData = (props) => {
                         <Link
                             to="/global-overview/suppliers"
                             className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
-                            View in detail →
+                            <T _str="View in detail" /> →
                         </Link>
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4 relative">
@@ -86,7 +73,7 @@ const GlobalData = (props) => {
                         <Link
                             to="/global-overview/buyers"
                             className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
-                            View in detail →
+                            <T _str="View in detail" /> →
                         </Link>
                     </div>
                     <div className="w-full px-2 mb-4">
@@ -100,7 +87,7 @@ const GlobalData = (props) => {
                         <Link
                             to="/global-overview/contracts"
                             className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
-                            View in detail →
+                            <T _str="View in detail" /> →
                         </Link>
                     </div>
                     <div className="w-full lg:w-1/2 px-2 mb-4 relative">

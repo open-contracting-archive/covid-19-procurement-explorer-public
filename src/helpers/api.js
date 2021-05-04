@@ -61,15 +61,14 @@ const apiRoutes = {
     // cms api
     pages: 'api/v2/pages/',
 
-    // filter parameters
+    // filter parameter api
     'filter-parameter': 'api/v1/visualization/filter-parameters/',
-    //todo: make correction; 'filters' to 'filter'
     'filter-parameters-static':
-        'api/v1/visualization/filters-parameters/static/',
+        'api/v1/visualization/filter-parameters/static/',
     'filter-parameters-buyers':
-        'api/v1/visualization/filters-parameters/buyers/',
+        'api/v1/visualization/filter-parameters/buyers/',
     'filter-parameters-suppliers':
-        'api/v1/visualization/filters-parameters/suppliers/',
+        'api/v1/visualization/filter-parameters/suppliers/',
     languages: 'api/v1/language/'
 }
 

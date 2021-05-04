@@ -105,7 +105,7 @@ const Suppliers = (props) => {
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
                     onClick={() => modalHandler(Visualization.TOTAL_SUPPLIERS)}>
-                    View in detail →
+                    <T _str="View in detail" /> →
                 </span>
             )}
         </div>

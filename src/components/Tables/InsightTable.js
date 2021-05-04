@@ -324,7 +324,7 @@ const InsightTable = (props) => {
                         <div>
                             <div className="mt-2 text-sm text-right">
                                 <p className="text-opacity-50 text-primary-dark">
-                                    Showing{' '}
+                                    <T _str="Showing" />{' '}
                                     <span className="text-opacity-75 text-primary-dark">
                                         {1 + currentPage * limit}
                                     </span>{' '}

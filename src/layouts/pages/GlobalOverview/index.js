@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
+import { t } from '@transifex/native'
+import { useLocale } from '@transifex/react'
 import useCountries from '../../../hooks/useCountries'
 import { WorldMap } from '../../../components/Visualizations'
 import {
@@ -57,9 +59,18 @@ const GlobalOverview = () => {
     // ===========================================================================
     let { tabSlug } = useParams()
     const { globalCountryItem } = useCountries()
+    const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
+    const locale = useLocale()
     const disclaimerInfo = (
         <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
     )
+
+    useEffect(() => {
+        setMetaInfo({
+            title: t('Global Overview'),
+            description: t('Welcome Covid-19 Contract Explorer')
+        })
+    }, [locale])
 
     const renderTab = () => {
         switch (tabSlug) {
@@ -87,8 +98,8 @@ const GlobalOverview = () => {
     return (
         <Fragment>
             <MetaInformation
-                title="Global Overview"
-                description="Welcome Covid-19 Contract Explorer"
+                title={metaInfo.title}
+                description={metaInfo.description}
             />
             <section className="global-profile -mt-8">
                 <section className="bg-blue-0 pt-12 md:pt-20 px-4">

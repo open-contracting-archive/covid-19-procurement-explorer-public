@@ -139,8 +139,8 @@ const CountryProfile = () => {
     return (
         <section className="pt-10 md:pt-20 -mt-8 bg-blue-0">
             <MetaInformation
-                title="Country Profile"
-                description="Welcome Covid-19 Contract Explorer"
+                title={countryData.name}
+                description={countryData.name}
             />
             {!isEmpty(countryData) && (
                 <section className="px-4">

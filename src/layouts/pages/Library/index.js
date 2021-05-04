@@ -1,5 +1,6 @@
-import React from 'react'
-import { T } from '@transifex/react'
+import React, { useState, useEffect } from 'react'
+import { t } from '@transifex/native'
+import { T, useLocale } from '@transifex/react'
 import { MetaInformation } from '../../../components/Utilities'
 
 const LibraryResources = React.lazy(() =>
@@ -18,13 +19,22 @@ const LibraryNews = React.lazy(() =>
 )
 
 const Library = () => {
+    const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
+    const locale = useLocale()
+
+    useEffect(() => {
+        setMetaInfo({
+            title: t('Library'),
+            description: t('Welcome Covid-19 Contract Explorer')
+        })
+    }, [locale])
     window.scrollTo(0, 0)
 
     return (
         <div className="library">
             <MetaInformation
-                title="Library"
-                description="Welcome Covid-19 Contract Explorer"
+                title={metaInfo.title}
+                description={metaInfo.description}
             />
             <section className="news px-4 py-12 md:py-24 bg-blue-0 -mt-8">
                 <div className="container mx-auto">
