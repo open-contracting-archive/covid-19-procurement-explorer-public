@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { has } from 'lodash'
-import { T } from '@transifex/react'
 
 const numberSorting = (a, b, direction) => {
     return direction === '-' ? b - a : a - b
@@ -115,7 +114,7 @@ const useTableSorting = ({
         <span
             className="flex items-center cursor-pointer"
             onClick={() => appendSort(name)}>
-            <T _str={label} /> {columnSorting(name)}
+            {label} {columnSorting(name)}
         </span>
     )
     return {

@@ -1,4 +1,7 @@
 .select-filter {
+    &.country {
+        width: 120px;
+    }
     &__control[class] {
         border: none;
         background: none;
