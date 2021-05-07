@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import { useTheme, create, percent, color } from '@amcharts/amcharts4/core'
 import {
     CircleBullet,
@@ -88,6 +89,12 @@ const CountryCombinedChart = ({ data, label1, label2 }) => {
     }, [data])
 
     return <div ref={combinedChartDiv} className="h-400" />
+}
+
+CountryCombinedChart.propTypes = {
+    data: PropTypes.array,
+    label1: PropTypes.string,
+    label2: PropTypes.string
 }
 
 export default CountryCombinedChart

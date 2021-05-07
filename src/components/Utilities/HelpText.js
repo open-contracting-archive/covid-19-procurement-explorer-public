@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import Icon from '../../assets/img/icons'
 
@@ -17,6 +18,10 @@ const HelpText = (props) => {
             </div>
         </div>
     )
+}
+
+HelpText.propTypes = {
+    helpTextInfo: PropTypes.string
 }
 
 export default HelpText

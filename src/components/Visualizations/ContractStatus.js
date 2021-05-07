@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { isEmpty, sumBy } from 'lodash'
 import { useSelector } from 'react-redux'
 import VisualizationService from '../../services/VisualizationService'
@@ -86,6 +87,11 @@ const ContractStatus = (props) => {
             </div>
         </CardContainer>
     )
+}
+
+ContractStatus.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default ContractStatus

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 const Header = React.lazy(() =>
     import(/* webpackChunkName: "app-common" */ './_partials/header')
@@ -17,5 +18,9 @@ const WebLayout = (props) => {
             <Footer />
         </Fragment>
     )
+}
+
+WebLayout.propTypes = {
+    children: PropTypes.element
 }
 export default WebLayout

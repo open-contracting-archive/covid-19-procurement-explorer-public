@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
@@ -28,11 +29,8 @@ const TotalSpending = (props) => {
         areaChart: [],
         barChart: []
     })
-    const {
-        areaChartData,
-        changePercentage,
-        colorValue
-    } = useDataCalculations()
+    const { areaChartData, changePercentage, colorValue } =
+        useDataCalculations()
 
     // ===========================================================================
     // Hooks
@@ -119,6 +117,13 @@ const TotalSpending = (props) => {
             )}
         </CardContainer>
     )
+}
+
+TotalSpending.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    modalHandler: PropTypes.func,
+    helpText: PropTypes.string
 }
 
 export default TotalSpending

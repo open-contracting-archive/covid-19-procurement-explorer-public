@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import {
     FacebookShareButton,
@@ -40,4 +41,9 @@ const ShareButtons = (props) => {
         </div>
     )
 }
+
+ShareButtons.propTypes = {
+    url: PropTypes.string
+}
+
 export default ShareButtons

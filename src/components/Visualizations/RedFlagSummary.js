@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { groupBy, identity, pickBy } from 'lodash'
@@ -212,6 +213,11 @@ const RedFlagSummary = (props) => {
             )}
         </div>
     )
+}
+
+RedFlagSummary.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default RedFlagSummary

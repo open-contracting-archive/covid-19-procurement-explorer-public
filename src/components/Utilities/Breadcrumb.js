@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
 
@@ -26,4 +27,9 @@ const Breadcrumb = ({ item }) => {
         </div>
     )
 }
+
+Breadcrumb.propTypes = {
+    item: PropTypes.string
+}
+
 export default Breadcrumb

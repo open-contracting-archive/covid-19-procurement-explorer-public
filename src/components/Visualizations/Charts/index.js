@@ -58,3 +58,16 @@ export const TreeMapChart = React.lazy(() =>
         /* webpackChunkName: "app-data-page" */ './TreeMapChart/TreeMapChart'
     )
 )
+export const AreaChart = React.lazy(() =>
+    import(/* webpackChunkName: "app-data-page" */ './AreaChart/AreaChart')
+)
+export const HorizontalBarChart = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ './HorizontalBarChart/HorizontalBarChart'
+    )
+)
+export const PartitionedChart = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ './PartitionedChart/PartitionedChart'
+    )
+)

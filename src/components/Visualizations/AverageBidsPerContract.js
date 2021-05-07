@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
 import { Loader, ErrorHandler } from '../Utilities'
@@ -19,11 +20,8 @@ const AverageBidsPerContract = (props) => {
         percentage: 0,
         areaChart: []
     })
-    const {
-        areaChartData,
-        changePercentage,
-        colorValue
-    } = useDataCalculations()
+    const { areaChartData, changePercentage, colorValue } =
+        useDataCalculations()
 
     // ===========================================================================
     // Hooks
@@ -79,6 +77,11 @@ const AverageBidsPerContract = (props) => {
             )}
         </div>
     )
+}
+
+AverageBidsPerContract.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default AverageBidsPerContract

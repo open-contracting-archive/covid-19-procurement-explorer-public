@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { isEmpty, sumBy } from 'lodash'
@@ -97,7 +98,7 @@ const ProductDistribution = (props) => {
                 {!error ? (
                     <BarListChart
                         data={chartData}
-                        text={
+                        forwardUrl={
                             countrySlug
                                 ? `country/${countrySlug}/products`
                                 : `global-overview/products`
@@ -111,6 +112,12 @@ const ProductDistribution = (props) => {
             </div>
         </CardContainer>
     )
+}
+
+ProductDistribution.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
 }
 
 export default ProductDistribution

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { isEmpty, get } from 'lodash'
@@ -148,6 +149,13 @@ const CountrySuppliers = (props) => {
             />
         </div>
     )
+}
+
+CountrySuppliers.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string,
+    countrySlug: PropTypes.string
 }
 
 export default CountrySuppliers

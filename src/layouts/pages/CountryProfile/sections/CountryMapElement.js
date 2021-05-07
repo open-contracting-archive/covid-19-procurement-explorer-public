@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../../../services/VisualizationService'
 import { CountryDetailMap } from '../../../../components/Visualizations'
@@ -11,6 +12,7 @@ import ContractView from '../../../../constants/ContractView'
 import Default from '../../../../constants/Default'
 
 const CountryMapElement = (props) => {
+    const { countryCode } = props
     const [loading, setLoading] = useState(true)
     const [viewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState({})
@@ -19,7 +21,7 @@ const CountryMapElement = (props) => {
     const fullScreenHandler = useFullScreenHandle()
 
     useEffect(() => {
-        VisualizationService.CountryMap({ country: props.countryCode })
+        VisualizationService.CountryMap({ country: countryCode })
             .then((result) => {
                 setLoading(false)
                 if (result) {
@@ -62,7 +64,7 @@ const CountryMapElement = (props) => {
                         ) : !error ? (
                             <CountryDetailMap
                                 data={mapData}
-                                countryCode={props.countryCode}
+                                countryCode={countryCode}
                             />
                         ) : (
                             <ErrorHandler />
@@ -74,6 +76,10 @@ const CountryMapElement = (props) => {
             <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
+}
+
+CountryMapElement.propTypes = {
+    countryCode: PropTypes.string
 }
 
 export default CountryMapElement

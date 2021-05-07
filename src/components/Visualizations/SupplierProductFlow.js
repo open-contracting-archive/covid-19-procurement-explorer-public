@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { get, isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { SankeyChart } from './Charts'
@@ -114,4 +115,9 @@ const SupplierProductFlow = (props) => {
     )
 }
 
+SupplierProductFlow.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
+}
 export default SupplierProductFlow

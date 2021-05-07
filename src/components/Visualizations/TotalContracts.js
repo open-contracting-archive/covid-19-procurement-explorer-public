@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
 import { SimpleBarChart, AreaChartBlock } from './Charts'
@@ -26,11 +27,8 @@ const TotalContracts = (props) => {
         areaChart: [],
         barChart: []
     })
-    const {
-        areaChartData,
-        changePercentage,
-        colorValue
-    } = useDataCalculations()
+    const { areaChartData, changePercentage, colorValue } =
+        useDataCalculations()
 
     // ===========================================================================
     // Hooks
@@ -112,6 +110,13 @@ const TotalContracts = (props) => {
             )}
         </CardContainer>
     )
+}
+
+TotalContracts.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    modalHandler: PropTypes.func,
+    helpText: PropTypes.string
 }
 
 export default TotalContracts

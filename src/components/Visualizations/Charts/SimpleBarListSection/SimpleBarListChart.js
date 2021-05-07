@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import Default from '../../../../constants/Default'
 import { formatNumber } from '../../../../helpers/number'
@@ -57,6 +58,12 @@ function SimpleBarListChart({ data, currency, viewType }) {
             </ul>
         </div>
     )
+}
+
+SimpleBarListChart.propTypes = {
+    data: PropTypes.array,
+    currency: PropTypes.string,
+    viewType: PropTypes.string
 }
 
 export default SimpleBarListChart

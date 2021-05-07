@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 import { identity, pickBy } from 'lodash'
@@ -488,6 +489,15 @@ const ContractFilter = (props) => {
             </div>
         </div>
     )
+}
+
+ContractFilter.propTypes = {
+    params: PropTypes.object,
+    appendFilter: PropTypes.func,
+    hasCountry: PropTypes.func,
+    hasBuyer: PropTypes.func,
+    hasSupplier: PropTypes.func,
+    hasProduct: PropTypes.func
 }
 
 export default ContractFilter

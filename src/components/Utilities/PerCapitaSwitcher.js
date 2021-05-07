@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 
 const PerCapitaSwitcher = (props) => {
@@ -28,4 +29,11 @@ const PerCapitaSwitcher = (props) => {
         </div>
     )
 }
+
+PerCapitaSwitcher.propTypes = {
+    show: PropTypes.bool,
+    handleToggle: PropTypes.func,
+    id: PropTypes.string
+}
+
 export default PerCapitaSwitcher

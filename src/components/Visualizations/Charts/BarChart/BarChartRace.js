@@ -1,5 +1,5 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -198,6 +198,11 @@ const BarChartRace = ({ data, viewType }) => {
     }, [data])
 
     return <div ref={raceBarChartDiv} className="race-bar-section" />
+}
+
+BarChartRace.propTypes = {
+    data: PropTypes.object,
+    viewType: PropTypes.string
 }
 
 export default BarChartRace

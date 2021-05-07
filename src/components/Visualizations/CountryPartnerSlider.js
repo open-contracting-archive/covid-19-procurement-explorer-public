@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { T } from '@transifex/react'
@@ -133,5 +134,9 @@ const CountryPartnerSlider = ({ params }) => {
             )}
         </div>
     )
+}
+
+CountryPartnerSlider.propTypes = {
+    params: PropTypes.object
 }
 export default CountryPartnerSlider

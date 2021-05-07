@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import { get } from 'lodash'
 import useTableSorting from '../../../hooks/useTableSorting'
@@ -107,6 +108,10 @@ const AwardedItemTable = (props) => {
             </div>
         </Fragment>
     )
+}
+
+AwardedItemTable.propTypes = {
+    items: PropTypes.array
 }
 
 export default AwardedItemTable

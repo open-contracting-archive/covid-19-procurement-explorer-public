@@ -57,3 +57,6 @@ export const NotFound = React.lazy(() =>
 export const Loader = React.lazy(() =>
     import(/* webpackChunkName: "app-common" */ './Loader')
 )
+export const ContinentSelector = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './ContinentSelector')
+)

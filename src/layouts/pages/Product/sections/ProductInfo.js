@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import { useHistory, useParams } from 'react-router-dom'
 
@@ -49,5 +50,8 @@ const ProductInfo = (props) => {
         </Fragment>
     )
 }
-
+ProductInfo.propTypes = {
+    product: PropTypes.object,
+    country: PropTypes.object
+}
 export default ProductInfo

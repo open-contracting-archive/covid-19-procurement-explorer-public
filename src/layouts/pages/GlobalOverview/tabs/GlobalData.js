@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
@@ -109,6 +110,10 @@ const GlobalData = (props) => {
             </Modal>
         </section>
     )
+}
+
+GlobalData.propTypes = {
+    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalData

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { T } from '@transifex/react'
 import { Loader, ChartFooter, ErrorHandler } from '../Utilities'
@@ -15,9 +16,8 @@ const BuyerProductTimeline = (props) => {
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const [error, setError] = useState(false)
-    const [buyerProductTimelineType, setBuyerProductTimelineType] = useState(
-        'value'
-    )
+    const [buyerProductTimelineType, setBuyerProductTimelineType] =
+        useState('value')
     const fullScreenHandler = useFullScreenHandle()
 
     // ===========================================================================
@@ -59,8 +59,6 @@ const BuyerProductTimeline = (props) => {
             setLoading(false)
         }
     }, [originalData, buyerProductTimelineType])
-
-    const barColorValue = '#ABBABF'
 
     return (
         <div>
@@ -105,7 +103,6 @@ const BuyerProductTimeline = (props) => {
                             data={chartData}
                             height="600px"
                             className="chart-full"
-                            barColorValue={barColorValue}
                             chartKey="product"
                             chartValue="value"
                             axisRotation="270"
@@ -119,6 +116,11 @@ const BuyerProductTimeline = (props) => {
             <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
+}
+
+BuyerProductTimeline.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default BuyerProductTimeline

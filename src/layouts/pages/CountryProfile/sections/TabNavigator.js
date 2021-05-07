@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { T } from '@transifex/react'
 import { tabItems } from '../../../../constants/Tab'
@@ -31,5 +32,10 @@ const TabNavigator = (props) => {
             </div>
         </div>
     )
+}
+
+TabNavigator.propTypes = {
+    endpoint: PropTypes.string,
+    countrySlug: PropTypes.string
 }
 export default TabNavigator

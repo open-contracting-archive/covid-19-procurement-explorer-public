@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import { T } from '@transifex/react'
@@ -109,6 +110,10 @@ const VisualizationModal = (props) => {
             <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
+}
+VisualizationModal.propTypes = {
+    visualizationType: PropTypes.string,
+    closeModal: PropTypes.func
 }
 
 export default VisualizationModal

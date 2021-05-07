@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
 import { AreaChartBlock } from './Charts'
@@ -107,6 +108,13 @@ const Buyers = (props) => {
             )}
         </div>
     )
+}
+
+Buyers.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    modalHandler: PropTypes.func,
+    helpText: PropTypes.string
 }
 
 export default Buyers

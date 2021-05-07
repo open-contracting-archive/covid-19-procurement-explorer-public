@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { T } from '@transifex/react'
 
@@ -34,4 +35,9 @@ const TagList = ({ item }) => {
         </Fragment>
     )
 }
+
+TagList.propTypes = {
+    item: PropTypes.object.isRequired
+}
+
 export default TagList

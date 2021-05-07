@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import VisualizationService from '../../services/VisualizationService'
 import { formatDate, dateDiff } from '../../helpers/date'
@@ -110,6 +111,13 @@ const Suppliers = (props) => {
             )}
         </div>
     )
+}
+
+Suppliers.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    modalHandler: PropTypes.func,
+    helpText: PropTypes.string
 }
 
 export default Suppliers

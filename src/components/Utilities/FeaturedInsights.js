@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
 import { T } from '@transifex/react'
@@ -81,6 +82,10 @@ const FeaturedInsights = ({ params }) => {
             </Fragment>
         )
     )
+}
+
+FeaturedInsights.propTypes = {
+    params: PropTypes.object
 }
 
 export default FeaturedInsights

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import Select from 'react-select'
 import { useSelector } from 'react-redux'
@@ -24,7 +25,7 @@ const WorldMap = (props) => {
     const { params } = props
     const [originalData, setOriginalData] = useState({})
     const countries = useSelector((state) => state.general.countries)
-    const [mapData, setMapData] = useState({})
+    const [mapData, setMapData] = useState([])
     const [selectedContinent, setSelectedContinent] = useState(options[0])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
@@ -36,7 +37,8 @@ const WorldMap = (props) => {
             return current.country_code_alpha_2 !== 'gl'
                 ? {
                       ...acc,
-                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                      [current.country_code_alpha_2.toUpperCase()]:
+                          current.population
                   }
                 : acc
         }, {})
@@ -153,6 +155,10 @@ const WorldMap = (props) => {
             </div>
         </div>
     )
+}
+
+WorldMap.propTypes = {
+    params: PropTypes.object
 }
 
 export default WorldMap

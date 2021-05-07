@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ProductCategoryMap } from '../../../../components/Visualizations'
 import { ProductTable } from '../../../../components/Tables'
 
@@ -28,6 +29,11 @@ const CountryProducts = (props) => {
             {renderTable()}
         </div>
     )
+}
+
+CountryProducts.propTypes = {
+    countryCode: PropTypes.string,
+    disclaimerInfo: PropTypes.element
 }
 
 export default CountryProducts

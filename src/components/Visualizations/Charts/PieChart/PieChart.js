@@ -1,11 +1,11 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const PieChart = ({ data, colors }) => {
-    const piechartDiv = useRef(null)
+    const pieChartDiv = useRef(null)
 
     useLayoutEffect(() => {
         /* Chart code */
@@ -14,7 +14,7 @@ const PieChart = ({ data, colors }) => {
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(piechartDiv.current, am4charts.PieChart)
+        let chart = am4core.create(pieChartDiv.current, am4charts.PieChart)
 
         // Add and configure Series
         let pieSeries = chart.series.push(new am4charts.PieSeries())
@@ -84,7 +84,12 @@ const PieChart = ({ data, colors }) => {
         }
     }, [data])
 
-    return <div ref={piechartDiv} className="w-full h-32" />
+    return <div ref={pieChartDiv} className="w-full h-32" />
+}
+
+PieChart.propTypes = {
+    data: PropTypes.array,
+    colors: PropTypes.array
 }
 
 export default PieChart

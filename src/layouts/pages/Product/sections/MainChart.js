@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { T } from '@transifex/react'
 import {
@@ -111,4 +112,8 @@ const MainChart = (props) => {
     )
 }
 
+MainChart.propTypes = {
+    product: PropTypes.object,
+    country: PropTypes.object
+}
 export default MainChart

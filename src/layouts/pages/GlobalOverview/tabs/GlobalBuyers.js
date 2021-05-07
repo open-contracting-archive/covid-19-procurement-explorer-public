@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     Buyers,
@@ -47,6 +48,10 @@ const GlobalBuyers = (props) => {
             </Modal>
         </div>
     )
+}
+
+GlobalBuyers.propTypes = {
+    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalBuyers

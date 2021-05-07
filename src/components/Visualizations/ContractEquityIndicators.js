@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { identity, pickBy, groupBy } from 'lodash'
@@ -18,7 +19,7 @@ const ContractEquityIndicators = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { params } = props
+    const { label = 'Contracts and equity indicators', params } = props
     const equities = useSelector((state) =>
         state.general.equities.map((equity, index) => ({
             ...equity,
@@ -28,10 +29,9 @@ const ContractEquityIndicators = (props) => {
     const currency = useSelector((state) => state.general.currency)
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
-    const [
-        selectedEquityIndicators,
-        setSelectedEquityIndicators
-    ] = useState(() => equities.map((equity) => equity.id))
+    const [selectedEquityIndicators, setSelectedEquityIndicators] = useState(
+        () => equities.map((equity) => equity.id)
+    )
     const [originalData, setOriginalData] = useState([])
     const [chartData, setChartData] = useState([])
     const fullScreenHandler = useFullScreenHandle()
@@ -189,7 +189,7 @@ const ContractEquityIndicators = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between mb-4 md:mb-6">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            <T _str="Contracts and equity indicators" />
+                            <T _str={label} />
                         </h3>
 
                         {shouldRenderChart() && (
@@ -216,4 +216,10 @@ const ContractEquityIndicators = (props) => {
         </div>
     )
 }
+
+ContractEquityIndicators.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
+}
+
 export default ContractEquityIndicators

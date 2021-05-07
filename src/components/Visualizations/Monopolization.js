@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
 import VisualizationService from '../../services/VisualizationService'
@@ -90,6 +91,12 @@ const Monopolization = (props) => {
             </div>
         </div>
     )
+}
+
+Monopolization.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
 }
 
 export default Monopolization

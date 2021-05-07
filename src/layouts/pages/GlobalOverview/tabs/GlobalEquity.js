@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ContractEquityIndicators } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
 
@@ -26,4 +27,7 @@ const GlobalEquity = (props) => {
     )
 }
 
+GlobalEquity.propTypes = {
+    disclaimerInfo: PropTypes.element
+}
 export default GlobalEquity

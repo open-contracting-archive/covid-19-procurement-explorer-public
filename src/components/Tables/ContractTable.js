@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
@@ -342,4 +343,7 @@ const ContractTable = (props) => {
     )
 }
 
+ContractTable.propTypes = {
+    params: PropTypes.object
+}
 export default ContractTable
