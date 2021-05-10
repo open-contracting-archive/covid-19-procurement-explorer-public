@@ -1,12 +1,12 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const CombinedChart = (props) => {
     const { data, type, currency } = props
-    const combinedchartDiv = useRef(null)
+    const combinedChartDiv = useRef(null)
 
     useLayoutEffect(() => {
         /* Chart code */
@@ -15,7 +15,7 @@ const CombinedChart = (props) => {
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(combinedchartDiv.current, am4charts.XYChart)
+        let chart = am4core.create(combinedChartDiv.current, am4charts.XYChart)
 
         // Create axes
         chart.xAxes.push(new am4charts.DateAxis())
@@ -97,7 +97,13 @@ const CombinedChart = (props) => {
         }
     }, [data])
 
-    return <div ref={combinedchartDiv} className="h-400" />
+    return <div ref={combinedChartDiv} className="h-400" />
+}
+
+CombinedChart.propTypes = {
+    data: PropTypes.array,
+    type: PropTypes.string,
+    currency: PropTypes.string
 }
 
 export default CombinedChart

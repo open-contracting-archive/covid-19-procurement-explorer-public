@@ -1,12 +1,12 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const GlobalMap = ({ data, coordinates, viewType }) => {
-    const globalMapchartDiv = useRef(null)
+    const globalMapDiv = useRef(null)
 
     useLayoutEffect(() => {
         /* Chart code */
@@ -15,7 +15,7 @@ const GlobalMap = ({ data, coordinates, viewType }) => {
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(globalMapchartDiv.current, am4maps.MapChart)
+        let chart = am4core.create(globalMapDiv.current, am4maps.MapChart)
         chart.chartContainer.wheelable = false
 
         // Set map definition
@@ -133,9 +133,15 @@ const GlobalMap = ({ data, coordinates, viewType }) => {
 
     return (
         <div className="map-wrapper bg-white rounded-md h-full mt-5">
-            <div ref={globalMapchartDiv} className="h-500 global-map-section" />
+            <div ref={globalMapDiv} className="h-500 global-map-section" />
         </div>
     )
+}
+
+GlobalMap.propTypes = {
+    data: PropTypes.array,
+    coordinates: PropTypes.object,
+    viewType: PropTypes.string
 }
 
 export default GlobalMap

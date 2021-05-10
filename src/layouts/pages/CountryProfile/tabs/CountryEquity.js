@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ContractEquityIndicators } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
 
@@ -30,6 +31,11 @@ const CountryEquity = (props) => {
             {renderTable()}
         </div>
     )
+}
+
+CountryEquity.propTypes = {
+    countryCode: PropTypes.string,
+    disclaimerInfo: PropTypes.element
 }
 
 export default CountryEquity

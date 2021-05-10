@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { RedFlagSummary } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
 
@@ -28,6 +29,11 @@ const CountryContracts = (props) => {
             {renderTable()}
         </div>
     )
+}
+
+CountryContracts.propTypes = {
+    countryCode: PropTypes.string,
+    disclaimerInfo: PropTypes.element
 }
 
 export default CountryContracts

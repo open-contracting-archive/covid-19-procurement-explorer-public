@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
@@ -85,7 +86,7 @@ const TopSuppliers = (props) => {
                 {!error ? (
                     <BarListChart
                         data={chartData}
-                        text="suppliers"
+                        forwardUrl="suppliers"
                         currency={currency}
                         viewType={viewType}
                     />
@@ -95,6 +96,11 @@ const TopSuppliers = (props) => {
             </div>
         </CardContainer>
     )
+}
+
+TopSuppliers.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default TopSuppliers

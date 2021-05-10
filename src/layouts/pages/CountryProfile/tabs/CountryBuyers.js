@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { BuyerTable } from '../../../../components/Tables'
 import {
     Buyers,
@@ -33,6 +34,11 @@ const CountryBuyers = (props) => {
     ) : (
         ''
     )
+}
+
+CountryBuyers.propTypes = {
+    countryCode: PropTypes.string,
+    disclaimerInfo: PropTypes.element
 }
 
 export default CountryBuyers

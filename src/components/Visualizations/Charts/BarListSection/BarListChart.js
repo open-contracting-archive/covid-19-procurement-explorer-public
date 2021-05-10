@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
@@ -6,7 +7,7 @@ import Default from '../../../../constants/Default'
 import { formatNumber } from '../../../../helpers/number'
 
 function BarListChart(props) {
-    const { data, text, currency, viewType } = props
+    const { data, forwardUrl, currency, viewType } = props
     const countryCurrency = useSelector(
         (state) => state.general.countryCurrency
     )
@@ -14,7 +15,7 @@ function BarListChart(props) {
     return (
         <div className="custom-horizontal-bar">
             <ul className="custom-scrollbar h-80 overflow-y-auto pr-4">
-                {data.length < 1 || data === undefined ? (
+                {data.length < 1 || false ? (
                     <li>No Data Available</li>
                 ) : (
                     data &&
@@ -25,7 +26,7 @@ function BarListChart(props) {
                                     <div className="custom-horizontal-bar-text">
                                         <Link
                                             className="hover:text-primary-blue"
-                                            to={`/${text}/${bar_value.id}`}>
+                                            to={`/${forwardUrl}/${bar_value.id}`}>
                                             <h3 title={bar_value.name}>
                                                 {bar_value.name}
                                             </h3>
@@ -68,6 +69,13 @@ function BarListChart(props) {
             </ul>
         </div>
     )
+}
+
+BarListChart.propTypes = {
+    data: PropTypes.array,
+    forwardUrl: PropTypes.string,
+    currency: PropTypes.string,
+    viewType: PropTypes.string
 }
 
 export default BarListChart

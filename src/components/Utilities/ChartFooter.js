@@ -1,4 +1,5 @@
 import React, { Fragment, useRef } from 'react'
+import PropTypes from 'prop-types'
 import { Link, useParams } from 'react-router-dom'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
@@ -183,6 +184,13 @@ const ChartFooter = (props) => {
             </Modal>
         </div>
     )
+}
+
+ChartFooter.propTypes = {
+    fullScreenHandler: PropTypes.object,
+    embeddedVisualization: PropTypes.object,
+    detailViewURL: PropTypes.string,
+    downloadUrl: PropTypes.string
 }
 
 export default ChartFooter

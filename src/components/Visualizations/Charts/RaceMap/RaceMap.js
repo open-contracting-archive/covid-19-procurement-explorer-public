@@ -1,5 +1,5 @@
-/* Imports */
 import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
@@ -255,6 +255,14 @@ const RaceMap = ({
     }, [data, coordinates, formatYearText])
 
     return <div ref={mapDiv} className="race-map-section" />
+}
+
+RaceMap.propTypes = {
+    sliderData: PropTypes.array,
+    contractType: PropTypes.string,
+    contractData: PropTypes.object,
+    yearMonth: PropTypes.string,
+    coordinates: PropTypes.object
 }
 
 export default RaceMap

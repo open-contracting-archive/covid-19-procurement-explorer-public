@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
@@ -27,11 +28,8 @@ const BuyerTable = (props) => {
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [tableLoading, setTableLoading] = useState(false)
-    const {
-        countrySelectList,
-        productSelectList,
-        valueRanges
-    } = useContractFilters()
+    const { countrySelectList, productSelectList, valueRanges } =
+        useContractFilters()
     const history = useHistory()
     const [showFilter, setShowFilter] = useState('hidden')
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
@@ -465,6 +463,10 @@ const BuyerTable = (props) => {
             </div>
         </div>
     )
+}
+
+BuyerTable.propTypes = {
+    params: PropTypes.object
 }
 
 export default BuyerTable

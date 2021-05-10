@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import ContractView from '../../constants/ContractView'
 
@@ -39,4 +40,11 @@ const ContractViewSwitcher = (props) => {
         </div>
     )
 }
+
+ContractViewSwitcher.propTypes = {
+    viewType: PropTypes.string,
+    viewHandler: PropTypes.func,
+    style: PropTypes.string
+}
+
 export default ContractViewSwitcher

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link, useParams } from 'react-router-dom'
 import { T } from '@transifex/react'
 import { Loader } from '../../../../components/Utilities'
@@ -120,6 +121,11 @@ function CountryData(props) {
             </div>
         </section>
     )
+}
+
+CountryData.propTypes = {
+    countryCode: PropTypes.string,
+    disclaimerInfo: PropTypes.element
 }
 
 export default CountryData

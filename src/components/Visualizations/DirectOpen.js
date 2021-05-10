@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
@@ -113,6 +114,12 @@ const DirectOpen = (props) => {
             )}
         </CardContainer>
     )
+}
+
+DirectOpen.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
 }
 
 export default DirectOpen

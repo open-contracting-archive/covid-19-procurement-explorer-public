@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     Suppliers,
@@ -57,4 +58,7 @@ const GlobalSuppliers = (props) => {
     )
 }
 
+GlobalSuppliers.propTypes = {
+    disclaimerInfo: PropTypes.element
+}
 export default GlobalSuppliers

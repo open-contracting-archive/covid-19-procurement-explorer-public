@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-function Checkbox(props) {
+const Checkbox = (props) => {
     return (
         <div className="styled-checkbox">
             <input
@@ -16,6 +17,13 @@ function Checkbox(props) {
             <label htmlFor={props.id} />
         </div>
     )
+}
+
+Checkbox.propTypes = {
+    id: PropTypes.string,
+    checked: PropTypes.bool,
+    itemSelected: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 }
 
 export default Checkbox

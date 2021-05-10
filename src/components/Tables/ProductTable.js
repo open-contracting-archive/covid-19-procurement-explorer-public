@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 import { useHistory, useParams } from 'react-router-dom'
 import { get, identity, pickBy } from 'lodash'
@@ -250,6 +251,10 @@ const ProductTable = (props) => {
             </div>
         </div>
     )
+}
+
+ProductTable.propTypes = {
+    params: PropTypes.object
 }
 
 export default ProductTable

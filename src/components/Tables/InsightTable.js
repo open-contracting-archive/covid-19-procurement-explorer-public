@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
 import Select from 'react-select'
@@ -26,11 +27,8 @@ const InsightTable = (props) => {
     const [currentPage, setCurrentPage] = useState(0)
     const { countryNameById } = useCountries()
     const [showFilter, setShowFilter] = useState('hidden')
-    const {
-        contentsTypeSelectList,
-        countrySelectList,
-        yearSelectList
-    } = useContentFilters()
+    const { contentsTypeSelectList, countrySelectList, yearSelectList } =
+        useContentFilters()
     const history = useHistory()
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
         items: insightList,
@@ -366,6 +364,10 @@ const InsightTable = (props) => {
             )}
         </div>
     )
+}
+
+InsightTable.propTypes = {
+    params: PropTypes.object
 }
 
 export default InsightTable

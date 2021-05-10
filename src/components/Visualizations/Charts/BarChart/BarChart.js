@@ -1,5 +1,5 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -52,6 +52,12 @@ const BarChart = ({ data, barColorValue, axisRotation }) => {
     }, [data])
 
     return <div ref={barchartDiv} style={{ width: '100%', height: '250px' }} />
+}
+
+BarChart.propTypes = {
+    data: PropTypes.array,
+    barColorValue: PropTypes.string,
+    axisRotation: PropTypes.string
 }
 
 export default BarChart

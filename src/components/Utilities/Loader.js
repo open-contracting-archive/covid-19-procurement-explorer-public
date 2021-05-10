@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Loader = ({ sm }) => {
     return (
@@ -9,4 +10,9 @@ const Loader = ({ sm }) => {
         </section>
     )
 }
+
+Loader.propTypes = {
+    sm: PropTypes.bool
+}
+
 export default Loader

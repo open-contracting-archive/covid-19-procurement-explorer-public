@@ -34,7 +34,8 @@ const WorldTimelineRaceBarChart = () => {
             return current.country_code_alpha_2 !== 'gl'
                 ? {
                       ...acc,
-                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                      [current.country_code_alpha_2.toUpperCase()]:
+                          current.population
                   }
                 : acc
         }, {})

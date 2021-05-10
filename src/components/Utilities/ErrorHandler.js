@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 
 function ErrorHandler(props) {
@@ -13,4 +14,7 @@ function ErrorHandler(props) {
     )
 }
 
+ErrorHandler.propTypes = {
+    message: PropTypes.string
+}
 export default ErrorHandler

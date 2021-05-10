@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import { Loader, HelpText, ContractViewSwitcher } from './index'
 
@@ -38,4 +39,19 @@ const CardContainer = (props) => {
         </div>
     )
 }
+
+CardContainer.propTypes = {
+    label: PropTypes.string,
+    helpText: PropTypes.string,
+    loading: PropTypes.bool,
+    symbol: PropTypes.element,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
+    appendClass: PropTypes.string,
+    viewType: PropTypes.string,
+    viewHandler: PropTypes.func
+}
+
 export default CardContainer

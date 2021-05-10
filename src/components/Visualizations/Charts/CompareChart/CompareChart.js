@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -56,9 +57,8 @@ const CompareChart = (props) => {
         valueAxis.renderer.baseGrid.disabled = true
         // height of axis
         valueAxis.height = am4core.percent(65)
-        valueAxis.renderer.gridContainer.background.fill = am4core.color(
-            '#000000'
-        )
+        valueAxis.renderer.gridContainer.background.fill =
+            am4core.color('#000000')
         valueAxis.renderer.gridContainer.background.fillOpacity = 0.05
         valueAxis.renderer.inside = true
         valueAxis.renderer.labels.template.verticalCenter = 'bottom'
@@ -79,9 +79,8 @@ const CompareChart = (props) => {
         valueAxis2.renderer.labels.template.padding(2, 2, 2, 2)
         //valueAxis.renderer.maxLabelPosition = 0.95;
         valueAxis2.renderer.fontSize = '0.8em'
-        valueAxis2.renderer.gridContainer.background.fill = am4core.color(
-            '#000000'
-        )
+        valueAxis2.renderer.gridContainer.background.fill =
+            am4core.color('#000000')
         valueAxis2.renderer.gridContainer.background.fillOpacity = 0.05
 
         let volumeSeries = chart.series.push(new am4charts.StepLineSeries())
@@ -120,6 +119,11 @@ const CompareChart = (props) => {
     }, [chartData, indicators])
 
     return <div className="h-500 compare-chart-section" ref={compareChart} />
+}
+
+CompareChart.propTypes = {
+    chartData: PropTypes.array,
+    indicators: PropTypes.array
 }
 
 export default CompareChart

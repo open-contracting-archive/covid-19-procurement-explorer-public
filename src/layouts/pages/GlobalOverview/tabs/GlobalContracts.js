@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { RedFlagSummary } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
 
@@ -24,6 +25,10 @@ const GlobalContracts = (props) => {
             {renderTable()}
         </div>
     )
+}
+
+GlobalContracts.propTypes = {
+    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalContracts

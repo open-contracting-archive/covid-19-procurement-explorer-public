@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import { siteUrl } from '../../helpers/general'
 import Icon from '../../assets/img/icons'
@@ -93,6 +94,11 @@ const EmbeddedModal = (props) => {
             </div>
         </div>
     )
+}
+
+EmbeddedModal.propTypes = {
+    params: PropTypes.object,
+    closeModal: PropTypes.func
 }
 
 export default EmbeddedModal

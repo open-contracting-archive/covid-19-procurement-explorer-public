@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { isEmpty, sumBy } from 'lodash'
 import VisualizationService from '../../services/VisualizationService'
 import { BarListChart } from './Charts'
@@ -61,7 +62,7 @@ const Concentration = (props) => {
                 {!error ? (
                     <BarListChart
                         data={chartData}
-                        text="suppliers"
+                        forwardUrl="suppliers"
                         viewType={'buyer'}
                     />
                 ) : (
@@ -70,6 +71,11 @@ const Concentration = (props) => {
             </div>
         </CardContainer>
     )
+}
+
+Concentration.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default Concentration

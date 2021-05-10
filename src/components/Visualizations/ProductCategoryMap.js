@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { T } from '@transifex/react'
@@ -17,7 +18,7 @@ const ProductCategoryMap = (props) => {
     // ===========================================================================
     // State and variables
     // ===========================================================================
-    const { params } = props
+    const { label = 'Product Category Map', params } = props
     const [loading, setLoading] = useState(true)
     const [viewType, setViewType] = useState(ContractView.VALUE)
     const [originalData, setOriginalData] = useState([])
@@ -69,7 +70,7 @@ const ProductCategoryMap = (props) => {
                 <div className="p-4 bg-white rounded rounded-b-none h-full">
                     <div className="flex flex-wrap items-center justify-between md:mb-4">
                         <h3 className="mb-4 md:mb-0 w-full md:w-auto uppercase font-bold  text-primary-dark">
-                            <T _str="Product Category Map" />
+                            <T _str={label} />
                         </h3>
                         <ContractViewSwitcher
                             style={'short'}
@@ -92,6 +93,11 @@ const ProductCategoryMap = (props) => {
             <ChartFooter fullScreenHandler={fullScreenHandler} />
         </div>
     )
+}
+
+ProductCategoryMap.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default ProductCategoryMap

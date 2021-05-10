@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import VisualizationService from '../../services/VisualizationService'
@@ -129,6 +130,12 @@ const ContractsCorrelation = (props) => {
             />
         </div>
     )
+}
+
+ContractsCorrelation.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
 }
 
 export default ContractsCorrelation

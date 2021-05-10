@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import CmsPageService from '../../../services/CmsPageService'
 import { Loader } from '../../../components/Utilities'
 
@@ -42,5 +43,9 @@ const CmsPageContent = (props) => {
             </div>
         </section>
     )
+}
+
+CmsPageContent.propTypes = {
+    slug: PropTypes.string
 }
 export default CmsPageContent

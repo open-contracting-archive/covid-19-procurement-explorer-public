@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 import { useSelector } from 'react-redux'
 import CountryService from '../../services/CountryService'
@@ -24,7 +25,8 @@ const DirectOpenContractTrend = (props) => {
             return current.country_code_alpha_2 !== 'gl'
                 ? {
                       ...acc,
-                      [current.country_code_alpha_2.toUpperCase()]: current.population
+                      [current.country_code_alpha_2.toUpperCase()]:
+                          current.population
                   }
                 : acc
         }, {})
@@ -98,6 +100,11 @@ const DirectOpenContractTrend = (props) => {
             )}
         </div>
     )
+}
+
+DirectOpenContractTrend.propTypes = {
+    viewType: PropTypes.string,
+    selectedContinent: PropTypes.object
 }
 
 export default DirectOpenContractTrend

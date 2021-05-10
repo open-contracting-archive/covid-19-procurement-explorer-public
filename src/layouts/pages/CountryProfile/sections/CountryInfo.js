@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
@@ -199,6 +200,10 @@ const CountryInfo = (props) => {
             </div>
         </div>
     )
+}
+
+CountryInfo.propTypes = {
+    country: PropTypes.object
 }
 
 export default CountryInfo

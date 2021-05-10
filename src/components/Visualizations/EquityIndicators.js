@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
@@ -112,6 +113,12 @@ const EquityIndicators = (props) => {
             )}
         </CardContainer>
     )
+}
+
+EquityIndicators.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
 }
 
 export default EquityIndicators

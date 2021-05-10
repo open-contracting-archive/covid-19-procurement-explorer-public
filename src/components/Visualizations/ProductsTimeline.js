@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { StackedChart } from './Charts'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
@@ -119,6 +120,11 @@ const ProductsTimeline = (props) => {
             />
         </div>
     )
+}
+
+ProductsTimeline.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object
 }
 
 export default ProductsTimeline

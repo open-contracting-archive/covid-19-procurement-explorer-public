@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import { WorldMap } from './index'
 
@@ -14,6 +15,10 @@ const CountryProductMap = (props) => {
             <WorldMap params={params} />
         </div>
     )
+}
+
+CountryProductMap.propTypes = {
+    params: PropTypes.object
 }
 
 export default CountryProductMap

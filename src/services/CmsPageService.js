@@ -29,8 +29,7 @@ class CmsPageService {
         try {
             const res = await Api.get(getURI('pages'), {
                 type: 'content.InsightsPage',
-                fields:
-                    '_,title,id,slug,content_image,news_date,country,contents_type,author,rendered_body',
+                fields: '_,title,id,slug,content_image,news_date,country,contents_type,author,rendered_body',
                 contents_type: 'Blog',
                 order: '-news_date',
                 ...queryParams
@@ -73,8 +72,7 @@ class CmsPageService {
         try {
             const res = await Api.get(getURI('pages'), {
                 type: 'content.InsightsPage',
-                fields:
-                    '_,title,id,slug,content_image,featured,news_date,country,contents_type',
+                fields: '_,title,id,slug,content_image,featured,news_date,country,contents_type',
                 order: '-news_date',
                 ...queryParams
             })
@@ -106,8 +104,7 @@ class CmsPageService {
         try {
             const res = await Api.get(getURI('pages'), {
                 type: 'content.ResourcesPage',
-                fields:
-                    '_,title,id,slug,published_date,country,resource_type,lang,topics,document,link',
+                fields: '_,title,id,slug,published_date,country,resource_type,lang,topics,document,link',
                 order: '-published_date',
                 ...queryParams
             })
@@ -122,8 +119,7 @@ class CmsPageService {
         try {
             const res = await Api.get(getURI('pages'), {
                 type: 'content.StaticPage',
-                fields:
-                    '_,title,id,slug,show_in_header_menu,show_in_footer_menu',
+                fields: '_,title,id,slug,show_in_header_menu,show_in_footer_menu',
                 ...queryParams
             })
 

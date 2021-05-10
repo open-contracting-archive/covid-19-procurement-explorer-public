@@ -1,5 +1,5 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -114,6 +114,12 @@ const StackedChart = ({ data, currency, viewType }) => {
     }, [data])
 
     return <div ref={stackedChart} className="h-500" />
+}
+
+StackedChart.propTypes = {
+    data: PropTypes.array,
+    currency: PropTypes.string,
+    viewType: PropTypes.string
 }
 
 export default StackedChart

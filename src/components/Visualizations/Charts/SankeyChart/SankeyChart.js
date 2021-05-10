@@ -1,8 +1,9 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+import Default from '../../../../constants/Default'
 
 const SankeyChart = ({ data, currency, viewType }) => {
     const sankeyChart = useRef(null)
@@ -25,7 +26,11 @@ const SankeyChart = ({ data, currency, viewType }) => {
         chart.dataFields.toName = 'to'
         chart.dataFields.value = 'value'
         chart.links.template.tooltipText = `{from} -> {to} : ${
-            viewType === 'value' ? (currency == 'usd' ? '$' : '') : ''
+            viewType === 'value'
+                ? currency === Default.CURRENCY_USD
+                    ? '$'
+                    : ''
+                : ''
         }{value} [text-transform: uppercase]${
             viewType === 'value' ? currency : ''
         }`
@@ -64,6 +69,12 @@ const SankeyChart = ({ data, currency, viewType }) => {
     }, [data])
 
     return <div ref={sankeyChart} className="h-400" />
+}
+
+SankeyChart.propTypes = {
+    data: PropTypes.array,
+    currency: PropTypes.string,
+    viewType: PropTypes.string
 }
 
 export default SankeyChart

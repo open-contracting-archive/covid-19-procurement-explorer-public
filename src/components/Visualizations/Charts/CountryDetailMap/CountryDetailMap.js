@@ -1,5 +1,5 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4maps from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
@@ -88,6 +88,11 @@ const CountryDetailMap = ({ data, countryCode }) => {
             <div ref={countryMapChartDiv} className="country-map-section" />
         </div>
     )
+}
+
+CountryDetailMap.propTypes = {
+    data: PropTypes.array,
+    countryCode: PropTypes.string
 }
 
 export default CountryDetailMap

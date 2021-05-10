@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ProductCategoryMap } from '../../../../components/Visualizations'
 import { ProductTable } from '../../../../components/Tables'
 
@@ -24,6 +25,10 @@ const GlobalProducts = (props) => {
             {renderTable()}
         </div>
     )
+}
+
+GlobalProducts.propTypes = {
+    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalProducts

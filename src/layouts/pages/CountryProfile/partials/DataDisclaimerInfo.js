@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
 
@@ -22,6 +23,10 @@ const DataDisclaimerInfo = (props) => {
             </p>
         </div>
     )
+}
+
+DataDisclaimerInfo.propTypes = {
+    forwardUrl: PropTypes.string
 }
 
 export default DataDisclaimerInfo

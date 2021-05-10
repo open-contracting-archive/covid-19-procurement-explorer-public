@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
 import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
@@ -37,7 +38,7 @@ const CountryMethodology = (props) => {
                         </h2>
                         <div
                             style={{ minHeight: '40vh' }}
-                            className="flex flex-wrap lg:flex-no-wrap justify-between news-detail__content">
+                            className="flex flex-wrap lg:flex-no-wrap justify-between news-detail__content min-w-full">
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body
@@ -51,6 +52,10 @@ const CountryMethodology = (props) => {
             </div>
         </section>
     )
+}
+
+CountryMethodology.propTypes = {
+    countryId: PropTypes.number
 }
 
 export default CountryMethodology

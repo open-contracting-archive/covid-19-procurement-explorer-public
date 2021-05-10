@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 import { T } from '@transifex/react'
@@ -151,6 +152,11 @@ const CountryProductComparisonChart = (props) => {
             </div>
         </div>
     )
+}
+
+CountryProductComparisonChart.propTypes = {
+    product: PropTypes.object,
+    country: PropTypes.object
 }
 
 export default CountryProductComparisonChart

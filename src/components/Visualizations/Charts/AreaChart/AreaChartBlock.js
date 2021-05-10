@@ -1,5 +1,6 @@
 import React from 'react'
-import AreaChart from './AreaChart'
+import PropTypes from 'prop-types'
+import { AreaChart } from '../index'
 import { formatNumber } from '../../../../helpers/number'
 import { useSelector } from 'react-redux'
 import Default from '../../../../constants/Default'
@@ -41,6 +42,14 @@ const AreaChartBlock = (props) => {
             </p>
         </div>
     )
+}
+
+AreaChartBlock.propTypes = {
+    totalAmount: PropTypes.number,
+    percentage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    chartData: PropTypes.array,
+    currency: PropTypes.string,
+    colorValue: PropTypes.string
 }
 
 export default AreaChartBlock

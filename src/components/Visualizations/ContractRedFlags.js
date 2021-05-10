@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import VisualizationService from '../../services/VisualizationService'
 import { CardContainer, ErrorHandler } from '../Utilities'
 import Default from '../../constants/Default'
@@ -72,6 +73,12 @@ const ContractRedFlags = (props) => {
             </div>
         </CardContainer>
     )
+}
+
+ContractRedFlags.propTypes = {
+    label: PropTypes.string,
+    params: PropTypes.object,
+    helpText: PropTypes.string
 }
 
 export default ContractRedFlags

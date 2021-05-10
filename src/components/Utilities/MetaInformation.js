@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import Default from '../../constants/Default'
 
@@ -31,6 +32,13 @@ const MetaInformation = (props) => {
             <meta name="twitter:image" content={imageURL} />
         </Helmet>
     )
+}
+
+MetaInformation.propTypes = {
+    title: PropTypes.string,
+    canonicalLink: PropTypes.string,
+    description: PropTypes.string,
+    imageURL: PropTypes.string
 }
 
 export default MetaInformation

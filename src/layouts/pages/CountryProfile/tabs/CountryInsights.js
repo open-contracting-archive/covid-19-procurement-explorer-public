@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { T } from '@transifex/react'
 import { FeaturedInsights } from '../../../../components/Utilities'
 import { InsightTable } from '../../../../components/Tables'
@@ -29,4 +30,7 @@ const CountryInsights = (props) => {
     )
 }
 
+CountryInsights.propTypes = {
+    countryId: PropTypes.number
+}
 export default CountryInsights

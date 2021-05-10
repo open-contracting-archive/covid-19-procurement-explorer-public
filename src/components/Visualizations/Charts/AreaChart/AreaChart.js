@@ -1,11 +1,11 @@
-/* Imports */
 import React, { useLayoutEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const AreaChart = ({ data, apiData, colorValue }) => {
-    const areachartDiv = useRef(null)
+    const areaChartDiv = useRef(null)
 
     useLayoutEffect(() => {
         /* Chart code */
@@ -14,7 +14,7 @@ const AreaChart = ({ data, apiData, colorValue }) => {
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(areachartDiv.current, am4charts.XYChart)
+        let chart = am4core.create(areaChartDiv.current, am4charts.XYChart)
 
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
         categoryAxis.renderer.grid.template.location = 0
@@ -75,7 +75,7 @@ const AreaChart = ({ data, apiData, colorValue }) => {
 
     return (
         <div
-            ref={areachartDiv}
+            ref={areaChartDiv}
             className="relative z-10"
             style={{
                 width: '100%',
@@ -83,6 +83,12 @@ const AreaChart = ({ data, apiData, colorValue }) => {
             }}
         />
     )
+}
+
+AreaChart.propTypes = {
+    data: PropTypes.array,
+    apiData: PropTypes.bool,
+    colorValue: PropTypes.string
 }
 
 export default AreaChart
