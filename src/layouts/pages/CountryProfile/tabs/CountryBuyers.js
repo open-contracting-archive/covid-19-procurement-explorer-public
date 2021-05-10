@@ -1,18 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { BuyerTable } from '../../../../components/Tables'
 import {
     Buyers,
     TotalContracts,
     TotalSpending
 } from '../../../../components/Visualizations'
+import { useCountry } from '../../../../context/CountryContext'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const CountryBuyers = (props) => {
-    const { countryCode, disclaimerInfo = null } = props
+const CountryBuyers = () => {
+    const { country_code_alpha_2: countryCode, slug: countrySlug } =
+        useCountry()
 
-    return countryCode ? (
+    return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo
+                forwardUrl={`/country/${countrySlug}/methodology`}
+            />
 
             <div className="flex flex-wrap -mx-2 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-4">
@@ -31,14 +35,7 @@ const CountryBuyers = (props) => {
             </div>
             <BuyerTable params={{ country: countryCode }} />
         </div>
-    ) : (
-        ''
     )
-}
-
-CountryBuyers.propTypes = {
-    countryCode: PropTypes.string,
-    disclaimerInfo: PropTypes.element
 }
 
 export default CountryBuyers

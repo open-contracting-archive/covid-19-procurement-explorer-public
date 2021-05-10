@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from 'lodash'
+import { T } from '@transifex/react'
 import CmsPageService from '../../../../services/CmsPageService'
 import { Loader } from '../../../../components/Utilities'
 
@@ -47,7 +48,9 @@ const CountryMethodology = (props) => {
                         </div>
                     </Fragment>
                 ) : (
-                    <p>No content found.</p>
+                    <p>
+                        <T _str="No content found." />
+                    </p>
                 )}
             </div>
         </section>

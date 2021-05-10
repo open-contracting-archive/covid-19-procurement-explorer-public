@@ -60,3 +60,6 @@ export const Loader = React.lazy(() =>
 export const ContinentSelector = React.lazy(() =>
     import(/* webpackChunkName: "app-common" */ './ContinentSelector')
 )
+export const DataDisclaimerInfo = React.lazy(() =>
+    import(/* webpackChunkName: "app-common" */ './DataDisclaimerInfo')
+)

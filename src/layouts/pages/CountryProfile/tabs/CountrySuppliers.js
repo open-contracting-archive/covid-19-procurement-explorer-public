@@ -1,18 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { SupplierTable } from '../../../../components/Tables'
 import {
     Suppliers,
     TotalContracts,
     TotalSpending
 } from '../../../../components/Visualizations'
+import { useCountry } from '../../../../context/CountryContext'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const CountrySuppliers = (props) => {
-    const { countryCode, disclaimerInfo = null } = props
+const CountrySuppliers = () => {
+    const { country_code_alpha_2: countryCode, slug: countrySlug } =
+        useCountry()
 
-    return countryCode ? (
+    return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo
+                forwardUrl={`/country/${countrySlug}/methodology`}
+            />
 
             <div className="flex flex-wrap -mx-2 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-4">
@@ -32,14 +36,7 @@ const CountrySuppliers = (props) => {
             </div>
             <SupplierTable params={{ country: countryCode }} />
         </div>
-    ) : (
-        ''
     )
-}
-
-CountrySuppliers.propTypes = {
-    countryCode: PropTypes.string,
-    disclaimerInfo: PropTypes.element
 }
 
 export default CountrySuppliers

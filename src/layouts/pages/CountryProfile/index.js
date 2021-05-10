@@ -27,7 +27,12 @@ import {
     CountryProducts,
     CountrySuppliers
 } from './tabs'
-import { CountrySelector, MetaInformation } from '../../../components/Utilities'
+import {
+    CountrySelector,
+    MetaInformation,
+    ErrorHandler
+} from '../../../components/Utilities'
+import { CountryWrapper } from '../../../context/CountryContext'
 
 const TabNavigator = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './sections/TabNavigator')
@@ -39,11 +44,6 @@ const CountryMapElement = React.lazy(() =>
 )
 const CountryInfo = React.lazy(() =>
     import(/* webpackChunkName: "app-data-page" */ './sections/CountryInfo')
-)
-const DataDisclaimerInfo = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './partials/DataDisclaimerInfo'
-    )
 )
 
 const CountryProfile = () => {
@@ -57,115 +57,82 @@ const CountryProfile = () => {
     // Hooks
     // ===========================================================================
     useEffect(() => {
-        let country = countries.find((country) => country.slug === countrySlug)
+        try {
+            let country = countries.find(
+                (country) => country.slug === countrySlug
+            )
 
-        if (country) {
+            if (!country) {
+                throw 'Country not found'
+            }
+
             setCountryData(country)
             dispatch(setCountryCurrency(country.currency))
+        } catch (error) {
+            console.log(error)
         }
 
         return () => {
             dispatch(setCurrency(Default.CURRENCY_USD))
         }
     }, [countries, countrySlug])
-    const disclaimerInfo = (
-        <DataDisclaimerInfo
-            forwardUrl={`/country/${countrySlug}/methodology`}
-        />
-    )
 
     const renderTab = () => {
         switch (tabSlug) {
             case DATA:
-                return (
-                    <CountryData
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountryData />
             case INSIGHTS:
-                return <CountryInsights countryId={countryData.id} />
+                return <CountryInsights />
             case CONTRACTS:
-                return (
-                    <CountryContracts
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountryContracts />
             case EQUITY:
-                return (
-                    <CountryEquity
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountryEquity />
             case BUYERS:
-                return (
-                    <CountryBuyers
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountryBuyers />
             case SUPPLIERS:
-                return (
-                    <CountrySuppliers
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountrySuppliers />
             case PRODUCTS:
-                return (
-                    <CountryProducts
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountryProducts />
             case METHODOLOGY:
-                return (
-                    countryData.id && (
-                        <CountryMethodology countryId={countryData.id} />
-                    )
-                )
+                return <CountryMethodology countryId={countryData.id} />
             default:
-                return (
-                    <CountryData
-                        countryCode={countryData.country_code_alpha_2}
-                        disclaimerInfo={disclaimerInfo}
-                    />
-                )
+                return <CountryData />
         }
     }
 
-    return (
+    return isEmpty(countryData) ? (
+        <ErrorHandler message="Country not found" />
+    ) : (
         <section className="pt-10 md:pt-20 -mt-8 bg-blue-0">
             <MetaInformation
                 title={countryData.name}
                 description={countryData.name}
             />
-            {!isEmpty(countryData) && (
+            <CountryWrapper country={countryData}>
                 <section className="px-4">
                     <div className="container mx-auto">
                         <CountrySelector />
 
                         <div className="relative flex flex-wrap -mx-2 -mb-4">
-                            <CountryMapElement
-                                countryCode={countryData.country_code_alpha_2}
-                            />
-                            <CountryInfo country={countryData} />
+                            <CountryMapElement />
+                            <CountryInfo />
                         </div>
                     </div>
                 </section>
-            )}
 
-            <TabNavigator endpoint={'country'} countrySlug={countrySlug} />
+                <TabNavigator
+                    endpoint={'country'}
+                    countrySlug={countryData.slug}
+                />
 
-            <div
-                style={{
-                    borderTop: '5px solid #1fbbec'
-                }}
-                className="py-6 md:py-16 bg-primary-gray px-4">
-                <div className="container mx-auto">{renderTab()}</div>
-            </div>
+                <div
+                    style={{
+                        borderTop: '5px solid #1fbbec'
+                    }}
+                    className="py-6 md:py-16 bg-primary-gray px-4">
+                    <div className="container mx-auto">{renderTab()}</div>
+                </div>
+            </CountryWrapper>
         </section>
     )
 }

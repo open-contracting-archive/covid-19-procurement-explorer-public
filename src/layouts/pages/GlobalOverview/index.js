@@ -15,41 +15,20 @@ import {
     SUPPLIERS
 } from '../../../constants/Tab'
 import { CountrySelector, MetaInformation } from '../../../components/Utilities'
+import {
+    GlobalData,
+    GlobalInsights,
+    GlobalContracts,
+    GlobalEquity,
+    GlobalBuyers,
+    GlobalSuppliers,
+    GlobalProducts
+} from './tabs'
+import { CountryMethodology } from '../CountryProfile/tabs'
 
 const TabNavigator = React.lazy(() =>
     import(
         /* webpackChunkName: "app-data-page" */ '../CountryProfile/sections/TabNavigator'
-    )
-)
-const GlobalData = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalData')
-)
-const GlobalInsights = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalInsights')
-)
-const GlobalContracts = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalContracts')
-)
-const GlobalEquity = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalEquity')
-)
-const GlobalBuyers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalBuyers')
-)
-const GlobalSuppliers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalSuppliers')
-)
-const GlobalProducts = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './tabs/GlobalProducts')
-)
-const DataDisclaimerInfo = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../CountryProfile/partials/DataDisclaimerInfo'
-    )
-)
-const CountryMethodology = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../CountryProfile/tabs/CountryMethodology'
     )
 )
 
@@ -61,9 +40,6 @@ const GlobalOverview = () => {
     const { globalCountryItem } = useCountries()
     const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })
     const locale = useLocale()
-    const disclaimerInfo = (
-        <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
-    )
 
     useEffect(() => {
         setMetaInfo({
@@ -75,23 +51,23 @@ const GlobalOverview = () => {
     const renderTab = () => {
         switch (tabSlug) {
             case DATA:
-                return <GlobalData disclaimerInfo={disclaimerInfo} />
+                return <GlobalData />
             case INSIGHTS:
                 return <GlobalInsights />
             case CONTRACTS:
-                return <GlobalContracts disclaimerInfo={disclaimerInfo} />
+                return <GlobalContracts />
             case EQUITY:
-                return <GlobalEquity disclaimerInfo={disclaimerInfo} />
+                return <GlobalEquity />
             case BUYERS:
-                return <GlobalBuyers disclaimerInfo={disclaimerInfo} />
+                return <GlobalBuyers />
             case SUPPLIERS:
-                return <GlobalSuppliers disclaimerInfo={disclaimerInfo} />
+                return <GlobalSuppliers />
             case PRODUCTS:
-                return <GlobalProducts disclaimerInfo={disclaimerInfo} />
+                return <GlobalProducts />
             case METHODOLOGY:
                 return <CountryMethodology countryId={globalCountryItem().id} />
             default:
-                return <GlobalData disclaimerInfo={disclaimerInfo} />
+                return <GlobalData />
         }
     }
 

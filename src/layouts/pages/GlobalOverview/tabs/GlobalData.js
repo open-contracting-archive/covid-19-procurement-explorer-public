@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { T } from '@transifex/react'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
@@ -21,9 +20,9 @@ import {
 } from '../../../../components/Visualizations'
 import VisualizationModal from '../modal/VisualizationModal'
 import 'react-simple-hook-modal/dist/styles.css'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const GlobalData = (props) => {
-    const { disclaimerInfo = null } = props
+const GlobalData = () => {
     const [modalVisualization, setModalVisualization] = useState('')
     const { isModalOpen, openModal, closeModal } = useModal()
     const modalHandler = (visualization) => {
@@ -37,7 +36,9 @@ const GlobalData = (props) => {
     return (
         <section className="bg-primary-gray">
             <div className="container mx-auto">
-                {disclaimerInfo && disclaimerInfo}
+                <DataDisclaimerInfo
+                    forwardUrl={`/global-overview/methodology`}
+                />
 
                 <div className="flex flex-wrap -mx-2 -mb-4">
                     <div className="w-full lg:w-1/3 px-2 mb-4">
@@ -110,10 +111,6 @@ const GlobalData = (props) => {
             </Modal>
         </section>
     )
-}
-
-GlobalData.propTypes = {
-    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalData

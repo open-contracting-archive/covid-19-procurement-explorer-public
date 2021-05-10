@@ -1,33 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ContractEquityIndicators } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const GlobalEquity = (props) => {
-    const { disclaimerInfo = null } = props
-
-    function renderMainVisualization() {
-        return <ContractEquityIndicators />
-    }
-
-    function renderTable() {
-        return <ContractTable />
-    }
-
+const GlobalEquity = () => {
     return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
 
             <div className="w-full mb-12 global-profile">
-                {renderMainVisualization()}
+                <ContractEquityIndicators />
             </div>
 
-            {renderTable()}
+            <ContractTable />
         </div>
     )
 }
 
-GlobalEquity.propTypes = {
-    disclaimerInfo: PropTypes.element
-}
 export default GlobalEquity

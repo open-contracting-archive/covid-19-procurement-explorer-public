@@ -1,41 +1,26 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ContractEquityIndicators } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
+import { useCountry } from '../../../../context/CountryContext'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const CountryEquity = (props) => {
-    const { countryCode, disclaimerInfo = null } = props
-
-    function renderMainVisualization() {
-        if (countryCode) {
-            return (
-                <ContractEquityIndicators params={{ country: countryCode }} />
-            )
-        }
-    }
-
-    function renderTable() {
-        if (countryCode) {
-            return <ContractTable params={{ country: countryCode }} />
-        }
-    }
+const CountryEquity = () => {
+    const { country_code_alpha_2: countryCode, slug: countrySlug } =
+        useCountry()
 
     return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo
+                forwardUrl={`/country/${countrySlug}/methodology`}
+            />
 
             <div className="w-full mb-12 global-profile">
-                {renderMainVisualization()}
+                <ContractEquityIndicators params={{ country: countryCode }} />
             </div>
 
-            {renderTable()}
+            <ContractTable params={{ country: countryCode }} />
         </div>
     )
-}
-
-CountryEquity.propTypes = {
-    countryCode: PropTypes.string,
-    disclaimerInfo: PropTypes.element
 }
 
 export default CountryEquity

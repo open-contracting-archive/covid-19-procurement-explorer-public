@@ -1,39 +1,26 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { ProductCategoryMap } from '../../../../components/Visualizations'
 import { ProductTable } from '../../../../components/Tables'
+import { useCountry } from '../../../../context/CountryContext'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const CountryProducts = (props) => {
-    const { countryCode, disclaimerInfo = null } = props
-
-    function renderMainVisualization() {
-        if (countryCode) {
-            return <ProductCategoryMap params={{ country: countryCode }} />
-        }
-    }
-
-    function renderTable() {
-        if (countryCode) {
-            return <ProductTable params={{ country: countryCode }} />
-        }
-    }
+const CountryProducts = () => {
+    const { country_code_alpha_2: countryCode, slug: countrySlug } =
+        useCountry()
 
     return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo
+                forwardUrl={`/country/${countrySlug}/methodology`}
+            />
 
             <div className="w-full mb-12 global-profile">
-                {renderMainVisualization()}
+                <ProductCategoryMap params={{ country: countryCode }} />
             </div>
 
-            {renderTable()}
+            <ProductTable params={{ country: countryCode }} />
         </div>
     )
-}
-
-CountryProducts.propTypes = {
-    countryCode: PropTypes.string,
-    disclaimerInfo: PropTypes.element
 }
 
 export default CountryProducts
