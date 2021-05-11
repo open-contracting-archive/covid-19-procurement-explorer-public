@@ -1,34 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { RedFlagSummary } from '../../../../components/Visualizations'
 import { ContractTable } from '../../../../components/Tables'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const GlobalContracts = (props) => {
-    const { disclaimerInfo = null } = props
-
-    function renderMainVisualization() {
-        return <RedFlagSummary />
-    }
-
-    function renderTable() {
-        return <ContractTable />
-    }
-
+const GlobalContracts = () => {
     return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
 
             <div className="w-full mb-12 global-profile">
-                {renderMainVisualization()}
+                <RedFlagSummary />
             </div>
 
-            {renderTable()}
+            <ContractTable />
         </div>
     )
-}
-
-GlobalContracts.propTypes = {
-    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalContracts

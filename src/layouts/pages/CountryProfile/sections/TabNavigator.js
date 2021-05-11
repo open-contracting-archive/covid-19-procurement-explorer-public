@@ -35,7 +35,7 @@ const TabNavigator = (props) => {
 }
 
 TabNavigator.propTypes = {
-    endpoint: PropTypes.string,
+    endpoint: PropTypes.string.isRequired,
     countrySlug: PropTypes.string
 }
 export default TabNavigator

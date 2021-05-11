@@ -1,5 +1,4 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { get } from 'lodash'
 import { T } from '@transifex/react'
@@ -12,14 +11,15 @@ import {
 } from '../../../../components/Utilities'
 import CountryService from '../../../../services/CountryService'
 import { mediaUrl } from '../../../../helpers/general'
+import { useCountry } from '../../../../context/CountryContext'
 
-const CountryInfo = (props) => {
-    const { country } = props
+const CountryInfo = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [countryStats, setCountryStats] = useState({})
     const [dataProviders, setDataProviders] = useState([])
     const currency = useSelector((state) => state.general.currency)
+    const country = useCountry()
 
     // ===========================================================================
     // Hooks
@@ -43,7 +43,7 @@ const CountryInfo = (props) => {
                 setDataProviders([])
             }
         }
-    }, [country?.country_code_alpha_2])
+    }, [country])
 
     useEffect(() => {
         const spending = get(country, `amount_${currency}`, 0)
@@ -200,10 +200,6 @@ const CountryInfo = (props) => {
             </div>
         </div>
     )
-}
-
-CountryInfo.propTypes = {
-    country: PropTypes.object
 }
 
 export default CountryInfo

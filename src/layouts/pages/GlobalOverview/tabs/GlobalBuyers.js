@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     Buyers,
@@ -7,10 +6,15 @@ import {
     TotalSpending
 } from '../../../../components/Visualizations'
 import { BuyerTable } from '../../../../components/Tables'
-import VisualizationModal from '../modal/VisualizationModal'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
-const GlobalBuyers = (props) => {
-    const { disclaimerInfo = null } = props
+const VisualizationModal = React.lazy(() =>
+    import(
+        /* webpackChunkName: "app-data-page" */ '../modal/VisualizationModal'
+    )
+)
+
+const GlobalBuyers = () => {
     const [modalVisualization, setModalVisualization] = useState('')
     const { isModalOpen, openModal, closeModal } = useModal()
     const modalHandler = (visualization) => {
@@ -23,7 +27,7 @@ const GlobalBuyers = (props) => {
 
     return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
 
             <div className="flex flex-wrap -mx-3 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
@@ -48,10 +52,6 @@ const GlobalBuyers = (props) => {
             </Modal>
         </div>
     )
-}
-
-GlobalBuyers.propTypes = {
-    disclaimerInfo: PropTypes.element
 }
 
 export default GlobalBuyers

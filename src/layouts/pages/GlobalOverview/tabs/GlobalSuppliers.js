@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { Modal, useModal, ModalTransition } from 'react-simple-hook-modal'
 import {
     Suppliers,
@@ -7,6 +6,7 @@ import {
     TotalSpending
 } from '../../../../components/Visualizations'
 import { SupplierTable } from '../../../../components/Tables'
+import { DataDisclaimerInfo } from '../../../../components/Utilities'
 
 const VisualizationModal = React.lazy(() =>
     import(
@@ -14,8 +14,7 @@ const VisualizationModal = React.lazy(() =>
     )
 )
 
-const GlobalSuppliers = (props) => {
-    const { disclaimerInfo = null } = props
+const GlobalSuppliers = () => {
     const [modalVisualization, setModalVisualization] = useState('')
     const { isModalOpen, openModal, closeModal } = useModal()
     const modalHandler = (visualization) => {
@@ -28,7 +27,7 @@ const GlobalSuppliers = (props) => {
 
     return (
         <div>
-            {disclaimerInfo && disclaimerInfo}
+            <DataDisclaimerInfo forwardUrl={`/global-overview/methodology`} />
 
             <div className="flex flex-wrap -mx-3 md:mb-16">
                 <div className="w-full lg:w-1/3 px-2 mb-6">
@@ -58,7 +57,4 @@ const GlobalSuppliers = (props) => {
     )
 }
 
-GlobalSuppliers.propTypes = {
-    disclaimerInfo: PropTypes.element
-}
 export default GlobalSuppliers
