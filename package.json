@@ -39,7 +39,7 @@
     "react-simple-hook-modal": "^1.1.0",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
-    "swiper": "^6.4.5",
+    "swiper": "^6.5.1",
     "web-vitals": "^0.2.4",
     "webpack-notifier": "^1.12.0",
     "workbox-background-sync": "^5.1.3",
