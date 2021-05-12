@@ -1,7 +1,12 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import { color, create, useTheme } from '@amcharts/amcharts4/core'
+import {
+    CategoryAxis,
+    ColumnSeries,
+    ValueAxis,
+    XYChart
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { barColorValue } from '../../../../constants/Theme'
 
@@ -13,17 +18,14 @@ const SimpleBarChart = (props) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(barchartDiv.current, am4charts.XYChart)
-
-        // Add chart download option
-        // chart.exporting.menu = new am4core.ExportMenu()
+        let chart = create(barchartDiv.current, XYChart)
 
         // Create axes
-        let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+        let categoryAxis = chart.xAxes.push(new CategoryAxis())
         categoryAxis.dataFields.category = chartKey
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.minGridDistance = 30
@@ -31,18 +33,18 @@ const SimpleBarChart = (props) => {
         categoryAxis.renderer.labels.template.fontSize = 12
         categoryAxis.renderer.grid.template.disabled = true
 
-        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
+        let valueAxis = chart.yAxes.push(new ValueAxis())
         valueAxis.renderer.grid.template.disabled = true
         valueAxis.renderer.labels.template.disabled = true
 
         // Create series
-        let series = chart.series.push(new am4charts.ColumnSeries())
+        let series = chart.series.push(new ColumnSeries())
         series.dataFields.valueY = chartValue
         series.dataFields.categoryX = chartKey
         series.name = 'Value'
         series.columns.template.tooltipText = '{categoryX}: [bold]{valueY}[/]'
         series.columns.template.fillOpacity = 0.8
-        series.columns.template.fill = am4core.color(barColorValue)
+        series.columns.template.fill = color(barColorValue)
 
         let columnTemplate = series.columns.template
         columnTemplate.strokeWidth = 1

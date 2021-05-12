@@ -1,7 +1,13 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import {
+    Color,
+    color,
+    colors,
+    create,
+    useTheme
+} from '@amcharts/amcharts4/core'
+import { TreeMap, NavigationBar, LabelBullet } from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const TreeMapChart = ({ data }) => {
@@ -14,15 +20,13 @@ const TreeMapChart = ({ data }) => {
     }
 
     useLayoutEffect(() => {
-        // console.log('date updated')
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
-
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(treeMapChart.current, am4charts.TreeMap)
+        let chart = create(treeMapChart.current, TreeMap)
         chart.padding(0, 0, 0, 0)
         chart.hiddenState.properties.opacity = 0
 
@@ -34,7 +38,7 @@ const TreeMapChart = ({ data }) => {
         chart.dataFields.children = 'children'
 
         // enable navigation
-        chart.navigationBar = new am4charts.NavigationBar()
+        chart.navigationBar = new NavigationBar()
         chart.zoomable = false
 
         // level 0 series template
@@ -50,8 +54,8 @@ const TreeMapChart = ({ data }) => {
 
         // darken
         hoverState.adapter.add('fill', function (fill) {
-            if (fill instanceof am4core.Color) {
-                return am4core.color(am4core.colors.brighten(fill.rgb, -0.2))
+            if (fill instanceof Color) {
+                return color(colors.brighten(fill.rgb, -0.2))
             }
             return fill
         })
@@ -61,13 +65,11 @@ const TreeMapChart = ({ data }) => {
         level1SeriesTemplate.columns.template.fillOpacity = 0
         level1SeriesTemplate.columns.template.strokeOpacity = 0.4
 
-        let bullet1 = level1SeriesTemplate.bullets.push(
-            new am4charts.LabelBullet()
-        )
+        let bullet1 = level1SeriesTemplate.bullets.push(new LabelBullet())
         bullet1.locationX = 0.5
         bullet1.locationY = 0.5
         bullet1.label.text = '{name}'
-        bullet1.label.fill = am4core.color('#ffffff')
+        bullet1.label.fill = color('#ffffff')
         bullet1.label.fontSize = 14
         bullet1.label.wrap = true
         bullet1.label.fillOpacity = 0.7

@@ -1,7 +1,13 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import { color, create, percent, useTheme } from '@amcharts/amcharts4/core'
+import {
+    CategoryAxis,
+    ColumnSeries,
+    Legend,
+    ValueAxis,
+    XYChart
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const StackedChart = ({ data, currency, viewType }) => {
@@ -9,36 +15,36 @@ const StackedChart = ({ data, currency, viewType }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(stackedChart.current, am4charts.XYChart)
+        let chart = create(stackedChart.current, XYChart)
         chart.responsive.enabled = true
 
         chart.colors.list = [
-            am4core.color('#BEBADA'),
-            am4core.color('#6E44FF'),
-            am4core.color('#B3DE69'),
-            am4core.color('#BC80BD'),
-            am4core.color('#FB8072'),
-            am4core.color('#FCCDE5'),
-            am4core.color('#FDB462'),
-            am4core.color('#99F7AB'),
-            am4core.color('#FE654F'),
-            am4core.color('#CE96A6'),
-            am4core.color('#D6EFFF'),
-            am4core.color('#60695C')
+            color('#BEBADA'),
+            color('#6E44FF'),
+            color('#B3DE69'),
+            color('#BC80BD'),
+            color('#FB8072'),
+            color('#FCCDE5'),
+            color('#FDB462'),
+            color('#99F7AB'),
+            color('#FE654F'),
+            color('#CE96A6'),
+            color('#D6EFFF'),
+            color('#60695C')
         ]
 
         // Create axes
-        let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+        let categoryAxis = chart.xAxes.push(new CategoryAxis())
         categoryAxis.dataFields.category = 'month'
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.grid.template.disabled = true
         categoryAxis.renderer.labels.template.fontSize = 12
 
-        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
+        let valueAxis = chart.yAxes.push(new ValueAxis())
         valueAxis.renderer.inside = true
         valueAxis.renderer.labels.template.disabled = true
         valueAxis.renderer.grid.template.disabled = true
@@ -47,7 +53,7 @@ const StackedChart = ({ data, currency, viewType }) => {
         // Create series
         function createSeries(field, name) {
             // Set up series
-            let series = chart.series.push(new am4charts.ColumnSeries())
+            let series = chart.series.push(new ColumnSeries())
             series.name = name
             series.dataFields.valueY = field
             series.dataFields.categoryX = 'month'
@@ -57,7 +63,7 @@ const StackedChart = ({ data, currency, viewType }) => {
             series.stacked = true
 
             // Configure columns
-            series.columns.template.width = am4core.percent(60)
+            series.columns.template.width = percent(60)
             series.columns.template.tooltipText = `[bold]{name}[/]\n[font-size:14px]{categoryX}: ${
                 viewType === 'value' ? (currency === 'usd' ? '$' : '') : ''
             }{valueY} [text-transform: uppercase font-size:14px] ${
@@ -89,7 +95,7 @@ const StackedChart = ({ data, currency, viewType }) => {
         createSeries('not-identified', 'Not Identified')
 
         // Legend
-        chart.legend = new am4charts.Legend()
+        chart.legend = new Legend()
         chart.legend.useDefaultMarker = true
         let marker = chart.legend.markers.template.children.getIndex(0)
         marker.cornerRadius(0, 0, 0, 0)

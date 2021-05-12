@@ -1,7 +1,12 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4maps from '@amcharts/amcharts4/maps'
+import { color, create, useTheme } from '@amcharts/amcharts4/core'
+import {
+    MapChart,
+    MapPolygonSeries,
+    projections,
+    ZoomControl
+} from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4geodata_data_countries2 from '@amcharts/amcharts4-geodata/data/countries2'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
@@ -12,21 +17,21 @@ const CountryDetailMap = ({ data, countryCode }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(countryMapChartDiv.current, am4maps.MapChart)
+        let chart = create(countryMapChartDiv.current, MapChart)
         chart.chartContainer.wheelable = false
 
         // Set map definition
         chart.geodata = am4geodata_worldLow
 
         // Set projection
-        chart.projection = new am4maps.projections.Miller()
+        chart.projection = new projections.Miller()
 
         // Create map polygon series
-        let countrySeries = chart.series.push(new am4maps.MapPolygonSeries())
+        let countrySeries = chart.series.push(new MapPolygonSeries())
 
         // Make map load polygon (like country names) data from GeoJSON
         countrySeries.useGeodata = true
@@ -39,9 +44,9 @@ const CountryDetailMap = ({ data, countryCode }) => {
         countryPolygon.tooltipText = '{name}'
         countryPolygon.nonScalingStroke = true
         countryPolygon.strokeOpacity = 0.5
-        countryPolygon.fill = am4core.color('#2B8CBE')
+        countryPolygon.fill = color('#2B8CBE')
 
-        chart.colors.list = [am4core.color('#C8D419')]
+        chart.colors.list = [color('#C8D419')]
 
         let hs = countryPolygon.states.create('hover')
         hs.properties.fill = chart.colors.getIndex(0)
@@ -67,7 +72,7 @@ const CountryDetailMap = ({ data, countryCode }) => {
         countrySeries.data = data
 
         // Zoom control
-        chart.zoomControl = new am4maps.ZoomControl()
+        chart.zoomControl = new ZoomControl()
         chart.zoomControl.valign = 'top'
         chart.logo.disabled = true
         chart.numberFormatter.numberFormat = '#.##a'

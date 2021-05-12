@@ -1,7 +1,12 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import { create, useTheme } from '@amcharts/amcharts4/core'
+import {
+    XYChart,
+    CategoryAxis,
+    ValueAxis,
+    ColumnSeries
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const HorizontalBarChart = ({ data }) => {
@@ -10,14 +15,11 @@ const HorizontalBarChart = ({ data }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(
-            horizontalBarChart.current,
-            am4charts.XYChart
-        )
+        let chart = create(horizontalBarChart.current, XYChart)
         chart.padding(40, 40, 40, 40)
 
         chart.numberFormatter.bigNumberPrefixes = [
@@ -28,18 +30,18 @@ const HorizontalBarChart = ({ data }) => {
 
         // Create axes
 
-        let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
+        let categoryAxis = chart.yAxes.push(new CategoryAxis())
         categoryAxis.dataFields.category = 'country'
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.minGridDistance = 30
         categoryAxis.renderer.grid.template.disabled = true
 
-        let valueAxis = chart.xAxes.push(new am4charts.ValueAxis())
+        let valueAxis = chart.xAxes.push(new ValueAxis())
         valueAxis.renderer.grid.template.disabled = true
         valueAxis.renderer.labels.template.disabled = true
 
         // Create series
-        let series = chart.series.push(new am4charts.ColumnSeries())
+        let series = chart.series.push(new ColumnSeries())
         series.dataFields.valueX = 'visits'
         series.dataFields.categoryY = 'country'
         series.name = 'Visits'

@@ -1,7 +1,14 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import { color, create, percent, useTheme } from '@amcharts/amcharts4/core'
+import {
+    DateAxis,
+    LineSeries,
+    StepLineSeries,
+    ValueAxis,
+    XYChart,
+    XYCursor
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { toCamelCase } from '../../../../helpers/general'
 
@@ -12,14 +19,14 @@ const CompareChart = (props) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(compareChart.current, am4charts.XYChart)
+        let chart = create(compareChart.current, XYChart)
         chart.padding(0, 0, 0, 0)
         chart.colors.step = 3
-        chart.cursor = new am4charts.XYCursor()
+        chart.cursor = new XYCursor()
         chart.data = chartData
         chart.logo.disabled = true
         chart.numberFormatter.numberFormat = '#.##a'
@@ -35,7 +42,7 @@ const CompareChart = (props) => {
         // uncomment this line if you want to change order of axes
         //chart.bottomAxesContainer.reverseOrder = true;
 
-        let dateAxis = chart.xAxes.push(new am4charts.DateAxis())
+        let dateAxis = chart.xAxes.push(new DateAxis())
         dateAxis.renderer.grid.template.location = 0
         dateAxis.renderer.ticks.template.length = 8
         dateAxis.renderer.ticks.template.strokeOpacity = 0.1
@@ -51,14 +58,13 @@ const CompareChart = (props) => {
         // dateAxis.start = 0.7;
         // dateAxis.keepSelection = true
 
-        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
+        let valueAxis = chart.yAxes.push(new ValueAxis())
         valueAxis.tooltip.disabled = true
         valueAxis.zIndex = 1
         valueAxis.renderer.baseGrid.disabled = true
         // height of axis
-        valueAxis.height = am4core.percent(65)
-        valueAxis.renderer.gridContainer.background.fill =
-            am4core.color('#000000')
+        valueAxis.height = percent(65)
+        valueAxis.renderer.gridContainer.background.fill = color('#000000')
         valueAxis.renderer.gridContainer.background.fillOpacity = 0.05
         valueAxis.renderer.inside = true
         valueAxis.renderer.labels.template.verticalCenter = 'bottom'
@@ -66,10 +72,10 @@ const CompareChart = (props) => {
         //valueAxis.renderer.maxLabelPosition = 0.95;
         valueAxis.renderer.fontSize = '0.8em'
 
-        let valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis())
+        let valueAxis2 = chart.yAxes.push(new ValueAxis())
         valueAxis2.tooltip.disabled = true
         // height of axis
-        valueAxis2.height = am4core.percent(35)
+        valueAxis2.height = percent(35)
         valueAxis2.zIndex = 3
         // this makes gap between panels
         valueAxis2.marginTop = 30
@@ -79,11 +85,10 @@ const CompareChart = (props) => {
         valueAxis2.renderer.labels.template.padding(2, 2, 2, 2)
         //valueAxis.renderer.maxLabelPosition = 0.95;
         valueAxis2.renderer.fontSize = '0.8em'
-        valueAxis2.renderer.gridContainer.background.fill =
-            am4core.color('#000000')
+        valueAxis2.renderer.gridContainer.background.fill = color('#000000')
         valueAxis2.renderer.gridContainer.background.fillOpacity = 0.05
 
-        let volumeSeries = chart.series.push(new am4charts.StepLineSeries())
+        let volumeSeries = chart.series.push(new StepLineSeries())
         volumeSeries.fillOpacity = 1
         volumeSeries.fill = '#ABBABF'
         volumeSeries.stroke = '#ABBABF'
@@ -97,7 +102,7 @@ const CompareChart = (props) => {
         volumeSeries.tooltip.label.fill = volumeSeries.stroke
 
         indicators.forEach((indicator) => {
-            let equitySeries = chart.series.push(new am4charts.LineSeries())
+            let equitySeries = chart.series.push(new LineSeries())
             equitySeries.dataFields.dateX = 'month'
             equitySeries.dataFields.valueY = toCamelCase(indicator.name)
             // equitySeries.dataFields.valueYShow = 'changePercent'
@@ -105,7 +110,7 @@ const CompareChart = (props) => {
             equitySeries.name = indicator.name
             equitySeries.tooltip.getFillFromObject = false
             equitySeries.tooltip.getStrokeFromObject = true
-            equitySeries.tooltip.background.fill = am4core.color('#fff')
+            equitySeries.tooltip.background.fill = color('#fff')
             equitySeries.tooltip.background.strokeWidth = 2
             equitySeries.tooltip.label.fill = equitySeries.stroke
             equitySeries.stroke = indicator.color

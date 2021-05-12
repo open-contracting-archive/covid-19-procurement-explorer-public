@@ -1,7 +1,13 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import {
+    color,
+    create,
+    DropShadowFilter,
+    percent,
+    useTheme
+} from '@amcharts/amcharts4/core'
+import { PieChart as Pie_Chart, PieSeries } from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const PieChart = ({ data, colors }) => {
@@ -10,22 +16,22 @@ const PieChart = ({ data, colors }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(pieChartDiv.current, am4charts.PieChart)
+        let chart = create(pieChartDiv.current, Pie_Chart)
 
         // Add and configure Series
-        let pieSeries = chart.series.push(new am4charts.PieSeries())
+        let pieSeries = chart.series.push(new PieSeries())
         pieSeries.dataFields.value = 'number'
         pieSeries.dataFields.category = 'value'
 
         // Let's cut a hole in our Pie chart the size of 30% the radius
-        chart.innerRadius = am4core.percent(45)
+        chart.innerRadius = percent(45)
 
         // Put a thick white border around each Slice
-        pieSeries.slices.template.stroke = am4core.color('#fff')
+        pieSeries.slices.template.stroke = color('#fff')
         pieSeries.slices.template.strokeWidth = 2
         pieSeries.slices.template.strokeOpacity = 1
         // change the cursor on hover to make it apparent the object can be interacted with
@@ -46,7 +52,7 @@ const PieChart = ({ data, colors }) => {
 
         // Create a base filter effect (as if it's not there) for the hover to return to
         let shadow = pieSeries.slices.template.filters.push(
-            new am4core.DropShadowFilter()
+            new DropShadowFilter()
         )
         shadow.opacity = 0
 
@@ -54,18 +60,12 @@ const PieChart = ({ data, colors }) => {
         let hoverState = pieSeries.slices.template.states.getKey('hover') // normally we have to create the hover state, in this case it already exists
 
         // Slightly shift the shadow and make it more prominent on hover
-        let hoverShadow = hoverState.filters.push(
-            new am4core.DropShadowFilter()
-        )
+        let hoverShadow = hoverState.filters.push(new DropShadowFilter())
         hoverShadow.opacity = 0.7
         hoverShadow.blur = 5
 
-        // Add a legend
-        // chart.legend = new am4charts.Legend()
-        // chart.legend.position = 'top'
-
         pieSeries.colors.list = colors.map((color) => {
-            return am4core.color(color)
+            return color(color)
         })
 
         chart.data = data

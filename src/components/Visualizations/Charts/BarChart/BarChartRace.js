@@ -1,7 +1,22 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import {
+    create,
+    ease,
+    Image,
+    Label,
+    percent,
+    PlayButton,
+    useTheme
+} from '@amcharts/amcharts4/core'
+import {
+    CategoryAxis,
+    ColumnSeries,
+    LabelBullet,
+    ValueAxis,
+    XYChart,
+    XYCursor
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { formatYearText } from '../../../../helpers/date'
 
@@ -11,25 +26,25 @@ const BarChartRace = ({ data, viewType }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
-        let chart = am4core.create(raceBarChartDiv.current, am4charts.XYChart)
+        let chart = create(raceBarChartDiv.current, XYChart)
         chart.padding(40, 40, 40, 0)
         chart.responsive.enabled = true
 
-        let label = chart.plotContainer.createChild(am4core.Label)
-        label.x = am4core.percent(97)
-        label.y = am4core.percent(90)
+        let label = chart.plotContainer.createChild(Label)
+        label.x = percent(97)
+        label.y = percent(90)
         label.horizontalCenter = 'right'
         label.verticalCenter = 'middle'
         label.dx = -15
         label.fontSize = 24
         label.zIndex = 200
 
-        let playButton = chart.plotContainer.createChild(am4core.PlayButton)
-        playButton.x = am4core.percent(97)
-        playButton.y = am4core.percent(90)
+        let playButton = chart.plotContainer.createChild(PlayButton)
+        playButton.x = percent(97)
+        playButton.y = percent(90)
         playButton.dy = -2
         playButton.verticalCenter = 'middle'
         playButton.zIndex = 200
@@ -43,7 +58,7 @@ const BarChartRace = ({ data, viewType }) => {
 
         let stepDuration = 1000
 
-        let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
+        let categoryAxis = chart.yAxes.push(new CategoryAxis())
         categoryAxis.dataFields.category = 'country'
         categoryAxis.renderer.grid.template.disabled = true
         categoryAxis.renderer.grid.template.location = 0
@@ -52,9 +67,9 @@ const BarChartRace = ({ data, viewType }) => {
         categoryAxis.renderer.grid.template.strokeOpacity = 0
         categoryAxis.renderer.tooltip.dx = -40
 
-        let valueAxis = chart.xAxes.push(new am4charts.ValueAxis())
+        let valueAxis = chart.xAxes.push(new ValueAxis())
         valueAxis.min = 0
-        valueAxis.rangeChangeEasing = am4core.ease.linear
+        valueAxis.rangeChangeEasing = ease.linear
         valueAxis.rangeChangeDuration = stepDuration
         valueAxis.extraMax = 0.1
         valueAxis.cursorTooltipEnabled = true
@@ -65,7 +80,7 @@ const BarChartRace = ({ data, viewType }) => {
         valueAxis.renderer.labels.template.dy = 20
         valueAxis.maxPrecision = 8
 
-        let series = chart.series.push(new am4charts.ColumnSeries())
+        let series = chart.series.push(new ColumnSeries())
         series.dataFields.categoryY = 'country'
         series.dataFields.valueX = 'value'
         series.tooltipText = `{valueX.value} ${
@@ -75,13 +90,13 @@ const BarChartRace = ({ data, viewType }) => {
         series.columns.template.column.cornerRadiusBottomRight = 5
         series.columns.template.column.cornerRadiusTopRight = 5
         series.interpolationDuration = stepDuration
-        series.interpolationEasing = am4core.ease.linear
+        series.interpolationEasing = ease.linear
         series.tooltip.pointerOrientation = 'vertical'
         series.tooltip.dy = -30
         series.columnsContainer.zIndex = 100
         series.mainContainer.mask = undefined
 
-        let labelBullet = series.bullets.push(new am4charts.LabelBullet())
+        let labelBullet = series.bullets.push(new LabelBullet())
         labelBullet.label.horizontalCenter = 'right'
         labelBullet.label.text = `{valueX.value} ${
             viewType === 'value' ? 'USD' : ''
@@ -91,7 +106,7 @@ const BarChartRace = ({ data, viewType }) => {
         labelBullet.label.dx = viewType === 'value' ? 135 : 90
         labelBullet.label.textAlign = 'end'
 
-        var image = labelBullet.createChild(am4core.Image)
+        var image = labelBullet.createChild(Image)
         image.width = 40
         image.height = 40
         image.horizontalCenter = 'right'
@@ -166,7 +181,7 @@ const BarChartRace = ({ data, viewType }) => {
 
         categoryAxis.sortBySeries = series
 
-        chart.cursor = new am4charts.XYCursor()
+        chart.cursor = new XYCursor()
         chart.cursor.lineX.opacity = 0
         chart.cursor.lineY.opacity = 0
 

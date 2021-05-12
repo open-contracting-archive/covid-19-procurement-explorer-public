@@ -1,7 +1,20 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import {
+    color as am4CoreColor,
+    create,
+    ease,
+    ExportMenu,
+    useTheme
+} from '@amcharts/amcharts4/core'
+import {
+    CategoryAxis,
+    ColumnSeries,
+    Legend,
+    ValueAxis,
+    XYChart,
+    XYCursor
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const PartitionedChart = ({ data }) => {
@@ -10,24 +23,24 @@ const PartitionedChart = ({ data }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(partitionedChart.current, am4charts.XYChart)
-        chart.exporting.menu = new am4core.ExportMenu()
+        let chart = create(partitionedChart.current, XYChart)
+        chart.exporting.menu = new ExportMenu()
 
         // Create axes
-        let yAxis = chart.yAxes.push(new am4charts.CategoryAxis())
+        let yAxis = chart.yAxes.push(new CategoryAxis())
         yAxis.dataFields.category = 'state'
         yAxis.renderer.grid.template.location = 0
         yAxis.renderer.labels.template.fontSize = 10
         yAxis.renderer.minGridDistance = 10
 
-        chart.xAxes.push(new am4charts.ValueAxis())
+        chart.xAxes.push(new ValueAxis())
 
         // Create series
-        let series = chart.series.push(new am4charts.ColumnSeries())
+        let series = chart.series.push(new ColumnSeries())
         series.dataFields.valueX = 'sales'
         series.dataFields.categoryY = 'state'
         series.columns.template.tooltipText = '{categoryY}: [bold]{valueX}[/]'
@@ -71,12 +84,12 @@ const PartitionedChart = ({ data }) => {
             range.label.horizontalCenter = 'left'
             range.label.inside = true
 
-            range.grid.stroke = am4core.color('#396478')
+            range.grid.stroke = am4CoreColor('#396478')
             range.grid.strokeOpacity = 1
             range.tick.length = 200
             range.tick.disabled = false
             range.tick.strokeOpacity = 0.6
-            range.tick.stroke = am4core.color('#396478')
+            range.tick.stroke = am4CoreColor('#396478')
             range.tick.location = 0
 
             range.locations.category = 1
@@ -97,9 +110,9 @@ const PartitionedChart = ({ data }) => {
         addRange('South', 'Florida', 'South Carolina', chart.colors.getIndex(2))
         addRange('West', 'California', 'Wyoming', chart.colors.getIndex(3))
 
-        chart.cursor = new am4charts.XYCursor()
+        chart.cursor = new XYCursor()
 
-        let legend = new am4charts.Legend()
+        let legend = new Legend()
         legend.position = 'right'
         legend.scrollable = true
         legend.valign = 'top'
@@ -115,7 +128,7 @@ const PartitionedChart = ({ data }) => {
                 axisBreak.animate(
                     { property: 'breakSize', to: 0 },
                     1000,
-                    am4core.ease.cubicOut
+                    ease.cubicOut
                 )
                 yAxis.dataItems.each(function (dataItem) {
                     if (dataItem.dataContext.region == name) {
@@ -131,7 +144,7 @@ const PartitionedChart = ({ data }) => {
                 axisBreak.animate(
                     { property: 'breakSize', to: 1 },
                     1000,
-                    am4core.ease.cubicOut
+                    ease.cubicOut
                 )
                 yAxis.dataItems.each(function (dataItem) {
                     if (dataItem.dataContext.region == name) {
