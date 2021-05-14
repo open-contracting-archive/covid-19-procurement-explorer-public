@@ -78,8 +78,8 @@ const ChartFooter = (props) => {
                                 href={downloadCountryContracts()}
                                 target="_blank"
                                 rel="noreferrer">
-                                <Icon.Download className=" mr-2 inline-block" />
-                                <span className=" hidden md:inline-block">
+                                <Icon.Download className="mr-2 inline-block" />
+                                <span className="hidden md:inline-block">
                                     <T _str="Download" />
                                 </span>
                             </a>
@@ -104,7 +104,7 @@ const ChartFooter = (props) => {
                         <div className="flex flex-col">
                             <FacebookShareButton
                                 url={currentLocation}
-                                className=" social-icon">
+                                className="social-icon">
                                 <SocialIcon.Facebook />
                                 <span>
                                     <T _str="Facebook" />
@@ -114,7 +114,7 @@ const ChartFooter = (props) => {
                             <TwitterShareButton
                                 url={currentLocation}
                                 via={twitterHandle}
-                                className=" social-icon">
+                                className="social-icon">
                                 <SocialIcon.Twitter />
                                 <span>
                                     <T _str="Twitter" />
@@ -123,7 +123,7 @@ const ChartFooter = (props) => {
 
                             <LinkedinShareButton
                                 url={currentLocation}
-                                className=" social-icon">
+                                className="social-icon">
                                 <SocialIcon.Linked />
                                 <span>
                                     <T _str="LinkedIn" />
@@ -132,7 +132,7 @@ const ChartFooter = (props) => {
 
                             <EmailShareButton
                                 url={currentLocation}
-                                className=" social-icon email">
+                                className="social-icon email">
                                 <SocialIcon.Mail />
                                 <span>
                                     <T _str="Email" />
@@ -149,8 +149,8 @@ const ChartFooter = (props) => {
                                     <div
                                         className="flex items-center cursor-pointer social-embed"
                                         onClick={() => modalHandler()}>
-                                        <SocialIcon.Embedded className=" w-5" />
-                                        <span className=" ml-4">
+                                        <SocialIcon.Embedded className="w-5" />
+                                        <span className="ml-4">
                                             <T _str="Embedded" />
                                         </span>
                                     </div>
@@ -174,7 +174,7 @@ const ChartFooter = (props) => {
             {showFullScreenAction()}
 
             <Modal
-                id=" embedded-visualization-modal"
+                id="embedded-visualization-modal"
                 isOpen={isModalOpen}
                 transition={ModalTransition.NONE}>
                 <EmbeddedModal

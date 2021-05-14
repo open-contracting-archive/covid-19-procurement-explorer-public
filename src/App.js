@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ModalProvider } from 'react-simple-hook-modal'
 import { tx } from '@transifex/native'
 import { load } from 'fathom-client'
-import { init } from 'cookie-though'
 import {
     setContractMethods,
     setContractStates,
@@ -16,10 +15,8 @@ import {
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
 import RouterView from './layouts/RouterView'
-import cookieConfig from './components/Utilities/CookieConfig'
 
 if (process.env.NODE_ENV === 'production') {
-    init(cookieConfig)
     const domain =
         process.env.REACT_APP_FATHOM_ANALYTICS_DOMAIN || 'cdn.usefathom.com'
     const siteKey = process.env.REACT_APP_FATHOM_ANALYTICS_ID
