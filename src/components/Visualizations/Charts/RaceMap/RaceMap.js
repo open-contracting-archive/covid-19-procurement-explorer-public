@@ -1,7 +1,23 @@
 import React, { useLayoutEffect, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4maps from '@amcharts/amcharts4/maps'
+import {
+    color,
+    Container,
+    create,
+    ease,
+    Label,
+    percent,
+    PlayButton,
+    Slider,
+    useTheme
+} from '@amcharts/amcharts4/core'
+import {
+    HeatLegend,
+    MapChart,
+    MapPolygonSeries,
+    ZoomControl,
+    projections
+} from '@amcharts/amcharts4/maps'
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { formatYearText } from '../../../../helpers/date'
@@ -36,16 +52,16 @@ const RaceMap = ({
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(mapDiv.current, am4maps.MapChart)
+        let chart = create(mapDiv.current, MapChart)
         chart.chartContainer.wheelable = false
         chart.responsive.enabled = true
 
-        let label = chart.createChild(am4core.Label)
-        label.y = am4core.percent(80)
+        let label = chart.createChild(Label)
+        label.y = percent(80)
         label.horizontalCenter = 'center'
         label.verticalCenter = 'middle'
         label.fontSize = 24
@@ -56,10 +72,10 @@ const RaceMap = ({
         chart.geodata = am4geodata_worldLow
 
         // Set projection
-        chart.projection = new am4maps.projections.Miller()
+        chart.projection = new projections.Miller()
 
         // Create map polygon series
-        let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries())
+        let polygonSeries = chart.series.push(new MapPolygonSeries())
 
         // Exclude Antarctica
         polygonSeries.exclude = ['AQ']
@@ -67,7 +83,7 @@ const RaceMap = ({
         // Make map load polygon (like country names) data from GeoJSON
         polygonSeries.useGeodata = true
 
-        chart.colors.list = [am4core.color('#F0F9E8'), am4core.color('#08589E')]
+        chart.colors.list = [color('#F0F9E8'), color('#08589E')]
 
         //Set min/max fill color for each area
         polygonSeries.heatRules.push({
@@ -115,20 +131,20 @@ const RaceMap = ({
         polygonSeries.data = data
 
         // Set up heat legend
-        let heatLegend = chart.createChild(am4maps.HeatLegend)
+        let heatLegend = chart.createChild(HeatLegend)
         heatLegend.series = polygonSeries
         heatLegend.align = 'center'
         heatLegend.valign = 'bottom'
-        heatLegend.width = am4core.percent(80)
-        heatLegend.marginBottom = am4core.percent(8)
+        heatLegend.width = percent(80)
+        heatLegend.marginBottom = percent(8)
         heatLegend.orientation = 'horizontal'
         heatLegend.padding(20, 20, 20, 20)
         heatLegend.valueAxis.renderer.labels.template.fontSize = 10
         heatLegend.valueAxis.renderer.minGridDistance = 40
-        heatLegend.minColor = am4core.color('#A8DDB5')
-        heatLegend.maxColor = am4core.color('#08589E')
+        heatLegend.minColor = color('#A8DDB5')
+        heatLegend.maxColor = color('#08589E')
 
-        chart.zoomControl = new am4maps.ZoomControl()
+        chart.zoomControl = new ZoomControl()
         chart.zoomControl.valign = 'top'
 
         // Setting map's initial zoom
@@ -154,20 +170,20 @@ const RaceMap = ({
         label.text = formatYearText(yearMonthMapData)
 
         function createSlider() {
-            let sliderContainer = chart.createChild(am4core.Container)
-            sliderContainer.width = am4core.percent(100)
+            let sliderContainer = chart.createChild(Container)
+            sliderContainer.width = percent(100)
             sliderContainer.valign = 'bottom'
-            sliderContainer.marginBottom = am4core.percent(4)
+            sliderContainer.marginBottom = percent(4)
             sliderContainer.padding(0, 50, 25, 50)
             sliderContainer.layout = 'horizontal'
             sliderContainer.height = 50
 
-            slider = sliderContainer.createChild(am4core.Slider)
+            slider = sliderContainer.createChild(Slider)
             slider.valign = 'middle'
             slider.margin(0, 0, 0, 0)
             slider.background.opacity = 1
             slider.opacity = 0.8
-            slider.background.fill = am4core.color('#DCEAEE')
+            slider.background.fill = color('#DCEAEE')
             slider.marginTop = 50
             slider.marginRight = 10
             slider.height = 15
@@ -194,9 +210,9 @@ const RaceMap = ({
                 }
             })
 
-            playButton = sliderContainer.createChild(am4core.PlayButton)
+            playButton = sliderContainer.createChild(PlayButton)
             playButton.valign = 'middle'
-            playButton.background.fill = am4core.color('#1FBBEC')
+            playButton.background.fill = color('#1FBBEC')
             playButton.events.on('toggled', function (event) {
                 if (event.target.isActive) {
                     play()
@@ -211,11 +227,7 @@ const RaceMap = ({
             })
 
             sliderAnimation = slider
-                .animate(
-                    { property: 'start', to: 1 },
-                    50000,
-                    am4core.ease.linear
-                )
+                .animate({ property: 'start', to: 1 }, 50000, ease.linear)
                 .pause()
             sliderAnimation.events.on('animationended', function () {
                 playButton.isActive = false

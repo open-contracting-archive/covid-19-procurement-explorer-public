@@ -1,7 +1,19 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import {
+    color,
+    create,
+    LinearGradient,
+    LinearGradientModifier,
+    useTheme
+} from '@amcharts/amcharts4/core'
+import {
+    CategoryAxis,
+    LineSeries,
+    ValueAxis,
+    XYChart,
+    XYCursor
+} from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 
 const AreaChart = ({ data, apiData, colorValue }) => {
@@ -10,13 +22,13 @@ const AreaChart = ({ data, apiData, colorValue }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(areaChartDiv.current, am4charts.XYChart)
+        let chart = create(areaChartDiv.current, XYChart)
 
-        let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+        let categoryAxis = chart.xAxes.push(new CategoryAxis())
         categoryAxis.renderer.grid.template.location = 0
         categoryAxis.renderer.ticks.template.disabled = true
         categoryAxis.renderer.line.opacity = 0
@@ -27,7 +39,7 @@ const AreaChart = ({ data, apiData, colorValue }) => {
         categoryAxis.startLocation = 0.4
         categoryAxis.endLocation = 0.6
 
-        let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
+        let valueAxis = chart.yAxes.push(new ValueAxis())
         valueAxis.tooltip.disabled = true
         valueAxis.renderer.line.opacity = 0
         valueAxis.renderer.ticks.template.disabled = true
@@ -35,7 +47,7 @@ const AreaChart = ({ data, apiData, colorValue }) => {
         valueAxis.renderer.labels.template.disabled = true
         valueAxis.min = 0
 
-        let lineSeries = chart.series.push(new am4charts.LineSeries())
+        let lineSeries = chart.series.push(new LineSeries())
         lineSeries.dataFields.categoryX = apiData ? 'date' : 'month'
         lineSeries.dataFields.valueY = 'value'
         lineSeries.tooltipText = 'value: {valueY.value}'
@@ -44,16 +56,16 @@ const AreaChart = ({ data, apiData, colorValue }) => {
         lineSeries.stroke = colorValue
         lineSeries.fill = colorValue
 
-        var gradient = new am4core.LinearGradient()
-        gradient.addColor(am4core.color(''))
+        var gradient = new LinearGradient()
+        gradient.addColor(color(''))
 
-        var fillModifier = new am4core.LinearGradientModifier()
+        var fillModifier = new LinearGradientModifier()
         fillModifier.opacities = [1, 0]
         fillModifier.offsets = [0, 1]
         fillModifier.gradient.rotation = 90
         lineSeries.segments.template.fillModifier = fillModifier
 
-        chart.cursor = new am4charts.XYCursor()
+        chart.cursor = new XYCursor()
         chart.cursor.lineX.opacity = 0
         chart.cursor.lineY.opacity = 0
 

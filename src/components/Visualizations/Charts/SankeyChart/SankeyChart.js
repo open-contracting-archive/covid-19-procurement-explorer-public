@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import * as am4core from '@amcharts/amcharts4/core'
-import * as am4charts from '@amcharts/amcharts4/charts'
+import { create, MouseCursorStyle, useTheme } from '@amcharts/amcharts4/core'
+import { SankeyDiagram } from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import Default from '../../../../constants/Default'
 
@@ -11,11 +11,11 @@ const SankeyChart = ({ data, currency, viewType }) => {
     useLayoutEffect(() => {
         /* Chart code */
         // Themes begin
-        am4core.useTheme(am4themes_animated)
+        useTheme(am4themes_animated)
         // Themes end
 
         // Create chart instance
-        let chart = am4core.create(sankeyChart.current, am4charts.SankeyDiagram)
+        let chart = create(sankeyChart.current, SankeyDiagram)
         chart.hiddenState.properties.opacity = 0
         chart.responsive.enabled = true
 
@@ -48,7 +48,7 @@ const SankeyChart = ({ data, currency, viewType }) => {
         // make nodes draggable
         nodeTemplate.readerTitle = 'Click to show/hide or drag to rearrange'
         nodeTemplate.showSystemTooltip = true
-        nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer
+        nodeTemplate.cursorOverStyle = MouseCursorStyle.pointer
 
         nodeTemplate.nameLabel.height = undefined
         nodeTemplate.nameLabel.label.hideOversized = true
