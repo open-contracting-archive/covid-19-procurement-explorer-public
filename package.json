@@ -41,7 +41,6 @@
     "redux-actions": "^2.6.5",
     "swiper": "^6.5.1",
     "web-vitals": "^0.2.4",
-    "webpack-notifier": "^1.12.0",
     "workbox-background-sync": "^5.1.3",
     "workbox-broadcast-update": "^5.1.3",
     "workbox-cacheable-response": "^5.1.3",
@@ -83,7 +82,8 @@
     "postcss-loader": "^4.2.0",
     "react-app-rewired": "^2.1.8",
     "redux-devtools-extension": "^2.13.8",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^1.9.6",
+    "webpack-notifier": "^1.12.0"
   },
   "config-overrides-path": "config-overrides.cjs"
 }
