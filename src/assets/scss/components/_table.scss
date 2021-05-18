@@ -1,39 +1,31 @@
 .table-scroll {
     max-height: 700px;
-    overflow-y: auto;
+    @apply overflow-y-auto;
 
     thead {
         th {
-            position: sticky;
-            top: 0;
-            @apply bg-primary-gray;
+            @apply bg-primary-gray sticky top-0;
         }
     }
 }
 
 table {
-    width: 100%;
-    max-width: 100%;
-    background: transparent;
+    @apply w-full max-w-full bg-transparent;
 
     thead {
         th {
-            text-align: left;
-            font-weight: normal;
-            text-transform: uppercase;
             font-size: 14px;
-            padding: 8px;
-            vertical-align: bottom;
+            @apply text-left font-normal uppercase p-2 align-bottom;
         }
     }
 
     tbody {
         td {
-            vertical-align: top;
             padding: 18px 8px 12px;
             border-bottom: 1px solid #f1f1f1;
             font-size: 14px;
-            background-color: #fff;
+
+            @apply align-top bg-white;
         }
 
         tr {
@@ -51,7 +43,7 @@ table {
         th:first-child {
             td {
                 &:first-child {
-                    padding-left: 20px;
+                    @apply pl-5;
                 }
             }
         }
@@ -83,7 +75,7 @@ table {
 
             td {
                 &:first-child {
-                    padding-left: 20px;
+                    @apply pl-5;
                 }
             }
 
@@ -98,20 +90,20 @@ table {
     thead {
         th {
             &:first-child {
-                padding-left: 20px;
+                @apply pl-5;
             }
         }
     }
     &__resources {
         tbody tr {
-            vertical-align: top;
             border-bottom: 1px solid #f1f1f1;
-            background-color: #fff;
+            @apply align-top bg-white;
+
             &:hover {
                 @apply bg-blue-0;
             }
             td {
-                border: 0;
+                @apply border-0;
             }
         }
     }
@@ -122,10 +114,7 @@ table {
     height: 10px;
     min-height: 10px;
     min-width: 10px;
-    border-radius: 50%;
-    background-color: transparent;
-    display: inline-block;
-    margin-right: 4px;
+    @apply bg-transparent mr-1 inline-block rounded-full;
 
     &.active {
         background-color: #b174fe;
@@ -139,7 +128,5 @@ table {
 }
 
 .sort {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @apply flex flex-col justify-center;
 }

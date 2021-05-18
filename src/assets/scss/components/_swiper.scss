@@ -29,20 +29,18 @@
 .swiper-button-prev {
     &:before {
         content: 'Previous';
-        position: absolute;
-        top: 0;
         left: 18px;
         font-size: 14px;
+        @apply absolute top-0;
     }
 }
 
 .swiper-button-next {
     &:before {
         content: 'Next';
-        position: absolute;
-        top: 0;
         right: 18px;
         font-size: 14px;
+        @apply absolute top-0;
     }
 }
 
@@ -53,7 +51,7 @@
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
 .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 0;
+    @apply bottom-0;
 
     @media only screen and (min-width: 768px) {
         bottom: 10px;

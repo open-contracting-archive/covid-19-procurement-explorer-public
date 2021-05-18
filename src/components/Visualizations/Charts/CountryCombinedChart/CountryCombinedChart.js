@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { useTheme, create, percent, color } from '@amcharts/amcharts4/core'
+import { useTheme, create, color } from '@amcharts/amcharts4/core'
 import {
     CircleBullet,
     ColumnSeries,
@@ -32,7 +32,7 @@ const CountryCombinedChart = ({ data, label1, label2 }) => {
         valueAxis1.title.text = 'World Average'
 
         // Create series
-        function createSeries(field, name) {
+        function createSeries(field, name, width = 20, second = false) {
             let series = chart.series.push(new ColumnSeries())
             series.dataFields.valueY = field
             series.dataFields.dateX = 'date'
@@ -40,15 +40,19 @@ const CountryCombinedChart = ({ data, label1, label2 }) => {
             series.name = name
             series.tooltipText = '{name}\n[bold font-size: 14]${valueY}M[/]'
             series.strokeWidth = 0
-            series.clustered = true
-            series.columns.template.width = percent(200)
+            series.clustered = false
             series.sequencedInterpolation = true
+            series.columns.template.width = width
+
+            if (second) {
+                series.fill = '#1FBBEC70'
+            }
         }
 
         createSeries('value1', label1)
 
         if (label2) {
-            createSeries('value2', label2)
+            createSeries('value2', label2, 35, true)
         }
 
         let series2 = chart.series.push(new LineSeries())

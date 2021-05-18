@@ -1,17 +1,13 @@
 .tooltip {
-    position: absolute;
     z-index: 100;
-    pointer-events: none;
-    opacity: 0;
     transition: all 0.23s linear;
+    @apply absolute pointer-events-none opacity-0;
 
     a {
-        display: inline-block;
         background: #3d393d;
         padding: 6px 16px;
-        color: #fff;
         font-size: 18px;
         line-height: 18px;
-        border-radius: 4px;
+        @apply inline-block text-white rounded;
     }
 }

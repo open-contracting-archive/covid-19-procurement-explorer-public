@@ -20,29 +20,26 @@
     }
 
     &__value-container[class] {
-        padding: 0;
+        @apply p-0;
     }
 
     &__indicator-separator[class] {
-        display: none;
+        @apply hidden;
     }
 
     &__indicator[class] {
-        padding: 0;
+        @apply p-0;
     }
 
     &--input {
         input,
         .field {
             padding: 3px 0 5px;
-            background: none;
             border-bottom: 2px solid #fff;
-            display: inline-block;
-            width: 100%;
             font-size: 14px;
             line-height: 1.4;
-            outline: none;
             color: #333;
+            @apply inline-block w-full bg-transparent outline-none bg-none;
 
             @media only screen and (min-width: 768px) {
                 border-bottom-color: #1fbbec;
@@ -50,19 +47,19 @@
 
             &::-webkit-input-placeholder {
                 /* Chrome/Opera/Safari */
-                color: #fff;
+                @apply text-white;
             }
             &::-moz-placeholder {
                 /* Firefox 19+ */
-                color: #fff;
+                @apply text-white;
             }
             &:-ms-input-placeholder {
                 /* IE 10+ */
-                color: #fff;
+                @apply text-white;
             }
             &:-moz-placeholder {
                 /* Firefox 18- */
-                color: #fff;
+                @apply text-white;
             }
 
             @media only screen and (min-width: 768px) {
@@ -85,28 +82,6 @@
             }
         }
     }
-
-    // .select-filter__placeholder {
-    //     color: #fff;
-    //     @media only screen and (min-width: 768px) {
-    //         color: hsl(0, 0%, 50%);
-    //     }
-    // }
-
-    // .select-filter__single-value {
-    //     color: #fff;
-
-    //     @media only screen and (min-width: 768px) {
-    //         color: hsl(0, 0%, 20%);
-    //     }
-    // }
-
-    // .select-filter__indicator {
-    //     color: #fff;
-    //     @media only screen and (min-width: 768px) {
-    //         color: #ccc;
-    //     }
-    // }
 
     .select-filter__menu {
         z-index: 9999 !important;

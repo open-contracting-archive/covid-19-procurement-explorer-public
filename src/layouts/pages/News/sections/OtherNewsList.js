@@ -65,7 +65,7 @@ const OtherNewsList = () => {
     return (
         <section className="px-4 py-24">
             <div className="container mx-auto">
-                <div className="flex md: flex-nowrap flex-wrap justify-between pb-10">
+                <div className="flex md:flex-nowrap flex-wrap justify-between pb-10">
                     <p className="text-xl blue-50">
                         <T _str="Other News" />
                     </p>
@@ -115,7 +115,7 @@ const OtherNewsList = () => {
                             ) : (
                                 <div className="flex justify-center pt-10">
                                     <span
-                                        className="text-white bg-primary-blue px-32 py-4 rounded"
+                                        className="text-white bg-primary-blue px-32 py-4 rounded cursor-pointer"
                                         onClick={() => {
                                             loadMoreNews()
                                         }}>

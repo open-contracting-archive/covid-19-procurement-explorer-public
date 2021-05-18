@@ -1,54 +1,45 @@
 .toggle-switch {
-    position: relative;
     width: 30px;
-    display: inline-block;
-    vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    text-align: left;
+    @apply relative inline-block align-middle text-left;
 
     &-checkbox {
-        display: none;
+        @apply hidden;
     }
 
     &-label {
-        display: block;
-        overflow: hidden;
-        cursor: pointer;
         border: 0 solid #bbb;
         border-radius: 20px;
-        margin: 0;
+        @apply block overflow-hidden cursor-pointer m-0;
     }
+
     &-inner {
-        display: block;
         width: 200%;
         margin-left: -100%;
         transition: margin 0.3s ease-in 0s;
+        @apply block;
 
         &:before,
         &:after {
-            display: block;
             float: left;
             width: 50%;
-            height: 16px;
-            padding: 0;
             line-height: 16px;
             font-size: 14px;
-            color: white;
-            font-weight: bold;
             box-sizing: border-box;
+            @apply block h-4 text-white font-bold p-0;
         }
 
         &:before {
             content: '';
             text-transform: uppercase;
             padding-left: 10px;
-            background-color: #1fbbec;
-            color: #fff;
+            @apply uppercase bg-primary-blue text-white;
         }
     }
+
     &-disabled {
         background-color: #ddd;
         cursor: not-allowed;
@@ -58,34 +49,29 @@
             cursor: not-allowed;
         }
     }
+
     &-inner:after {
         content: '';
-        text-transform: uppercase;
         padding-right: 10px;
         background-color: #bbb;
-        color: #fff;
-        text-align: right;
+        @apply uppercase text-white text-right;
     }
+
     &-switch {
-        display: block;
-        width: 12px;
-        height: 12px;
         margin: 2px;
-        background: #fff;
-        position: absolute;
-        top: 0;
-        bottom: 0;
         right: 13px;
         border: 0 solid #bbb;
         border-radius: 20px;
         transition: all 0.3s ease-in 0s;
+        @apply absolute top-0 bottom-0 bg-white block w-3 h-3;
     }
+
     &-checkbox:checked + &-label {
         .toggle-switch-inner {
-            margin-left: 0;
+            @apply ml-0;
         }
         .toggle-switch-switch {
-            right: 0px;
+            @apply right-0;
         }
     }
 }
