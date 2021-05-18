@@ -64,8 +64,8 @@ const PieChart = ({ data, colors }) => {
         hoverShadow.opacity = 0.7
         hoverShadow.blur = 5
 
-        pieSeries.colors.list = colors.map((color) => {
-            return color(color)
+        pieSeries.colors.list = colors.map((colorItem) => {
+            return color(colorItem)
         })
 
         chart.data = data

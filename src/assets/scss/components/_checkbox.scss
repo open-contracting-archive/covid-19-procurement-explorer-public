@@ -1,45 +1,36 @@
 .styled-checkbox {
-    position: relative;
+    @apply relative;
 }
 
 .styled-checkbox-input {
-    position: absolute;
-    opacity: 0;
+    @apply absolute opacity-0;
 
     + label {
-        position: relative;
-        cursor: pointer;
-        padding: 0;
+        @apply relative cursor-pointer p-0;
 
         &:before {
             content: '';
-            display: inline-block;
             vertical-align: text-top;
-            width: 16px;
-            height: 16px;
-            background: white;
-            border-radius: 4px;
-            border: 2px solid #1fbbec;
+            @apply inline-block w-4 h-4 bg-white rounded border-2 border-primary-blue;
         }
     }
 
     &:checked + label {
         &:before {
-            background: #1fbbec;
+            @apply bg-primary-blue;
         }
 
         &:after {
             content: '';
-            position: absolute;
             left: 3px;
             top: 7px;
-            background: white;
             width: 2px;
             height: 2px;
             box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white,
                 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
             -webkit-transform: rotate(45deg);
             transform: rotate(45deg);
+            @apply absolute bg-white;
         }
     }
 }

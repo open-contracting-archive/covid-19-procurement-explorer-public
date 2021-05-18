@@ -6,10 +6,11 @@
         }
     }
 }
-// blogs listing styles
+
 .blogs-list .img-wrapper {
     @apply h-full;
 }
+
 .related-section {
     @media only screen and (min-width: 768px) {
         max-width: 246px;
@@ -25,24 +26,21 @@
         }
     }
 }
+
 .detail__metadata {
     max-width: 170px;
 }
 
 .details {
     ul {
-        padding: 0;
-        margin: 0;
+        @apply p-0 m-0;
         li {
             &:before {
                 content: '';
-                position: absolute;
                 height: 6px;
                 width: 6px;
-                left: 0;
                 top: 6px;
-                position: block;
-                background: #1fbbec;
+                @apply absolute left-0 block bg-primary-blue;
             }
         }
     }
@@ -65,14 +63,14 @@
     h2 {
         font-size: 20px;
         font-weight: 500;
-        margin-bottom: 16px;
+        @apply mb-4;
     }
 
     p {
-        margin-bottom: 16px;
+        @apply mb-4;
     }
 
     table {
-        margin: 16px 0;
+        @apply my-4 mx-0;
     }
 }

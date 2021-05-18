@@ -6,7 +6,7 @@
             margin-bottom: 15px;
 
             &:last-child {
-                margin-bottom: 0;
+                @apply mb-0 border-b-0;
                 border-bottom: none;
             }
         }
@@ -14,19 +14,15 @@
     .custom-horizontal-bar-text {
         width: 236px;
         flex-shrink: 0;
-        margin-bottom: 8px;
+        @apply mb-2;
 
         @media only screen and (min-width: 768px) {
             width: 180px;
-            margin-bottom: 0;
-            margin-right: 12px;
+            @apply mb-0 mr-3;
         }
 
         h3 {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
+            @apply w-full whitespace-nowrap overflow-ellipsis overflow-hidden;
         }
     }
     .custom-horizontal-bar-amount {
@@ -37,36 +33,27 @@
     .custom-horizontal-bar-progress {
         height: 14px;
         width: 68%;
-        margin-right: 8px;
         background: #dceaee;
-        position: relative;
+        @apply relative mr-2;
 
         @media only screen and (min-width: 768px) {
             width: calc(100% - 180px);
         }
 
         span {
-            display: inline-block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            top: 0;
             background-color: #abbabf;
-            bottom: 0;
-            z-index: 1;
             transition: all 0.23s ease-in-out;
+            @apply inline-block absolute top-0 left-0 right-0 bottom-0 z-10;
         }
     }
 
     &.simple-bar {
         ul {
             li {
-                border: none;
-                margin-bottom: 0;
+                @apply border-none mb-0;
 
                 &:last-child {
-                    padding-bottom: 0;
+                    @apply pb-0;
                 }
             }
         }
@@ -81,8 +68,7 @@
 
 .custom-scrollbar {
     &::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
+        @apply w-1 h-1;
     }
 
     &::-webkit-scrollbar-track {
@@ -90,7 +76,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: #1fbbec;
+        @apply bg-primary-blue;
         outline: 1px solid #1fbbec;
     }
 }

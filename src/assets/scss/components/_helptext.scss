@@ -1,41 +1,33 @@
 .tooltip-icon {
-    width: 20px;
-    height: 20px;
+    @apply w-5 h-5;
 
     svg {
-        fill: currentColor;
+        @apply fill-current;
     }
 }
 
 .tooltip-content {
     background: #454545;
     min-width: 200px;
-    color: #fff;
-    border-radius: 4px;
-    padding: 8px;
     font-size: 14px;
-    opacity: 0;
     top: 30px;
-    pointer-events: none;
     transition: all 0.23s linear;
     left: -150px;
     z-index: 999;
+    @apply text-white p-2 rounded opacity-0 pointer-events-none;
 
     @media only screen and (min-width: 768px) {
         right: -6px;
-        left: auto;
+        @apply left-auto;
     }
 
     &:before {
         content: '';
-        position: absolute;
         top: -6px;
-        width: 0;
-        height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         border-bottom: 8px solid #454545;
-        right: 32px;
+        @apply absolute w-0 h-0 right-8;
 
         @media only screen and (min-width: 768px) {
             right: 8px;
@@ -48,9 +40,8 @@
     &:hover,
     &:focus {
         .tooltip-content {
-            opacity: 1;
-            pointer-events: auto;
             transition: all 0.23s linear;
+            @apply opacity-100 pointer-events-auto;
         }
     }
 }

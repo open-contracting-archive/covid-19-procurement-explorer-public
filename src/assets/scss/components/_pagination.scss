@@ -1,49 +1,41 @@
 .pagination-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    @apply flex justify-center mt-5;
+
     .pagination-items {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        @apply flex flex-wrap justify-center;
     }
+
     .pagination-item {
-        margin: 0 4px;
-        color: #1fbbec;
         font-size: 14px;
         padding: 2px 8px;
+        @apply my-0 mx-1 text-primary-blue;
+
         &.active {
-            background-color: #1fbbec;
-            color: #fff;
-            border-radius: 4px;
-            outline: none;
+            @apply bg-primary-blue text-white rounded outline-none;
+
             a {
-                color: #fff;
-                outline: none;
+                @apply text-white outline-none;
             }
         }
         a {
-            // color: var(--color-text-light);
-            color: #1fbbec;
             font-size: 14px;
-            cursor: pointer;
+            @apply text-primary-blue cursor-pointer;
         }
         &.next,
         &.prev {
             text-indent: -9999px;
-            position: relative;
+            @apply relative;
+
             a::after {
                 content: '';
-                position: absolute;
                 top: 50%;
                 left: 50%;
-                cursor: pointer;
-                border-radius: 4px;
                 transform: translate(-50%, -50%);
+                @apply absolute cursor-pointer rounded;
             }
         }
         &.next {
-            margin-left: 8px;
+            @apply ml-2;
             a::after {
                 border-top: 8px solid transparent;
                 border-bottom: 8px solid transparent;
@@ -51,7 +43,7 @@
             }
         }
         &.prev {
-            margin-right: 8px;
+            @apply mr-2;
             a::after {
                 border-top: 8px solid transparent;
                 border-bottom: 8px solid transparent;
@@ -62,29 +54,21 @@
 }
 
 .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @apply flex items-center justify-center;
 
     .page-item {
-        margin-right: 12px;
+        @apply mr-3;
 
         &:last-child {
-            margin-right: 0;
+            @apply mr-0;
         }
 
         &.active {
-            background: #1fbbec;
+            @apply bg-primary-blue;
         }
     }
 
     .page-link {
-        width: 24px;
-        height: 24px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
+        @apply w-6 h-6 text-center flex items-center justify-center rounded-full;
     }
 }
