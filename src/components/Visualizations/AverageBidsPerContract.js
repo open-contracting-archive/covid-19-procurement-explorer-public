@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'lodash'
-import { T } from '@transifex/react'
-import { Loader, ErrorHandler } from '../Utilities'
+import { ErrorHandler, CardContainer } from '../Utilities'
 import VisualizationService from '../../services/VisualizationService'
 import { AreaChartBlock } from './Charts'
 import useDataCalculations from '../../hooks/useDataCalculations'
@@ -57,13 +56,8 @@ const AverageBidsPerContract = (props) => {
     }, [originalData])
 
     return (
-        <div className="bg-white rounded p-4 h-full">
-            <h3 className="uppercase font-bold  text-primary-dark">
-                {label || <T _str="Average bids per contract" />}
-            </h3>
-            {loading ? (
-                <Loader sm />
-            ) : !error ? (
+        <CardContainer label={label} loading={loading}>
+            {!error ? (
                 <div className="flex items-end">
                     <AreaChartBlock
                         chartData={chartData.areaChart}
@@ -75,7 +69,7 @@ const AverageBidsPerContract = (props) => {
             ) : (
                 <ErrorHandler />
             )}
-        </div>
+        </CardContainer>
     )
 }
 

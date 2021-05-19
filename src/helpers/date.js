@@ -1,5 +1,6 @@
 import Default from '../constants/Default'
 import * as dayjs from 'dayjs'
+import Duration from 'dayjs/plugin/duration'
 
 export const formatDate = (dateString, format = Default.DISPLAY_DATE_SHORT) => {
     return dayjs(dateString).format(format)
@@ -21,4 +22,10 @@ export const sortItemsByDate = (items, key) => {
     return items.sort((item1, item2) => {
         return dateDiff(item1[key], item2[key])
     })
+}
+
+export const durationInMonths = (duration) => {
+    dayjs.extend(Duration)
+
+    return Math.floor(dayjs.duration(duration.split(' ')[0], 'days').asMonths())
 }
