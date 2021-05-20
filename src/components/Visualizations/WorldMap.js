@@ -50,7 +50,6 @@ const WorldMap = (props) => {
     useEffect(() => {
         VisualizationService.GlobalMap(params)
             .then((result) => {
-                setLoading(false)
                 if (result) {
                     setOriginalData(result)
                 } else {
@@ -87,6 +86,7 @@ const WorldMap = (props) => {
                 })
             })
         setMapData(parsedMapData)
+        setLoading(false)
     }, [originalData, viewType, showPerCapita])
 
     // ===========================================================================

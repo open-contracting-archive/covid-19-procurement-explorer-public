@@ -23,7 +23,8 @@ const SupplierTable = (props) => {
     const { params } = props
     const [originalData, setOriginalData] = useState([])
     const [selectedFilters, setSelectedFilters] = useState({})
-    const [suppliersNameParameter, setSuppliersNameParameter] = useState('')
+    const [supplierNameParameter, setSupplierNameParameter] = useState('')
+    const [supplierIdParameter, setSupplierIdParameter] = useState('')
     const [loading, setLoading] = useState(true)
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
@@ -99,9 +100,9 @@ const SupplierTable = (props) => {
         history.push(path)
     }
 
-    const handleInputSubmit = (event, parameter) => {
+    const handleInputSubmit = (event, parameters) => {
         event.preventDefault()
-        appendFilter({ supplier_name: parameter })
+        appendFilter(parameters)
     }
 
     const handleFilterToggle = () => {
@@ -129,7 +130,7 @@ const SupplierTable = (props) => {
                     className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between mb-4 text-white md:mb-0">
                         <span className="text-sm font-bold uppercase">
-                            Filter
+                            <T _str="Filter" />
                         </span>
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
@@ -140,25 +141,44 @@ const SupplierTable = (props) => {
                     <div className="flex flex-wrap -mx-2 -mb-5">
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                <T _str="Suppliers" />
+                                <T _str="Supplier" />
                             </p>
                             <form
                                 className="mt-2 select-filter--input"
                                 onSubmit={(event) =>
-                                    handleInputSubmit(
-                                        event,
-                                        suppliersNameParameter
-                                    )
+                                    handleInputSubmit(event, {
+                                        supplier_name: supplierNameParameter
+                                    })
                                 }>
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter contract name"
-                                    value={suppliersNameParameter}
+                                    placeholder="Enter supplier name"
+                                    value={supplierNameParameter}
                                     onChange={(e) =>
-                                        setSuppliersNameParameter(
-                                            e.target.value
-                                        )
+                                        setSupplierNameParameter(e.target.value)
+                                    }
+                                />
+                            </form>
+                        </div>
+                        <div className="w-1/2 px-2 mb-5 md:w-40">
+                            <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
+                                <T _str="Supplier ID" />
+                            </p>
+                            <form
+                                className="mt-2 select-filter--input"
+                                onSubmit={(event) =>
+                                    handleInputSubmit(event, {
+                                        supplier_id: supplierIdParameter
+                                    })
+                                }>
+                                <input
+                                    type="text"
+                                    className="select-filter"
+                                    placeholder="Enter supplier Id"
+                                    value={supplierIdParameter}
+                                    onChange={(e) =>
+                                        setSupplierIdParameter(e.target.value)
                                     }
                                 />
                             </form>
@@ -224,20 +244,44 @@ const SupplierTable = (props) => {
                 <div className="hidden gap-8 md:flex">
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            <T _str="Suppliers" />
+                            <T _str="Supplier Name" />
                         </p>
                         <form
                             className="mt-2 select-filter--input"
                             onSubmit={(event) =>
-                                handleInputSubmit(event, suppliersNameParameter)
+                                handleInputSubmit(event, {
+                                    supplier_name: supplierNameParameter
+                                })
                             }>
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter contract name"
-                                value={suppliersNameParameter}
+                                placeholder="Enter supplier name"
+                                value={supplierNameParameter}
                                 onChange={(e) =>
-                                    setSuppliersNameParameter(e.target.value)
+                                    setSupplierNameParameter(e.target.value)
+                                }
+                            />
+                        </form>
+                    </div>
+                    <div className="w-40">
+                        <p className="text-xs leading-none uppercase opacity-50">
+                            <T _str="Supplier ID" />
+                        </p>
+                        <form
+                            className="mt-2 select-filter--input"
+                            onSubmit={(event) =>
+                                handleInputSubmit(event, {
+                                    supplier_code: supplierIdParameter
+                                })
+                            }>
+                            <input
+                                type="text"
+                                className="select-filter"
+                                placeholder="Enter supplier Id"
+                                value={supplierIdParameter}
+                                onChange={(e) =>
+                                    setSupplierIdParameter(e.target.value)
                                 }
                             />
                         </form>
@@ -306,9 +350,15 @@ const SupplierTable = (props) => {
                                         <T _str="Supplier" />
                                     )}
                                 </th>
+                                <th style={{ width: '20%' }}>
+                                    {tableHeaderSpan(
+                                        'supplier_id',
+                                        <T _str="Supplier ID" />
+                                    )}
+                                </th>
                                 <th style={{ width: '10%' }}>
                                     {tableHeaderSpan(
-                                        'country_name',
+                                        'country__name',
                                         <T _str="Country" />
                                     )}
                                 </th>
@@ -363,6 +413,16 @@ const SupplierTable = (props) => {
                                                     'supplier_name'
                                                 )}>
                                                 {get(supplier, 'supplier_name')}
+                                            </p>
+                                        </td>
+                                        <td className="hover:text-primary-blue">
+                                            <p
+                                                className="truncate-text"
+                                                title={get(
+                                                    supplier,
+                                                    'supplier_code'
+                                                )}>
+                                                {get(supplier, 'supplier_code')}
                                             </p>
                                         </td>
                                         {!hasCountry() && (

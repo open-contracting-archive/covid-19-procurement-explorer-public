@@ -23,7 +23,8 @@ const BuyerTable = (props) => {
     const { params } = props
     const [originalData, setOriginalData] = useState([])
     const [selectedFilters, setSelectedFilters] = useState({})
-    const [buyersNameParameter, setBuyersNameParameter] = useState('')
+    const [buyerNameParameter, setBuyerNameParameter] = useState('')
+    const [buyerIdParameter, setBuyerIdParameter] = useState('')
     const [loading, setLoading] = useState(true)
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
@@ -105,9 +106,9 @@ const BuyerTable = (props) => {
         history.push(path)
     }
 
-    const handleInputSubmit = (event, parameter) => {
+    const handleInputSubmit = (event, parameters) => {
         event.preventDefault()
-        appendFilter({ buyer_name: parameter })
+        appendFilter(parameters)
     }
 
     const handleFilterToggle = () => {
@@ -135,7 +136,7 @@ const BuyerTable = (props) => {
                     className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between mb-4 text-white md:mb-0">
                         <span className="text-sm font-bold uppercase">
-                            Filter
+                            <T _str="Filter" />
                         </span>
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
@@ -146,23 +147,44 @@ const BuyerTable = (props) => {
                     <div className="flex flex-wrap -mx-2 -mb-5">
                         <div className="w-1/2 px-2 mb-5 md:w-40">
                             <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
-                                <T _str="Buyers" />
+                                <T _str="Buyer Name" />
                             </p>
                             <form
                                 className="mt-2 select-filter--input"
                                 onSubmit={(event) =>
-                                    handleInputSubmit(
-                                        event,
-                                        buyersNameParameter
-                                    )
+                                    handleInputSubmit(event, {
+                                        buyer_code: buyerNameParameter
+                                    })
                                 }>
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter contract name"
-                                    value={buyersNameParameter}
+                                    placeholder="Enter buyer name"
+                                    value={buyerNameParameter}
                                     onChange={(e) =>
-                                        setBuyersNameParameter(e.target.value)
+                                        setBuyerNameParameter(e.target.value)
+                                    }
+                                />
+                            </form>
+                        </div>
+                        <div className="w-1/2 px-2 mb-5 md:w-40">
+                            <p className="text-xs leading-none text-white uppercase opacity-50 md:text-primary-dark">
+                                <T _str="Buyer ID" />
+                            </p>
+                            <form
+                                className="mt-2 select-filter--input"
+                                onSubmit={(event) =>
+                                    handleInputSubmit(event, {
+                                        buyer_code: buyerIdParameter
+                                    })
+                                }>
+                                <input
+                                    type="text"
+                                    className="select-filter"
+                                    placeholder="Enter buyer ID"
+                                    value={buyerIdParameter}
+                                    onChange={(e) =>
+                                        setBuyerIdParameter(e.target.value)
                                     }
                                 />
                             </form>
@@ -227,20 +249,44 @@ const BuyerTable = (props) => {
                 <div className="hidden gap-8 md:flex">
                     <div className="w-40">
                         <p className="text-xs leading-none uppercase opacity-50">
-                            <T _str="Buyers" />
+                            <T _str="Buyer Name" />
                         </p>
                         <form
                             className="mt-2 select-filter--input"
                             onSubmit={(event) =>
-                                handleInputSubmit(event, buyersNameParameter)
+                                handleInputSubmit(event, {
+                                    buyer_name: buyerNameParameter
+                                })
                             }>
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter contract name"
-                                value={buyersNameParameter}
+                                placeholder="Enter buyer name"
+                                value={buyerNameParameter}
                                 onChange={(e) =>
-                                    setBuyersNameParameter(e.target.value)
+                                    setBuyerNameParameter(e.target.value)
+                                }
+                            />
+                        </form>
+                    </div>
+                    <div className="w-40">
+                        <p className="text-xs leading-none uppercase opacity-50">
+                            <T _str="Buyer ID" />
+                        </p>
+                        <form
+                            className="mt-2 select-filter--input"
+                            onSubmit={(event) =>
+                                handleInputSubmit(event, {
+                                    buyer_code: buyerIdParameter
+                                })
+                            }>
+                            <input
+                                type="text"
+                                className="select-filter"
+                                placeholder="Enter buyer ID"
+                                value={buyerIdParameter}
+                                onChange={(e) =>
+                                    setBuyerIdParameter(e.target.value)
                                 }
                             />
                         </form>
@@ -308,10 +354,16 @@ const BuyerTable = (props) => {
                                         <T _str="Buyer" />
                                     )}
                                 </th>
+                                <th style={{ width: '20%' }}>
+                                    {tableHeaderSpan(
+                                        'buyer_id',
+                                        <T _str="Buyer ID" />
+                                    )}
+                                </th>
                                 {!hasCountry() && (
                                     <th style={{ width: '10%' }}>
                                         {tableHeaderSpan(
-                                            'country',
+                                            'country__name',
                                             <T _str="Country" />
                                         )}
                                     </th>
@@ -369,6 +421,17 @@ const BuyerTable = (props) => {
                                                 {get(buyer, 'buyer_name')}{' '}
                                             </p>{' '}
                                         </td>
+                                        <td className="hover:text-primary-blue">
+                                            <p
+                                                className="truncate-text"
+                                                title={get(
+                                                    buyer,
+                                                    'buyer_code'
+                                                )}>
+                                                {get(buyer, 'buyer_code')}{' '}
+                                            </p>{' '}
+                                        </td>
+
                                         {!hasCountry() && (
                                             <td>
                                                 {get(

@@ -169,9 +169,12 @@ const ContractDetail = () => {
                             <T _str="Tender value" />
                         </p>
                         <p className="font-bold text-xl">
-                            {contractDetail && contractDetail.tender_usd ? (
+                            {contractDetail &&
+                            contractDetail.tender_value_usd ? (
                                 <Fragment>
-                                    {formatNumber(contractDetail.tender_usd)}{' '}
+                                    {formatNumber(
+                                        contractDetail.tender_value_usd
+                                    )}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
                                     </span>
@@ -186,9 +189,12 @@ const ContractDetail = () => {
                             <T _str="Award value" />
                         </p>
                         <p className="font-bold text-xl">
-                            {contractDetail && contractDetail.award_usd ? (
+                            {contractDetail &&
+                            contractDetail.award_value_usd ? (
                                 <Fragment>
-                                    {formatNumber(contractDetail.award_usd)}{' '}
+                                    {formatNumber(
+                                        contractDetail.award_value_usd
+                                    )}{' '}
                                     <span className="font-normal text-base uppercase">
                                         USD
                                     </span>
