@@ -57,7 +57,7 @@ const CountrySelector = () => {
                 <div
                     className="pr-6 mb-3 text-lg font-normal capitalize bg-transparent outline-none appearance-none cursor-pointer md:mb-5 md:text-2xl text-primary-dark"
                     onClick={toggling}>
-                    {selectedCountry || 'Global Overview'}
+                    {selectedCountry || <T _str="Global Overview" />}
                 </div>
                 {isOpen && (
                     <div className="absolute z-30 w-64 p-4 space-y-3 text-base text-white rounded md:-mt-5 bg-primary-dark">
