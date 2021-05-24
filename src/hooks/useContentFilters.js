@@ -21,11 +21,27 @@ const useContentFilters = () => {
                     })
             ]
         }, [countries]),
+        countrySelectListByCode: useMemo(() => {
+            return [
+                { label: 'All ', value: '' },
+                ...countries
+                    .map((country) => {
+                        return {
+                            label: country.name,
+                            value: country.country_code_alpha_2
+                        }
+                    })
+                    .sort((a, b) => {
+                        return a.label < b.label ? -1 : 0
+                    })
+            ]
+        }, [countries]),
         contentsTypeSelectList: useMemo(() => {
             return [
                 { label: 'All', value: '' },
                 { label: 'News', value: 'News' },
-                { label: 'Blog', value: 'Blog' }
+                { label: 'Blog', value: 'Blog' },
+                { label: 'Resources', value: 'Resources' }
             ]
         }, []),
         resourceTypeSelectList: useMemo(() => {
@@ -39,10 +55,16 @@ const useContentFilters = () => {
             ]
         }, []),
         yearSelectList: useMemo(() => {
-            return range(2019, new Date().getFullYear()).reduce(
-                (acc, current) => [...acc, { value: current, label: current }],
-                []
-            )
+            return [
+                { value: '', label: 'All' },
+                ...range(2019, new Date().getFullYear()).reduce(
+                    (acc, current) => [
+                        ...acc,
+                        { value: current, label: current }
+                    ],
+                    []
+                )
+            ]
         }, [])
     }
 }

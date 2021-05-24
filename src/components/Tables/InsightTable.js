@@ -6,11 +6,9 @@ import Select from 'react-select'
 import ReactPaginate from 'react-paginate'
 import { T } from '@transifex/react'
 import CmsPageService from '../../services/CmsPageService'
-import useCountries from '../../hooks/useCountries'
 import useContentFilters from '../../hooks/useContentFilters'
 import useTableSorting from '../../hooks/useTableSorting'
 import { hasValidProperty } from '../../helpers/general'
-import { formatDate } from '../../helpers/date'
 import { Loader, TableLoader } from '../Utilities'
 import Default from '../../constants/Default'
 import Icon from '../../assets/img/icons'
@@ -25,9 +23,8 @@ const InsightTable = (props) => {
     const [selectedFilters, setSelectedFilters] = useState({})
     const [totalItems, setTotalItems] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
-    const { countryNameById } = useCountries()
     const [showFilter, setShowFilter] = useState('hidden')
-    const { contentsTypeSelectList, countrySelectList, yearSelectList } =
+    const { contentsTypeSelectList, countrySelectListByCode, yearSelectList } =
         useContentFilters()
     const history = useHistory()
     const { sortedItems, sorting, tableHeaderSpan } = useTableSorting({
@@ -51,10 +48,10 @@ const InsightTable = (props) => {
         setTableLoading(true)
         CmsPageService.InsightList(queryParams)
             .then((result) => {
-                if (result.items) {
-                    setInsightList(result.items)
+                if (result.data.data) {
+                    setInsightList(result.data.data)
                 }
-                setTotalItems(result.meta.total_count)
+                setTotalItems(result.data.count)
                 setLoading(false)
                 setTableLoading(false)
             })
@@ -74,9 +71,20 @@ const InsightTable = (props) => {
     }
 
     const showDetail = (type, id) => {
-        let path =
-            type.toLowerCase() === 'news' ? `/news/${id}` : `/blogs/${id}`
-        history.push(path)
+        switch (type) {
+            case 'news':
+                history.push(`/news/${id}`)
+                break
+            case 'blog':
+                history.push(`/blogs/${id}`)
+                break
+            case 'resources':
+                history.push(`/resources/${id}`)
+                break
+            default:
+                history.push(`/news/${id}`)
+                break
+        }
     }
     const hasCountry = () => {
         return hasValidProperty(params, 'country')
@@ -136,7 +144,7 @@ const InsightTable = (props) => {
                                 <Select
                                     className="mt-2 text-sm select-filter"
                                     classNamePrefix="select-filter"
-                                    options={countrySelectList}
+                                    options={countrySelectListByCode}
                                     onChange={(selectedOption) =>
                                         handleCountryFilter(
                                             selectedOption.value
@@ -155,7 +163,7 @@ const InsightTable = (props) => {
                                 options={contentsTypeSelectList}
                                 onChange={(selectedFilter) => {
                                     appendFilter({
-                                        contents_type: selectedFilter.value
+                                        type: selectedFilter.value
                                     })
                                 }}
                             />
@@ -168,12 +176,11 @@ const InsightTable = (props) => {
                                 className="mt-2 text-sm select-filter"
                                 classNamePrefix="select-filter"
                                 options={yearSelectList}
-                                // onChange={(selectedFilter) => {
-                                //     appendFilter({
-                                //         news_date__gte: `${selectedFilter.value}-1-1`,
-                                //         news_date__lt: `${selectedFilter.value}-12-31`
-                                //     })
-                                // }}
+                                onChange={(selectedFilter) => {
+                                    appendFilter({
+                                        year: selectedFilter.value
+                                    })
+                                }}
                             />
                         </div>
                     </div>
@@ -192,7 +199,7 @@ const InsightTable = (props) => {
                             <Select
                                 className="mt-2 text-sm select-filter"
                                 classNamePrefix="select-filter"
-                                options={countrySelectList}
+                                options={countrySelectListByCode}
                                 onChange={(selectedOption) =>
                                     handleCountryFilter(selectedOption.value)
                                 }
@@ -209,7 +216,7 @@ const InsightTable = (props) => {
                             options={contentsTypeSelectList}
                             onChange={(selectedFilter) => {
                                 appendFilter({
-                                    contents_type: selectedFilter.value
+                                    type: selectedFilter.value
                                 })
                             }}
                         />
@@ -222,12 +229,11 @@ const InsightTable = (props) => {
                             className="mt-2 text-sm select-filter"
                             classNamePrefix="select-filter"
                             options={yearSelectList}
-                            // onChange={(selectedFilter) => {
-                            //     appendFilter({
-                            //         news_date__gte: `${selectedFilter.value}-1-1`,
-                            //         news_date__lt: `${selectedFilter.value}-12-31`
-                            //     })
-                            // }}
+                            onChange={(selectedFilter) => {
+                                appendFilter({
+                                    year: selectedFilter.value
+                                })
+                            }}
                         />
                     </div>
                 </div>
@@ -248,20 +254,23 @@ const InsightTable = (props) => {
                                                 <T _str="Title" />
                                             )}
                                         </th>
-                                        <th style={{ width: '15%' }}>
-                                            <span className="flex items-center">
-                                                <T _str="Country" />
-                                            </span>
-                                        </th>
+                                        {!hasCountry() && (
+                                            <th style={{ width: '15%' }}>
+                                                {tableHeaderSpan(
+                                                    'country',
+                                                    <T _str="Country" />
+                                                )}
+                                            </th>
+                                        )}
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
-                                                'contents_type',
+                                                'type',
                                                 <T _str="Type" />
                                             )}
                                         </th>
                                         <th style={{ width: '10%' }}>
                                             {tableHeaderSpan(
-                                                'news_date',
+                                                'year',
                                                 <T _str="Year" />
                                             )}
                                         </th>
@@ -274,7 +283,7 @@ const InsightTable = (props) => {
                                                 key={index}
                                                 onClick={() =>
                                                     showDetail(
-                                                        insight.contents_type,
+                                                        insight.type.toLowerCase(),
                                                         insight.id
                                                     )
                                                 }
@@ -284,22 +293,11 @@ const InsightTable = (props) => {
                                                         {insight.title}
                                                     </p>
                                                 </td>
-                                                <td>
-                                                    {countryNameById(
-                                                        get(
-                                                            insight,
-                                                            'country.id',
-                                                            null
-                                                        )
-                                                    )}
-                                                </td>
-                                                <td>{insight.contents_type}</td>
-                                                <td>
-                                                    {formatDate(
-                                                        insight.news_date,
-                                                        'YYYY'
-                                                    )}
-                                                </td>
+                                                {!hasCountry() && (
+                                                    <td>{insight.country}</td>
+                                                )}
+                                                <td>{insight.type}</td>
+                                                <td>{insight.year}</td>
                                             </tr>
                                         )
                                     })}
