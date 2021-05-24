@@ -5,7 +5,7 @@ import { InsightTable } from '../../../../components/Tables'
 import { useCountry } from '../../../../context/CountryContext'
 
 const CountryInsights = () => {
-    const { id: countryId } = useCountry()
+    const { id: countryId, country_code_alpha_2: countryCode } = useCountry()
 
     return (
         <div>
@@ -15,7 +15,7 @@ const CountryInsights = () => {
                 <T _str="Best practices and solutions from our database" />
             </h2>
 
-            <InsightTable params={{ country: countryId }} />
+            <InsightTable params={{ country: countryCode }} />
         </div>
     )
 }

@@ -62,6 +62,7 @@ const apiRoutes = {
 
     // cms api
     pages: 'api/v2/pages/',
+    insights: 'api/contents/insights',
 
     // filter parameter api
     'filter-parameter': 'api/v1/visualization/filter-parameters/',
