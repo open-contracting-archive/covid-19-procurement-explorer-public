@@ -2,26 +2,11 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { t } from '@transifex/native'
 import { useLocale } from '@transifex/react'
 import { MetaInformation } from '../../../components/Utilities'
-
-const HomeBanner = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/HomeBanner')
-)
-const MainVisualization = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './sections/MainVisualization'
-    )
-)
-const NewsSection = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/NewsSection')
-)
-const LibrarySection = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/LibrarySection')
-)
-const LibraryUpcomingEvents = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ '../Library/sections/LibraryUpcomingEvents'
-    )
-)
+import HomeBanner from './sections/HomeBanner'
+import MainVisualization from './sections/MainVisualization'
+import NewsSection from './sections/NewsSection'
+import LibrarySection from './sections/LibrarySection'
+import LibraryUpcomingEvents from './../Library/sections/LibraryUpcomingEvents'
 
 const Home = () => {
     const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })

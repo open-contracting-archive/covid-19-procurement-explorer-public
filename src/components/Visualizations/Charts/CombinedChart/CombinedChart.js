@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { t } from '@transifex/native'
 import { color, create, percent, useTheme } from '@amcharts/amcharts4/core'
 import {
     CircleBullet,
@@ -30,12 +31,12 @@ const CombinedChart = (props) => {
         chart.xAxes.push(new DateAxis())
 
         let valueAxis1 = chart.yAxes.push(new ValueAxis())
-        valueAxis1.title.text = 'Covid case / deaths'
+        valueAxis1.title.text = t('Covid case / deaths')
         valueAxis1.fontSize = 12
 
         let valueAxis2 = chart.yAxes.push(new ValueAxis())
         valueAxis2.title.text =
-            type == 'value' ? 'Contract values' : 'Contract numbers'
+            type === 'value' ? t('Contract values') : t('Contract numbers')
         valueAxis2.fontSize = 12
         valueAxis2.renderer.opposite = true
         valueAxis2.renderer.grid.template.disabled = true
@@ -45,7 +46,7 @@ const CombinedChart = (props) => {
         series1.dataFields.valueY = 'activeCase'
         series1.dataFields.dateX = 'date'
         series1.yAxis = valueAxis1
-        series1.name = 'Active cases'
+        series1.name = t('Active cases')
         series1.tooltipText = '{name}\n[bold font-size: 20]{valueY}[/]'
         series1.fill = '#ABBABF'
         series1.strokeWidth = 0
@@ -57,7 +58,7 @@ const CombinedChart = (props) => {
         series2.dataFields.valueY = 'deathCase'
         series2.dataFields.dateX = 'date'
         series2.yAxis = valueAxis1
-        series2.name = 'Death cases'
+        series2.name = t('Death cases')
         series2.tooltipText = '{name}\n[bold font-size: 20]{valueY}[/]'
         // series2.fill = '#d0d0d0'
         series2.fill = '#abbabf80'
@@ -68,14 +69,15 @@ const CombinedChart = (props) => {
         let series3 = chart.series.push(new LineSeries())
         series3.dataFields.valueY = 'value'
         series3.dataFields.dateX = 'date'
-        series3.name = type == 'value' ? 'Total spending' : 'Total contracts'
+        series3.name =
+            type === 'value' ? t('Total spending') : t('Total contracts')
         series3.strokeWidth = 2
         series3.tensionX = 0.7
         series3.yAxis = valueAxis2
         series3.tooltipText =
-            type == 'value'
+            type === 'value'
                 ? `{name}\n[bold font-size: 20]${
-                      currency == 'usd' ? '$' : ''
+                      currency === 'usd' ? '$' : ''
                   }{valueY} [bold font-size: 20 text-transform: uppercase]${currency}[/]`
                 : '{name}\n[bold font-size: 20]{valueY}[/]'
         series3.fontSize = 12

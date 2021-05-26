@@ -166,7 +166,9 @@ const WorldTimelineMap = () => {
                         embeddedVisualization={{
                             key: Visualization.WORLD_MAP_RACE
                         }}
-                        downloadUrl={mediaUrl('export/overall_summary.xlsx')}
+                        downloadUrl={mediaUrl(
+                            'export/Overall Country Summary.xlsx'
+                        )}
                     />
                 </Fragment>
             )}

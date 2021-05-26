@@ -4,8 +4,9 @@ import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 import { identity, pickBy, get } from 'lodash'
 import ReactPaginate from 'react-paginate'
-import VisualizationService from '../../services/VisualizationService'
 import { T } from '@transifex/react'
+import { t } from '@transifex/native'
+import VisualizationService from '../../services/VisualizationService'
 import { Loader, TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
 import { hasValidProperty } from '../../helpers/general'
@@ -159,7 +160,7 @@ const BuyerTable = (props) => {
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter buyer name"
+                                    placeholder={t('Enter buyer name')}
                                     value={buyerNameParameter}
                                     onChange={(e) =>
                                         setBuyerNameParameter(e.target.value)
@@ -181,7 +182,7 @@ const BuyerTable = (props) => {
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter buyer ID"
+                                    placeholder={t('Enter buyer ID')}
                                     value={buyerIdParameter}
                                     onChange={(e) =>
                                         setBuyerIdParameter(e.target.value)
@@ -261,7 +262,7 @@ const BuyerTable = (props) => {
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter buyer name"
+                                placeholder={t('Enter buyer name')}
                                 value={buyerNameParameter}
                                 onChange={(e) =>
                                     setBuyerNameParameter(e.target.value)
@@ -283,7 +284,7 @@ const BuyerTable = (props) => {
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter buyer ID"
+                                placeholder={t('Enter buyer ID')}
                                 value={buyerIdParameter}
                                 onChange={(e) =>
                                     setBuyerIdParameter(e.target.value)

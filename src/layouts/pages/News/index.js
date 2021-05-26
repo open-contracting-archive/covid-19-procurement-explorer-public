@@ -2,13 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { t } from '@transifex/native'
 import { T, useLocale } from '@transifex/react'
 import { MetaInformation, Breadcrumb } from '../../../components/Utilities'
-
-const OtherNewsList = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/OtherNewsList')
-)
-const FeaturedNewsList = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/FeaturedNewsList')
-)
+import OtherNewsList from './sections/OtherNewsList'
+import FeaturedNewsList from './sections/FeaturedNewsList'
 
 const News = () => {
     const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })

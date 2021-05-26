@@ -7,12 +7,7 @@ import {
 } from '../../../../components/Visualizations'
 import { SupplierTable } from '../../../../components/Tables'
 import { DataDisclaimerInfo } from '../../../../components/Utilities'
-
-const VisualizationModal = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../modal/VisualizationModal'
-    )
-)
+import VisualizationModal from '../modal/VisualizationModal'
 
 const GlobalSuppliers = () => {
     const [modalVisualization, setModalVisualization] = useState('')

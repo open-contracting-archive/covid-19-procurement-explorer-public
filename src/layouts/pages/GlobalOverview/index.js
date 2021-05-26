@@ -25,12 +25,7 @@ import {
     GlobalProducts
 } from './tabs'
 import { CountryMethodology } from '../CountryProfile/tabs'
-
-const TabNavigator = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../CountryProfile/sections/TabNavigator'
-    )
-)
+import TabNavigator from '../CountryProfile/sections/TabNavigator'
 
 const GlobalOverview = () => {
     // ===========================================================================

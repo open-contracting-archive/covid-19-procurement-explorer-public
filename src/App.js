@@ -15,6 +15,7 @@ import {
 import CountryService from './services/CountryService'
 import GeneralService from './services/GeneralService'
 import RouterView from './layouts/RouterView'
+import { LocaleProvider } from './context/LocaleProvider'
 
 if (process.env.NODE_ENV === 'production') {
     const domain =
@@ -30,9 +31,11 @@ if (process.env.NODE_ENV === 'production') {
     }
 
     if (process.env.REACT_APP_TRANSIFEX_TOKEN) {
+        const locale = window.localStorage.getItem('locale')
         tx.init({
             token: process.env.REACT_APP_TRANSIFEX_TOKEN
         })
+        tx.setCurrentLocale(locale)
     }
 }
 
@@ -66,7 +69,9 @@ function App() {
     return (
         <Fragment>
             <ModalProvider>
-                {countries.length > 0 && <RouterView />}
+                <LocaleProvider>
+                    {countries.length > 0 ? <RouterView /> : ''}
+                </LocaleProvider>
             </ModalProvider>
         </Fragment>
     )

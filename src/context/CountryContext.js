@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-const CountryContext = React.createContext({})
+const CountryContext = React.createContext()
 
 export function useCountry() {
     return useContext(CountryContext)
