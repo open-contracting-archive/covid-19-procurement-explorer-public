@@ -1,79 +1,23 @@
 import React from 'react'
 
-const Home = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/Homepage')
-)
-const StaticPage = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/StaticPage')
-)
-const Tags = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/Library/Tags')
-)
-const Library = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/Library')
-)
-const ResourceDetail = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ '../layouts/pages/Resources/ResourceDetail'
-    )
-)
-const Resources = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/Resources')
-)
-const EventDetail = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ '../layouts/pages/Events/EventDetail'
-    )
-)
-const Events = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/Events')
-)
-const BlogDetail = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ '../layouts/pages/Blog/BlogDetail'
-    )
-)
-const Blogs = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/Blog')
-)
-const NewsDetail = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ '../layouts/pages/News/NewsDetail'
-    )
-)
-const News = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ '../layouts/pages/News')
-)
-const ContractDetail = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../layouts/pages/Contract/ContractDetail'
-    )
-)
-const CountryProfile = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../layouts/pages/CountryProfile'
-    )
-)
-const ProductProfile = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../layouts/pages/Product/ProductProfile'
-    )
-)
-const GlobalOverview = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../layouts/pages/GlobalOverview'
-    )
-)
-const BuyerProfile = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../layouts/pages/Buyer/BuyerProfile'
-    )
-)
-const SupplierProfile = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ '../layouts/pages/Supplier/SupplierProfile'
-    )
-)
+import Home from '../layouts/pages/Homepage'
+import StaticPage from '../layouts/pages/StaticPage'
+import Tags from '../layouts/pages/Library/Tags'
+import Library from '../layouts/pages/Library'
+import ResourceDetail from '../layouts/pages/Resources/ResourceDetail'
+import Resources from '../layouts/pages/Resources'
+import EventDetail from '../layouts/pages/Events/EventDetail'
+import Events from '../layouts/pages/Events'
+import BlogDetail from '../layouts/pages/Blog/BlogDetail'
+import Blogs from '../layouts/pages/Blog'
+import NewsDetail from '../layouts/pages/News/NewsDetail'
+import News from '../layouts/pages/News'
+import ContractDetail from '../layouts/pages/Contract/ContractDetail'
+import CountryProfile from '../layouts/pages/CountryProfile'
+import ProductProfile from '../layouts/pages/Product/ProductProfile'
+import GlobalOverview from '../layouts/pages/GlobalOverview'
+import BuyerProfile from '../layouts/pages/Buyer/BuyerProfile'
+import SupplierProfile from '../layouts/pages/Supplier/SupplierProfile'
 
 export const webRoutes = [
     {

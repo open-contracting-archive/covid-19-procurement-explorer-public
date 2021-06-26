@@ -1,73 +1,17 @@
-import React from 'react'
-
-export const AreaChartBlock = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './AreaChart/AreaChartBlock')
-)
-export const BarChart = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './BarChart/BarChart')
-)
-export const BarChartRace = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './BarChart/BarChartRace')
-)
-export const BarListChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './BarListSection/BarListChart'
-    )
-)
-export const CombinedChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './CombinedChart/CombinedChart'
-    )
-)
-export const CompareChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './CompareChart/CompareChart'
-    )
-)
-export const CountryCombinedChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './CountryCombinedChart/CountryCombinedChart'
-    )
-)
-export const PieChart = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './PieChart/PieChart')
-)
-export const RaceMap = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './RaceMap/RaceMap')
-)
-export const SankeyChart = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './SankeyChart/SankeyChart')
-)
-export const SimpleBarChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './SimpleBarChart/SimpleBarChart'
-    )
-)
-export const SimpleBarListChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './SimpleBarListSection/SimpleBarListChart'
-    )
-)
-export const StackedChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './StackedChart/StackedChart'
-    )
-)
-export const TreeMapChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './TreeMapChart/TreeMapChart'
-    )
-)
-export const AreaChart = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './AreaChart/AreaChart')
-)
-export const HorizontalBarChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './HorizontalBarChart/HorizontalBarChart'
-    )
-)
-export const PartitionedChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './PartitionedChart/PartitionedChart'
-    )
-)
+export { default as AreaChartBlock } from './AreaChart/AreaChartBlock'
+export { default as BarChart } from './BarChart/BarChart'
+export { default as BarChartRace } from './BarChart/BarChartRace'
+export { default as BarListChart } from './BarListSection/BarListChart'
+export { default as CombinedChart } from './CombinedChart/CombinedChart'
+export { default as CompareChart } from './CompareChart/CompareChart'
+export { default as CountryCombinedChart } from './CountryCombinedChart/CountryCombinedChart'
+export { default as PieChart } from './PieChart/PieChart'
+export { default as RaceMap } from './RaceMap/RaceMap'
+export { default as SankeyChart } from './SankeyChart/SankeyChart'
+export { default as SimpleBarChart } from './SimpleBarChart/SimpleBarChart'
+export { default as SimpleBarListChart } from './SimpleBarListSection/SimpleBarListChart'
+export { default as StackedChart } from './StackedChart/StackedChart'
+export { default as TreeMapChart } from './TreeMapChart/TreeMapChart'
+export { default as AreaChart } from './AreaChart/AreaChart'
+export { default as HorizontalBarChart } from './HorizontalBarChart/HorizontalBarChart'
+export { default as PartitionedChart } from './PartitionedChart/PartitionedChart'

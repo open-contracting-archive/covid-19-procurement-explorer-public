@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { identity, get, pickBy } from 'lodash'
 import ReactPaginate from 'react-paginate'
 import { T } from '@transifex/react'
+import { t } from '@transifex/native'
 import VisualizationService from '../../services/VisualizationService'
 import { Loader, TableLoader } from '../Utilities'
 import useContractFilters from '../../hooks/useContractFilters'
@@ -153,7 +154,7 @@ const SupplierTable = (props) => {
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter supplier name"
+                                    placeholder={t('Enter supplier name')}
                                     value={supplierNameParameter}
                                     onChange={(e) =>
                                         setSupplierNameParameter(e.target.value)
@@ -175,7 +176,7 @@ const SupplierTable = (props) => {
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter supplier Id"
+                                    placeholder={t('Enter supplier Id')}
                                     value={supplierIdParameter}
                                     onChange={(e) =>
                                         setSupplierIdParameter(e.target.value)
@@ -256,7 +257,7 @@ const SupplierTable = (props) => {
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter supplier name"
+                                placeholder={t('Enter supplier name')}
                                 value={supplierNameParameter}
                                 onChange={(e) =>
                                     setSupplierNameParameter(e.target.value)
@@ -278,7 +279,7 @@ const SupplierTable = (props) => {
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter supplier Id"
+                                placeholder={t('Enter supplier Id')}
                                 value={supplierIdParameter}
                                 onChange={(e) =>
                                     setSupplierIdParameter(e.target.value)

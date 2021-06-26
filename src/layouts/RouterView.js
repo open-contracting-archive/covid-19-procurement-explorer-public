@@ -4,12 +4,7 @@ import WebLayout from './WebLayout'
 import { webRoutes } from '../routes/webRoutes'
 import { NotFound } from '../components/Utilities'
 import Loader from '../components/Utilities/Loader'
-
-const EmbeddedVisualization = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './pages/Visualization/EmbeddedVisualization'
-    )
-)
+import EmbeddedVisualization from './pages/Visualization/EmbeddedVisualization'
 
 const RouterView = () => {
     const renderWebRoutes = () => {

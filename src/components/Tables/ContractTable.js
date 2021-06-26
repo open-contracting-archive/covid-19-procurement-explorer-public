@@ -11,10 +11,8 @@ import { hasValidProperty } from '../../helpers/general'
 import useTableSorting from '../../hooks/useTableSorting'
 import Default from '../../constants/Default'
 import Icon from '../../assets/img/icons'
+import ContractFilter from './ContractFilter'
 
-const ContractFilter = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ContractFilter')
-)
 const limit = Default.PAGE_SIZE
 
 const ContractTable = (props) => {

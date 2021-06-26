@@ -11,10 +11,7 @@ import {
     MetaInformation
 } from '../../../components/Utilities'
 import Icon from '../../../assets/img/icons'
-
-const AwardedItemTable = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './AwardedItemsTable')
-)
+import AwardedItemTable from './AwardedItemsTable'
 
 const ContractDetail = () => {
     const { contractId } = useParams()

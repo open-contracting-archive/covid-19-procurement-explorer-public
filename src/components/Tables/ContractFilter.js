@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 import DatePicker from 'react-datepicker'
 import { identity, pickBy } from 'lodash'
-import ContractService from '../../services/ContractService'
 import { T } from '@transifex/react'
+import { t } from '@transifex/native'
+import ContractService from '../../services/ContractService'
 import useContractFilters from '../../hooks/useContractFilters'
 import { formatDate } from '../../helpers/date'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -166,7 +167,7 @@ const ContractFilter = (props) => {
                                 <input
                                     type="text"
                                     className="select-filter"
-                                    placeholder="Enter contract name"
+                                    placeholder={t('Enter contract name')}
                                     value={contractTitleParameter}
                                     onChange={(event) =>
                                         setContractTitleParameter(
@@ -337,7 +338,7 @@ const ContractFilter = (props) => {
                             <input
                                 type="text"
                                 className="select-filter"
-                                placeholder="Enter contract name"
+                                placeholder={t('Enter contract name')}
                                 value={contractTitleParameter}
                                 onChange={(event) =>
                                     setContractTitleParameter(

@@ -1,113 +1,35 @@
-import React from 'react'
-
-export const AverageBidsPerContract = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './AverageBidsPerContract')
-)
-export const TotalContracts = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './TotalContracts')
-)
-export const TotalSpending = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './TotalSpending')
-)
-export const Monopolization = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './Monopolization')
-)
-export const ContractStatus = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ContractStatus')
-)
-export const EquityIndicators = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './EquityIndicators')
-)
-export const DirectOpen = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './DirectOpen')
-)
-export const ProductsTimeline = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ProductsTimeline')
-)
-export const TopSuppliers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './TopSuppliers')
-)
-export const TopBuyers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './TopBuyers')
-)
-export const GlobalSuppliers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './GlobalSuppliers')
-)
-export const ProductDistribution = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ProductDistribution')
-)
-export const ContractRedFlags = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ContractRedFlags')
-)
-export const ContractsCorrelation = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ContractsCorrelation')
-)
-export const Buyers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './Buyers')
-)
-export const Suppliers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './Suppliers')
-)
-export const CountrySuppliers = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './CountrySuppliers')
-)
-export const ContractEquityIndicators = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ContractEquityIndicators')
-)
-export const RedFlagSummary = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './RedFlagSummary')
-)
-export const WorldTimelineMap = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './WorldTimelineMap')
-)
-export const WorldTimelineRaceBarChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './WorldTimelineRaceBarChart'
-    )
-)
-export const Concentration = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './Concentration')
-)
-export const WorldMap = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './WorldMap')
-)
-export const CountryProductComparisonChart = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './CountryProductComparisonChart'
-    )
-)
-export const ProductMap = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ProductMap')
-)
-export const ContractTrend = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ContractTrend')
-)
-export const DirectOpenContractTrend = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './DirectOpenContractTrend')
-)
-export const BuyerTrend = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './BuyerTrend')
-)
-export const SupplierTrend = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './SupplierTrend')
-)
-export const ProductCategoryMap = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ProductCategoryMap')
-)
-export const CountryDetailMap = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './Charts/CountryDetailMap/CountryDetailMap'
-    )
-)
-export const CountryPartnerSlider = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './CountryPartnerSlider')
-)
-export const GlobalMap = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './GlobalMap')
-)
-export const ProductFlow = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './ProductFlow')
-)
-export const SupplierProductFlow = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './SupplierProductFlow')
-)
+export { default as AverageBidsPerContract } from './AverageBidsPerContract'
+export { default as TotalContracts } from './TotalContracts'
+export { default as TotalSpending } from './TotalSpending'
+export { default as Monopolization } from './Monopolization'
+export { default as ContractStatus } from './ContractStatus'
+export { default as EquityIndicators } from './EquityIndicators'
+export { default as DirectOpen } from './DirectOpen'
+export { default as ProductsTimeline } from './ProductsTimeline'
+export { default as TopSuppliers } from './TopSuppliers'
+export { default as TopBuyers } from './TopBuyers'
+export { default as GlobalSuppliers } from './GlobalSuppliers'
+export { default as ProductDistribution } from './ProductDistribution'
+export { default as ContractRedFlags } from './ContractRedFlags'
+export { default as ContractsCorrelation } from './ContractsCorrelation'
+export { default as Buyers } from './Buyers'
+export { default as Suppliers } from './Suppliers'
+export { default as CountrySuppliers } from './CountrySuppliers'
+export { default as ContractEquityIndicators } from './ContractEquityIndicators'
+export { default as RedFlagSummary } from './RedFlagSummary'
+export { default as WorldTimelineMap } from './WorldTimelineMap'
+export { default as WorldTimelineRaceBarChart } from './WorldTimelineRaceBarChart'
+export { default as Concentration } from './Concentration'
+export { default as WorldMap } from './WorldMap'
+export { default as CountryProductComparisonChart } from './CountryProductComparisonChart'
+export { default as ProductMap } from './ProductMap'
+export { default as ContractTrend } from './ContractTrend'
+export { default as DirectOpenContractTrend } from './DirectOpenContractTrend'
+export { default as BuyerTrend } from './BuyerTrend'
+export { default as SupplierTrend } from './SupplierTrend'
+export { default as ProductCategoryMap } from './ProductCategoryMap'
+export { default as CountryDetailMap } from './Charts/CountryDetailMap/CountryDetailMap'
+export { default as CountryPartnerSlider } from './CountryPartnerSlider'
+export { default as GlobalMap } from './GlobalMap'
+export { default as ProductFlow } from './ProductFlow'
+export { default as SupplierProductFlow } from './SupplierProductFlow'

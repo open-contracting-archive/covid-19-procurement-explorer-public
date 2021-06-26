@@ -150,7 +150,7 @@ const WorldTimelineRaceBarChart = () => {
                 embeddedVisualization={{
                     key: Visualization.WORLD_TIMELINE_RACE_BAR
                 }}
-                downloadUrl={mediaUrl('export/overall_summary.xlsx')}
+                downloadUrl={mediaUrl('export/Overall Country Summary.xlsx')}
             />
         </Fragment>
     )

@@ -19,6 +19,7 @@ export const setCountryCurrency = (currency) => {
 
 export const setCurrentLocale = (locale) => {
     window.localStorage.setItem('locale', locale)
+
     return {
         type: types.SET_CURRENT_LOCALE,
         payload: locale

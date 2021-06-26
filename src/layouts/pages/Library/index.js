@@ -2,21 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { t } from '@transifex/native'
 import { T, useLocale } from '@transifex/react'
 import { MetaInformation } from '../../../components/Utilities'
-
-const LibraryResources = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/LibraryResources')
-)
-const LibraryUpcomingEvents = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ './sections/LibraryUpcomingEvents'
-    )
-)
-const LibraryBlogs = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/LibraryBlogs')
-)
-const LibraryNews = React.lazy(() =>
-    import(/* webpackChunkName: "app-common" */ './sections/LibraryNews')
-)
+import LibraryResources from './sections/LibraryResources'
+import LibraryUpcomingEvents from './sections/LibraryUpcomingEvents'
+import LibraryBlogs from './sections/LibraryBlogs'
+import LibraryNews from './sections/LibraryNews'
 
 const Library = () => {
     const [metaInfo, setMetaInfo] = useState({ title: '', description: '' })

@@ -7,12 +7,7 @@ import {
 } from '../../../../components/Visualizations'
 import { OverallStatisticsTable } from '../../../../components/Tables'
 import Icon from '../../../../assets/img/icons'
-
-const CmsPageContent = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-common" */ '../../StaticPage/CmsPageContent'
-    )
-)
+import CmsPageContent from '../../StaticPage/CmsPageContent'
 
 const MainVisualization = () => {
     // ===========================================================================

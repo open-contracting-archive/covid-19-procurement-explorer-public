@@ -33,18 +33,9 @@ import {
     ErrorHandler
 } from '../../../components/Utilities'
 import { CountryWrapper } from '../../../context/CountryContext'
-
-const TabNavigator = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './sections/TabNavigator')
-)
-const CountryMapElement = React.lazy(() =>
-    import(
-        /* webpackChunkName: "app-data-page" */ './sections/CountryMapElement'
-    )
-)
-const CountryInfo = React.lazy(() =>
-    import(/* webpackChunkName: "app-data-page" */ './sections/CountryInfo')
-)
+import TabNavigator from './sections/TabNavigator'
+import CountryMapElement from './sections/CountryMapElement'
+import CountryInfo from './sections/CountryInfo'
 
 const CountryProfile = () => {
     const countries = useSelector((state) => state.general.countries)
