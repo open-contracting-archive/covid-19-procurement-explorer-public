@@ -349,28 +349,44 @@ const OverallStatisticsTable = () => {
                                                         <td className="border-r border-gray-e2e text-right">
                                                             {get(
                                                                 item,
-                                                                'statistic.no_of_buyers',
+                                                                'statistic.total_buyers',
                                                                 0
                                                             ).toLocaleString()}
                                                         </td>
                                                         <td className="border-r border-gray-e2e text-right">
                                                             {get(
                                                                 item,
-                                                                'statistic.no_of_suppliers',
+                                                                'statistic.total_suppliers',
                                                                 0
                                                             ).toLocaleString()}
                                                         </td>
-                                                        <td className="border-r border-gray-e2e text-center">
-                                                            -
+                                                        <td className="border-r border-gray-e2e text-right">
+                                                            {get(
+                                                                item,
+                                                                'statistic.total_red_flag_contracts',
+                                                                0
+                                                            ).toLocaleString()}
                                                         </td>
-                                                        <td className="border-r border-gray-e2e text-center">
-                                                            -
+                                                        <td className="border-r border-gray-e2e text-right">
+                                                            {get(
+                                                                item,
+                                                                'statistic.total_amount_red_flag_contracts',
+                                                                0
+                                                            ).toLocaleString()}
                                                         </td>
-                                                        <td className="border-r border-gray-e2e text-center">
-                                                            -
+                                                        <td className="border-r border-gray-e2e text-right">
+                                                            {get(
+                                                                item,
+                                                                'statistic.total_equity_contracts',
+                                                                0
+                                                            ).toLocaleString()}
                                                         </td>
-                                                        <td className="border-r border-gray-e2e text-center">
-                                                            -
+                                                        <td className="border-r border-gray-e2e text-right">
+                                                            {get(
+                                                                item,
+                                                                'statistic.total_amount_equity_contracts',
+                                                                0
+                                                            ).toLocaleString()}
                                                         </td>
                                                         <td className="border-r border-gray-e2e text-center">
                                                             -
@@ -404,11 +420,19 @@ const OverallStatisticsTable = () => {
                                                                 0
                                                             ).toLocaleString()}
                                                         </td>
-                                                        <td className="border-r border-gray-e2e text-center">
-                                                            -
+                                                        <td className="border-r border-gray-e2e text-right">
+                                                            {get(
+                                                                item,
+                                                                'statistic.spending_per_covid_case',
+                                                                0
+                                                            ).toLocaleString()}
                                                         </td>
-                                                        <td className="border-r border-gray-e2e text-center">
-                                                            -
+                                                        <td className="border-r border-gray-e2e text-right">
+                                                            {get(
+                                                                item,
+                                                                'country.covid_active_cases',
+                                                                0
+                                                            ).toLocaleString()}
                                                         </td>
                                                         <td className="border-r border-gray-e2e text-right">
                                                             {get(
