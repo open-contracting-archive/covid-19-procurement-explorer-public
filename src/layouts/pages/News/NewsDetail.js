@@ -126,7 +126,8 @@ const NewsDetail = () => {
                                                         <Link
                                                             className="news-thumbnail"
                                                             to={`/news/${news.id}`}
-                                                            key={news.id}>
+                                                            key={news.id}
+                                                        >
                                                             {get(
                                                                 news,
                                                                 'content_image.meta.download_url'
@@ -169,7 +170,8 @@ const NewsDetail = () => {
                                         <hr className="text-primary-gray flex-1" />
                                         <Link
                                             to="/news"
-                                            className="text-blue-20 px-4">
+                                            className="text-blue-20 px-4"
+                                        >
                                             <T _str="View all news" /> --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />

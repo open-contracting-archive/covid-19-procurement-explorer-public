@@ -66,7 +66,8 @@ const GlobalData = () => {
                         <TopSuppliers />
                         <Link
                             to="/global-overview/suppliers"
-                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6"
+                        >
                             <T _str="View in detail" /> →
                         </Link>
                     </div>
@@ -74,7 +75,8 @@ const GlobalData = () => {
                         <TopBuyers />
                         <Link
                             to="/global-overview/buyers"
-                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6"
+                        >
                             <T _str="View in detail" /> →
                         </Link>
                     </div>
@@ -88,7 +90,8 @@ const GlobalData = () => {
                         <ContractRedFlags />
                         <Link
                             to="/global-overview/contracts"
-                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
+                            className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6"
+                        >
                             <T _str="View in detail" /> →
                         </Link>
                     </div>
@@ -103,7 +106,8 @@ const GlobalData = () => {
             <Modal
                 id="global-data-modal"
                 isOpen={isModalOpen}
-                transition={ModalTransition.NONE}>
+                transition={ModalTransition.NONE}
+            >
                 <VisualizationModal
                     visualizationType={modalVisualization}
                     closeModal={closeModal}

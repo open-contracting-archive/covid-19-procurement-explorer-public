@@ -42,7 +42,8 @@ const GlobalSuppliers = () => {
             <Modal
                 id="global-supplier-modal"
                 isOpen={isModalOpen}
-                transition={ModalTransition.NONE}>
+                transition={ModalTransition.NONE}
+            >
                 <VisualizationModal
                     visualizationType={modalVisualization}
                     closeModal={closeModal}

@@ -80,7 +80,8 @@ const OtherNewsList = () => {
                                 <Link
                                     className="news-thumbnail"
                                     to={news.detailUrl}
-                                    key={news.id}>
+                                    key={news.id}
+                                >
                                     {news.image != null ? (
                                         <div className="img-wrapper ">
                                             <img
@@ -118,7 +119,8 @@ const OtherNewsList = () => {
                                         className="text-white bg-primary-blue px-32 py-4 rounded cursor-pointer"
                                         onClick={() => {
                                             loadMoreNews()
-                                        }}>
+                                        }}
+                                    >
                                         <T _str="Load more" />
                                     </span>
                                 </div>

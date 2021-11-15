@@ -44,7 +44,8 @@ const FeaturedNewsList = () => {
                             <Link
                                 className="news-thumbnail"
                                 to={mainNews.detailUrl}
-                                key={mainNews.id}>
+                                key={mainNews.id}
+                            >
                                 <div className="news__item h-full">
                                     <div className="img-wrapper h-full relative">
                                         {mainNews.image && (
@@ -73,7 +74,8 @@ const FeaturedNewsList = () => {
                                 <Link
                                     className="news-thumbnail"
                                     to={news.detailUrl}
-                                    key={news.id}>
+                                    key={news.id}
+                                >
                                     <div className="news__item flex flex-wrap">
                                         {news.image != null ? (
                                             <div className="img-wrapper w-full h-auto">

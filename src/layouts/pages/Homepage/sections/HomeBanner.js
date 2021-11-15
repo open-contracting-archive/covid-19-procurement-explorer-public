@@ -21,7 +21,8 @@ const HomeBanner = () => {
                     <div className="flex md:flex-no-wrap justify-center pt-12 w-full text-white bg-primary-dark pb-6 md:pb-16">
                         <Link
                             to="/global-overview/data"
-                            className="px-2 md:px-0 md:flex md:mr-12 md:mb-10 text-center">
+                            className="px-2 md:px-0 md:flex md:mr-12 md:mb-10 text-center"
+                        >
                             <div>
                                 <p className="text-sm md:text-lg md:font-bold uppercase border-b-2 md:border-b-4 border-primary-blue">
                                     <T _str="Explore data" />
@@ -33,7 +34,8 @@ const HomeBanner = () => {
                         </Link>
                         <Link
                             to="/library"
-                            className="px-2 md:px-0 md:flex text-center">
+                            className="px-2 md:px-0 md:flex text-center"
+                        >
                             <div>
                                 <p className="text-sm md:text-lg md:font-bold uppercase border-b-2 md:border-b-4 border-primary-blue">
                                     <T _str="Explore library" />

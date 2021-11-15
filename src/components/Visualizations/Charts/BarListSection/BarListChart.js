@@ -28,7 +28,8 @@ function BarListChart(props) {
                                     <div className="custom-horizontal-bar-text">
                                         <Link
                                             className="hover:text-primary-blue"
-                                            to={`/${forwardUrl}/${bar_value.id}`}>
+                                            to={`/${forwardUrl}/${bar_value.id}`}
+                                        >
                                             <h3 title={bar_value.name}>
                                                 {bar_value.name}
                                             </h3>
@@ -38,7 +39,8 @@ function BarListChart(props) {
                                         <span
                                             style={{
                                                 width: `${bar_value.value}%`
-                                            }}></span>
+                                            }}
+                                        ></span>
                                     </div>
                                     <div className="md:ml-2 custom-horizontal-bar-amount">
                                         <p>

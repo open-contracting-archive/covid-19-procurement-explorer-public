@@ -39,7 +39,8 @@ const LibraryUpcomingEvents = () => {
                                         <Link
                                             className="events-thumbnail"
                                             to={`/events/${event.id}`}
-                                            key={event.id}>
+                                            key={event.id}
+                                        >
                                             <div className="card__item h-full p-4 md:p-8">
                                                 <div className="card__day text-3xl md:text-4xl leading-none">
                                                     {formatDate(

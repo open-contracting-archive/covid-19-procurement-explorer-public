@@ -22,7 +22,8 @@ const TabNavigator = (props) => {
                                 <NavLink
                                     activeClassName="active"
                                     className={'capitalize'}
-                                    to={pathTo(item)}>
+                                    to={pathTo(item)}
+                                >
                                     <T _str={item} />
                                 </NavLink>
                             </li>
