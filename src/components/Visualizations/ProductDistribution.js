@@ -93,7 +93,8 @@ const ProductDistribution = (props) => {
             viewType={viewType}
             loading={loading}
             helpText={helpText}
-            viewHandler={setViewType}>
+            viewHandler={setViewType}
+        >
             <div className="custom-horizontal-bar">
                 {!error ? (
                     <BarListChart

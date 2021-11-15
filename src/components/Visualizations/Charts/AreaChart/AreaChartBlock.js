@@ -17,7 +17,8 @@ const AreaChartBlock = (props) => {
             <p className="mt-2 flex leading-tight items-baseline">
                 <strong
                     className="text-xl inline-block mr-1"
-                    title={totalAmount}>
+                    title={totalAmount}
+                >
                     {currency && (
                         <span>
                             {currency !== Default.CURRENCY_LOCAL ? '$' : ''}
@@ -37,7 +38,8 @@ const AreaChartBlock = (props) => {
             <p
                 className={`text-sm  font-bold ${
                     percentage < 0 ? 'text-red-30' : 'text-green-30'
-                }`}>
+                }`}
+            >
                 {percentage}%
             </p>
         </div>

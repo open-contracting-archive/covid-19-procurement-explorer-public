@@ -23,7 +23,8 @@ const CurrencySwitcher = () => {
                             ? 'text-white bg-primary-dark'
                             : 'opacity-50'
                     } `}
-                    onClick={() => changeCurrency(Default.CURRENCY_USD)}>
+                    onClick={() => changeCurrency(Default.CURRENCY_USD)}
+                >
                     USD
                 </button>
                 <button
@@ -32,7 +33,8 @@ const CurrencySwitcher = () => {
                             ? 'text-white bg-primary-dark'
                             : 'opacity-50'
                     }`}
-                    onClick={() => changeCurrency(Default.CURRENCY_LOCAL)}>
+                    onClick={() => changeCurrency(Default.CURRENCY_LOCAL)}
+                >
                     {countryCurrency || '---'}
                 </button>
             </div>

@@ -18,7 +18,8 @@ const Breadcrumb = ({ item }) => {
             {item !== undefined ? (
                 <Link
                     to={`/${linkSlug()}`}
-                    className="cursor-pointer text-primary-blue capitalize">
+                    className="cursor-pointer text-primary-blue capitalize"
+                >
                     {linkSlug()}
                 </Link>
             ) : (

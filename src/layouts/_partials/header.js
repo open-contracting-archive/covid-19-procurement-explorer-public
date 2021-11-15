@@ -41,11 +41,13 @@ const Header = () => {
         <div
             className={`overflow-hidden ${
                 isHome ? 'header-container' : 'header-inner-container'
-            }`}>
+            }`}
+        >
             <header
                 className={`py-4 px-4 absolute top-0 w-full z-10 ${
                     isHome ? 'header-home' : 'header-inner'
-                } `}>
+                } `}
+            >
                 <div className="container text-white [ mx-auto ] [ flex justify-between items-center ]">
                     <div className="w-24 leading-none">
                         <NavLink to="/" className="leading-tight font-bold">
@@ -63,7 +65,8 @@ const Header = () => {
                                     <NavLink
                                         activeClassName="active"
                                         to={`/pages/${menu.meta.slug}`}
-                                        className="capitalize">
+                                        className="capitalize"
+                                    >
                                         <T _str={menu.title} />
                                     </NavLink>
                                 </li>
@@ -73,7 +76,8 @@ const Header = () => {
                                 <li className="mr-2 md:mr-8" key={index}>
                                     <NavLink
                                         activeClassName="active"
-                                        to={item.route}>
+                                        to={item.route}
+                                    >
                                         <T _str={item.title} />
                                     </NavLink>
                                 </li>

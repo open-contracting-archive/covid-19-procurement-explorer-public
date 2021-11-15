@@ -46,7 +46,8 @@ const ContractRedFlags = (props) => {
             label={label}
             appendClass={'pb-12 h-full'}
             helpText={helpText}
-            symbol={<Icon.RedFlag className="inline-block ml-2" />}>
+            symbol={<Icon.RedFlag className="inline-block ml-2" />}
+        >
             <div className="-mt-4 md:mt-0 custom-horizontal-bar">
                 {!error ? (
                     <ul className="pr-4 overflow-y-auto custom-scrollbar h-80">
