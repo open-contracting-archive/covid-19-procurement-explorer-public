@@ -40,8 +40,7 @@ const LibraryBlogs = () => {
                                 return (
                                     <div
                                         key={blog.id}
-                                        className="blogs-thumbnail"
-                                    >
+                                        className="blogs-thumbnail">
                                         <Link to={`/blogs/${blog.id}`}>
                                             {get(
                                                 blog,

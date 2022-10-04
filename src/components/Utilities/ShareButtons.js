@@ -26,8 +26,7 @@ const ShareButtons = (props) => {
                 <TwitterShareButton
                     url={url}
                     via={twitterHandle}
-                    className="social-icon"
-                >
+                    className="social-icon">
                     <SocialIcon.Twitter />
                 </TwitterShareButton>
 

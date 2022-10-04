@@ -77,8 +77,7 @@ function CountryData() {
                             <TopSuppliers params={{ country: countryCode }} />
                             <Link
                                 to={`/country/${countrySlug}/suppliers`}
-                                className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6"
-                            >
+                                className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
                                 <T _str="View in detail" /> →
                             </Link>
                         </div>
@@ -86,8 +85,7 @@ function CountryData() {
                             <TopBuyers params={{ country: countryCode }} />
                             <Link
                                 to={`/country/${countrySlug}/buyers`}
-                                className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6"
-                            >
+                                className="absolute -mt-8 text-primary-blue inline-block text-sm right-0 mr-6">
                                 <T _str="View in detail" /> →
                             </Link>
                         </div>

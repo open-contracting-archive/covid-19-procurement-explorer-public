@@ -137,8 +137,7 @@ const ContractEquityIndicators = (props) => {
                                         <li
                                             key={index}
                                             className="active text-sm md:text-base py-1 md:py-2 flex items-center justify-between
-                                                        border-b border-blue-0 text-blue-50"
-                                        >
+                                                        border-b border-blue-0 text-blue-50">
                                             <div className="flex items-center">
                                                 <div className="contract-line">
                                                     <span

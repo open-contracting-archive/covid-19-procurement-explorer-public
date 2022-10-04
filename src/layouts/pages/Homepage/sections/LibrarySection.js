@@ -91,8 +91,7 @@ const LibrarySection = () => {
                             insightList.map((insightItem) => (
                                 <Link
                                     key={insightItem.id}
-                                    to={insightItem.detail_url}
-                                >
+                                    to={insightItem.detail_url}>
                                     <div>
                                         <div className="library__tag">
                                             <p className="uppercase">

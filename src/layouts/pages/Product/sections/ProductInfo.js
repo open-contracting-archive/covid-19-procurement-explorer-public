@@ -32,15 +32,13 @@ const ProductInfo = (props) => {
                 <div className="text-sm mb-4 text-blue-5">
                     <span
                         className="text-primary-blue cursor-pointer"
-                        onClick={() => showCountryPage()}
-                    >
+                        onClick={() => showCountryPage()}>
                         {country ? country.name : <T _str="Global" />}
                     </span>{' '}
                     /{' '}
                     <span
                         className="cursor-pointer text-primary-blue"
-                        onClick={() => showProductTab()}
-                    >
+                        onClick={() => showProductTab()}>
                         <T _str="Products" />
                     </span>
                 </div>

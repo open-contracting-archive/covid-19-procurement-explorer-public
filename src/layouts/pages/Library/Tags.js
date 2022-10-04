@@ -56,8 +56,7 @@ const Tags = () => {
                                                 to={`/${insight.contents_type.toLowerCase()}/${
                                                     insight.id
                                                 }`}
-                                                key={insight.id}
-                                            >
+                                                key={insight.id}>
                                                 {get(
                                                     insight,
                                                     'content_image.meta.download_url'
@@ -66,8 +65,7 @@ const Tags = () => {
                                                         className="img-wrapper "
                                                         style={{
                                                             height: '240px'
-                                                        }}
-                                                    >
+                                                        }}>
                                                         <img
                                                             className="h-full w-full object-cover"
                                                             src={`${API_URL}${get(

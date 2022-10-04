@@ -129,11 +129,9 @@ const BlogDetail = () => {
                                                     return (
                                                         <div
                                                             className="blogs-thumbnail"
-                                                            key={blog.id}
-                                                        >
+                                                            key={blog.id}>
                                                             <Link
-                                                                to={`/blogs/${blog.id}`}
-                                                            >
+                                                                to={`/blogs/${blog.id}`}>
                                                                 <div className="img-wrapper">
                                                                     {get(
                                                                         blog,
@@ -159,8 +157,7 @@ const BlogDetail = () => {
                                                             </Link>
                                                             <div>
                                                                 <Link
-                                                                    to={`/blogs/${blog.id}`}
-                                                                >
+                                                                    to={`/blogs/${blog.id}`}>
                                                                     <h3 className="blogs-caption__title">
                                                                         {
                                                                             blog.title
@@ -181,8 +178,7 @@ const BlogDetail = () => {
                                         <hr className="text-primary-gray flex-1" />
                                         <Link
                                             to="/blogs"
-                                            className="text-blue-20 px-4"
-                                        >
+                                            className="text-blue-20 px-4">
                                             <T _str="View all blogs" /> --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />

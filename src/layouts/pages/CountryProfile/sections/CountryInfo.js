@@ -143,8 +143,7 @@ const CountryInfo = () => {
                                         .map((dataProvider, index) => (
                                             <div
                                                 key={index}
-                                                className="w-full px-4 flex items-center justify-between mb-5"
-                                            >
+                                                className="w-full px-4 flex items-center justify-between mb-5">
                                                 <p className="text-xs font-normal underline w-3/5">
                                                     {`${dataProvider.remark} ${dataProvider.name}`}
                                                 </p>
@@ -152,8 +151,7 @@ const CountryInfo = () => {
                                                     href={dataProvider.website}
                                                     title={dataProvider.name}
                                                     target="_blank"
-                                                    rel="noreferrer"
-                                                >
+                                                    rel="noreferrer">
                                                     <img
                                                         src={mediaUrl(
                                                             dataProvider.logo

@@ -48,8 +48,7 @@ function Events() {
                     <div className="text-sm mb-4 text-blue-5">
                         <span
                             className="cursor-pointer text-primary-blue"
-                            onClick={previousPage}
-                        >
+                            onClick={previousPage}>
                             <T _str="Library" />
                         </span>{' '}
                         /
@@ -65,8 +64,7 @@ function Events() {
                             <Link
                                 className="events-thumbnail"
                                 to={`/events/${events.id}`}
-                                key={events.id}
-                            >
+                                key={events.id}>
                                 <div className="card__item h-full px-8 py-8">
                                     <div className="card__day text-4xl leading-none">
                                         {formatDate(events.event_date, 'DD')}
@@ -118,8 +116,7 @@ function Events() {
                                     <Link
                                         key={events.id}
                                         className="events-thumbnail"
-                                        to={`/events/${events.id}`}
-                                    >
+                                        to={`/events/${events.id}`}>
                                         <div className="card__item h-full px-8 py-8">
                                             <div className="card__day text-4xl">
                                                 {formatDate(

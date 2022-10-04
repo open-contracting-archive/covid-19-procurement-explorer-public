@@ -79,8 +79,7 @@ const BuyerProductTimeline = (props) => {
                                     }`}
                                     onClick={() =>
                                         setBuyerProductTimelineType('value')
-                                    }
-                                >
+                                    }>
                                     <T _str="By value" />
                                 </li>
                                 <li
@@ -91,8 +90,7 @@ const BuyerProductTimeline = (props) => {
                                     }`}
                                     onClick={() =>
                                         setBuyerProductTimelineType('number')
-                                    }
-                                >
+                                    }>
                                     <T _str="By number" />
                                 </li>
                             </ul>

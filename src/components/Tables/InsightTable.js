@@ -116,8 +116,7 @@ const InsightTable = (props) => {
         <div className="relative">
             <div
                 className="cursor-pointer md:hidden"
-                onClick={handleFilterToggle}
-            >
+                onClick={handleFilterToggle}>
                 <div className="filter-ui">
                     <Icon.Filter />
                 </div>
@@ -125,16 +124,14 @@ const InsightTable = (props) => {
 
             {showFilter ? (
                 <div
-                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
-                >
+                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between mb-4 text-white md:mb-0">
                         <span className="text-sm font-bold uppercase">
                             Filter
                         </span>
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
-                            onClick={handleCloseFilter}
-                        >
+                            onClick={handleCloseFilter}>
                             <Icon.FilterClose />
                         </span>
                     </div>
@@ -290,8 +287,7 @@ const InsightTable = (props) => {
                                                         insight.id
                                                     )
                                                 }
-                                                className="cursor-pointer"
-                                            >
+                                                className="cursor-pointer">
                                                 <td>
                                                     <p className="hover:text-primary-blue focus:text-primary-blue">
                                                         {insight.title}
@@ -313,8 +309,7 @@ const InsightTable = (props) => {
                                     style={{
                                         height: '75%',
                                         minHeight: '250px'
-                                    }}
-                                >
+                                    }}>
                                     <p>
                                         <T _str="No data available" />
                                     </p>

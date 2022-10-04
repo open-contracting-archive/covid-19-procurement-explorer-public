@@ -56,16 +56,14 @@ const CountrySelector = () => {
             <div>
                 <div
                     className="pr-6 mb-3 text-lg font-normal capitalize bg-transparent outline-none appearance-none cursor-pointer md:mb-5 md:text-2xl text-primary-dark"
-                    onClick={toggling}
-                >
+                    onClick={toggling}>
                     {selectedCountry || <T _str="Global Overview" />}
                 </div>
                 {isOpen && (
                     <div className="absolute z-30 w-64 p-4 space-y-3 text-base text-white rounded md:-mt-5 bg-primary-dark">
                         <div
                             className="cursor-pointer global hover:text-primary-blue"
-                            onClick={countrySelected('global')}
-                        >
+                            onClick={countrySelected('global')}>
                             <div className="flex items-center">
                                 <span>
                                     <T _str="Global Overview" />
@@ -77,8 +75,7 @@ const CountrySelector = () => {
                             <div
                                 onClick={countrySelected(country.slug)}
                                 key={index}
-                                className={`cursor-pointer ${country.slug} hover:text-primary-blue`}
-                            >
+                                className={`cursor-pointer ${country.slug} hover:text-primary-blue`}>
                                 <div className="flex items-center">
                                     {country.country_code_alpha_2 !== 'gl' ? (
                                         <CountryFlagIcon

@@ -97,8 +97,7 @@ const ProductsTimeline = (props) => {
                     label={label}
                     viewType={viewType}
                     loading={loading}
-                    viewHandler={setViewType}
-                >
+                    viewHandler={setViewType}>
                     <div>
                         {!error ? (
                             <StackedChart

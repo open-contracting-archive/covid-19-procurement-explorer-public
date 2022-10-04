@@ -133,24 +133,21 @@ const ContractFilter = (props) => {
         <div>
             <div
                 className="md:hidden cursor-pointer"
-                onClick={handleFilterToggle}
-            >
+                onClick={handleFilterToggle}>
                 <div className="filter-ui">
                     <Icon.Filter />
                 </div>
             </div>
             {showFilter ? (
                 <div
-                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
-                >
+                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between text-white mb-4 md:mb-0">
                         <span className="text-sm uppercase font-bold">
                             Filter
                         </span>
                         <span
                             className="filter-close text-sm uppercase font-bold cursor-pointer"
-                            onClick={handleCloseFilter}
-                        >
+                            onClick={handleCloseFilter}>
                             <Icon.FilterClose />
                         </span>
                     </div>
@@ -166,8 +163,7 @@ const ContractFilter = (props) => {
                                         event,
                                         contractTitleParameter
                                     )
-                                }
-                            >
+                                }>
                                 <input
                                     type="text"
                                     className="select-filter"
@@ -274,8 +270,7 @@ const ContractFilter = (props) => {
                             <div ref={ref}>
                                 <div
                                     onClick={handleDatePicker}
-                                    className="select-filter--input mt-2"
-                                >
+                                    className="select-filter--input mt-2">
                                     <p className="field whitespace-no-wrap">
                                         {startDate && endDate ? (
                                             `${formatDate(
@@ -339,8 +334,7 @@ const ContractFilter = (props) => {
                             className="mt-2 select-filter--input"
                             onSubmit={(event) =>
                                 handleSearchInput(event, contractTitleParameter)
-                            }
-                        >
+                            }>
                             <input
                                 type="text"
                                 className="select-filter"
@@ -444,8 +438,7 @@ const ContractFilter = (props) => {
                         <div ref={ref}>
                             <div
                                 onClick={handleDatePicker}
-                                className="select-filter--input mt-2"
-                            >
+                                className="select-filter--input mt-2">
                                 <p className="field whitespace-no-wrap">
                                     {startDate && endDate ? (
                                         `${formatDate(

@@ -23,15 +23,13 @@ const LanguageSwitcher = () => {
                         padding: '5px 20px 5px 10px'
                     }}
                     className="cursor-pointer outline-none appearance-none bg-black bg-opacity-25 py-2 px-3 rounded-3xl text-xs"
-                    onChange={(e) => setLocale(e.target.value)}
-                >
+                    onChange={(e) => setLocale(e.target.value)}>
                     {sortedItemsByKey(languages, 'name').map(
                         (language, index) => (
                             <option
                                 key={index}
                                 value={language.code}
-                                selected={currentLocale === language.code}
-                            >
+                                selected={currentLocale === language.code}>
                                 {language.name}
                             </option>
                         )

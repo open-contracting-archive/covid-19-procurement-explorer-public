@@ -102,8 +102,7 @@ const Buyers = (props) => {
             {!error && modalHandler && (
                 <span
                     className="cursor-pointer text-sm text-primary-blue block text-right"
-                    onClick={() => modalHandler(Visualization.TOTAL_BUYERS)}
-                >
+                    onClick={() => modalHandler(Visualization.TOTAL_BUYERS)}>
                     <T _str="View in detail" /> →
                 </span>
             )}

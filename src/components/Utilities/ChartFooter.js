@@ -77,8 +77,7 @@ const ChartFooter = (props) => {
                             <a
                                 href={downloadCountryContracts()}
                                 target="_blank"
-                                rel="noreferrer"
-                            >
+                                rel="noreferrer">
                                 <Icon.Download className="mr-2 inline-block" />
                                 <span className="hidden md:inline-block">
                                     <T _str="Download" />
@@ -98,16 +97,14 @@ const ChartFooter = (props) => {
                         ref={dropdownRef}
                         className={`dropdown-menu ${
                             isActive ? 'active' : 'inactive'
-                        }`}
-                    >
+                        }`}>
                         <span className="inline-block mb-3 text-primary-dark">
                             <T _str="Share on" />
                         </span>
                         <div className="flex flex-col">
                             <FacebookShareButton
                                 url={currentLocation}
-                                className="social-icon"
-                            >
+                                className="social-icon">
                                 <SocialIcon.Facebook />
                                 <span>
                                     <T _str="Facebook" />
@@ -117,8 +114,7 @@ const ChartFooter = (props) => {
                             <TwitterShareButton
                                 url={currentLocation}
                                 via={twitterHandle}
-                                className="social-icon"
-                            >
+                                className="social-icon">
                                 <SocialIcon.Twitter />
                                 <span>
                                     <T _str="Twitter" />
@@ -127,8 +123,7 @@ const ChartFooter = (props) => {
 
                             <LinkedinShareButton
                                 url={currentLocation}
-                                className="social-icon"
-                            >
+                                className="social-icon">
                                 <SocialIcon.Linked />
                                 <span>
                                     <T _str="LinkedIn" />
@@ -137,8 +132,7 @@ const ChartFooter = (props) => {
 
                             <EmailShareButton
                                 url={currentLocation}
-                                className="social-icon email"
-                            >
+                                className="social-icon email">
                                 <SocialIcon.Mail />
                                 <span>
                                     <T _str="Email" />
@@ -154,8 +148,7 @@ const ChartFooter = (props) => {
                                     </span>
                                     <div
                                         className="flex items-center cursor-pointer social-embed"
-                                        onClick={() => modalHandler()}
-                                    >
+                                        onClick={() => modalHandler()}>
                                         <SocialIcon.Embedded className="w-5" />
                                         <span className="ml-4">
                                             <T _str="Embedded" />
@@ -172,8 +165,7 @@ const ChartFooter = (props) => {
                 <div className="absolute left-0 right-0 w-full m-0 text-center md:relative md:text-left md:w-auto md:my-0">
                     <Link
                         to={detailViewURL}
-                        className="inline-block text-sm text-primary-blue"
-                    >
+                        className="inline-block text-sm text-primary-blue">
                         <T _str="View in detail" /> →
                     </Link>
                 </div>
@@ -184,8 +176,7 @@ const ChartFooter = (props) => {
             <Modal
                 id="embedded-visualization-modal"
                 isOpen={isModalOpen}
-                transition={ModalTransition.NONE}
-            >
+                transition={ModalTransition.NONE}>
                 <EmbeddedModal
                     params={embeddedVisualization}
                     closeModal={closeModal}

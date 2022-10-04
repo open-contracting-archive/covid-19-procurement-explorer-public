@@ -25,8 +25,7 @@ function SimpleBarListChart({ data, currency, viewType }) {
                                     <span
                                         style={{
                                             width: `${bar_value.value}%`
-                                        }}
-                                    ></span>
+                                        }}></span>
                                 </div>
                                 <div className="ml-2 custom-horizontal-bar-amount">
                                     <p>

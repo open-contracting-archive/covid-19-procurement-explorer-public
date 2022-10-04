@@ -39,8 +39,7 @@ const CountryMethodology = (props) => {
                         </h2>
                         <div
                             style={{ minHeight: '40vh' }}
-                            className="flex flex-wrap lg:flex-no-wrap justify-between news-detail__content min-w-full"
-                        >
+                            className="flex flex-wrap lg:flex-no-wrap justify-between news-detail__content min-w-full">
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: pageDetail.rendered_body

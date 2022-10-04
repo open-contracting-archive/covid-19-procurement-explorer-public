@@ -86,12 +86,10 @@ const Footer = () => {
                             {showFooterMenu.map((menu, index) => (
                                 <li
                                     key={index}
-                                    className="mb-1 transition opacity-50 hover:opacity-75"
-                                >
+                                    className="mb-1 transition opacity-50 hover:opacity-75">
                                     <Link
                                         to={`/pages/${menu.meta.slug}`}
-                                        className="capitalize"
-                                    >
+                                        className="capitalize">
                                         <T _str={menu.title} />
                                     </Link>
                                 </li>
@@ -113,8 +111,7 @@ const Footer = () => {
                                         background: 'white'
                                     }}
                                     frameBorder="0"
-                                    scrolling="no"
-                                ></iframe>
+                                    scrolling="no"></iframe>
                             </div>
                         </form>
                         <div className="flex flex-wrap mt-8">
@@ -128,8 +125,7 @@ const Footer = () => {
                                             pathname:
                                                 'https://www.open-contracting.org/'
                                         }}
-                                        target="_blank"
-                                    >
+                                        target="_blank">
                                         <img
                                             src={OpenContractingPartner}
                                             alt="Open contracting partner logo"
@@ -142,8 +138,7 @@ const Footer = () => {
                                             pathname:
                                                 'https://www.transparency.org/en/'
                                         }}
-                                        target="_blank"
-                                    >
+                                        target="_blank">
                                         <img
                                             src={TransparencyInternational}
                                             alt="Transparency international logo"

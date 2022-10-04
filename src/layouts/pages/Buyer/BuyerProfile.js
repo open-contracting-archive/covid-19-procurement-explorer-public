@@ -74,8 +74,7 @@ const BuyerProfile = () => {
                                 /{' '}
                                 <span
                                     className="cursor-pointer text-primary-blue"
-                                    onClick={previousPage}
-                                >
+                                    onClick={previousPage}>
                                     <T _str="Buyers" />
                                 </span>
                             </div>
@@ -108,8 +107,7 @@ const BuyerProfile = () => {
                             style={{
                                 borderTop: '5px solid #1fbbec'
                             }}
-                            className="pt-16 pb-24 bg-primary-gray"
-                        >
+                            className="pt-16 pb-24 bg-primary-gray">
                             <div className="container mx-auto px-4 ">
                                 <div className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full lg:w-1/3 px-2 mb-6">

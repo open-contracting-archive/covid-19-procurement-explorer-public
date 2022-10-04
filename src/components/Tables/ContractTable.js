@@ -199,15 +199,13 @@ const ContractTable = (props) => {
                                                 className={tableRowClass(
                                                     contract.red_flag &&
                                                         contract.red_flag.length
-                                                )}
-                                            >
+                                                )}>
                                                 <td className="hover:text-primary-blue">
                                                     <p
                                                         className="truncate-text"
                                                         title={
                                                             contract.contract_title
-                                                        }
-                                                    >
+                                                        }>
                                                         {
                                                             contract.contract_title
                                                         }
@@ -224,8 +222,7 @@ const ContractTable = (props) => {
                                                             className="truncate-text"
                                                             title={
                                                                 contract.buyer_name
-                                                            }
-                                                        >
+                                                            }>
                                                             {
                                                                 contract.buyer_name
                                                             }
@@ -238,8 +235,7 @@ const ContractTable = (props) => {
                                                             className="truncate-text"
                                                             title={
                                                                 contract.supplier_name
-                                                            }
-                                                        >
+                                                            }>
                                                             {
                                                                 contract.supplier_name
                                                             }
@@ -290,8 +286,7 @@ const ContractTable = (props) => {
                                     style={{
                                         height: '75%',
                                         minHeight: '250px'
-                                    }}
-                                >
+                                    }}>
                                     <p>
                                         <T _str="No data available" />
                                     </p>

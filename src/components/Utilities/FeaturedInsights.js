@@ -52,8 +52,7 @@ const FeaturedInsights = ({ params }) => {
                                         ? `/news/${item.id}`
                                         : `/blogs/${item.id}`
                                 }
-                                key={item.id}
-                            >
+                                key={item.id}>
                                 {get(
                                     item,
                                     'content_image.meta.download_url'

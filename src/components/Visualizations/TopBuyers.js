@@ -79,8 +79,7 @@ const TopBuyers = (props) => {
             appendClass="pb-12"
             loading={loading}
             viewType={viewType}
-            viewHandler={setViewType}
-        >
+            viewHandler={setViewType}>
             <div className="custom-horizontal-bar">
                 {!error ? (
                     <BarListChart

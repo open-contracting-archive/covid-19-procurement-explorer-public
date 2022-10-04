@@ -113,8 +113,7 @@ const useTableSorting = ({
     const TableHeaderSpan = (name, label) => (
         <span
             className="flex items-center cursor-pointer"
-            onClick={() => appendSort(name)}
-        >
+            onClick={() => appendSort(name)}>
             {label} {columnSorting(name)}
         </span>
     )

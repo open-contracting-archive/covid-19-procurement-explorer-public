@@ -65,8 +65,7 @@ const Blogs = () => {
                         return (
                             <div
                                 className="blogs-thumbnail grid md:grid-cols-2 grid-cols-1  gap-x-10 gap-y-6 mb-16"
-                                key={blogs.id}
-                            >
+                                key={blogs.id}>
                                 <Link to={`/blogs/${blogs.id}`} key={blogs.id}>
                                     {get(
                                         blogs,
@@ -95,8 +94,7 @@ const Blogs = () => {
                                 <div className="blog__caption">
                                     <Link
                                         to={`/blogs/${blogs.id}`}
-                                        key={blogs.id}
-                                    >
+                                        key={blogs.id}>
                                         <h3 className="hover:text-primary-blue focus:text-primary-blue blog-caption__title leading-tight text-lg md:text-xl">
                                             {blogs.title}
                                         </h3>

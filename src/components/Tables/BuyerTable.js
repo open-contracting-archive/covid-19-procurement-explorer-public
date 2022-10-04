@@ -126,8 +126,7 @@ const BuyerTable = (props) => {
         <div className="relative">
             <div
                 className="cursor-pointer md:hidden"
-                onClick={handleFilterToggle}
-            >
+                onClick={handleFilterToggle}>
                 <div className="filter-ui">
                     <Icon.Filter />
                 </div>
@@ -135,16 +134,14 @@ const BuyerTable = (props) => {
 
             {showFilter ? (
                 <div
-                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
-                >
+                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between mb-4 text-white md:mb-0">
                         <span className="text-sm font-bold uppercase">
                             <T _str="Filter" />
                         </span>
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
-                            onClick={handleCloseFilter}
-                        >
+                            onClick={handleCloseFilter}>
                             <Icon.FilterClose />
                         </span>
                     </div>
@@ -159,8 +156,7 @@ const BuyerTable = (props) => {
                                     handleInputSubmit(event, {
                                         buyer_code: buyerNameParameter
                                     })
-                                }
-                            >
+                                }>
                                 <input
                                     type="text"
                                     className="select-filter"
@@ -182,8 +178,7 @@ const BuyerTable = (props) => {
                                     handleInputSubmit(event, {
                                         buyer_code: buyerIdParameter
                                     })
-                                }
-                            >
+                                }>
                                 <input
                                     type="text"
                                     className="select-filter"
@@ -263,8 +258,7 @@ const BuyerTable = (props) => {
                                 handleInputSubmit(event, {
                                     buyer_name: buyerNameParameter
                                 })
-                            }
-                        >
+                            }>
                             <input
                                 type="text"
                                 className="select-filter"
@@ -286,8 +280,7 @@ const BuyerTable = (props) => {
                                 handleInputSubmit(event, {
                                     buyer_code: buyerIdParameter
                                 })
-                            }
-                        >
+                            }>
                             <input
                                 type="text"
                                 className="select-filter"
@@ -418,21 +411,24 @@ const BuyerTable = (props) => {
                                         }
                                         className={tableRowClass(
                                             buyer.red_flag_tender_count
-                                        )}
-                                    >
+                                        )}>
                                         <td className="hover:text-primary-blue">
                                             <p
                                                 className="truncate-text"
-                                                title={get(buyer, 'buyer_name')}
-                                            >
+                                                title={get(
+                                                    buyer,
+                                                    'buyer_name'
+                                                )}>
                                                 {get(buyer, 'buyer_name')}{' '}
                                             </p>{' '}
                                         </td>
                                         <td className="hover:text-primary-blue">
                                             <p
                                                 className="truncate-text"
-                                                title={get(buyer, 'buyer_code')}
-                                            >
+                                                title={get(
+                                                    buyer,
+                                                    'buyer_code'
+                                                )}>
                                                 {get(buyer, 'buyer_code')}{' '}
                                             </p>{' '}
                                         </td>
@@ -482,8 +478,7 @@ const BuyerTable = (props) => {
                             style={{
                                 height: '75%',
                                 minHeight: '250px'
-                            }}
-                        >
+                            }}>
                             <p>
                                 <T _str="No data available" />
                             </p>

@@ -130,8 +130,7 @@ const EventDetail = () => {
                                                             <Link
                                                                 className="events-thumbnail bg-blue-0 "
                                                                 to={`/events/${events.id}`}
-                                                                key={events.id}
-                                                            >
+                                                                key={events.id}>
                                                                 <div className="card__item h-full px-8 py-8">
                                                                     <div className="card__day text-4xl leading-none">
                                                                         {formatDate(
@@ -182,8 +181,7 @@ const EventDetail = () => {
                                         <hr className="text-primary-gray flex-1" />
                                         <Link
                                             to="/events"
-                                            className="text-blue-20 px-4"
-                                        >
+                                            className="text-blue-20 px-4">
                                             <T _str="View all events" /> --&gt;{' '}
                                         </Link>
                                         <hr className="text-primary-gray flex-1" />

@@ -120,8 +120,7 @@ const SupplierTable = (props) => {
         <div className="relative">
             <div
                 className="cursor-pointer md:hidden"
-                onClick={handleFilterToggle}
-            >
+                onClick={handleFilterToggle}>
                 <div className="filter-ui">
                     <Icon.Filter />
                 </div>
@@ -129,16 +128,14 @@ const SupplierTable = (props) => {
 
             {showFilter ? (
                 <div
-                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
-                >
+                    className={`bg-primary-blue absolute top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                     <div className="flex justify-between mb-4 text-white md:mb-0">
                         <span className="text-sm font-bold uppercase">
                             <T _str="Filter" />
                         </span>
                         <span
                             className="text-sm font-bold uppercase cursor-pointer filter-close"
-                            onClick={handleCloseFilter}
-                        >
+                            onClick={handleCloseFilter}>
                             <Icon.FilterClose />
                         </span>
                     </div>
@@ -153,8 +150,7 @@ const SupplierTable = (props) => {
                                     handleInputSubmit(event, {
                                         supplier_name: supplierNameParameter
                                     })
-                                }
-                            >
+                                }>
                                 <input
                                     type="text"
                                     className="select-filter"
@@ -176,8 +172,7 @@ const SupplierTable = (props) => {
                                     handleInputSubmit(event, {
                                         supplier_id: supplierIdParameter
                                     })
-                                }
-                            >
+                                }>
                                 <input
                                     type="text"
                                     className="select-filter"
@@ -258,8 +253,7 @@ const SupplierTable = (props) => {
                                 handleInputSubmit(event, {
                                     supplier_name: supplierNameParameter
                                 })
-                            }
-                        >
+                            }>
                             <input
                                 type="text"
                                 className="select-filter"
@@ -281,8 +275,7 @@ const SupplierTable = (props) => {
                                 handleInputSubmit(event, {
                                     supplier_code: supplierIdParameter
                                 })
-                            }
-                        >
+                            }>
                             <input
                                 type="text"
                                 className="select-filter"
@@ -414,16 +407,14 @@ const SupplierTable = (props) => {
                                         }
                                         className={tableRowClass(
                                             supplier.red_flag_tender_count
-                                        )}
-                                    >
+                                        )}>
                                         <td className="hover:text-primary-blue">
                                             <p
                                                 className="truncate-text"
                                                 title={get(
                                                     supplier,
                                                     'supplier_name'
-                                                )}
-                                            >
+                                                )}>
                                                 {get(supplier, 'supplier_name')}
                                             </p>
                                         </td>
@@ -433,8 +424,7 @@ const SupplierTable = (props) => {
                                                 title={get(
                                                     supplier,
                                                     'supplier_code'
-                                                )}
-                                            >
+                                                )}>
                                                 {get(supplier, 'supplier_code')}
                                             </p>
                                         </td>
@@ -489,8 +479,7 @@ const SupplierTable = (props) => {
                             style={{
                                 height: '75%',
                                 minHeight: '250px'
-                            }}
-                        >
+                            }}>
                             <p>
                                 <T _str="No data available" />
                             </p>

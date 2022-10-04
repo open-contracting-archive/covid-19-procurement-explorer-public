@@ -92,8 +92,7 @@ const ProductFlow = (props) => {
                     label={label}
                     helpText={helpText}
                     viewType={viewType}
-                    viewHandler={setViewType}
-                >
+                    viewHandler={setViewType}>
                     <div>
                         {!error ? (
                             <div className="flex mt-4">

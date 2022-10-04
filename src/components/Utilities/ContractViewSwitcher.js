@@ -26,16 +26,14 @@ const ContractViewSwitcher = (props) => {
                     className={`w-1/2 md:w-auto md:mr-4 cursor-pointer text-base ${
                         viewType === ContractView.VALUE && activeClass
                     }`}
-                    onClick={() => viewHandler(ContractView.VALUE)}
-                >
+                    onClick={() => viewHandler(ContractView.VALUE)}>
                     <T _str={labels[ContractView.VALUE][style]} />
                 </li>
                 <li
                     className={`w-1/2 md:w-auto cursor-pointer text-base ${
                         viewType === ContractView.NUMBER && activeClass
                     }`}
-                    onClick={() => viewHandler(ContractView.NUMBER)}
-                >
+                    onClick={() => viewHandler(ContractView.NUMBER)}>
                     <T _str={labels[ContractView.NUMBER][style]} />
                 </li>
             </ul>

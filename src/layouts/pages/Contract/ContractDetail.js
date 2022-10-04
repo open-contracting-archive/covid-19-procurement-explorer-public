@@ -51,8 +51,7 @@ const ContractDetail = () => {
                 <div className="text-sm mb-4 text-blue-5">
                     <span
                         className="cursor-pointer text-primary-blue"
-                        onClick={previousPage}
-                    >
+                        onClick={previousPage}>
                         <T _str="Contracts" />{' '}
                     </span>{' '}
                     /
@@ -63,8 +62,7 @@ const ContractDetail = () => {
                         href={contractDetail.link_to_contract}
                         title={contractDetail && contractDetail.contract_title}
                         target="_blank"
-                        rel="noreferrer"
-                    >
+                        rel="noreferrer">
                         {contractDetail && contractDetail.contract_title} #
                         {contractDetail && contractDetail.contract_id}
                     </a>
@@ -241,8 +239,7 @@ const ContractDetail = () => {
                                     contractDetail,
                                     'buyer_id'
                                 )}`}
-                                className="hover:text-primary-blue focus:text-primary-blue"
-                            >
+                                className="hover:text-primary-blue focus:text-primary-blue">
                                 <span className="font-bold text-sm uppercase block">
                                     {get(contractDetail, 'buyer_name', '-')}
                                 </span>
@@ -265,8 +262,7 @@ const ContractDetail = () => {
                             to={`/suppliers/${get(
                                 contractDetail,
                                 'supplier_id'
-                            )}`}
-                        >
+                            )}`}>
                             <p className="font-bold text-sm uppercase">
                                 {get(contractDetail, 'supplier_name', '-')}
                             </p>

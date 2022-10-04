@@ -48,8 +48,7 @@ const NewsSection = () => {
                                     <div key={news.id} className="news-item">
                                         <Link
                                             to={`/news/${news.id}`}
-                                            className="news-link"
-                                        >
+                                            className="news-link">
                                             <div className="img-wrapper img-gradient">
                                                 {get(
                                                     news,
@@ -73,8 +72,7 @@ const NewsSection = () => {
                                                     index === 0
                                                         ? 'news-caption--large'
                                                         : ''
-                                                }`}
-                                            >
+                                                }`}>
                                                 <h3 className="news-caption__title hover:text-primary-blue focus:text-primary-blue">
                                                     {news.title}
                                                 </h3>

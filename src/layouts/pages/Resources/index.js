@@ -157,24 +157,21 @@ const Resources = () => {
                         <div className="relative">
                             <div
                                 className="md:hidden cursor-pointer"
-                                onClick={handleFilterToggle}
-                            >
+                                onClick={handleFilterToggle}>
                                 <div className="filter-ui">
                                     <Icon.Filter />
                                 </div>
                             </div>
                             {showFilter ? (
                                 <div
-                                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}
-                                >
+                                    className={`mt-24 bg-primary-blue absolute left-0 right-0 top-0 filter-ui-content z-20 p-4 mr-10 ${showFilter}`}>
                                     <div className="flex justify-between text-white mb-4 md:mb-0">
                                         <span className="text-sm uppercase font-bold">
                                             <T _str="Filter" />
                                         </span>
                                         <span
                                             className="filter-close text-sm uppercase font-bold cursor-pointer"
-                                            onClick={handleCloseFilter}
-                                        >
+                                            onClick={handleCloseFilter}>
                                             <Icon.FilterClose />
                                         </span>
                                     </div>
@@ -264,16 +261,14 @@ const Resources = () => {
                                                     <th
                                                         style={{
                                                             width: '35%'
-                                                        }}
-                                                    >
+                                                        }}>
                                                         <span
                                                             className="flex items-center cursor-pointer"
                                                             onClick={() =>
                                                                 appendSort(
                                                                     'title'
                                                                 )
-                                                            }
-                                                        >
+                                                            }>
                                                             <T _str="Title" />
                                                             {columnSorting(
                                                                 'title'
@@ -283,8 +278,7 @@ const Resources = () => {
                                                     <th
                                                         style={{
                                                             width: '15%'
-                                                        }}
-                                                    >
+                                                        }}>
                                                         <span className="flex items-center">
                                                             <T _str="Country" />
                                                         </span>
@@ -292,16 +286,14 @@ const Resources = () => {
                                                     <th
                                                         style={{
                                                             width: '10%'
-                                                        }}
-                                                    >
+                                                        }}>
                                                         <span
                                                             className="flex items-center cursor-pointer"
                                                             onClick={() =>
                                                                 appendSort(
                                                                     'resource_type'
                                                                 )
-                                                            }
-                                                        >
+                                                            }>
                                                             <T _str="Type" />
                                                             {columnSorting(
                                                                 'resource_type'
@@ -322,8 +314,7 @@ const Resources = () => {
                                                                         showDetail(
                                                                             resource.id
                                                                         )
-                                                                    }
-                                                                >
+                                                                    }>
                                                                     <td>
                                                                         <p className="hover:text-primary-blue focus:text-primary-blue">
                                                                             {
@@ -357,8 +348,7 @@ const Resources = () => {
                                                 style={{
                                                     height: '75%',
                                                     minHeight: '250px'
-                                                }}
-                                            >
+                                                }}>
                                                 <p>
                                                     <T _str="No data available" />
                                                 </p>
