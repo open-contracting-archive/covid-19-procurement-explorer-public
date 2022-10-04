@@ -54,7 +54,8 @@ const MainVisualization = () => {
                                             className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
                                                 tabView === 'map' && 'active'
                                             }`}
-                                            onClick={() => setTabView('map')}>
+                                            onClick={() => setTabView('map')}
+                                        >
                                             <div>
                                                 <Icon.Map className="inline-block w-4 h-4" />
                                                 <span className="block mt-1 text-xs md:text-sm">
@@ -66,7 +67,8 @@ const MainVisualization = () => {
                                             className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
                                                 tabView === 'chart' && 'active'
                                             }`}
-                                            onClick={() => setTabView('chart')}>
+                                            onClick={() => setTabView('chart')}
+                                        >
                                             <div>
                                                 <Icon.Charts className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
@@ -78,7 +80,8 @@ const MainVisualization = () => {
                                             className={`product-worldmap-tablist text-center cursor-pointer mb-2 ${
                                                 tabView === 'table' && 'active'
                                             }`}
-                                            onClick={() => setTabView('table')}>
+                                            onClick={() => setTabView('table')}
+                                        >
                                             <div>
                                                 <Icon.Table className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
@@ -93,7 +96,8 @@ const MainVisualization = () => {
                                             }`}
                                             onClick={() =>
                                                 setTabView('sources')
-                                            }>
+                                            }
+                                        >
                                             <div>
                                                 <Icon.Sources className="inline-block" />
                                                 <span className="block mt-1 text-xs md:text-sm">
@@ -115,7 +119,8 @@ const MainVisualization = () => {
                 <T _str="Don’t see your country data?" />
                 <Link
                     to="/pages/add-my-country-data"
-                    className="inline-block ml-2 text-primary-blue">
+                    className="inline-block ml-2 text-primary-blue"
+                >
                     <T _str="Here’s how you can add your country data" />
                 </Link>
             </p>

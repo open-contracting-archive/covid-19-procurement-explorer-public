@@ -111,7 +111,8 @@ const TotalSpending = (props) => {
             {!error && modalHandler && (
                 <span
                     className="block text-sm text-right cursor-pointer text-primary-blue"
-                    onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}>
+                    onClick={() => modalHandler(Visualization.TOTAL_SPENDING)}
+                >
                     <T _str="View in detail" /> →
                 </span>
             )}

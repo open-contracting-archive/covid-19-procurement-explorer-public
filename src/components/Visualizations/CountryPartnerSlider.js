@@ -54,7 +54,8 @@ const CountryPartnerSlider = ({ params }) => {
                             spaceBetween={50}
                             slidesPerView={1}
                             navigation
-                            pagination={{ clickable: true }}>
+                            pagination={{ clickable: true }}
+                        >
                             {originalData &&
                                 originalData.map((index, key) => {
                                     return (
@@ -86,7 +87,8 @@ const CountryPartnerSlider = ({ params }) => {
                                                                         rel="noreferrer"
                                                                         title={
                                                                             index.name
-                                                                        }>
+                                                                        }
+                                                                    >
                                                                         {
                                                                             index.website
                                                                         }
@@ -98,7 +100,8 @@ const CountryPartnerSlider = ({ params }) => {
                                                                     </span>
                                                                     <a
                                                                         href={`maitlo:${index.email}`}
-                                                                        className="text-blue-20">
+                                                                        className="text-blue-20"
+                                                                    >
                                                                         {
                                                                             index.email
                                                                         }

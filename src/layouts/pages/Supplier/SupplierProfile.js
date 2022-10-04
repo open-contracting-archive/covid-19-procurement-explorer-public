@@ -73,7 +73,8 @@ const SupplierProfile = () => {
                                 /{' '}
                                 <span
                                     className="cursor-pointer text-primary-blue"
-                                    onClick={previousPage}>
+                                    onClick={previousPage}
+                                >
                                     <T _str="Supplier" />
                                 </span>
                             </div>
@@ -115,7 +116,8 @@ const SupplierProfile = () => {
                             style={{
                                 borderTop: '5px solid #1fbbec'
                             }}
-                            className="py-10 md:pt-16 md:pb-24 px-4 bg-primary-gray">
+                            className="py-10 md:pt-16 md:pb-24 px-4 bg-primary-gray"
+                        >
                             <div className="container mx-auto">
                                 <div className="flex flex-wrap -mx-2 mb-6">
                                     <div className="w-full lg:w-1/3 px-2 mb-4">

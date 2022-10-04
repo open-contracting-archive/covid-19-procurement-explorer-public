@@ -42,7 +42,8 @@ function NotFound() {
                         </p>
                         <Link
                             className="inline-block bg-primary-blue hover:bg-primary-dark hover:text-white py-4 px-6 rounded-full text-white transition"
-                            to="/">
+                            to="/"
+                        >
                             <T _str="Back to Homepage" />
                         </Link>
                     </div>

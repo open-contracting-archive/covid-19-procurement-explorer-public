@@ -64,7 +64,8 @@ const MainChart = (props) => {
                                         className={`product-worldmap-tablist z-10 text-center cursor-pointer mb-2 ${
                                             view === 'chart' ? 'active' : ''
                                         }`}
-                                        onClick={() => setView('chart')}>
+                                        onClick={() => setView('chart')}
+                                    >
                                         <div>
                                             <Icon.Charts className="inline-block" />
                                             <span className="mt-1 md:mt-0 block text-sm">
@@ -79,7 +80,8 @@ const MainChart = (props) => {
                                                 ? 'active'
                                                 : ''
                                         }`}
-                                        onClick={() => setView('map')}>
+                                        onClick={() => setView('map')}
+                                    >
                                         <div>
                                             <Icon.Map className="inline-block w-4 h-4" />
                                             <span className="mt-1 md:mt-0 block text-sm">
@@ -92,7 +94,8 @@ const MainChart = (props) => {
                                     className={`product-worldmap-tablist z-10 text-center cursor-pointer ${
                                         view === 'flow' ? 'active' : ''
                                     }`}
-                                    onClick={() => setView('flow')}>
+                                    onClick={() => setView('flow')}
+                                >
                                     <div>
                                         <Icon.Flow className="inline-block" />
                                         <span className="mt-1 md:mt-0 block text-sm">

@@ -87,7 +87,8 @@ const EmbeddedModal = (props) => {
                 <div className="ml-6 mt-10">
                     <button
                         className="focus:outline-none bg-primary-blue text-center rounded text-white py-2 px-6"
-                        onClick={closeModal}>
+                        onClick={closeModal}
+                    >
                         Close
                     </button>
                 </div>

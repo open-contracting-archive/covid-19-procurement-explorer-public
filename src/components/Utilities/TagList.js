@@ -24,7 +24,8 @@ const TagList = ({ item }) => {
                                 key={index}
                                 onClick={() => {
                                     handleClick(tagItem, item.contents_type)
-                                }}>
+                                }}
+                            >
                                 {tagItem}
                             </div>
                         ))}

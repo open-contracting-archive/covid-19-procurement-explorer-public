@@ -58,7 +58,8 @@ const AwardedItemTable = (props) => {
                             {listItem.map((service, index) => {
                                 return (
                                     <tr
-                                        key={`${service.classification_code} - ${index}`}>
+                                        key={`${service.classification_code} - ${index}`}
+                                    >
                                         <td className="hover:text-primary-blue">
                                             <p className="truncate-text">
                                                 {get(
@@ -91,7 +92,8 @@ const AwardedItemTable = (props) => {
                             style={{
                                 height: '75%',
                                 minHeight: '250px'
-                            }}>
+                            }}
+                        >
                             <p>
                                 <T _str="No data available" />
                             </p>

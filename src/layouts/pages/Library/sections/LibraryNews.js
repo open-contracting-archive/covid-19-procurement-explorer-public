@@ -38,7 +38,8 @@ const LibraryNews = () => {
                                 {newsList.length && (
                                     <Link
                                         className="news-thumbnail"
-                                        to={`/news/${newsList[0].id}`}>
+                                        to={`/news/${newsList[0].id}`}
+                                    >
                                         <div className="img-wrapper relative">
                                             {get(
                                                 newsList[0],
@@ -82,7 +83,8 @@ const LibraryNews = () => {
                                         <Link
                                             className="news-thumbnail"
                                             to={`/news/${news.id}`}
-                                            key={news.id}>
+                                            key={news.id}
+                                        >
                                             <div className="news__item flex">
                                                 {get(
                                                     news,

@@ -84,7 +84,8 @@ const DirectOpen = (props) => {
             viewType={viewType}
             loading={loading}
             helpText={helpText}
-            viewHandler={setViewType}>
+            viewHandler={setViewType}
+        >
             {!error ? (
                 <div className="flex items-end">
                     <div>

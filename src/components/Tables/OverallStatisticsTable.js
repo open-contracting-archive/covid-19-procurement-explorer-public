@@ -72,112 +72,134 @@ const OverallStatisticsTable = () => {
                                         <tr className="whitespace-no-wrap border border-gray-e2e">
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Country" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Total Contracts" />
                                             </th>
                                             <th
                                                 colSpan={2}
-                                                className="text-center border-r border-gray-e2e">
+                                                className="text-center border-r border-gray-e2e"
+                                            >
                                                 <T _str="Total Amount" />
                                             </th>
                                             <th
                                                 colSpan={5}
-                                                className="text-center border-r border-gray-e2e">
+                                                className="text-center border-r border-gray-e2e"
+                                            >
                                                 <T _str="Procurement Procedure wise Number of Contracts" />
                                             </th>
                                             <th
                                                 colSpan={5}
-                                                className="text-center border-r border-gray-e2e">
+                                                className="text-center border-r border-gray-e2e"
+                                            >
                                                 <T _str="Procurement Procedure wise Amount (USD)" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap">
+                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap"
+                                            >
                                                 <T _str="Average bids per contract" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Monopolization" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="No of Buyers" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="No of Suppliers" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap">
+                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap"
+                                            >
                                                 <T _str="Quantity of red flags" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap">
+                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap"
+                                            >
                                                 <T _str="Total value of contracts with red flags" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap">
+                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap"
+                                            >
                                                 <T _str="Quantity of equity contracts" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap">
+                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap"
+                                            >
                                                 <T _str="Total value of equity contracts" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap">
+                                                className="align-middle border-r border-gray-e2e whitespace-pre-wrap"
+                                            >
                                                 <T _str="Total value per product category" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Time span (months)" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="GDP per captia" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Healthcare budget" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="% of GDP to healthcare budget" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="$ per covid case" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Covid statistics per country Active cases, current" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Covid statistics per country Total cases" />
                                             </th>
                                             <th
                                                 rowSpan={2}
-                                                className="align-middle border-r border-gray-e2e">
+                                                className="align-middle border-r border-gray-e2e"
+                                            >
                                                 <T _str="Total death cases, cumulative" />
                                             </th>
                                         </tr>
@@ -238,7 +260,8 @@ const OverallStatisticsTable = () => {
                                                                     'country.slug'
                                                                 )
                                                             )
-                                                        }>
+                                                        }
+                                                    >
                                                         <td className="border-r border-l border-gray-e2e whitespace-no-wrap">
                                                             {get(
                                                                 item,
@@ -460,7 +483,8 @@ const OverallStatisticsTable = () => {
                                         style={{
                                             height: '75%',
                                             minHeight: '250px'
-                                        }}>
+                                        }}
+                                    >
                                         <p>
                                             <T _str="No data available" />
                                         </p>
@@ -470,7 +494,8 @@ const OverallStatisticsTable = () => {
                             <div className="flex justify-center mt-5">
                                 <Link
                                     to="/global-overview/data"
-                                    className="text-white bg-primary-blue px-12 py-2 rounded">
+                                    className="text-white bg-primary-blue px-12 py-2 rounded"
+                                >
                                     <T _str="View More" />
                                 </Link>
                             </div>
